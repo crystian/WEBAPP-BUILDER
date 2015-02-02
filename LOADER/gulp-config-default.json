@@ -1,0 +1,36 @@
+{
+  "release": true,
+  "withCompressor": false,
+  "ip": "127.0.0.1",
+  "os": "Pc",
+  "keypass": "provisoryKey1",
+  "storepass": "provisoryKey1",
+  "site":"http://",
+  "autoprefixer": ["ie 10", "android 4", "chrome 32", "ff 27", "ios 7", "opera 19", "safari 7"],
+  "folders": {
+    "build": "build",
+    "temp": "build/.tmp",
+    "screens": "build/screens",
+    "www": "www",
+    "loader": "www/loader",
+    "base": "www/base",
+    "dist": "dist",
+    "bower": "vendors/bower_components"
+  },
+  "ports": {
+    "serve": 9000,
+    "build": 9001,
+    "nightmare": 9002
+  },
+  "text":{
+    "pageTitle":"titlee",
+    "pageDescription":"descripcione",
+    "pageKeyword":"keyworde",
+    "pageAuthor":"autore"
+  },
+  "banner":{
+    "header":["headerr"],
+    "footer":["footer"]
+  }
+
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<title id="pageTitle"></title>
+	<meta id="pageDescription" name="description" content="">
+	<meta id="pageKeyword" name="keyword" content="">
+	<meta id="pageAuthor" name="author" content="">
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<meta name="viewport" content="user-scalable=no, minimum-scale=1, maximum-scale=1, initial-scale=1, width=device-width, height=device-height">
+
+	<!-- TODO rellenar -->
+	<!-- https://github.com/audreyr/favicon-cheat-sheet -->
+
+<!-- build:css -->
+	<link rel="stylesheet" href="loader/loader.css"/>
+<!-- endbuild -->
+<!-- inject:loaderCss -->
+	<!--acutamaticamente se va a llenar aca-->
+<!-- endinject -->
+
+</head>
+<body>
+
+<!--no script habilitado-->
+<noscript>
+	<div class="noscript">
+		<br/>Es una broma? este sitio es una app javascript, indispensable para que funcione,
+		actualiza el navegador o usa otro. Gracias vuelvan prontos!
+		<br/><em>Para mas info: <a href="http://languagesgym.com/faq">http://languagesgym.com/faq</a> : browsers
+		incompatibles.</em>
+		<br/><br/>
+	</div>
+</noscript>
+<!--end noscript-->
+
+<!--just a loader screen:-->
+<div id="loadingScreen" class="fullscreen">
+	<div class="wrapCenter">
+		<div class="spinner on" id="spinner"></div>
+	</div>
+</div>
+<!--loader-->
+
+<!--Anclas para reemplazar:-->
+<span class="hide"></span>
+<p id="debugZone"></p>
+
+<!-- build:js -->
+	<!--this will be remove-->
+	<!--LOADER-->
+		<!--REMEMBER!! PUT EACH FILE ON make:loader GULP TASK!-->
+		<script src="../vendors/bower_components/lz-string/libs/reference/lz-string-1.3.3.js"></script>
+		<script src="../vendors/bower_components/platform/platform.js"></script>
+		<script src="loader/loader.js"></script><!--don't touch order-->
+		<script src="loader/config.js"></script><!--don't touch order-->
+		<script src="loader/modules/diag.js"></script><!--don't touch order, regarding old browsers ... -->
+		<script src="loader/modules/compatibility.js"></script><!--don't touch order, regarding old browser ... -->
+		<script src="loader/modules/polyfill-ie.js"></script>
+		<script src="loader/modules/utils.js"></script>
+		<script src="loader/modules/screen.js"></script>
+		<script src="loader/modules/events.js"></script>
+		<script src="loader/modules/settings.js"></script>
+		<script src="loader/modules/lang.js"></script>
+		<script src="loader/modules/redefine.js"></script>
+		<script src="loader/boot.js"></script>
+	<!--/LOADER-->
+
+	<script src="base/index.js"></script>
+<!-- endbuild -->
+
+
+<!-- inject:loaderJs -->
+	<!--acutamaticamente se va a llenar aca-->
+<!-- endinject -->
+
+</body>
+</html>
