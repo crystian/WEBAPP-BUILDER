@@ -11,20 +11,13 @@ gulp.task('build', function (cb) {
 	runSequence(
 		'remove:build',
 		'make:loader',
-		'copy:loader',
 		cb);
 });
 
 gulp.task('release', function (cb) {
 	runSequence(
-		'test',
 		'build',
-		cb);
-});
-
-gulp.task('test', function (cb) {
-	runSequence(
-		'test:loader', //nightmare
+		'test:loader',
 		cb);
 });
 

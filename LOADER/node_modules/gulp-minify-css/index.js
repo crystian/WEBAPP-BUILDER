@@ -107,7 +107,7 @@ function minifyCSSGulp(opt){
             }
           });
           
-          applySourceMap(file, JSON.stringify(map));
+          applySourceMap(file, map);
         }
 
         done(errors ? errors[0] : null, file);

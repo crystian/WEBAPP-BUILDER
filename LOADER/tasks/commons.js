@@ -13,7 +13,6 @@ var gulp = require('gulp'),
 gulp.task('remove:build', function(cb) {
 	//no borrar la carpeta build, da errores de sincro
 	del([global.cfg.folders.temp,
-		global.cfg.folders.build,
 		global.cfg.folders.screens,
 		global.cfg.folders.dist
 	], /*{force:true}, */cb());

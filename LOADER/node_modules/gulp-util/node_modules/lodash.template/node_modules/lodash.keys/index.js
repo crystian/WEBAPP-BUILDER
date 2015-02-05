@@ -1,5 +1,5 @@
 /**
- * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+ * lodash 3.0.2 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
@@ -13,9 +13,6 @@ var isArguments = require('lodash.isarguments'),
 /** Used for native method references. */
 var objectProto = Object.prototype;
 
-/** Used to detect DOM support. */
-var document = (document = global.window) && document.document;
-
 /** Used to check objects for own properties. */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
@@ -27,7 +24,7 @@ var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
 
 /**
  * Used as the maximum length of an array-like value.
- * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+ * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
  * for more details.
  */
 var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
@@ -42,18 +39,6 @@ var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 var support = {};
 
 (function(x) {
-
-  /**
-   * Detect if the DOM is supported.
-   *
-   * @memberOf _.support
-   * @type boolean
-   */
-  try {
-    support.dom = document.createDocumentFragment().nodeType === 11;
-  } catch(e) {
-    support.dom = false;
-  }
 
   /**
    * Detect if `arguments` object indexes are non-enumerable.
@@ -90,6 +75,10 @@ function isIndex(value, length) {
 
 /**
  * Checks if `value` is a valid array-like length.
+ *
+ * **Note:** This function is based on ES `ToLength`. See the
+ * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+ * for more details.
  *
  * @private
  * @param {*} value The value to check.

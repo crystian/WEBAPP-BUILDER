@@ -65,7 +65,7 @@ gulp.task('make:loader', ['make:loader:js'],  function () {
 			site: global.cfg.site})))
 		.pipe(gif(global.cfg.release, footer(global.cfg.banner.footer.join('\n'))))
 
-		.pipe(gulp.dest(global.cfg.folders.temp));
+		.pipe(gulp.dest(global.cfg.folders.build));
 
 	stream.on('error', console.error.bind(console));
 

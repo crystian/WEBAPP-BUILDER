@@ -1,4 +1,3 @@
 {
-  "release": true,
-  "withCompressor": false
+  "release": false
 }

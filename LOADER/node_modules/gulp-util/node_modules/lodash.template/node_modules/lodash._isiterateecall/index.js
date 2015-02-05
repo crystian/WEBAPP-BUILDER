@@ -1,5 +1,5 @@
 /**
- * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+ * lodash 3.0.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
@@ -9,7 +9,7 @@
 
 /**
  * Used as the maximum length of an array-like value.
- * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+ * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
  * for more details.
  */
 var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
@@ -46,13 +46,17 @@ function isIterateeCall(value, index, object) {
     var length = object.length,
         prereq = isLength(length) && isIndex(index, length);
   } else {
-    prereq = type == 'string' && index in value;
+    prereq = type == 'string' && index in object;
   }
   return prereq && object[index] === value;
 }
 
 /**
  * Checks if `value` is a valid array-like length.
+ *
+ * **Note:** This function is based on ES `ToLength`. See the
+ * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+ * for more details.
  *
  * @private
  * @param {*} value The value to check.
