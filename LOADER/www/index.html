@@ -12,6 +12,7 @@
 	<meta name="viewport" content="user-scalable=no, minimum-scale=1, maximum-scale=1, initial-scale=1, width=device-width, height=device-height">
 
 	<!-- TODO rellenar -->
+	<!--https://www.npmjs.com/package/favicons/-->
 	<!-- https://github.com/audreyr/favicon-cheat-sheet -->
 
 <!-- build:css -->
@@ -46,16 +47,21 @@
 <span class="hide"></span>
 <p id="debugZone"></p>
 
+	<script src="../vendors/lz-string/libs/lz-string.js"></script>
+	<script src="../vendors/platform/platform.js"></script>
+	<script src="../vendors/jquery/dist/jquery.js"></script>
+	<script src="../vendors/fastclick/lib/fastclick.js"></script>
+	<script src="../vendors/bootstrap/dist/js/bootstrap.js"></script>
+
 <!-- build:js -->
 	<!--this will be remove-->
 	<!--LOADER-->
 		<!--REMEMBER!! PUT EACH FILE ON make:loader GULP TASK!-->
-		<script src="../vendors/bower_components/lz-string/libs/reference/lz-string-1.3.3.js"></script>
-		<script src="../vendors/bower_components/platform/platform.js"></script>
-		<script src="loader/loader.js"></script><!--don't touch order-->
-		<script src="loader/config.js"></script><!--don't touch order-->
-		<script src="loader/modules/diag.js"></script><!--don't touch order, regarding old browsers ... -->
-		<script src="loader/modules/compatibility.js"></script><!--don't touch order, regarding old browser ... -->
+		<!--don't touch order-->
+		<script src="loader/loader.js"></script>
+		<script src="loader/config.js"></script>
+		<script src="loader/modules/diag.js"></script>
+		<script src="loader/modules/compatibility.js"></script>
 		<script src="loader/modules/polyfill-ie.js"></script>
 		<script src="loader/modules/utils.js"></script>
 		<script src="loader/modules/screen.js"></script>

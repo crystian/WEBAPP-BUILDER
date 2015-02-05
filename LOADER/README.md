@@ -15,6 +15,15 @@ Luego de bajarlo ejecutar en LOADER:
 Npm i
 Gulp i
 
+### Bower
+
+En el caso 
+
+
+
+cache!
+
+gulp-config-local.json
 
 ---
 

@@ -1,53 +1,63 @@
 {
-  "version": "0.1.0",
-  "release": false,
-  "compressor": false,
-  "bootstrap":"3.3.0",
-  "jquery":"2",
-  "fastclick": "",
-  "cordova": true,
-  "analytics": true,
-  "analyticsDisabled": true,
-  "ip": "127.0.0.1",
-  "os": "Pc",
-  "viewport": "user-scalable=no, minimum-scale=1, maximum-scale=1, initial-scale=1, width=device-width, height=device-height",
-  "keypass": "provisoryKey1",
-  "storepass": "provisoryKey1",
-  "site":"http://",
-  "autoprefixer": ["ie 10", "android 4", "chrome 32", "ff 27", "ios 7", "opera 19", "safari 7"],
-  "folders": {
-    "build": "build",
-    "temp": "build/.tmp",
-    "screens": "build/screens",
-    "www": "www",
-    "loader": "www/loader",
-    "base": "www/base",
-    "dist": "dist",
-    "bower": "vendors/bower_components"
-  },
-  "ports": {
-    "serve": 9000,
-    "build": 9001,
-    "nightmare": 9002
-  },
-  "text":{
-    "pageTitle":"titlese",
-    "pageDescription":"descripcione",
-    "pageKeyword":"keyworde",
-    "pageAuthor":"autore",
-    "noscript":"<br/>Es una broma? este sitio es una app javascript, indispensable para que funcione, actualiza el navegador o usa otro. Gracias vuelvan prontos! <br/><em>Para mas info: <a href="http://languagesgym.com/faq">http://languagesgym.com/faq</a> : browsers incompatibles.</em><br/><br/>"
-  },
-  "banner":{
-    "header":["headaerr"],
-    "footer":["footear"]
-  },
-  "bower": {
-    "name": "Power Loader",
-    "dependencies": {
-    "platform": "~1.3.0",
-    "lz-string": "~1.3.7",
-    "bootstrap": "~3.3.2",
-    "fastclick": "~1.0.6"
-    }
-  }
+	"name": "Power loader",
+	"description": "Para que tus apps salgan con fritas!",
+	"version": "0.0.1",
+	"bower": {
+		"dependencies": {
+			"platform": "~1.3.0",
+			"lz-string": "~1.3.7",
+			"bootstrap": "~3.3.2",
+			"fastclick": "~1.0.6"
+		}
+	},
+
+	"release": false,
+	"compressor": false,
+	"bootstrap": "3.3.0",
+	"jquery": "2",
+	"fastclick": "",
+	"cordova": true,
+	"analytics": true,
+	"analyticsDisabled": true,
+	"ip": "127.0.0.1",
+	"os": "Pc",
+	"viewport": "user-scalable=no, minimum-scale=1, maximum-scale=1, initial-scale=1, width=device-width, height=device-height",
+	"keypass": "provisoryKey1",
+	"storepass": "provisoryKey1",
+	"site": "http://",
+	"autoprefixer": [
+		"ie 10",
+		"android 4",
+		"chrome 32",
+		"ff 27",
+		"ios 7",
+		"opera 19",
+		"safari 7"
+	],
+	"folders": {
+		"build": "build",
+		"temp": "build/.tmp",
+		"screens": "build/screens",
+		"www": "www",
+		"loader": "www/loader",
+		"base": "www/base",
+		"dist": "dist",
+		"bower": "vendors/bower_components"
+	},
+	"ports": {
+		"serve": 9000,
+		"build": 9001,
+		"nightmare": 9002
+	},
+	"text": {
+		"pageTitle": "titlese",
+		"pageDescription": "descripcione",
+		"pageKeyword": "keyworde",
+		"pageAuthor": "autore",
+		"noscript": "<br/>Es una broma? este sitio es una app javascript, indispensable para que funcione, actualiza el navegador o usa otro. Gracias vuelvan prontos! <br/><em>Para mas info: <a href='http://languagesgym.com/faq'>http://languagesgym.com/faq</a> : browsers incompatibles.</em><br/><br/>"
+	},
+	"banner": {
+		"header": ["headaerr"],
+		"footer": ["footear"]
+	}
 }
