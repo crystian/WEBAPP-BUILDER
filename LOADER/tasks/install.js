@@ -5,20 +5,65 @@
 
 var gulp = require('gulp'),
 	//debug = require('gulp-debug'),
-	//del	= require('del'),
-	//gutil = require('gulp-util'),
+	inject = require('gulp-inject'),
 	fs = require('fs');
 
-gulp.task('install', function() {
-	var bower = global.cfg.bower;
-	bower.name = 'Power Loader';
-	bower.version = global.cfg.version;
-	bower.description = 'auto generated, don\'t change it, you should use gulp-config to change it and run \'gulp i\'';
+//install
+gulp.task('i', function() {
+	var bower = global.cfg.bower,
+		ambient = 'dev',
+		rJs = [],
+		rCss = [],
+		rBower = {
+			'name':global.cfg.name + ' - by Power Loader',
+			'version' : global.cfg.version,
+			'description' : 'auto generated, don\'t change it, you should use gulp-config to change it and run \'gulp i\'',
+			'dependencies':{}
+		};
 
-	fs.writeFile('bower.json', JSON.stringify(bower, null, '\t'), function (err) {
+	var i = 0,
+		l = bower.length;
+
+	for (; i < l; i++) {
+		var o = bower[i],
+			js = [],
+			css = [];
+
+		if(o['js-'+ ambient]){
+			js = o['js-'+ ambient].map(function (item) {
+				return './vendors/'+item;
+			});
+		}
+
+		if(o['css-'+ ambient]){
+			css = o['css-'+ ambient].map(function (item) {
+				return './vendors/'+item;
+			});
+		}
+
+		if (js && js.length > 0) {
+			rJs = rJs.concat(js);
+		}
+
+		if (css && css.length > 0) {
+			rCss = rCss.concat(css);
+		}
+
+		if (o.version !== '') {
+			rBower.dependencies[o.name] = o.version;
+		}
+
+	}
+
+	//update bower.json file
+	fs.writeFile('bower.json', JSON.stringify(rBower, null, '\t'), function (err) {
 		if (err) throw err;
 		console.log('Bower.json generated');
 	});
+
+	//replace references on index.html
+	gulp.src('./www/index.html')
+		.pipe(inject(gulp.src(rJs, {read: false}), {name: 'bower', relative:'true'}))
+		.pipe(inject(gulp.src(rCss, {read: false}), {name: 'bower', relative:'true'}))
+		.pipe(gulp.dest('./www'));
 });
-
-

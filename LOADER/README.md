@@ -8,12 +8,14 @@ Cuenta con deliciosos features y temas solucionados tipicos, esto ahorraria faci
 
 * Node/npm
 * Gulp
+* Bower
 * Git
 
 Luego de bajarlo ejecutar en LOADER:
 
-Npm i
-Gulp i
+npm i
+gulp i
+bower I
 
 ### Bower
 

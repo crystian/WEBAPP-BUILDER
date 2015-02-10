@@ -46,11 +46,12 @@ gulp.task('make:loader', ['make:loader:js'],  function () {
 		.pipe(htmlreplace())
 		.pipe(cheerio({
 			run: function ($) {
-				var texts = global.cfg.text;
+				var texts = global.cfg.texts;
 				$('#pageTitle').text(texts.pageTitle);
 				$('#pageDescription').attr('content',texts.pageDescription);
 				$('#pageKeyword').attr('content',texts.pageKeyword);
 				$('#pageAuthor').attr('content',texts.pageAuthor);
+				$('#viewport').attr('content',texts.viewport);
 			}
 		}))
 		.pipe(injectContent(global.cfg.folders.temp +'/-compiledLoader.css','loaderCss','style'))

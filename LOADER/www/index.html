@@ -7,9 +7,9 @@
 	<meta id="pageDescription" name="description" content="">
 	<meta id="pageKeyword" name="keyword" content="">
 	<meta id="pageAuthor" name="author" content="">
+	<meta id="viewport" name="viewport" content="user-scalable=no, minimum-scale=1, maximum-scale=1, initial-scale=1, width=device-width, height=device-height">
 	<link rel="shortcut icon" href="favicon.ico">
 
-	<meta name="viewport" content="user-scalable=no, minimum-scale=1, maximum-scale=1, initial-scale=1, width=device-width, height=device-height">
 
 	<!-- TODO rellenar -->
 	<!--https://www.npmjs.com/package/favicons/-->
@@ -18,20 +18,22 @@
 <!-- build:css -->
 	<link rel="stylesheet" href="loader/loader.css"/>
 <!-- endbuild -->
+
+<!-- bower:css -->
+<link rel="stylesheet" href="../vendors/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="../vendors/bootstrap/dist/css/bootstrap-theme.css">
+<!-- endinject -->
+
 <!-- inject:loaderCss -->
-	<!--acutamaticamente se va a llenar aca-->
+	<!--autamaticamente se va a llenar aca-->
 <!-- endinject -->
 
 </head>
 <body>
 
-<!--no script habilitado-->
+<!--scripts no habilitado-->
 <noscript>
-	<div class="noscript" id="noscript">
-		<br/>Es una broma? este sitio es una app javascript, indispensable para que funcione, actualiza el navegador o usa otro. Gracias vuelvan prontos!
-		<br/><em>Para mas info: <a href="http://languagesgym.com/faq">http://languagesgym.com/faq</a> : browsers incompatibles.</em>
-		<br/><br/>
-	</div>
+	<div class="noscript" id="noscript"></div>
 </noscript>
 <!--end noscript-->
 
@@ -47,11 +49,14 @@
 <span class="hide"></span>
 <p id="debugZone"></p>
 
-	<script src="../vendors/lz-string/libs/lz-string.js"></script>
-	<script src="../vendors/platform/platform.js"></script>
-	<script src="../vendors/jquery/dist/jquery.js"></script>
-	<script src="../vendors/fastclick/lib/fastclick.js"></script>
-	<script src="../vendors/bootstrap/dist/js/bootstrap.js"></script>
+
+<!-- bower:js -->
+<script src="../vendors/platform/platform.js"></script>
+<script src="../vendors/lz-string/libs/lz-string.js"></script>
+<script src="../vendors/jquery/dist/jquery.js"></script>
+<script src="../vendors/fastclick/lib/fastclick.js"></script>
+<script src="../vendors/bootstrap/dist/js/bootstrap.js"></script>
+<!-- endinject -->
 
 <!-- build:js -->
 	<!--this will be remove-->
