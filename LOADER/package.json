@@ -11,7 +11,7 @@
     "async": "^0.9.0",
     "del": "^1.1.1",
     "event-stream": "^3.2.1",
-    "gulp": "^3.8.10",
+    "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-cheerio": "^0.6.2",
     "gulp-concat": "^2.4.3",

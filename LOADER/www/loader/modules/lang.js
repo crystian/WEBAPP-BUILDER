@@ -67,29 +67,8 @@ loader.diag.lang = (function () {
 	}
 
 	function setLang( _lang, m ) {
-
-		var lang = validateLang(_lang);
-
-		console.info('Language detected: "'+ lang +'" via '+ m);
-		loader.cfg.lang = lang;
-	}
-
-	function validateLang(_lang){
-		var lang = 'es'; //default language if fallback others methods
-
-		_lang = _lang.toLowerCase();
-
-		if( loader.cfg.i18n.langsFrom[_lang] ){ //first detect with country (es-ar)
-			lang = _lang;
-		} else { //second: with main lang
-			_lang = _lang.split('-')[0];
-
-			if(loader.cfg.i18n.langsFrom[_lang]){
-				lang = _lang;
-			}
-		}
-
-		return lang;
+		console.info('Language detected: "'+ _lang +'" via '+ m);
+		loader.cfg.lang = _lang;
 	}
 
 	return {
