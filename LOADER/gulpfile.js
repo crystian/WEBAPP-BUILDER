@@ -23,7 +23,7 @@ global.cfg = merge(
 
 global.cfg.pkg = require('./package.json');
 
-
+//be careful, no funciona con hijos, solo con parents directos
 function merge(root){
 	for ( var i = 1; i < arguments.length; i++ ){
 		for ( var key in arguments[i] ){

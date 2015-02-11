@@ -5,13 +5,14 @@
 
 var gulp = require('gulp'),
 	//debug = require('gulp-debug'),
+	uglify = require('gulp-uglify'),
 	inject = require('gulp-inject'),
 	fs = require('fs');
 
 //install
 gulp.task('i', function() {
 	var bower = global.cfg.bower,
-		ambient = 'dev',
+		ambient = 'prod',
 		rJs = [],
 		rCss = [],
 		rBower = {
@@ -42,6 +43,21 @@ gulp.task('i', function() {
 		}
 
 		if (js && js.length > 0) {
+
+			if(ambient==='prod' && o['generate-js']){
+
+
+				var jsDev = o['js-dev'].map(function (item) {
+					return './vendors/'+item;
+				});
+
+				gulp.src(jsDev)
+					.pipe(uglify())
+					.pipe(gulp.dest(js));
+
+			}
+
+
 			rJs = rJs.concat(js);
 		}
 
