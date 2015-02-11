@@ -4,9 +4,10 @@
 */
 
 var gulp = require('gulp'),
-	//debug = require('gulp-debug'),
+	debug = require('gulp-debug'),
 	uglify = require('gulp-uglify'),
 	inject = require('gulp-inject'),
+	replace = require('gulp-replace'),
 	fs = require('fs');
 
 //install
@@ -78,8 +79,30 @@ gulp.task('i', function() {
 	});
 
 	//replace references on index.html
-	gulp.src('./www/index.html')
+	gulp.src(global.cfg.folders.www +'/index.html')
 		.pipe(inject(gulp.src(rJs, {read: false}), {name: 'bower', relative:'true'}))
 		.pipe(inject(gulp.src(rCss, {read: false}), {name: 'bower', relative:'true'}))
-		.pipe(gulp.dest('./www'));
+		.pipe(gulp.dest(global.cfg.folders.www));
+});
+
+gulp.task('in', function() {
+	var config = global.cfg.folders.www + '/loader/';
+
+	gulp.src(config +'/config.js')
+		.pipe(debug({verbose: true}))
+		.pipe(replace(/(_loaderCfg\.appName\W+= \')(.+)(\'\;)/, '$1'+global.cfg.name+'$3'))
+		.pipe(replace(/(_loaderCfg\.loaderVersion\W+= \')(.+)(\'\;)/, '$1'+global.cfg.pkg.version+'$3'))
+		.pipe(replace(/(_loaderCfg\.gaId\W+= \')(.+)(\'\;)/, '$1'+global.cfg.gaId+'$3'))
+		.pipe(replace(/(_loaderCfg\.appName\W+= \')(.+)(\'\;)/, '$1'+global.cfg.appName+'$3'))
+		.pipe(replace(/(_loaderCfg\.appId\W+= \')(.+)(\'\;)/, '$1'+global.cfg.appId+'$3'))
+		.pipe(replace(/(_loaderCfg\.appInstaller\W+= \')(.+)(\'\;)/, '$1'+global.cfg.appInstaller+'$3'))
+		.pipe(replace(/(.*\/\/compatibilityFirst)(.|\n)*(\/\/ENDcompatibilityFirst)/, '$1'+global.cfg.compatibilityFirst+'$3'))
+		.pipe(replace(/(.*_loaderCfg\.matrix = )(.|\n)*(;\/\/)/, '$1'+JSON.stringify(global.cfg.compatibilityMatrix,null,'\t')+'$3'))
+		.pipe(replace(/(incompatibleByFeatures : \')(.*)(\',\n)/, '$1'+global.cfg.textIncompatibleByFeatures+'$3'))
+		.pipe(replace(/(incompatibleByDiag : \')(.*)(\',\n)/, '$1'+global.cfg.textIncompatibleByDiag+'$3'))
+		.pipe(replace(/(semiIncompatible : \')(.*)(\',\n)/, '$1'+global.cfg.textSemiIncompatible+'$3'))
+		.pipe(replace(/(faqLink : \')(.*)(\',\n)/, '$1'+global.cfg.textFaqLink+'$3'))
+		.pipe(replace(/(errorRequestFile : \')(.*)(\',\n)/, '$1'+global.cfg.textErrorRequestFile+'$3'))
+		.pipe(replace(/(errorTimeoutServer : \')(.*)(\'\n)/, '$1'+global.cfg.textErrorTimeoutServer+'$3'))
+		.pipe(gulp.dest(config));
 });

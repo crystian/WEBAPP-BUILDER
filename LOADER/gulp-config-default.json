@@ -1,10 +1,6 @@
 {
 	"name": "Power loader",
 	"description": "Para que tus apps salgan con fritas!",
-	"version": "0.0.1",
-	"release": false,
-	"ip": "127.0.0.1",
-	"os": "Pc",
 	"bower": [
 		{
 			"name": "platform",
@@ -37,31 +33,28 @@
 		}
 	],
 
-	"compressor": true,
-	"cordova": true,
-	"analytics": true,
-	"analyticsDisabled": true,
+    "gaId": "UA-XXXXXXXX-V",
+	"appName": "appName",
+	"appId" : "com.appName.appId",
+	"appInstaller" : "com.appName.installer",
 
-	"appName": "LanguagesGym",
-	"appId" : "com.languagesgym",
-	"appInstallerWeb" : "com.languagesgym.web",
-	"debugMode"	: true,
-	"showDeviceInfo": true,
-	"showSkeletor": true,
-	"contentEditable": true,
-	"viewport": "user-scalable=no, minimum-scale=1, maximum-scale=1, initial-scale=1, width=device-width, height=device-height",
-	"keypass": "provisoryKey1",
-	"storepass": "provisoryKey1",
-	"site": "http://",
-	"autoprefixer": [
-		"ie 10",
-		"android 4",
-		"chrome 32",
-		"ff 27",
-		"ios 7",
-		"opera 19",
-		"safari 7"
-	],
+	"compatibilityFirst": "\n\treturn !!(window.document.querySelector &&\n\twindow.console &&window.document.addEventListener &&\n\t(window.document.getElementsByTagName('body')[0]).classList &&\n\twindow.localStorage &&\n\twindow.navigator &&\n\twindow.XMLHttpRequest &&\n\twindow.applicationCache &&\n\twindow.document.createEvent &&\n\tarr.map &&\n\tarr.every);\n\t",
+	"compatibilityMatrix": {
+		"ie": [9.9, 10.9, 11.0],
+		"firefox": [23.9, 25.9, 26.0],
+		"android": [3.9, 3.9, 4.0],
+		"chrome": [17.9, 28.9, 29.0],
+		"safari": [6.0, 6.0, 7.0],
+		"ios":	[6	,6	,7]
+	},
+
+	"textIncompatibleByFeatures" : "Navegador incompatible (no se encontraron features), por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
+	"textIncompatibleByDiag" : "Navegador incompatible, por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
+	"textSemiIncompatible" : "Navegador no reconocido o con problemas de compatibilidad, la aplicacion funcionara pero es recomendable actualizarlo o usar otro, ver en el F.A.Q. \\nhttp://languagesgym.com/faq",
+	"textFaqLink" : "<a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a>",
+	"textErrorRequestFile": "Error leyendo el archivo del servidor, por favor vuelva a intentar mas tarde",
+	"textErrorTimeoutServer": "Se agoto el tiempo de espera, verifica que tengas internet y este andando bien",
+
 	"folders": {
 		"build": "build",
 		"temp": "build/.tmp",
@@ -77,15 +70,37 @@
 		"build": 9001,
 		"nightmare": 9002
 	},
-	"texts": {
-		"pageTitle": "titlese",
-		"pageDescription": "descripcione",
-		"pageKeyword": "keyworde",
-		"pageAuthor": "autore",
-		"noscript": "<br/>Es una broma? este sitio es una app javascript, indispensable para que funcione, actualiza el navegador o usa otro. Gracias vuelvan prontos! <br/><em>Para mas info: <a href='http://languagesgym.com/faq'>http://languagesgym.com/faq</a> : browsers incompatibles.</em><br/><br/>"
-	},
-	"banner": {
-		"header": ["headaerr"],
-		"footer": ["footear"]
-	}
+
+
+
+	"release": false,
+	"debugMode"	: true,
+
+	"ip": "127.0.0.1",
+	"os": "Pc",
+
+	"compressor": true,
+	"cordova": true,
+
+	"keypass": "provisoryKey1",
+	"storepass": "provisoryKey1",
+	"site": "http://",
+	"autoprefixer": [
+		"ie 10",
+		"android 4",
+		"chrome 32",
+		"ff 27",
+		"ios 7",
+		"opera 19",
+		"safari 7"
+	],
+	"textPageTitle": "titlese",
+	"textPageDescription": "descripcione",
+	"textPageKeyword": "keyworde",
+	"textPageAuthor": "autore",
+	"viewport": "user-scalable=no, minimum-scale=1, maximum-scale=1, initial-scale=1, width=device-width, height=device-height",
+	"textNoscript": "<br/>Es una broma? este sitio es una app javascript, indispensable para que funcione, actualiza el navegador o usa otro. Gracias vuelvan prontos! <br/><em>Para mas info: <a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a> : browsers incompatibles.</em><br/><br/>",
+
+	"textHeader": ["headaerr"],
+	"textFooter": ["footear"]
 }

@@ -1,2 +1,6 @@
 {
+  "gaId": "UA-XXXXXXXX-Z",
+  "appName": "Number",
+  "appId" : "com.languagesgym.number",
+  "appInstaller" : "com.languagesgym.installer"
 }
