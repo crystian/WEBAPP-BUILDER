@@ -1,42 +1,16 @@
 /**
 * Created by Crystian on 10/18/2014.
 */
-var _loaderCfg = {};
+
 
 //Gulp: Automatic by gulp (with install and build), don't CHANGE it manually or I'LL CUT YOUR HANDS!!!
 _loaderCfg.appName		= 'Number';//install
-_loaderCfg.loaderVersion = '0.0.1';//install
+_loaderCfg.loaderVersion= '0.0.1';//install
 _loaderCfg.gaId			= 'UA-XXXXXXXX-Z';//install
 _loaderCfg.appId		= 'com.languagesgym.number';//install
 _loaderCfg.appInstaller = 'com.languagesgym.installer';//install
-_loaderCfg.isCordovaDevice = false;//build
+_loaderCfg.isCordovaDevice= false;//build
 //END by gulp
-
-//injected automatically:
-_loaderCfg.compatibility= 0; // 0 = no compatible, 1 = con problemas, 2 = compatible
-_loaderCfg.isDevice		= 0; // setter by loader
-_loaderCfg.isDesktop	= 0; // setter by loader
-_loaderCfg.isMobile		= 0; // setter by loader
-_loaderCfg.isTablet		= 0; // setter by loader
-_loaderCfg.orientation	= 0; // 0=portrait, 1=landscape
-_loaderCfg.lang			= ''; //by diag and settings
-_loaderCfg.isTouchDevice= false; //detected by diag
-_loaderCfg.online		= true; //detected by diag.offline
-_loaderCfg.offline		= !_loaderCfg.online; //detected by diag.offline
-_loaderCfg.connectionType= ''; //0=without connection, 1=bad connection and 2 good connection
-_loaderCfg.isLandscape	= 0; //detected by diag
-_loaderCfg.isPortraid	= !_loaderCfg.isLandscape;
-
-//default values for test:
-_loaderCfg.analytics		= 1;
-_loaderCfg.devLocal			= 1;//request by request, otherwise one json file
-_loaderCfg.debugMode		= 1; //can be different that build, this show debugZone with info (debugAdd)
-_loaderCfg.showDeviceInfo	= 1;
-_loaderCfg.showSkeletor		= 1;
-_loaderCfg.contentEditable	= 1;
-
-//others=
-_loaderCfg.debugZone	= document.getElementById('debugZone');
 
 
 //primer chequeo, si no es compatible con esto, se cancela el loader!
