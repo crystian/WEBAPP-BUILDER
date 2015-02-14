@@ -1,4 +1,2 @@
-# Created by .ignore support plugin (hsz.mobi)
-
-.idea/workspace.xml
-gulp-config-local.json
+/.idea/workspace.xml
+/gulp-config-local.json

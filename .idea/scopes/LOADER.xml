@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="LOADER" pattern="file[NUMBERS]:LOADER//*" />
+</component>

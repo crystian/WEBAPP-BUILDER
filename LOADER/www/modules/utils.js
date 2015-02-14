@@ -1,95 +1,96 @@
-///**
-// * Created by Crystian on 3/3/14.
-// */
-//
-////shortcuts:
-//var byId = function (id) {
-//	'use strict';
-//	return document.getElementById(id);
-//};
-//
-//var byClass = function(_class){
-//	'use strict';
-//	return document.getElementsByClassName(_class)[0];
-//};
-//
-///* insert html in id sent */
-////jshint unused:false
-//var h = function(id, v){
-//	'use strict';
-//	var el = byId(id);
-//	if( el ){
-//		el.innerHTML = v;
-//	}
-//};
-//var hp = function(id, v){
-//	'use strict';
-//	var el = byId(id);
-//	if( el ){
-//		el.placeholder = v;
-//	}
-//};
-////jshint unused:false
-//var t = function(id, v){
-//	'use strict';
-//	var el = byId(id);
-//	if( el ){
-//		el.innerText = v;
-//	}
-//};
-//
-////show message in debug zone
-////jshint unused:false
-//var d = function(m){
-//	'use strict';
-//	loader.diag.debugAdd(m);
-//};
-//
-//
-////jshint maxstatements:false
-//loader.utils = (function () {
-//	'use strict';
-//
+/**
+* Created by Crystian on 3/3/14.
+*/
+
+//shortcuts:
+var byId = function (id) {
+	'use strict';
+	return document.getElementById(id);
+};
+
+//jshint unused:false
+var byClass = function(_class){
+	'use strict';
+	return document.getElementsByClassName(_class)[0];
+};
+
+/* insert html in id sent */
+//jshint unused:false
+var h = function(id, v){
+	'use strict';
+	var el = byId(id);
+	if( el ){
+		el.innerHTML = v;
+	}
+};
+var hp = function(id, v){
+	'use strict';
+	var el = byId(id);
+	if( el ){
+		el.placeholder = v;
+	}
+};
+//jshint unused:false
+var t = function(id, v){
+	'use strict';
+	var el = byId(id);
+	if( el ){
+		el.innerText = v;
+	}
+};
+
+//show message in debug zone
+//jshint unused:false
+var d = function(m){
+	'use strict';
+	loader.diag.debugAdd(m);
+};
+
+
+//jshint maxstatements:false
+loader.utils = (function() {
+	'use strict';
+
 //	var _cache = [];
 //
-//	//return 0 === equals, 1 === a > b, -1 === a < b
-//	function compareSemVer(a, b) {
-//		if (a === b) {
-//			return 0;
-//		}
-//
-//		var aComponents = a.split('.');
-//		var bComponents = b.split('.');
-//
-//		var len = Math.min(aComponents.length, bComponents.length);
-//
-//		// loop while the components are equal
-//		for (var i = 0; i < len; i++) {
-//			// A bigger than B
-//			if (parseInt(aComponents[i],10) > parseInt(bComponents[i],10)) {
-//				return 1;
-//			}
-//
-//			// B bigger than A
-//			if (parseInt(aComponents[i],10) < parseInt(bComponents[i],10)) {
-//				return -1;
-//			}
-//		}
-//
-//		// If one's a prefix of the other, the longer one is greater.
-//		if (aComponents.length > bComponents.length) {
-//			return 1;
-//		}
-//
-//		if (aComponents.length < bComponents.length) {
-//			return -1;
-//		}
-//
-//		// Otherwise they are the same.
-//		return 0;
-//	}
-//
-//
+	//return 0 === equals, 1 === a > b, -1 === a < b
+	function compareSemVer(a, b) {
+		if (a === b) {
+			return 0;
+		}
+
+		var aComponents = a.split('.');
+		var bComponents = b.split('.');
+
+		var len = Math.min(aComponents.length, bComponents.length);
+
+		// loop while the components are equal
+		for (var i = 0; i < len; i++) {
+			// A bigger than B
+			if (parseInt(aComponents[i],10) > parseInt(bComponents[i],10)) {
+				return 1;
+			}
+
+			// B bigger than A
+			if (parseInt(aComponents[i],10) < parseInt(bComponents[i],10)) {
+				return -1;
+			}
+		}
+
+		// If one's a prefix of the other, the longer one is greater.
+		if (aComponents.length > bComponents.length) {
+			return 1;
+		}
+
+		if (aComponents.length < bComponents.length) {
+			return -1;
+		}
+
+		// Otherwise they are the same.
+		return 0;
+	}
+
+
 //	function request(file, callback) {
 //		console.log('request: '+ file);
 //		var xhr = new XMLHttpRequest();
@@ -164,28 +165,7 @@
 //		var el = document.getElementById(id);
 //		el.appendChild(resourceLoader);
 //	}
-//
-//	function getInternetExplorerVersion() {
-//		var rv = -1,
-//			ua, re;
-//		if (navigator.appName === 'Microsoft Internet Explorer') {
-//			ua = navigator.userAgent;
-//			re = new RegExp('MSIE ([0-9]{1,}[.0-9]{0,})');
-//			if (re.exec(ua) !== null){
-//				rv = parseFloat(RegExp.$1);
-//			}
-//		}
-//		else if (navigator.appName === 'Netscape') {
-//			ua = navigator.userAgent;
-//			re = new RegExp('Trident/.*rv:([0-9]{1,}[.0-9]{0,})');
-//			if (re.exec(ua) !== null){
-//				rv = parseFloat(RegExp.$1);
-//			}
-//		}
-//		return rv;
-//	}
-//
-//
+
 //	//via: http://stackoverflow.com/questions/8917921/cross-browser-javascript-not-jquery-scroll-to-top-animation
 //	function scrollTo(element, to, duration) {
 //		var start = element.scrollTop,
@@ -214,48 +194,48 @@
 //		return -c/2 * (t*(t-2) - 1) + b;
 //	};
 //	////
-//
-//	function showSkeletor(){
-//		toggleSkeletor(false);
-//	}
-//
-//	function hideSkeletor(){
-//		toggleSkeletor(true);
-//	}
-//
-//	//TODO remove with gulp
-//	function toggleSkeletor(v){
-//		var el = document.getElementsByTagName('body')[0],
-//			className = 'skeletor',
-//			byValue = false;
-//
-//		byValue = (v === true || v === false) ? v :  el.classList.contains(className);
-//
-//		if( byValue ){
-//			el.classList.remove(className);
-//		} else {
-//			el.classList.add(className);
-//		}
-//	}
-//
+
+	function showSkeletor(){
+		toggleSkeletor(false);
+	}
+
+	function hideSkeletor(){
+		toggleSkeletor(true);
+	}
+
+	//TODO remove with gulp
+	function toggleSkeletor(v){
+		var el = document.getElementsByTagName('body')[0],
+			className = 'skeletor',
+			byValue = false;
+
+		byValue = (v === true || v === false) ? v :  el.classList.contains(className);
+
+		if( byValue ){
+			el.classList.remove(className);
+		} else {
+			el.classList.add(className);
+		}
+	}
+
 //	function showPanicError(m){
 //		if(window.console){window.console.error(m);}
 //		var body = document.getElementsByTagName('body')[0];
 //		body.innerHTML = m;
 //	}
-//
-//	function getRandomInt(max) {
-//		return Math.round(getRandomRange(0, max));
-//	}
-//
+
+	function getRandomInt(max) {
+		return Math.round(getRandomRange(0, max));
+	}
+
 //	function getRandom(max) {
 //		return getRandomRange(0, max);
 //	}
-//
-//	function getRandomRange(min, max) {
-//		return Math.random() * (max - min) + min;
-//	}
-//
+
+	function getRandomRange(min, max) {
+		return Math.random() * (max - min) + min;
+	}
+
 //	function handleCompress(data){
 //		//anchor for compress, DON't touch it!
 //		if(true){return data;}//flagCompress
@@ -280,29 +260,28 @@
 //			return _cache[key];
 //		}
 //	}
-//
-//	return {
+
+	return {
 //		merge: merge,
 //		cx: cache,
 //		za: handleCompress,
-//		showSkeletor: showSkeletor,
-//		compareSemVer: compareSemVer,
-//		hideSkeletor: hideSkeletor,
-//		toggleSkeletor: toggleSkeletor,
+		showSkeletor: showSkeletor,
+		compareSemVer: compareSemVer,
+		hideSkeletor: hideSkeletor,
+		toggleSkeletor: toggleSkeletor,
 //		scrollTo: scrollTo,
 //		getRandom: getRandom,
-//		getRandomInt: getRandomInt,
+		getRandomInt: getRandomInt
 //		getRandomRange: getRandomRange,
 //		getJsAsync: getJsAsync,
 //		setJsSync: setJsSync,
 //		getCssAsync: getCssAsync,
 //		setCssSync: setCssSync,
 //		setHtmlMain: setHtmlMain,
-//		getInternetExplorerVersion: getInternetExplorerVersion,
 //		showPanicError: showPanicError,
 //		setNewResourceByTag: setNewResourceByTag,
 //		setNewResourceById: setNewResourceById,
 //		request: request
-//	};
-//
-//}());
+	};
+
+}());

@@ -23,6 +23,8 @@ global.cfg = merge(
 
 global.cfg.pkg = require('./package.json');
 
+//TASK ON tasks.js
+
 //be careful, no funciona con hijos, solo con parents directos
 function merge(root){
 	for ( var i = 1; i < arguments.length; i++ ){

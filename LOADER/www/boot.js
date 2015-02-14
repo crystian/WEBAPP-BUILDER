@@ -1,7 +1,10 @@
-//(function(){
-//	'use strict';
-//
-//	document.addEventListener('DOMContentLoaded',function(){
-//		loader.init();
-//	});
-//}());
+(function(){
+	'use strict';
+
+	if(_loaderCfg.compatibilityFirstRun()){
+		document.addEventListener('DOMContentLoaded',function(){
+			loader.init();
+		});
+	}
+
+}());

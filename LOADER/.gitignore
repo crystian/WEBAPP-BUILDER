@@ -1,5 +1,4 @@
-bower.json
-/dist
-/.idea/workspace.xml
+/bower.json
 /build
-loader.css
+/node_modules
+/vendors

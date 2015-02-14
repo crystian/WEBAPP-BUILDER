@@ -1,12 +1,16 @@
-///**
-//* Created by Crystian on 10/16/2014.
-//*/
-//
-//var gulp = require('gulp'),
-//	runSequence = require('run-sequence');
-//
+/**
+* Created by Crystian on 10/16/2014.
+*/
+
+var gulp = require('gulp'),
+	runSequence = require('run-sequence');
+
+gulp.task('i', ['install']);
+gulp.task('install', ['bowerify']);//install
+
+
 //gulp.task('default', ['build']);
-//
+
 //gulp.task('build', function (cb) {
 //	runSequence(
 //		'remove:build',

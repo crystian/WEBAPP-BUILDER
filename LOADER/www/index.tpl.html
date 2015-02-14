@@ -1,3 +1,4 @@
+<!--msgTpl-->
 <!DOCTYPE html>
 <html>
 
@@ -12,11 +13,11 @@
 	<link rel="shortcut icon" href="favicon.ico">
 
 	<!-- TODO rellenar -->
-	<!--https://www.npmjs.com/package/favicons/-->
+	<!-- https://www.npmjs.com/package/favicons/ -->
 	<!-- https://github.com/audreyr/favicon-cheat-sheet -->
 
 <!-- build:css -->
-	<link rel="stylesheet" href="loader/loader.css"/>
+	<link rel="stylesheet" href="loader.css"/>
 <!-- endbuild -->
 
 <!-- bower:css -->
@@ -45,9 +46,8 @@
 <!--loader-->
 
 <!--Anclas para reemplazar:-->
-<!--<span class="hide"></span>-->
+<!--REVIEW <span class="hide"></span>-->
 <p id="debugZone"></p>
-
 
 <!-- bower:js -->
 <!-- endinject -->
@@ -55,26 +55,26 @@
 <!-- build:js -->
 	<!--this will be remove-->
 	<!--LOADER-->
-		<!--REMEMBER!! PUT EACH FILE ON make:loader GULP TASK!-->
+		<!--REVIEW REMEMBER!! PUT EACH FILE ON make:loader GULP TASK!-->
 		<!--don't touch order-->
-		<!--<script src="loader/loader.js"></script>-->
-		<!--<script src="loader/config.js"></script>-->
-		<!--<script src="loader/variables.js"></script>-->
-		<!--<script src="loader/modules/diag.js"></script>-->
-		<!--<script src="loader/modules/compatibility.js"></script>-->
-		<!--<script src="loader/modules/polyfill-ie.js"></script>-->
-		<!--<script src="loader/modules/utils.js"></script>-->
+		<script src="config.js"></script>
+		<script src="loader.js"></script>
+		<script src="modules/compatibility.js"></script>
+		<script src="variables.js"></script>
+		<script src="modules/utils.js"></script>
+		<script src="modules/diag.js"></script>
+		<script src="modules/polyfill-ie.js"></script>
+		<script src="modules/settings.js"></script>
+		<script src="modules/lang.js"></script>
+		<script src="modules/events.js"></script>
+		<script src="modules/redefine.js"></script>
+
 		<!--<script src="loader/modules/screen.js"></script>-->
-		<!--<script src="loader/modules/events.js"></script>-->
-		<!--<script src="loader/modules/settings.js"></script>-->
-		<!--<script src="loader/modules/lang.js"></script>-->
-		<!--<script src="loader/modules/redefine.js"></script>-->
 		<!--<script src="loader/modules/analytics.js"></script>-->
 		<!--<script src="loader/modules/cordovaConnection.js"></script>-->
-		<!--<script src="loader/boot.js"></script>-->
+		<script src="boot.js"></script>
 	<!--/LOADER-->
 <!-- endbuild -->
-
 
 <!-- inject:loaderJs -->
 	<!--acutamaticamente se va a llenar aca-->
