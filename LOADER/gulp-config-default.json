@@ -63,6 +63,8 @@
 	"textNoscript": "<br/>Es una broma? este sitio es una app javascript, indispensable para que funcione, actualiza el navegador o usa otro. Gracias vuelvan prontos! <br/><em>Para mas info: <a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a> : browsers incompatibles.</em><br/><br/>",
 	"viewport": "user-scalable=no, minimum-scale=1, maximum-scale=1, initial-scale=1, width=device-width, height=device-height",
 
+	"analytics": false,
+	"analyticsActive": true,
 	"gaId": "UA-XXXXXXXX-V",
 	"gaAppName": "appName",
 	"gaAppId": "com.appName.appId",

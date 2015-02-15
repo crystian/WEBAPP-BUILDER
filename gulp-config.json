@@ -1,7 +1,7 @@
 {
   "version": "0.0.3",
-  "gaId": "UA-XXXXXXXX-Z",
-  "appName": "Number",
-  "appId" : "com.languagesgym.number",
-  "appInstaller" : "com.languagesgym.installer"
+  "gaId": "UA-XXXXXXXX-V",
+  "gaAppName": "Number",
+  "gaAppId" : "com.languagesgym.number",
+  "gaAppInstaller" : "com.languagesgym.installer"
 }

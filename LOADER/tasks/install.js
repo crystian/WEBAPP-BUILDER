@@ -68,6 +68,8 @@ gulp.task('makeConfig', function (cb) {
 	json.consoleError = global.cfg.consoleError;
 	json.fastClick = global.cfg.fastClick;
 	json.autoprefixer = global.cfg.autoprefixer;
+	json.analytics = global.cfg.analytics;
+	json.analyticsActive = global.cfg.analyticsActive;
 
 	compatibilityTpl =
 		'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n'+

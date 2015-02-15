@@ -13,7 +13,7 @@ _loaderCfg.contentEditable	= 0;
 _loaderCfg.isDevice		= 0; // setter by loader
 _loaderCfg.isDesktop	= 0; // setter by loader
 _loaderCfg.compatibility= 0; // 0 = no compatible, 1 = con problemas, 2 = compatible
-_loaderCfg.orientation	= 0; // 0=portrait, 1=landscape
+_loaderCfg.orientation	= 0; // 0=portrait, 1=landscape //detected by diag
 _loaderCfg.isLandscape	= 0; //detected by diag
 _loaderCfg.isPortraid	= 0; //detected by diag
 _loaderCfg.isTouchDevice= 0; //detected by diag, be careful, can not be real

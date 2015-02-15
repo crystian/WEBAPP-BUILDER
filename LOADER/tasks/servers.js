@@ -21,7 +21,7 @@ gulp.task('serve', function() {
 });
 
 gulp.task('watch', function() {
-	gulp.watch(global.cfg.folders.www +'/index.tpl.html', ['bowerify']);
+	gulp.watch([global.cfg.folders.www +'/index.tpl.html','gulp-config-default.json'], ['bowerify']);
 });
 
 gulp.task('servew', ['serve','watch']);
