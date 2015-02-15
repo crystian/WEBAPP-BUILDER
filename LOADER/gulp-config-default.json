@@ -88,6 +88,7 @@
 	"textErrorTimeoutServer": "Se agoto el tiempo de espera, verifica que tengas internet y este andando bien",
 
 	"isCordovaDevice": false,
+	"compressor": true,
 	"fastClick": true,
 
 	"consoleError": [
@@ -104,6 +105,7 @@
 		"Error in obliteration rast"
 	],
 
+	"os": "Pc",
 	"ip": "0.0.0.0",
 	"ports": {
 		"serve": 9000,
@@ -121,20 +123,9 @@
 		"safari 7"
 	],
 
-	"old": {
-		"name": "Power loader",
-		"description": "Para que tus apps salgan con fritas!",
+	"textHeader": ["headaerr"],
+	"textFooter": ["footear"],
 
-
-
-		"os": "Pc",
-		"compressor": true,
-		"cordova": true,
-		"keypass": "provisoryKey1",
-		"storepass": "provisoryKey1",
-		"site": "http://",
-
-		"textHeader": ["headaerr"],
-		"textFooter": ["footear"]
-	}
+	"keypass": "provisoryKey1",
+	"storepass": "provisoryKey1"
 }

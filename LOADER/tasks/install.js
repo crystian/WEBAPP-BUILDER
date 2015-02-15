@@ -70,6 +70,7 @@ gulp.task('makeConfig', function (cb) {
 	json.autoprefixer = global.cfg.autoprefixer;
 	json.analytics = global.cfg.analytics;
 	json.analyticsActive = global.cfg.analyticsActive;
+	json.compressor = global.cfg.compressor;
 
 	compatibilityTpl =
 		'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n'+
