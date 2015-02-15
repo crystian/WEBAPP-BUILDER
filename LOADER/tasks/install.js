@@ -67,6 +67,7 @@ gulp.task('makeConfig', function (cb) {
 	json.isCordovaDevice = global.cfg.isCordovaDevice;
 	json.consoleError = global.cfg.consoleError;
 	json.fastClick = global.cfg.fastClick;
+	json.autoprefixer = global.cfg.autoprefixer;
 
 	compatibilityTpl =
 		'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n'+

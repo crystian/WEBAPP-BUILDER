@@ -20,7 +20,7 @@ _loaderCfg.isTouchDevice= 0; //detected by diag, be careful, can not be real
 _loaderCfg.isMobile		= 0; // setter by diag, need it a review
 _loaderCfg.isTablet		= 0; // setter by diag, need it a review
 _loaderCfg.lang			= ''; //by lang and settings
-//_loaderCfg.online		= true; //detected by diag.offline
-//_loaderCfg.offline		= !_loaderCfg.online; //detected by diag.offline
-//_loaderCfg.connectionType= ''; //0=without connection, 1=bad connection and 2 good connection
+_loaderCfg.offline		= 0; //detected by diag.offline
+_loaderCfg.online		= 1; //detected by diag.offline
+_loaderCfg.connectionType= 2; //0=without connection, 1=bad connection and 2 good connection //just for cordava apps
 

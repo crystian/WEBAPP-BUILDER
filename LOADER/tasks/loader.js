@@ -1,11 +1,11 @@
-/////**
-//// * Created by Crystian on 10/19/2014.
-//// */
-////
-//var gulp = require('gulp'),
-//	commons = require('./commons'),
-//	debug = require('gulp-debug'),
-//	gif = require('gulp-if'),
+/**
+* Created by Crystian on 10/19/2014.
+*/
+
+var gulp = require('gulp'),
+	commons = require('./commons'),
+	debug = require('gulp-debug'),
+	gif = require('gulp-if'),
 //	inject = require('gulp-inject'),
 //	htmlreplace = require('gulp-html-replace'),
 //	htmlmin = require('gulp-htmlmin'),
@@ -17,11 +17,11 @@
 ////	streamqueue =require('streamqueue'),
 //	cheerio = require('gulp-cheerio'),
 //	jshint = require('gulp-jshint'),
-//	gutil = require('gulp-util'),
 //	es = require('event-stream'),
 //	replace = require('gulp-replace'),
 //	header = require('gulp-header'),
 //	footer = require('gulp-footer');
+	gutil = require('gulp-util');
 //
 //gulp.task('make:loader', ['make:loader:js'],  function () {
 //	var htmlminOptions = {
@@ -149,13 +149,13 @@
 //	result.on('error', console.error.bind(console));
 //	return result;
 //});
-//
-//
-//gulp.task('css:loader', function () {
-//	return commons.sassfixer(global.cfg.folders.loader + '/loader.scss',global.cfg.folders.loader);
-//});
-//
-//
+
+
+gulp.task('css:loader', function () {
+	return commons.sassfixer(global.cfg.folders.www + '/loader.scss',global.cfg.folders.www);
+});
+
+
 //gulp.task('copy:loader',function () {
 //	return gulp.src([
 //		global.cfg.folders.temp + '/index.html'

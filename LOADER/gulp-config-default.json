@@ -49,10 +49,9 @@
 	"folders": {
 		"www": "www",
 		"bower": "vendors",
-		"zbuild": "build",
+		"build": "build",
 		"ztemp": "build/.tmp",
 		"zscreens": "build/screens",
-		"zloader": "www/loader",
 		"zbase": "www/base",
 		"zdist": "dist"
 	},
@@ -110,6 +109,16 @@
 		"nightmare": 9002
 	},
 
+	"autoprefixer": [
+		"ie 10",
+		"android 4",
+		"chrome 32",
+		"ff 27",
+		"ios 7",
+		"opera 19",
+		"safari 7"
+	],
+
 	"old": {
 		"name": "Power loader",
 		"description": "Para que tus apps salgan con fritas!",
@@ -122,15 +131,7 @@
 		"keypass": "provisoryKey1",
 		"storepass": "provisoryKey1",
 		"site": "http://",
-		"autoprefixer": [
-			"ie 10",
-			"android 4",
-			"chrome 32",
-			"ff 27",
-			"ios 7",
-			"opera 19",
-			"safari 7"
-		],
+
 		"textHeader": ["headaerr"],
 		"textFooter": ["footear"]
 	}

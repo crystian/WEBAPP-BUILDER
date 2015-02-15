@@ -156,8 +156,14 @@ loader.diag = (function (window) {
 //			'Device Version: ' + device.version;
 //	}
 
+	function setStatusConnection(v){
+		loader.cfg.online = v;
+		loader.cfg.offline = !v;
+	}
+
 	return {
 		registerDetectOrientation: registerDetectOrientation,
+		setStatusConnection: setStatusConnection,
 		getInfo: getInfo,
 		isTouchDevice: isTouchDevice,
 		isMobile: isMobile,
