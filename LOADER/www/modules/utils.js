@@ -218,11 +218,12 @@ loader.utils = (function() {
 		}
 	}
 
-//	function showPanicError(m){
-//		if(window.console){window.console.error(m);}
-//		var body = document.getElementsByTagName('body')[0];
-//		body.innerHTML = m;
-//	}
+	function showPanicError(m){
+		if(window.console){window.console.error(m);}
+		var body = document.getElementsByTagName('body')[0];
+		body.innerHTML = m;
+		loader.hide();
+	}
 
 	function getRandomInt(max) {
 		return Math.round(getRandomRange(0, max));
@@ -271,14 +272,14 @@ loader.utils = (function() {
 		toggleSkeletor: toggleSkeletor,
 //		scrollTo: scrollTo,
 //		getRandom: getRandom,
-		getRandomInt: getRandomInt
+		getRandomInt: getRandomInt,
 //		getRandomRange: getRandomRange,
 //		getJsAsync: getJsAsync,
 //		setJsSync: setJsSync,
 //		getCssAsync: getCssAsync,
 //		setCssSync: setCssSync,
 //		setHtmlMain: setHtmlMain,
-//		showPanicError: showPanicError,
+		showPanicError: showPanicError
 //		setNewResourceByTag: setNewResourceByTag,
 //		setNewResourceById: setNewResourceById,
 //		request: request

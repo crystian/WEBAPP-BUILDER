@@ -9,26 +9,27 @@ gulp.task('i', ['install']);
 gulp.task('install', ['bowerify']);//install
 
 
-//gulp.task('default', ['build']);
+gulp.task('default', ['build']);
 
-//gulp.task('build', function (cb) {
-//	runSequence(
-//		'remove:build',
-//		'make:loader',
-//		cb);
-//});
-//
-//gulp.task('release', function (cb) {
-//	runSequence(
-//		'build',
-//		'test:loader',
-//		cb);
-//});
-//
-//gulp.task('css', ['sassfixer']); //just an alias
-//gulp.task('sassfixer', [
-//	'css:loader',
-//	//'css:base'
-//]);
-//
-//
+gulp.task('build', function (cb) {
+	runSequence(
+		'remove:build',
+		'make:loader',
+		'remove:temp',
+		cb);
+});
+
+gulp.task('release', function (cb) {
+
+	if (!global.cfg.release) {
+		console.error('variable release in gulp-config on "false", you will change it if you want a release');
+		//return;
+	}
+	runSequence(
+		//'bowerify',
+		//'build',
+		'test:loader',
+		cb);
+});
+
+gulp.task('css', ['css:loader']); //just an alias

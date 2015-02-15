@@ -5,6 +5,8 @@
 		document.addEventListener('DOMContentLoaded',function(){
 			loader.init();
 		});
+	} else {
+		loader.loadingScreen.off();
 	}
 
 }());

@@ -1,6 +1,7 @@
 {
-	"debugMode": false,
-	"release": true,
+	"name": "Power loader",
+	"site": "http://",
+	"release": false,
 	"loaderVersion": "0.0.1",
 	"version": "0.0.0",
 	"bower": [
@@ -51,7 +52,7 @@
 		"bower": "vendors",
 		"build": "build",
 		"temp": "build/.tmp",
-		"zscreens": "build/screens",
+		"screens": "build/screens",
 		"zbase": "www/base",
 		"zdist": "dist"
 	},
@@ -108,7 +109,7 @@
 	],
 
 	"os": "Pc",
-	"ip": "0.0.0.0",
+	"ip": "127.0.0.1",
 	"ports": {
 		"serve": 9000,
 		"build": 9001,
@@ -125,8 +126,8 @@
 		"safari 7"
 	],
 
-	"textHeader": ["headaerr"],
-	"textFooter": ["footear"],
+	"textHeader": ["<!--","<%=name%>","<%=site%>","<%=date%> (<%=version%>)","","Power by Javascript community!, Magic by Crystian","Copyright (c) 2015, @Crystian (Cristian Bietti) @crystian","-->","",""],
+	"textFooter": ["","","<!--'... Your future is whatever you make it. So make it a good one!' - Doc Brown to Marty McFly, BTTF (1990)-->"],
 
 	"keypass": "provisoryKey1",
 	"storepass": "provisoryKey1"

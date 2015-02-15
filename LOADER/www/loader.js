@@ -118,7 +118,7 @@ var loader = (function(){
 	function _handleDebugMode() {
 		cfg.debugZone = byId('debugZone');
 
-		if( cfg.debugMode ){
+		if( cfg.release ){
 			cfg.debugZone.classList.remove('hide');
 		}
 
@@ -129,7 +129,7 @@ var loader = (function(){
 		}
 
 		//prefiero hacerlo asi por seguridad, esto lo remueve gulp en modo release
-		if(true){return;}//flagGulpConsoleMessage//REVIEW
+		if(true){return;}//flagGulpConsoleMessage
 
 		//jshint quotmark:false, maxstatements:30
 		console.log("                         __..--.._");
@@ -214,14 +214,14 @@ var loader = (function(){
 	}
 
 	function debug(m) {
-		if (!cfg.debugMode) {
+		if (!cfg.release) {
 			return;
 		}
 		cfg.debugZone.innerHTML = m;
 	}
 
 	function debugAdd(m) {
-		if (!cfg.debugMode) {
+		if (!cfg.release) {
 			return;
 		}
 		debug(cfg.debugZone.innerHTML + '<br>---<br>' + m);

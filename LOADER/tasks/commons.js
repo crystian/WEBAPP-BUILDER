@@ -6,21 +6,23 @@ var gulp = require('gulp'),
 	sass = require('gulp-ruby-sass'),
 	autoprefixer = require('gulp-autoprefixer'),
 	csslint = require('gulp-csslint'),
-	debug = require('gulp-debug'),
-//	del	= require('del'),
+	//debug = require('gulp-debug'),
+	del	= require('del'),
 	gutil = require('gulp-util');
 
-//gulp.task('remove:build', function(cb) {
-//	//no borrar la carpeta build, da errores de sincro
-//	del([global.cfg.folders.temp,
-//		global.cfg.folders.screens,
-//		global.cfg.folders.dist
-//	], /*{force:true}, */cb());
-//});
+gulp.task('remove:build', ['remove:temp'], function(cb) {
+	//no borrar la carpeta build, da errores de sincro
+	del([global.cfg.folders.screens,
+		global.cfg.folders.build +'/*.*'
+	], /*{force:true}, */cb());
+});
+gulp.task('remove:temp', function(cb) {
+	del([global.cfg.folders.temp],cb());
+});
 
 exports.sassfixer = function(src, dest) {
 	return gulp.src(src)
-		.pipe(debug({verbose: true}))
+		//.pipe(debug({verbose: true}))
 		.on('error', console.error.bind(console))
 		.pipe(sass({style: 'expanded', noCache: true}))
 		.pipe(autoprefixer(global.cfg.autoprefixer))

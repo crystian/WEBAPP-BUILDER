@@ -3,7 +3,7 @@
 */
 
 var gulp = require('gulp'),
-	debug = require('gulp-debug'),
+	//debug = require('gulp-debug'),
 	uglify = require('gulp-uglify'),
 	inject = require('gulp-inject'),
 	replace = require('gulp-replace'),
@@ -50,7 +50,6 @@ gulp.task('copy:indexTpl',function () {
 gulp.task('makeConfig', function (cb) {
 	var json = {};
 	json.gaId = global.cfg.gaId;
-	json.debugMode = global.cfg.debugMode;
 	json.release = global.cfg.release;
 	json.gaAppName = global.cfg.gaAppName;
 	json.gaAppId = global.cfg.gaAppId;
@@ -92,7 +91,7 @@ gulp.task('makeConfig', function (cb) {
 			if(err) {
 				console.log(err);
 			} else {
-				console.log("Config.js generated");
+				console.log('Config.js generated');
 			}
 			cb();
 		});
@@ -116,7 +115,7 @@ gulp.task('bowerGenerator',['parseInstaller'],  function(cb) {
 
 gulp.task('parseInstaller', function() {
 	var bower = global.cfg.bower,
-		ambient = global.cfg.debugMode ? 'dev' : 'prod',
+		ambient = global.cfg.release ? 'dev' : 'prod',
 		rJs = [],
 		rCss = [],
 		rBower = {

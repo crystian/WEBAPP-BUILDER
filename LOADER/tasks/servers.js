@@ -5,6 +5,12 @@
 var gulp = require('gulp'),
 	webserver = require('gulp-webserver');
 
+gulp.task('servew', ['serve','watch']);
+
+gulp.task('watch', function() {
+	gulp.watch([global.cfg.folders.www +'/index.tpl.html','gulp-config-default.json'], ['bowerify']);
+});
+
 gulp.task('serve', function() {
 	'use strict';
 
@@ -19,12 +25,6 @@ gulp.task('serve', function() {
 			open: false
 		}));
 });
-
-gulp.task('watch', function() {
-	gulp.watch([global.cfg.folders.www +'/index.tpl.html','gulp-config-default.json'], ['bowerify']);
-});
-
-gulp.task('servew', ['serve','watch']);
 
 
 gulp.task('serve:build', function() {
