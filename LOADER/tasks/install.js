@@ -75,13 +75,14 @@ gulp.task('makeConfig', function (cb) {
 	compatibilityTpl =
 		'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n'+
 		'_loaderCfg.compatibilityFirst = function () {\n'+
+		'	//jshint maxcomplexity:false, quotmark:false\n'+
 		'	\'use strict\';\n'+
-		'	//jshint maxcomplexity:false\n'+
 		'	var arr = [];\n'+
 		global.cfg.compatibilityFirst+
 		'};\n';
 
 	var text = '/* Remember, this file is autogenerate, don\'t change it */\n\n' +
+		'//jshint maxlen:false\n'+
 		'var _loaderCfg = '+ JSON.stringify(json, null, '\t') +';'+
 		compatibilityTpl;
 

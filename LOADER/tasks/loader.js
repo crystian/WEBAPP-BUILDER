@@ -9,14 +9,14 @@ var gulp = require('gulp'),
 //	inject = require('gulp-inject'),
 //	htmlreplace = require('gulp-html-replace'),
 //	htmlmin = require('gulp-htmlmin'),
-//	concat = require('gulp-concat'),
+	concat = require('gulp-concat'),
 //	uglify = require('gulp-uglify'),
-//	minifycss = require('gulp-minify-css'),
-////	rename = require("gulp-rename"),
+	minifycss = require('gulp-minify-css'),
+	rename = require('gulp-rename'),
 ////	merge = require('merge-stream'),
 ////	streamqueue =require('streamqueue'),
 //	cheerio = require('gulp-cheerio'),
-//	jshint = require('gulp-jshint'),
+	jshint = require('gulp-jshint'),
 //	es = require('event-stream'),
 //	replace = require('gulp-replace'),
 //	header = require('gulp-header'),
@@ -72,83 +72,86 @@ var gulp = require('gulp'),
 //
 //	return stream;
 //});
-//
-//gulp.task('make:loader:js', ['make:loader:css'],  function () {
-//	var result = {};
-//
-//	//lib no uglificadas
-//	var libNoMin = gulp.src([
-//			global.cfg.folders.bower + '/platform/platform.js'
-//		])
-//		.pipe(gif(cfg.release, uglify()));
-//
-//	//lib uglificadas
-//	var libMin = gulp.src([
-//			global.cfg.withCompressor ? global.cfg.folders.bower + '/lz-string/libs/lz-string.min.js' : ''
-//		]);
-//
-//	var loader = gulp.src([
-//			global.cfg.folders.loader + '/config.js',
-//			global.cfg.folders.loader + '/loader.js',
-//			global.cfg.folders.loader + '/modules/diag.js',
-//			global.cfg.folders.loader + '/modules/compatibility.js',
-//			global.cfg.folders.loader + '/modules/polyfill-ie.js',
-//			global.cfg.folders.loader + '/modules/utils.js',
-//			global.cfg.folders.loader + '/modules/screen.js',
-//			global.cfg.folders.loader + '/modules/events.js',
-//			global.cfg.folders.loader + '/modules/settings.js',
-//			global.cfg.folders.loader + '/modules/lang.js',
-//			global.cfg.folders.loader + '/boot.js',
-//
-//			global.cfg.folders.base + '/index.js'
-//		])
-//
-//		//.pipe(debug({verbose: true}))
-//		.pipe(jshint())
-//		.pipe(jshint.reporter('jshint-stylish'))
-//		.pipe(jshint.reporter('fail'))
-//
-//		//just for "debugger" forgotens
-//		.pipe(gif(cfg.release, jshint({lookup:false, debug:false})))
-//		.pipe(gif(cfg.release, jshint.reporter('jshint-stylish')))
-//		.pipe(gif(cfg.release, jshint.reporter('fail')))
-//
-//		.pipe(gif(cfg.release, replace('if(true){return;}//flagGulpConsoleMessage', '')))
-//		.pipe(replace(/(_loaderCfg.version.\W*=\W*')(.*)(\W*';)/, '$1'+global.cfg.pkg.version+'$3'))
-//		.pipe(gif(cfg.release, replace(/(_loaderCfg\.debugMode.\W*=\W*)(.\w*)(\W*;)/, '$10$3')))
-//		.pipe(gif(cfg.release, replace(/(_loaderCfg\.showDeviceInfo.\W*=\W*)(.\w*)(\W*;)/, '$10$3')))
-//		.pipe(gif(cfg.release, replace(/(_loaderCfg\.showSkeletor.\W*=\W*)(.\w*)(\W*;)/, '$10$3')))
-//		.pipe(gif(cfg.release, replace(/(_loaderCfg\.contentEditable.\W*=\W*)(.\w*)(\W*;)/, '$10$3')))
-//		.pipe(gif(cfg.release, uglify({
-//				output:{
-//					beautify: false
-//				},
-//				compress:{
-//					sequences: true,
-//					drop_console: false
-//				}
-//			}))
-//		);
-//
-//
-//	return es.merge(libMin, libNoMin, loader)
-//		.on('error', console.error.bind(console))
-//		.pipe(concat('/-compiledLoader.js',{newLine: ';'}))
-//		.pipe(gulp.dest(global.cfg.folders.temp));
-//});
-//
-//
-//gulp.task('make:loader:css', ['css:loader'],  function () {
-//	var result = gulp.src([
-//			global.cfg.folders.loader +'/loader.css'
-//		])
-//		.pipe(gif(cfg.release, minifycss()))
-//		.pipe(concat('/-compiledLoader.css'))
-//		.pipe(gulp.dest(global.cfg.folders.temp));
-//
-//	result.on('error', console.error.bind(console));
-//	return result;
-//});
+
+gulp.task('make:loader:js', ['make:loader:css'],  function () {
+	var result = {},
+		releasePostName = (global.cfg.release) ? 'min.' : '';
+
+	//TODO improve it
+	var libs = [
+		global.cfg.folders.bower + '/platform/platform.' + releasePostName + 'js',
+		global.cfg.fastClick ? global.cfg.folders.bower + '/fastclick/lib/fastclick.' + releasePostName + 'js' : '',
+		global.cfg.jquery ? global.cfg.folders.bower + '/jquery/dist/jquery.' + releasePostName + 'js' : '',
+		global.cfg.bootstrap ? global.cfg.folders.bower + '/bootstrap/dist/js/bootstrap.' + releasePostName + 'js' : '',
+		global.cfg.compressor ? global.cfg.folders.bower + '/lz-string/libs/lz-string.' + releasePostName + 'js' : ''
+	];
+
+	//TODO improve it
+	var loaderScripts = [
+		global.cfg.folders.www + '/config.js',
+		global.cfg.folders.www + '/loader.js',
+		global.cfg.folders.www + '/modules/compatibility.js',
+		global.cfg.folders.www + '/variables.js',
+		global.cfg.folders.www + '/modules/utils.js',
+		global.cfg.folders.www + '/modules/diag.js',
+		global.cfg.folders.www + '/modules/polyfill-ie.js',
+		global.cfg.folders.www + '/modules/settings.js',
+		global.cfg.folders.www + '/modules/lang.js',
+		global.cfg.folders.www + '/modules/events.js',
+		global.cfg.folders.www + '/modules/redefine.js',
+		global.cfg.folders.www + '/modules/screen.js',
+		global.cfg.folders.www + '/modules/cordovaConnection.js',
+		global.cfg.folders.www + '/modules/analytics.js',
+		global.cfg.folders.www + '/boot.js'
+	];
+
+	var libMin = gulp.src(libs);
+	var loader = gulp.src(loaderScripts)
+		.pipe(debug({verbose: true}))
+		.pipe(jshint())
+		.pipe(jshint.reporter('jshint-stylish'))
+		.pipe(jshint.reporter('fail'))
+
+		////just for "debugger" forgotens
+		//.pipe(gif(cfg.release, jshint({lookup:false, debug:false})))
+		//.pipe(gif(cfg.release, jshint.reporter('jshint-stylish')))
+		//.pipe(gif(cfg.release, jshint.reporter('fail')))
+		//
+		//.pipe(gif(cfg.release, replace('if(true){return;}//flagGulpConsoleMessage', '')))
+		//.pipe(replace(/(_loaderCfg.version.\W*=\W*')(.*)(\W*';)/, '$1'+global.cfg.pkg.version+'$3'))
+		//.pipe(gif(cfg.release, replace(/(_loaderCfg\.debugMode.\W*=\W*)(.\w*)(\W*;)/, '$10$3')))
+		//.pipe(gif(cfg.release, replace(/(_loaderCfg\.showDeviceInfo.\W*=\W*)(.\w*)(\W*;)/, '$10$3')))
+		//.pipe(gif(cfg.release, replace(/(_loaderCfg\.showSkeletor.\W*=\W*)(.\w*)(\W*;)/, '$10$3')))
+		//.pipe(gif(cfg.release, replace(/(_loaderCfg\.contentEditable.\W*=\W*)(.\w*)(\W*;)/, '$10$3')))
+		//.pipe(gif(cfg.release, uglify({
+		//		output:{
+		//			beautify: false
+		//		},
+		//		compress:{
+		//			sequences: true,
+		//			drop_console: false
+		//		}
+		//	}))
+		//);
+
+
+return;
+	return es.merge(libMin, libNoMin, loader)
+		.on('error', console.error.bind(console))
+		.pipe(concat('/-compiledLoader.js',{newLine: ';'}))
+		.pipe(gulp.dest(global.cfg.folders.temp));
+});
+
+
+gulp.task('make:loader:css', ['css:loader'],  function () {
+	return gulp.src(global.cfg.folders.www +'/loader.css')
+		//.on('error', console.error.bind(console))
+		.pipe(gif(global.cfg.release, minifycss()))
+		//.pipe(concat('/-compiledLoader.css'))
+		//.pipe(gulp.dest(global.cfg.folders.temp));
+		.pipe(rename('-compiledLoader.css'))
+		.pipe(gulp.dest(global.cfg.folders.temp));
+});
 
 
 gulp.task('css:loader', function () {

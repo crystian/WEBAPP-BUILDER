@@ -34,7 +34,7 @@ var loader = (function(){
 
 		//if it is a device, load cordova plugins and more!
 		if(cfg.isCordovaDevice){
-			//console.info('Cordova device');
+			console.info('Cordova device');
 			//cfg.isDevice = 1;
 			//
 			////carga asincrona, cuando llegue y se parsee dispara un deviceReady y lo mando a cordovaReady

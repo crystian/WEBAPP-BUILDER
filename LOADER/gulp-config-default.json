@@ -1,6 +1,6 @@
 {
 	"debugMode": false,
-	"release": false,
+	"release": true,
 	"loaderVersion": "0.0.1",
 	"version": "0.0.0",
 	"bower": [
@@ -50,7 +50,7 @@
 		"www": "www",
 		"bower": "vendors",
 		"build": "build",
-		"ztemp": "build/.tmp",
+		"temp": "build/.tmp",
 		"zscreens": "build/screens",
 		"zbase": "www/base",
 		"zdist": "dist"
@@ -90,6 +90,8 @@
 	"isCordovaDevice": false,
 	"compressor": true,
 	"fastClick": true,
+	"jquery": true,
+	"bootstrap": true,
 
 	"consoleError": [
 		"Error unknown",

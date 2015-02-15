@@ -11,7 +11,7 @@ loader.diag.lang = (function () {
 		callback = _callback;
 
 		if (loader.cfg.isCordovaDevice){ //second: via device
-
+			console.log('via cordova lang');
 			//navigator.globalization.getLocaleName(
 			//	function (language) {
 			//		lang = language.value.replace('_', '-');

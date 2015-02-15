@@ -123,7 +123,7 @@ loader.diag = (function (window) {
 		var result = '';
 		if (loader.cfg.isCordovaDevice) {
 			//result = deviceInfoHtml();
-			//result += '<br />';
+			result += '<br />';
 		}
 		result += clientInfoHtml();
 
