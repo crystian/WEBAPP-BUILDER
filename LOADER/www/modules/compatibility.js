@@ -8,7 +8,6 @@
 
 	//yes on _loaderCfg, after this test, will be removed
 	if(!_loaderCfg.compatibilityFirst()){
-		//TODO i18n ?
 		alert(_loaderCfg.textIncompatibleByFeatures);
 		var body = document.getElementsByTagName('body')[0];
 		body.innerHTML = _loaderCfg.textIncompatibleByFeatures+'<br>'+_loaderCfg.textFaqLink;
