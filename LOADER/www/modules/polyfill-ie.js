@@ -17,9 +17,10 @@ var polyfills = (function(){
 				return evt;
 			}
 
-			CustomEvent.prototype = window.CustomEvent.prototype;
-
-			window.CustomEvent = CustomEvent;
+			if (!window.CustomEvent) {
+				//CustomEvent.prototype = window.CustomEvent.prototype;
+				window.CustomEvent = CustomEvent;
+			}
 		})();
 	}
 

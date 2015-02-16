@@ -23,12 +23,12 @@ gulp.task('release', function (cb) {
 
 	if (!global.cfg.release) {
 		console.error('variable release in gulp-config on "false", you will change it if you want a release');
-		//return;
+		return;
 	}
 	runSequence(
 		'bowerify',
 		'build',
-		//'test:loader',
+		'test:loader',
 		cb);
 });
 

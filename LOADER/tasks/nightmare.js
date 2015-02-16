@@ -231,7 +231,7 @@ gulp.task('test:loader',['serve:nightmare'], function(cb) {
 					)
 				){
 					gutil.beep();
-					throw new Error('Mode release with debugMode (and others) activate!');
+					throw new Error('Mode release on false (and others) activate!');
 				}
 
 				if (cfg.compatibility !== b.compatibility) {

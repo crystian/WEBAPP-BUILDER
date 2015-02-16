@@ -113,6 +113,9 @@ var loader = (function(){
 
 		//all right, next step, should be load landing page with this event
 		doc.dispatchEvent(events.loaderFinished);
+
+		//TODO REMOVE ME!
+		loader.hide();
 	}
 
 	function _handleDebugMode() {

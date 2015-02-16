@@ -14,9 +14,9 @@ var gulp = require('gulp'),
 	minifycss = require('gulp-minify-css'),
 	//rename = require('gulp-rename'),
 	//merge = require('merge-stream'),
-	//streamqueue =require('streamqueue'),
+	streamqueue =require('streamqueue'),
 	jshint = require('gulp-jshint'),
-	es = require('event-stream'),
+	//es = require('event-stream'),
 	replace = require('gulp-replace'),
 	header = require('gulp-header'),
 	footer = require('gulp-footer'),
@@ -59,6 +59,31 @@ gulp.task('make:loader', ['make:loader:js'],  function () {
 		.pipe(gulp.dest(global.cfg.folders.build));
 });
 
+function jsValidator(src) {
+	return gulp.src(src)
+		//.pipe(debug({verbose: true}))
+		.pipe(jshint())
+		.pipe(jshint.reporter('jshint-stylish'))
+		.pipe(jshint.reporter('fail'))
+
+		//just for "debugger" forgotens
+		.pipe(gif(cfg.release, jshint({lookup:false, debug:false})))
+		.pipe(gif(cfg.release, jshint.reporter('jshint-stylish')))
+		.pipe(gif(cfg.release, jshint.reporter('fail')))
+
+		.pipe(gif(cfg.release, replace('if(true){return;}//flagGulpConsoleMessage', '')))
+		.pipe(gif(cfg.release, uglify({
+			output:{
+				beautify: false
+			},
+			compress:{
+				sequences: true,
+				drop_console: false
+			}
+		}))
+	);
+}
+
 gulp.task('make:loader:js', ['make:loader:css'],  function () {
 	var releasePostName = (global.cfg.release) ? 'min.' : '';
 
@@ -72,10 +97,13 @@ gulp.task('make:loader:js', ['make:loader:css'],  function () {
 	];
 
 	//TODO improve it
-	var loaderScripts = [
+	var loaderScripts1 = [
 		global.cfg.folders.www + '/config.js',
+		global.cfg.folders.www + '/modules/compatibility.js'
+	];
+
+	var loaderScripts2 = [
 		global.cfg.folders.www + '/loader.js',
-		global.cfg.folders.www + '/modules/compatibility.js',
 		global.cfg.folders.www + '/variables.js',
 		global.cfg.folders.www + '/modules/utils.js',
 		global.cfg.folders.www + '/modules/diag.js',
@@ -91,38 +119,16 @@ gulp.task('make:loader:js', ['make:loader:css'],  function () {
 	];
 
 	var libMin = gulp.src(libs)
-		.pipe(gif(cfg.release, strip({safe:false, block:false})));
+		.pipe(gif(cfg.release, strip({safe:false, block:false}))),
 
-	var loader = gulp.src(loaderScripts)
-		//.pipe(debug({verbose: true}))
-		.pipe(jshint())
-		.pipe(jshint.reporter('jshint-stylish'))
-		.pipe(jshint.reporter('fail'))
+		scripts1 = jsValidator(loaderScripts1),
+		scripts2 = jsValidator(loaderScripts2);
 
-		//just for "debugger" forgotens
-		.pipe(gif(cfg.release, jshint({lookup:false, debug:false})))
-		.pipe(gif(cfg.release, jshint.reporter('jshint-stylish')))
-		.pipe(gif(cfg.release, jshint.reporter('fail')))
-
-		.pipe(gif(cfg.release, replace('if(true){return;}//flagGulpConsoleMessage', '')))
-		.pipe(gif(cfg.release, uglify({
-				output:{
-					beautify: false
-				},
-				compress:{
-					sequences: true,
-					drop_console: false
-				}
-			}))
-		);
-
-
-	return es.merge(libMin, loader)
+	return streamqueue({ objectMode: true },scripts1, libMin, scripts2)
 		.on('error', console.error.bind(console))
 		.pipe(concat('/-compiledLoader.js',{newLine: ';'}))
 		.pipe(gulp.dest(global.cfg.folders.temp));
 });
-
 
 gulp.task('make:loader:css', ['css:loader'],  function () {
 	var releasePostName = (global.cfg.release) ? 'min.' : '';
