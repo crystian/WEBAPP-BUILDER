@@ -12,17 +12,18 @@ loader.diag.lang = (function () {
 
 		if (loader.cfg.isCordovaDevice){ //second: via device
 			console.log('via cordova lang');
-			//navigator.globalization.getLocaleName(
-			//	function (language) {
-			//		lang = language.value.replace('_', '-');
-			//		setLang( lang, 'cordova device' );
-			//	},
-			//	function () {
-			//		console.warn('Fail with cordova device, fallback with browser');
-			//		//en caso de error usa el detector de browser
-			//		setLang( getBrowserLang(), 'browser' );
-			//	}
-			//);
+
+			navigator.globalization.getLocaleName(
+				function (language) {
+					var lang = language.value.replace('_', '-');
+					setLang( lang, 'cordova device' );
+				},
+				function () {
+					console.warn('Fail with cordova device, fallback with browser');
+					//en caso de error usa el detector de browser
+					setLang( getBrowserLang(), 'browser' );
+				}
+			);
 
 		} else { //third: via browser (UA)
 

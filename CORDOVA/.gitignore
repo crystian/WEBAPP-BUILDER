@@ -1,1 +1,4 @@
 /www
+/platforms/android/ant-build
+/platforms/android/CordovaLib/ant-build
+/platforms/android/assets/www

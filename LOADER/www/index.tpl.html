@@ -4,12 +4,14 @@
 
 <head>
 	<meta charset="utf-8">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="msapplication-tap-highlight" content="no" />
 	<!--Build change it-->
 	<title id="pageTitle"></title>
 	<meta id="pageDescription" name="description" content="">
 	<meta id="pageKeyword" name="keyword" content="">
 	<meta id="pageAuthor" name="author" content="">
-	<meta id="viewport" name="viewport" content="user-scalable=no, minimum-scale=1, maximum-scale=1, initial-scale=1, width=device-width, height=device-height">
+	<meta id="viewport" name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
 	<link rel="shortcut icon" href="favicon.ico">
 
 	<!-- TODO rellenar -->
@@ -48,15 +50,15 @@
 <p id="debugZone"></p>
 
 <!-- build:js -->
+	<!--this will be remove-->
+	<!--REMEMBER!! PUT EACH FILE ON make:loader GULP TASK!-->
+	<!--don't touch order-->
 	<script src="config.js"></script>
 	<script src="modules/compatibility.js"></script>
 
 	<!-- bower:js -->
 	<!-- endinject -->
 
-	<!--this will be remove-->
-	<!--REMEMBER!! PUT EACH FILE ON make:loader GULP TASK!-->
-	<!--don't touch order-->
 	<script src="loader.js"></script>
 	<script src="variables.js"></script>
 	<script src="modules/utils.js"></script>

@@ -8,7 +8,6 @@ var gulp = require('gulp'),
 gulp.task('i', ['install']);
 gulp.task('install', ['bowerify']);//install
 
-
 gulp.task('default', ['build']);
 
 gulp.task('build', function (cb) {
@@ -19,15 +18,23 @@ gulp.task('build', function (cb) {
 		cb);
 });
 
-gulp.task('release', function (cb) {
-
-	if (!global.cfg.release) {
-		console.error('variable release in gulp-config on "false", you will change it if you want a release');
-		return;
-	}
+gulp.task('build:full', function (cb) {
 	runSequence(
 		'bowerify',
 		'build',
+		cb);
+});
+
+gulp.task('release', function (cb) {
+	'use strict';
+
+	if (!global.cfg.release) {
+		console.error('variable release in gulp-config on "false", you will change it if you want a release');
+		global.cfg.release = true;
+	}
+
+	runSequence(
+		'build:full',
 		'test:loader',
 		cb);
 });

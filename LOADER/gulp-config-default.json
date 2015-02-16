@@ -1,7 +1,7 @@
 {
 	"name": "Power loader",
 	"site": "http://",
-	"release": true,
+	"release": false,
 	"loaderVersion": "0.0.1",
 	"version": "0.0.0",
 	"bower": [
@@ -62,7 +62,7 @@
 	"textPageKeyword": "keyworde",
 	"textPageAuthor": "autore",
 	"textNoscript": "<br/>Es una broma? este sitio es una app javascript, indispensable para que funcione, actualiza el navegador o usa otro. Gracias vuelvan prontos! <br/><em>Para mas info: <a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a> : browsers incompatibles.</em><br/><br/>",
-	"viewport": "user-scalable=no, minimum-scale=1, maximum-scale=1, initial-scale=1, width=device-width, height=device-height",
+	"viewport": "user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height",
 
 	"analytics": false,
 	"analyticsActive": true,
@@ -77,6 +77,7 @@
 		"firefox": [23.9, 25.9, 26.0],
 		"android": [3.9, 3.9, 4.0],
 		"chrome": [17.9, 28.9, 29.0],
+		"chromeMobile": [3.9, 3.9, 4.0],
 		"safari": [6.0, 6.0, 7.0],
 		"ios": [6, 6, 7]
 	},

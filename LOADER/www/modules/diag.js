@@ -14,6 +14,7 @@ loader.diag = (function (window) {
 		}
 
 		loader.diag.lang.init();
+		loader.diag.cordovaConnection.init();
 
 		return compatibility;
 	}
@@ -33,6 +34,8 @@ loader.diag = (function (window) {
 			polyfills.customEventsForIE();
 		} else if( platformName.indexOf('android') >= 0 ){
 			platformName = 'android';
+		} else if( platformName.indexOf('chrome mobile') >= 0 ) {
+			platformName = 'chromeMobile';
 		} else if( platformName.indexOf('chrome') >= 0 ) {
 			platformName = 'chrome';
 		} else if( platform.os.family.toLowerCase().indexOf('ios') >= 0 ) {
@@ -122,7 +125,7 @@ loader.diag = (function (window) {
 	function getInfo() {
 		var result = '';
 		if (loader.cfg.isCordovaDevice) {
-			//result = deviceInfoHtml();
+			result = deviceInfoHtml();
 			result += '<br />';
 		}
 		result += clientInfoHtml();
@@ -145,16 +148,16 @@ loader.diag = (function (window) {
 			'USER AGENT: ' +window.navigator.userAgent;
 	}
 
-//	//based on cordova "device" object
-//	function deviceInfoHtml() {
-//		return '<b>Cordova device based:</b><br />' +
-//			'Device Model: ' + device.model + '<br />' +
-//			'Device Name: ' + device.name + '<br />' +
-//			'Device Cordova: ' + device.cordova + '<br />' +
-//			'Device Platform: ' + device.platform + '<br />' +
-//			'Device UUID: ' + device.uuid + '<br />' +
-//			'Device Version: ' + device.version;
-//	}
+	//based on cordova "device" object
+	function deviceInfoHtml() {
+		return '<b>Cordova device based:</b><br />' +
+			'Device Model: ' + device.model + '<br />' +
+			'Device Name: ' + device.name + '<br />' +
+			'Device Cordova: ' + device.cordova + '<br />' +
+			'Device Platform: ' + device.platform + '<br />' +
+			'Device UUID: ' + device.uuid + '<br />' +
+			'Device Version: ' + device.version;
+	}
 
 	function setStatusConnection(v){
 		loader.cfg.online = v;

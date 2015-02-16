@@ -12,7 +12,7 @@ var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	uglify = require('gulp-uglify'),
 	minifycss = require('gulp-minify-css'),
-	//rename = require('gulp-rename'),
+	rename = require('gulp-rename'),
 	//merge = require('merge-stream'),
 	streamqueue =require('streamqueue'),
 	jshint = require('gulp-jshint'),
@@ -56,6 +56,12 @@ gulp.task('make:loader', ['make:loader:js'],  function () {
 			version: global.cfg.version,
 			site: global.cfg.site})))
 		.pipe(gif(global.cfg.release, footer(global.cfg.textFooter.join('\n'))))
+		.pipe(gulp.dest(global.cfg.folders.build))
+		.pipe(rename('index-cordova.html'))
+		.pipe(gif(global.cfg.release,
+			replace(',isCordovaDevice:!1,', ',isCordovaDevice:1,'),
+			replace('"isCordovaDevice": false,', '"isCordovaDevice": true,')
+		))
 		.pipe(gulp.dest(global.cfg.folders.build));
 });
 

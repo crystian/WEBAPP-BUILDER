@@ -35,13 +35,13 @@ var loader = (function(){
 		//if it is a device, load cordova plugins and more!
 		if(cfg.isCordovaDevice){
 			console.info('Cordova device');
-			//cfg.isDevice = 1;
-			//
-			////carga asincrona, cuando llegue y se parsee dispara un deviceReady y lo mando a cordovaReady
-			//doc.addEventListener('deviceready', _loadAsync, false);
-			//
-			//utils.getJsAsync('cordova.js');
-			//
+			cfg.isDevice = 1;
+
+			//carga asincrona, cuando llegue y se parsee dispara un deviceReady y lo mando a cordovaReady
+			doc.addEventListener('deviceready', _loadAsync, false);
+
+			utils.getJsAsync('cordova.js');
+
 		} else {
 			if (platform.os.toString().match(/(iPhone|iPod|iPad|iOS|Android|BlackBerry)/)) {
 				console.info('Device (without cordova)');
@@ -125,7 +125,7 @@ var loader = (function(){
 			cfg.debugZone.classList.remove('hide');
 		}
 
-		debug('Version: ' + cfg.version);
+		debug('Version: ' + cfg.version+ '<br>Loader version: ' + cfg.loaderVersion);
 
 		if( cfg.showDeviceInfo ){
 			debugAdd(diag.getInfo());

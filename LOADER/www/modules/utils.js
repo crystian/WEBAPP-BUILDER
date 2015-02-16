@@ -43,7 +43,7 @@ var t = function(id, v){
 //jshint unused:false
 var d = function(m){
 	'use strict';
-	loader.diag.debugAdd(m);
+	loader.debugAdd(m);
 };
 
 
@@ -117,16 +117,17 @@ loader.utils = (function() {
 //		xhr.timeout = 10000;//yes here, porque ie11 pincha :S
 //		xhr.send();
 //	}
-//
-//	function getJsAsync(file) {
-//		var resourceLoader = document.createElement('script');
-//		resourceLoader.type = 'text/javascript';
-//		resourceLoader.async = true;
-//		resourceLoader.src = file;
-//
-//		setNewResourceByTag(resourceLoader, 'script');
-//	}
-//
+
+	function getJsAsync(file) {
+		var tagName = 'script';
+		var resourceLoader = document.createElement(tagName);
+		resourceLoader.type = 'text/javascript';
+		resourceLoader.async = true;
+		resourceLoader.src = file;
+
+		setNewResourceByTag(resourceLoader, tagName);
+	}
+
 //	function setJsSync(content) {
 //		var resourceLoader = document.createElement('script');
 //		resourceLoader.type = 'text/javascript';
@@ -155,12 +156,12 @@ loader.utils = (function() {
 //		var el = document.getElementById('mainView');
 //		el.innerHTML = data;
 //	}
-//
-//	function setNewResourceByTag(resourceLoader, tagWhere) {
-//		var scripts = document.getElementsByTagName(tagWhere)[0];
-//		scripts.appendChild(resourceLoader);
-//	}
-//
+
+	function setNewResourceByTag(resourceLoader, tagWhere) {
+		var scripts = document.getElementsByTagName(tagWhere)[0];
+		scripts.appendChild(resourceLoader);
+	}
+
 //	function setNewResourceById(resourceLoader, id) {
 //		var el = document.getElementById(id);
 //		el.appendChild(resourceLoader);
@@ -274,13 +275,13 @@ loader.utils = (function() {
 //		getRandom: getRandom,
 		getRandomInt: getRandomInt,
 //		getRandomRange: getRandomRange,
-//		getJsAsync: getJsAsync,
+		getJsAsync: getJsAsync,
 //		setJsSync: setJsSync,
 //		getCssAsync: getCssAsync,
 //		setCssSync: setCssSync,
 //		setHtmlMain: setHtmlMain,
-		showPanicError: showPanicError
-//		setNewResourceByTag: setNewResourceByTag,
+		showPanicError: showPanicError,
+		setNewResourceByTag: setNewResourceByTag
 //		setNewResourceById: setNewResourceById,
 //		request: request
 	};
