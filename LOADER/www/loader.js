@@ -118,7 +118,7 @@ var loader = (function(){
 	function _handleDebugMode() {
 		cfg.debugZone = byId('debugZone');
 
-		if( cfg.release ){
+		if( !cfg.release ){
 			cfg.debugZone.classList.remove('hide');
 		}
 
@@ -214,14 +214,14 @@ var loader = (function(){
 	}
 
 	function debug(m) {
-		if (!cfg.release) {
+		if (cfg.release) {
 			return;
 		}
 		cfg.debugZone.innerHTML = m;
 	}
 
 	function debugAdd(m) {
-		if (!cfg.release) {
+		if (cfg.release) {
 			return;
 		}
 		debug(cfg.debugZone.innerHTML + '<br>---<br>' + m);

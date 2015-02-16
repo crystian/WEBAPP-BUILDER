@@ -91,7 +91,7 @@ gulp.task('make:loader:js', ['make:loader:css'],  function () {
 	];
 
 	var libMin = gulp.src(libs)
-		.pipe(strip({safe:false, block:false}));
+		.pipe(gif(cfg.release, strip({safe:false, block:false})));
 
 	var loader = gulp.src(loaderScripts)
 		//.pipe(debug({verbose: true}))

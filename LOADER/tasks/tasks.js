@@ -26,9 +26,9 @@ gulp.task('release', function (cb) {
 		//return;
 	}
 	runSequence(
-		//'bowerify',
-		//'build',
-		'test:loader',
+		'bowerify',
+		'build',
+		//'test:loader',
 		cb);
 });
 

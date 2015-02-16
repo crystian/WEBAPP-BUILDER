@@ -3,10 +3,9 @@
 */
 
 //default values for test:
-//_loaderCfg.analytics		= 1;
 //_loaderCfg.devLocal			= 1;//request by request, otherwise one json file
-_loaderCfg.showDeviceInfo	= 1;
-_loaderCfg.showSkeletor		= 1;
+_loaderCfg.showDeviceInfo	= 0;
+_loaderCfg.showSkeletor		= 0;
 _loaderCfg.contentEditable	= 0;
 
 //injected automatically on the app:

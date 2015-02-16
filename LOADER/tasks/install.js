@@ -115,7 +115,7 @@ gulp.task('bowerGenerator',['parseInstaller'],  function(cb) {
 
 gulp.task('parseInstaller', function() {
 	var bower = global.cfg.bower,
-		ambient = global.cfg.release ? 'dev' : 'prod',
+		ambient = global.cfg.release ? 'prod' : 'dev',
 		rJs = [],
 		rCss = [],
 		rBower = {

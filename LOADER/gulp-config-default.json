@@ -1,7 +1,7 @@
 {
 	"name": "Power loader",
 	"site": "http://",
-	"release": false,
+	"release": true,
 	"loaderVersion": "0.0.1",
 	"version": "0.0.0",
 	"bower": [
