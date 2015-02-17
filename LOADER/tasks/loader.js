@@ -99,7 +99,8 @@ gulp.task('make:loader:js', ['make:loader:css'],  function () {
 		global.cfg.fastClick ? global.cfg.folders.bower + '/fastclick/lib/fastclick.' + releasePostName + 'js' : '',
 		global.cfg.jquery ? global.cfg.folders.bower + '/jquery/dist/jquery.' + releasePostName + 'js' : '',
 		global.cfg.bootstrap ? global.cfg.folders.bower + '/bootstrap/dist/js/bootstrap.' + releasePostName + 'js' : '',
-		global.cfg.compressor ? global.cfg.folders.bower + '/lz-string/libs/lz-string.' + releasePostName + 'js' : ''
+		global.cfg.compressor ? global.cfg.folders.bower + '/lz-string/libs/lz-string.' + releasePostName + 'js' : '',
+		global.cfg.compressor ? global.cfg.folders.bower + '/swiper/dist/js/swiper.' + releasePostName + 'js' : ''
 	];
 
 	//TODO improve it
@@ -139,6 +140,7 @@ gulp.task('make:loader:js', ['make:loader:css'],  function () {
 gulp.task('make:loader:css', ['css:loader'],  function () {
 	var releasePostName = (global.cfg.release) ? 'min.' : '';
 		bootstrapCss = [
+			global.cfg.folders.bower+ '/swiper/dist/css/swiper.'+releasePostName+'css',
 			global.cfg.folders.bower+ '/bootstrap/dist/css/bootstrap.'+releasePostName+'css',
 			global.cfg.folders.bower+ '/bootstrap/dist/css/bootstrap-theme.'+releasePostName+'css'
 		];

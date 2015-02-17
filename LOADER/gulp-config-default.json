@@ -1,7 +1,7 @@
 {
 	"name": "Power loader",
 	"site": "http://",
-	"release": false,
+	"release": true,
 	"loaderVersion": "0.0.1",
 	"version": "0.0.0",
 	"bower": [
@@ -32,6 +32,14 @@
 			"generate-js": true
 		},
 		{
+			"name": "swiper",
+			"version": "~3.0.1",
+			"js-dev": ["swiper/dist/js/swiper.js"],
+			"js-prod": ["swiper/dist/js/swiper.min.js"],
+			"css-dev": ["swiper/dist/css/swiper.css"],
+			"css-prod": ["swiper/dist/css/swiper.min.css"]
+		},
+		{
 			"name": "bootstrap",
 			"version": "~3.3.2",
 			"js-dev": ["bootstrap/dist/js/bootstrap.js"],
@@ -46,6 +54,12 @@
 			]
 		}
 	],
+
+	"compressor": true,
+	"fastClick": true,
+	"jquery": true,
+	"bootstrap": true,
+	"swiper": true,
 
 	"folders": {
 		"www": "www",
@@ -90,10 +104,6 @@
 	"textErrorTimeoutServer": "Se agoto el tiempo de espera, verifica que tengas internet y este andando bien",
 
 	"isCordovaDevice": false,
-	"compressor": true,
-	"fastClick": true,
-	"jquery": true,
-	"bootstrap": true,
 
 	"consoleError": [
 		"Error unknown",
