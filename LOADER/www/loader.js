@@ -135,7 +135,9 @@ var loader = (function(){
 		}
 
 		//prefiero hacerlo asi por seguridad, esto lo remueve gulp en modo release
+		//removeIf(production)
 		if(true){return;}//flagGulpConsoleMessage
+		//endRemoveIf(production)
 
 		//jshint quotmark:false, maxstatements:30
 		console.log("                         __..--.._");

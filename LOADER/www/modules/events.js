@@ -5,7 +5,6 @@
 loader.events = (function(){
 	'use strict';
 
-	//TODO REVIEW
 	//jshint validthis:true
 	function init() {
 		//no customEvent porque no es soportado por android browser

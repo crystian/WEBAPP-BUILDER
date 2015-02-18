@@ -4,7 +4,7 @@
 
 var gulp = require('gulp'),
 	commons = require('./commons'),
-	debug = require('gulp-debug'),
+	//debug = require('gulp-debug'),
 	gif = require('gulp-if'),
 	htmlreplace = require('gulp-html-replace'),
 	htmlmin = require('gulp-htmlmin'),
@@ -21,6 +21,7 @@ var gulp = require('gulp'),
 	footer = require('gulp-footer'),
 	strip = require('gulp-strip-comments'),
 	runSequence = require('run-sequence'),
+	removeCode = require('gulp-remove-code'),
 	gutil = require('gulp-util');
 
 
@@ -57,7 +58,7 @@ gulp.task('make:loader', ['make:loader:js'],  function () {
 		.pipe(gulp.dest(global.cfg.folders.build));
 });
 
-function jsValidator(src) {
+function jsMaker(src) {
 	return gulp.src(src)
 		//.pipe(debug({verbose: true}))
 		.pipe(jshint())
@@ -69,7 +70,7 @@ function jsValidator(src) {
 		.pipe(gif(cfg.release, jshint.reporter('jshint-stylish')))
 		.pipe(gif(cfg.release, jshint.reporter('fail')))
 
-		.pipe(gif(cfg.release, replace('if(true){return;}//flagGulpConsoleMessage', '')))
+		.pipe(removeCode({ production: cfg.release }))
 		.pipe(gif(cfg.release, uglify({
 			output:{
 				beautify: false
@@ -85,7 +86,6 @@ function jsValidator(src) {
 gulp.task('make:loader:js', ['make:loader:css'],  function () {
 	var releasePostName = (global.cfg.release) ? 'min.' : '';
 
-	//TODO improve it
 	var libs = [
 		global.cfg.folders.bower + '/platform/platform.' + releasePostName + 'js',
 		global.cfg.fastClick ? global.cfg.folders.bower + '/fastclick/lib/fastclick.' + releasePostName + 'js' : '',
@@ -95,7 +95,6 @@ gulp.task('make:loader:js', ['make:loader:css'],  function () {
 		global.cfg.compressor ? global.cfg.folders.bower + '/swiper/dist/js/swiper.' + releasePostName + 'js' : ''
 	];
 
-	//TODO improve it
 	var loaderScripts1 = [
 		global.cfg.folders.www + '/config.js',
 		global.cfg.folders.www + '/modules/compatibility.js'
@@ -120,8 +119,8 @@ gulp.task('make:loader:js', ['make:loader:css'],  function () {
 	var libMin = gulp.src(libs)
 		.pipe(gif(cfg.release, strip({safe:false, block:false}))),
 
-		scripts1 = jsValidator(loaderScripts1),
-		scripts2 = jsValidator(loaderScripts2);
+		scripts1 = jsMaker(loaderScripts1),
+		scripts2 = jsMaker(loaderScripts2);
 
 	return streamqueue({ objectMode: true },scripts1, libMin, scripts2)
 		.on('error', console.error.bind(console))

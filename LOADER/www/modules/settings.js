@@ -5,9 +5,7 @@
 loader.settings = (function (){
 	'use strict';
 
-	var VERSION = 'version',
-		USER = 'user',
-		LOGGED = 'logged';
+	var VERSION = 'v';
 
 
 	//jshint maxcomplexity:9
@@ -23,8 +21,6 @@ loader.settings = (function (){
 
 		} else {
 			if( loader.utils.compareSemVer(loader.cfg.version, version) === 1 ){
-				//TODO we need update! chan!
-
 				console.warn('New version by revision, migrate data...');
 
 				//after all
@@ -57,8 +53,6 @@ loader.settings = (function (){
 
 	return {
 		VERSION: VERSION,
-		USER: USER,
-		LOGGED: LOGGED,
 		init: init,
 		remove: remove,
 		removeAlldata: removeAlldata,

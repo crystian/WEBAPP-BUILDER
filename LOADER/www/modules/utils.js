@@ -204,8 +204,8 @@ loader.utils = (function() {
 		toggleSkeletor(true);
 	}
 
-	//TODO remove with gulp
 	function toggleSkeletor(v){
+		//removeIf(production)
 		var el = document.getElementsByTagName('body')[0],
 			className = 'skeletor',
 			byValue = false;
@@ -217,6 +217,7 @@ loader.utils = (function() {
 		} else {
 			el.classList.add(className);
 		}
+		//endRemoveIf(production)
 	}
 
 	function showPanicError(m){

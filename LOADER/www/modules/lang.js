@@ -45,9 +45,10 @@ loader.diag.lang = (function () {
 			}
 		}
 
-		//TODO improve it?
 		if ( !lang ) {
-			if ( navigator.language ) {
+			if ( navigator.languages && navigator.languages instanceof Array) {
+				lang = navigator.languages[0];
+			} else if ( navigator.language ) {
 				lang = navigator.language;
 			} else if ( navigator.browserLanguage ) {
 				lang = navigator.browserLanguage;

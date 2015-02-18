@@ -1,7 +1,6 @@
 loader.diag.cordovaConnection = (function () {
 	'use strict';
 
-	//TODO REVIEW!
 	function init() {
 		document.addEventListener('online', function(){
 			console.debug('loader.diag.cordovaConnection.online');

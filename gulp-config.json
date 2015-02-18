@@ -1,7 +1,7 @@
 {
 	"name": "Numbers!",
 	"site": "http://languages",
-	"version": "0.0.3",
+	"version": "0.0.5",
 	"gaId": "UA-XXXXXXXX-V",
 	"gaAppName": "Number",
 	"gaAppId" : "com.languagesgym.number",

@@ -25,6 +25,7 @@
     "gulp-inject": "^1.1.1",
     "gulp-jshint": "^1.9.2",
     "gulp-minify-css": "^0.4.5",
+    "gulp-remove-code": "^1.0.1",
     "gulp-rename": "^1.2.0",
     "gulp-replace": "^0.5.2",
     "gulp-ruby-sass": "^0.7.1",

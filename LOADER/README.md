@@ -22,8 +22,9 @@ bower I
 En el caso 
 
 
-
-cache!
+revisar
+appcache!
+offline
 
 gulp-config-local.json
 

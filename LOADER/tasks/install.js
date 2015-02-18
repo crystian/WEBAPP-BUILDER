@@ -3,7 +3,7 @@
 */
 
 var gulp = require('gulp'),
-	debug = require('gulp-debug'),
+	//debug = require('gulp-debug'),
 	commons = require('./commons'),
 	uglify = require('gulp-uglify'),
 	inject = require('gulp-inject'),
@@ -17,7 +17,7 @@ var gulp = require('gulp'),
 gulp.task('bowerify', ['bowerDownload','makeIndex','makeConfig'], function() {
 	//replace references on index.html
 	return gulp.src(global.cfg.folders.www +'/index.html')
-		.pipe(debug({verbose: true}))
+		//.pipe(debug({verbose: true}))
 		.pipe(commons.injectContent(global.cfg.folders.loadings+'/'+ global.cfg.loading +'/loading.html','loadingHtml'))
 		.pipe(inject(gulp.src(global.cfg.folders.loadings+'/'+ global.cfg.loading +'/loading.css', {read: false}), {name: 'loadingCss', relative:'true'}))
 		.pipe(inject(gulp.src(global.cfg.varJs, {read: false}), {name: 'bower', relative:'true'}))
