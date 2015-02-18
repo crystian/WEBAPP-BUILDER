@@ -23,7 +23,9 @@ loader.loadingScreen = (function(el, spinner){
 			t = false;
 			el.classList.remove('fadeout');
 			el.classList.add('fadein');
-			spinner.classList.add('on');
+			if (spinner) {
+				spinner.classList.add('on');
+			}
 			setTimeout(function () {
 				callback();
 			}, duration);//be careful esto tambien esta en el class
@@ -32,7 +34,9 @@ loader.loadingScreen = (function(el, spinner){
 			el.classList.remove('fadein');
 			el.classList.add('fadeout');
 			setTimeout(function () {
-				spinner.classList.remove('on');
+				if (spinner) {
+					spinner.classList.remove('on');
+				}
 				callback();
 			}, duration);//be careful esto tambien esta en el class
 		}
