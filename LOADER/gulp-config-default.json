@@ -67,9 +67,7 @@
 		"build": "build",
 		"temp": "build/.tmp",
 		"screens": "build/screens",
-		"loadings": "www/loading/",
-		"zbase": "www/base",
-		"zdist": "dist"
+		"loadings": "www/loading/"
 	},
 
 	"textPageTitle": "titlese",
