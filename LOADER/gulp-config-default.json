@@ -60,6 +60,7 @@
 	"jquery": true,
 	"bootstrap": true,
 	"swiper": true,
+	"cordova": true,
 
 	"folders": {
 		"www": "www",
