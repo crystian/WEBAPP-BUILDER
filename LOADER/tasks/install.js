@@ -11,8 +11,7 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	fs = require('fs'),
 	bowerify = require('gulp-bower'),
-	cheerio = require('gulp-cheerio'),
-	gutil = require('gulp-util');
+	cheerio = require('gulp-cheerio');
 
 gulp.task('bowerify', ['bowerDownload','makeIndex','makeConfig'], function() {
 	//replace references on index.html
