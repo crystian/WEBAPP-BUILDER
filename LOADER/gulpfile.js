@@ -12,27 +12,21 @@
 
 var gulp = require('gulp'),
 	requireDir = require('require-dir'),
-	gutil = require('gulp-util'),
-	fs = require('fs-extra'),
-	dir = requireDir('./tasks');
+	gutil = require('gulp-util');
+
+requireDir('./tasks');
 
 
-if(gutil.env.first){
-	console.log('* Running first time, making folder and other stuffs, after that, run "gulp i"');
-	global.cfg = require('./gulp-config-default.json');
-
-	fs.copySync('./!rootTpl', '../');
-	fs.outputJSONSync('../gulp-config-local.json',{});
-
-
-	process.exit(1);
-} else {
-	//merge between default and specify:
+//merge between default and specify:
+try{
 	global.cfg = merge(
-		require('./gulp-config-default.json'),
+		require('./gulp-config-master.json'),
 		require('../gulp-config.json'),
 		require('../gulp-config-local.json')
 	);
+} catch (e){
+	console.log('Do you run installer?, There are some problems with gulp-config*, check those please');
+	process.exit(1);
 }
 
 
