@@ -12,14 +12,24 @@
 
 var gulp = require('gulp'),
 	requireDir = require('require-dir'),
+	gutil = require('gulp-util'),
 	dir = requireDir('./tasks');
 
-//merge between default and specify:
-global.cfg = merge(
-	require('./gulp-config-default.json'),
-	require('../gulp-config.json'),
-	require('../gulp-config-local.json')
-);
+
+if(gutil.env.first){
+	console.log('* Running first time, making folder and other stuffs, after that, run "gulp i"');
+	global.cfg = require('./gulp-config-default.json');
+
+	process.exit(1);
+} else {
+	//merge between default and specify:
+	global.cfg = merge(
+		require('./gulp-config-default.json'),
+		require('../gulp-config.json'),
+		require('../gulp-config-local.json')
+	);
+}
+
 
 global.cfg.pkg = require('./package.json');
 
