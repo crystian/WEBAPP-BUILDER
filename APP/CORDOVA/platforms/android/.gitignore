@@ -6,7 +6,7 @@ local.properties
 /gradle
 # Ant builds
 ant-built
-ant-gen
+CordovaLib/ant-gen
 # Eclipse builds
 gen
 out
