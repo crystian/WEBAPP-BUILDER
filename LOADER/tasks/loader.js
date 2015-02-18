@@ -34,7 +34,7 @@ gulp.task('make:loader', ['make:loader:js'],  function () {
 		removeOptionalTags: false
 	};
 
-	return gulp.src(global.cfg.folders.www + '/index.html')
+	var stream = gulp.src(global.cfg.folders.www + '/index.html')
 		//.pipe(debug({verbose: true}))
 		.on('error', console.error.bind(console))
 		.pipe(htmlreplace())
@@ -49,13 +49,18 @@ gulp.task('make:loader', ['make:loader:js'],  function () {
 			version: global.cfg.version,
 			site: global.cfg.site})))
 		.pipe(gif(global.cfg.release, footer(global.cfg.textFooter.join('\n'))))
-		.pipe(gulp.dest(global.cfg.folders.build))
-		.pipe(rename('index-cordova.html'))
+		.pipe(gulp.dest(global.cfg.folders.build));
+
+	if(global.cfg.cordova){
+		stream.pipe(rename('index-cordova.html'))
 		.pipe(gif(global.cfg.release,
 			replace(',isCordovaDevice:!1,', ',isCordovaDevice:1,'),
 			replace('"isCordovaDevice": false,', '"isCordovaDevice": true,')
 		))
 		.pipe(gulp.dest(global.cfg.folders.build));
+	}
+
+	return stream;
 });
 
 function jsMaker(src) {
