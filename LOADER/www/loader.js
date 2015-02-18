@@ -28,6 +28,9 @@ var loader = (function(){
 		setters();
 		_handleAppCache();
 
+		if (!cfg.release) {
+			console.warn('****    DEBUG MODE!: NOT RELEASE    ****');
+		}
 		console.info('Loader version: ' + cfg.loaderVersion);
 		console.info('App version: ' + cfg.version);
 		console.info('Loader init');

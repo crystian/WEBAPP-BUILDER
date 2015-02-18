@@ -1,16 +1,3 @@
-html{
-	background-color: #ffffcc;
-}
-
-.fullscreen {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	margin: 0;
-	padding: 0;
-}
 
 .wrapCenter {
 	width: 100px;
@@ -24,7 +11,7 @@ html{
 }
 
 #loadingScreen {
-//	background-color: #d6eff9;
+	//	background-color: #d6eff9;
 	background-color: #000000;
 	z-index: 10;
 	opacity: 1;
@@ -65,9 +52,9 @@ html{
 }
 
 @keyframes rotateplane {
-  0%	{ transform: perspective(120px) rotateX(0deg) rotateY(0deg);}
-  50%	{ transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);}
-  100%	{ transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);}
+	0%	{ transform: perspective(120px) rotateX(0deg) rotateY(0deg);}
+	50%	{ transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);}
+	100%	{ transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);}
 }
 
 @keyframes fadeout {
@@ -81,26 +68,11 @@ html{
 }
 
 @keyframes fadeout50 {
-  0%	{ opacity: 0.5; visibility: visible;}
-  99%	{ opacity: 0;}
-  100%	{ opacity: 0; visibility: hidden;}
+	0%	{ opacity: 0.5; visibility: visible;}
+	99%	{ opacity: 0;}
+	100%	{ opacity: 0; visibility: hidden;}
 }
 @keyframes fadein50 {
-  0%	{ opacity: 0; visibility: visible;}
-  100%	{ opacity: 0.5;}
+	0%	{ opacity: 0; visibility: visible;}
+	100%	{ opacity: 0.5;}
 }
-
-.noscript{
-	z-index: 1000;
-	position: absolute;
-	margin: 15px;
-	background-color: #ffffff;
-	color: #000000;
-	a{
-		color: black;
-	}
-}
-
-//JUST FOR DETECT ORIENTATION
-@media screen and (orientation:portrait)  {body{background-color: inherit;}}
-@media screen and (orientation:landscape) {body{background-color: inherit;}}

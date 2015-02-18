@@ -19,8 +19,11 @@
 	<!-- https://github.com/audreyr/favicon-cheat-sheet -->
 
 <!-- build:css -->
-	<link rel="stylesheet" href="loader.css"/>
 	<!-- bower:css -->
+	<!-- endinject -->
+
+	<link rel="stylesheet" href="css/loader.css"/>
+	<!-- loadingCss:css -->
 	<!-- endinject -->
 <!-- endbuild -->
 
@@ -40,9 +43,8 @@
 
 <!--just a loader screen:-->
 <div id="loadingScreen" class="fullscreen">
-	<div class="wrapCenter">
-		<div class="spinner on" id="spinner"></div>
-	</div>
+	<!-- inject:loadingHtml -->
+	<!-- endinject -->
 </div>
 <!--loader-->
 
@@ -71,7 +73,7 @@
 	<script src="modules/screen.js"></script>
 	<script src="modules/cordovaConnection.js"></script>
 	<script src="modules/analytics.js"></script>
-	<script src="boot.js"></script>
+	<script src="modules/boot.js"></script>
 <!-- endbuild -->
 
 <!-- inject:loaderJs -->

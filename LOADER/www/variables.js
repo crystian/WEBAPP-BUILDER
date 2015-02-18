@@ -4,7 +4,7 @@
 
 //default values for test:
 //_loaderCfg.devLocal			= 1;//request by request, otherwise one json file
-_loaderCfg.showDeviceInfo	= 0;
+_loaderCfg.showDeviceInfo	= 1;
 _loaderCfg.showSkeletor		= 0;
 _loaderCfg.contentEditable	= 0;
 
@@ -21,5 +21,5 @@ _loaderCfg.isTablet		= 0; // setter by diag, need it a review
 _loaderCfg.lang			= ''; //by lang and settings
 _loaderCfg.offline		= 0; //detected by diag.offline
 _loaderCfg.online		= 1; //detected by diag.offline
-_loaderCfg.connectionType= 2; //0=without connection, 1=bad connection and 2 good connection //just for cordava apps
+_loaderCfg.connectionType= 2; //0=without connection, 1=bad connection and 2 good connection //just for cordova apps
 

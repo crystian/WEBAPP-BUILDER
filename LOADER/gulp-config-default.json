@@ -67,6 +67,7 @@
 		"build": "build",
 		"temp": "build/.tmp",
 		"screens": "build/screens",
+		"loadings": "www/loading/",
 		"zbase": "www/base",
 		"zdist": "dist"
 	},
@@ -84,6 +85,8 @@
 	"gaAppName": "appName",
 	"gaAppId": "com.appName.appId",
 	"gaAppInstaller": "com.appName.installer",
+
+	"loading": 1,
 
 	"compatibilityFirst": "\n\treturn !!(window.document.querySelector &&\n\twindow.console &&window.document.addEventListener &&\n\t(window.document.getElementsByTagName('body')[0]).classList &&\n\twindow.localStorage &&\n\twindow.navigator &&\n\twindow.XMLHttpRequest &&\n\twindow.applicationCache &&\n\twindow.document.createEvent &&\n\tarr.map &&\n\tarr.every);\n\t",
 	"compatibilityMatrix": {

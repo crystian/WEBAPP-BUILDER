@@ -4,9 +4,8 @@
 
 var gulp = require('gulp'),
 	commons = require('./commons'),
-	//debug = require('gulp-debug'),
+	debug = require('gulp-debug'),
 	gif = require('gulp-if'),
-	inject = require('gulp-inject'),
 	htmlreplace = require('gulp-html-replace'),
 	htmlmin = require('gulp-htmlmin'),
 	concat = require('gulp-concat'),
@@ -21,7 +20,9 @@ var gulp = require('gulp'),
 	header = require('gulp-header'),
 	footer = require('gulp-footer'),
 	strip = require('gulp-strip-comments'),
+	runSequence = require('run-sequence'),
 	gutil = require('gulp-util');
+
 
 gulp.task('make:loader', ['make:loader:js'],  function () {
 	var htmlminOptions = {
@@ -32,21 +33,12 @@ gulp.task('make:loader', ['make:loader:js'],  function () {
 		removeOptionalTags: false
 	};
 
-	function injectContent(filePath, name, tagHtm) {
-		return inject(gulp.src([filePath]), {
-			starttag: '<!-- inject:'+ name +' -->',
-			transform: function (filePath, file) {
-				return '<'+tagHtm+'>'+file.contents.toString('utf8')+'</'+tagHtm+'>';
-			}
-		});
-	}
-
 	return gulp.src(global.cfg.folders.www + '/index.html')
 		//.pipe(debug({verbose: true}))
 		.on('error', console.error.bind(console))
 		.pipe(htmlreplace())
-		.pipe(injectContent(global.cfg.folders.temp +'/-compiledLoader.css','loaderCss','style'))
-		.pipe(injectContent(global.cfg.folders.temp +'/-compiledLoader.js','loaderJs','script'))
+		.pipe(commons.injectContent(global.cfg.folders.temp +'/-compiledLoader.css','loaderCss','style'))
+		.pipe(commons.injectContent(global.cfg.folders.temp +'/-compiledLoader.js','loaderJs','script'))
 		.pipe(gif(global.cfg.release, htmlmin(htmlminOptions)))
 
 		//header and footers:
@@ -122,7 +114,7 @@ gulp.task('make:loader:js', ['make:loader:css'],  function () {
 		global.cfg.folders.www + '/modules/screen.js',
 		global.cfg.folders.www + '/modules/cordovaConnection.js',
 		global.cfg.folders.www + '/modules/analytics.js',
-		global.cfg.folders.www + '/boot.js'
+		global.cfg.folders.www + '/modules/boot.js'
 	];
 
 	var libMin = gulp.src(libs)
@@ -137,7 +129,7 @@ gulp.task('make:loader:js', ['make:loader:css'],  function () {
 		.pipe(gulp.dest(global.cfg.folders.temp));
 });
 
-gulp.task('make:loader:css', ['css:loader'],  function () {
+gulp.task('make:loader:css', ['css:sass'],  function () {
 	var releasePostName = (global.cfg.release) ? 'min.' : '';
 		bootstrapCss = [
 			global.cfg.folders.bower+ '/swiper/dist/css/swiper.'+releasePostName+'css',
@@ -145,7 +137,11 @@ gulp.task('make:loader:css', ['css:loader'],  function () {
 			global.cfg.folders.bower+ '/bootstrap/dist/css/bootstrap-theme.'+releasePostName+'css'
 		];
 
-	var cssSheets = [global.cfg.folders.www + '/loader.css'];
+	//TODO for non-min library
+
+	var cssSheets = [
+		global.cfg.folders.www + '/css/loader.css',
+		global.cfg.folders.loadings+'/'+ global.cfg.loading +'/loading.css'];
 
 	if(global.cfg.bootstrap){
 		cssSheets = bootstrapCss.concat(cssSheets);
@@ -160,6 +156,19 @@ gulp.task('make:loader:css', ['css:loader'],  function () {
 });
 
 
+gulp.task('css:sass', function (cb) {
+	'use strict';
+
+	runSequence(
+		'css:loader',
+		'css:loadingTpl',
+		cb);
+});
+
 gulp.task('css:loader', function () {
-	return commons.sassfixer(global.cfg.folders.www + '/loader.scss',global.cfg.folders.www);
+	return commons.sassfixer(global.cfg.folders.www + '/css/*.scss',global.cfg.folders.www +'/css');
+});
+
+gulp.task('css:loadingTpl', function () {
+	return commons.sassfixer(global.cfg.folders.www + '/loading/**/*.scss',global.cfg.folders.www +'/loading');
 });
