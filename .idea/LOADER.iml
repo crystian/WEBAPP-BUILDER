@@ -9,6 +9,7 @@
       <excludeFolder url="file://$MODULE_DIR$/LOADER/dist" />
       <excludeFolder url="file://$MODULE_DIR$/LOADER/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/LOADER/vendors" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

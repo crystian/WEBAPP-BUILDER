@@ -15,17 +15,17 @@ var gulp = require('gulp'),
 
 gulp.task('bowerify', ['bowerDownload','makeIndex','makeConfig'], function() {
 	//replace references on index.html
-	return gulp.src(global.cfg.folders.www +'/index.html')
+	return gulp.src(global.cfg.loaderFolders.www +'/index.html')
 		//.pipe(debug({verbose: true}))
-		.pipe(commons.injectContent(global.cfg.folders.loadings+'/'+ global.cfg.loading +'/loading.html','loadingHtml'))
-		.pipe(inject(gulp.src(global.cfg.folders.loadings+'/'+ global.cfg.loading +'/loading.css', {read: false}), {name: 'loadingCss', relative:'true'}))
+		.pipe(commons.injectContent(global.cfg.loaderFolders.loadings+'/'+ global.cfg.loading +'/loading.html','loadingHtml'))
+		.pipe(inject(gulp.src(global.cfg.loaderFolders.loadings+'/'+ global.cfg.loading +'/loading.css', {read: false}), {name: 'loadingCss', relative:'true'}))
 		.pipe(inject(gulp.src(global.cfg.varJs, {read: false}), {name: 'bower', relative:'true'}))
 		.pipe(inject(gulp.src(global.cfg.varCss, {read: false}), {name: 'bower', relative:'true'}))
-		.pipe(gulp.dest(global.cfg.folders.www));
+		.pipe(gulp.dest(global.cfg.loaderFolders.www));
 });
 
 gulp.task('makeIndex', ['copy:indexTpl'], function () {
-	return gulp.src(global.cfg.folders.www + '/index.html')
+	return gulp.src(global.cfg.loaderFolders.www + '/index.html')
 		//.pipe(debug({verbose: true}))
 		.pipe(cheerio({
 			run: function ($) {
@@ -40,14 +40,14 @@ gulp.task('makeIndex', ['copy:indexTpl'], function () {
 		}))
 		.pipe(replace('<!--msgTpl-->','<!-- REMEMBER, this file is generated, don\'t change it, because you can lost it -->'))
 		.on('error', console.error.bind(console))
-		.pipe(gulp.dest(global.cfg.folders.www));
+		.pipe(gulp.dest(global.cfg.loaderFolders.www));
 });
 
 gulp.task('copy:indexTpl',function () {
-	return gulp.src(global.cfg.folders.www + '/index.tpl.html')
+	return gulp.src(global.cfg.loaderFolders.www + '/index.tpl.html')
 		.on('error', console.error.bind(console))
 		.pipe(rename('index.html'))
-		.pipe(gulp.dest(global.cfg.folders.www));
+		.pipe(gulp.dest(global.cfg.loaderFolders.www));
 });
 
 gulp.task('makeConfig', function (cb) {
@@ -73,6 +73,7 @@ gulp.task('makeConfig', function (cb) {
 	json.analytics = global.cfg.analytics;
 	json.analyticsActive = global.cfg.analyticsActive;
 	json.compressor = global.cfg.compressor;
+	json.loaderWithApp = global.cfg.loaderWithApp;
 
 	compatibilityTpl =
 		'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n'+
@@ -88,7 +89,7 @@ gulp.task('makeConfig', function (cb) {
 		'var _loaderCfg = '+ JSON.stringify(json, null, '\t') +';'+
 		compatibilityTpl;
 
-	fs.writeFile(global.cfg.folders.www +'/config.js',
+	fs.writeFile(global.cfg.loaderFolders.www +'/config.js',
 		text,
 		function(err){
 			if(err) {
@@ -101,7 +102,7 @@ gulp.task('makeConfig', function (cb) {
 });
 
 gulp.task('bowerDownload',['bowerGenerator'], function(cb) {
-	return bowerify({ directory: './'+ global.cfg.folders.bower});
+	return bowerify({ directory: './'+ global.cfg.loaderFolders.bower});
 });
 
 gulp.task('bowerGenerator',['parseInstaller'],  function(cb) {
@@ -138,13 +139,13 @@ gulp.task('parseInstaller', function() {
 
 		if(o['js-'+ ambient]){
 			js = o['js-'+ ambient].map(function (item) {
-				return './'+ global.cfg.folders.bower +'/'+item;
+				return './'+ global.cfg.loaderFolders.bower +'/'+item;
 			});
 		}
 
 		if(o['css-'+ ambient]){
 			css = o['css-'+ ambient].map(function (item) {
-				return './'+ global.cfg.folders.bower +'/'+item;
+				return './'+ global.cfg.loaderFolders.bower +'/'+item;
 			});
 		}
 
@@ -153,7 +154,7 @@ gulp.task('parseInstaller', function() {
 			if(ambient==='prod' && o['generate-js']){
 
 				var jsDev = o['js-dev'].map(function (item) {
-					return './'+ global.cfg.folders.bower  +'/'+item;
+					return './'+ global.cfg.loaderFolders.bower  +'/'+item;
 				});
 
 				js.forEach(function (element,pos) {

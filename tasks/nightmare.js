@@ -13,7 +13,7 @@ var gulp = require('gulp'),
 gulp.task('serve:nightmare', function() {
 	'use strict';
 
-	return gulp.src(global.cfg.folders.build)
+	return gulp.src(global.cfg.loaderFolders.build)
 		.pipe(webserver({
 			host: global.cfg.ip,
 			port: global.cfg.ports.nightmare,
@@ -138,25 +138,25 @@ gulp.task('test:loader',['serve:nightmare'], function(cb) {
 		},{
 			name: 'androidLG-G',
 			ua: 'Mozilla/5.0 (Linux; Android 4.0; LG-E975 Build/IMM76L) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19',
-			compatibility: 1,
+			compatibility: 2,
 			isDevice: 1,	isDesktop: 0,	isTablet: 0,	isMobile: 1,
 			width: 384,	height: 640,	orientation: 0,	lang: 'en-US'
 		},{
 			name: 'androidHTC-ONE',
 			ua: 'Mozilla/5.0 (Linux; Android 4.0.3; HTC One X Build/IML74K) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19',
-			compatibility: 1,
+			compatibility: 2,
 			isDevice: 1,	isDesktop: 0,	isTablet: 0,	isMobile: 1,
 			width: 1024,	height: 768,	orientation: 1,	lang: 'en-US'
 		},{
 			name: 'androidNexus4',
 			ua: 'Mozilla/5.0 (Linux; Android 4.2.1; en-US; Nexus 4 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19',
-			compatibility: 1,
+			compatibility: 2,
 			isDevice: 1,	isDesktop: 0,	isTablet: 0,	isMobile: 1,
 			width: 1024,	height: 768,	orientation: 1,	lang: 'en'
 		},{
 			name: 'androidNexus5',
 			ua: 'Mozilla/5.0 (Linux; Android 4.2.1; en-US; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19',
-			compatibility: 1,
+			compatibility: 2,
 			isDevice: 1,	isDesktop: 0,	isTablet: 0,	isMobile: 1,
 			width: 1024,	height: 768,	orientation: 1,	lang: 'en'
 		},{
@@ -215,9 +215,14 @@ gulp.task('test:loader',['serve:nightmare'], function(cb) {
 			.on('error', gutil.log)
 			.goto('http://' + global.cfg.ip + ':' + global.cfg.ports.nightmare + '/index.html')
 			.wait(1000)
-			.screenshot(global.cfg.folders.screens + '/' + b.name + '.jpg')
+			.screenshot(global.cfg.loaderFolders.screens + '/' + b.name + '.jpg')
 			.evaluate(function () {return window;},
 			function (window){
+
+				if(!window.loader){
+					console.log('Problem detected, check if you publish on 0.0.0.0, you need to publish on real ip');
+					return;
+				}
 
 				var cfg = window.loader.cfg;
 

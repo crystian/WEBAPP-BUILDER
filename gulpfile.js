@@ -12,15 +12,15 @@
 
 var gulp = require('gulp'),
 	requireDir = require('require-dir'),
+	extend = require('extend'),
 	gutil = require('gulp-util');
 
 requireDir('./tasks');
 
-
 //merge between default and specify:
 try{
-	global.cfg = merge(
-		require('./gulp-config-master.json'),
+	global.cfg = extend(true, {},
+		require('./gulp-config.json'),
 		require('../gulp-config.json'),
 		require('../gulp-config-local.json')
 	);
@@ -29,17 +29,8 @@ try{
 	process.exit(1);
 }
 
-
 global.cfg.pkg = require('./package.json');
+global.cfg.folders = {}; //I remove it just in case
+global.cfg.loaderWithApp = !!(gutil.env.withapp);
 
-//TASK ON tasks.js
-
-//be careful, no funciona con hijos, solo con parents directos
-function merge(root){
-	for ( var i = 1; i < arguments.length; i++ ){
-		for ( var key in arguments[i] ){
-			root[key] = arguments[i][key];
-		}
-	}
-	return root;
-}
+//remember: TASK ON tasks.js

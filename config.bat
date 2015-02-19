@@ -18,10 +18,12 @@ rem NODE
 set NODE_PATH=%WS%\NodeJs
 setx NODE_PATH "%WS%\NodeJs"
 setx NODE_MODULES "%%NODE_PATH%%\node_modules"
-rem setx PHANTOM_HOME %WS%\PhantomJs
 call %NODE_PATH%\npm c set prefix %NODE_PATH% -g
 call %NODE_PATH%\npm c set cache %NODE_PATH%\npm-cache -g
 set PATH_TEMP="%PATH_TEMP%;%%NODE_PATH%%"
+
+setx PHANTOM_HOME %WS%\PhantomJs\2.0.0
+set PATH_TEMP="%PATH_TEMP%;%%PHANTOM_HOME%%\bin"
 
 rem ANDROID
 setx ANDROID_HOME "%WS%"\android

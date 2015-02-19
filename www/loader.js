@@ -23,7 +23,9 @@ var loader = (function(){
 	}
 
 	//all history start here:
-	function init(){
+	function init(finishFn){
+		loader.finish = finishFn;
+
 		_replaceVariables();
 		setters();
 		_handleAppCache();
@@ -114,11 +116,18 @@ var loader = (function(){
 			FastClick.attach(doc.body);
 		}
 
-		//all right, next step, should be load landing page with this event
-		doc.dispatchEvent(events.loaderFinished);
+		_loadApp();
+	}
 
-		//TODO REMOVE ME!
-		loader.hide();
+	function _loadApp() {
+		if (!cfg.loaderWithApp){
+			loader.hide();
+			loader.finish();
+			return;
+		}
+
+		
+
 	}
 
 	function _handleDebugMode() {
@@ -215,9 +224,8 @@ var loader = (function(){
 		loadingScreen.on(); //via css 500ms
 	}
 
-	//TODO improve it!
 	function _showError(m){
-		console.warn(m);
+		console.error(m);
 		alert(m);
 	}
 

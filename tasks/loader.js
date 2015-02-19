@@ -32,12 +32,12 @@ gulp.task('make:loader', ['make:loader:js'],  function () {
 		removeOptionalTags: false
 	};
 
-	var stream = gulp.src(global.cfg.folders.www + '/index.html')
+	var stream = gulp.src(global.cfg.loaderFolders.www + '/index.html')
 		//.pipe(debug({verbose: true}))
 		.on('error', console.error.bind(console))
 		.pipe(htmlreplace())
-		.pipe(commons.injectContent(global.cfg.folders.temp +'/-compiledLoader.css','loaderCss','style'))
-		.pipe(commons.injectContent(global.cfg.folders.temp +'/-compiledLoader.js','loaderJs','script'))
+		.pipe(commons.injectContent(global.cfg.loaderFolders.temp +'/-compiledLoader.css','loaderCss','style'))
+		.pipe(commons.injectContent(global.cfg.loaderFolders.temp +'/-compiledLoader.js','loaderJs','script'))
 		.pipe(gif(global.cfg.release, htmlmin(htmlminOptions)))
 
 		//header and footers:
@@ -46,23 +46,26 @@ gulp.task('make:loader', ['make:loader:js'],  function () {
 			name: global.cfg.name,
 			version: global.cfg.version,
 			site: global.cfg.site})))
-		.pipe(gif(global.cfg.release, footer(global.cfg.textFooter.join('\n'))))
-		.pipe(gulp.dest(global.cfg.folders.build));
+		.pipe(gif(global.cfg.release, footer(global.cfg.textFooter.join('\n'))));
+
+	stream.pipe(gulp.dest(global.cfg.loaderFolders.build));
 
 	if(global.cfg.cordova){
+		/*This is ok, because it make another file equals to index but one change,
+		I prefer it than run again all process to make other file */
 		stream.pipe(rename('index-cordova.html'))
 		.pipe(gif(global.cfg.release,
 			replace(',isCordovaDevice:!1,', ',isCordovaDevice:1,'),
 			replace('"isCordovaDevice": false,', '"isCordovaDevice": true,')
 		))
-		.pipe(gulp.dest(global.cfg.folders.build));
+		.pipe(gulp.dest(global.cfg.loaderFolders.build));
 	}
 
 	return stream;
 });
 
-function jsMaker(src) {
-	return gulp.src(src)
+function jsMaker(stream) {
+	return stream
 		//.pipe(debug({verbose: true}))
 		.pipe(jshint())
 		.pipe(jshint.reporter('jshint-stylish'))
@@ -89,61 +92,74 @@ function jsMaker(src) {
 gulp.task('make:loader:js', ['make:loader:css'],  function () {
 	var releasePostName = (global.cfg.release) ? 'min.' : '';
 
+	//libs
 	var libs = [
-		global.cfg.folders.bower + '/platform/platform.' + releasePostName + 'js',
-		global.cfg.fastClick ? global.cfg.folders.bower + '/fastclick/lib/fastclick.' + releasePostName + 'js' : '',
-		global.cfg.jquery ? global.cfg.folders.bower + '/jquery/dist/jquery.' + releasePostName + 'js' : '',
-		global.cfg.bootstrap ? global.cfg.folders.bower + '/bootstrap/dist/js/bootstrap.' + releasePostName + 'js' : '',
-		global.cfg.compressor ? global.cfg.folders.bower + '/lz-string/libs/lz-string.' + releasePostName + 'js' : '',
-		global.cfg.compressor ? global.cfg.folders.bower + '/swiper/dist/js/swiper.' + releasePostName + 'js' : ''
+		global.cfg.loaderFolders.bower + '/platform/platform.' + releasePostName + 'js',
+		global.cfg.fastClick ? global.cfg.loaderFolders.bower + '/fastclick/lib/fastclick.' + releasePostName + 'js' : '',
+		global.cfg.jquery ? global.cfg.loaderFolders.bower + '/jquery/dist/jquery.' + releasePostName + 'js' : '',
+		global.cfg.bootstrap ? global.cfg.loaderFolders.bower + '/bootstrap/dist/js/bootstrap.' + releasePostName + 'js' : '',
+		global.cfg.compressor ? global.cfg.loaderFolders.bower + '/lz-string/libs/lz-string.' + releasePostName + 'js' : '',
+		global.cfg.compressor ? global.cfg.loaderFolders.bower + '/swiper/dist/js/swiper.' + releasePostName + 'js' : ''
 	];
+	var libsMin = gulp.src(libs)
+			.pipe(gif(cfg.release, strip({safe:false, block:false})));
+	//endLibs
 
+	//header script
 	var loaderScripts1 = [
-		global.cfg.folders.www + '/config.js',
-		global.cfg.folders.www + '/modules/compatibility.js'
+		global.cfg.loaderFolders.www + '/config.js',
+		global.cfg.loaderFolders.www + '/modules/compatibility.js'
 	];
+	var loaderScripts1Stream = gulp.src(loaderScripts1);
 
+	//force variables on build time
+	if (gutil.env.withapp) {
+		loaderScripts1Stream.pipe(replace(/(\"loaderWithApp.*\:)(.*)(\n)/,'$1true$3'));
+	}
+
+	loaderScripts1Stream = jsMaker(loaderScripts1Stream);
+	//endheader script
+
+	//body script
 	var loaderScripts2 = [
-		global.cfg.folders.www + '/loader.js',
-		global.cfg.folders.www + '/variables.js',
-		global.cfg.folders.www + '/modules/utils.js',
-		global.cfg.folders.www + '/modules/diag.js',
-		global.cfg.folders.www + '/modules/polyfill-ie.js',
-		global.cfg.folders.www + '/modules/settings.js',
-		global.cfg.folders.www + '/modules/lang.js',
-		global.cfg.folders.www + '/modules/events.js',
-		global.cfg.folders.www + '/modules/redefine.js',
-		global.cfg.folders.www + '/modules/screen.js',
-		global.cfg.folders.www + '/modules/cordovaConnection.js',
-		global.cfg.folders.www + '/modules/analytics.js',
-		global.cfg.folders.www + '/modules/boot.js'
+		global.cfg.loaderFolders.www + '/loader.js',
+		global.cfg.loaderFolders.www + '/variables.js',
+		global.cfg.loaderFolders.www + '/modules/utils.js',
+		global.cfg.loaderFolders.www + '/modules/diag.js',
+		global.cfg.loaderFolders.www + '/modules/polyfill-ie.js',
+		global.cfg.loaderFolders.www + '/modules/settings.js',
+		global.cfg.loaderFolders.www + '/modules/lang.js',
+		global.cfg.loaderFolders.www + '/modules/events.js',
+		global.cfg.loaderFolders.www + '/modules/redefine.js',
+		global.cfg.loaderFolders.www + '/modules/screen.js',
+		global.cfg.loaderFolders.www + '/modules/cordovaConnection.js',
+		global.cfg.loaderFolders.www + '/modules/analytics.js',
+		global.cfg.loaderFolders.www + '/modules/boot.js'
 	];
+	var loaderScripts2Stream = gulp.src(loaderScripts2);
+	//space for future change/replace on build time
+	loaderScripts2Stream = jsMaker(loaderScripts2Stream);
+	//endbody script
 
-	var libMin = gulp.src(libs)
-		.pipe(gif(cfg.release, strip({safe:false, block:false}))),
-
-		scripts1 = jsMaker(loaderScripts1),
-		scripts2 = jsMaker(loaderScripts2);
-
-	return streamqueue({ objectMode: true },scripts1, libMin, scripts2)
+	return streamqueue({ objectMode: true }, loaderScripts1Stream, libsMin, loaderScripts2Stream)
 		.on('error', console.error.bind(console))
 		.pipe(concat('/-compiledLoader.js',{newLine: ';'}))
-		.pipe(gulp.dest(global.cfg.folders.temp));
+		.pipe(gulp.dest(global.cfg.loaderFolders.temp));
 });
 
 gulp.task('make:loader:css', ['css:sass'],  function () {
 	var releasePostName = (global.cfg.release) ? 'min.' : '';
 		bootstrapCss = [
-			global.cfg.folders.bower+ '/swiper/dist/css/swiper.'+releasePostName+'css',
-			global.cfg.folders.bower+ '/bootstrap/dist/css/bootstrap.'+releasePostName+'css',
-			global.cfg.folders.bower+ '/bootstrap/dist/css/bootstrap-theme.'+releasePostName+'css'
+			global.cfg.loaderFolders.bower+ '/swiper/dist/css/swiper.'+releasePostName+'css',
+			global.cfg.loaderFolders.bower+ '/bootstrap/dist/css/bootstrap.'+releasePostName+'css',
+			global.cfg.loaderFolders.bower+ '/bootstrap/dist/css/bootstrap-theme.'+releasePostName+'css'
 		];
 
 	//TODO for non-min library
 
 	var cssSheets = [
-		global.cfg.folders.www + '/css/loader.css',
-		global.cfg.folders.loadings+'/'+ global.cfg.loading +'/loading.css'];
+		global.cfg.loaderFolders.www + '/css/loader.css',
+		global.cfg.loaderFolders.loadings+'/'+ global.cfg.loading +'/loading.css'];
 
 	if(global.cfg.bootstrap){
 		cssSheets = bootstrapCss.concat(cssSheets);
@@ -154,7 +170,7 @@ gulp.task('make:loader:css', ['css:sass'],  function () {
 		.pipe(concat('/-compiledLoader.css'))
 		.pipe(strip({safe:false, block:false}))
 		.pipe(gif(global.cfg.release, minifycss()))
-		.pipe(gulp.dest(global.cfg.folders.temp));
+		.pipe(gulp.dest(global.cfg.loaderFolders.temp));
 });
 
 
@@ -168,9 +184,9 @@ gulp.task('css:sass', function (cb) {
 });
 
 gulp.task('css:loader', function () {
-	return commons.sassfixer(global.cfg.folders.www + '/css/*.scss',global.cfg.folders.www +'/css');
+	return commons.sassfixer(global.cfg.loaderFolders.www + '/css/*.scss',global.cfg.loaderFolders.www +'/css');
 });
 
 gulp.task('css:loadingTpl', function () {
-	return commons.sassfixer(global.cfg.folders.www + '/loading/**/*.scss',global.cfg.folders.www +'/loading');
+	return commons.sassfixer(global.cfg.loaderFolders.www + '/loading/**/*.scss',global.cfg.loaderFolders.www +'/loading');
 });

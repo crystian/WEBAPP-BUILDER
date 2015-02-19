@@ -30,6 +30,7 @@ gulp i
 
 revisar:
 offline
+nightmare, cada perfil
 
 
 Pendientes:

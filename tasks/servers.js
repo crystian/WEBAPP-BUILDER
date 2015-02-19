@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 gulp.task('servew', ['serve','watch']);
 
 gulp.task('watch', function() {
-	gulp.watch([global.cfg.folders.www +'/index.tpl.html','gulp-config-default.json'], ['bowerify']);
+	gulp.watch([global.cfg.loaderFolders.www +'/index.tpl.html','gulp-config-default.json'], ['bowerify']);
 });
 
 gulp.task('serve', function() {
@@ -32,7 +32,7 @@ gulp.task('serve:build', function() {
 
 	console.log('Remember, this is the url: http://'+global.cfg.ip+':'+global.cfg.ports.build+'/index.html');
 
-	gulp.src(global.cfg.folders.build)
+	gulp.src(global.cfg.loaderFolders.build)
 		.pipe(webserver({
 			host: global.cfg.ip,
 			port: global.cfg.ports.build,

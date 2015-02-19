@@ -13,13 +13,13 @@ var gulp = require('gulp'),
 
 gulp.task('remove:build', ['remove:temp'], function(cb) {
 	//no borrar la carpeta build, da errores de sincro
-	del([global.cfg.folders.screens,
-		global.cfg.folders.build +'/*.*'
+	del([global.cfg.loaderFolders.screens,
+		global.cfg.loaderFolders.build +'/*.*'
 	], /*{force:true}, */cb());
 });
 
 gulp.task('remove:temp', function(cb) {
-	del([global.cfg.folders.temp],cb());
+	del([global.cfg.loaderFolders.temp],cb());
 });
 
 
