@@ -22,7 +22,9 @@ node installer
 / todo esto con un hermoso wizard
 
 gulp i
-bower I
+
+
+
 
 ### Bower
 
