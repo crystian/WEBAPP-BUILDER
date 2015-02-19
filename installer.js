@@ -26,7 +26,7 @@ console.log(chalk.black.bgGreen('  ╚══════════════
 console.log(chalk.black.bgGreen('                                                                                               '));
 console.log('');
 
-
+//questions tutorial: http://enzolutions.com/articles/2014/09/08/how-to-create-an-interactive-command-in-node-js/
 var install = [{
 	type: 'confirm',
 	name: 'install',
@@ -64,9 +64,11 @@ var cordovaPlatform = [{
 	message: "Platform to install:",
 	name: "platforms",
 	choices: [
-		{value: "windows", name: "Windows (Desktop mode, for debug)",checked: true},
+		{value: "browser", name: "Browser", checked: true},
 		{value: "android", name: "Android", checked: true},
-		{value: "ios", name: "iOS"}
+		{value: "windows", name: "Windows"},
+		{value: "ios", name: "iOS"},
+		{value: "wp8", name: "Windows Phone 8"}
 	]
 }];
 

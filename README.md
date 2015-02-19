@@ -12,6 +12,8 @@ Cuenta con deliciosos features y temas solucionados tipicos, esto ahorraria faci
 * Bower
 * Git
 
+config.bat
+
 Luego de bajarlo ejecutar en la carpeta LOADER:
 
 npm i (instala dependecias de node)
@@ -26,16 +28,18 @@ gulp i
 
 
 
-### Bower
-
-En el caso 
-
-
-revisar
-appcache!
+revisar:
 offline
 
-gulp-config-local.json
+
+Pendientes:
+appcache!
+estilos de loader deben estar primero
+mover merge de gulpfile to commons
+weinre
+test
+ci
+
 
 ---
 
