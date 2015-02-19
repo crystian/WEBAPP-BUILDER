@@ -45,11 +45,11 @@ var cordova = [{
 },{
 	when: function(r) {return r.cordova;},
 	type: 'input',
-	name: 'dom',
+	name: 'domain',
 	message: 'Package:',
 	default: 'com.example.hello'
 },{
-	when: function(r) {return r.dom;},
+	when: function(r) {return r.domain;},
 	type: 'input',
 	name: 'main',
 	message: 'Main Class:',
@@ -106,8 +106,6 @@ questions = questions.concat(cordovaPlugins);
 inquirer.prompt(questions, function( answers ) {
 	//console.dir(answers);
 
-	fs.deleteSync('../'+ folders.app);
-
 	if (answers.install){
 		fs.copySync('./!rootTpl', '../');
 		fs.outputJSONSync('../gulp-config-local.json',{});
@@ -115,7 +113,7 @@ inquirer.prompt(questions, function( answers ) {
 		if (answers.cordova) {
 			console.log(chalk.black.bgYellow('Cordova is instaling...'));
 
-			var child1 = exec('cordova create '+folders.cordova+' '+ answers.dom +' '+ answers.main,{cwd:'../'+ folders.app +'/'},
+			exec('cordova create '+folders.cordova+' '+ answers.domain +' '+ answers.main,{cwd:'../'+ folders.app +'/'},
 				function (error, stdout, stderr) {
 
 				if (error !== null) {
@@ -124,6 +122,12 @@ inquirer.prompt(questions, function( answers ) {
 					console.log(chalk.black.bgRed('exec error: ' + error));
 				} else {
 					console.log(chalk.black.bgGreen(stdout));
+
+					var packageJson = '../package.json';
+					var pkg = require(packageJson);
+					pkg.domain = answers.domain;
+					pkg.mainClass = answers.main;
+					fs.outputJSONSync(packageJson,pkg);
 
 					installCordovaPl('platform', answers.platforms, function () {
 						if(answers.platforms.length>0){

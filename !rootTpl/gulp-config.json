@@ -1,10 +1,11 @@
 {
 	"name": "Numbers!",
 	"site": "http://languages",
-	"version": "0.0.5",
+	"version": "0.0.1",
+	"analytics": false,
 	"gaId": "UA-XXXXXXXX-V",
-	"gaAppName": "Number",
-	"gaAppId" : "com.languagesgym.number",
+	"gaAppName": "Numbers",
+	"gaAppId" : "com.languagesgym.numbers",
 	"gaAppInstaller" : "com.languagesgym.installer",
 	"ip": "0.0.0.0"
 }
