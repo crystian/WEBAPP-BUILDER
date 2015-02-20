@@ -46,13 +46,14 @@ gulp.task('make:loader', ['make:loader:js'],  function () {
 			name: global.cfg.name,
 			version: global.cfg.version,
 			site: global.cfg.site})))
-		.pipe(gif(global.cfg.release, footer(global.cfg.textFooter.join('\n'))));
-
-	stream.pipe(gulp.dest(global.cfg.loaderFolders.build));
+		.pipe(gif(global.cfg.release, footer(global.cfg.textFooter.join('\n'))))
+		.pipe(gulp.dest(global.cfg.loaderFolders.build));
 
 	if(global.cfg.cordova){
-		/*This is ok, because it make another file equals to index but one change,
-		I prefer it than run again all process to make other file */
+		/*
+		This is ok, because it make another file equals to index but one change,
+		I prefer it than run again all process to make other file
+		*/
 		stream.pipe(rename('index-cordova.html'))
 		.pipe(gif(global.cfg.release,
 			replace(',isCordovaDevice:!1,', ',isCordovaDevice:1,'),

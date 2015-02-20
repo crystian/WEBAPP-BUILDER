@@ -74,6 +74,7 @@ gulp.task('makeConfig', function (cb) {
 	json.analyticsActive = global.cfg.analyticsActive;
 	json.compressor = global.cfg.compressor;
 	json.loaderWithApp = global.cfg.loaderWithApp;
+	json.localRequest = global.cfg.localRequest;
 
 	compatibilityTpl =
 		'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n'+

@@ -31,7 +31,7 @@ gulp i
 revisar:
 offline
 nightmare, cada perfil
-
+mejorar el json de config
 
 Pendientes:
 appcache!
