@@ -10,9 +10,14 @@
 //to see arguments: gutil.env.
 //https://github.com/mikestreety/gulp/blob/master/gulpfile.js
 
+
+//REMEMBER!: THE TASKS ARE ON tasks.js
+
+
 var gulp = require('gulp'),
 	requireDir = require('require-dir'),
 	extend = require('extend'),
+	chalk = require('chalk'),
 	gutil = require('gulp-util');
 
 requireDir('./tasks');
@@ -25,7 +30,13 @@ try{
 		require('../gulp-config-local.json')
 	);
 } catch (e){
-	console.log('Do you run installer?, There are some problems with gulp-config*, check those please');
+	console.log(chalk.black.bgRed('Do you run installer?, There are some problems with gulp-config*, check those please'));
+	process.exit(1);
+}
+
+//validations:
+if (global.cfg.release && global.cfg.localRequest) {
+	console.log(chalk.black.bgRed('DevLocal activated, does not posible to build, change value'));
 	process.exit(1);
 }
 
@@ -33,4 +44,4 @@ global.cfg.pkg = require('./package.json');
 global.cfg.folders = {}; //I remove it just in case
 global.cfg.loaderWithApp = !!(gutil.env.withapp);
 
-//remember: TASK ON tasks.js
+

@@ -3,6 +3,7 @@
 */
 
 var gulp = require('gulp'),
+	chalk = require('chalk'),
 	runSequence = require('run-sequence');
 
 gulp.task('i', ['install']);
@@ -29,7 +30,7 @@ gulp.task('release', function (cb) {
 	'use strict';
 
 	if (!global.cfg.release) {
-		console.error('variable release in gulp-config on "false", you will change it if you want a release');
+		console.log(chalk.black.bgRed('variable release in gulp-config on "false", you will change it if you want a release'));
 		global.cfg.release = true;
 	}
 
