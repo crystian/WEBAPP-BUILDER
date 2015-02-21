@@ -115,7 +115,7 @@ gulp.task('make:loader:js', ['make:loader:css'],  function () {
 
 	//force variables on build time
 	if (gutil.env.withapp) {
-		loaderScripts1Stream.pipe(replace(/(\"loaderWithApp.*\:)(.*)(\n)/,'$1true$3'));
+		loaderScripts1Stream.pipe(replace(/(\"loaderWithApp.*\:[ ]?)(\w*)/,'$1true'));
 	}
 
 	loaderScripts1Stream = jsMaker(loaderScripts1Stream);
