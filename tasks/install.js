@@ -11,76 +11,124 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	fs = require('fs'),
 	bowerify = require('gulp-bower'),
+	inspect = require('util').inspect,
 	cheerio = require('gulp-cheerio');
 
-gulp.task('bowerify', ['bowerDownload','makeIndex','makeConfig'], function() {
+//necesitaba hacer el minificado despues de la bajada, me complico la vida,
+// esto fue lo mejor que me quedo, luego de varias horas ...
+//problemas con syncronismo y argumentos
+gulp.task('bower:make:libsmin', ['bowerDownload','makeIndex','makeConfig'], function(cb) {
+
+	var i = 0,
+		len = global.cfg.varLibsToMin.length;
+
+
+	if(len===0){cb();}
+
+	global.cfg.varLibsToMinI = 0;
+
+	for (; i < len; i++) {
+		var s = global.cfg.varLibsToMin[i];
+		gulp.src(s.jsDev)
+			.pipe(uglify())
+			.pipe(rename(s.name))
+			.pipe(gulp.dest(s.pa))
+			.on('finish', function (a,b,c) {
+				console.logGreen('Minification of '+global.cfg.varLibsToMin[global.cfg.varLibsToMinI].name+'...');
+				global.cfg.varLibsToMinI++;
+				if(global.cfg.varLibsToMinI===len){
+					cb();
+				}
+			});
+	}
+
+});
+
+
+gulp.task('bowerify', ['bower:make:libsmin'], function() {
 	//replace references on index.html
-	return gulp.src(global.cfg.loaderFolders.www +'/index.html')
+	return gulp.src(global.cfg.folders.www +'/index.html')
 		//.pipe(debug({verbose: true}))
-		.pipe(commons.injectContent(global.cfg.loaderFolders.loadings+'/'+ global.cfg.loading +'/loading.html','loadingHtml'))
-		.pipe(inject(gulp.src(global.cfg.loaderFolders.loadings+'/'+ global.cfg.loading +'/loading.css', {read: false}), {name: 'loadingCss', relative:'true'}))
+		.pipe(commons.injectContent(global.cfg.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.html','loadingHtml'))
+		.pipe(inject(gulp.src(global.cfg.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.css', {read: false}), {name: 'loadingCss', relative:'true'}))
 		.pipe(inject(gulp.src(global.cfg.varJs, {read: false}), {name: 'bower', relative:'true'}))
 		.pipe(inject(gulp.src(global.cfg.varCss, {read: false}), {name: 'bower', relative:'true'}))
-		.pipe(gulp.dest(global.cfg.loaderFolders.www));
+		.pipe(gulp.dest(global.cfg.folders.www));
 });
 
 gulp.task('makeIndex', ['copy:indexTpl'], function () {
-	return gulp.src(global.cfg.loaderFolders.www + '/index.html')
+	return gulp.src(global.cfg.folders.www + '/index.html')
 		//.pipe(debug({verbose: true}))
 		.pipe(cheerio({
 			run: function ($) {
 				var cfg = global.cfg;
-				$('#pageTitle').text(cfg.textPageTitle);
-				$('#pageDescription').attr('content',cfg.textPageDescription);
-				$('#pageKeyword').attr('content',cfg.textPageKeyword);
-				$('#pageAuthor').attr('content',cfg.textPageAuthor);
-				$('#noscript').html(cfg.textNoscript);
-				$('#viewport').attr('content',cfg.viewport);
+				$('#pageTitle').text(cfg.loader.text.title);
+				$('#pageDescription').attr('content',cfg.loader.text.description);
+				$('#pageKeyword').attr('content',cfg.loader.text.keyword);
+				$('#pageAuthor').attr('content',cfg.loader.text.author);
+				$('#noscript').html(cfg.loader.text.noscript);
+				$('#viewport').attr('content',cfg.loader.viewport);
 			}
 		}))
 		.pipe(replace('<!--msgTpl-->','<!-- REMEMBER, this file is generated, don\'t change it, because you can lost it -->'))
 		.on('error', console.error.bind(console))
-		.pipe(gulp.dest(global.cfg.loaderFolders.www));
+		.pipe(gulp.dest(global.cfg.folders.www));
 });
 
 gulp.task('copy:indexTpl',function () {
-	return gulp.src(global.cfg.loaderFolders.www + '/index.tpl.html')
+	return gulp.src(global.cfg.folders.www + '/index.tpl.html')
 		.on('error', console.error.bind(console))
 		.pipe(rename('index.html'))
-		.pipe(gulp.dest(global.cfg.loaderFolders.www));
+		.pipe(gulp.dest(global.cfg.folders.www));
 });
 
 gulp.task('makeConfig', function (cb) {
+	//variables shared between loader build and loader app
 	var json = {};
-	json.gaId = global.cfg.gaId;
-	json.release = global.cfg.release;
-	json.gaAppName = global.cfg.gaAppName;
-	json.gaAppId = global.cfg.gaAppId;
-	json.gaAppInstaller = global.cfg.gaAppInstaller;
-	json.compatibilityMatrix = global.cfg.compatibilityMatrix;
-	json.textIncompatibleByFeatures = global.cfg.textIncompatibleByFeatures;
-	json.textIncompatibleByDiag = global.cfg.textIncompatibleByDiag;
-	json.textSemiIncompatible = global.cfg.textSemiIncompatible;
-	json.textFaqLink = global.cfg.textFaqLink;
-	json.textErrorRequestFile = global.cfg.textErrorRequestFile;
-	json.textErrorTimeoutServer = global.cfg.textErrorTimeoutServer;
-	json.loaderVersion = global.cfg.loaderVersion;
+	json.release = global.cfg.loader.release;//be carefull, it's from loader!
 	json.version = global.cfg.version;
-	json.isCordovaDevice = global.cfg.isCordovaDevice;
-	json.consoleError = global.cfg.consoleError;
-	json.fastClick = global.cfg.fastClick;
-	json.autoprefixer = global.cfg.autoprefixer;
-	json.analytics = global.cfg.analytics;
-	json.analyticsActive = global.cfg.analyticsActive;
-	json.compressor = global.cfg.compressor;
-	json.loaderWithApp = global.cfg.loaderWithApp;
-	json.localRequest = global.cfg.localRequest;
-	json.appMainHtml = global.cfg.appMainHtml;
-	json.appMainJs = global.cfg.appMainJs;
-	json.appMainCss = global.cfg.appMainCss;
-	json.appMainFile = global.cfg.appMainFile;
 
-	compatibilityTpl =
+	json.compress = global.cfg.compress;
+	json.isCordovaDevice = global.cfg.isCordovaDevice;
+	json.compatibilityMatrix = global.cfg.compatibilityMatrix;
+
+	json.analytics = {
+		'id': global.cfg.analytics.id,
+		'installed': global.cfg.analytics.installed,
+		'active': global.cfg.analytics.active,
+		'linkid': global.cfg.analytics.linkid,
+		'displayFeatures':  global.cfg.analytics.displayFeatures,
+		'appName': global.cfg.analytics.appName,
+		'appId': global.cfg.analytics.appId,
+		'appInstaller': global.cfg.analytics.appInstaller
+	};
+
+	json.consoleError = global.cfg.consoleError;
+
+	json.loader = {
+		version: global.cfg.loader.version,
+		oneRequest: global.cfg.loader.oneRequest,
+		withApp: global.cfg.loader.withApp,
+		fastclick: global.cfg.loader.fastclick,
+
+		text: {
+			incompatibleByFeatures: global.cfg.loader.text.incompatibleByFeatures,
+			incompatibleByDiag: global.cfg.loader.text.incompatibleByDiag,
+			semiIncompatible: global.cfg.loader.text.semiIncompatible,
+			faqLink: global.cfg.loader.text.faqLink,
+			errorRequestFile: global.cfg.loader.text.errorRequestFile,
+			errorTimeoutServer: global.cfg.loader.text.errorTimeoutServer
+		}
+	};
+
+	json.landing = {
+		'html': global.cfg.loader.landing.html,
+		'js': global.cfg.loader.landing.js,
+		'css': global.cfg.loader.landing.css,
+		'finalFile': global.cfg.loader.landing.finalFile
+	};
+
+	var compatibilityTpl =
 		'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n'+
 		'_loaderCfg.compatibilityFirst = function () {\n'+
 		'	//jshint maxcomplexity:false, quotmark:false\n'+
@@ -94,42 +142,45 @@ gulp.task('makeConfig', function (cb) {
 		'var _loaderCfg = '+ JSON.stringify(json, null, '\t') +';'+
 		compatibilityTpl;
 
-	fs.writeFile(global.cfg.loaderFolders.www +'/config.js',
+	fs.writeFile(global.cfg.folders.www +'/config.js',
 		text,
 		function(err){
 			if(err) {
-				console.log(err);
+				console.logRed(err);
 			} else {
-				console.log('Config.js generated');
+				console.logGreen('Config.js generated');
 			}
 			cb();
 		});
 });
 
-gulp.task('bowerDownload',['bowerGenerator'], function(cb) {
-	return bowerify({ directory: './'+ global.cfg.loaderFolders.bower});
+gulp.task('bowerDownload',['bowerGenerator'], function() {
+	return bowerify({ directory: './'+ global.cfg.folders.bower});
 });
 
 gulp.task('bowerGenerator',['parseInstaller'],  function(cb) {
 	//update bower.json file
 	fs.writeFile('bower.json', JSON.stringify(global.cfg.varBower, null, '\t'), function (err) {
 		if (err) {
-			console.error('err',err);
+			console.logRed('Error:');
+			console.error(err);
 			throw err;
 		}
-		console.log('Bower.json generated');
+		console.logGreen('Bower.json generated');
 		cb();
 	});
 });
 
-gulp.task('parseInstaller', function() {
-	var bower = global.cfg.bower,
-		ambient = global.cfg.release ? 'prod' : 'dev',
+
+gulp.task('parseInstaller', function(cb) {
+	var bower = Object.keys(global.cfg.loader.bower),
+		ambient = global.cfg.loader.release ? 'prod' : 'dev',
 		rJs = [],
 		rCss = [],
+		libsToMin = [],
 		rBower = {
-			'name': global.cfg.name + ' - by Power Loader',
-			'version' : global.cfg.version,
+			'name': global.cfg.name + ' - by '+ global.cfg.loader.name,
+			'version' : global.cfg.loader.version,
 			'description' : 'auto generated, don\'t change it, you should use gulp-config to change it and run \'gulp i\'',
 			'dependencies': {}
 		};
@@ -138,19 +189,28 @@ gulp.task('parseInstaller', function() {
 		l = bower.length;
 
 	for (; i < l; i++) {
-		var o = bower[i],
+		var o = global.cfg.loader.bower[bower[i]],
 			js = [],
 			css = [];
 
+		//set variable on loader app
+		global.cfg.loader[bower[i]] = true;
+
+		//set to null if you don't want some lib
+		if(!o){
+			global.cfg.loader[bower[i]] = false;
+			continue;
+		}
+
 		if(o['js-'+ ambient]){
 			js = o['js-'+ ambient].map(function (item) {
-				return './'+ global.cfg.loaderFolders.bower +'/'+item;
+				return './'+ global.cfg.folders.bower +'/'+item;
 			});
 		}
 
 		if(o['css-'+ ambient]){
 			css = o['css-'+ ambient].map(function (item) {
-				return './'+ global.cfg.loaderFolders.bower +'/'+item;
+				return './'+ global.cfg.folders.bower +'/'+item;
 			});
 		}
 
@@ -159,21 +219,19 @@ gulp.task('parseInstaller', function() {
 			if(ambient==='prod' && o['generate-js']){
 
 				var jsDev = o['js-dev'].map(function (item) {
-					return './'+ global.cfg.loaderFolders.bower  +'/'+item;
+					return './'+ global.cfg.folders.bower  +'/'+item;
 				});
 
 				js.forEach(function (element,pos) {
 
 					if(fs.existsSync(element)){return;}
 
-					var p = element.lastIndexOf('/'),
-						name = element.substr(p+1),
-						pa = element.substr(0, p);
+					var pathSrc = element.lastIndexOf('/'),
+						name = element.substr(pathSrc+1),
+						pathDest = element.substr(0, pathSrc);
 
-					gulp.src(jsDev[pos])
-						.pipe(uglify())
-						.pipe(rename(name))
-						.pipe(gulp.dest(pa));
+					libsToMin.push({jsDev:jsDev[pos],name:name,pa:pathDest});
+
 				});
 
 			}
@@ -186,14 +244,18 @@ gulp.task('parseInstaller', function() {
 		}
 
 		if (o.version !== '') {
-			rBower.dependencies[o.name] = o.version;
+			rBower.dependencies[bower[i]] = o.version;
 		}
 
 	}
 
+	inspect(libsToMin);
+
 	//horrible, I know
+	global.cfg.varLibsToMin = libsToMin;
 	global.cfg.varBower = rBower;
 	global.cfg.varJs = rJs;
 	global.cfg.varCss = rCss;
 
+	cb();
 });

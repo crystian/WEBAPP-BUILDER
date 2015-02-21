@@ -3,8 +3,9 @@
 */
 
 var gulp = require('gulp'),
-	chalk = require('chalk'),
-	runSequence = require('run-sequence');
+	//debug = require('gulp-debug'),
+	runSequence = require('run-sequence'),
+	gutil = require('gulp-util');
 
 gulp.task('i', ['install']);
 gulp.task('install', ['bowerify']);//install
@@ -29,9 +30,14 @@ gulp.task('build:full', function (cb) {
 gulp.task('release', function (cb) {
 	'use strict';
 
-	if (!global.cfg.release) {
-		console.log(chalk.black.bgRed('variable release in gulp-config on "false", you will change it if you want a release'));
-		global.cfg.release = true;
+	if (!global.cfg.loader.release) {
+		console.logRed('Variable "release" in gulp-config on "false", you will change it if you want a release');
+		process.exit(1);
+	}
+
+	if (gutil.env.withapp) {
+		console.logRed('Is not posible with "withapp" argument, because its need a final destination');
+		process.exit(1);
 	}
 
 	runSequence(

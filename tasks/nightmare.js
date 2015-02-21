@@ -5,6 +5,7 @@
  */
 
 var gulp = require('gulp'),
+	//debug = require('gulp-debug'),
 	Nightmare = require('nightmare'),
 	webserver = require('gulp-webserver'),
 	async = require('async'),
@@ -13,7 +14,7 @@ var gulp = require('gulp'),
 gulp.task('serve:nightmare', function() {
 	'use strict';
 
-	return gulp.src(global.cfg.loaderFolders.build)
+	return gulp.src(global.cfg.folders.build)
 		.pipe(webserver({
 			host: global.cfg.ip,
 			port: global.cfg.ports.nightmare,
@@ -212,22 +213,22 @@ gulp.task('test:loader',['serve:nightmare'], function(cb) {
 		nightmare
 			.useragent(b.ua)
 			.viewport(b.width, b.height)
-			.on('error', gutil.log)
+			//.on('error', gutil.log)
 			.goto('http://' + global.cfg.ip + ':' + global.cfg.ports.nightmare + '/index.html')
 			.wait(1000)
-			.screenshot(global.cfg.loaderFolders.screens + '/' + b.name + '.jpg')
+			.screenshot(global.cfg.folders.screens + '/' + b.name + '.jpg')
 			.evaluate(function () {return window;},
 			function (window){
 
 				if(!window.loader){
-					console.log('Problem detected, check if you publish on 0.0.0.0, you need to publish on real ip');
+					console.logRed('Problem detected, check if you publish on 0.0.0.0, you need to publish on real ip');
 					return;
 				}
 
 				var cfg = window.loader.cfg;
 
 				//just in case
-				if (global.cfg.release &&
+				if (global.cfg.loader.release &&
 					(
 					cfg.showDeviceInfo ||
 					cfg.showSkeletor ||
@@ -285,7 +286,7 @@ gulp.task('test:loader',['serve:nightmare'], function(cb) {
 
 			})
 			.run(function (err, nightmare) {
-				if (err) return console.log(err);
+				if (err) return console.logRed(err);
 				cbMap();
 			});
 	}, function (e){

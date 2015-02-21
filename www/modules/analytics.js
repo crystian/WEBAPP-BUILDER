@@ -2,8 +2,8 @@
 loader.ga = (function (){
 	'use strict';
 
-	function load(){
-		if(!loader.cfg.analytics){
+	function init(){
+		if(!loader.cfg.analytics.installed){
 			console.debug('Without analytics');
 			window.ga = function () {};
 			return;
@@ -15,18 +15,23 @@ loader.ga = (function (){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create',{trackingId: loader.cfg.analytics.id, cookieDomain: 'auto'});
 
-		ga('create',{trackingId: loader.cfg.gaId, cookieDomain: 'auto'});
-		ga('require', 'linkid');
-		ga('require', 'displayfeatures');
+		if (loader.cfg.analytics.linkid) {
+			ga('require', 'linkid');
+		}
+		if (loader.cfg.analytics.displayFeatures) {
+			ga('require', 'displayfeatures');
+		}
+
 		ga('set',{
 			'appVersion': loader.cfg.version,
-			'appName': loader.cfg.gaAppName,
-			'appId': loader.cfg.gaAppId,
+			'appName': loader.cfg.analytics.appName,
+			'appId': loader.cfg.analytics.appId,
 			'appInstallerId': loader.cfg.gaAppInstaller
 		});
 
-		window['ga-disable-'+ loader.cfg.gaId] = !loader.cfg.analyticsActive;
+		window['ga-disable-'+ loader.cfg.analytics.id] = !loader.cfg.analytics.active;
 
 		//jshint camelcase:false
 //		window.ga_debug = {trace: true};
@@ -44,7 +49,7 @@ loader.ga = (function (){
 
 
 	return {
-		load: load,
+		init: init,
 		landing: landing
 	};
 }());

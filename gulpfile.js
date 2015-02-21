@@ -29,19 +29,27 @@ try{
 		require('../gulp-config.json'),
 		require('../gulp-config-local.json')
 	);
+
+
+	global.cfg.folders = global.cfg.loader.folders;
+
 } catch (e){
-	console.log(chalk.black.bgRed('Do you run installer?, There are some problems with gulp-config*, check those please'));
+	console.logRed('Do you run installer?, There are some problems with gulp-config*, check those please');
 	process.exit(1);
 }
 
-//validations:
-if (global.cfg.release && global.cfg.localRequest) {
-	console.log(chalk.black.bgRed('LocalRequest activated, does not posible to build, change value'));
+//validations always:
+if (global.cfg.loader.release && !global.cfg.loader.oneRequest) {
+	console.logRed('oneRequest on false, does not posible to build, change value');
 	process.exit(1);
 }
+
+if (global.cfg.compress && !global.cfg.loader.bower['lz-string']) {
+	console.logRed('Compress option active, but library lz-string not present');
+	process.exit(1);
+}
+
 
 global.cfg.pkg = require('./package.json');
-global.cfg.folders = {}; //I remove it just in case
-global.cfg.loaderWithApp = !!(gutil.env.withapp);
-
+global.cfg.loader.withApp = !!(gutil.env.withapp);
 

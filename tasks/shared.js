@@ -5,8 +5,6 @@
 var gulp = require('gulp'),
 	//debug = require('gulp-debug'),
 	fs = require('fs'),
-	chalk = require('chalk'),
-	LZString = require('../vendors/lz-string/libs/lz-string.min.js'),
 	gutil = require('gulp-util');
 
 gulp.task('make:landing', function(cb) {
@@ -18,18 +16,19 @@ gulp.task('make:landing', function(cb) {
 
 	var jsonText = JSON.stringify(json);
 
-	if(global.cfg.compressor){
+	if(global.cfg.compress){
+		LZString = require('../vendors/lz-string/libs/lz-string.min.js');
 		jsonText = LZString.compressToUTF16(jsonText);
-		console.log(chalk.black.bgGreen('Base compressed!'));
+		console.logGreen('Base compressed!');
 	}
 
-	fs.writeFile(global.cfg.loaderFolders.build +'/magic',
+	fs.writeFile(global.cfg.folders.build +'/magic',
 		jsonText,
 		function(err){
 			if(err) {
-				console.log(err);
+				console.logRed(err);
 			} else {
-				console.log(chalk.black.bgGreen('Magic generated'));
+				console.logGreen('Magic generated');
 			}
 			cb();
 		});

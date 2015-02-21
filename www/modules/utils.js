@@ -62,11 +62,11 @@ loader.utils = (function() {
 
 				callback(this.responseText);
 			} else if( this.readyState === 4 ) {
-				errorDetected(loader.cfg.textErrorRequestFile);
+				errorDetected(loader.cfg.loader.text.errorRequestFile);
 			}
 		};
 
-		xhr.ontimeout = function(){errorDetected(loader.textErrorTimeoutServer);};
+		xhr.ontimeout = function(){errorDetected(loader.cfg.loader.text.errorTimeoutServer);};
 		xhr.open('GET', file, true);
 		// 10000 is to much?
 		xhr.timeout = 10000;//yes here, porque ie11 pincha :S
@@ -198,7 +198,8 @@ loader.utils = (function() {
 
 	function handleCompress(data){
 		//anchor for compress, DON't touch it!
-		if(!loader.cfg.compressor){return data;}//flagCompress
+		if(!loader.cfg.compress){return data;}//flagCompress
+		console.log('Resource compressed');
 		return LZString.decompressFromUTF16(data);
 	}
 
