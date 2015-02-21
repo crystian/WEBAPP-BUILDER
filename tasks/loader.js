@@ -100,7 +100,7 @@ gulp.task('make:loader:js', ['make:loader:css'],  function () {
 		global.cfg.jquery ? global.cfg.loaderFolders.bower + '/jquery/dist/jquery.' + releasePostName + 'js' : '',
 		global.cfg.bootstrap ? global.cfg.loaderFolders.bower + '/bootstrap/dist/js/bootstrap.' + releasePostName + 'js' : '',
 		global.cfg.compressor ? global.cfg.loaderFolders.bower + '/lz-string/libs/lz-string.' + releasePostName + 'js' : '',
-		global.cfg.compressor ? global.cfg.loaderFolders.bower + '/swiper/dist/js/swiper.' + releasePostName + 'js' : ''
+		global.cfg.swiper ? global.cfg.loaderFolders.bower + '/swiper/dist/js/swiper.' + releasePostName + 'js' : ''
 	];
 	var libsMin = gulp.src(libs)
 			.pipe(gif(cfg.release, strip({safe:false, block:false})));
@@ -123,6 +123,7 @@ gulp.task('make:loader:js', ['make:loader:css'],  function () {
 
 	//body script
 	var loaderScripts2 = [
+		global.cfg.loaderFolders.www + '/modules/shortcuts.js',
 		global.cfg.loaderFolders.www + '/loader.js',
 		global.cfg.loaderFolders.www + '/variables.js',
 		global.cfg.loaderFolders.www + '/modules/utils.js',
@@ -137,8 +138,9 @@ gulp.task('make:loader:js', ['make:loader:css'],  function () {
 		global.cfg.loaderFolders.www + '/modules/analytics.js',
 		global.cfg.loaderFolders.www + '/modules/boot.js'
 	];
-	var loaderScripts2Stream = gulp.src(loaderScripts2);
-	//space for future change/replace on build time
+	var loaderScripts2Stream = gulp.src(loaderScripts2)
+		.pipe(gif(global.cfg.compressor, replace('if(!loader.cfg.compressor){return data;}//flagCompress','')));
+
 	loaderScripts2Stream = jsMaker(loaderScripts2Stream);
 	//endbody script
 

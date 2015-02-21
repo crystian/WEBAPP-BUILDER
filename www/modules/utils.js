@@ -1,58 +1,13 @@
 /**
-* Created by Crystian on 3/3/14.
-*/
-
-//shortcuts:
-var byId = function (id) {
-	'use strict';
-	return document.getElementById(id);
-};
-
-//jshint unused:false
-var byClass = function(_class){
-	'use strict';
-	return document.getElementsByClassName(_class)[0];
-};
-
-/* insert html in id sent */
-//jshint unused:false
-var h = function(id, v){
-	'use strict';
-	var el = byId(id);
-	if( el ){
-		el.innerHTML = v;
-	}
-};
-var hp = function(id, v){
-	'use strict';
-	var el = byId(id);
-	if( el ){
-		el.placeholder = v;
-	}
-};
-//jshint unused:false
-var t = function(id, v){
-	'use strict';
-	var el = byId(id);
-	if( el ){
-		el.innerText = v;
-	}
-};
-
-//show message in debug zone
-//jshint unused:false
-var d = function(m){
-	'use strict';
-	loader.debugAdd(m);
-};
-
+ * Created by Crystian on 3/3/14.
+ */
 
 //jshint maxstatements:false
 loader.utils = (function() {
 	'use strict';
 
-//	var _cache = [];
-//
+	var _cache = [];
+
 	//return 0 === equals, 1 === a > b, -1 === a < b
 	function compareSemVer(a, b) {
 		if (a === b) {
@@ -91,52 +46,45 @@ loader.utils = (function() {
 	}
 
 
-//	function request(file, callback) {
-//		console.log('request: '+ file);
-//		var xhr = new XMLHttpRequest();
-//
-//		function errorDetected(er) {
-//			console.error(er);
-//			alert(er);
-//		}
-//
-//		xhr.onreadystatechange = function(){
-//			if (this.readyState === 4 &&
-//				this.status === 200 &&
-//				this.responseText !== null){
-//
-//				callback(this.responseText);
-//			} else if( this.readyState === 4 ) {
-//				errorDetected(loader.i18n.loader.errorRequestFile);
-//			}
-//		};
-//
-//		xhr.ontimeout = function(){errorDetected(loader.i18n.loader.errorTimeoutServer);};
-//		xhr.open('GET', file, true);
-//		// 10000 is to much?
-//		xhr.timeout = 10000;//yes here, porque ie11 pincha :S
-//		xhr.send();
-//	}
+	function request(file, callback) {
+		console.log('request: '+ file);
+		var xhr = new XMLHttpRequest();
 
-	function getJsAsync(file) {
-		var tagName = 'script';
-		var resourceLoader = document.createElement(tagName);
+		function errorDetected(er) {
+			console.error(er);
+			alert(er);
+		}
+
+		xhr.onreadystatechange = function(){
+			if (this.readyState === 4 &&
+				this.status === 200 &&
+				this.responseText !== null){
+
+				callback(this.responseText);
+			} else if( this.readyState === 4 ) {
+				errorDetected(loader.cfg.textErrorRequestFile);
+			}
+		};
+
+		xhr.ontimeout = function(){errorDetected(loader.textErrorTimeoutServer);};
+		xhr.open('GET', file, true);
+		// 10000 is to much?
+		xhr.timeout = 10000;//yes here, porque ie11 pincha :S
+		xhr.send();
+	}
+
+	//potential issue about security
+	function getJs(file) {
+		var resourceLoader = document.createElement('script');
 		resourceLoader.type = 'text/javascript';
 		resourceLoader.async = true;
 		resourceLoader.src = file;
 
-		setNewResourceByTag(resourceLoader, tagName);
+		setNewResourceByTag(resourceLoader, 'head');
 	}
 
-//	function setJsSync(content) {
-//		var resourceLoader = document.createElement('script');
-//		resourceLoader.type = 'text/javascript';
-//		resourceLoader.async = false;
-//		resourceLoader.innerHTML = content;
-//
-//		setNewResourceByTag(resourceLoader, 'head');
-//	}
-//
+
+
 //	function getCssAsync(file) {
 //		var resourceLoader = document.createElement('link');
 //		resourceLoader.rel = 'stylesheet';
@@ -145,21 +93,30 @@ loader.utils = (function() {
 //
 //		setNewResourceByTag(resourceLoader, 'link');
 //	}
-//
-//	function setCssSync(content) {
-//		var resourceLoader = document.createElement('style');
-//		resourceLoader.innerHTML = content;
-//		setNewResourceByTag(resourceLoader, 'head');
-//	}
-//
-//	function setHtmlMain(data){
-//		var el = document.getElementById('mainView');
-//		el.innerHTML = data;
-//	}
+
+	function setJs(content) {
+		var resourceLoader = document.createElement('script');
+		resourceLoader.type = 'text/javascript';
+		resourceLoader.async = false;
+		resourceLoader.innerHTML = content;
+
+		setNewResourceByTag(resourceLoader, 'head');
+	}
+
+	function setCss(content) {
+		var resourceLoader = document.createElement('style');
+		resourceLoader.innerHTML = content;
+		setNewResourceByTag(resourceLoader, 'head');
+	}
+
+	function setHtml(data){
+		var el = document.getElementById('mainContainer');
+		el.innerHTML = data;
+	}
 
 	function setNewResourceByTag(resourceLoader, tagWhere) {
-		var scripts = document.getElementsByTagName(tagWhere)[0];
-		scripts.appendChild(resourceLoader);
+		var tag = document.getElementsByTagName(tagWhere)[0];
+		tag.appendChild(resourceLoader);
 	}
 
 //	function setNewResourceById(resourceLoader, id) {
@@ -239,35 +196,25 @@ loader.utils = (function() {
 		return Math.random() * (max - min) + min;
 	}
 
-//	function handleCompress(data){
-//		//anchor for compress, DON't touch it!
-//		if(true){return data;}//flagCompress
-//		return LZString.decompressFromUTF16(data);
-//	}
-//
-//	//merge between objects
-//	function merge(root){
-//		for ( var i = 1; i < arguments.length; i++ ){
-//			for ( var key in arguments[i] ){
-//				root[key] = arguments[i][key];
-//			}
-//		}
-//		return root;
-//	}
-//
-//	//two arguments are set, one is a get, just for encapsular y no ver las variables
-//	function cache(key, value) {
-//		if(value !== undefined){
-//			_cache[key] = value;
-//		} else {
-//			return _cache[key];
-//		}
-//	}
+	function handleCompress(data){
+		//anchor for compress, DON't touch it!
+		if(!loader.cfg.compressor){return data;}//flagCompress
+		return LZString.decompressFromUTF16(data);
+	}
+
+
+	//two arguments are set, one is a get, just for encapsular y no ver las variables
+	function cache(key, value) {
+		if(value !== undefined){
+			_cache[key] = value;
+		} else {
+			return _cache[key];
+		}
+	}
 
 	return {
-//		merge: merge,
-//		cx: cache,
-//		za: handleCompress,
+		cx: cache,
+		za: handleCompress,
 		showSkeletor: showSkeletor,
 		compareSemVer: compareSemVer,
 		hideSkeletor: hideSkeletor,
@@ -276,15 +223,16 @@ loader.utils = (function() {
 //		getRandom: getRandom,
 		getRandomInt: getRandomInt,
 //		getRandomRange: getRandomRange,
-		getJsAsync: getJsAsync,
-//		setJsSync: setJsSync,
+		getJs: getJs,
+		setJs: setJs,
 //		getCssAsync: getCssAsync,
 //		setCssSync: setCssSync,
-//		setHtmlMain: setHtmlMain,
+		setHtml: setHtml,
+		setCss: setCss,
 		showPanicError: showPanicError,
-		setNewResourceByTag: setNewResourceByTag
+		setNewResourceByTag: setNewResourceByTag,
 //		setNewResourceById: setNewResourceById,
-//		request: request
+		request: request
 	};
 
 }());

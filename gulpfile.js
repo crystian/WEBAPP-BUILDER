@@ -36,7 +36,7 @@ try{
 
 //validations:
 if (global.cfg.release && global.cfg.localRequest) {
-	console.log(chalk.black.bgRed('DevLocal activated, does not posible to build, change value'));
+	console.log(chalk.black.bgRed('LocalRequest activated, does not posible to build, change value'));
 	process.exit(1);
 }
 

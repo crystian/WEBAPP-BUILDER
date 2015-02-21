@@ -1,10 +1,14 @@
 {
 	"name": "Power loader",
 	"site": "http://",
-	"release": false,
+	"release": true,
 	"localRequest": false,
 	"loaderVersion": "0.0.1",
 	"version": "0.0.0",
+	"appMainHtml": "app.html",
+	"appMainJs": "app.js",
+	"appMainCss": "app.css",
+	"appMainFile": "magic",
 	"bower": [
 		{
 			"name": "platform",
@@ -56,7 +60,7 @@
 		}
 	],
 
-	"compressor": true,
+	"compressor": false,
 	"fastClick": true,
 	"jquery": true,
 	"bootstrap": true,
@@ -87,7 +91,7 @@
 	"gaAppInstaller": "com.appName.installer",
 
 	"loading": 1,
-	"loaderWithApp": false,
+	"loaderWithApp": true,
 
 	"compatibilityFirst": "\n\treturn !!(window.document.querySelector &&\n\twindow.console &&window.document.addEventListener &&\n\t(window.document.getElementsByTagName('body')[0]).classList &&\n\twindow.localStorage &&\n\twindow.navigator &&\n\twindow.XMLHttpRequest &&\n\twindow.applicationCache &&\n\twindow.document.createEvent &&\n\tarr.map &&\n\tarr.every);\n\t",
 	"compatibilityMatrix": {

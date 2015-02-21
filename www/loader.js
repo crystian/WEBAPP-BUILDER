@@ -33,8 +33,7 @@ var loader = (function(){
 		if (!cfg.release) {
 			console.warn('****    DEBUG MODE!: NOT RELEASE    ****');
 		}
-		console.info('Loader version: ' + cfg.loaderVersion);
-		console.info('App version: ' + cfg.version);
+		console.info('App version: ' + cfg.version +' ('+cfg.loaderVersion+')');
 		console.info('Loader init');
 
 		//if it is a device, load cordova plugins and more!
@@ -120,14 +119,37 @@ var loader = (function(){
 	}
 
 	function _loadApp() {
+		//just a dummy:
 		if (!cfg.loaderWithApp){
 			loader.hide();
 			loader.finish();
 			return;
 		}
 
-		
+		//real case:
+		if( cfg.localRequest ){
+			//TODO css!
+			utils.request(cfg.appMainHtml, function (data) {
+				utils.setHtml(data);
+				utils.request(cfg.appMainCss, function (data) {
+					utils.setCss(data);
+					utils.request(cfg.appMainJs, function (data) {
+						utils.setJs(data);
+						loader.finish();
+					});
+				});
+			});
 
+		} else {
+			utils.request(cfg.appMainFile, function (data) {
+				data = JSON.parse(utils.za(data));
+				//console.dir(data);
+				utils.setHtml(data.h);
+				utils.setCss(data.c);
+				utils.setJs(data.j);
+				loader.finish();
+			});
+		}
 	}
 
 	function _handleDebugMode() {

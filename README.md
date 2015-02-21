@@ -32,6 +32,7 @@ revisar:
 offline
 nightmare, cada perfil
 mejorar el json de config
+copy de fs-extra
 
 Pendientes:
 appcache!
@@ -40,6 +41,7 @@ mover merge de gulpfile to commons
 weinre
 test
 ci
+cache de apps internamente
 
 
 ---

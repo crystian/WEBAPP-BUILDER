@@ -20,8 +20,8 @@ gulp.task('serve', function() {
 		.pipe(webserver({
 			host: global.cfg.ip,
 			port: global.cfg.ports.serve,
-			fallback: 'index.html',
-			livereload: true,
+			//fallback: 'index.html',
+			livereload: false,
 			open: false
 		}));
 });
@@ -36,7 +36,7 @@ gulp.task('serve:build', function() {
 		.pipe(webserver({
 			host: global.cfg.ip,
 			port: global.cfg.ports.build,
-			fallback: 'index.html',
+			//fallback: 'index.html',
 			livereload: false,
 			open: false
 		}));
