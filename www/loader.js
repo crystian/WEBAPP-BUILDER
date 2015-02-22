@@ -122,16 +122,12 @@ var loader = (function(){
 
 	function _loadApp() {
 		//just a dummy:
-		if (!cfg.loader.withApp){
-			loader.hide();
-			loader.finish();
-			return;
-		}
+		var path = (cfg.loader.build) ? '' : '../'+cfg.loader.pathTpl;
 
 		//real case:
 		if( cfg.loader.oneRequest ){
 
-			utils.request(cfg.landing.finalFile, function (data) {
+			utils.request(path +'/'+ cfg.landing.finalFile, function (data) {
 				data = JSON.parse(utils.za(data));
 				//console.dir(data);
 				utils.setHtml(data.h);
@@ -142,11 +138,11 @@ var loader = (function(){
 
 		} else {
 
-			utils.request(cfg.landing.html, function (data) {
+			utils.request(path +'/'+ cfg.landing.html, function (data) {
 				utils.setHtml(data);
-				utils.request(cfg.landing.css, function (data) {
+				utils.request(path +'/'+ cfg.landing.css, function (data) {
 					utils.setCss(data);
-					utils.request(cfg.landing.js, function (data) {
+					utils.request(path +'/'+ cfg.landing.js, function (data) {
 						utils.setJs(data);
 						loader.finish();
 					});

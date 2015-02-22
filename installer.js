@@ -107,7 +107,7 @@ inquirer.prompt(questions, function( answers ) {
 	//console.dir(answers);
 
 	if (answers.install){
-		fs.copySync('./!rootTpl', '../');
+		fs.copySync(cfg.folders.template, '../');
 		fs.outputJSONSync('../gulp-config-local.json',{});
 
 		if (answers.cordova) {

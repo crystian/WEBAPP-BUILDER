@@ -64,7 +64,7 @@
 	"loader":{
 		"name": "Power loader",
 		"version": "0.0.1",
-		"release": false,
+		"release": true,
 		"oneRequest": true,
 
 		"loading": 1,
@@ -94,7 +94,8 @@
 			"build": "build",
 			"temp": "build/.tmp",
 			"screens": "build/screens",
-			"loadings": "www/loading/"
+			"loadings": "www/loading",
+			"template": "!rootTpl/APP/WWW"
 		},
 
 		"landing":{

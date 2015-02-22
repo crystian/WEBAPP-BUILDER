@@ -108,8 +108,9 @@ gulp.task('makeConfig', function (cb) {
 	json.loader = {
 		version: global.cfg.loader.version,
 		oneRequest: global.cfg.loader.oneRequest,
-		withApp: global.cfg.loader.withApp,
+		build: false,
 		fastclick: global.cfg.loader.fastclick,
+		pathTpl: global.cfg.loader.folders.template,
 
 		text: {
 			incompatibleByFeatures: global.cfg.loader.text.incompatibleByFeatures,

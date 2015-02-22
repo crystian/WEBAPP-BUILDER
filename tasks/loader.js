@@ -21,10 +21,11 @@ var gulp = require('gulp'),
 	strip = require('gulp-strip-comments'),
 	runSequence = require('run-sequence'),
 	removeCode = require('gulp-remove-code'),
+	fs = require('fs-extra'),
 	gutil = require('gulp-util');
 
 
-gulp.task('make:loader', ['make:loader:js'],  function () {
+gulp.task('make:loader', ['make:loader:js'],  function (cb) {
 	var htmlminOptions = {
 		removeComments: true,
 		collapseWhitespace: true,
@@ -63,7 +64,29 @@ gulp.task('make:loader', ['make:loader:js'],  function () {
 		.pipe(gulp.dest(global.cfg.folders.build));
 	}
 
-	return stream;
+
+	function callbackFn() {
+		fs.copySync(global.cfg.folders.template, global.cfg.folders.build);
+		cb();
+	}
+
+	if (global.cfg.loader.oneRequest) {
+
+		//landing
+		global.cfg.makeOneRequestFile = {
+			name:'landing',
+			js: global.cfg.folders.template +'/app.js',
+			css: global.cfg.folders.template +'/app.css',
+			html: global.cfg.folders.template +'/app.html',
+			dest: '../'+global.cfg.folders.template +'/'+ global.cfg.loader.landing.finalFile
+		};
+
+		runSequence('make:onRequest',callbackFn);
+
+	} else {
+		callbackFn();
+	}
+
 });
 
 function jsMaker(stream) {
@@ -91,6 +114,7 @@ function jsMaker(stream) {
 	);
 }
 
+//TODO move makecss to main task
 gulp.task('make:loader:js', ['make:loader:css'],  function () {
 	var releasePostName = (global.cfg.loader.release) ? 'min.' : '';
 	//libs
@@ -111,12 +135,9 @@ gulp.task('make:loader:js', ['make:loader:css'],  function () {
 		global.cfg.folders.www + '/config.js',
 		global.cfg.folders.www + '/modules/compatibility.js'
 	];
-	var loaderScripts1Stream = gulp.src(loaderScripts1);
-
-	//force variables on build time
-	if (gutil.env.withapp) {
-		loaderScripts1Stream.pipe(replace(/(\"loader.withApp.*\:[ ]?)(\w*)/,'$1true'));
-	}
+	var loaderScripts1Stream = gulp.src(loaderScripts1)
+		.pipe(replace(/(\"build\".*\:[ ]?)(\w*)/,'$1true'))//just for index built
+		;
 
 	loaderScripts1Stream = jsMaker(loaderScripts1Stream);
 	//endheader script

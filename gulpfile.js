@@ -1,37 +1,31 @@
 /**
  * Created by Crystian on 10/16/2014.
+ * Migrado de grunt, creado el 9/7/2013
  *
  * Loader para languages gym y otras, hecho en varias madrugadas, habra valido la pena?
  */
 
-//HELP & TIPS:
-//environment variables, you can read follow this:
-//var env = process.env.NODE_ENV;
-//to see arguments: gutil.env.
-//https://github.com/mikestreety/gulp/blob/master/gulpfile.js
-
-
-//REMEMBER!: THE TASKS ARE ON tasks.js
-
+//REMEMBER!: All public TASKS ARE ON tasks.js
 
 var gulp = require('gulp'),
 	requireDir = require('require-dir'),
 	extend = require('extend'),
-	chalk = require('chalk'),
 	gutil = require('gulp-util');
 
 requireDir('./tasks');
 
-//merge between default and specify:
 try{
+	//merge between default and specify:
 	global.cfg = extend(true, {},
 		require('./gulp-config.json'),
 		require('../gulp-config.json'),
 		require('../gulp-config-local.json')
 	);
 
-
+	//shortcut to simplify
 	global.cfg.folders = global.cfg.loader.folders;
+
+	global.cfg.pkg = require('./package.json');
 
 } catch (e){
 	console.logRed('Do you run installer?, There are some problems with gulp-config*, check those please');
@@ -40,7 +34,7 @@ try{
 
 //validations always:
 if (global.cfg.loader.release && !global.cfg.loader.oneRequest) {
-	console.logRed('oneRequest on false, does not posible to build, change value');
+	console.logRed('release with oneRequest on false, does not posible to build, change the values please');
 	process.exit(1);
 }
 
@@ -48,8 +42,3 @@ if (global.cfg.compress && !global.cfg.loader.bower['lz-string']) {
 	console.logRed('Compress option active, but library lz-string not present');
 	process.exit(1);
 }
-
-
-global.cfg.pkg = require('./package.json');
-global.cfg.loader.withApp = !!(gutil.env.withapp);
-

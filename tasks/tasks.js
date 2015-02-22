@@ -35,11 +35,6 @@ gulp.task('release', function (cb) {
 		process.exit(1);
 	}
 
-	if (gutil.env.withapp) {
-		console.logRed('Is not posible with "withapp" argument, because its need a final destination');
-		process.exit(1);
-	}
-
 	runSequence(
 		'build:full',
 		'test:loader',
