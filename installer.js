@@ -7,23 +7,21 @@ Remember, you need permission to execute this file (in *nix ambient)
 # chmod u+x installer.js
 
 */
-'use strict';
 
 var fs = require('fs-extra'),
 	inquirer = require('inquirer'),
-	sys = require('sys'),
 	exec = require('child_process').exec,
+	commons = require('./tasks/commons'),
+	cfg = require('./gulp-config.json'),
 	chalk = require('chalk');
 
-var folders = {app:'APP',cordova:'CORDOVA'},
-	questions = [];
+var questions = [];
 
-
-console.log(chalk.black.bgGreen('                                                                                               '));
-console.log(chalk.black.bgGreen('  ╔═════════════════════════════════════════════════════════════════════════════════════════╗  '));
-console.log(chalk.black.bgGreen('  ║ * Welcome to instalation of POWER-LOADER, please read the readme.md before install it * ║  '));
-console.log(chalk.black.bgGreen('  ╚═════════════════════════════════════════════════════════════════════════════════════════╝  '));
-console.log(chalk.black.bgGreen('                                                                                               '));
+console.logGreen('                                                                                               ');
+console.logGreen('  ╔═════════════════════════════════════════════════════════════════════════════════════════╗  ');
+console.logGreen('  ║ * Welcome to instalation of POWER-LOADER, please read the readme.md before install it * ║  ');
+console.logGreen('  ╚═════════════════════════════════════════════════════════════════════════════════════════╝  ');
+console.logGreen('                                                                                               ');
 console.log('');
 
 //questions tutorial: http://enzolutions.com/articles/2014/09/08/how-to-create-an-interactive-command-in-node-js/
@@ -45,15 +43,15 @@ var cordova = [{
 },{
 	when: function(r) {return r.cordova;},
 	type: 'input',
+	name: 'main',
+	message: 'Name:',
+	default: 'HelloWorld'
+},{
+	when: function(r) {return r.main;},
+	type: 'input',
 	name: 'domain',
 	message: 'Package:',
 	default: 'com.example.hello'
-},{
-	when: function(r) {return r.domain;},
-	type: 'input',
-	name: 'main',
-	message: 'Main Class:',
-	default: 'HelloWorld'
 }];
 
 questions = questions.concat(cordova);
@@ -107,21 +105,20 @@ inquirer.prompt(questions, function( answers ) {
 	//console.dir(answers);
 
 	if (answers.install){
-		fs.copySync(cfg.folders.template, '../');
+		fs.copySync(cfg.app.folders.template, '../');
 		fs.outputJSONSync('../gulp-config-local.json',{});
-
 		if (answers.cordova) {
 			console.log(chalk.black.bgYellow('Cordova is instaling...'));
 
-			exec('cordova create '+folders.cordova+' '+ answers.domain +' '+ answers.main,{cwd:'../'+ folders.app +'/'},
+			exec('cordova create '+cfg.app.folders.cordova+' '+ answers.domain +' '+ answers.main,{cwd:'../'+ cfg.app.folders.app +'/'},
 				function (error, stdout, stderr) {
 
 				if (error !== null) {
-					console.log(chalk.black.bgRed(stdout));
-					console.log(chalk.black.bgRed('stderr: ' + stderr));
-					console.log(chalk.black.bgRed('exec error: ' + error));
+					console.logRed(stdout);
+					console.logRed('stderr: ' + stderr);
+					console.logRed('exec error: ' + error);
 				} else {
-					console.log(chalk.black.bgGreen(stdout));
+					console.logGreen(stdout);
 
 					var packageJson = '../package.json';
 					var pkg = require(packageJson);
@@ -144,15 +141,15 @@ inquirer.prompt(questions, function( answers ) {
 
 function installCordovaPl(text, pl, cb){/* plugins and platforms */
 	if (pl.length>0){
-		exec('cordova '+ text +' add '+ pl.join(' '), {cwd:'../'+ folders.app +'/'+folders.cordova},
+		exec('cordova '+ text +' add '+ pl.join(' '), {cwd:'../'+ cfg.app.folders.app +'/'+cfg.app.folders.cordova},
 			function (error, stdout, stderr) {
 
 				if (error !== null) {
-					console.log(chalk.black.bgRed(stdout));
-					console.log(chalk.black.bgRed('stderr: ' + stderr));
-					console.log(chalk.black.bgRed('exec error: ' + error));
+					console.logRed(stdout);
+					console.logRed('stderr: ' + stderr);
+					console.logRed('exec error: ' + error);
 				} else {
-					console.log(chalk.black.bgGreen(stdout));
+					console.logGreen(stdout);
 				}
 				cb();
 			});
@@ -162,7 +159,7 @@ function installCordovaPl(text, pl, cb){/* plugins and platforms */
 }
 
 function finalCordova(){
-	var www = '../' + folders.app + '/' + folders.cordova + '/www';
+	var www = '../' + cfg.app.folders.app + '/' + cfg.app.folders.cordova + '/www';
 	fs.deleteSync(www);
 	fs.mkdirsSync(www);
 }

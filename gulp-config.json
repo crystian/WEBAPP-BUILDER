@@ -60,6 +60,14 @@
 		"Error in obliteration rast"
 	],
 
+	"app": {
+		"folders":{
+			"app": "APP",
+			"cordova": "CORDOVA",
+			"www": "APP/WWW",
+			"template": "!rootTpl"
+		}
+	},
 
 	"loader":{
 		"name": "Power loader",
