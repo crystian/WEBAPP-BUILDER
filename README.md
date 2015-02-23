@@ -14,6 +14,12 @@ Tiempo estimado de desarrollo de todo esto, con multiples pruebas y demas: 3 mes
 
 ---
 
+## Tasks:
+
+gulp serve
+gulp serve:build
+
+
 ## Requisitos
 
 * Node/npm
@@ -39,33 +45,25 @@ Es necesario que todo este en el path, para ayudarte en esto creen un bat (windo
 	`git clone https://github.com/crystian/LOADER.git LOADER`
 * Ingrear a carpeta LOADER
 * Instalar dependencias de node: `npm i`
+	(en windows da un error que no puede instalar "weak", no te preocupes)
 * Deploy/instalacion de carpetas: `node installer`
+	Esto te arma la estructura necesaria pra el proyecto "wrapeandolo"
+	Con este hermoso wizard instalas lo que necesitas para el proyecto.
+	Si selecionas cordova tenes que tenerlo instalado previamente.
+* Hacer un build completo: `gulp build:full`
 
 
+## Pendientes:
 
-* prepara el directorio padre para contener/wrappear la app (usa la carpeta !rootTpl como template)
-* instala cordova
-/ todo esto con un hermoso wizard
+### revisar:
+* offline
+* nightmare, cada perfil
 
-gulp i
-
-
-
-
-revisar:
-offline
-nightmare, cada perfil
-mejorar el json de config
-copy de fs-extra
-
-Pendientes:
-appcache!
-estilos de loader deben estar primero
-mover merge de gulpfile to commons
-weinre
-test
-ci
-cache de apps internamente
+### TODO:
+* appcache!
+* weinre
+* test
+* ci
 cambiar nombre de repo
 
 ---
