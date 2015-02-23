@@ -1,13 +1,19 @@
 {
   "name": "Numbers!",
   "author": "Crystian (Cristian Bietti) @crystian",
+  "repository": "https://github.com/crystian/NUMBERS.git",
   "version": "0.0.1",
   "dependencies": {
+    "chalk": "^0.5.1",
     "del": "^1.1.1",
+    "extend": "^2.0.0",
     "gulp": "^3.8.11",
+    "gulp-debug": "^2.0.0",
     "gulp-util": "^3.0.3",
     "gulp-webserver": "^0.9.0",
     "require-dir": "^0.1.0",
     "run-sequence": "^1.0.2"
-  }
+  },
+  "domain": "com.languagesgym.numbers",
+  "mainClass": "Numbers"
 }

@@ -4,6 +4,7 @@
 
 var gulp = require('gulp'),
 	requireDir = require('require-dir'),
+	extend = require('extend'),
 	gutil = require('gulp-util');
 
 requireDir('./tasks');
@@ -11,10 +12,10 @@ requireDir('./tasks');
 
 //merge between default and specify:
 try{
-	global.cfg = merge(
-		require('LOADER/gulp-config-master.json'),
-		require('../gulp-config.json'),
-		require('../gulp-config-local.json')
+	global.cfg = extend(true, {},
+		require('./LOADER/gulp-config.json'),
+		require('./gulp-config.json'),
+		require('./gulp-config-local.json')
 	);
 } catch (e){
 	console.log('Do you run installer?, There are some problems with gulp-config*, check those please');
@@ -23,14 +24,10 @@ try{
 
 global.cfg.pkg = require('./package.json');
 
-//TASK ON tasks.js
+//redefine:
+global.cfg.folders.cordovaFull = global.cfg.folders.app +'/'+ global.cfg.folders.cordova;
+global.cfg.folders.wwwFull = global.cfg.folders.app +'/'+ global.cfg.folders.www;
+global.cfg.folders.tempFull = global.cfg.folders.build +'/'+ global.cfg.folders.temp;
+global.cfg.folders.loaderDist = global.cfg.folders.loader +'/'+ global.cfg.folders.build;
 
-//be careful, no funciona con hijos, solo con parents directos
-function merge(root){
-	for ( var i = 1; i < arguments.length; i++ ){
-		for ( var key in arguments[i] ){
-			root[key] = arguments[i][key];
-		}
-	}
-	return root;
-}
+//TASK ON tasks.js
