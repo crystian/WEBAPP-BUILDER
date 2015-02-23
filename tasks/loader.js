@@ -25,7 +25,7 @@ var gulp = require('gulp'),
 	gutil = require('gulp-util');
 
 
-gulp.task('make:loader', ['make:loader:js'],  function (cb) {
+gulp.task('make:loader', ['make:loader:js', 'make:loader:css'],  function (cb) {
 	var htmlminOptions = {
 		removeComments: true,
 		collapseWhitespace: true,
@@ -114,8 +114,7 @@ function jsMaker(stream) {
 	);
 }
 
-//TODO move makecss to main task
-gulp.task('make:loader:js', ['make:loader:css'],  function () {
+gulp.task('make:loader:js',  function () {
 	var releasePostName = (global.cfg.loader.release) ? 'min.' : '';
 	//libs
 	var libs = [
@@ -206,11 +205,9 @@ gulp.task('make:loader:css', ['css:sass'],  function () {
 
 
 gulp.task('css:sass', function (cb) {
-	'use strict';
-
 	runSequence(
 		'css:loader',
-		'css:loadingTpl',
+		'css:loadings',
 		cb);
 });
 
@@ -218,6 +215,6 @@ gulp.task('css:loader', function () {
 	return commons.sassfixer(global.cfg.folders.www + '/css/*.scss',global.cfg.folders.www +'/css');
 });
 
-gulp.task('css:loadingTpl', function () {
+gulp.task('css:loadings', function () {
 	return commons.sassfixer(global.cfg.folders.www + '/loading/**/*.scss',global.cfg.folders.www +'/loading');
 });

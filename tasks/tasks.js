@@ -7,29 +7,25 @@ var gulp = require('gulp'),
 	runSequence = require('run-sequence'),
 	gutil = require('gulp-util');
 
-gulp.task('i', ['install']);
-gulp.task('install', ['bowerify']);//install
+gulp.task('default', ['build:fast']);
 
-gulp.task('default', ['build']);
+gulp.task('build:full', function (cb) {
+	runSequence(
+		'make:base',
+		'build:fast',
+	cb);
+});
 
-gulp.task('build', function (cb) {
+gulp.task('build:fast', function (cb) {
 	runSequence(
 		'remove:build',
 		'make:loader',
 		'remove:temp',
-		cb);
+	cb);
 });
 
-gulp.task('build:full', function (cb) {
-	runSequence(
-		'bowerify',
-		'build',
-		cb);
-});
 
 gulp.task('release', function (cb) {
-	'use strict';
-
 	if (!global.cfg.loader.release) {
 		console.logRed('Variable "release" in gulp-config on "false", you will change it if you want a release');
 		process.exit(1);
@@ -38,7 +34,7 @@ gulp.task('release', function (cb) {
 	runSequence(
 		'build:full',
 		'test:loader',
-		cb);
+	cb);
 });
 
 gulp.task('css', ['css:loader']); //just an alias

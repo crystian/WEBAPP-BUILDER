@@ -16,8 +16,20 @@ Tiempo estimado de desarrollo de todo esto, con multiples pruebas y demas: 3 mes
 
 ## Tasks:
 
-gulp serve
-gulp serve:build
+* `gulp serve` server directo del directorio de desarrollo (www)
+* `gulp serve:build` server del dir build
+* `gulp build:fast` Tarea por defecto. Build rapido, sin bower, solo build
+* `gulp build:full` Bower y build completo
+* `gulp release` es un full pero con tests de user-agents y otros de compatibilidad, recomendado antes de una release de la app producto.
+* `gulp css` force para generar el css, especial para un watcher
+* `gulp servew` serve con watch de config e index.tpl, vuelve a ejectuar el `make:base`
+
+**NOTAS:**
+
+Si se modifican los archivos de configuracion (gulp-config.json), es necesario hacer un `gulp build:full`
+
+## Config:
+templates
 
 
 ## Requisitos
@@ -26,6 +38,7 @@ gulp serve:build
 * Gulp
 * Bower
 * Git
+* Ruby
 
 **Opcionales:**
 
@@ -58,13 +71,28 @@ Es necesario que todo este en el path, para ayudarte en esto creen un bat (windo
 ### revisar:
 * offline
 * nightmare, cada perfil
+* buscar esos inject asincronos del build, ver de que son y sincronizarlo
 
 ### TODO:
-* appcache!
+* appcache
 * weinre
 * test
 * ci
-cambiar nombre de repo
+* si no se instala bootstrap, instalar normalized
+
+## Guideline
+### gulp tasks
+* nomenclature: action:what
+
+
+---
+
+## CHANGELOG:
+23/02/15 v0.0.1
+Terminado, primera version
+
+01/02/15
+Recuperando files y codigo de projecto languages gym para reutilizar en este
 
 ---
 

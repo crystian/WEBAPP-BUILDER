@@ -6,15 +6,13 @@ var gulp = require('gulp'),
 	//debug = require('gulp-debug'),
 	webserver = require('gulp-webserver');
 
-gulp.task('servew', ['serve','watch']);
+gulp.task('servew', ['serve','watch:tpl']);
 
-gulp.task('watch', function() {
-	gulp.watch([global.cfg.folders.www +'/index.tpl.html','gulp-config-default.json'], ['bowerify']);
+gulp.task('watch:tpl', function() {
+	gulp.watch([global.cfg.folders.www +'/index.tpl.html','gulp-config.json'], ['make:base']);
 });
 
 gulp.task('serve', function() {
-	'use strict';
-
 	console.logGreen('Remember, this is the url: http://'+global.cfg.ip+':'+global.cfg.ports.serve+'/www/index.html');
 
 	gulp.src('.')
@@ -28,9 +26,7 @@ gulp.task('serve', function() {
 });
 
 
-gulp.task('serve:build', function() {
-	'use strict';
-
+gulp.task('serve:build', ['build:fast'], function() {
 	console.logGreen('Remember, this is the url: http://'+global.cfg.ip+':'+global.cfg.ports.build+'/index.html');
 
 	gulp.src(global.cfg.folders.build)
@@ -39,6 +35,17 @@ gulp.task('serve:build', function() {
 			port: global.cfg.ports.build,
 			//fallback: 'index.html',
 			livereload: false,
+			open: false
+		}));
+});
+
+gulp.task('serve:nightmare', function() {
+	return gulp.src(global.cfg.folders.build)
+		.pipe(webserver({
+			host: global.cfg.ip,
+			port: global.cfg.ports.nightmare,
+			livereload: false,
+			//fallback: 'index.html',
 			open: false
 		}));
 });

@@ -11,19 +11,6 @@ var gulp = require('gulp'),
 	async = require('async'),
 	gutil = require('gulp-util');
 
-gulp.task('serve:nightmare', function() {
-	'use strict';
-
-	return gulp.src(global.cfg.folders.build)
-		.pipe(webserver({
-			host: global.cfg.ip,
-			port: global.cfg.ports.nightmare,
-			livereload: false,
-			fallback: 'index.html',
-			open: false
-		}));
-});
-
 gulp.task('test:loader',['serve:nightmare'], function(cb) {
 	'use strict';
 

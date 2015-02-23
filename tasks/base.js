@@ -14,10 +14,24 @@ var gulp = require('gulp'),
 	inspect = require('util').inspect,
 	cheerio = require('gulp-cheerio');
 
-//necesitaba hacer el minificado despues de la bajada, me complico la vida,
-// esto fue lo mejor que me quedo, luego de varias horas ...
-//problemas con syncronismo y argumentos
-gulp.task('bower:make:libsmin', ['bowerDownload','makeIndex','makeConfig'], function(cb) {
+
+gulp.task('make:base', ['make:bower','make:index','generate:config'], function() {
+	//replace references on index.html
+	return gulp.src(global.cfg.folders.www +'/index.html')
+		//.pipe(debug({verbose: true}))
+		.pipe(commons.injectContent(global.cfg.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.html','loadingHtml'))
+		.pipe(inject(gulp.src(global.cfg.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.css', {read: false}), {name: 'loadingCss', relative:'true'}))
+		.pipe(inject(gulp.src(global.cfg.varJs, {read: false}), {name: 'bower', relative:'true'}))
+		.pipe(inject(gulp.src(global.cfg.varCss, {read: false}), {name: 'bower', relative:'true'}))
+		.pipe(gulp.dest(global.cfg.folders.www));
+});
+
+/*
+ necesitaba hacer el minificado despues de la bajada, me complico la vida...,
+ esto fue lo mejor que me quedo, luego de varias horas ...
+ problemas con syncronismo y argumentos
+*/
+gulp.task('make:bower', ['download:bower'], function(cb) {
 
 	var i = 0,
 		len = global.cfg.varLibsToMin.length;
@@ -44,19 +58,7 @@ gulp.task('bower:make:libsmin', ['bowerDownload','makeIndex','makeConfig'], func
 
 });
 
-
-gulp.task('bowerify', ['bower:make:libsmin'], function() {
-	//replace references on index.html
-	return gulp.src(global.cfg.folders.www +'/index.html')
-		//.pipe(debug({verbose: true}))
-		.pipe(commons.injectContent(global.cfg.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.html','loadingHtml'))
-		.pipe(inject(gulp.src(global.cfg.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.css', {read: false}), {name: 'loadingCss', relative:'true'}))
-		.pipe(inject(gulp.src(global.cfg.varJs, {read: false}), {name: 'bower', relative:'true'}))
-		.pipe(inject(gulp.src(global.cfg.varCss, {read: false}), {name: 'bower', relative:'true'}))
-		.pipe(gulp.dest(global.cfg.folders.www));
-});
-
-gulp.task('makeIndex', ['copy:indexTpl'], function () {
+gulp.task('make:index', ['copy:index'], function () {
 	return gulp.src(global.cfg.folders.www + '/index.html')
 		//.pipe(debug({verbose: true}))
 		.pipe(cheerio({
@@ -71,18 +73,18 @@ gulp.task('makeIndex', ['copy:indexTpl'], function () {
 			}
 		}))
 		.pipe(replace('<!--msgTpl-->','<!-- REMEMBER, this file is generated, don\'t change it, because you can lost it -->'))
-		.on('error', console.error.bind(console))
+		//.on('error', console.error.bind(console))
 		.pipe(gulp.dest(global.cfg.folders.www));
 });
 
-gulp.task('copy:indexTpl',function () {
+gulp.task('copy:index',function () {
 	return gulp.src(global.cfg.folders.www + '/index.tpl.html')
-		.on('error', console.error.bind(console))
+		//.on('error', console.error.bind(console))
 		.pipe(rename('index.html'))
 		.pipe(gulp.dest(global.cfg.folders.www));
 });
 
-gulp.task('makeConfig', function (cb) {
+gulp.task('generate:config', function (cb) {
 	//variables shared between loader build and loader app
 	var json = {};
 	json.release = global.cfg.loader.release;//be carefull, it's from loader!
@@ -155,11 +157,11 @@ gulp.task('makeConfig', function (cb) {
 		});
 });
 
-gulp.task('bowerDownload',['bowerGenerator'], function() {
+gulp.task('download:bower',['generator:bower'], function() {
 	return bowerify({ directory: './'+ global.cfg.folders.bower});
 });
 
-gulp.task('bowerGenerator',['parseInstaller'],  function(cb) {
+gulp.task('generator:bower',['parse:bower'],  function(cb) {
 	//update bower.json file
 	fs.writeFile('bower.json', JSON.stringify(global.cfg.varBower, null, '\t'), function (err) {
 		if (err) {
@@ -173,7 +175,7 @@ gulp.task('bowerGenerator',['parseInstaller'],  function(cb) {
 });
 
 
-gulp.task('parseInstaller', function(cb) {
+gulp.task('parse:bower', function(cb) {
 	var bower = Object.keys(global.cfg.loader.bower),
 		ambient = global.cfg.loader.release ? 'prod' : 'dev',
 		rJs = [],
@@ -249,8 +251,6 @@ gulp.task('parseInstaller', function(cb) {
 		}
 
 	}
-
-	inspect(libsToMin);
 
 	//horrible, I know
 	global.cfg.varLibsToMin = libsToMin;
