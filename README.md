@@ -24,6 +24,25 @@ Tiempo estimado de desarrollo de todo esto, con multiples pruebas y demas: 3 mes
 * `gulp css` force para generar el css, especial para un watcher
 * `gulp servew` serve con watch de config e index.tpl, vuelve a ejectuar el `make:base`
 
+## Features:
+
+Todo en un unico archivo!
+
+* LIBS: platform (requerida), bootstrap, fastClick, jquery, lz-string, swiper (opcionales)
+* Todo ocupa menos 400k, mientras baja el archivo y siguientes queda mostrandose un lindo loading
+* Posibilidad de hacer distintos loading (CSS)
+* Multiples request o solo uno, y este comprimido con lz-string
+* Modo release y absolutamente minificado para ocultar info y otros
+* Configuracion independiente y hererable
+* Sistema de deploy con proyecto template
+* Deteccion de browser (platform)
+* Sistema de filtrado de compatibilidades
+* Preparado y listo para cordova
+* Autominificado de librerias que no lo contengan
+* Test de UserAgent y compatibilidades
+* Preparado como proyecto independiente y actualizable
+* Otros modulos: Analytics, loading screens, deteccion de languages, otros.
+
 ## Instrucciones de uso
 
 La idea es de un wrapper, todo el contenido del loader, estara en la carpeta LOADER, a su vez contiene un template de un proyecto (AppTemplate) que se copia en el parent en la instalacion (`node installer`), con esto quedan los archivos listos para ser modificados, salvo la carpeta LOADER que seguira siendo otro proyecto de otro repo.

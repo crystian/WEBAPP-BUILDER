@@ -25,7 +25,8 @@ var gulp = require('gulp'),
 	gutil = require('gulp-util');
 
 
-gulp.task('make:loader', ['make:loader:js', 'make:loader:css'],  function (cb) {
+gulp.task('make:loader', ['make:loader:files'],  function (cb) {
+
 	var htmlminOptions = {
 		removeComments: true,
 		collapseWhitespace: true,
@@ -64,6 +65,10 @@ gulp.task('make:loader', ['make:loader:js', 'make:loader:css'],  function (cb) {
 		.pipe(gulp.dest(global.cfg.folders.build));
 	}
 
+	return stream;
+});
+
+gulp.task('make:loader:files', ['make:loader:js', 'make:loader:css'], function (cb) {
 
 	function callbackFn() {
 		fs.copySync(global.cfg.folders.template, global.cfg.folders.build);
@@ -81,7 +86,7 @@ gulp.task('make:loader', ['make:loader:js', 'make:loader:css'],  function (cb) {
 			dest: '../'+global.cfg.folders.template +'/'+ global.cfg.landing.finalFile
 		};
 
-		runSequence('make:onRequest',callbackFn);
+		runSequence('make:onRequest', callbackFn);
 
 	} else {
 		callbackFn();
