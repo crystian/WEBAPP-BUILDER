@@ -2,7 +2,7 @@
 	"name": "app name",
 	"version": "0.0.0",
 	"os": "Pc",
-	"ip": "10.0.1.2",
+	"ip": "127.0.0.1",
 
 	"cordova": true,
 	"compress": true,
@@ -10,13 +10,13 @@
 
 	"compatibilityFirst": "\n\treturn !!(window.document.querySelector &&\n\twindow.console &&window.document.addEventListener &&\n\t(window.document.getElementsByTagName('body')[0]).classList &&\n\twindow.localStorage &&\n\twindow.navigator &&\n\twindow.XMLHttpRequest &&\n\twindow.applicationCache &&\n\twindow.document.createEvent &&\n\tarr.map &&\n\tarr.every);\n\t",
 	"compatibilityMatrix": {
-		"ie": [9.9, 10.9, 11.0],
-		"firefox": [23.9, 25.9, 26.0],
-		"android": [3.9, 3.9, 4.0],
-		"chrome": [17.9, 18.9, 19.0],
-		"chromeMobile": [3.9, 3.9, 4.0],
-		"safari": [6.0, 6.0, 7.0],
-		"ios": [6, 6, 7]
+		"ie": [9.9, 10.9],
+		"firefox": [23.9, 25.9],
+		"android": [3.9, 3.9],
+		"chrome": [17.9, 18.9],
+		"chromeMobile": [3.9, 3.9],
+		"safari": [6.0, 6.0],
+		"ios": [6, 6]
 	},
 
 	"analytics": {
@@ -65,9 +65,17 @@
 			"app": "APP",
 			"cordova": "CORDOVA",
 			"www": "APP/WWW",
-			"template": "!rootTpl"
+			"template": "AppTemplate"
 		}
 	},
+
+	"landing":{
+		"html": "app.html",
+		"js": "app.js",
+		"css": "app.css",
+		"finalFile": "magic"
+	},
+
 
 	"loader":{
 		"name": "Power loader",
@@ -103,14 +111,7 @@
 			"temp": "build/.tmp",
 			"screens": "build/screens",
 			"loadings": "www/loading",
-			"template": "!rootTpl/APP/WWW"
-		},
-
-		"landing":{
-			"html": "app.html",
-			"js": "app.js",
-			"css": "app.css",
-			"finalFile": "magic"
+			"template": "AppTemplate/APP/WWW"
 		},
 
 		"bower": {

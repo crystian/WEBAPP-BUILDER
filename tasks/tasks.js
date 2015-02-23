@@ -9,6 +9,7 @@ var gulp = require('gulp'),
 
 gulp.task('default', ['build:fast']);
 
+gulp.task('full',['build:full']);
 gulp.task('build:full', function (cb) {
 	runSequence(
 		'make:base',

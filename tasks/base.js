@@ -125,10 +125,10 @@ gulp.task('generate:config', function (cb) {
 	};
 
 	json.landing = {
-		'html': global.cfg.loader.landing.html,
-		'js': global.cfg.loader.landing.js,
-		'css': global.cfg.loader.landing.css,
-		'finalFile': global.cfg.loader.landing.finalFile
+		'html': global.cfg.landing.html,
+		'js': global.cfg.landing.js,
+		'css': global.cfg.landing.css,
+		'finalFile': global.cfg.landing.finalFile
 	};
 
 	var compatibilityTpl =

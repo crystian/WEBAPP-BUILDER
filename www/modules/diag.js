@@ -78,7 +78,7 @@ loader.diag = (function (window) {
 			compatibility = 0;
 		} else if (version <= matrixBrowser[1]) {
 			compatibility = 1;
-		} else if (version >= matrixBrowser[2]) {
+		} else if (version > matrixBrowser[1]) {
 			compatibility = 2;
 		}
 

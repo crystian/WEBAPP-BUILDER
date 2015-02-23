@@ -78,7 +78,7 @@ gulp.task('make:loader', ['make:loader:js', 'make:loader:css'],  function (cb) {
 			js: global.cfg.folders.template +'/app.js',
 			css: global.cfg.folders.template +'/app.css',
 			html: global.cfg.folders.template +'/app.html',
-			dest: '../'+global.cfg.folders.template +'/'+ global.cfg.loader.landing.finalFile
+			dest: '../'+global.cfg.folders.template +'/'+ global.cfg.landing.finalFile
 		};
 
 		runSequence('make:onRequest',callbackFn);
