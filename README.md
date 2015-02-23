@@ -26,8 +26,7 @@ Tiempo estimado de desarrollo de todo esto, con multiples pruebas y demas: 3 mes
 
 ## Features:
 
-Todo en un unico archivo!
-
+* **Todo el producto termina en un unico archivo!**
 * LIBS: platform (requerida), bootstrap, fastClick, jquery, lz-string, swiper (opcionales)
 * Todo ocupa menos 400k, mientras baja el archivo y siguientes queda mostrandose un lindo loading
 * Posibilidad de hacer distintos loading (CSS)
