@@ -17,7 +17,7 @@ var gulp = require('gulp'),
 
 gulp.task('make:base', ['make:bower','make:index','generate:config'], function() {
 	//replace references on index.html
-	return gulp.src(global.cfg.folders.www +'/index.html')
+	return gulp.src(global.cfg.folders.www +'/'+global.cfg.files.index)
 		//.pipe(debug({verbose: true}))
 		.pipe(commons.injectContent(global.cfg.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.html','loadingHtml'))
 		.pipe(inject(gulp.src(global.cfg.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.css', {read: false}), {name: 'loadingCss', relative:'true'}))
@@ -59,7 +59,7 @@ gulp.task('make:bower', ['download:bower'], function(cb) {
 });
 
 gulp.task('make:index', ['copy:index'], function () {
-	return gulp.src(global.cfg.folders.www + '/index.html')
+	return gulp.src(global.cfg.folders.www + '/'+global.cfg.files.index)
 		//.pipe(debug({verbose: true}))
 		.pipe(cheerio({
 			run: function ($) {
@@ -80,7 +80,7 @@ gulp.task('make:index', ['copy:index'], function () {
 gulp.task('copy:index',function () {
 	return gulp.src(global.cfg.folders.www + '/index.tpl.html')
 		//.on('error', console.error.bind(console))
-		.pipe(rename('index.html'))
+		.pipe(rename(global.cfg.files.index))
 		.pipe(gulp.dest(global.cfg.folders.www));
 });
 

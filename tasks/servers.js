@@ -13,7 +13,7 @@ gulp.task('watch:tpl', function() {
 });
 
 gulp.task('serve', function() {
-	console.logGreen('Remember, this is the url: http://'+global.cfg.ip+':'+global.cfg.ports.serve+'/www/index.html');
+	console.logGreen('Remember, this is the url: http://'+global.cfg.ip+':'+global.cfg.ports.serve+'/www/'+global.cfg.files.index);
 
 	gulp.src('.')
 		.pipe(webserver({
@@ -27,7 +27,7 @@ gulp.task('serve', function() {
 
 
 gulp.task('serve:build', ['build:fast'], function() {
-	console.logGreen('Remember, this is the url: http://'+global.cfg.ip+':'+global.cfg.ports.build+'/index.html');
+	console.logGreen('Remember, this is the url: http://'+global.cfg.ip+':'+global.cfg.ports.build+'/'+global.cfg.files.index);
 
 	gulp.src(global.cfg.folders.build)
 		.pipe(webserver({

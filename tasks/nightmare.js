@@ -201,7 +201,7 @@ gulp.task('test:loader',['serve:nightmare'], function(cb) {
 			.useragent(b.ua)
 			.viewport(b.width, b.height)
 			//.on('error', gutil.log)
-			.goto('http://' + global.cfg.ip + ':' + global.cfg.ports.nightmare + '/index.html')
+			.goto('http://' + global.cfg.ip + ':' + global.cfg.ports.nightmare + '/'+global.cfg.files.index)
 			.wait(1000)
 			.screenshot(global.cfg.folders.screens + '/' + b.name + '.jpg')
 			.evaluate(function () {return window;},

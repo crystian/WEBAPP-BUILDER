@@ -35,7 +35,7 @@ gulp.task('make:loader', ['make:loader:files'],  function (cb) {
 		removeOptionalTags: false
 	};
 
-	var stream = gulp.src(global.cfg.folders.www + '/index.html')
+	var stream = gulp.src(global.cfg.folders.www + '/'+global.cfg.files.index)
 		//.pipe(debug({verbose: true}))
 		//.on('error', console.error.bind(console))
 		.pipe(htmlreplace())
@@ -57,7 +57,7 @@ gulp.task('make:loader', ['make:loader:files'],  function (cb) {
 		This is ok, because it make another file equals to index but one change,
 		I prefer it than run again all process to make other file
 		*/
-		stream.pipe(rename('index-cordova.html'))
+		stream.pipe(rename(global.cfg.files.indexCordova))
 		.pipe(gif(global.cfg.loader.release,
 			replace(',isCordovaDevice:!1,', ',isCordovaDevice:1,'),
 			replace('"isCordovaDevice": false,', '"isCordovaDevice": true,')

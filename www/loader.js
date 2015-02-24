@@ -45,7 +45,7 @@ var loader = (function(){
 			//carga asincrona, cuando llegue y se parsee dispara un deviceReady y lo mando a cordovaReady
 			doc.addEventListener('deviceready', _loadAsync, false);
 
-			utils.getJsAsync('cordova.js');
+			utils.getJs('cordova.js');
 
 		} else {
 			if (platform.os.toString().match(/(iPhone|iPod|iPad|iOS|Android|BlackBerry)/)) {
@@ -122,7 +122,7 @@ var loader = (function(){
 
 	function _loadApp() {
 		//just a dummy:
-		var path = (cfg.loader.build) ? '' : '../'+cfg.loader.pathTpl;
+		var path = (cfg.loader.build) ? '.' : '../'+cfg.loader.pathTpl;
 
 		//real case:
 		if( cfg.loader.oneRequest ){
