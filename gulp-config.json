@@ -62,7 +62,6 @@
 
 	"app": {
 		"folders":{
-			"app": "APP",
 			"cordova": "CORDOVA",
 			"www": "APP/WWW",
 			"template": "AppTemplate"
