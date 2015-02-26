@@ -117,7 +117,8 @@
 			"temp": "build/.tmp",
 			"screens": "build/screens",
 			"loadings": "www/loading",
-			"template": "AppTemplate/APP/WWW"
+			"template": "AppTemplate/APP/WWW",
+			"bootstrapDist": "bootstrap/dist"
 		},
 
 		"bower": {
@@ -155,12 +156,10 @@
 				"js-dev": ["bootstrap/dist/js/bootstrap.js"],
 				"js-prod": ["bootstrap/dist/js/bootstrap.min.js"],
 				"css-dev": [
-					"bootstrap/dist/css/bootstrap.css",
-					"bootstrap/dist/css/bootstrap-theme.css"
+					"bootstrap/dist/css/bootstrap.css"
 				],
 				"css-prod": [
-					"bootstrap/dist/css/bootstrap.min.css",
-					"bootstrap/dist/css/bootstrap-theme.min.css"
+					"bootstrap/dist/css/bootstrap.min.css"
 				]
 			}
 		}

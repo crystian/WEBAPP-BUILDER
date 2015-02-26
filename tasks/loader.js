@@ -4,12 +4,11 @@
 
 var gulp = require('gulp'),
 	//debug = require('gulp-debug'),
-	commons = require('./commons'),
+	shared = require('./shared'),
 	gif = require('gulp-if'),
 	htmlreplace = require('gulp-html-replace'),
 	htmlmin = require('gulp-htmlmin'),
 	concat = require('gulp-concat'),
-	uglify = require('gulp-uglify'),
 	minifycss = require('gulp-minify-css'),
 	rename = require('gulp-rename'),
 	streamqueue =require('streamqueue'),
@@ -20,12 +19,11 @@ var gulp = require('gulp'),
 	footer = require('gulp-footer'),
 	strip = require('gulp-strip-comments'),
 	runSequence = require('run-sequence'),
-	removeCode = require('gulp-remove-code'),
 	fs = require('fs-extra'),
 	gutil = require('gulp-util');
 
 
-gulp.task('make:loader', ['make:loader:files'],  function (cb) {
+gulp.task('make:loader', ['make:loader:files'],  function () {
 
 	var htmlminOptions = {
 		removeComments: true,
@@ -37,10 +35,10 @@ gulp.task('make:loader', ['make:loader:files'],  function (cb) {
 
 	var stream = gulp.src(global.cfg.folders.www + '/'+global.cfg.files.index)
 		//.pipe(debug({verbose: true}))
-		//.on('error', console.error.bind(console))
+		//.on('error', gutil.log)
 		.pipe(htmlreplace())
-		.pipe(commons.injectContent(global.cfg.folders.temp +'/-compiledLoader.css','loaderCss','style'))
-		.pipe(commons.injectContent(global.cfg.folders.temp +'/-compiledLoader.js','loaderJs','script'))
+		.pipe(shared.injectContent(global.cfg.folders.temp +'/-compiledLoader.css','loaderCss','style'))
+		.pipe(shared.injectContent(global.cfg.folders.temp +'/-compiledLoader.js','loaderJs','script'))
 		.pipe(gif(global.cfg.loader.release, htmlmin(htmlminOptions)))
 
 		//header and footers:
@@ -68,15 +66,14 @@ gulp.task('make:loader', ['make:loader:files'],  function (cb) {
 	return stream;
 });
 
-gulp.task('make:loader:files', ['make:loader:js', 'make:loader:css'], function (cb) {
+gulp.task('make:loader:files', ['make:loader:js', 'make:loader:css', 'copy:fonts'], function (cb) {
 
-	function callbackFn() {
+	function callbackFn(_cb) {
 		fs.copySync(global.cfg.folders.template, global.cfg.folders.build);
-		cb();
+		_cb();
 	}
 
 	if (global.cfg.loader.oneRequest) {
-
 		//landing
 		global.cfg.makeOneRequestFile = {
 			name:'landing',
@@ -86,49 +83,26 @@ gulp.task('make:loader:files', ['make:loader:js', 'make:loader:css'], function (
 			dest: '../'+global.cfg.folders.template +'/'+ global.cfg.landing.finalFile
 		};
 
-		runSequence('make:onRequest', callbackFn);
+		runSequence('make:onRequest', function () {
+			callbackFn(cb);
+		});
 
 	} else {
-		callbackFn();
+		callbackFn(cb);
 	}
 
 });
-
-function jsMaker(stream) {
-	return stream
-		//.pipe(debug({verbose: true}))
-		.pipe(jshint())
-		.pipe(jshint.reporter('jshint-stylish'))
-		.pipe(jshint.reporter('fail'))
-
-		//just for "debugger" forgotens
-		.pipe(gif(cfg.loader.release, jshint({lookup:false, debug:false})))
-		.pipe(gif(cfg.loader.release, jshint.reporter('jshint-stylish')))
-		.pipe(gif(cfg.loader.release, jshint.reporter('fail')))
-
-		.pipe(removeCode({ production: cfg.loader.release }))
-		.pipe(gif(cfg.loader.release, uglify({
-			output:{
-				beautify: false
-			},
-			compress:{
-				sequences: true,
-				drop_console: false
-			}
-		}))
-	);
-}
 
 gulp.task('make:loader:js',  function () {
 	var releasePostName = (global.cfg.loader.release) ? 'min.' : '';
 	//libs
 	var libs = [
 		global.cfg.folders.bower + '/platform/platform.' + releasePostName + 'js',
-		global.cfg.loader.fastclick ? global.cfg.folders.bower + '/fastclick/lib/fastclick.' + releasePostName + 'js' : '',
-		global.cfg.loader.jquery ? global.cfg.folders.bower + '/jquery/dist/jquery.' + releasePostName + 'js' : '',
-		global.cfg.loader.bootstrap ? global.cfg.folders.bower + '/bootstrap/dist/js/bootstrap.' + releasePostName + 'js' : '',
+		global.cfg.loader.bower.fastclick ? global.cfg.folders.bower + '/fastclick/lib/fastclick.' + releasePostName + 'js' : '',
+		global.cfg.loader.bower.jquery ? global.cfg.folders.bower + '/jquery/dist/jquery.' + releasePostName + 'js' : '',
+		global.cfg.loader.bower.bootstrap ? global.cfg.folders.bower + '/bootstrap/dist/js/bootstrap.' + releasePostName + 'js' : '',
 		global.cfg.compress ? global.cfg.folders.bower + '/lz-string/libs/lz-string.' + releasePostName + 'js' : '',
-		global.cfg.loader.swiper ? global.cfg.folders.bower + '/swiper/dist/js/swiper.' + releasePostName + 'js' : ''
+		global.cfg.loader.bower.swiper ? global.cfg.folders.bower + '/swiper/dist/js/swiper.' + releasePostName + 'js' : ''
 	];
 	var libsMin = gulp.src(libs)
 			.pipe(gif(cfg.loader.release, strip({safe:false, block:false})));
@@ -143,7 +117,7 @@ gulp.task('make:loader:js',  function () {
 		.pipe(replace(/(\"build\".*\:[ ]?)(\w*)/,'$1true'))//just for index built
 		;
 
-	loaderScripts1Stream = jsMaker(loaderScripts1Stream);
+	loaderScripts1Stream = shared.jsMaker(loaderScripts1Stream);
 	//endheader script
 
 	//body script
@@ -166,22 +140,22 @@ gulp.task('make:loader:js',  function () {
 	var loaderScripts2Stream = gulp.src(loaderScripts2)
 		.pipe(gif(global.cfg.compress, replace('if(!loader.cfg.compress){return data;}//flagCompress','')));
 
-	loaderScripts2Stream = jsMaker(loaderScripts2Stream);
+	loaderScripts2Stream = shared.jsMaker(loaderScripts2Stream);
 	//endbody script
 
 	return streamqueue({ objectMode: true }, loaderScripts1Stream, libsMin, loaderScripts2Stream)
-		.on('error', console.error.bind(console))
+		.on('error', gutil.log)
 		.pipe(concat('/-compiledLoader.js',{newLine: ';'}))
 		.pipe(gulp.dest(global.cfg.folders.temp));
 });
 
-gulp.task('make:loader:css', ['css:sass'],  function () {
+gulp.task('make:loader:css', ['css:loader'],  function () {
 	var releasePostName = (global.cfg.loader.release) ? 'min.' : '';
 
 	var cssLib = [
-		global.cfg.loader.swiper ? global.cfg.folders.bower + '/swiper/dist/css/swiper.'+releasePostName+'css' : '',
-		global.cfg.loader.bootstrap ? global.cfg.folders.bower + '/bootstrap/dist/css/bootstrap.'+releasePostName+'css' : '',
-		global.cfg.loader.bootstrap ? global.cfg.folders.bower + '/bootstrap/dist/css/bootstrap-theme.'+releasePostName+'css ': ''
+		global.cfg.loader.bower.swiper ? global.cfg.folders.bower + '/swiper/dist/css/swiper.'+releasePostName+'css' : '',
+		global.cfg.loader.bower.bootstrap ? global.cfg.folders.bower + '/' + global.cfg.folders.bootstrapDist + '/css/bootstrap.'+releasePostName+'css' : ''
+		//global.cfg.loader.bootstrap ? global.cfg.folders.bower + '/bootstrap/dist/css/bootstrap-theme.'+releasePostName+'css ': ''
 	];
 
 	var cssLibToMin = [
@@ -195,6 +169,7 @@ gulp.task('make:loader:css', ['css:sass'],  function () {
 
 	return streamqueue({ objectMode: true },
 			gulp.src(cssLib)
+				.pipe(gif(global.cfg.loader.bower.bootstrap, replace('../fonts/glyphicons','fonts/glyphicons')))
 				.pipe(strip({safe:false, block:false})),
 			merge(
 				gulp.src(cssLoader),
@@ -203,23 +178,27 @@ gulp.task('make:loader:css', ['css:sass'],  function () {
 			.pipe(strip({safe:false, block:false}))
 			.pipe(gif(global.cfg.loader.release, minifycss()))
 		)
-		//.on('error', console.error.bind(console))
+		.on('error', gutil.log)
 		.pipe(concat('/-compiledLoader.css'))
 		.pipe(gulp.dest(global.cfg.folders.temp));
 });
 
-
-gulp.task('css:sass', function (cb) {
-	runSequence(
-		'css:loader',
-		'css:loadings',
-		cb);
+gulp.task('copy:fonts', function (cb) {
+	if(global.cfg.loader.bower.bootstrap){
+		fs.copySync(
+			global.cfg.folders.bower + '/' + global.cfg.folders.bootstrapDist +'/fonts',
+			global.cfg.folders.build + '/fonts'
+		);
+		console.logGreen('Bootstrap fonts copied');
+	}
+	cb();
 });
 
-gulp.task('css:loader', function () {
-	return commons.sassfixer(global.cfg.folders.www + '/css/*.scss',global.cfg.folders.www +'/css');
+gulp.task('css:loader', ['css:template'], function () {
+	return shared.sassfixer(global.cfg.folders.www + '/**/*.scss',global.cfg.folders.www);
 });
 
-gulp.task('css:loadings', function () {
-	return commons.sassfixer(global.cfg.folders.www + '/loading/**/*.scss',global.cfg.folders.www +'/loading');
+gulp.task('css:template', function () {
+	var path = global.cfg.folders.template;
+	return shared.sassfixer(path +'/*.scss',path)
 });

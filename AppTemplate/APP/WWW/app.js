@@ -2,9 +2,8 @@
  * Created by Crystian on 2/22/2015.
  */
 
-
-setTimeout(function () {
-	var a = document.getElementById('a');
-	a.innerHTML = 'lala';
+document.addEventListener('loaderFinished', function () {
+	var test = document.getElementById('text');
+	test.innerHTML = 'This is a test injected with javascript';
 	loader.hide();
-},200);
+});

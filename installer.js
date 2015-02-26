@@ -62,8 +62,8 @@ var cordovaPlatform = [{
 	message: "Platform to install:",
 	name: "platforms",
 	choices: [
-		{value: "browser", name: "Browser", checked: true},
 		{value: "android", name: "Android", checked: true},
+		{value: "browser", name: "Browser"},
 		{value: "windows", name: "Windows"},
 		{value: "ios", name: "iOS"},
 		{value: "wp8", name: "Windows Phone 8"}

@@ -50,12 +50,12 @@ gulp.task('loader:make', function (cb) {
 gulp.task('loader:copy',['loader:make'], function () {
 	return gulp.src(global.cfg.folders.loaderDist+'/*.*')
 		//.pipe(debug({verbose: true}))
-		//.on('error', console.error.bind(console))
+		//.on('error', gutil.log)
 		.pipe(gulp.dest(global.cfg.folders.tempFull));
 });
 gulp.task('loader:get',['loader:copy'], function () {
 	return gulp.src(global.cfg.folders.tempFull+'/index.html')
 		//.pipe(debug({verbose: true}))
-		//.on('error', console.error.bind(console))
+		//.on('error', gutil.log)
 		.pipe(gulp.dest(global.cfg.folders.wwwFull));
 });

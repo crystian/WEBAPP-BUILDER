@@ -1,5 +1,5 @@
 html{
-	background-color: #ffffcc;
+	background-color: #ffffff;
 }
 
 .fullscreen {
@@ -21,6 +21,15 @@ html{
 	a{
 		color: black;
 	}
+}
+
+#debugZone{
+	border-top: solid #000000 1px;
+}
+
+.testLoader{
+	background-color: #007aff;
+	color: #ffffff;
 }
 
 //JUST FOR DETECT ORIENTATION

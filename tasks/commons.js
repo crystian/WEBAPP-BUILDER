@@ -4,24 +4,39 @@
 
 var gulp = require('gulp'),
 	//debug = require('gulp-debug'),
-	sass = require('gulp-ruby-sass'),
-	autoprefixer = require('gulp-autoprefixer'),
-	csslint = require('gulp-csslint'),
-	inject = require('gulp-inject'),
-	del	= require('del'),
+	shared = require('./shared'),
 	chalk = require('chalk'),
+	clean = require('gulp-clean'),
 	gutil = require('gulp-util');
 
-gulp.task('remove:build', ['remove:temp'], function(cb) {
+gulp.task('remove:build', function() {
 	//no borrar la carpeta build, da errores de sincro
-	del([global.cfg.folders.screens,
-		global.cfg.folders.build +'/**/*'
-	], /*{force:true}, */cb());
+	return gulp.src([
+			global.cfg.folders.screens,
+			global.cfg.folders.build
+		], {read: false})
+		.pipe(clean());
 });
 
-gulp.task('remove:temp', function(cb) {
-	del([global.cfg.folders.temp],cb());
+gulp.task('remove:temp', function() {
+	return gulp.src([
+			global.cfg.folders.temp,
+			global.cfg.folders.build +'/*.scss',
+			global.cfg.folders.build +'/'+
+				(global.cfg.loader.oneRequest ? '{'+
+					global.cfg.landing.html+','+
+					global.cfg.landing.css+','+
+					global.cfg.landing.js+'}'
+					: global.cfg.landing.finalFile
+				)
+		], {read: false})
+		.pipe(clean());
 });
+
+gulp.task('make:onRequest', function(cb) {
+	shared.makeOneRequest(global.cfg.makeOneRequestFile, cb);
+});
+
 
 
 process.on('uncaughtException', function(err){
@@ -34,35 +49,9 @@ process.on('uncaughtException', function(err){
 });
 
 
-exports.sassfixer = function(src, dest) {
-	return gulp.src(src)
-		//.pipe(debug({verbose: true}))
-		//.on('error', console.error.bind(console))
-		.pipe(sass({style: 'expanded', noCache: true}))
-		.pipe(autoprefixer(global.cfg.autoprefixer))
-		.pipe(csslint('csslintrc.json'))
-		.pipe(csslint.reporter().on('error',gutil.log))
-		.pipe(gulp.dest(dest));
-};
-
-
-exports.injectContent = function(filePath, name, tagHtm) {
-	return inject(gulp.src([filePath]), {
-		starttag: '<!-- inject:'+ name +' -->',
-		transform: function (filePath, file) {
-			var r = file.contents.toString('utf8');
-			if (tagHtm) {
-				r = '<'+tagHtm+'>'+r+'</'+tagHtm+'>';
-			}
-			return r;
-		}
-	});
-};
-
-
 console.logGreen = function (m) {
 	console.log(chalk.black.bgGreen(m));
 };
 console.logRed = function (m) {
-	console.log(chalk.black.bgRed(m));
+	console.log(chalk.white.bold.bgRed(m));
 };

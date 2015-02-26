@@ -4,63 +4,34 @@
 
 var gulp = require('gulp'),
 	//debug = require('gulp-debug'),
-	commons = require('./commons'),
+	shared = require('./shared'),
 	uglify = require('gulp-uglify'),
 	inject = require('gulp-inject'),
 	replace = require('gulp-replace'),
 	rename = require('gulp-rename'),
 	fs = require('fs'),
 	bowerify = require('gulp-bower'),
-	inspect = require('util').inspect,
+	//inspect = require('util').inspect,
 	cheerio = require('gulp-cheerio');
 
 
-gulp.task('make:base', ['make:bower','make:index','generate:config'], function() {
+gulp.task('make:base', ['make:bower', 'make:index', 'generate:config'], function() {
 	//replace references on index.html
 	return gulp.src(global.cfg.folders.www +'/'+global.cfg.files.index)
 		//.pipe(debug({verbose: true}))
-		.pipe(commons.injectContent(global.cfg.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.html','loadingHtml'))
+		.pipe(shared.injectContent(global.cfg.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.html','loadingHtml'))
 		.pipe(inject(gulp.src(global.cfg.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.css', {read: false}), {name: 'loadingCss', relative:'true'}))
 		.pipe(inject(gulp.src(global.cfg.varJs, {read: false}), {name: 'bower', relative:'true'}))
 		.pipe(inject(gulp.src(global.cfg.varCss, {read: false}), {name: 'bower', relative:'true'}))
 		.pipe(gulp.dest(global.cfg.folders.www));
 });
 
-/*
- necesitaba hacer el minificado despues de la bajada, me complico la vida...,
- esto fue lo mejor que me quedo, luego de varias horas ...
- problemas con syncronismo y argumentos
-*/
-gulp.task('make:bower', ['download:bower'], function(cb) {
-
-	var i = 0,
-		len = global.cfg.varLibsToMin.length;
-
-
-	if(len===0){cb();}
-
-	global.cfg.varLibsToMinI = 0;
-
-	for (; i < len; i++) {
-		var s = global.cfg.varLibsToMin[i];
-		gulp.src(s.jsDev)
-			.pipe(uglify())
-			.pipe(rename(s.name))
-			.pipe(gulp.dest(s.pa))
-			.on('finish', function (a,b,c) {
-				console.logGreen('Minification of '+global.cfg.varLibsToMin[global.cfg.varLibsToMinI].name+'...');
-				global.cfg.varLibsToMinI++;
-				if(global.cfg.varLibsToMinI===len){
-					cb();
-				}
-			});
-	}
-
-});
-
-gulp.task('make:index', ['copy:index'], function () {
-	return gulp.src(global.cfg.folders.www + '/'+global.cfg.files.index)
+gulp.task('make:index', function () {
+	return gulp.src(global.cfg.folders.www + '/index.tpl.html')
+		//.on('error', gutil.log)
 		//.pipe(debug({verbose: true}))
+		.pipe(rename(global.cfg.files.index))
+		.pipe(gulp.dest(global.cfg.folders.www))
 		.pipe(cheerio({
 			run: function ($) {
 				var cfg = global.cfg;
@@ -73,14 +44,7 @@ gulp.task('make:index', ['copy:index'], function () {
 			}
 		}))
 		.pipe(replace('<!--msgTpl-->','<!-- REMEMBER, this file is generated, don\'t change it, because you can lost it -->'))
-		//.on('error', console.error.bind(console))
-		.pipe(gulp.dest(global.cfg.folders.www));
-});
-
-gulp.task('copy:index',function () {
-	return gulp.src(global.cfg.folders.www + '/index.tpl.html')
-		//.on('error', console.error.bind(console))
-		.pipe(rename(global.cfg.files.index))
+		//.on('error', gutil.log)
 		.pipe(gulp.dest(global.cfg.folders.www));
 });
 
@@ -155,6 +119,37 @@ gulp.task('generate:config', function (cb) {
 			}
 			cb();
 		});
+});
+
+/*
+ necesitaba hacer el minificado despues de la bajada, me complico la vida...,
+ esto fue lo mejor que me quedo, luego de varias horas ...
+ problemas con syncronismo y argumentos
+ */
+gulp.task('make:bower', ['download:bower'], function(cb) {
+
+	var i = 0,
+		len = global.cfg.varLibsToMin.length;
+
+	if(len===0){cb();}
+
+	global.cfg.varLibsToMinI = 0;
+
+	for (; i < len; i++) {
+		var s = global.cfg.varLibsToMin[i];
+		gulp.src(s.jsDev)
+			.pipe(uglify())
+			.pipe(rename(s.name))
+			.pipe(gulp.dest(s.pa))
+			.on('finish', function (a,b,c) {
+				console.logGreen('Minification of '+global.cfg.varLibsToMin[global.cfg.varLibsToMinI].name+'...');
+				global.cfg.varLibsToMinI++;
+				if(global.cfg.varLibsToMinI===len){
+					cb();
+				}
+			});
+	}
+
 });
 
 gulp.task('download:bower',['generator:bower'], function() {

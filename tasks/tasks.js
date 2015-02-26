@@ -17,7 +17,7 @@ gulp.task('build:full', function (cb) {
 	cb);
 });
 
-gulp.task('build:fast', function (cb) {
+gulp.task('build:fast',function (cb) {
 	runSequence(
 		'remove:build',
 		'make:loader',
