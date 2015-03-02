@@ -46,8 +46,8 @@ loader.utils = (function() {
 	}
 
 
-	function request(file, callback) {
-		console.log('request: '+ file);
+	function request(url, callback) {
+		console.log('request: '+ url);
 		var xhr = new XMLHttpRequest();
 
 		function errorDetected(er) {
@@ -67,7 +67,7 @@ loader.utils = (function() {
 		};
 
 		xhr.ontimeout = function(){errorDetected(loader.cfg.loader.text.errorTimeoutServer);};
-		xhr.open('GET', file, true);
+		xhr.open('GET', url, true);
 		// 10000 is to much?
 		xhr.timeout = 10000;//yes here, porque ie11 pincha :S
 		xhr.send();
@@ -83,7 +83,12 @@ loader.utils = (function() {
 		setNewResourceByTag(resourceLoader, 'head');
 	}
 
-
+	function requestScript(url, cb){
+		request(url, function (scripts) {
+			setJs(scripts);
+			cb();
+		});
+	}
 
 //	function getCssAsync(file) {
 //		var resourceLoader = document.createElement('link');
@@ -223,7 +228,9 @@ loader.utils = (function() {
 //		scrollTo: scrollTo,
 //		getRandom: getRandom,
 		getRandomInt: getRandomInt,
+		request: request,
 //		getRandomRange: getRandomRange,
+		requestScript: requestScript,
 		getJs: getJs,
 		setJs: setJs,
 //		getCssAsync: getCssAsync,
@@ -231,9 +238,8 @@ loader.utils = (function() {
 		setHtml: setHtml,
 		setCss: setCss,
 		showPanicError: showPanicError,
-		setNewResourceByTag: setNewResourceByTag,
+		setNewResourceByTag: setNewResourceByTag
 //		setNewResourceById: setNewResourceById,
-		request: request
 	};
 
 }());
