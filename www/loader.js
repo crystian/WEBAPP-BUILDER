@@ -154,10 +154,6 @@ var loader = (function(){
 	function _handleDebugMode() {
 		cfg.debugZone = byId('debugZone');
 
-		if( !cfg.release ){
-			cfg.debugZone.classList.remove('hide');
-		}
-
 		debug('Version: ' + cfg.version+ '<br>Loader version: ' + cfg.loader.version);
 
 		if( cfg.showDeviceInfo ){
@@ -251,14 +247,14 @@ var loader = (function(){
 	}
 
 	function debug(m) {
-		if (cfg.release) {
+		if (cfg.release || !cfg.debugZoneActive) {
 			return;
 		}
 		cfg.debugZone.innerHTML = m;
 	}
 
 	function debugAdd(m) {
-		if (cfg.release) {
+		if (cfg.release || !cfg.debugZoneActive) {
 			return;
 		}
 		debug(cfg.debugZone.innerHTML + '<br>---<br>' + m);

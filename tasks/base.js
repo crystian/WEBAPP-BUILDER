@@ -57,6 +57,7 @@ gulp.task('generate:config', function (cb) {
 	json.compress = global.cfg.compress;
 	json.isCordovaDevice = global.cfg.isCordovaDevice;
 	json.compatibilityMatrix = global.cfg.compatibilityMatrix;
+	json.debugZoneActive = global.cfg.debugZoneActive;
 
 	json.analytics = {
 		'id': global.cfg.analytics.id,
