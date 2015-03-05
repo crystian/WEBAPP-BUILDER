@@ -86,6 +86,7 @@
 		"require": true,
 		"ga": true,
 		"FastClick": true,
-		"Connection": true
+		"Connection": true,
+		"JSON": true
 	}
 }
