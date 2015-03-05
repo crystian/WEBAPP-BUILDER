@@ -6,7 +6,7 @@
 var loader = (function(){
 	'use strict';
 
-	var cfg, diag, platform, utils, settings, events, doc, loadingScreen, applicationCache, location, ga;
+	var cfg, diag, platform, utils, settings, events, doc, loadingScreen, applicationCache, location, ga, mx;
 
 	//just for ofuscation
 	function setters() {
@@ -20,6 +20,7 @@ var loader = (function(){
 		applicationCache = window.applicationCache;
 		location = window.location;
 		ga = loader.ga;
+		mx = loader.mx;
 		doc = window.document;
 	}
 
@@ -110,6 +111,7 @@ var loader = (function(){
 		events.init();
 		settings.init();
 		ga.init();
+		mx.init();
 
 		_debugToolsLoad();
 

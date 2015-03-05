@@ -135,6 +135,7 @@ gulp.task('make:loader:js',  function () {
 		global.cfg.folders.www + '/modules/screen.js',
 		global.cfg.folders.www + '/modules/cordovaConnection.js',
 		global.cfg.folders.www + '/modules/analytics.js',
+		global.cfg.folders.www + '/modules/mixpanel.js',
 		global.cfg.folders.www + '/modules/boot.js'
 	];
 	var loaderScripts2Stream = gulp.src(loaderScripts2)

@@ -31,6 +31,12 @@
 		"appInstaller": "com.appName.installer"
 	},
 
+	"mixpanel":{
+		"installed": true,
+		"active": true,
+		"token": "YOUR TOKEN"
+	},
+
 	"ports": {
 		"serve": 9000,
 		"build": 9001,

@@ -59,6 +59,12 @@ gulp.task('generate:config', function (cb) {
 	json.compatibilityMatrix = global.cfg.compatibilityMatrix;
 	json.debugZoneActive = global.cfg.debugZoneActive;
 
+	json.mixpanel = {
+		'installed': global.cfg.mixpanel.installed,
+		'active': global.cfg.mixpanel.active,
+		'token': global.cfg.mixpanel.token
+	};
+
 	json.analytics = {
 		'id': global.cfg.analytics.id,
 		'installed': global.cfg.analytics.installed,
