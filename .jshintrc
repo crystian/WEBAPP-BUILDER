@@ -87,6 +87,7 @@
 		"ga": true,
 		"mixpanel": true,
 		"FastClick": true,
-		"Connection": true
+		"Connection": true,
+		"JSON": true
 	}
 }
