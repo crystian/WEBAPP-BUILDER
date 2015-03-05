@@ -23,6 +23,52 @@ html{
 	}
 }
 
+.wrapCenter {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	margin: auto;
+	bottom: 0;
+	left: 0;
+	top: 0;
+	right: 0;
+}
+
+.fadeout {
+	animation: fadeout 1s linear;
+	visibility: hidden;
+}
+.fadein {
+	animation: fadein 1s linear;
+}
+
+.fadeout50 {
+	animation: fadeout50 1s linear;
+	visibility: hidden;
+}
+.fadein50 {
+	animation: fadein50 1s linear;
+}
+
+@keyframes fadeout {
+	0%	{ opacity: 1; visibility: visible;}
+	99%	{ opacity: 0;}
+	100%	{ opacity: 0; visibility: hidden;}
+}
+@keyframes fadein {
+	0%	{ opacity: 0; visibility: visible;}
+	100%	{ opacity: 1;}
+}
+
+@keyframes fadeout50 {
+	0%	{ opacity: 0.5; visibility: visible;}
+	99%	{ opacity: 0;}
+	100%	{ opacity: 0; visibility: hidden;}
+}
+@keyframes fadein50 {
+	0%	{ opacity: 0; visibility: visible;}
+	100%	{ opacity: 0.5;}
+}
 
 .testLoader{
 	background-color: #007aff;

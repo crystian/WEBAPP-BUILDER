@@ -77,7 +77,8 @@ exports.sassfixer = function(src, dest) {
 	return gulp.src(src)
 		//.pipe(debug({verbose: true}))
 		//.on('error', gutil.log)
-		.pipe(sass({sourcemap : false, style: 'expanded', noCache: true,  "sourcemap=none": true}))
+		//en mac se necesita ,  'sourcemap=none': true ??
+		.pipe(sass({sourcemap : false, style: 'expanded', noCache: true}))
 		.pipe(autoprefixer(global.cfg.autoprefixer))
 		.pipe(csslint('csslintrc.json'))
 		.pipe(csslint.reporter().on('error',gutil.log))

@@ -1,15 +1,3 @@
-
-.wrapCenter {
-	width: 100px;
-	height: 100px;
-	position: absolute;
-	margin: auto;
-	bottom: 0;
-	left: 0;
-	top: 0;
-	right: 0;
-}
-
 #loadingScreen {
 	//	background-color: #d6eff9;
 	background-color: #000000;
@@ -35,44 +23,8 @@
 	}
 }
 
-.fadeout {
-	animation: fadeout 1s linear;
-	visibility: hidden;
-}
-.fadein {
-	animation: fadein 1s linear;
-}
-
-.fadeout50 {
-	animation: fadeout50 1s linear;
-	visibility: hidden;
-}
-.fadein50 {
-	animation: fadein50 1s linear;
-}
-
 @keyframes rotateplane {
 	0%	{ transform: perspective(120px) rotateX(0deg) rotateY(0deg);}
 	50%	{ transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);}
 	100%	{ transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);}
-}
-
-@keyframes fadeout {
-	0%	{ opacity: 1; visibility: visible;}
-	99%	{ opacity: 0;}
-	100%	{ opacity: 0; visibility: hidden;}
-}
-@keyframes fadein {
-	0%	{ opacity: 0; visibility: visible;}
-	100%	{ opacity: 1;}
-}
-
-@keyframes fadeout50 {
-	0%	{ opacity: 0.5; visibility: visible;}
-	99%	{ opacity: 0;}
-	100%	{ opacity: 0; visibility: hidden;}
-}
-@keyframes fadein50 {
-	0%	{ opacity: 0; visibility: visible;}
-	100%	{ opacity: 0.5;}
 }

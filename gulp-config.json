@@ -32,8 +32,8 @@
 	},
 
 	"mixpanel":{
-		"installed": true,
-		"active": true,
+		"installed": false,
+		"active": false,
 		"token": "YOUR TOKEN"
 	},
 
