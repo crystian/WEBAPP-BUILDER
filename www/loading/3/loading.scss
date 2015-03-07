@@ -1,0 +1,43 @@
+#loadingScreen {
+	background-color: #000000;
+	z-index: 10;
+	opacity: 1;
+	transform: translateZ(0);
+
+	.spinner {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 2px 1px 0 white;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -25px;
+		margin-left: -25px;
+	}
+	.loadingAnimation.on{
+		-moz-animation: spin 0.7s linear infinite;
+		-webkit-animation: spin 0.7s linear infinite;
+		animation: spin 0.7s linear infinite;
+	}
+}
+@-moz-keyframes spin {
+	100% {
+		-moz-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+@-webkit-keyframes spin {
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+@keyframes spin {
+	100% {
+		-moz-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}

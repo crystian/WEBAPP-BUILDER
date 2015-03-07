@@ -2,7 +2,7 @@
 * Created by Crystian on 3/2/14.
 */
 
-loader.loadingScreen = (function(el, spinner){
+loader.loadingScreen = (function(el, animationElements){
 	'use strict';
 
 	var t = false,
@@ -23,8 +23,9 @@ loader.loadingScreen = (function(el, spinner){
 			t = false;
 			el.classList.remove('fadeout');
 			el.classList.add('fadein');
-			if (spinner) {
-				spinner.classList.add('on');
+			if (animationElements) {
+				animationOn();
+
 			}
 			setTimeout(function () {
 				callback();
@@ -34,14 +35,36 @@ loader.loadingScreen = (function(el, spinner){
 			el.classList.remove('fadein');
 			el.classList.add('fadeout');
 			setTimeout(function () {
-				if (spinner) {
-					spinner.classList.remove('on');
+				if (animationElements) {
+					animationOff();
 				}
 				callback();
 			}, duration);//be careful esto tambien esta en el class
 		}
 	}
 
+	function animationOn(){
+		animationSwitch(true);
+	}
+	function animationOff(){
+		animationSwitch(false);
+	}
+	function animationSwitch(v){
+		if(animationElements.length===0){return;}
+		var i = 0,
+			l = animationElements.length;
+
+		for (; i < l; i++) {
+			var el = animationElements[i];
+			if(v){
+				el.classList.add('on');
+			} else {
+				el.classList.remove('on');
+			}
+		}
+	}
+
+
 	return {on : on, off: off, toggle: toggle};
 
-}(byId('loadingScreen'), byId('spinner')));
+}(byId('loadingScreen'), document.getElementsByClassName('loadingAnimation')));

@@ -17,9 +17,9 @@
 		height: 75px;
 		position: absolute;
 		transform: translateZ(0);
-		&.on {
-			animation: rotateplane 1.2s infinite ease-in-out;
-		}
+	}
+	.loadingAnimation.on {
+		animation: rotateplane 1.2s infinite ease-in-out;
 	}
 }
 
