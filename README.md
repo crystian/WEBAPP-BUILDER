@@ -163,6 +163,9 @@ Es necesario que todo este en el path, para ayudarte en esto creen un bat (windo
 ---
 
 ## CHANGELOG:
+08/03/15
+varios fixes y loaders added
+
 23/02/15 v0.0.1
 Terminado, primera version
 
