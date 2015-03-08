@@ -1,0 +1,45 @@
+$color1: #fcd04b;
+$color2: #fcad26;
+
+#loadingScreen {
+	background: $color1;
+	color: $color2;
+	z-index: 10;
+	opacity: 1;
+	transform: translateZ(0);
+
+	.loading{
+		position: absolute;
+		width: 24px*6-4px;
+		height: 20px;
+		left: -48px;
+		top: 50px;
+		.dot {
+			position: absolute;
+			border-radius: 50%;
+			width: 20px;
+			height: 20px;
+			background: $color2;
+		}
+		&.loadingAnimation.on .dot {
+			@for $i from 0 through 6 {
+				&:nth-child(#{$i}) {
+					animation: spin .5s #{$i*80}ms infinite alternate both;
+					left: 24px*$i;
+				}
+			}
+		}
+	}
+}
+
+
+@keyframes spin {
+	from {
+		transform: translateY(0);
+		box-shadow: 0 0 0 $color2;
+	}
+	to {
+		transform: translateY(-20px);
+		box-shadow: 0 40px 0 $color2;
+	}
+}

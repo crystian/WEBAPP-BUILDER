@@ -1,0 +1,77 @@
+$color1: #e74c3c;
+$color2: white;
+$animation-time: 2.5s;
+
+#loadingScreen {
+	background: $color1;
+	color: $color2;
+	z-index: 10;
+	opacity: 1;
+	transform: translateZ(0);
+
+	.loading{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 20px;
+		height: 20px;
+		transform: translate(-50%, -50%);
+		.dot {
+			position: absolute;
+			border-radius: 50%;
+			left: 1px;top: 1px;
+			width: 18px;
+			height: 18px;
+			background: $color2;
+		}
+		.dot2 {
+			position: absolute;
+			border-radius: 50%;
+			width: 20px;
+			height: 20px;
+			background: $color2;
+		}
+		&.loadingAnimation.on .dot{
+			animation: spin $animation-time 0s infinite both;
+		}
+		&.loadingAnimation.on .dot2{
+			animation: spin2 $animation-time 0s infinite both;
+		}
+	}
+}
+
+
+@keyframes spin {
+	0%, 100% {
+		box-shadow: 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2;
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	25%, 75% {
+		box-shadow: 28px 0 0 $color2, -28px 0 0 $color2, 0 28px 0 $color2, 0 -28px 0 $color2, 20px -20px 0 $color2, 20px 20px 0 $color2,  -20px -20px 0 $color2, -20px 20px 0 $color2;
+
+	}
+	100% {
+		transform: rotate(360deg);
+		box-shadow: 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2;
+	}
+}
+
+@keyframes spin2 {
+	0%, 100% {
+		box-shadow: 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2;
+	}
+	50% {
+		transform: rotate(-180deg);
+	}
+	25%, 75% {
+		box-shadow: 52px 0 0 $color2, -52px 0 0 $color2, 0 52px 0 $color2, 0 -52px 0 $color2, 38px -38px 0 $color2, 38px 38px 0 $color2,  -38px -38px 0 $color2, -38px 38px 0 $color2;
+		background: transparent;
+	}
+	100% {
+		transform: rotate(-360deg);
+		box-shadow: 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2, 0 0 0 $color2;
+	}
+}
+
