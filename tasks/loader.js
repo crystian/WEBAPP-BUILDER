@@ -98,6 +98,7 @@ gulp.task('make:loader:js',  function () {
 	//libs
 	var libs = [
 		global.cfg.folders.bower + '/platform/platform.' + releasePostName + 'js',
+		global.cfg.folders.bower + '/es6-promise/promise.' + releasePostName + 'js',
 		global.cfg.loader.bower.fastclick ? global.cfg.folders.bower + '/fastclick/lib/fastclick.' + releasePostName + 'js' : '',
 		global.cfg.loader.bower.jquery ? global.cfg.folders.bower + '/jquery/dist/jquery.' + releasePostName + 'js' : '',
 		global.cfg.loader.bower.bootstrap ? global.cfg.folders.bower + '/bootstrap/dist/js/bootstrap.' + releasePostName + 'js' : '',

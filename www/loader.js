@@ -113,6 +113,11 @@ var loader = (function(){
 		ga.init();
 		mx.init();
 
+		if(!window.Promise){
+			console.warn('Promise polyfill installed');
+			ES6Promise.polyfill();
+		}
+
 		_debugToolsLoad();
 
 		if(cfg.loader.fastclick && cfg.isTouchDevice){

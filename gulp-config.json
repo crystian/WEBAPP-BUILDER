@@ -140,6 +140,11 @@
 				"js-dev": ["lz-string/libs/lz-string.js"],
 				"js-prod": ["lz-string/libs/lz-string.min.js"]
 			},
+			"es6-promise": {
+				"version": "~2.0.1",
+				"js-dev": ["es6-promise/promise.js"],
+				"js-prod": ["es6-promise/promise.min.js"]
+			},
 			"jquery": {
 				"version": "~2.1.3",
 				"js-dev": ["jquery/dist/jquery.js"],

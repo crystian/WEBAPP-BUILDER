@@ -88,6 +88,7 @@
 		"mixpanel": true,
 		"FastClick": true,
 		"Connection": true,
-		"JSON": true
+		"JSON": true,
+		"ES6Promise": true
 	}
 }
