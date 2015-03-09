@@ -144,7 +144,6 @@ Es necesario que todo este en el path, para ayudarte en esto creen un bat (windo
 * offline - cordova
 * i18n - cordova
 * nightmare, cada perfil
-* buscar esos inject asincronos del build, ver de que son y sincronizarlo
 
 ### TODO:
 * appcache
