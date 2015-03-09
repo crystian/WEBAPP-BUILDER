@@ -1,4 +1,6 @@
-$color1: #fcd04b;
+//$color1: #fcd04b;
+//$color2: #fcad26;
+$color1: black;
 $color2: #fcad26;
 
 #loadingScreen {
@@ -24,7 +26,7 @@ $color2: #fcad26;
 		&.loadingAnimation.on .dot {
 			@for $i from 0 through 6 {
 				&:nth-child(#{$i}) {
-					animation: spin .5s #{$i*80}ms infinite alternate both;
+					animation: parallel .5s #{$i*80}ms infinite alternate both;
 					left: 24px*$i;
 				}
 			}
@@ -33,7 +35,7 @@ $color2: #fcad26;
 }
 
 
-@keyframes spin {
+@keyframes parallel {
 	from {
 		transform: translateY(0);
 		box-shadow: 0 0 0 $color2;

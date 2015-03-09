@@ -99,6 +99,33 @@ loader.utils = (function() {
 //		setNewResourceByTag(resourceLoader, 'link');
 //	}
 
+
+	function multipleRequests(requestsArray, cb){
+		requestsArray.map(function (requestConfig, index) {
+			if(requestConfig.length===2){
+
+				//be aware, it is asyncro
+				request(requestConfig[1], function (data) {
+					switch (requestConfig[0]){
+						case 'css':
+							setCss(data);
+							break;
+						case 'js':
+							setJs(data);
+							break;
+					}
+
+					if(index===requestsArray.length-1){
+						cb();
+					}
+				});
+
+			} else {
+				console.warn('Invalid pair of request on mutipleRequests',requestConfig);
+			}
+		});
+	}
+
 	function setJs(content) {
 		var resourceLoader = document.createElement('script');
 		resourceLoader.type = 'text/javascript';
@@ -229,6 +256,7 @@ loader.utils = (function() {
 //		getRandom: getRandom,
 		getRandomInt: getRandomInt,
 		request: request,
+		multipleRequests: multipleRequests,
 //		getRandomRange: getRandomRange,
 		requestScript: requestScript,
 		getJs: getJs,

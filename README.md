@@ -144,6 +144,7 @@ Es necesario que todo este en el path, para ayudarte en esto creen un bat (windo
 * offline - cordova
 * i18n - cordova
 * nightmare, cada perfil
+* loaderFinished
 
 ### TODO:
 * appcache
