@@ -46,7 +46,7 @@ var loader = (function(){
 			//carga asincrona, cuando llegue y se parsee dispara un deviceReady y lo mando a cordovaReady
 			doc.addEventListener('deviceready', _loadAsync, false);
 
-			utils.getJs('cordova.js');
+			utils.getJsFile('cordova.js');
 
 		} else {
 			if (platform.os.toString().match(/(iPhone|iPod|iPad|iOS|Android|BlackBerry)/)) {
@@ -95,6 +95,13 @@ var loader = (function(){
 		setTimeout(_load, 100);
 	}
 
+	function setPolyfills() {
+		if (!window.Promise) {
+			console.warn('Promise polyfill installed');
+			ES6Promise.polyfill();
+		}
+	}
+
 	function _load() {
 		_handleDebugMode();
 		cfg.compatibility = diag.executeDiag();
@@ -113,10 +120,7 @@ var loader = (function(){
 		ga.init();
 		mx.init();
 
-		if(!window.Promise){
-			console.warn('Promise polyfill installed');
-			ES6Promise.polyfill();
-		}
+		setPolyfills();
 
 		_debugToolsLoad();
 
@@ -145,18 +149,22 @@ var loader = (function(){
 
 		} else {
 
-			utils.request(path +'/'+ cfg.landing.html, function (data) {
-				utils.setHtml(data);
-				utils.request(path +'/'+ cfg.landing.css, function (data) {
-					utils.setCss(data);
-					utils.request(path +'/'+ cfg.landing.js, function (data) {
-						utils.setJs(data);
-						loader.finish();
-					});
-				});
+			var landingFiles = [
+				['html', path +'/'+ cfg.landing.html],
+				['css', path +'/'+ cfg.landing.css],
+				['js', path +'/'+ cfg.landing.js]
+			];
+
+			utils.requestMultimple(landingFiles, function () {
+				console.log('MAGIA!');
+				loader.finish();
+			}, function (err) {
+				utils.showPanicError(err);
 			});
+
 		}
 	}
+
 
 	function _handleDebugMode() {
 		cfg.debugZone = byId('debugZone');

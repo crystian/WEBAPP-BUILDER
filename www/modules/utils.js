@@ -46,35 +46,65 @@ loader.utils = (function() {
 	}
 
 
-	function request(url, callback) {
-		console.log('request: '+ url);
-		var xhr = new XMLHttpRequest();
+	function request(url) {
+		return new Promise(function (resolve, reject) {
+			console.log('request: '+ url);
+			var xhr = new XMLHttpRequest();
 
-		function errorDetected(er) {
-			console.error(er);
-			alert(er);
-		}
-
-		xhr.onreadystatechange = function(){
-			if (this.readyState === 4 &&
-				this.status === 200 &&
-				this.responseText !== null){
-
-				callback(this.responseText);
-			} else if( this.readyState === 4 ) {
-				errorDetected(loader.cfg.loader.text.errorRequestFile);
+			function errorDetected(er) {
+				reject(er);
 			}
-		};
 
-		xhr.ontimeout = function(){errorDetected(loader.cfg.loader.text.errorTimeoutServer);};
-		xhr.open('GET', url, true);
-		// 10000 is to much?
-		xhr.timeout = 10000;//yes here, porque ie11 pincha :S
-		xhr.send();
+			xhr.onreadystatechange = function(){
+				if (this.readyState === 4 &&
+					this.status === 200 &&
+					this.responseText !== null){
+
+					resolve(this.responseText);
+				} else if( this.readyState === 4 ) {
+					errorDetected(loader.cfg.loader.text.errorRequestFile);
+				}
+			};
+
+			xhr.ontimeout = function(){errorDetected(loader.cfg.loader.text.errorTimeoutServer);};
+			xhr.open('GET', url, true);
+			// 10000 is to much?
+			xhr.timeout = 10000;//yes here, porque ie11 pincha :S
+			xhr.send();
+		});
 	}
 
-	//potential issue about security
-	function getJs(file) {
+	function requestMultimple(requestsArray, cb, cbe){
+
+		Promise.all(requestsArray.map(function (requestConfig) {
+			var q = {};
+
+			if(requestConfig.length===2){
+				var type = requestConfig[0],
+					url = requestConfig[1];
+
+				switch (type){
+					case 'html': q = requestAndSetHtml(url); break;
+					case 'css': q = requestAndSetCss(url); break;
+					case 'js': q = requestAndSetJs(url); break;
+					default:
+						return Promise.reject('Error key not found on requestMultiple array');
+				}
+
+			} else {
+				q = Promise.reject('Invalid pair of request on requestMultiple: '+ requestConfig);
+			}
+			return q;
+		}))
+			.then(cb)
+			//fail:
+			.then(undefined, function (err) {
+				cbe(err);
+			});
+	}
+
+	//potential issue about security, review it
+	function getJsFile(file) {
 		var resourceLoader = document.createElement('script');
 		resourceLoader.type = 'text/javascript';
 		resourceLoader.async = true;
@@ -83,50 +113,10 @@ loader.utils = (function() {
 		setNewResourceByTag(resourceLoader, 'head');
 	}
 
-	function requestScript(url, cb){
-		request(url, function (scripts) {
-			setJs(scripts);
-			cb();
-		});
+	function requestAndSetJs(url){
+		return request(url).then(_setJs);
 	}
-
-//	function getCssAsync(file) {
-//		var resourceLoader = document.createElement('link');
-//		resourceLoader.rel = 'stylesheet';
-//		resourceLoader.async = true;
-//		resourceLoader.href = file;
-//
-//		setNewResourceByTag(resourceLoader, 'link');
-//	}
-
-
-	function multipleRequests(requestsArray, cb){
-		requestsArray.map(function (requestConfig, index) {
-			if(requestConfig.length===2){
-
-				//be aware, it is asyncro
-				request(requestConfig[1], function (data) {
-					switch (requestConfig[0]){
-						case 'css':
-							setCss(data);
-							break;
-						case 'js':
-							setJs(data);
-							break;
-					}
-
-					if(index===requestsArray.length-1){
-						cb();
-					}
-				});
-
-			} else {
-				console.warn('Invalid pair of request on mutipleRequests',requestConfig);
-			}
-		});
-	}
-
-	function setJs(content) {
+	function _setJs(content) {
 		var resourceLoader = document.createElement('script');
 		resourceLoader.type = 'text/javascript';
 		resourceLoader.async = false;
@@ -135,13 +125,19 @@ loader.utils = (function() {
 		setNewResourceByTag(resourceLoader, 'head');
 	}
 
-	function setCss(content) {
+	function requestAndSetCss(url){
+		return request(url).then(_setCss);
+	}
+	function _setCss(content) {
 		var resourceLoader = document.createElement('style');
 		resourceLoader.innerHTML = content;
 		setNewResourceByTag(resourceLoader, 'head');
 	}
 
-	function setHtml(data){
+	function requestAndSetHtml(url){
+		return request(url).then(_setHtml);
+	}
+	function _setHtml(data){
 		var el = document.getElementById('mainContainer');
 		el.innerHTML = data;
 	}
@@ -220,9 +216,9 @@ loader.utils = (function() {
 		return Math.round(getRandomRange(0, max));
 	}
 
-//	function getRandom(max) {
-//		return getRandomRange(0, max);
-//	}
+	function getRandom(max) {
+		return getRandomRange(0, max);
+	}
 
 	function getRandomRange(min, max) {
 		return Math.random() * (max - min) + min;
@@ -234,7 +230,6 @@ loader.utils = (function() {
 		console.log('Resource compressed');
 		return LZString.decompressFromUTF16(data);
 	}
-
 
 	//two arguments are set, one is a get, just for encapsular y no ver las variables
 	function cache(key, value) {
@@ -253,18 +248,17 @@ loader.utils = (function() {
 		hideSkeletor: hideSkeletor,
 		toggleSkeletor: toggleSkeletor,
 //		scrollTo: scrollTo,
-//		getRandom: getRandom,
+		getRandom: getRandom,
 		getRandomInt: getRandomInt,
+		getRandomRange: getRandomRange,
+		getJsFile: getJsFile,
+
 		request: request,
-		multipleRequests: multipleRequests,
-//		getRandomRange: getRandomRange,
-		requestScript: requestScript,
-		getJs: getJs,
-		setJs: setJs,
-//		getCssAsync: getCssAsync,
-//		setCssSync: setCssSync,
-		setHtml: setHtml,
-		setCss: setCss,
+		requestAndSetJs: requestAndSetJs,
+		requestAndSetHtml: requestAndSetHtml,
+		requestAndSetCss: requestAndSetCss,
+		requestMultimple: requestMultimple,
+
 		showPanicError: showPanicError,
 		setNewResourceByTag: setNewResourceByTag
 //		setNewResourceById: setNewResourceById,

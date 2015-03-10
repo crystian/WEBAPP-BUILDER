@@ -202,5 +202,5 @@ gulp.task('css:loader', ['css:template'], function () {
 
 gulp.task('css:template', function () {
 	var path = global.cfg.folders.template;
-	return shared.sassfixer(path +'/*.scss',path)
+	return shared.sassfixer(path +'/**/*.scss',path)
 });
