@@ -100,10 +100,10 @@
 		"viewport": "user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height",
 
 		"text": {
-			"title": "titlese2",
-			"description": "descripcione",
-			"keyword": "keyworde",
-			"author": "autore",
+			"title": "Title",
+			"description": "Description",
+			"keyword": "keywords",
+			"author": "autors",
 			"noscript": "<br/>Es una broma? este sitio es una app javascript, indispensable para que funcione, actualiza el navegador o usa otro. Gracias vuelvan prontos! <br/><em>Para mas info: <a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a> : browsers incompatibles.</em><br/><br/>",
 
 			"incompatibleByFeatures": "Navegador incompatible (no se encontraron features), por tu seguridad actualizalo o usa otro, ver en F.A.Q.",

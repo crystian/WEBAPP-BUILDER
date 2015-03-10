@@ -11,7 +11,6 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	fs = require('fs'),
 	bowerify = require('gulp-bower'),
-	//inspect = require('util').inspect,
 	cheerio = require('gulp-cheerio');
 
 

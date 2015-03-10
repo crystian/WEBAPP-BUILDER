@@ -7,7 +7,6 @@
 var gulp = require('gulp'),
 	//debug = require('gulp-debug'),
 	Nightmare = require('nightmare'),
-	webserver = require('gulp-webserver'),
 	async = require('async'),
 	gutil = require('gulp-util');
 

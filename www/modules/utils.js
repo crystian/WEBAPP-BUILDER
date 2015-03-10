@@ -74,6 +74,14 @@ loader.utils = (function() {
 		});
 	}
 
+	function getExtensionFile(s){
+		var arr = s.split('.');
+		if(arr.length===0){
+			return s;
+		}
+		return arr[arr.length-1];
+	}
+
 	function requestAllInOne(url){
 		return request(url).then(function (data) {
 
@@ -101,24 +109,19 @@ loader.utils = (function() {
 
 	function requestMultimple(requestsArray){
 
-		return Promise.all(requestsArray.map(function (requestConfig) {
+		return Promise.all(requestsArray.map(function (url) {
 			var q = {};
 
-			if(requestConfig.length===2){
-				var type = requestConfig[0],
-					url = requestConfig[1];
+			var type = getExtensionFile(url);
 
-				switch (type){
-					case 'html': q = requestAndSetHtml(url); break;
-					case 'css': q = requestAndSetCss(url); break;
-					case 'js': q = requestAndSetJs(url); break;
-					default:
-						return Promise.reject('Error key not found on requestMultiple array');
-				}
-
-			} else {
-				q = Promise.reject('Invalid pair of request on requestMultiple: '+ requestConfig);
+			switch (type){
+				case 'html': q = requestAndSetHtml(url); break;
+				case 'css': q = requestAndSetCss(url); break;
+				case 'js': q = requestAndSetJs(url); break;
+				default:
+					return Promise.reject('Error key not found on requestMultiple array');
 			}
+
 			return q;
 		}));
 	}
@@ -265,13 +268,13 @@ loader.utils = (function() {
 		za: handleCompress,
 		showSkeletor: showSkeletor,
 		compareSemVer: compareSemVer,
+		getExtensionFile:getExtensionFile,
 		hideSkeletor: hideSkeletor,
 		toggleSkeletor: toggleSkeletor,
 //		scrollTo: scrollTo,
 		getRandom: getRandom,
 		getRandomInt: getRandomInt,
 		getRandomRange: getRandomRange,
-		getJsFile: getJsFile,
 
 		request: request,
 		requestMultimple: requestMultimple,
@@ -279,6 +282,7 @@ loader.utils = (function() {
 		requestAndSetJs: requestAndSetJs,
 		requestAndSetHtml: requestAndSetHtml,
 		requestAndSetCss: requestAndSetCss,
+		getJsFile: getJsFile,
 
 		showPanicError: showPanicError,
 		setNewResourceByTag: setNewResourceByTag

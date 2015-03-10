@@ -3,7 +3,7 @@
 */
 
 //jshint unused:false
-var polyfills = (function(){
+loader.polyfills = (function(){
 	'use strict';
 
 

@@ -6,7 +6,7 @@
 
 var gulp = require('gulp'),
 	//debug = require('gulp-debug'),
-	//fs = require('fs'),
+	replace = require('gulp-replace'),
 	gif = require('gulp-if'),
 	fs = require('fs-extra'),
 	sass = require('gulp-ruby-sass'),
@@ -80,6 +80,7 @@ exports.sassfixer = function(src, dest) {
 		//en mac se necesita ,  'sourcemap=none': true ??
 		.pipe(sass({sourcemap : false, style: 'expanded', noCache: true}))
 		.pipe(autoprefixer(global.cfg.autoprefixer))
+		.pipe(replace(' 0px', ' 0'))
 		.pipe(csslint('csslintrc.json'))
 		.pipe(csslint.reporter().on('error',gutil.log))
 		.pipe(gulp.dest(dest));

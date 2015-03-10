@@ -132,35 +132,40 @@ var loader = (function(){
 	}
 
 	function _loadApp() {
-		//just a dummy:
 		var path = (cfg.loader.build) ? '.' : '../'+cfg.loader.pathTpl;
 
 		//real case:
 		if( cfg.loader.oneRequest ){
 
 			utils.requestAllInOne(path +'/'+ cfg.landing.finalFile).then(function () {
-					loader.finish();
+					_loadAppSuccess();
 				}, function (err) {
-					utils.showPanicError(err);
+					_loadAppFail(err);
 				});
 
-		} else {
+		} else { //dev case
 
 			var landingFiles = [
-				['html', path +'/'+ cfg.landing.html],
-				['css', path +'/'+ cfg.landing.css],
-				['js', path +'/'+ cfg.landing.js]
+				path +'/'+ cfg.landing.html,
+				path +'/'+ cfg.landing.css,
+				path +'/'+ cfg.landing.js
 			];
 
 			utils.requestMultimple(landingFiles)
 				.then(function () {
-					loader.finish();
+					_loadAppSuccess();
 				}, function (err) {
-					utils.showPanicError(err);
+					_loadAppFail(err);
 				});
 		}
 	}
 
+	function _loadAppSuccess(){
+		loader.finish();
+	}
+	function _loadAppFail(err){
+		utils.showPanicError(err);
+	}
 
 	function _handleDebugMode() {
 		cfg.debugZone = byId('debugZone');
