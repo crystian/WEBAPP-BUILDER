@@ -138,14 +138,11 @@ var loader = (function(){
 		//real case:
 		if( cfg.loader.oneRequest ){
 
-			utils.request(path +'/'+ cfg.landing.finalFile, function (data) {
-				data = JSON.parse(utils.za(data));
-				//console.dir(data);
-				utils.setHtml(data.h);
-				utils.setCss(data.c);
-				utils.setJs(data.j);
-				loader.finish();
-			});
+			utils.requestAllInOne(path +'/'+ cfg.landing.finalFile).then(function () {
+					loader.finish();
+				}, function (err) {
+					utils.showPanicError(err);
+				});
 
 		} else {
 
@@ -155,13 +152,12 @@ var loader = (function(){
 				['js', path +'/'+ cfg.landing.js]
 			];
 
-			utils.requestMultimple(landingFiles, function () {
-				console.log('MAGIA!');
-				loader.finish();
-			}, function (err) {
-				utils.showPanicError(err);
-			});
-
+			utils.requestMultimple(landingFiles)
+				.then(function () {
+					loader.finish();
+				}, function (err) {
+					utils.showPanicError(err);
+				});
 		}
 	}
 

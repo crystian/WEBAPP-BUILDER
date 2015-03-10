@@ -50,7 +50,7 @@ exports.makeOneRequest = function (file, cb) {
 	if(file.css) {json.h = fs.readFileSync(file.html, {encoding : 'utf8'});}
 	if(file.js)	 {json.j = fs.readFileSync(file.js, {encoding : 'utf8'});}
 	if(file.css) {json.c = fs.readFileSync(file.css, {encoding : 'utf8'});}
-	if(file.data){json.d = fs.readFileSync(file.data, {encoding : 'utf8'});}
+	//if(file.data){json.d = fs.readFileSync(file.data, {encoding : 'utf8'});}
 
 	var jsonText = JSON.stringify(json);
 

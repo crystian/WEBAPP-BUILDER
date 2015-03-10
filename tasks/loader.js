@@ -77,9 +77,9 @@ gulp.task('make:loader:files', ['make:loader:js', 'make:loader:css', 'copy:fonts
 		//landing
 		global.cfg.makeOneRequestFile = {
 			name:'landing',
-			js: global.cfg.folders.template +'/app.js',
-			css: global.cfg.folders.template +'/app.css',
-			html: global.cfg.folders.template +'/app.html',
+			js: global.cfg.folders.template +'/'+ global.cfg.landing.js,
+			css: global.cfg.folders.template +'/'+ global.cfg.landing.css,
+			html: global.cfg.folders.template +'/'+ global.cfg.landing.html,
 			dest: '../'+global.cfg.folders.template +'/'+ global.cfg.landing.finalFile
 		};
 

@@ -74,9 +74,34 @@ loader.utils = (function() {
 		});
 	}
 
-	function requestMultimple(requestsArray, cb, cbe){
+	function requestAllInOne(url){
+		return request(url).then(function (data) {
 
-		Promise.all(requestsArray.map(function (requestConfig) {
+			try{
+				data = JSON.parse(handleCompress(data));
+			} catch (e){
+				return Promise.reject(e);
+			}
+
+			//console.dir(data);
+			if (data.h) {
+				_setHtml(data.h);
+			}
+			if (data.c) {
+				_setCss(data.c);
+			}
+			if (data.j) {
+				_setJs(data.j);
+			}
+			//if (data.d) {
+			//
+			//}
+		});
+	}
+
+	function requestMultimple(requestsArray){
+
+		return Promise.all(requestsArray.map(function (requestConfig) {
 			var q = {};
 
 			if(requestConfig.length===2){
@@ -95,12 +120,7 @@ loader.utils = (function() {
 				q = Promise.reject('Invalid pair of request on requestMultiple: '+ requestConfig);
 			}
 			return q;
-		}))
-			.then(cb)
-			//fail:
-			.then(undefined, function (err) {
-				cbe(err);
-			});
+		}));
 	}
 
 	//potential issue about security, review it
@@ -254,10 +274,11 @@ loader.utils = (function() {
 		getJsFile: getJsFile,
 
 		request: request,
+		requestMultimple: requestMultimple,
+		requestAllInOne: requestAllInOne,
 		requestAndSetJs: requestAndSetJs,
 		requestAndSetHtml: requestAndSetHtml,
 		requestAndSetCss: requestAndSetCss,
-		requestMultimple: requestMultimple,
 
 		showPanicError: showPanicError,
 		setNewResourceByTag: setNewResourceByTag
