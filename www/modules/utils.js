@@ -107,6 +107,7 @@ loader.utils = (function() {
 		});
 	}
 
+	//be careful, HTML option pisa old version
 	function requestMultimple(requestsArray){
 
 		return Promise.all(requestsArray.map(function (url) {

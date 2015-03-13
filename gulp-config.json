@@ -1,7 +1,7 @@
 {
 	"name": "app name",
 	"version": "0.0.0",
-	"os": "Pc",
+	"os": "win",
 	"ip": "127.0.0.1",
 
 	"cordova": true,
