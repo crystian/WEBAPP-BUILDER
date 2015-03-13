@@ -78,7 +78,7 @@ exports.sassfixer = function(src, dest) {
 		//.pipe(debug({verbose: true}))
 		//.on('error', gutil.log)
 		//en mac se necesita ,  'sourcemap=none': true ??
-		.pipe(sass({sourcemap : false, style: 'expanded', noCache: true}))
+		.pipe(sass({sourcemap : false, style: 'expanded', noCache: true,  'sourcemap=none': true}))
 		.pipe(autoprefixer(global.cfg.autoprefixer))
 		.pipe(replace(' 0px', ' 0'))
 		.pipe(csslint('csslintrc.json'))

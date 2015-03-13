@@ -89,6 +89,7 @@
 		"FastClick": true,
 		"Connection": true,
 		"JSON": true,
-		"ES6Promise": true
+		"ES6Promise": true,
+		"Promise": true
 	}
 }
