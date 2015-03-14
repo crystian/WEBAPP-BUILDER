@@ -40,7 +40,8 @@
 	"ports": {
 		"serve": 9000,
 		"build": 9001,
-		"nightmare": 9002
+		"api": 9002,
+		"nightmare": 9003
 	},
 
 	"autoprefixer": [
@@ -72,9 +73,10 @@
 			"build": "build",
 			"cordova": "CORDOVA",
 			"cordovaWWW": "CORDOVA/www",
-			"www": "WWW",
+			"www": "www",
 			"template": "AppTemplate",
-			"loader": "LOADER"
+			"loader": "LOADER",
+			"api": "www/api"
 		}
 	},
 
@@ -92,7 +94,7 @@
 
 	"loader":{
 		"name": "Power loader",
-		"version": "0.0.1",
+		"version": "0.0.2",
 		"release": true,
 		"oneRequest": true,
 

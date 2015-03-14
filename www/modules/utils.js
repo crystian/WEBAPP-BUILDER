@@ -45,6 +45,13 @@ loader.utils = (function() {
 		return 0;
 	}
 
+	function getExtensionFile(s) {
+		var arr = s.split('.');
+		if (arr.length === 0) {
+			return s;
+		}
+		return arr[arr.length - 1];
+	}
 
 	function request(url) {
 		return new Promise(function (resolve, reject) {
@@ -76,12 +83,8 @@ loader.utils = (function() {
 		});
 	}
 
-	function getExtensionFile(s) {
-		var arr = s.split('.');
-		if (arr.length === 0) {
-			return s;
-		}
-		return arr[arr.length - 1];
+	function requestJson(url) {
+		return request(url).then(JSON.parse);
 	}
 
 	function requestAllInOne(url) {
@@ -147,7 +150,6 @@ loader.utils = (function() {
 			});
 
 	}
-
 	function requestMultimpleSyncUnique(url) {
 		return new Promise(function (resolve, reject) {
 			console.group('requestMultipleSync: ' + url);
@@ -175,6 +177,8 @@ loader.utils = (function() {
 				console.log('resolved');
 				console.groupEnd();
 				resolve();
+			}, function (m) {
+				reject(m);
 			});
 		});
 	}
@@ -334,6 +338,7 @@ loader.utils = (function() {
 		getRandomRange: getRandomRange,
 
 		request: request,
+		requestJson: requestJson,
 		requestMultipleSync: requestMultipleSync,
 		requestMultipleAsync: requestMultipleAsync,
 		requestAllInOne: requestAllInOne,

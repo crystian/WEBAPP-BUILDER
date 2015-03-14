@@ -163,6 +163,11 @@ Es necesario que todo este en el path, para ayudarte en esto creen un bat (windo
 ---
 
 ## CHANGELOG:
+
+14/03/15 v0.0.2
+muchos cambios estructurales, integrando con app angular
+soporte a request sincronos y asincronos :)
+
 08/03/15
 varios fixes y loaders added
 
