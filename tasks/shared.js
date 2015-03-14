@@ -23,11 +23,7 @@ var gulp = require('gulp'),
 exports.jsMaker = function(stream) {
 	return stream
 		//.pipe(debug({verbose: true}))
-		.pipe(jshint())
-		.pipe(jshint.reporter('jshint-stylish'))
-		.pipe(jshint.reporter('fail'))
-
-		//just for "debugger" forgotens
+		//.on('error', gutil.log)
 		.pipe(gif(cfg.loader.release, jshint({lookup:false, debug:false})))
 		.pipe(gif(cfg.loader.release, jshint.reporter('jshint-stylish')))
 		.pipe(gif(cfg.loader.release, jshint.reporter('fail')))

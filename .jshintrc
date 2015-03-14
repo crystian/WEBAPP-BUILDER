@@ -29,7 +29,7 @@
 	"boss":		true,
 	"supernew":	true,
 	"asi":		false,
-	"debug":	true,
+	"debug":	false,
 	"eqnull":	false,
 	"esnext":	false,
 	"evil":		false,

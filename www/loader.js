@@ -146,12 +146,12 @@ var loader = (function(){
 		} else { //dev case
 
 			var landingFiles = [
-				path +'/'+ cfg.landing.html,
 				path +'/'+ cfg.landing.css,
+				path +'/'+ cfg.landing.html,
 				path +'/'+ cfg.landing.js
 			];
 
-			utils.requestMultimple(landingFiles)
+			utils.requestMultimpleSerial(landingFiles)
 				.then(function () {
 					_loadAppSuccess();
 				}, function (err) {

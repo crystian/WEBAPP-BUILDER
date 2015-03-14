@@ -108,7 +108,7 @@ loader.utils = (function() {
 	}
 
 	//be careful, HTML option pisa old version
-	function requestMultimple(requestsArray){
+	function requestMultimpleParallel(requestsArray){
 
 		return Promise.all(requestsArray.map(function (url) {
 			var q = {};
@@ -127,6 +127,35 @@ loader.utils = (function() {
 		}));
 	}
 
+	function requestMultimpleSerial(requestsArray){
+		var sequence = Promise.resolve();
+
+		if (requestsArray.length>0) {
+			var url = requestsArray.shift();
+			sequence = sequence.then(function () {
+
+				var type = getExtensionFile(url),
+					fn;
+
+				switch (type){
+					case 'html': fn = requestAndSetHtml; break;
+					case 'css': fn = requestAndSetCss; break;
+					case 'js': fn = requestAndSetJs; break;
+
+					default:
+						return Promise.reject('Error key not found on requestMultiple array');
+				}
+
+				return fn(url).then(function () {
+					return requestMultimpleSerial(requestsArray);
+				});
+
+			});
+		}
+
+		return sequence;
+	}
+
 	//potential issue about security, review it
 	function getJsFile(file) {
 		var resourceLoader = document.createElement('script');
@@ -142,10 +171,9 @@ loader.utils = (function() {
 	}
 	function _setJs(content) {
 		var resourceLoader = document.createElement('script');
-		resourceLoader.type = 'text/javascript';
+		resourceLoader.type = 'text\/javascript';
 		resourceLoader.async = false;
 		resourceLoader.innerHTML = content;
-
 		setNewResourceByTag(resourceLoader, 'head');
 	}
 
@@ -278,7 +306,8 @@ loader.utils = (function() {
 		getRandomRange: getRandomRange,
 
 		request: request,
-		requestMultimple: requestMultimple,
+		requestMultimpleSerial: requestMultimpleSerial,
+		requestMultimpleParallel: requestMultimpleParallel,
 		requestAllInOne: requestAllInOne,
 		requestAndSetJs: requestAndSetJs,
 		requestAndSetHtml: requestAndSetHtml,
