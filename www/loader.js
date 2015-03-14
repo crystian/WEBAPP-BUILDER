@@ -151,7 +151,7 @@ var loader = (function(){
 				path +'/'+ cfg.landing.js
 			];
 
-			utils.requestMultimpleSerial(landingFiles)
+			utils.requestMultimpleSync(landingFiles)
 				.then(function () {
 					_loadAppSuccess();
 				}, function (err) {

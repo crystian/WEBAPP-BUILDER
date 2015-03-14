@@ -108,7 +108,7 @@ loader.utils = (function() {
 	}
 
 	//be careful, HTML option pisa old version
-	function requestMultimpleParallel(requestsArray){
+	function requestMultimpleAsync(requestsArray){
 
 		return Promise.all(requestsArray.map(function (url) {
 			var q = {};
@@ -127,7 +127,7 @@ loader.utils = (function() {
 		}));
 	}
 
-	function requestMultimpleSerial(requestsArray){
+	function requestMultimpleSync(requestsArray){
 		var sequence = Promise.resolve();
 
 		if (requestsArray.length>0) {
@@ -147,7 +147,7 @@ loader.utils = (function() {
 				}
 
 				return fn(url).then(function () {
-					return requestMultimpleSerial(requestsArray);
+					return requestMultimpleSync(requestsArray);
 				});
 
 			});
@@ -306,8 +306,8 @@ loader.utils = (function() {
 		getRandomRange: getRandomRange,
 
 		request: request,
-		requestMultimpleSerial: requestMultimpleSerial,
-		requestMultimpleParallel: requestMultimpleParallel,
+		requestMultimpleSync: requestMultimpleSync,
+		requestMultimpleAsync: requestMultimpleAsync,
 		requestAllInOne: requestAllInOne,
 		requestAndSetJs: requestAndSetJs,
 		requestAndSetHtml: requestAndSetHtml,
