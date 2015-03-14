@@ -151,7 +151,7 @@ var loader = (function(){
 				path +'/'+ cfg.landing.js
 			];
 
-			utils.requestMultimpleSync(landingFiles)
+			utils.requestMultipleSync(landingFiles)
 				.then(function () {
 					_loadAppSuccess();
 				}, function (err) {

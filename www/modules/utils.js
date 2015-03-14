@@ -22,12 +22,12 @@ loader.utils = (function() {
 		// loop while the components are equal
 		for (var i = 0; i < len; i++) {
 			// A bigger than B
-			if (parseInt(aComponents[i],10) > parseInt(bComponents[i],10)) {
+			if (parseInt(aComponents[i], 10) > parseInt(bComponents[i], 10)) {
 				return 1;
 			}
 
 			// B bigger than A
-			if (parseInt(aComponents[i],10) < parseInt(bComponents[i],10)) {
+			if (parseInt(aComponents[i], 10) < parseInt(bComponents[i], 10)) {
 				return -1;
 			}
 		}
@@ -48,25 +48,27 @@ loader.utils = (function() {
 
 	function request(url) {
 		return new Promise(function (resolve, reject) {
-			console.log('request: '+ url);
+			console.log('request: ' + url);
 			var xhr = new XMLHttpRequest();
 
 			function errorDetected(er) {
 				reject(er);
 			}
 
-			xhr.onreadystatechange = function(){
+			xhr.onreadystatechange = function () {
 				if (this.readyState === 4 &&
 					this.status === 200 &&
-					this.responseText !== null){
+					this.responseText !== null) {
 
 					resolve(this.responseText);
-				} else if( this.readyState === 4 ) {
+				} else if (this.readyState === 4) {
 					errorDetected(loader.cfg.loader.text.errorRequestFile);
 				}
 			};
 
-			xhr.ontimeout = function(){errorDetected(loader.cfg.loader.text.errorTimeoutServer);};
+			xhr.ontimeout = function () {
+				errorDetected(loader.cfg.loader.text.errorTimeoutServer);
+			};
 			xhr.open('GET', url, true);
 			// 10000 is to much?
 			xhr.timeout = 10000;//yes here, porque ie11 pincha :S
@@ -74,20 +76,20 @@ loader.utils = (function() {
 		});
 	}
 
-	function getExtensionFile(s){
+	function getExtensionFile(s) {
 		var arr = s.split('.');
-		if(arr.length===0){
+		if (arr.length === 0) {
 			return s;
 		}
-		return arr[arr.length-1];
+		return arr[arr.length - 1];
 	}
 
-	function requestAllInOne(url){
+	function requestAllInOne(url) {
 		return request(url).then(function (data) {
 
-			try{
+			try {
 				data = JSON.parse(handleCompress(data));
-			} catch (e){
+			} catch (e) {
 				return Promise.reject(e);
 			}
 
@@ -108,17 +110,23 @@ loader.utils = (function() {
 	}
 
 	//be careful, HTML option pisa old version
-	function requestMultimpleAsync(requestsArray){
+	function requestMultipleAsync(requestsArray) {
 
 		return Promise.all(requestsArray.map(function (url) {
 			var q = {};
 
 			var type = getExtensionFile(url);
 
-			switch (type){
-				case 'html': q = requestAndSetHtml(url); break;
-				case 'css': q = requestAndSetCss(url); break;
-				case 'js': q = requestAndSetJs(url); break;
+			switch (type) {
+				case 'html':
+					q = requestAndSetHtml(url);
+					break;
+				case 'css':
+					q = requestAndSetCss(url);
+					break;
+				case 'js':
+					q = requestAndSetJs(url);
+					break;
 				default:
 					return Promise.reject('Error key not found on requestMultiple array');
 			}
@@ -127,33 +135,48 @@ loader.utils = (function() {
 		}));
 	}
 
-	function requestMultimpleSync(requestsArray){
-		var sequence = Promise.resolve();
-
-		if (requestsArray.length>0) {
-			var url = requestsArray.shift();
-			sequence = sequence.then(function () {
-
-				var type = getExtensionFile(url),
-					fn;
-
-				switch (type){
-					case 'html': fn = requestAndSetHtml; break;
-					case 'css': fn = requestAndSetCss; break;
-					case 'js': fn = requestAndSetJs; break;
-
-					default:
-						return Promise.reject('Error key not found on requestMultiple array');
-				}
-
-				return fn(url).then(function () {
-					return requestMultimpleSync(requestsArray);
-				});
-
-			});
+	function requestMultipleSync(requestsArray) {
+		if (requestsArray.length === 0) {
+			return Promise.resolve();
 		}
 
-		return sequence;
+		var url = requestsArray.shift();
+		return requestMultimpleSyncUnique(url)
+			.then(function () {
+				return requestMultipleSync(requestsArray);
+			});
+
+	}
+
+	function requestMultimpleSyncUnique(url) {
+		return new Promise(function (resolve, reject) {
+			console.group('requestMultipleSync: ' + url);
+
+			var type = getExtensionFile(url),
+				fn;
+
+			switch (type) {
+				case 'html':
+					fn = requestAndSetHtml;
+					break;
+				case 'css':
+					fn = requestAndSetCss;
+					break;
+				case 'js':
+					fn = requestAndSetJs;
+					break;
+
+				default:
+					reject('Error key not found on requestMultiple array');
+			}
+
+			console.log('type:', type);
+			fn(url).then(function () {
+				console.log('resolved');
+				console.groupEnd();
+				resolve();
+			});
+		});
 	}
 
 	//potential issue about security, review it
@@ -166,9 +189,10 @@ loader.utils = (function() {
 		setNewResourceByTag(resourceLoader, 'head');
 	}
 
-	function requestAndSetJs(url){
+	function requestAndSetJs(url) {
 		return request(url).then(_setJs);
 	}
+
 	function _setJs(content) {
 		var resourceLoader = document.createElement('script');
 		resourceLoader.type = 'text\/javascript';
@@ -177,19 +201,21 @@ loader.utils = (function() {
 		setNewResourceByTag(resourceLoader, 'head');
 	}
 
-	function requestAndSetCss(url){
+	function requestAndSetCss(url) {
 		return request(url).then(_setCss);
 	}
+
 	function _setCss(content) {
 		var resourceLoader = document.createElement('style');
 		resourceLoader.innerHTML = content;
 		setNewResourceByTag(resourceLoader, 'head');
 	}
 
-	function requestAndSetHtml(url){
+	function requestAndSetHtml(url) {
 		return request(url).then(_setHtml);
 	}
-	function _setHtml(data){
+
+	function _setHtml(data) {
 		var el = document.getElementById('mainContainer');
 		el.innerHTML = data;
 	}
@@ -233,23 +259,23 @@ loader.utils = (function() {
 //	};
 //	////
 
-	function showSkeletor(){
+	function showSkeletor() {
 		toggleSkeletor(false);
 	}
 
-	function hideSkeletor(){
+	function hideSkeletor() {
 		toggleSkeletor(true);
 	}
 
-	function toggleSkeletor(v){
+	function toggleSkeletor(v) {
 		//removeIf(production)
 		var el = document.getElementsByTagName('body')[0],
 			className = 'skeletor',
 			byValue = false;
 
-		byValue = (v === true || v === false) ? v :  el.classList.contains(className);
+		byValue = (v === true || v === false) ? v : el.classList.contains(className);
 
-		if( byValue ){
+		if (byValue) {
 			el.classList.remove(className);
 		} else {
 			el.classList.add(className);
@@ -257,8 +283,10 @@ loader.utils = (function() {
 		//endRemoveIf(production)
 	}
 
-	function showPanicError(m){
-		if(window.console){window.console.error(m);}
+	function showPanicError(m) {
+		if (window.console) {
+			window.console.error(m);
+		}
 		var body = document.getElementsByTagName('body')[0];
 		body.innerHTML = m;
 		loader.hide();
@@ -276,7 +304,7 @@ loader.utils = (function() {
 		return Math.random() * (max - min) + min;
 	}
 
-	function handleCompress(data){
+	function handleCompress(data) {
 		//anchor for compress, DON't touch it!
 		if(!loader.cfg.compress){return data;}//flagCompress
 		console.log('Resource compressed');
@@ -285,7 +313,7 @@ loader.utils = (function() {
 
 	//two arguments are set, one is a get, just for encapsular y no ver las variables
 	function cache(key, value) {
-		if(value !== undefined){
+		if (value !== undefined) {
 			_cache[key] = value;
 		} else {
 			return _cache[key];
@@ -297,7 +325,7 @@ loader.utils = (function() {
 		za: handleCompress,
 		showSkeletor: showSkeletor,
 		compareSemVer: compareSemVer,
-		getExtensionFile:getExtensionFile,
+		getExtensionFile: getExtensionFile,
 		hideSkeletor: hideSkeletor,
 		toggleSkeletor: toggleSkeletor,
 //		scrollTo: scrollTo,
@@ -306,8 +334,8 @@ loader.utils = (function() {
 		getRandomRange: getRandomRange,
 
 		request: request,
-		requestMultimpleSync: requestMultimpleSync,
-		requestMultimpleAsync: requestMultimpleAsync,
+		requestMultipleSync: requestMultipleSync,
+		requestMultipleAsync: requestMultipleAsync,
 		requestAllInOne: requestAllInOne,
 		requestAndSetJs: requestAndSetJs,
 		requestAndSetHtml: requestAndSetHtml,
@@ -319,4 +347,4 @@ loader.utils = (function() {
 //		setNewResourceById: setNewResourceById,
 	};
 
-}());
+})();
