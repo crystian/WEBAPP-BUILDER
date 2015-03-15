@@ -13,6 +13,7 @@ var gulp = require('gulp'),
 	autoprefixer = require('gulp-autoprefixer'),
 	csslint = require('gulp-csslint'),
 	inject = require('gulp-inject'),
+	chalk = require('chalk'),
 	removeCode = require('gulp-remove-code'),
 	uglify = require('gulp-uglify'),
 	jshint = require('gulp-jshint'),
@@ -140,4 +141,22 @@ exports.getExtensionFile = function(s) {
 		return s;
 	}
 	return arr[arr.length - 1];
+};
+
+//COMMONS between project and loader:
+process.on('uncaughtException', function(err){
+	if(typeof err === 'string') err = {message:err};
+	console.logRed('uncaughtException: ' + err.message);
+	if (gutil.env.debug) {
+		console.logRed(err.stack);
+	}
+	process.exit(1);             // exit with error
+});
+
+console.logGreen = function (m) {
+	console.log(chalk.black.bgGreen(m));
+};
+
+console.logRed = function (m) {
+	console.log(chalk.white.bold.bgRed(m));
 };
