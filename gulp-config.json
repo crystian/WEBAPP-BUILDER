@@ -7,7 +7,7 @@
 	"cordova": true,
 	"compress": true,
 	"isCordovaDevice": false,
-	"debugZoneActive": true,
+	"debugZoneActive": false,
 
 	"compatibilityFirst": "\n\treturn !!(window.document.querySelector &&\n\twindow.console &&window.document.addEventListener &&\n\t(window.document.getElementsByTagName('body')[0]).classList &&\n\twindow.localStorage &&\n\twindow.navigator &&\n\twindow.XMLHttpRequest &&\n\twindow.applicationCache &&\n\twindow.document.createEvent &&\n\tarr.map &&\n\tarr.every);\n\t",
 	"compatibilityMatrix": {
@@ -69,6 +69,7 @@
 	],
 
 	"app": {
+		"release": true,
 		"folders":{
 			"build": "build",
 			"cordova": "CORDOVA",
@@ -76,6 +77,7 @@
 			"www": "www",
 			"template": "AppTemplate",
 			"loader": "LOADER",
+			"bower": "vendors/bower_components",
 			"api": "www/api"
 		}
 	},

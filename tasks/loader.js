@@ -169,7 +169,7 @@ gulp.task('make:loader:css', ['css:loader'],  function () {
 
 	return streamqueue({ objectMode: true },
 			gulp.src(cssLib)
-				.pipe(gif(global.cfg.loader.bower.bootstrap, replace('../fonts/glyphicons','fonts/glyphicons')))
+				.pipe(gif(global.cfg.loader.bower.bootstrap, replace('../fonts/glyphicons','assets/fonts/glyphicons')))
 				.pipe(strip({safe:false, block:false})),
 			merge(
 				gulp.src(cssLoader),
@@ -187,7 +187,7 @@ gulp.task('copy:fonts', function (cb) {
 	if(global.cfg.loader.bower.bootstrap){
 		fs.copySync(
 			global.cfg.folders.bower + '/' + global.cfg.folders.bootstrapDist +'/fonts',
-			global.cfg.folders.build + '/fonts'
+			global.cfg.folders.build + '/assets/fonts'
 		);
 		console.logGreen('Bootstrap fonts copied');
 	}
