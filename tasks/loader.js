@@ -20,6 +20,7 @@ var gulp = require('gulp'),
 	strip = require('gulp-strip-comments'),
 	runSequence = require('run-sequence'),
 	fs = require('fs-extra'),
+	clean = require('gulp-clean'),
 	gutil = require('gulp-util');
 
 
@@ -61,6 +62,10 @@ gulp.task('make:loader', ['make:loader:files'],  function () {
 			replace('"isCordovaDevice": false,', '"isCordovaDevice": true,')
 		))
 		.pipe(gulp.dest(global.cfg.folders.build));
+	}
+
+	if (global.cfg.loader.oneRequest) {
+		gulp.src(global.cfg.folders.build + '/landing', {read: false}).pipe(clean());
 	}
 
 	return stream;
