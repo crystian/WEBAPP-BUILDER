@@ -20,23 +20,10 @@ gulp.task('remove:build', function() {
 
 gulp.task('remove:temp', function() {
 	return gulp.src([
-			global.cfg.folders.temp,
-			global.cfg.folders.build +'/*.scss',
-			global.cfg.folders.build +'/'+
-				(global.cfg.loader.oneRequest ? '{'+
-					global.cfg.landing.html+','+
-					global.cfg.landing.css+','+
-					global.cfg.landing.js+'}'
-					: global.cfg.landing.finalFile
-				)
+			global.cfg.folders.temp
 		], {read: false})
 		.pipe(clean());
 });
-
-gulp.task('make:onRequest', function(cb) {
-	shared.makeOneRequest(global.cfg.makeOneRequestFile, cb);
-});
-
 
 
 process.on('uncaughtException', function(err){

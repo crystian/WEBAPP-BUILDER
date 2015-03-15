@@ -41,7 +41,42 @@ exports.jsMaker = function(stream) {
 	);
 };
 
-exports.makeOneRequest = function (file, cb) {
+
+exports.getFileNamesOrAllInOne = function(files){
+	if(files.length<2){
+		console.logRed('getFileNamesOrAllInOne: It can be minor two element');
+		process.exit(1);
+	}
+	return (global.cfg.loader.oneRequest) ? files[files.length-1] : files.slice(0,files.length-1);
+};
+
+
+exports.prepareOneRequestFile = function (files, cb) {
+	var f = {
+			html: '',
+			js: '',
+			css: ''
+		},
+		self = this;
+
+	files.forEach(function (item) {
+		var type = self.getExtensionFile(item);
+		f[type] = item;
+	});
+
+	var	oneRequestFiles = {
+		js: global.cfg.folders.template +'/'+ f.js,
+		css: global.cfg.folders.template +'/'+ f.css,
+		html: global.cfg.folders.template +'/'+ f.html,
+		dest: '../'+ global.cfg.folders.template +'/'+ files[files.length-1]//always last option
+	};
+
+	this.makeOneRequestFile(oneRequestFiles, function () {
+		cb();
+	});
+};
+
+exports.makeOneRequestFile = function (file, cb) {
 	var json = {};
 	if(file.html) {json.h = fs.readFileSync(file.html, {encoding : 'utf8'});}
 	if(file.js)	 {json.j = fs.readFileSync(file.js, {encoding : 'utf8'});}
@@ -53,7 +88,7 @@ exports.makeOneRequest = function (file, cb) {
 	if(global.cfg.compress){
 		LZString = require('../vendors/lz-string/libs/lz-string.min.js');
 		jsonText = LZString.compressToUTF16(jsonText);
-		console.logGreen(file.name +' compressed!');
+		console.logGreen(file.dest +' compressed!');
 	}
 
 	fs.writeFile(global.cfg.folders.build +'/'+file.dest,
@@ -62,7 +97,7 @@ exports.makeOneRequest = function (file, cb) {
 			if(err) {
 				console.logRed(err);
 			} else {
-				console.logGreen('Magic generated');
+				console.logGreen(file.dest +' generated');
 			}
 			cb();
 		});
@@ -97,4 +132,12 @@ exports.injectContent = function(filePath, name, tagHtm) {
 			return r;
 		}
 	});
+};
+
+exports.getExtensionFile = function(s) {
+	var arr = s.split('.');
+	if (arr.length === 0) {
+		return s;
+	}
+	return arr[arr.length - 1];
 };

@@ -128,36 +128,12 @@ var loader = (function(){
 			FastClick.attach(doc.body);
 		}
 
-		_loadApp();
+		_loadAppFiles(cfg.landingFiles, _loadAppSuccess, _loadAppFail);
 	}
 
-	function _loadApp() {
-		var path = (cfg.loader.build) ? '.' : '../'+cfg.loader.pathTpl;
 
-		//real case:
-		if( cfg.loader.oneRequest ){
-
-			utils.requestAllInOne(path +'/'+ cfg.landing.finalFile).then(function () {
-					_loadAppSuccess();
-				}, function (err) {
-					_loadAppFail(err);
-				});
-
-		} else { //dev case
-
-			var landingFiles = [
-				path +'/'+ cfg.landing.css,
-				path +'/'+ cfg.landing.html,
-				path +'/'+ cfg.landing.js
-			];
-
-			utils.requestMultipleSync(landingFiles)
-				.then(function () {
-					_loadAppSuccess();
-				}, function (err) {
-					_loadAppFail(err);
-				});
-		}
+	function _loadAppFiles(files, loadAppSuccess, loadAppFail){
+		utils.requestOneOrAllInOne(files).then(loadAppSuccess, loadAppFail);
 	}
 
 	function _loadAppSuccess(){

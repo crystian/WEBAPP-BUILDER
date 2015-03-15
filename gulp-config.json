@@ -80,12 +80,12 @@
 		}
 	},
 
-	"landing": {
-		"html": "landing/landing.html",
-		"js": "landing/landing.js",
-		"css": "landing/landing.css",
-		"finalFile": "magic"
-	},
+	"landing": [
+		"landing/landing.js",
+		"landing/landing.css",
+		"landing/landing.html",
+		"magic"
+	],
 
 	"files": {
 		"index":"index.html",
@@ -126,7 +126,7 @@
 			"temp": "build/.tmp",
 			"screens": "build/screens",
 			"loadings": "www/loading",
-			"template": "AppTemplate/APP/WWW",
+			"template": "AppTemplate/APP/www",
 			"bootstrapDist": "bootstrap/dist"
 		},
 

@@ -87,6 +87,20 @@ loader.utils = (function() {
 		return request(url).then(JSON.parse);
 	}
 
+	function requestOneOrAllInOne(files){
+		var path = (loader.cfg.loader.build) ? '.' : '../'+loader.cfg.loader.pathTpl;
+
+		if(files instanceof Array){
+			files = files.map(function (item) {
+				return path +'/'+ item;
+			});
+
+			return requestMultipleAsync(files);
+		}
+
+		return requestAllInOne(files);
+	}
+
 	function requestAllInOne(url) {
 		return request(url).then(function (data) {
 
@@ -339,6 +353,7 @@ loader.utils = (function() {
 
 		request: request,
 		requestJson: requestJson,
+		requestOneOrAllInOne: requestOneOrAllInOne,
 		requestMultipleSync: requestMultipleSync,
 		requestMultipleAsync: requestMultipleAsync,
 		requestAllInOne: requestAllInOne,

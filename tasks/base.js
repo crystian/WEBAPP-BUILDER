@@ -79,7 +79,6 @@ gulp.task('generate:config', function (cb) {
 
 	json.loader = {
 		version: global.cfg.loader.version,
-		oneRequest: global.cfg.loader.oneRequest,
 		build: false,
 		fastclick: global.cfg.loader.fastclick,
 		pathTpl: global.cfg.loader.folders.template,
@@ -94,12 +93,7 @@ gulp.task('generate:config', function (cb) {
 		}
 	};
 
-	json.landing = {
-		'html': global.cfg.landing.html,
-		'js': global.cfg.landing.js,
-		'css': global.cfg.landing.css,
-		'finalFile': global.cfg.landing.finalFile
-	};
+	json.landingFiles = shared.getFileNamesOrAllInOne(global.cfg.landing);
 
 	var compatibilityTpl =
 		'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n'+

@@ -80,15 +80,8 @@ gulp.task('make:loader:files', ['make:loader:js', 'make:loader:css', 'copy:fonts
 
 	if (global.cfg.loader.oneRequest) {
 		//landing
-		global.cfg.makeOneRequestFile = {
-			name:'landing',
-			js: global.cfg.folders.template +'/'+ global.cfg.landing.js,
-			css: global.cfg.folders.template +'/'+ global.cfg.landing.css,
-			html: global.cfg.folders.template +'/'+ global.cfg.landing.html,
-			dest: '../'+global.cfg.folders.template +'/'+ global.cfg.landing.finalFile
-		};
 
-		runSequence('make:onRequest', function () {
+		shared.prepareOneRequestFile(global.cfg.landing, function () {
 			callbackFn(cb);
 		});
 
