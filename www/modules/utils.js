@@ -152,7 +152,7 @@ loader.utils = (function() {
 	}
 	function requestMultimpleSyncUnique(url) {
 		return new Promise(function (resolve, reject) {
-			console.group('requestMultipleSync: ' + url);
+			//console.group('requestMultipleSync: ' + url);
 
 			var type = getExtensionFile(url),
 				fn;
@@ -172,10 +172,10 @@ loader.utils = (function() {
 					reject('Error key not found on requestMultiple array');
 			}
 
-			console.log('type:', type);
+			//console.log('type:', type);
 			fn(url).then(function () {
-				console.log('resolved');
-				console.groupEnd();
+				//console.log('resolved');
+				//console.groupEnd();
 				resolve();
 			}, function (m) {
 				reject(m);
