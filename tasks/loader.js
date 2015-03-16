@@ -183,6 +183,7 @@ gulp.task('make:loader:css', ['css:loader'],  function () {
 		.pipe(gulp.dest(global.cfg.folders.temp));
 });
 
+//TODO rename with bootstrap
 gulp.task('copy:fonts', function (cb) {
 	if(global.cfg.loader.bower.bootstrap){
 		fs.copySync(
@@ -202,3 +203,4 @@ gulp.task('css:template', function () {
 	var path = global.cfg.folders.template;
 	return shared.sassfixer(path +'/**/*.scss',path)
 });
+

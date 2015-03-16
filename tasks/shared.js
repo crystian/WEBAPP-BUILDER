@@ -143,6 +143,18 @@ exports.getExtensionFile = function(s) {
 	return arr[arr.length - 1];
 };
 
+exports.setExtensionMinFile = function(s, preExtension) {
+	var arr = s.split('.');
+	if (arr.length <= 1) {
+		console.logRed('Extension not found!');
+		return s;
+	}
+
+	arr.splice(arr.length-1, 0, preExtension);
+
+	return arr.join('.');
+};
+
 //COMMONS between project and loader:
 process.on('uncaughtException', function(err){
 	if(typeof err === 'string') err = {message:err};
@@ -152,6 +164,10 @@ process.on('uncaughtException', function(err){
 	}
 	process.exit(1);             // exit with error
 });
+
+console.logWarn = function (m) {
+	console.log(chalk.black.bgYellow(m));
+};
 
 console.logGreen = function (m) {
 	console.log(chalk.black.bgGreen(m));
