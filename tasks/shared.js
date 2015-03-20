@@ -143,6 +143,15 @@ exports.getExtensionFile = function(s) {
 	return arr[arr.length - 1];
 };
 
+exports.getFileName = function(s) {
+	var arr = s.split('.');
+	if (arr.length === 0) {
+		return s;
+	}
+	arr.splice(arr.length-1,1);
+	return arr.join('.');
+};
+
 exports.setExtensionMinFile = function(s, preExtension) {
 	var arr = s.split('.');
 	if (arr.length <= 1) {

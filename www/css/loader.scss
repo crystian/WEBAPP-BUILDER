@@ -1,5 +1,7 @@
+$colorBg: #ffffff;
+
 html{
-	background-color: #ffffff;
+	background-color: $colorBg;
 }
 
 .fullscreen {
@@ -16,7 +18,7 @@ html{
 	z-index: 1000;
 	position: absolute;
 	margin: 15px;
-	background-color: #ffffff;
+	background-color: $colorBg;
 	color: #000000;
 	a{
 		color: black;

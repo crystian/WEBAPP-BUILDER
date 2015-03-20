@@ -4,3 +4,4 @@
 /node_modules
 /vendors
 /AppTemplate/APP/WWW/**/*.css
+/.sass-cache

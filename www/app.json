@@ -1,31 +1,15 @@
 [
 	{
-		"file": "swiper.css",
-		"path": "vendors/swiper/dist/css",
-		"active": "global.cfg.loader.bower.swiper",
-		"source": "swiper.scss",
-		"overwrite": false,
-		"linter": false,
-		"minificated": true
-	},{
-		"file": "bootstrap.css",
-		"path": "vendors/bootstrap/dist/css",
-		"condition": "global.cfg.loader.bower.bootstrap",
-		"linter": false,
-		"replaces": {
-			"pre": [
-				["../fonts/glyphicons","assets/fonts/glyphicons"]
-			],
-			"post": [
-			]
-		}
-	},{
-		"file": "loader.css",
-		"source": "loader.scss",
+		"file": "loader.scss",
 		"path": "www/css"
 	},{
-		"file": "loading.css",
-		"source": "loading.scss",
-		"path": "global.cfg.folders.loadings +'/'+ global.cfg.loader.loading"
+		"file": "loader2.sass",
+		"path": "www/css"
+	},{
+		"file": "a.css",
+		"path": "www/css"
+	},{
+		"file": "loader.js",
+		"path": "www/js"
 	}
 ]
