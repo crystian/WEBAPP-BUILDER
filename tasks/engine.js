@@ -13,6 +13,7 @@ var gulp = require('gulp'),
 	fs = require('fs-extra'),
 	extend = require('extend'),
 	gif = require('gulp-if'),
+	less = require('gulp-less'),
 	debug = require('gulp-debug'),
 	merge =require('merge-stream'),
 	clean = require('gulp-clean'),
@@ -47,21 +48,24 @@ var defaults = {
 				//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
 			]
 		}
+	},
+	types : {
+		'scss': true,
+		'css': true,
+		'js': true,
+		'html': true
 	}
 };
 
-
-
 gulp.task('a', ['preprocessors:loader'], function () {
-	var a = doMagic(require('../www/app.json'));
+	var a = doMagic('../www/app.json');
 	//cb();
 	return a;
 });
 
-gulp.task('sass:loader', function () {
+gulp.task('preprocessors:loader', function () {
 	return preprocessorsProcess('../www/app.json');
 });
-gulp.task('preprocessors:loader', ['sass:loader']);
 
 function preprocessorsProcess(url){
 	var files = require(url);
@@ -87,8 +91,7 @@ function preprocessorsProcess(url){
 
 		if(!fs.existsSync(source)){
 			console.logRed('File not found: '+ source);
-			//todo improve
-			process.exit(1);
+			exit(1);
 		}
 
 		var final = file.path + '/' + fileName +'.css';
@@ -97,69 +100,57 @@ function preprocessorsProcess(url){
 			continue;
 		}
 
+		var newStream = {};
+
 		switch (type){
 			case 'scss':
 			case 'sass':
-				//filesToProcess.scss.push(p);
 				var sassOptions = {sourcemap: false, style: 'expanded', noCache: false, trace: true};
 				if (global.cfg.os==='osx') {
 					sassOptions['sourcemap=none'] = true;//hack for sass on mac
 				}
 
-				var s = gulp.src(source)
+				newStream = gulp.src(source)
 					.pipe(debug({verbose: true}))
 					.on('error', gutil.log)
 					.pipe(sass(sassOptions))
 					.pipe(gulp.dest(file.path));
 
-				stream = (stream === undefined) ? s : merge(stream, s);
 				break;
 			case 'less':
+				newStream = gulp.src(source)
+					.pipe(debug({verbose: true}))
+					.on('error', gutil.log)
+					.pipe(less())
+					.pipe(gulp.dest(file.path));
 
 				break;
 		}
+
+		stream = (stream === undefined) ? newStream : merge(stream, newStream);
 	}
 
 	return stream;
 }
 
+function exit(n){
+	process.exit(n);
+}
 
-//gulp.task('doCss', function (cb) {
-//	var files = require('../www/app.json');
-//
-//	doCss(files);
-//	cb();
-//});
-//
-//function doCss(files){
-//	var i = 0,
-//		l = files.length;
-//
-//	for (; i < l; i++) {
-//		var file = extend(true, {}, fileDefault, files[i]);
-//
-//
-//	}
-//}
 
-function doMagic(files, options){
+function doMagic(url, options){
 	'use strict';
 
-	var optionsDefault = {
-			'scss': true,
-			'css': true,
-			'js': true,
-			'html': true
-		},
-		streamsMerged = undefined;
+	var streamsMerged = undefined,
+		files = require(url);
 
-	options = extend(true, {}, optionsDefault, options);
+	options = extend(true, {}, defaults.types, options);
 
 	var i = 0,
 		l = files.length;
 
 	for (; i < l; i++) {
-		var file = extend(true, {}, fileDefault, files[i]);
+		var file = extend(true, {}, defaults.file, files[i]);
 		console.log('File: ', file.path);
 
 		//1 is active? you can send an expression
@@ -172,7 +163,7 @@ function doMagic(files, options){
 		_makePath(file);
 
 		//4 overwrite?
-		if(!file.overwrite && _fileExist(file)) {
+		if(!file.overwrite && _fileDestExist(file)) {
 			continue;
 		}
 
@@ -197,12 +188,7 @@ function doMagic(files, options){
 		//* replaces posterity to minimisation
 		_replace(stream, file.replaces.post);
 
-
-		if(streamsMerged===undefined) {
-			streamsMerged = stream;
-		} else {
-			streamsMerged = merge(streamsMerged, stream);
-		}
+		streamsMerged = (streamsMerged === undefined) ? stream : merge(streamsMerged, stream);
 
 		/*
 		flujo:
@@ -230,19 +216,6 @@ function doMagic(files, options){
 }
 
 var _handle = {
-	'scss': function(stream, file){
-		console.logWarn('SASS');
-
-		var p = file.path +'/'+ file.name;
-		if(!fs.existsSync(p)){
-			console.logRed('File not found: '+ p);
-			//todo improve
-			process.exit(1);
-		}
-
-		return _handle.css(stream, file);
-	},
-
 	'css' : function(stream, file) {
 		console.logWarn('CSS');
 
@@ -298,7 +271,7 @@ function _makePath(file) {
 
 //if it is minificated version, just validate this file, otherwise check the normal version
 //this is util for Libs with out min version
-function _fileExist(file){
+function _fileDestExist(file){
 	var r = false;
 	//validate if exit, if exist return don't process nothing
 	var p = file.path + '/';

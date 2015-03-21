@@ -11,5 +11,8 @@
 	},{
 		"file": "loader.js",
 		"path": "www/js"
+	},{
+		"file": "loader3.less",
+		"path": "www/css"
 	}
 ]
