@@ -154,7 +154,7 @@ var loader = (function(){
 
 		//prefiero hacerlo asi por seguridad, esto lo remueve gulp en modo release
 		//removeIf(production)
-		if(true){return;}//flagGulpConsoleMessage
+		if(true){return;}
 		//endRemoveIf(production)
 
 		//jshint quotmark:false, maxstatements:30

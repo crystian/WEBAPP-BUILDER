@@ -6,7 +6,7 @@ var gulp = require('gulp'),
 	shared = require('./shared'),
 	strip = require('gulp-strip-comments'),
 	minifycss = require('gulp-minify-css'),
-	sass = require('gulp-ruby-sass'),
+	sass = require('gulp-sass'),
 	autoprefixer = require('gulp-autoprefixer'),
 	csslint = require('gulp-csslint'),
 	replace = require('gulp-replace'),
@@ -40,6 +40,7 @@ var defaults = {
 		'autoPrefix': true,		//auto prefix when source is active
 		'overwrite': true,		//specially for libs, just make it once
 		'minificated': false,	//if it is a lib for don't re do the minifcation
+		'makeMin': false,		//it should be create a minificate version
 		'replaces': {
 			'pre': [			//pre minificatedd
 				//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
@@ -49,18 +50,44 @@ var defaults = {
 			]
 		}
 	},
-	types : {
-		'scss': true,
-		'css': true,
-		'js': true,
-		'html': true
+	validCssExtensions : ['sass', 'scss','less'],
+	options: {
+		extensionToProcess : {
+			'scss': true,
+			'sass': true,
+			'less': true,
+			'css': true,
+			'js': true,
+			'html': true
+		}
 	}
 };
 
+/*
+ flujo:
+ active
+ min name
+ path
+ overwrite
+ replace-pre
+
+ css:
+ sass
+ prefijos
+ linter
+ save (sin min)
+ minifacte
+
+ replace-post
+ concat
+ */
+
 gulp.task('a', ['preprocessors:loader'], function () {
-	var a = doMagic('../www/app.json');
-	//cb();
-	return a;
+	return doMagic('../www/app.json');
+});
+
+gulp.task('b', function () {
+	return doMagic('../www/app.json');
 });
 
 gulp.task('preprocessors:loader', function () {
@@ -71,214 +98,244 @@ function preprocessorsProcess(url){
 	var files = require(url);
 	var i = 0,
 		l = files.length,
-		validExtensions = ['sass', 'scss','less'],
-		stream = undefined;
+		streams = undefined;
 
 	for (; i < l; i++) {
 		var file = extend(true, {}, defaults.file, files[i]);
 
-		if(_isNotActive(file)){continue;}
+		if(_isNotActive(file) || file.minificated){continue;}
 
 		var fileName = shared.getFileName(file.file),
 			type = shared.getExtensionFile(file.file);
 
+
 		//valid types
-		if(validExtensions.indexOf(type)===-1){continue;}
+		if(defaults.validCssExtensions.indexOf(type)===-1){continue;}
 
-		_makePath(file);
+		file.path = _makePath(file.path);
 
-		var source = file.path + '/' + file.file;
+		var source = file.path + '/' + file.file,
+			final = file.path + '/' + fileName +'.css';
+
+		//which name have min file?, default: *.min.*
+		file.min = file.min || shared.setExtensionFilename(file.file, 'min.css');
 
 		if(!fs.existsSync(source)){
 			console.logRed('File not found: '+ source);
-			exit(1);
+			_exit(1);
 		}
 
-		var final = file.path + '/' + fileName +'.css';
+		file._cssFile = final;
 
-		if(!file.overwrite && fs.existsSync(final)) {
+		if( !(global.cfg.loader.release || file.overwrite)
+			&& (_fileDestExist(file)
+			&& !file.overwrite)) {//for the overwrite = false
+			//exist, and don't overwrite it
+			console.log('File found, don\'t overwrite ('+ file.file +')');
 			continue;
 		}
 
-		var newStream = {};
+		var stream = gulp.src(source)
+			.pipe(debug({verbose: true}))
+			.on('error', gutil.log);
 
 		switch (type){
 			case 'scss':
 			case 'sass':
-				var sassOptions = {sourcemap: false, style: 'expanded', noCache: false, trace: true};
-				if (global.cfg.os==='osx') {
-					sassOptions['sourcemap=none'] = true;//hack for sass on mac
-				}
+				var sassOptions = {errLogToConsole: true, indentedSyntax: (type === 'sass')};
 
-				newStream = gulp.src(source)
-					.pipe(debug({verbose: true}))
-					.on('error', gutil.log)
-					.pipe(sass(sassOptions))
-					.pipe(gulp.dest(file.path));
-
+				stream = stream.pipe(sass(sassOptions));
 				break;
 			case 'less':
-				newStream = gulp.src(source)
-					.pipe(debug({verbose: true}))
-					.on('error', gutil.log)
-					.pipe(less())
-					.pipe(gulp.dest(file.path));
-
+				stream = stream.pipe(less());
 				break;
 		}
 
-		stream = (stream === undefined) ? newStream : merge(stream, newStream);
+		if (file.autoPrefix) {
+			stream = stream.pipe(autoprefixer(global.cfg.autoprefixer))
+				.pipe(replace(' 0px', ' 0'));
+		}
+
+		if (file.linter) {
+			stream = stream.pipe(csslint('csslintrc.json'))
+				.pipe(csslint.reporter()).on('error', gutil.log);
+		}
+
+		stream = stream.pipe(gulp.dest(file.path));
+
+		if(file.makeMin){
+			stream = _minificate(stream, file, type)
+		}
+
+		streams = _merge(streams, stream);
 	}
 
-	return stream;
-}
-
-function exit(n){
-	process.exit(n);
+	return streams;
 }
 
 
 function doMagic(url, options){
-	'use strict';
-
-	var streamsMerged = undefined,
+	var streams = undefined,
 		files = require(url);
 
-	options = extend(true, {}, defaults.types, options);
+	options = _mergeOptions(options);
 
 	var i = 0,
 		l = files.length;
 
 	for (; i < l; i++) {
 		var file = extend(true, {}, defaults.file, files[i]);
-		console.log('File: ', file.path);
 
-		//1 is active? you can send an expression
+		//is active? you can send an expression
 		if(_isNotActive(file)){continue;}
 
-		//2 which name have min file?, default: *.min.*
-		file.min = file.min || shared.setExtensionMinFile(file.file, 'min');
+		////which name have min file?, default: *.min.*
+		//file.min = file.min || shared.setPreExtensionFilename(file.file, 'min');
 
-		//3 getting the path, you can send an expression
-		_makePath(file);
+		//getting the path, you can send an expression
+		file.path = _makePath(file.path);
 
-		//4 overwrite?
-		if(!file.overwrite && _fileDestExist(file)) {
-			continue;
-		}
+		var source = file.path + '/' + file.file,
+			fileName = shared.getFileName(file.file),
+			type = shared.getExtensionFile(file.file);
 
-		//5 Finally I'll create a stream
-		var stream = gulp.src(file.path + '/'+ file.file)
+		if(options.extensionToProcess[type]===undefined){
+			console.logRed('Error, extension unknown, check app.json: '+ source);
+			_exit(-1);
+		} else if(options.extensionToProcess[type]===true) {
+
+			//just css files, before that it should be run preprocessorsProcess
+			if (defaults.validCssExtensions.indexOf(type) !== -1) {
+				type = 'css';
+				source = file.path + '/' + fileName + '.css';
+			}
+
+			//file should be exist!
+			if (!fs.existsSync(source)) {
+				console.logRed('File not found!: ' + source);
+				_exit(-1);
+			}
+
+			//Finally I'll create a stream
+			var newStream = gulp.src(source)
 				.pipe(debug({verbose: true}))
 				.on('error', gutil.log);
 
-		//6 replaces previously to minimisation
-		_replace(stream, file.replaces.pre);
+			{
+				//replaces previously to minimisation
+				newStream = _replace(newStream, file.replaces.pre);
 
-		var type = shared.getExtensionFile(file.file);
+				if (_handle[type]) {
+					console.log('File to process: ', source);
+					newStream = _handle[type](newStream, file);
+				}
 
-		if(options[type]){
-			if (_handle[type]) {
-				stream = _handle[type](stream, file);
+				//* replaces posterity to minimisation
+				newStream = _replace(newStream, file.replaces.post);
+
 			}
-		} else {
-			console.logRed('Error, extension unknown, check app.json');
 		}
 
-		//* replaces posterity to minimisation
-		_replace(stream, file.replaces.post);
 
-		streamsMerged = (streamsMerged === undefined) ? stream : merge(streamsMerged, stream);
-
-		/*
-		flujo:
-			active
-			min name
-			path
-			overwrite
-			replace-pre
-
-			css:
-				sass
-				prefijos
-				linter
-				save (sin min)
-				minifacte
-
-			replace-post
-			concat
-		*/
-
+		streams = _merge(streams, newStream);
 	}
 
-	return streamsMerged;
+	return streams;
 
+}
+
+function _minificate(stream, file, type){
+	//replaces previously to minimisation
+	stream = _replace(stream, file.replaces.pre);
+
+	//just css files, before that it should be run preprocessorsProcess
+	if (defaults.validCssExtensions.indexOf(type) !== -1) {
+		type = 'css';
+	}
+
+	if (_handle[type]) {
+		console.log('File to process: ', file.file);
+		stream = _handle[type](stream, file);
+	} else {
+		console.logRed('Type not found on _minificate, file: '+ file.file);
+	}
+
+	//* replaces posterity to minimisation
+	stream = _replace(stream, file.replaces.post);
+
+	return stream;
 }
 
 var _handle = {
 	'css' : function(stream, file) {
 		console.logWarn('CSS');
 
-		if (file.autoPrefix) {
-			console.log('autoprefix');
-			stream.pipe(autoprefixer(global.cfg.autoprefixer))
-				.pipe(replace(' 0px', ' 0'));
-		}
-
-		stream.pipe(gif(global.cfg.loader.release, strip({safe:false, block:false})));
-
-		if (file.linter) {
-			console.log('Linter');
-			stream.pipe(csslint('csslintrc.json'))
-				.pipe(csslint.reporter());
-		}
-
-		//finish preprocessor process and save it (*.css final version)
-		stream.pipe(gulp.dest('aaaa/'+ file.path));
-
-		//if it is false means it need write once, this is the moment!
-		if(!file.overwrite){
-			console.log('overwrite once');
-			stream.pipe(minifycss());
-			stream.pipe(gulp.dest('cccc/'+ file.path));
-		} else {
-			console.log('minificate: '+global.cfg.loader.release);
-			stream.pipe(gif(global.cfg.loader.release, minifycss()))
-		}
+		stream.pipe(strip({safe:false, block:false}))
+			.pipe(minifycss())
+			.pipe(rename({extname: '.min.css'}))
+			.pipe(gulp.dest(file.path));
 
 		return stream;
-
 	},
+
 	'js': function(stream, file){
 		console.log('NADA AUN JS');
+		return stream;
 	},
 	'html': function(stream, file) {
 		console.log('NADA AUN HTML');
+		return stream;
 	}
 };
 
+
+function _mergeOptions(options) {
+	//merge options, by default all are true, but if we send and type others will be false
+	if (options) {
+		var op = {};
+		for (ext in defaults.options.extensionToProcess) {
+			var extDetected = options.extensionToProcess[ext];
+			if (extDetected === undefined) {
+				op[ext] = false;
+			} else {
+				op[ext] = extDetected;
+			}
+		}
+		options.extensionToProcess = op;
+	} else {
+		options = extend(true, {}, defaults.options);
+	}
+	return options;
+}
+
+function _merge(stream, newStream) {
+	return (stream === undefined) ? newStream : merge(stream, newStream);
+}
+
 function _isNotActive(file) {
+	//eval, yes, with pleasure! :)
 	return (!eval(file.active));
 }
 
-function _makePath(file) {
+function _makePath(path) {
+	var r = path;
 	//if fail, it is a string
 	try {
-		file.path = eval(file.path);
+		//eval, yes, with pleasure! :)
+		r = eval(path);
 	} catch (e) {
 	}
+	return r;
 }
 
 //if it is minificated version, just validate this file, otherwise check the normal version
 //this is util for Libs with out min version
 function _fileDestExist(file){
 	var r = false;
-	//validate if exit, if exist return don't process nothing
-	var p = file.path + '/';
-	p += (file.minificated) ? file.min : file.file;
 
+	//validate if exist, if exist return don't process nothing
+	var p = (global.cfg.loader.release || file.makeMin) ? file.path + '/' +file.min : file._cssFile;
 	if(fs.existsSync(p)){
-		console.log('File found, don\'t overwrite ('+ p +')');
 		r = true;
 	}
 
@@ -298,8 +355,12 @@ function _replace(stream, replaces){
 		}
 
 		console.logGreen('key: "'+ replacePair[0] +'" value: "'+ replacePair[1] +'"');
-		stream.pipe(replace(replacePair[0], replacePair[1]));
+		stream = stream.pipe(replace(replacePair[0], replacePair[1]));
 	}
 
 	return stream;
+}
+
+function _exit(n){
+	process.exit(n);
 }

@@ -27,7 +27,7 @@ set PATH_TEMP="%PATH_TEMP%;%%PHANTOM_HOME%%\bin"
 
 rem ANDROID
 setx ANDROID_HOME "%WS%"\android
-set PATH_TEMP="%PATH_TEMP%;%%ANDROID_HOME%%\tools"
+set PATH_TEMP="%PATH_TEMP%;%%ANDROID_HOME%%\tools;%%ANDROID_HOME%%\platform-tools"
 
 rem RUBY
 setx RUBY_PATH %WS%\Ruby\2.0.0p451
