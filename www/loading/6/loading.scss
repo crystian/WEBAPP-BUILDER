@@ -12,7 +12,7 @@ $color2: #fcad26;
 
 	.loading{
 		position: absolute;
-		width: 24px*6-4px;
+		width: calc(calc(24px*6px) - 4px);
 		height: 20px;
 		left: -48px;
 		top: 50px;
