@@ -17,9 +17,9 @@ requireDir('./tasks');
 try{
 	//merge between default and specify:
 	global.cfg = extend(true, {},
-		require('./gulp-config.json'),
-		require('../gulp-config.json'),
-		require('../gulp-config-local.json')
+		require('./project-config.json'),
+		require('../project-config.json'),
+		require('../project-config-local.json')
 	);
 
 	//shortcut to simplify
@@ -28,7 +28,7 @@ try{
 	global.cfg.pkg = require('./package.json');
 
 } catch (e){
-	console.logRed('Do you run installer?, There are some problems with gulp-config*, check those please');
+	console.logRed('Do you run installer?, There are some problems with project-config*, check those please');
 	process.exit(1);
 }
 

@@ -12,7 +12,7 @@ var fs = require('fs-extra'),
 	inquirer = require('inquirer'),
 	exec = require('child_process').exec,
 	commons = require('./tasks/commons'),
-	cfg = require('./gulp-config.json'),
+	cfg = require('./project-config.json'),
 	chalk = require('chalk');
 
 var questions = [];
@@ -106,7 +106,7 @@ inquirer.prompt(questions, function( answers ) {
 
 	if (answers.install){
 		fs.copySync(cfg.app.folders.template, '../');
-		fs.outputJSONSync('../gulp-config-local.json',{});
+		fs.outputJSONSync('../project-config-local.json',{});
 		if (answers.cordova) {
 			console.log(chalk.black.bgYellow('Cordova is instaling...'));
 

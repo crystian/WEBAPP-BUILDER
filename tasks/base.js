@@ -179,7 +179,7 @@ gulp.task('parse:bower', function(cb) {
 		rBower = {
 			'name': global.cfg.name + ' - by '+ global.cfg.loader.name,
 			'version' : global.cfg.loader.version,
-			'description' : 'auto generated, don\'t change it, you should use gulp-config to change it and run \'gulp i\'',
+			'description' : 'auto generated, don\'t change it, you should use project-config to change it and run \'gulp i\'',
 			'dependencies': {}
 		};
 

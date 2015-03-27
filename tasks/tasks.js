@@ -28,7 +28,7 @@ gulp.task('build:fast',function (cb) {
 
 gulp.task('release', function (cb) {
 	if (!global.cfg.loader.release) {
-		console.logRed('Variable "release" in gulp-config on "false", you will change it if you want a release');
+		console.logRed('Variable "release" in project-config on "false", you will change it if you want a release');
 		process.exit(1);
 	}
 

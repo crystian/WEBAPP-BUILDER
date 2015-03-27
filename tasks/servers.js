@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 gulp.task('servew', ['serve','watch:tpl']);
 
 gulp.task('watch:tpl', function() {
-	gulp.watch([global.cfg.folders.www +'/index.tpl.html','gulp-config.json'], ['make:base']);
+	gulp.watch([global.cfg.folders.www +'/index.tpl.html','project-config.json'], ['make:base']);
 });
 
 gulp.task('serve', function() {
