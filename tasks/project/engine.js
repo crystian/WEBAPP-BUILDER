@@ -3,7 +3,7 @@
  */
 
 var gulp = require('gulp'),
-	shared = require('./shared'),
+	utils = require('./utils'),
 	strip = require('gulp-strip-comments'),
 	minifycss = require('gulp-minify-css'),
 	sass = require('gulp-sass'),
@@ -81,21 +81,25 @@ var defaults = {
  replace-post
  concat
  */
+//
+//gulp.task('a', ['preprocessors:loader'], function () {
+//	return doMagic('../www/app.json');
+//});
+//
+//gulp.task('b', function () {
+//	return doMagic('../www/app.json');
+//});
+//
+//gulp.task('preprocessors:loader', function () {
+//	return preprocessorsProcess('../www/app.json');
+//});
 
-gulp.task('a', ['preprocessors:loader'], function () {
-	return doMagic('../www/app.json');
-});
+exports.merge = function(stream, newStream) {
+	return (stream === undefined) ? newStream : merge(stream, newStream);
+};
 
-gulp.task('b', function () {
-	return doMagic('../www/app.json');
-});
-
-gulp.task('preprocessors:loader', function () {
-	return preprocessorsProcess('../www/app.json');
-});
-
-function preprocessorsProcess(url){
-	var files = require(url);
+exports.runPreprocessors = function(url){
+	var files = require('../../'+ url);
 	var i = 0,
 		l = files.length,
 		streams = undefined;
@@ -105,8 +109,8 @@ function preprocessorsProcess(url){
 
 		if(_isNotActive(file) || file.minificated){continue;}
 
-		var fileName = shared.getFileName(file.file),
-			type = shared.getExtensionFile(file.file);
+		var fileName = utils.getFileName(file.file),
+			type = utils.getExtensionFile(file.file);
 
 
 		//valid types
@@ -118,7 +122,7 @@ function preprocessorsProcess(url){
 			final = file.path + '/' + fileName +'.css';
 
 		//which name have min file?, default: *.min.*
-		file.min = file.min || shared.setExtensionFilename(file.file, 'min.css');
+		file.min = file.min || utils.setExtensionFilename(file.file, 'min.css');
 
 		if(!fs.existsSync(source)){
 			console.logRed('File not found: '+ source);
@@ -167,82 +171,82 @@ function preprocessorsProcess(url){
 			stream = _minificate(stream, file, type)
 		}
 
-		streams = _merge(streams, stream);
+		streams = this.merge(streams, stream);
 	}
 
 	return streams;
 }
 
-
-function doMagic(url, options){
-	var streams = undefined,
-		files = require(url);
-
-	options = _mergeOptions(options);
-
-	var i = 0,
-		l = files.length;
-
-	for (; i < l; i++) {
-		var file = extend(true, {}, defaults.file, files[i]);
-
-		//is active? you can send an expression
-		if(_isNotActive(file)){continue;}
-
-		////which name have min file?, default: *.min.*
-		//file.min = file.min || shared.setPreExtensionFilename(file.file, 'min');
-
-		//getting the path, you can send an expression
-		file.path = _makePath(file.path);
-
-		var source = file.path + '/' + file.file,
-			fileName = shared.getFileName(file.file),
-			type = shared.getExtensionFile(file.file);
-
-		if(options.extensionToProcess[type]===undefined){
-			console.logRed('Error, extension unknown, check app.json: '+ source);
-			_exit(-1);
-		} else if(options.extensionToProcess[type]===true) {
-
-			//just css files, before that it should be run preprocessorsProcess
-			if (defaults.validCssExtensions.indexOf(type) !== -1) {
-				type = 'css';
-				source = file.path + '/' + fileName + '.css';
-			}
-
-			//file should be exist!
-			if (!fs.existsSync(source)) {
-				console.logRed('File not found!: ' + source);
-				_exit(-1);
-			}
-
-			//Finally I'll create a stream
-			var newStream = gulp.src(source)
-				.pipe(debug({verbose: true}))
-				.on('error', gutil.log);
-
-			{
-				//replaces previously to minimisation
-				newStream = _replace(newStream, file.replaces.pre);
-
-				if (_handle[type]) {
-					console.log('File to process: ', source);
-					newStream = _handle[type](newStream, file);
-				}
-
-				//* replaces posterity to minimisation
-				newStream = _replace(newStream, file.replaces.post);
-
-			}
-		}
-
-
-		streams = _merge(streams, newStream);
-	}
-
-	return streams;
-
-}
+//
+//function doMagic(url, options){
+//	var streams = undefined,
+//		files = require(url);
+//
+//	options = _mergeOptions(options);
+//
+//	var i = 0,
+//		l = files.length;
+//
+//	for (; i < l; i++) {
+//		var file = extend(true, {}, defaults.file, files[i]);
+//
+//		//is active? you can send an expression
+//		if(_isNotActive(file)){continue;}
+//
+//		////which name have min file?, default: *.min.*
+//		//file.min = file.min || utils.setPreExtensionFilename(file.file, 'min');
+//
+//		//getting the path, you can send an expression
+//		file.path = _makePath(file.path);
+//
+//		var source = file.path + '/' + file.file,
+//			fileName = utils.getFileName(file.file),
+//			type = utils.getExtensionFile(file.file);
+//
+//		if(options.extensionToProcess[type]===undefined){
+//			console.logRed('Error, extension unknown, check app.json: '+ source);
+//			_exit(-1);
+//		} else if(options.extensionToProcess[type]===true) {
+//
+//			//just css files, before that it should be run preprocessorsProcess
+//			if (defaults.validCssExtensions.indexOf(type) !== -1) {
+//				type = 'css';
+//				source = file.path + '/' + fileName + '.css';
+//			}
+//
+//			//file should be exist!
+//			if (!fs.existsSync(source)) {
+//				console.logRed('File not found!: ' + source);
+//				_exit(-1);
+//			}
+//
+//			//Finally I'll create a stream
+//			var newStream = gulp.src(source)
+//				.pipe(debug({verbose: true}))
+//				.on('error', gutil.log);
+//
+//			{
+//				//replaces previously to minimisation
+//				newStream = _replace(newStream, file.replaces.pre);
+//
+//				if (_handle[type]) {
+//					console.log('File to process: ', source);
+//					newStream = _handle[type](newStream, file);
+//				}
+//
+//				//* replaces posterity to minimisation
+//				newStream = _replace(newStream, file.replaces.post);
+//
+//			}
+//		}
+//
+//
+//		streams = _merge(streams, newStream);
+//	}
+//
+//	return streams;
+//
+//}
 
 function _minificate(stream, file, type){
 	//replaces previously to minimisation
@@ -308,9 +312,6 @@ function _mergeOptions(options) {
 	return options;
 }
 
-function _merge(stream, newStream) {
-	return (stream === undefined) ? newStream : merge(stream, newStream);
-}
 
 function _isNotActive(file) {
 	//eval, yes, with pleasure! :)
@@ -350,7 +351,7 @@ function _replace(stream, replaces){
 		var replacePair = replaces[i];
 		if(!replacePair || replacePair.length !== 2){
 			console.logRed('Replace pair not correct format, check it, it should be two items: 0 = value searched, 1 = replace, elements found: '+ replacePair.length);
-			//todo salir con error!
+			_exit(-1);
 			return;
 		}
 

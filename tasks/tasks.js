@@ -8,8 +8,9 @@ var gulp = require('gulp'),
 	gutil = require('gulp-util');
 
 gulp.task('default', ['build:fast']);
-
+gulp.task('css', ['css:loader']); //just an alias
 gulp.task('full',['build:full']);
+
 gulp.task('build:full', function (cb) {
 	runSequence(
 		'make:base',
@@ -37,5 +38,3 @@ gulp.task('release', function (cb) {
 		'test:loader',
 	cb);
 });
-
-gulp.task('css', ['css:loader']); //just an alias

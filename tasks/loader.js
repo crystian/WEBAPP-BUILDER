@@ -4,7 +4,6 @@
 
 var gulp = require('gulp'),
 	//debug = require('gulp-debug'),
-	shared = require('./shared'),
 	gif = require('gulp-if'),
 	htmlreplace = require('gulp-html-replace'),
 	htmlmin = require('gulp-htmlmin'),
@@ -18,11 +17,10 @@ var gulp = require('gulp'),
 	header = require('gulp-header'),
 	footer = require('gulp-footer'),
 	strip = require('gulp-strip-comments'),
-	runSequence = require('run-sequence'),
 	fs = require('fs-extra'),
 	clean = require('gulp-clean'),
+	commons = require('./commons'),
 	gutil = require('gulp-util');
-
 
 gulp.task('make:loader', ['make:loader:files'],  function () {
 
@@ -38,8 +36,8 @@ gulp.task('make:loader', ['make:loader:files'],  function () {
 		//.pipe(debug({verbose: true}))
 		//.on('error', gutil.log)
 		.pipe(htmlreplace())
-		.pipe(shared.injectContent(global.cfg.folders.temp +'/-compiledLoader.css','loaderCss','style'))
-		.pipe(shared.injectContent(global.cfg.folders.temp +'/-compiledLoader.js','loaderJs','script'))
+		.pipe(commons.injectContent(global.cfg.folders.temp +'/-compiledLoader.css','loaderCss','style'))
+		.pipe(commons.injectContent(global.cfg.folders.temp +'/-compiledLoader.js','loaderJs','script'))
 		.pipe(gif(global.cfg.loader.release, htmlmin(htmlminOptions)))
 
 		//header and footers:
@@ -64,6 +62,7 @@ gulp.task('make:loader', ['make:loader:files'],  function () {
 		.pipe(gulp.dest(global.cfg.folders.build));
 	}
 
+//TODO review!
 	if (global.cfg.loader.oneRequest) {
 		gulp.src(global.cfg.folders.build + '/landing', {read: false}).pipe(clean());
 	}
@@ -71,7 +70,7 @@ gulp.task('make:loader', ['make:loader:files'],  function () {
 	return stream;
 });
 
-gulp.task('make:loader:files', ['make:loader:js', 'make:loader:css', 'copy:fonts'], function (cb) {
+gulp.task('make:loader:files', ['make:loader:js', 'make:loader:css', 'copy:bootstrap:fonts'], function (cb) {
 
 	function callbackFn(_cb) {
 		fs.copySync(global.cfg.folders.template, global.cfg.folders.build);
@@ -80,8 +79,8 @@ gulp.task('make:loader:files', ['make:loader:js', 'make:loader:css', 'copy:fonts
 
 	if (global.cfg.loader.oneRequest) {
 		//landing
-
-		shared.prepareOneRequestFile(global.cfg.landing, function () {
+//TODO review!
+		commons.prepareOneRequestFile(global.cfg.landing, function () {
 			callbackFn(cb);
 		});
 
@@ -116,7 +115,7 @@ gulp.task('make:loader:js',  function () {
 		.pipe(replace(/(\"build\".*\:[ ]?)(\w*)/,'$1true'))//just for index built
 		;
 
-	loaderScripts1Stream = shared.jsMaker(loaderScripts1Stream);
+	loaderScripts1Stream = commons.jsMaker(loaderScripts1Stream);
 	//endheader script
 
 	//body script
@@ -140,7 +139,7 @@ gulp.task('make:loader:js',  function () {
 	var loaderScripts2Stream = gulp.src(loaderScripts2)
 		.pipe(gif(global.cfg.compress, replace('if(!loader.cfg.compress){return data;}//flagCompress','')));
 
-	loaderScripts2Stream = shared.jsMaker(loaderScripts2Stream);
+	loaderScripts2Stream = commons.jsMaker(loaderScripts2Stream);
 	//endbody script
 
 	return streamqueue({ objectMode: true }, loaderScripts1Stream, libsMin, loaderScripts2Stream)
@@ -183,8 +182,7 @@ gulp.task('make:loader:css', ['css:loader'],  function () {
 		.pipe(gulp.dest(global.cfg.folders.temp));
 });
 
-//TODO rename with bootstrap
-gulp.task('copy:fonts', function (cb) {
+gulp.task('copy:bootstrap:fonts', function (cb) {
 	if(global.cfg.loader.bower.bootstrap){
 		fs.copySync(
 			global.cfg.folders.bower + '/' + global.cfg.folders.bootstrapDist +'/fonts',
@@ -196,11 +194,11 @@ gulp.task('copy:fonts', function (cb) {
 });
 
 gulp.task('css:loader', ['css:template'], function () {
-	return shared.sassfixer(global.cfg.folders.www + '/**/*.scss',global.cfg.folders.www);
+	return commons.sassfixer(global.cfg.folders.www + '/**/*.scss',global.cfg.folders.www);
 });
 
 gulp.task('css:template', function () {
 	var path = global.cfg.folders.template;
-	return shared.sassfixer(path +'/**/*.scss',path)
+	return commons.sassfixer(path +'/**/*.scss',path)
 });
 
