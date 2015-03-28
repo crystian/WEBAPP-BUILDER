@@ -6,9 +6,6 @@
 var gulp = require('gulp'),
 	merge = require('merge-stream');
 
-exports.merge = function(stream, newStream) {
-	return (stream === undefined) ? newStream : merge(stream, newStream);
-};
 
 function _mergeOptions(options) {
 	//merge options, by default all are true, but if we send and type others will be false
@@ -28,6 +25,12 @@ function _mergeOptions(options) {
 	}
 	return options;
 }
+
+
+
+exports.merge = function(stream, newStream) {
+	return (stream === undefined) ? newStream : merge(stream, newStream);
+};
 
 
 exports.isNotActive = function(file) {

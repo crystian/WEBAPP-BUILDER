@@ -64,7 +64,20 @@ var defaults = {
 };
 
 
-exports.runPreprocessors = function(url){
+exports.runPreprocessors = function(appsJson) {
+	var apps = require('../../../'+ appsJson),
+		stream = undefined;
+
+	var self = this;
+
+	apps.forEach(function (v) {
+		stream = aux.merge(stream, self.runEachPreprocessors('www/'+ v +'/app.json'));
+	});
+
+	return stream;
+};
+
+exports.runEachPreprocessors = function(url){
 	var files = require('../../../'+ url);
 	var i = 0,
 		l = files.length,
