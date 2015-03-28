@@ -15,12 +15,11 @@ var gulp = require('gulp'),
 	gif = require('gulp-if'),
 	less = require('gulp-less'),
 	debug = require('gulp-debug'),
-	merge =require('merge-stream'),
 	clean = require('gulp-clean'),
 	rename = require('gulp-rename'),
+	aux = require('./auxiliar'),
 	gutil = require('gulp-util');
 	//es = require('event-stream')
-
 	//htmlreplace = require('gulp-html-replace'),
 	//htmlmin = require('gulp-htmlmin'),
 	//concat = require('gulp-concat'),
@@ -29,6 +28,7 @@ var gulp = require('gulp'),
 	//header = require('gulp-header'),
 	//footer = require('gulp-footer'),
 	//runSequence = require('run-sequence'),
+
 
 var defaults = {
 	file: {
@@ -63,43 +63,9 @@ var defaults = {
 	}
 };
 
-/*
- flujo:
- active
- min name
- path
- overwrite
- replace-pre
-
- css:
- sass
- prefijos
- linter
- save (sin min)
- minifacte
-
- replace-post
- concat
- */
-//
-//gulp.task('a', ['preprocessors:loader'], function () {
-//	return doMagic('../www/app.json');
-//});
-//
-//gulp.task('b', function () {
-//	return doMagic('../www/app.json');
-//});
-//
-//gulp.task('preprocessors:loader', function () {
-//	return preprocessorsProcess('../www/app.json');
-//});
-
-exports.merge = function(stream, newStream) {
-	return (stream === undefined) ? newStream : merge(stream, newStream);
-};
 
 exports.runPreprocessors = function(url){
-	var files = require('../../'+ url);
+	var files = require('../../../'+ url);
 	var i = 0,
 		l = files.length,
 		streams = undefined;
@@ -107,7 +73,7 @@ exports.runPreprocessors = function(url){
 	for (; i < l; i++) {
 		var file = extend(true, {}, defaults.file, files[i]);
 
-		if(_isNotActive(file) || file.minificated){continue;}
+		if(aux.isNotActive(file) || file.minificated){continue;}
 
 		var fileName = utils.getFileName(file.file),
 			type = utils.getExtensionFile(file.file);
@@ -116,7 +82,7 @@ exports.runPreprocessors = function(url){
 		//valid types
 		if(defaults.validCssExtensions.indexOf(type)===-1){continue;}
 
-		file.path = _makePath(file.path);
+		file.path = aux.makePath(file.path);
 
 		var source = file.path + '/' + file.file,
 			final = file.path + '/' + fileName +'.css';
@@ -126,13 +92,14 @@ exports.runPreprocessors = function(url){
 
 		if(!fs.existsSync(source)){
 			console.logRed('File not found: '+ source);
-			_exit(1);
+			aux.exit(1);
 		}
 
+		//just for detect potentian file exists
 		file._cssFile = final;
 
 		if( !(global.cfg.loader.release || file.overwrite)
-			&& (_fileDestExist(file)
+			&& (aux.fileDestExist(file)
 			&& !file.overwrite)) {//for the overwrite = false
 			//exist, and don't overwrite it
 			console.log('File found, don\'t overwrite ('+ file.file +')');
@@ -171,7 +138,7 @@ exports.runPreprocessors = function(url){
 			stream = _minificate(stream, file, type)
 		}
 
-		streams = this.merge(streams, stream);
+		streams = aux.merge(streams, stream);
 	}
 
 	return streams;
@@ -250,7 +217,7 @@ exports.runPreprocessors = function(url){
 
 function _minificate(stream, file, type){
 	//replaces previously to minimisation
-	stream = _replace(stream, file.replaces.pre);
+	stream = aux.replace(stream, file.replaces.pre);
 
 	//just css files, before that it should be run preprocessorsProcess
 	if (defaults.validCssExtensions.indexOf(type) !== -1) {
@@ -265,7 +232,7 @@ function _minificate(stream, file, type){
 	}
 
 	//* replaces posterity to minimisation
-	stream = _replace(stream, file.replaces.post);
+	stream = aux.replace(stream, file.replaces.post);
 
 	return stream;
 }
@@ -292,76 +259,3 @@ var _handle = {
 	}
 };
 
-
-function _mergeOptions(options) {
-	//merge options, by default all are true, but if we send and type others will be false
-	if (options) {
-		var op = {};
-		for (ext in defaults.options.extensionToProcess) {
-			var extDetected = options.extensionToProcess[ext];
-			if (extDetected === undefined) {
-				op[ext] = false;
-			} else {
-				op[ext] = extDetected;
-			}
-		}
-		options.extensionToProcess = op;
-	} else {
-		options = extend(true, {}, defaults.options);
-	}
-	return options;
-}
-
-
-function _isNotActive(file) {
-	//eval, yes, with pleasure! :)
-	return (!eval(file.active));
-}
-
-function _makePath(path) {
-	var r = path;
-	//if fail, it is a string
-	try {
-		//eval, yes, with pleasure! :)
-		r = eval(path);
-	} catch (e) {
-	}
-	return r;
-}
-
-//if it is minificated version, just validate this file, otherwise check the normal version
-//this is util for Libs with out min version
-function _fileDestExist(file){
-	var r = false;
-
-	//validate if exist, if exist return don't process nothing
-	var p = (global.cfg.loader.release || file.makeMin) ? file.path + '/' +file.min : file._cssFile;
-	if(fs.existsSync(p)){
-		r = true;
-	}
-
-	return r;
-}
-
-function _replace(stream, replaces){
-	var i = 0,
-		l = replaces.length;
-
-	for (; i < l; i++) {
-		var replacePair = replaces[i];
-		if(!replacePair || replacePair.length !== 2){
-			console.logRed('Replace pair not correct format, check it, it should be two items: 0 = value searched, 1 = replace, elements found: '+ replacePair.length);
-			_exit(-1);
-			return;
-		}
-
-		console.logGreen('key: "'+ replacePair[0] +'" value: "'+ replacePair[1] +'"');
-		stream = stream.pipe(replace(replacePair[0], replacePair[1]));
-	}
-
-	return stream;
-}
-
-function _exit(n){
-	process.exit(n);
-}
