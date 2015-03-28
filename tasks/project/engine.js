@@ -247,6 +247,8 @@ function _minificate(stream, file, type){
 	//* replaces posterity to minimisation
 	stream = aux.replace(stream, file.replaces.post);
 
+	stream = stream.pipe(gulp.dest(file.path));
+
 	return stream;
 }
 
@@ -254,10 +256,10 @@ var _handle = {
 	'css' : function(stream, file) {
 		console.logWarn('CSS');
 
-		stream.pipe(strip({safe:false, block:false}))
+		stream = stream
+			.pipe(strip({safe:false, block:false}))
 			.pipe(minifycss())
 			.pipe(rename({extname: '.min.css'}))
-			.pipe(gulp.dest(file.path));
 
 		return stream;
 	},
