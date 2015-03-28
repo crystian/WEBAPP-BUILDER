@@ -8,6 +8,7 @@ var gulp = require('gulp'),
 	//debug = require('gulp-debug'),
 	jshint = require('gulp-jshint'),
 	chalk = require('chalk'),
+	webserver = require('gulp-webserver'),
 	gutil = require('gulp-util');
 
 
@@ -18,8 +19,14 @@ process.on('uncaughtException', function(err){
 	if (gutil.env.debug) {
 		console.logRed(err.stack);
 	}
-	process.exit(1);             // exit with error
+	process.exit(1); // exit with error
 });
+
+//process.on('exit', function() {
+//	if(node){
+//		node.kill();
+//	}
+//});
 
 console.logWarn = function (m) {
 	console.log(chalk.black.bgYellow(m));
@@ -74,4 +81,20 @@ exports.setPreExtensionFilename = function(s, preExtension) {
 	arr.splice(arr.length-1, 0, preExtension);
 
 	return arr.join('.');
+};
+
+exports.makeServe = function(folder, path, ip, port) {
+
+	path = (path) ? path +'/': '';
+	console.logGreen('Remember, this is the url: http://'+ip+':'+port+'/'+ path);
+
+	return gulp.src(folder)
+		.pipe(webserver({
+			host: ip,
+			port: port,
+			//fallback: 'index.html',
+			livereload: false,
+			open: false
+		}));
+
 };
