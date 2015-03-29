@@ -51,6 +51,7 @@ var defaults = {
 		}
 	},
 	validCssExtensions : ['sass', 'scss','less'],
+	validExtensions : ['html', 'js'],
 	options: {
 		extensionToProcess : {
 			'scss': true,
@@ -65,19 +66,30 @@ var defaults = {
 
 
 exports.runPreprocessors = function(appsJson) {
+	return runEachApp(appsJson, runEachPreprocessors);
+};
+
+exports.runMagic = function(appsJson) {
+	return runEachApp(appsJson, doMagic);
+};
+
+
+
+function runEachApp(appsJson, fnEach){
 	var apps = require('../../../'+ appsJson),
 		stream = undefined;
 
 	var self = this;
 
 	apps.forEach(function (v) {
-		stream = aux.merge(stream, self.runEachPreprocessors('www/'+ v +'/app.json'));
+		stream = aux.merge(stream, fnEach('www/'+ v +'/app.json'));
 	});
 
 	return stream;
-};
+}
 
-exports.runEachPreprocessors = function(url){
+
+function runEachPreprocessors(url){
 	var files = require('../../../'+ url);
 	var i = 0,
 		l = files.length,
@@ -148,7 +160,7 @@ exports.runEachPreprocessors = function(url){
 		stream = stream.pipe(gulp.dest(file.path));
 
 		if(file.makeMin){
-			stream = _minificate(stream, file, type)
+			stream = _minificateAndSave(stream, file, 'css')
 		}
 
 		streams = aux.merge(streams, stream);
@@ -158,84 +170,76 @@ exports.runEachPreprocessors = function(url){
 }
 
 
-function doMagic(url, options){
-	var streams = undefined,
-		files = require(url);
-
-//	options = _mergeOptions(options);
-//
+function doMagic(url, options) {
+	var files = require('../../../' + url);
 	var i = 0,
-		l = files.length;
+		l = files.length,
+		streams = undefined;
 
 	for (; i < l; i++) {
 		var file = extend(true, {}, defaults.file, files[i]);
 
-		//is active? you can send an expression
-		if(_isNotActive(file)){continue;}
+		if(aux.isNotActive(file)){continue;}
 
-//		////which name have min file?, default: *.min.*
-//		//file.min = file.min || utils.setPreExtensionFilename(file.file, 'min');
-//
-//		//getting the path, you can send an expression
-//		file.path = _makePath(file.path);
-//
-//		var source = file.path + '/' + file.file,
-//			fileName = utils.getFileName(file.file),
-//			type = utils.getExtensionFile(file.file);
-//
-//		if(options.extensionToProcess[type]===undefined){
-//			console.logRed('Error, extension unknown, check app.json: '+ source);
-//			_exit(-1);
-//		} else if(options.extensionToProcess[type]===true) {
-//
-//			//just css files, before that it should be run preprocessorsProcess
-//			if (defaults.validCssExtensions.indexOf(type) !== -1) {
-//				type = 'css';
-//				source = file.path + '/' + fileName + '.css';
-//			}
-//
-//			//file should be exist!
-//			if (!fs.existsSync(source)) {
-//				console.logRed('File not found!: ' + source);
-//				_exit(-1);
-//			}
-//
-//			//Finally I'll create a stream
-//			var newStream = gulp.src(source)
-//				.pipe(debug({verbose: true}))
-//				.on('error', gutil.log);
-//
-//			{
-//				//replaces previously to minimisation
-//				newStream = _replace(newStream, file.replaces.pre);
-//
-//				if (_handle[type]) {
-//					console.log('File to process: ', source);
-//					newStream = _handle[type](newStream, file);
-//				}
-//
-//				//* replaces posterity to minimisation
-//				newStream = _replace(newStream, file.replaces.post);
-//
-//			}
-//		}
+		var fileName = utils.getFileName(file.file),
+			type = utils.getExtensionFile(file.file);
 
+		//valid types and normalize it
+		var flagTypeValid = false;
+		if (type === 'css' || defaults.validCssExtensions.indexOf(type) !== -1) {
+			flagTypeValid = true;
+			type = 'css';
+		} else if(defaults.validExtensions.indexOf(type) !== -1) {
+			flagTypeValid = true;
+		}
 
-		streams = _merge(streams, newStream);
+		if(!flagTypeValid){
+			console.logWarn('Invalid file type: '+ file.file);
+			continue;
+		}
+
+		file.min = file.min || utils.setPreExtensionFilename(file.file, 'min');
+
+		file.path = aux.makePath(file.path);
+
+		var source = file.path +'/'+ fileName + '.' + type;
+
+		if(file.minificated || file.makeMin){
+			source = file.path +'/'+ file.min;
+		}
+
+		var stream = gulp.src(source)
+			.pipe(debug({verbose: true}))
+			.on('error', gutil.log);
+
+		if(!file.minificated && !file.makeMin){
+			stream = _minificate(stream, file, type)
+		}
+
+		streams = aux.merge(streams, stream);
 	}
 
 	return streams;
+}
 
+function validFileExist(fileName){
+	if (!fs.existsSync(fileName)) {
+		console.logRed('File not found: ' + fileName);
+		aux.exit(1);
+	}
+}
+
+function _minificateAndSave(stream, file, type){
+	stream = _minificate(stream, file, type);
+
+	stream = stream.pipe(gulp.dest(file.path));
+
+	return stream;
 }
 
 function _minificate(stream, file, type){
 	//replaces previously to minimisation
 	stream = aux.replace(stream, file.replaces.pre);
-
-	//just css files, before that it should be run preprocessorsProcess
-	if (defaults.validCssExtensions.indexOf(type) !== -1) {
-		type = 'css';
-	}
 
 	if (_handle[type]) {
 		console.log('File to process: ', file.file);
@@ -247,8 +251,6 @@ function _minificate(stream, file, type){
 	//* replaces posterity to minimisation
 	stream = aux.replace(stream, file.replaces.post);
 
-	stream = stream.pipe(gulp.dest(file.path));
-
 	return stream;
 }
 
@@ -259,7 +261,7 @@ var _handle = {
 		stream = stream
 			.pipe(strip({safe:false, block:false}))
 			.pipe(minifycss())
-			.pipe(rename({extname: '.min.css'}))
+			.pipe(rename(file.min))
 
 		return stream;
 	},
