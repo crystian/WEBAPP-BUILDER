@@ -10,20 +10,20 @@ var gulp = require('gulp'),
 	autoprefixer = require('gulp-autoprefixer'),
 	csslint = require('gulp-csslint'),
 	replace = require('gulp-replace'),
+	concat = require('gulp-concat'),
 	fs = require('fs-extra'),
 	extend = require('extend'),
 	gif = require('gulp-if'),
 	less = require('gulp-less'),
 	debug = require('gulp-debug'),
-	clean = require('gulp-clean'),
 	rename = require('gulp-rename'),
+	StreamQueue = require('streamqueue'),
 	aux = require('./auxiliar'),
 	gutil = require('gulp-util');
 	//es = require('event-stream')
 	//htmlreplace = require('gulp-html-replace'),
 	//htmlmin = require('gulp-htmlmin'),
 	//concat = require('gulp-concat'),
-	//streamqueue =require('streamqueue'),
 	//jshint = require('gulp-jshint'),
 	//header = require('gulp-header'),
 	//footer = require('gulp-footer'),
@@ -79,17 +79,19 @@ function runEachApp(appsJson, fnEach){
 	var apps = require('../../../'+ appsJson),
 		stream = undefined;
 
-	var self = this;
+	var i = 0,
+		l = apps.length;
 
-	apps.forEach(function (v) {
-		stream = aux.merge(stream, fnEach('www/'+ v +'/app.json'));
-	});
+	for (; i < l; i++) {
+		var app = apps[i];
+		stream = aux.merge(stream, fnEach(global.cfg.app.folders.www +'/'+ app +'/app.json', app));
+	}
 
 	return stream;
 }
 
 
-function runEachPreprocessors(url){
+function runEachPreprocessors(url, appName){
 	var files = require('../../../'+ url);
 	var i = 0,
 		l = files.length,
@@ -170,11 +172,12 @@ function runEachPreprocessors(url){
 }
 
 
-function doMagic(url, options) {
+function doMagic(url, appName) {
 	var files = require('../../../' + url);
 	var i = 0,
 		l = files.length,
-		streams = undefined;
+		streamsFinal = undefined,
+		streams = [];
 
 	for (; i < l; i++) {
 		var file = extend(true, {}, defaults.file, files[i]);
@@ -216,17 +219,24 @@ function doMagic(url, options) {
 			stream = _minificate(stream, file, type)
 		}
 
-		streams = aux.merge(streams, stream);
+		if(!streams[type]){
+			streams[type] = new StreamQueue({ objectMode: true });
+		}
+		streams[type] = streams[type].queue(stream);
 	}
 
-	return streams;
+	streamsFinal = aux.merge(streamsFinal, _concat(streams, 'css', appName));
+	streamsFinal = aux.merge(streamsFinal, _concat(streams, 'js', appName));
+	streamsFinal = aux.merge(streamsFinal, _concat(streams, 'html', appName));
+	return streamsFinal;
 }
 
-function validFileExist(fileName){
-	if (!fs.existsSync(fileName)) {
-		console.logRed('File not found: ' + fileName);
-		aux.exit(1);
-	}
+function _concat(_streams, _type, _appName){
+	var s = _streams[_type].done();
+	s = s.pipe(concat(_appName+'.'+ _type, {newLine: ';'}))
+		.pipe(gulp.dest(global.cfg.app.folders.temp));
+
+	return s;
 }
 
 function _minificateAndSave(stream, file, type){
@@ -260,8 +270,8 @@ var _handle = {
 
 		stream = stream
 			.pipe(strip({safe:false, block:false}))
-			.pipe(minifycss())
-			.pipe(rename(file.min))
+			.pipe(gif(global.cfg.app.release, minifycss()))
+			.pipe(rename(utils.setExtensionFilename(file.min,'css')));
 
 		return stream;
 	},

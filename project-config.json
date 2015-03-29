@@ -72,6 +72,7 @@
 		"release": true,
 		"folders":{
 			"build": "build",
+			"temp": "build/.tmp",
 			"cordova": "CORDOVA",
 			"cordovaWWW": "CORDOVA/www",
 			"www": "www",

@@ -40,6 +40,12 @@ console.logRed = function (m) {
 	console.log(chalk.white.bold.bgRed(m));
 };
 
+exports.validFileExist = function(fileName){
+	if (!fs.existsSync(fileName)) {
+		console.logRed('File not found: ' + fileName);
+		aux.exit(1);
+	}
+};
 
 exports.getExtensionFile = function(s) {
 	var arr = s.split('.');
