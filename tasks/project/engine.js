@@ -157,22 +157,22 @@ exports.runEachPreprocessors = function(url){
 	return streams;
 }
 
-//
-//function doMagic(url, options){
-//	var streams = undefined,
-//		files = require(url);
-//
+
+function doMagic(url, options){
+	var streams = undefined,
+		files = require(url);
+
 //	options = _mergeOptions(options);
 //
-//	var i = 0,
-//		l = files.length;
-//
-//	for (; i < l; i++) {
-//		var file = extend(true, {}, defaults.file, files[i]);
-//
-//		//is active? you can send an expression
-//		if(_isNotActive(file)){continue;}
-//
+	var i = 0,
+		l = files.length;
+
+	for (; i < l; i++) {
+		var file = extend(true, {}, defaults.file, files[i]);
+
+		//is active? you can send an expression
+		if(_isNotActive(file)){continue;}
+
 //		////which name have min file?, default: *.min.*
 //		//file.min = file.min || utils.setPreExtensionFilename(file.file, 'min');
 //
@@ -219,14 +219,14 @@ exports.runEachPreprocessors = function(url){
 //
 //			}
 //		}
-//
-//
-//		streams = _merge(streams, newStream);
-//	}
-//
-//	return streams;
-//
-//}
+
+
+		streams = _merge(streams, newStream);
+	}
+
+	return streams;
+
+}
 
 function _minificate(stream, file, type){
 	//replaces previously to minimisation
