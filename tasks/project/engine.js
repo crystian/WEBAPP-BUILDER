@@ -19,6 +19,7 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	StreamQueue = require('streamqueue'),
 	aux = require('./auxiliar'),
+	LZString = require('../../vendors/lz-string/libs/lz-string'),
 	gutil = require('gulp-util');
 	//es = require('event-stream')
 	//htmlreplace = require('gulp-html-replace'),
@@ -237,9 +238,9 @@ function doMagic(url, appName) {
 function runJsonify(url, app){
 	var json = {};
 	json.v = global.cfg.version;
-	json.j = fs.readFileSync('build/'+ app +'.js', {encoding: 'utf8'});
-	json.c = fs.readFileSync('build/'+ app +'.css', {encoding: 'utf8'});
-	json.h = fs.readFileSync('build/'+ app +'.html', {encoding: 'utf8'});
+	json.j = fs.readFileSync(global.cfg.app.folders.temp +'/'+ app +'.js', {encoding: 'utf8'});
+	json.c = fs.readFileSync(global.cfg.app.folders.temp +'/'+ app +'.css', {encoding: 'utf8'});
+	json.h = fs.readFileSync(global.cfg.app.folders.temp +'/'+ app +'.html', {encoding: 'utf8'});
 
 	var b = JSON.stringify(json);
 
