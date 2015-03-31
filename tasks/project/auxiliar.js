@@ -7,26 +7,6 @@ var gulp = require('gulp'),
 	replace = require('gulp-replace'),
 	merge = require('merge-stream');
 
-
-function _mergeOptions(options) {
-	//merge options, by default all are true, but if we send and type others will be false
-	if (options) {
-		var op = {};
-		for (ext in defaults.options.extensionToProcess) {
-			var extDetected = options.extensionToProcess[ext];
-			if (extDetected === undefined) {
-				op[ext] = false;
-			} else {
-				op[ext] = extDetected;
-			}
-		}
-		options.extensionToProcess = op;
-	} else {
-		options = extend(true, {}, defaults.options);
-	}
-	return options;
-}
-
 exports.merge = function(stream, newStream) {
 	return (stream === undefined) ? newStream : merge(stream, newStream);
 };

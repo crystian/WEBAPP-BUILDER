@@ -53,6 +53,19 @@ loader.utils = (function() {
 		return arr[arr.length - 1];
 	}
 
+	function setExtensionFilename(s, extension) {
+		var arr = s.split('.');
+		if (arr.length <= 1) {
+			console.logRed('Extension not found!');
+			return s;
+		}
+
+		arr.pop();
+		arr.push(extension);
+
+		return arr.join('.');
+	}
+
 	function request(url) {
 		return new Promise(function (resolve, reject) {
 			console.log('request: ' + url);
@@ -87,47 +100,82 @@ loader.utils = (function() {
 		return request(url).then(JSON.parse);
 	}
 
-	function requestOneOrAllInOne(files){
-		var path = (loader.cfg.loader.build) ? '.' : '../'+loader.cfg.loader.pathTpl;
 
-		if(files instanceof Array){
-			files = files.map(function (item) {
-				return path +'/'+ item;
-			});
-
-			return requestMultipleAsync(files);
-		}
-
-		return requestAllInOne(files);
+	function requestApp(appName, loadAppSuccess, loadAppFail){
+		return _requestOneOrAllInOne(appName, loadAppSuccess, loadAppFail);
 	}
 
-	function requestAllInOne(url) {
-		return request(url).then(function (data) {
+	function _requestOneOrAllInOne(appName, loadAppSuccess, loadAppFail){
+		console.info('aaa', loader.cfg.oneRequest);
+debugger
+		if(loader.cfg.oneRequest){
+			console.info('oneRequest!');
+			return;
+		}
+		console.info('multiple request!');
 
-			try {
-				data = JSON.parse(handleCompress(data));
-			} catch (e) {
-				return Promise.reject(e);
+		return requestJson(appName +'/app.json').then(function (data) {
+			var i = 0,
+				l = data.length,
+				type = '',
+				urls = [];
+
+			for (; i < l; i++) {
+				var file = data[i];
+				type = getExtensionFile(file.file);
+
+				switch (type){
+					case 'scss':
+					case 'sass':
+					case 'less':
+					case 'css':
+						type = 'css';
+						console.log('css detected');
+						break;
+					case 'js':
+					case 'html':
+						console.log('js or html detected');
+						break;
+					default:
+						console.error('Error, type not found');
+						loadAppFail();
+						break;
+				}
+
+				urls.push('../'+ file.path +'/'+ setExtensionFilename(file.file, type));
 			}
 
-			//console.dir(data);
-			if (data.h) {
-				_setHtml(data.h);
-			}
-			if (data.c) {
-				_setCss(data.c);
-			}
-			if (data.j) {
-				_setJs(data.j);
-			}
-			//if (data.d) {
-			//
-			//}
+			return requestMultipleSync(urls, {appName: appName}).then(loadAppSuccess);
 		});
 	}
 
+	//function requestAllInOne(url) {
+	//	return request(url).then(function (data) {
+	//
+	//		try {
+	//			data = JSON.parse(handleCompress(data));
+	//		} catch (e) {
+	//			return Promise.reject(e);
+	//		}
+	//
+	//		//console.dir(data);
+	//		if (data.h) {
+	//			_setHtml(data.h);
+	//		}
+	//		if (data.c) {
+	//			_setCss(data.c);
+	//		}
+	//		if (data.j) {
+	//			_setJs(data.j);
+	//		}
+	//		//if (data.d) {
+	//		//
+	//		//}
+	//	});
+	//}
+
 	//be careful, HTML option pisa old version
-	function requestMultipleAsync(requestsArray) {
+	function requestMultipleAsync(requestsArray, options) {
 
 		return Promise.all(requestsArray.map(function (url) {
 			var q = {};
@@ -136,7 +184,7 @@ loader.utils = (function() {
 
 			switch (type) {
 				case 'html':
-					q = requestAndSetHtml(url);
+					q = requestAndSetHtml(url, options);
 					break;
 				case 'css':
 					q = requestAndSetCss(url);
@@ -152,19 +200,19 @@ loader.utils = (function() {
 		}));
 	}
 
-	function requestMultipleSync(requestsArray) {
+	function requestMultipleSync(requestsArray, options) {
 		if (requestsArray.length === 0) {
 			return Promise.resolve();
 		}
 
 		var url = requestsArray.shift();
-		return requestMultimpleSyncUnique(url)
+		return requestMultimpleSyncUnique(url, options)
 			.then(function () {
-				return requestMultipleSync(requestsArray);
+				return requestMultipleSync(requestsArray, options);
 			});
 
 	}
-	function requestMultimpleSyncUnique(url) {
+	function requestMultimpleSyncUnique(url, options) {
 		return new Promise(function (resolve, reject) {
 			//console.group('requestMultipleSync: ' + url);
 
@@ -173,7 +221,9 @@ loader.utils = (function() {
 
 			switch (type) {
 				case 'html':
-					fn = requestAndSetHtml;
+					fn = function (data) {
+						return requestAndSetHtml(data, options);
+					};
 					break;
 				case 'css':
 					fn = requestAndSetCss;
@@ -229,13 +279,30 @@ loader.utils = (function() {
 		setNewResourceByTag(resourceLoader, 'head');
 	}
 
-	function requestAndSetHtml(url) {
-		return request(url).then(_setHtml);
+	function requestAndSetHtml(url, options) {
+		return request(url).then(function (data) {
+			_setHtml(data, options);
+		});
 	}
 
-	function _setHtml(data) {
+	function _setHtml(data, options) {
 		var el = document.getElementById('mainContainer');
-		el.innerHTML = data;
+
+		options = options || {appName: 'app'};
+		options.replace = options.replace || false;
+
+	debugger
+		if((options && options.replace === false) || !el.getElementById(options.appName)){
+
+			var app = document.createElement('div');
+			app.innerHTML = data;
+			app.id = options.appName;
+			app.classList.add('height100');
+
+			setNewResourceById(app, 'mainContainer');
+		} else {
+			el.getElementById(options.appName).innerHTML = data;
+		}
 	}
 
 	function setNewResourceByTag(resourceLoader, tagWhere) {
@@ -243,10 +310,10 @@ loader.utils = (function() {
 		tag.appendChild(resourceLoader);
 	}
 
-//	function setNewResourceById(resourceLoader, id) {
-//		var el = document.getElementById(id);
-//		el.appendChild(resourceLoader);
-//	}
+	function setNewResourceById(resourceLoader, id) {
+		var el = document.getElementById(id);
+		el.appendChild(resourceLoader);
+	}
 
 //	//via: http://stackoverflow.com/questions/8917921/cross-browser-javascript-not-jquery-scroll-to-top-animation
 //	function scrollTo(element, to, duration) {
@@ -344,6 +411,7 @@ loader.utils = (function() {
 		showSkeletor: showSkeletor,
 		compareSemVer: compareSemVer,
 		getExtensionFile: getExtensionFile,
+		setExtensionFilename: setExtensionFilename,
 		hideSkeletor: hideSkeletor,
 		toggleSkeletor: toggleSkeletor,
 //		scrollTo: scrollTo,
@@ -353,10 +421,10 @@ loader.utils = (function() {
 
 		request: request,
 		requestJson: requestJson,
-		requestOneOrAllInOne: requestOneOrAllInOne,
+		requestApp: requestApp,
 		requestMultipleSync: requestMultipleSync,
 		requestMultipleAsync: requestMultipleAsync,
-		requestAllInOne: requestAllInOne,
+		//requestAllInOne: requestAllInOne,
 		requestAndSetJs: requestAndSetJs,
 		requestAndSetHtml: requestAndSetHtml,
 		requestAndSetCss: requestAndSetCss,

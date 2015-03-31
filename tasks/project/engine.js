@@ -74,8 +74,8 @@ exports.runMagic = function(appsJson) {
 	return runEachApp(appsJson, doMagic);
 };
 
-exports.runJsonify = function(appsJson) {
-	return runEachApp(appsJson, runJsonify);
+exports.runJsonify = function() {
+	return runEachApp(runJsonify);
 };
 
 
@@ -235,7 +235,7 @@ function doMagic(url, appName) {
 	return streamsFinal;
 }
 
-function runJsonify(url, app){
+function runJsonify(app){
 	var json = {};
 	json.v = global.cfg.version;
 	json.j = fs.readFileSync(global.cfg.app.folders.temp +'/'+ app +'.js', {encoding: 'utf8'});
@@ -249,7 +249,7 @@ function runJsonify(url, app){
 		console.logGreen(app +' compressed!');
 	}
 
-	fs.writeFileSync('build/'+ app +'.json', b);
+	fs.writeFileSync(global.cfg.app.folders.build +'/'+ app +'.json', b);
 }
 
 function _concat(_streams, _type, _appName){

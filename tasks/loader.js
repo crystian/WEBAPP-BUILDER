@@ -62,32 +62,12 @@ gulp.task('make:loader', ['make:loader:files'],  function () {
 		.pipe(gulp.dest(global.cfg.folders.build));
 	}
 
-//TODO review!
-	if (global.cfg.loader.oneRequest) {
-		gulp.src(global.cfg.folders.build + '/landing', {read: false}).pipe(clean());
-	}
-
 	return stream;
 });
 
 gulp.task('make:loader:files', ['make:loader:js', 'make:loader:css', 'copy:bootstrap:fonts'], function (cb) {
-
-	function callbackFn(_cb) {
-		fs.copySync(global.cfg.folders.template, global.cfg.folders.build);
-		_cb();
-	}
-
-	if (global.cfg.loader.oneRequest) {
-		//landing
-//TODO review!
-		commons.prepareOneRequestFile(global.cfg.landing, function () {
-			callbackFn(cb);
-		});
-
-	} else {
-		callbackFn(cb);
-	}
-
+	fs.copySync(global.cfg.folders.template, global.cfg.folders.build);
+	cb();
 });
 
 gulp.task('make:loader:js',  function () {

@@ -8,6 +8,7 @@
 	"compress": true,
 	"isCordovaDevice": false,
 	"debugZoneActive": false,
+	"oneRequest": true,
 
 	"compatibilityFirst": "\n\treturn !!(window.document.querySelector &&\n\twindow.console &&window.document.addEventListener &&\n\t(window.document.getElementsByTagName('body')[0]).classList &&\n\twindow.localStorage &&\n\twindow.navigator &&\n\twindow.XMLHttpRequest &&\n\twindow.applicationCache &&\n\twindow.document.createEvent &&\n\tarr.map &&\n\tarr.every);\n\t",
 	"compatibilityMatrix": {
@@ -70,6 +71,7 @@
 
 	"app": {
 		"release": true,
+		"firstApp": "landing",
 		"folders":{
 			"build": "build",
 			"temp": "build/.tmp",
@@ -83,13 +85,6 @@
 		}
 	},
 
-	"landing": [
-		"landing/landing.js",
-		"landing/landing.css",
-		"landing/landing.html",
-		"magic"
-	],
-
 	"files": {
 		"index":"index.html",
 		"indexCordova": "index-cordova.html"
@@ -99,7 +94,6 @@
 		"name": "Power loader",
 		"version": "0.0.2",
 		"release": true,
-		"oneRequest": true,
 
 		"loading": 1,
 		"viewport": "user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height",

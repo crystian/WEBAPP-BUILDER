@@ -80,7 +80,6 @@ gulp.task('generate:config', function (cb) {
 		build: false,
 		fastclick: global.cfg.loader.fastclick,
 		pathTpl: global.cfg.loader.folders.template,
-
 		text: {
 			incompatibleByFeatures: global.cfg.loader.text.incompatibleByFeatures,
 			incompatibleByDiag: global.cfg.loader.text.incompatibleByDiag,
@@ -91,7 +90,9 @@ gulp.task('generate:config', function (cb) {
 		}
 	};
 
-	json.landingFiles = commons.getFileNamesOrAllInOne(global.cfg.landing);
+	json.oneRequest = global.cfg.oneRequest;
+
+	json.firstApp = global.cfg.app.firstApp;
 
 	var compatibilityTpl =
 		'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n'+

@@ -128,15 +128,12 @@ var loader = (function(){
 			FastClick.attach(doc.body);
 		}
 
-		_loadAppFiles(cfg.landingFiles, _loadAppSuccess, _loadAppFail);
-	}
-
-
-	function _loadAppFiles(files, loadAppSuccess, loadAppFail){
-		utils.requestOneOrAllInOne(files).then(loadAppSuccess, loadAppFail);
+		console.log('load appName '+ cfg.firstApp);
+		utils.requestApp(cfg.firstApp, _loadAppSuccess, _loadAppFail);
 	}
 
 	function _loadAppSuccess(){
+		console.warn('_loadAppSuccess');
 		loader.finish();
 	}
 	function _loadAppFail(err){
