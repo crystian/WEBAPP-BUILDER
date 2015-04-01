@@ -106,8 +106,7 @@ loader.utils = (function() {
 	}
 
 	function _requestOneOrAllInOne(appName, loadAppSuccess, loadAppFail){
-		console.info('aaa', loader.cfg.oneRequest);
-debugger
+
 		if(loader.cfg.oneRequest){
 			console.info('oneRequest!');
 			return;
@@ -115,6 +114,8 @@ debugger
 		console.info('multiple request!');
 
 		return requestJson(appName +'/app.json').then(function (data) {
+			data = data.files;
+
 			var i = 0,
 				l = data.length,
 				type = '',

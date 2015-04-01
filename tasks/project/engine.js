@@ -80,14 +80,14 @@ exports.runJsonify = function() {
 
 
 function runEachApp(appsJson, fnEach){
-	var apps = require('../../../'+ appsJson),
+	var appsFile = require('../../../'+ appsJson),
 		stream = undefined;
 
 	var i = 0,
-		l = apps.length;
+		l = appsFile.apps.length;
 
 	for (; i < l; i++) {
-		var app = apps[i];
+		var app = appsFile.apps[i];
 		stream = aux.merge(stream, fnEach(global.cfg.app.folders.www +'/'+ app +'/app.json', app));
 	}
 
@@ -96,7 +96,7 @@ function runEachApp(appsJson, fnEach){
 
 
 function runEachPreprocessors(url, appName){
-	var files = require('../../../'+ url);
+	var files = require('../../../'+ url).files;
 	var i = 0,
 		l = files.length,
 		streams = undefined;
