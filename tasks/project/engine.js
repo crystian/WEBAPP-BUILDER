@@ -74,20 +74,20 @@ exports.runMagic = function(appsJson) {
 	return runEachApp(appsJson, doMagic);
 };
 
-exports.runJsonify = function() {
-	return runEachApp(runJsonify);
+exports.runJsonify = function(appsJson) {
+	return runEachApp(appsJson, runJsonify);
 };
 
 
 function runEachApp(appsJson, fnEach){
-	var appsFile = require('../../../'+ appsJson),
+	var apps = require('../../../'+ appsJson).apps,
 		stream = undefined;
 
 	var i = 0,
-		l = appsFile.apps.length;
+		l = apps.length;
 
 	for (; i < l; i++) {
-		var app = appsFile.apps[i];
+		var app = apps[i];
 		stream = aux.merge(stream, fnEach(global.cfg.app.folders.www +'/'+ app +'/app.json', app));
 	}
 
@@ -177,7 +177,7 @@ function runEachPreprocessors(url, appName){
 
 
 function doMagic(url, appName) {
-	var files = require('../../../' + url);
+	var files = require('../../../' + url).files;
 	var i = 0,
 		l = files.length,
 		streamsFinal = undefined,
@@ -235,7 +235,8 @@ function doMagic(url, appName) {
 	return streamsFinal;
 }
 
-function runJsonify(app){
+function runJsonify(path, app){
+	console.logRed('aap '+ app);
 	var json = {};
 	json.v = global.cfg.version;
 	json.j = fs.readFileSync(global.cfg.app.folders.temp +'/'+ app +'.js', {encoding: 'utf8'});
@@ -253,6 +254,7 @@ function runJsonify(app){
 }
 
 function _concat(_streams, _type, _appName){
+
 	var s = _streams[_type].done();
 	s = s.pipe(concat(_appName+'.'+ _type, {newLine: ';'}))
 		.pipe(gulp.dest(global.cfg.app.folders.temp));
