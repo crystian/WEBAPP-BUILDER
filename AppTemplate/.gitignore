@@ -1,5 +1,15 @@
 /build
 /.idea/workspace.xml
-/gulp-config-local.json
+/project-config-local.json
 /node_modules
 /LOADER
+/CORDOVA/www
+/CORDOVA/platforms/android/ant-build
+/CORDOVA/platforms/android/CordovaLib/ant-build
+/CORDOVA/platforms/android/assets/www
+/www/**/*.css
+/www/magic
+/www/index.html
+/www/index-cordova.html
+/www/assets/fonts/glyphicons-halflings-regular.*
+/vendors/bower_components

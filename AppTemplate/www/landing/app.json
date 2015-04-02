@@ -1,0 +1,32 @@
+{
+	"files": [
+		{
+			"file": "bootstrap-reset.css",
+			"path": "vendors/theme"
+		},
+		{
+			"file": "style.css",
+			"path": "vendors/theme"
+		},
+		{
+			"file": "style-responsive.css",
+			"path": "vendors/theme"
+		},
+		{
+			"file": "font-awesome.css",
+			"path": "vendors/theme/assets/font-awesome/css"
+		},
+		{
+			"file": "landing.scss",
+			"path": "www/landing"
+		},
+		{
+			"file": "landing.js",
+			"path": "www/landing"
+		},
+		{
+			"file": "landing.html",
+			"path": "www/landing"
+		}
+	]
+}

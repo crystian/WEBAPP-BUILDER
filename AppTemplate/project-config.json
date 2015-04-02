@@ -1,0 +1,13 @@
+{
+	"ip": "10.0.1.2",
+	"cordova": false,
+	"compress": false,
+	"oneRequest": false,
+	"loader": {
+		"loading": 6,
+		"release": false
+	},
+	"app" : {
+		"release": false
+	}
+}

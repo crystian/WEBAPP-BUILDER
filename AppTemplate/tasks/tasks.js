@@ -2,20 +2,13 @@
  * Created by Crystian on 2/19/2015.
  */
 
-
-var gulp = require('gulp'),
-	runSequence = require('run-sequence');
+var gulp = require('gulp');
 
 gulp.task('default', ['build']);
 
+gulp.task('css', ['css:app']); //just an alias
+gulp.task('loader', ['get:loader']);
 
-gulp.task('build', function (cb) {
-	runSequence(
-		'remove:build',
-		'make:app',
-		//'run:cordova',
-
-		//'make:loader',
-		//'remove:temp',
-		cb);
+gulp.task('cssw', function() {
+	gulp.watch([global.cfg.folders.www + '/**/*.scss'], ['css:app']);
 });

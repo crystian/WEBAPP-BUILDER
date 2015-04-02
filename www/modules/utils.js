@@ -113,7 +113,7 @@ loader.utils = (function() {
 		}
 		console.info('multiple request!');
 
-		return requestJson(appName +'/app.json').then(function (data) {
+		return requestJson('../'+ loader.cfg.loader.pathTpl +'/'+ appName +'/app.json').then(function (data) {
 			data = data.files;
 
 			var i = 0,

@@ -1,8 +1,15 @@
+
+GULP SIN TERMINAR!
+
+
+# DEPRECADO:
+
+
+
 # LANGUAGES GYM by Crystian & Eliminado
 ## WORKSTATION & AMBIENT
 ---
 
-GULP SIN TERMINAR!
 solo hecho en la base
 
 

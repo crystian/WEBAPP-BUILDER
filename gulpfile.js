@@ -16,11 +16,7 @@ requireDir('./tasks');
 
 try{
 	//merge between default and specify:
-	global.cfg = extend(true, {},
-		require('./project-config.json'),
-		require('../project-config.json'),
-		require('../project-config-local.json')
-	);
+	global.cfg = require('./project-config.json');
 
 	//shortcut to simplify
 	global.cfg.folders = global.cfg.loader.folders;
@@ -33,7 +29,7 @@ try{
 }
 
 //validations always:
-if (global.cfg.loader.release && !global.cfg.loader.oneRequest) {
+if (global.cfg.loader.release && !global.cfg.oneRequest) {
 	console.logRed('release with oneRequest on false, does not posible to build, change the values please');
 	process.exit(1);
 }

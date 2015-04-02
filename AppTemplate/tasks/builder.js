@@ -3,59 +3,21 @@
  */
 
 var gulp = require('gulp'),
-	exec = require('child_process').exec,
-	chalk = require('chalk'),
-	gutil = require('gulp-util'),
+	engine = require('../LOADER/tasks/project/engine'),
 	debug = require('gulp-debug');
 
 
+gulp.task('css:app', function (){
+	return engine.runPreprocessors(global.cfg.folders.www +'/apps.json');
+});
 
-gulp.task('make:app', ['concat:css'], function () {
+gulp.task('runMagic', function (){
+	return engine.runMagic(global.cfg.folders.www +'/apps.json');
+});
 
-
-
-
-
-	return {};
+gulp.task('build', ['runMagic'], function (){
+	return engine.runJsonify(global.cfg.folders.www +'/apps.json');
 });
 
 
 
-gulp.task('concat:css', function () {
-
-});
-
-
-gulp.task('loader:make', function (cb) {
-	exec('gulp build',{cwd:global.cfg.folders.loader},
-		function (error, stdout, stderr) {
-
-			if (error || (stderr && stderr !== '')) {
-				if (gutil.env.debug) {
-					console.log(chalk.black.bgRed(stdout));
-				}
-				console.log(chalk.black.bgRed('stderr: ' + stderr));
-				console.log(chalk.black.bgRed('exec error: ' + error));
-			} else {
-				if (gutil.env.debug) {
-					console.log(stdout);
-				} else {
-					console.log(chalk.black.bgGreen('Loader made'));
-				}
-			}
-			cb();
-		}
-	);
-});
-gulp.task('loader:copy',['loader:make'], function () {
-	return gulp.src(global.cfg.folders.loaderDist+'/*.*')
-		//.pipe(debug({verbose: true}))
-		//.on('error', gutil.log)
-		.pipe(gulp.dest(global.cfg.folders.tempFull));
-});
-gulp.task('loader:get',['loader:copy'], function () {
-	return gulp.src(global.cfg.folders.tempFull+'/index.html')
-		//.pipe(debug({verbose: true}))
-		//.on('error', gutil.log)
-		.pipe(gulp.dest(global.cfg.folders.wwwFull));
-});
