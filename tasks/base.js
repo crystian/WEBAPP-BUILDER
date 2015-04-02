@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 	inject = require('gulp-inject'),
 	replace = require('gulp-replace'),
 	rename = require('gulp-rename'),
-	fs = require('fs'),
+	fs = require('fs-extra'),
 	cheerio = require('gulp-cheerio');
 
 
@@ -48,38 +48,25 @@ gulp.task('make:index', function () {
 gulp.task('generate:config', function (cb) {
 	//variables shared between loader build and loader app
 	var json = {};
-	json.release = global.cfg.loader.release;//be carefull, it's from loader!
+	json.release = global.cfg.app.release;
 	json.version = global.cfg.version;
 
 	json.compress = global.cfg.compress;
 	json.isCordovaDevice = global.cfg.isCordovaDevice;
 	json.compatibilityMatrix = global.cfg.compatibilityMatrix;
 	json.debugZoneActive = global.cfg.debugZoneActive;
-
-	json.mixpanel = {
-		'installed': global.cfg.mixpanel.installed,
-		'active': global.cfg.mixpanel.active,
-		'token': global.cfg.mixpanel.token
-	};
-
-	json.analytics = {
-		'id': global.cfg.analytics.id,
-		'installed': global.cfg.analytics.installed,
-		'active': global.cfg.analytics.active,
-		'linkid': global.cfg.analytics.linkid,
-		'displayFeatures':  global.cfg.analytics.displayFeatures,
-		'appName': global.cfg.analytics.appName,
-		'appId': global.cfg.analytics.appId,
-		'appInstaller': global.cfg.analytics.appInstaller
-	};
-
+	json.mixpanel = global.cfg.mixpanel.installed;
+	json.analytics = global.cfg.analytics.appInstaller;
 	json.consoleError = global.cfg.consoleError;
+	json.oneRequest = global.cfg.oneRequest;
+	json.firstApp = global.cfg.app.firstApp;
+	json.fastclick = global.cfg.loader.bower.fastclick;
+	json.appRoot = global.cfg.app.folders.app;
 
 	json.loader = {
 		version: global.cfg.loader.version,
+		release: global.cfg.loader.release,
 		build: false,
-		fastclick: global.cfg.loader.fastclick,
-		pathTpl: global.cfg.loader.folders.template,
 		text: {
 			incompatibleByFeatures: global.cfg.loader.text.incompatibleByFeatures,
 			incompatibleByDiag: global.cfg.loader.text.incompatibleByDiag,
@@ -90,9 +77,6 @@ gulp.task('generate:config', function (cb) {
 		}
 	};
 
-	json.oneRequest = global.cfg.oneRequest;
-
-	json.firstApp = global.cfg.app.firstApp;
 
 	var compatibilityTpl =
 		'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n'+

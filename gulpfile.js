@@ -10,21 +10,26 @@
 var gulp = require('gulp'),
 	requireDir = require('require-dir'),
 	extend = require('extend'),
-	gutil = require('gulp-util');
+	utils = require('./tasks/project/utils.js');
 
 requireDir('./tasks');
 
 try{
-	//merge between default and specify:
-	global.cfg = require('./project-config.json');
+	var fileNameLocal = './project-config-local.json';
 
-	//shortcut to simplify
-	global.cfg.folders = global.cfg.loader.folders;
+	//merge between default and specify:
+	global.cfg = extend(true, {},
+		require('./project-config.json'),
+		utils.fileExist(fileNameLocal) && require(fileNameLocal)
+	);
+
+	console.logWarn(global.cfg.loader.version);
 
 	global.cfg.pkg = require('./package.json');
 
 } catch (e){
-	console.logRed('Do you run installer?, There are some problems with project-config*, check those please');
+	//console.logRed('Do you run installer?, There are some problems with project-config*, check those please');
+	console.logRed('Error: '+ e);
 	process.exit(1);
 }
 

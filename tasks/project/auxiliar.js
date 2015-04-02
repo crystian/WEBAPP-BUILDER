@@ -60,7 +60,3 @@ exports.replace = function(stream, replaces){
 
 	return stream;
 };
-
-exports.exit = function (n){
-	process.exit(n);
-};

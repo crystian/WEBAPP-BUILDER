@@ -124,7 +124,7 @@ var loader = (function(){
 
 		_debugToolsLoad();
 
-		if(cfg.loader.fastclick && cfg.isTouchDevice){
+		if(cfg.fastclick && cfg.isTouchDevice){
 			FastClick.attach(doc.body);
 		}
 

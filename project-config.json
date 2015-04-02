@@ -4,11 +4,25 @@
 	"os": "win",
 	"ip": "127.0.0.1",
 
-	"cordova": true,
+	"release": true,
+	"oneRequest": false,
 	"compress": true,
+	"firstApp": "landing",
+	"cordova": true,
+
+	"folders":{
+		"app": "APP",
+		"www": "www",
+		"build": "build",
+		"temp": "build/.tmp",
+		"cordova": "CORDOVA",
+		"cordovaWWW": "CORDOVA/www",
+		"bower": "vendors/bower_components",
+		"api": "www/api"
+	},
+
 	"isCordovaDevice": false,
 	"debugZoneActive": false,
-	"oneRequest": false,
 
 	"compatibilityFirst": "\n\treturn !!(window.document.querySelector &&\n\twindow.console &&window.document.addEventListener &&\n\t(window.document.getElementsByTagName('body')[0]).classList &&\n\twindow.localStorage &&\n\twindow.navigator &&\n\twindow.XMLHttpRequest &&\n\twindow.applicationCache &&\n\twindow.document.createEvent &&\n\tarr.map &&\n\tarr.every);\n\t",
 	"compatibilityMatrix": {
@@ -20,6 +34,16 @@
 		"safari": [6.0, 6.0],
 		"ios": [6, 6]
 	},
+
+	"autoprefixer": [
+		"ie 10",
+		"android 4",
+		"chrome 32",
+		"ff 27",
+		"ios 7",
+		"opera 19",
+		"safari 7"
+	],
 
 	"analytics": {
 		"installed": false,
@@ -45,16 +69,6 @@
 		"nightmare": 9003
 	},
 
-	"autoprefixer": [
-		"ie 10",
-		"android 4",
-		"chrome 32",
-		"ff 27",
-		"ios 7",
-		"opera 19",
-		"safari 7"
-	],
-
 	"consoleError": [
 		"Error unknown",
 		"Error about connection stablished",
@@ -69,51 +83,22 @@
 		"Error in obliteration rast"
 	],
 
-	"app": {
-		"release": true,
-		"firstApp": "landing",
-		"folders":{
-			"build": "build",
-			"temp": "build/.tmp",
-			"cordova": "CORDOVA",
-			"cordovaWWW": "CORDOVA/www",
-			"www": "www",
-			"template": "AppTemplate",
-			"loader": "LOADER",
-			"bower": "vendors/bower_components",
-			"api": "www/api"
+	"platform": {
+		"android": {
+			"keypass": "provisoryKey1",
+			"storepass": "provisoryKey1"
 		}
-	},
-
-	"files": {
-		"index":"index.html",
-		"indexCordova": "index-cordova.html"
 	},
 
 	"loader":{
 		"name": "Power loader",
 		"version": "0.0.3",
 		"release": false,
-
 		"loading": 1,
-		"viewport": "user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height",
 
-		"text": {
-			"title": "Title",
-			"description": "Description",
-			"keyword": "keywords",
-			"author": "autors",
-			"noscript": "<br/>Es una broma? este sitio es una app javascript, indispensable para que funcione, actualiza el navegador o usa otro. Gracias vuelvan prontos! <br/><em>Para mas info: <a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a> : browsers incompatibles.</em><br/><br/>",
-
-			"incompatibleByFeatures": "Navegador incompatible (no se encontraron features), por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
-			"incompatibleByDiag": "Navegador incompatible, por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
-			"semiIncompatible": "Navegador no reconocido o con problemas de compatibilidad, la aplicacion funcionara pero es recomendable actualizarlo o usar otro, ver en el F.A.Q. \\nhttp://languagesgym.com/faq",
-			"faqLink": "<a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a>",
-			"errorRequestFile": "Error leyendo el archivo del servidor, por favor vuelva a intentar mas tarde",
-			"errorTimeoutServer": "Se agoto el tiempo de espera, verifica que tengas internet y este andando bien",
-
-			"header": ["<!--","<%=name%>","<%=site%>","<%=date%> (<%=version%>)","","Power by Javascript community!, Magic by Crystian","Copyright (c) 2015, @Crystian (Cristian Bietti) @crystian","-->","",""],
-			"footer": ["","","<!--'... Your future is whatever you make it. So make it a good one!' - Doc Brown to Marty McFly, BTTF (1990)-->"]
+		"filesDest": {
+			"index":"index.html",
+			"indexCordova": "index-cordova.html"
 		},
 
 		"folders": {
@@ -122,10 +107,10 @@
 			"build": "build",
 			"temp": "build/.tmp",
 			"screens": "build/screens",
-			"loadings": "www/loading",
-			"template": "AppTemplate/www",
-			"bootstrapDist": "bootstrap/dist"
+			"loadings": "www/loading"
 		},
+
+		"viewport": "user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height",
 
 		"bower": {
 			"platform": {
@@ -173,11 +158,25 @@
 					"bootstrap/dist/css/bootstrap.min.css"
 				]
 			}
-		}
-	},
+		},
 
-	"android": {
-		"keypass": "provisoryKey1",
-		"storepass": "provisoryKey1"
+		"text": {
+			"title": "Title",
+			"description": "Description",
+			"keyword": "keywords",
+			"author": "autors",
+			"noscript": "<br/>Es una broma? este sitio es una app javascript, indispensable para que funcione, actualiza el navegador o usa otro. Gracias vuelvan prontos! <br/><em>Para mas info: <a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a> : browsers incompatibles.</em><br/><br/>",
+
+			"incompatibleByFeatures": "Navegador incompatible (no se encontraron features), por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
+			"incompatibleByDiag": "Navegador incompatible, por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
+			"semiIncompatible": "Navegador no reconocido o con problemas de compatibilidad, la aplicacion funcionara pero es recomendable actualizarlo o usar otro, ver en el F.A.Q. \\nhttp://languagesgym.com/faq",
+			"faqLink": "<a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a>",
+			"errorRequestFile": "Error leyendo el archivo del servidor, por favor vuelva a intentar mas tarde",
+			"errorTimeoutServer": "Se agoto el tiempo de espera, verifica que tengas internet y este andando bien",
+
+			"header": ["<!--","<%=name%>","<%=site%>","<%=date%> (<%=version%>)","","Power by Javascript community!, Magic by Crystian","Copyright (c) 2015, @Crystian (Cristian Bietti) @crystian","-->","",""],
+			"footer": ["","","<!--'... Your future is whatever you make it. So make it a good one!' - Doc Brown to Marty McFly, BTTF (1990)-->"]
+		}
+
 	}
 }

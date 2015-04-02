@@ -111,9 +111,11 @@ loader.utils = (function() {
 			console.info('oneRequest!');
 			return;
 		}
-		console.info('multiple request!');
 
-		return requestJson('../'+ loader.cfg.loader.pathTpl +'/'+ appName +'/app.json').then(function (data) {
+		console.info('multiple request!');
+		var path = '../' + loader.cfg.loader.pathTpl;
+
+        return requestJson(path +'/'+ appName +'/app.json').then(function (data) {
 			data = data.files;
 
 			var i = 0,
@@ -143,7 +145,7 @@ loader.utils = (function() {
 						break;
 				}
 
-				urls.push('../'+ file.path +'/'+ setExtensionFilename(file.file, type));
+				urls.push(path +'/'+ file.path +'/'+ setExtensionFilename(file.file, type));
 			}
 
 			return requestMultipleSync(urls, {appName: appName}).then(loadAppSuccess);

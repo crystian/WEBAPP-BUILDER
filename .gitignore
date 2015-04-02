@@ -5,4 +5,5 @@
 /vendors
 /AppTemplate/APP/WWW/**/*.css
 /.sass-cache
-.idea/shelf/
+/.idea/shelf/
+/project-config-local.json

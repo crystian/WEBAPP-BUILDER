@@ -133,7 +133,7 @@ gulp.task('make:loader:css', ['css:loader'],  function () {
 
 	var cssLib = [
 		global.cfg.loader.bower.swiper ? global.cfg.folders.bower + '/swiper/dist/css/swiper.'+releasePostName+'css' : '',
-		global.cfg.loader.bower.bootstrap ? global.cfg.folders.bower + '/' + global.cfg.folders.bootstrapDist + '/css/bootstrap.'+releasePostName+'css' : ''
+		global.cfg.loader.bower.bootstrap ? global.cfg.folders.bower + '/bootstrap/dist/css/bootstrap.'+releasePostName+'css' : ''
 		//global.cfg.loader.bootstrap ? global.cfg.folders.bower + '/bootstrap/dist/css/bootstrap-theme.'+releasePostName+'css ': ''
 	];
 
@@ -165,7 +165,7 @@ gulp.task('make:loader:css', ['css:loader'],  function () {
 gulp.task('copy:bootstrap:fonts', function (cb) {
 	if(global.cfg.loader.bower.bootstrap){
 		fs.copySync(
-			global.cfg.folders.bower + '/' + global.cfg.folders.bootstrapDist +'/fonts',
+			global.cfg.folders.bower + '/bootstrap/dist/fonts',
 			global.cfg.folders.build + '/assets/fonts'
 		);
 		console.logGreen('Bootstrap fonts copied');
