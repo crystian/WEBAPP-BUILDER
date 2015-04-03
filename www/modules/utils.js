@@ -106,14 +106,14 @@ loader.utils = (function() {
 	}
 
 	function _requestOneOrAllInOne(appName, loadAppSuccess, loadAppFail){
-
+debugger
 		if(loader.cfg.oneRequest){
 			console.info('oneRequest!');
 			return;
 		}
 
 		console.info('multiple request!');
-		var path = '../' + loader.cfg.loader.pathTpl;
+		var path = '../' + loader.cfg.appWww;
 
         return requestJson(path +'/'+ appName +'/app.json').then(function (data) {
 			data = data.files;
@@ -145,7 +145,7 @@ loader.utils = (function() {
 						break;
 				}
 
-				urls.push(path +'/'+ file.path +'/'+ setExtensionFilename(file.file, type));
+				urls.push(loader.cfg.appRoot +'/' + file.path + '/' + setExtensionFilename(file.file, type));
 			}
 
 			return requestMultipleSync(urls, {appName: appName}).then(loadAppSuccess);
@@ -294,7 +294,6 @@ loader.utils = (function() {
 		options = options || {appName: 'app'};
 		options.replace = options.replace || false;
 
-	debugger
 		if((options && options.replace === false) || !el.getElementById(options.appName)){
 
 			var app = document.createElement('div');

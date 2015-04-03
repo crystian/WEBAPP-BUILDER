@@ -41,14 +41,14 @@ exports.fileExist = function(fileName){
 	return fs.existsSync(fileName);
 };
 
-exports.fileRequire = function(fileName){
-	var r = this.fileExist(fileName);
-	if(!r){
-		console.logRed('File not found: ' + fileName);
-	}
-
-	return r;
-};
+//exports.fileRequire = function(fileName){
+//	var r = this.fileExist(fileName);
+//	if(!r){
+//		console.logRed('File not found: ' + fileName);
+//	}
+//
+//	return r;
+//};
 
 exports.getExtensionFile = function(s) {
 	var arr = s.split('.');
@@ -80,17 +80,17 @@ exports.setExtensionFilename = function(s, extension) {
 	return arr.join('.');
 };
 
-exports.setPreExtensionFilename = function(s, preExtension) {
-	var arr = s.split('.');
-	if (arr.length <= 1) {
-		console.logRed('Extension not found!');
-		return s;
-	}
-
-	arr.splice(arr.length-1, 0, preExtension);
-
-	return arr.join('.');
-};
+//exports.setPreExtensionFilename = function(s, preExtension) {
+//	var arr = s.split('.');
+//	if (arr.length <= 1) {
+//		console.logRed('Extension not found!');
+//		return s;
+//	}
+//
+//	arr.splice(arr.length-1, 0, preExtension);
+//
+//	return arr.join('.');
+//};
 
 exports.makeServe = function(folder, path, ip, port) {
 

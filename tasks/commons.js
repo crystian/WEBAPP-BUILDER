@@ -20,15 +20,15 @@ var gulp = require('gulp'),
 gulp.task('remove:build', function() {
 	//no borrar la carpeta build, da errores de sincro
 	return gulp.src([
-			global.cfg.folders.screens,
-			global.cfg.folders.build
+			global.cfg.loader.folders.screens,
+			global.cfg.loader.folders.build
 		], {read: false})
 		.pipe(clean());
 });
 
 gulp.task('remove:temp', function() {
 	return gulp.src([
-			global.cfg.folders.temp
+			global.cfg.loader.folders.temp
 		], {read: false})
 		.pipe(clean());
 });
@@ -71,13 +71,13 @@ exports.sassfixer = function(src, dest) {
 	var type = utils.getExtensionFile(src);
 	var sassOptions = {errLogToConsole: true, indentedSyntax: (type === 'sass')};
 
-	return gulp.src(src)
+    return gulp.src(src)
 		//.pipe(debug({verbose: true}))
 		//.on('error', gutil.log)
 		.pipe(sass(sassOptions))
 		.pipe(autoprefixer(global.cfg.autoprefixer))
 		.pipe(replace(' 0px', ' 0'))
 		.pipe(csslint('csslintrc.json'))
-		.pipe(csslint.reporter().on('error',gutil.log))
+		.pipe(csslint.reporter().on('error', gutil.log))
 		.pipe(gulp.dest(dest));
 };

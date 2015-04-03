@@ -7,7 +7,8 @@ var gulp = require('gulp'),
 	//debug = require('gulp-debug'),
 	uglify = require('gulp-uglify'),
 	rename = require('gulp-rename'),
-	fs = require('fs'),
+    utils = require('./project/utils.js'),
+	fs = require('fs-extra'),
 	bowerify = require('gulp-bower');
 
 /*
@@ -42,7 +43,7 @@ gulp.task('make:bower', ['download:bower'], function(cb) {
 });
 
 gulp.task('download:bower',['generator:bower'], function() {
-	return bowerify({ directory: './'+ global.cfg.folders.bower});
+	return bowerify({ directory: './'+ global.cfg.loader.folders.bower});
 });
 
 gulp.task('generator:bower',['parse:bower'],  function(cb) {
@@ -91,13 +92,13 @@ gulp.task('parse:bower', function(cb) {
 
 		if(o['js-'+ ambient]){
 			js = o['js-'+ ambient].map(function (item) {
-				return './'+ global.cfg.folders.bower +'/'+item;
+				return './'+ global.cfg.loader.folders.bower +'/'+item;
 			});
 		}
 
 		if(o['css-'+ ambient]){
 			css = o['css-'+ ambient].map(function (item) {
-				return './'+ global.cfg.folders.bower +'/'+item;
+				return './'+ global.cfg.loader.folders.bower +'/'+item;
 			});
 		}
 
@@ -106,12 +107,12 @@ gulp.task('parse:bower', function(cb) {
 			if(ambient==='prod' && o['generate-js']){
 
 				var jsDev = o['js-dev'].map(function (item) {
-					return './'+ global.cfg.folders.bower  +'/'+item;
+					return './'+ global.cfg.loader.folders.bower  +'/'+item;
 				});
 
 				js.forEach(function (element,pos) {
 
-					if(fs.existsSync(element)){return;}
+					if(utils.fileExist(element)){return;}
 
 					var pathSrc = element.lastIndexOf('/'),
 						name = element.substr(pathSrc+1),

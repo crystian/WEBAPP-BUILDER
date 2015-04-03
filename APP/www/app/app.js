@@ -12,7 +12,7 @@ var app = {};
 		app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 			$routeProvider
 				.when('/page/:n', {
-					templateUrl: 'app/page/page.html',
+					templateUrl: loader.cfg.appRoot +'/www/app/page/page.html',
 					controller: 'PageCtrl',
 					controllerAs: 'page'
 				})

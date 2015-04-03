@@ -16,6 +16,9 @@
             <option name="KEEP_INDENTS_ON_EMPTY_LINES" value="true" />
           </value>
         </option>
+        <XML>
+          <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+        </XML>
         <codeStyleSettings language="JSON">
           <indentOptions>
             <option name="INDENT_SIZE" value="4" />

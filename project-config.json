@@ -5,10 +5,12 @@
 	"ip": "127.0.0.1",
 
 	"release": true,
-	"oneRequest": false,
+	"oneRequest": true,
 	"compress": true,
 	"firstApp": "landing",
-	"cordova": true,
+	"cordova": false,
+	"isCordovaDevice": false,
+	"debugZoneActive": false,
 
 	"folders":{
 		"app": "APP",
@@ -20,9 +22,6 @@
 		"bower": "vendors/bower_components",
 		"api": "www/api"
 	},
-
-	"isCordovaDevice": false,
-	"debugZoneActive": false,
 
 	"compatibilityFirst": "\n\treturn !!(window.document.querySelector &&\n\twindow.console &&window.document.addEventListener &&\n\t(window.document.getElementsByTagName('body')[0]).classList &&\n\twindow.localStorage &&\n\twindow.navigator &&\n\twindow.XMLHttpRequest &&\n\twindow.applicationCache &&\n\twindow.document.createEvent &&\n\tarr.map &&\n\tarr.every);\n\t",
 	"compatibilityMatrix": {
@@ -93,9 +92,8 @@
 	"loader":{
 		"name": "Power loader",
 		"version": "0.0.3",
-		"release": false,
+		"release": true,
 		"loading": 1,
-
 		"filesDest": {
 			"index":"index.html",
 			"indexCordova": "index-cordova.html"

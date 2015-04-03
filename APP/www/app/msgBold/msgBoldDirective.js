@@ -7,9 +7,9 @@ app.directive('msgBoldDirective', function() {
 		restrict: 'E',
 		transclude: true,
 		scope: {},
-		templateUrl: 'app/msgBold/msgBoldDirective.html',
+		templateUrl: loader.cfg.appRoot +'/www/app/msgBold/msgBoldDirective.html',
 		link: function (scope, element) {
-			scope.model = {result:'Really!!'}
+			scope.model = {result:'Really!!'};
 		}
 	};
 });

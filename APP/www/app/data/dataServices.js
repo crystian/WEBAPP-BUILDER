@@ -14,7 +14,7 @@ app.factory('DataServices', ['$http', '$q',
 		};
 
 		function getLocal(){
-			var localRequest = 'app/data/local.json';
+			var localRequest = loader.cfg.appRoot +'/www/app/data/local.json';
 			return $http.get(localRequest).
 				then(function(response, status, headers, config) {
 					return response.data.dataFromJson;

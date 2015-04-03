@@ -23,8 +23,6 @@ try{
 		utils.fileExist(fileNameLocal) && require(fileNameLocal)
 	);
 
-	console.logWarn(global.cfg.loader.version);
-
 	global.cfg.pkg = require('./package.json');
 
 } catch (e){
@@ -35,11 +33,11 @@ try{
 
 //validations always:
 if (global.cfg.loader.release && !global.cfg.oneRequest) {
-	console.logRed('release with oneRequest on false, does not posible to build, change the values please');
+	console.logRed('LOADER: release with oneRequest on false, does not posible to build, change the values please');
 	process.exit(1);
 }
 
 if (global.cfg.compress && !global.cfg.loader.bower['lz-string']) {
-	console.logRed('Compress option active, but library lz-string not present');
+	console.logRed('LOADER: Compress option active, but library lz-string not present');
 	process.exit(1);
 }

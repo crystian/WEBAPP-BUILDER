@@ -4,6 +4,7 @@
 
 
 var gulp = require('gulp'),
+    utils = require('./utils'),
 	replace = require('gulp-replace'),
 	merge = require('merge-stream');
 
@@ -28,13 +29,13 @@ exports.makePath = function(path) {
 };
 
 //if it is minificated version, just validate this file, otherwise check the normal version
-//this is util for Libs with out min version
+//this is util for Libs without min version
 exports.fileDestExist = function(file){
 	var r = false;
 
 	//validate if exist, if exist return don't process nothing
-	var p = (global.cfg.loader.release || file.makeMin) ? file.path + '/' +file.min : file._cssFile;
-	if(fs.existsSync(p)){
+	var p = (global.cfg.release || file.makeMin) ? file.path + '/' +file.min : file._cssFile;
+	if(utils.fileExist(p)){
 		r = true;
 	}
 
@@ -42,21 +43,21 @@ exports.fileDestExist = function(file){
 };
 
 
-exports.replace = function(stream, replaces){
-	var i = 0,
-		l = replaces.length;
-
-	for (; i < l; i++) {
-		var replacePair = replaces[i];
-		if(!replacePair || replacePair.length !== 2){
-			console.logRed('Replace pair not correct format, check it, it should be two items: 0 = value searched, 1 = replace, elements found: '+ replacePair.length);
-			this.exit(-1);
-			return;
-		}
-
-		console.logGreen('key: "'+ replacePair[0] +'" value: "'+ replacePair[1] +'"');
-		stream = stream.pipe(replace(replacePair[0], replacePair[1]));
-	}
-
-	return stream;
-};
+//exports.replace = function(stream, replaces){
+//	var i = 0,
+//		l = replaces.length;
+//
+//	for (; i < l; i++) {
+//		var replacePair = replaces[i];
+//		if(!replacePair || replacePair.length !== 2){
+//			console.logRed('Replace pair not correct format, check it, it should be two items: 0 = value searched, 1 = replace, elements found: '+ replacePair.length);
+//			this.exit(-1);
+//			return;
+//		}
+//
+//		console.logGreen('key: "'+ replacePair[0] +'" value: "'+ replacePair[1] +'"');
+//		stream = stream.pipe(replace(replacePair[0], replacePair[1]));
+//	}
+//
+//	return stream;
+//};

@@ -4,16 +4,16 @@
 
 var gulp = require('gulp'),
 	spawn = require('child_process').spawn,
-	utils = require('../LOADER/tasks/project/utils'),
+	//utils = require('../../tasks/project/utils'),
 	node;
 
-gulp.task('serve', function() {
-	return utils.makeServe('.', 'www', global.cfg.ip, global.cfg.ports.serve);
-});
-
-gulp.task('serve:build', ['build:fast'], function() {
-	return utils.makeServe(global.cfg.folders.build, '', global.cfg.ip, global.cfg.ports.build);
-});
+//gulp.task('serve', function() {
+//	return utils.makeServe('.', 'www', global.cfg.ip, global.cfg.ports.serve);
+//});
+//
+//gulp.task('serve:build', ['build:fast'], function() {
+//	return utils.makeServe(global.cfg.folders.build, '', global.cfg.ip, global.cfg.ports.build);
+//});
 
 gulp.task('serve:api', function() {
 	if (node) node.kill();

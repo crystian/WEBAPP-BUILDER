@@ -16,7 +16,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="node_modules" level="project" />
     <orderEntry type="library" name="LOADER node_modules" level="project" />
   </component>
 </module>

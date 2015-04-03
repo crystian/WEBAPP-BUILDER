@@ -8,6 +8,7 @@ var gulp = require('gulp'),
 	//debug = require('gulp-debug'),
 	Nightmare = require('nightmare'),
 	async = require('async'),
+    utils = require('./project/utils'),
 	gutil = require('gulp-util');
 
 gulp.task('test:loader',['serve:nightmare'], function(cb) {
@@ -200,9 +201,9 @@ gulp.task('test:loader',['serve:nightmare'], function(cb) {
 			.useragent(b.ua)
 			.viewport(b.width, b.height)
 			//.on('error', gutil.log)
-			.goto('http://' + global.cfg.ip + ':' + global.cfg.ports.nightmare + '/'+global.cfg.files.index)
+			.goto('http://' + global.cfg.ip + ':' + global.cfg.ports.nightmare + '/'+global.cfg.loader.filesDest.index)
 			.wait(1000)
-			.screenshot(global.cfg.folders.screens + '/' + b.name + '.jpg')
+			.screenshot(global.cfg.loader.folders.screens + '/' + b.name + '.jpg')
 			.evaluate(function () {return window;},
 			function (window){
 
@@ -277,7 +278,7 @@ gulp.task('test:loader',['serve:nightmare'], function(cb) {
 			});
 	}, function (e){
 		setTimeout(function () {
-			process.exit(0);
+			utils.exit(1)
 		},500);
 		cb();
 	});

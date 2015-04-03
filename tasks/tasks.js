@@ -8,25 +8,26 @@ var gulp = require('gulp'),
 	utils = require('./project/utils.js'),
 	runSequence = require('run-sequence');
 
-gulp.task('default', ['build:fast']);
-gulp.task('css', ['css:loader']); //just an alias
+//alias:
+gulp.task('default', ['build']);
+gulp.task('css', ['css:loader']);
+gulp.task('config', ['make:config']);
 gulp.task('full',['build:full']);
 
 gulp.task('build:full', function (cb) {
 	runSequence(
 		'make:base',
-		'build:fast',
+		'build',
 	cb);
 });
 
-gulp.task('build:fast',function (cb) {
+gulp.task('build',function (cb) {
 	runSequence(
 		'remove:build',
 		'make:loader',
 		'remove:temp',
 	cb);
 });
-
 
 gulp.task('release', function (cb) {
 	if (!global.cfg.loader.release) {

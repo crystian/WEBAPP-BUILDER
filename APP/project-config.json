@@ -1,13 +1,14 @@
 {
-	"ip": "10.0.1.2",
-	"cordova": false,
-	"compress": false,
+	"name": "app name",
+	"version": "0.0.0",
+	"os": "win",
+	"ip": "127.0.0.1",
+
+	"release": false,
 	"oneRequest": false,
-	"loader": {
-		"loading": 6,
-		"release": false
-	},
-	"app" : {
-		"release": false
+	"compress": false,
+	"loader":{
+		"release": false,
+		"loading": 6
 	}
 }
