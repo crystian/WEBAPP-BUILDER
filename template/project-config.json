@@ -4,11 +4,10 @@
 	"os": "win",
 	"ip": "127.0.0.1",
 
-	"release": false,
-	"oneRequest": false,
+	"release": true,
+	"oneRequest": true,
 	"compress": false,
 	"loader":{
-		"release": false,
 		"loading": 6
 	}
 }

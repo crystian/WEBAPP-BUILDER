@@ -4,15 +4,14 @@
 
 // share with app
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
 	//debug = require('gulp-debug'),
 	jshint = require('gulp-jshint'),
 	chalk = require('chalk'),
 	fs = require('fs-extra'),
 	aux = require('./auxiliar'),
 	webserver = require('gulp-webserver'),
-
-	gutil = require('gulp-util');
+	gulp = require('gulp');
 
 
 //COMMONS between project and loader:
@@ -80,17 +79,17 @@ exports.setExtensionFilename = function(s, extension) {
 	return arr.join('.');
 };
 
-//exports.setPreExtensionFilename = function(s, preExtension) {
-//	var arr = s.split('.');
-//	if (arr.length <= 1) {
-//		console.logRed('Extension not found!');
-//		return s;
-//	}
-//
-//	arr.splice(arr.length-1, 0, preExtension);
-//
-//	return arr.join('.');
-//};
+exports.setPreExtensionFilename = function(s, preExtension) {
+	var arr = s.split('.');
+	if (arr.length <= 1) {
+		console.logRed('Extension not found!');
+		return s;
+	}
+
+	arr.splice(arr.length-1, 0, preExtension);
+
+	return arr.join('.');
+};
 
 exports.makeServe = function(folder, path, ip, port) {
 

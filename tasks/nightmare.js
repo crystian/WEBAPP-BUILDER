@@ -4,12 +4,12 @@
  * The main propose for this file is test the loader
  */
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
 	//debug = require('gulp-debug'),
 	Nightmare = require('nightmare'),
 	async = require('async'),
     utils = require('./project/utils'),
-	gutil = require('gulp-util');
+	gulp = require('gulp');
 
 gulp.task('test:loader',['serve:nightmare'], function(cb) {
 	'use strict';

@@ -3,13 +3,14 @@
  */
 
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
 	//debug = require('gulp-debug'),
+	utils = require('./project/utils.js'),
 	uglify = require('gulp-uglify'),
 	rename = require('gulp-rename'),
-    utils = require('./project/utils.js'),
 	fs = require('fs-extra'),
-	bowerify = require('gulp-bower');
+	bowerify = require('gulp-bower'),
+	gulp = require('gulp');
 
 /*
  necesitaba hacer el minificado despues de la bajada, me complico la vida...,

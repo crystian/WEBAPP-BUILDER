@@ -2,7 +2,7 @@
 * Created by Crystian on 15/02/02.
 */
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
 	//debug = require('gulp-debug'),
 	utils = require('./project/utils'),
 	removeCode = require('gulp-remove-code'),
@@ -15,7 +15,7 @@ var gulp = require('gulp'),
 	replace = require('gulp-replace'),
 	inject = require('gulp-inject'),
 	clean = require('gulp-clean'),
-	gutil = require('gulp-util');
+	gulp = require('gulp');
 
 gulp.task('remove:build', function() {
 	//no borrar la carpeta build, da errores de sincro

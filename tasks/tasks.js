@@ -2,11 +2,11 @@
 * Created by Crystian on 10/16/2014.
 */
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
 	//debug = require('gulp-debug'),
-	//gutil = require('gulp-util'),
 	utils = require('./project/utils.js'),
 	runSequence = require('run-sequence');
+	gulp = require('gulp');
 
 //alias:
 gulp.task('default', ['build']);

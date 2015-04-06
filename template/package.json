@@ -1,0 +1,8 @@
+{
+  "name": "Project",
+  "author": "Crystian (Cristian Bietti) @crystian",
+  "repository": "https://github.com/crystian/project1.git",
+  "dependencies": {
+    "restify": "^3.0.1"
+  }
+}

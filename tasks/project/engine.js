@@ -2,7 +2,8 @@
  * Created by Crystian on 3/16/2015.
  */
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
+	debug = require('gulp-debug'),
 	utils = require('./utils'),
 	strip = require('gulp-strip-comments'),
 	minifycss = require('gulp-minify-css'),
@@ -15,12 +16,10 @@ var gulp = require('gulp'),
 	extend = require('extend'),
 	gif = require('gulp-if'),
 	less = require('gulp-less'),
-	debug = require('gulp-debug'),
 	rename = require('gulp-rename'),
 	StreamQueue = require('streamqueue'),
 	aux = require('./auxiliar'),
 	LZString = require('../../vendors/lz-string/libs/lz-string'),
-	gutil = require('gulp-util');
 	//es = require('event-stream')
 	//htmlreplace = require('gulp-html-replace'),
 	//htmlmin = require('gulp-htmlmin'),
@@ -29,6 +28,7 @@ var gulp = require('gulp'),
 	//header = require('gulp-header'),
 	//footer = require('gulp-footer'),
 	//runSequence = require('run-sequence'),
+	gulp = require('gulp');
 
 
 var defaults = {
@@ -72,18 +72,17 @@ exports.runPreprocessors = function(appsJson) {
 	return runEachApp(appsJson, runEachPreprocessors);
 };
 
-//exports.runMagic = function(appsJson) {
-//	return runEachApp(appsJson, doMagic);
-//};
-//
-//exports.runJsonify = function(appsJson) {
-//	return runEachApp(appsJson, runJsonify);
-//};
+exports.runMagic = function(appsJson) {
+	return runEachApp(appsJson, doMagic);
+};
+
+exports.runJsonify = function(appsJson) {
+	return runEachApp(appsJson, runJsonify);
+};
 
 
 function runEachApp(appsJson, fnEach){
-    console.log('aaa', appsJson);
-	var apps = require('../../../'+ appsJson).apps,
+	var apps = require(global.cfg.appRoot +'/'+ appsJson).apps,
 		stream = undefined;
 
 	var i = 0,
@@ -99,7 +98,7 @@ function runEachApp(appsJson, fnEach){
 
 
 function runEachPreprocessors(url, appName){
-	var files = require('../../../'+url).files;
+	var files = require(global.cfg.appRoot +'/'+ url).files;
 	var i = 0,
 		l = files.length,
 		streams = undefined;
@@ -116,7 +115,7 @@ function runEachPreprocessors(url, appName){
 		//valid types
 		if(defaults.validCssExtensions.indexOf(type)===-1){continue;}
 
-		file.path = aux.makePath(file.path);
+		file.path = global.cfg.appRoot +'/'+ aux.makePath(file.path);
 
 		var source = file.path + '/' + file.file,
 			finalFileName = file.path + '/' + fileName +'.css';
@@ -126,7 +125,7 @@ function runEachPreprocessors(url, appName){
 
 		if(!utils.fileExist(source)){
 			console.logRed('File not found: '+ source);
-			aux.exit(1);
+			utils.exit(1);
 		}
 
 		//just for detect potentian file exists
@@ -178,92 +177,92 @@ function runEachPreprocessors(url, appName){
 	return streams;
 }
 
-//
-//function doMagic(url, appName) {
-//	var files = require('../../../' + url).files;
-//	var i = 0,
-//		l = files.length,
-//		streamsFinal = undefined,
-//		streams = [];
-//
-//	for (; i < l; i++) {
-//		var file = extend(true, {}, defaults.file, files[i]);
-//
-//		if(aux.isNotActive(file)){continue;}
-//
-//		var fileName = utils.getFileName(file.file),
-//			type = utils.getExtensionFile(file.file);
-//
-//		//valid types and normalize it
-//		var flagTypeValid = false;
-//		if (type === 'css' || defaults.validCssExtensions.indexOf(type) !== -1) {
-//			flagTypeValid = true;
-//			type = 'css';
-//		} else if(defaults.validExtensions.indexOf(type) !== -1) {
-//			flagTypeValid = true;
-//		}
-//
-//		if(!flagTypeValid){
-//			console.logWarn('Invalid file type: '+ file.file);
-//			continue;
-//		}
-//
-//		file.min = file.min || utils.setPreExtensionFilename(file.file, 'min');
-//
-//		file.path = aux.makePath(file.path);
-//
-//		var source = file.path +'/'+ fileName + '.' + type;
-//
-//		if(file.minificated || file.makeMin){
-//			source = file.path +'/'+ file.min;
-//		}
-//
-//		var stream = gulp.src(source)
-//			.pipe(debug({verbose: true}))
-//			.on('error', gutil.log);
-//
-//		if(!file.minificated && !file.makeMin){
-//			stream = _minificate(stream, file, type)
-//		}
-//
-//		if(!streams[type]){
-//			streams[type] = new StreamQueue({ objectMode: true });
-//		}
-//		streams[type] = streams[type].queue(stream);
-//	}
-//
-//	streamsFinal = aux.merge(streamsFinal, _concat(streams, 'css', appName));
-//	streamsFinal = aux.merge(streamsFinal, _concat(streams, 'js', appName));
-//	streamsFinal = aux.merge(streamsFinal, _concat(streams, 'html', appName));
-//	return streamsFinal;
-//}
-//
-//function runJsonify(path, app){
-//	console.logRed('aap '+ app);
-//	var json = {};
-//	json.v = global.cfg.version;
-//	json.j = fs.readFileSync(global.cfg.app.folders.temp +'/'+ app +'.js', {encoding: 'utf8'});
-//	json.c = fs.readFileSync(global.cfg.app.folders.temp +'/'+ app +'.css', {encoding: 'utf8'});
-//	json.h = fs.readFileSync(global.cfg.app.folders.temp +'/'+ app +'.html', {encoding: 'utf8'});
-//
-//	var b = JSON.stringify(json);
-//
-//	if(cfg.compress){
-//		b = LZString.compressToUTF16(b);
-//		console.logGreen(app +' compressed!');
-//	}
-//
-//	fs.writeFileSync(global.cfg.app.folders.build +'/'+ app +'.json', b);
-//}
-//
-//function _concat(_streams, _type, _appName){
-//
-//	var s = _streams[_type].done();
-//	s = s.pipe(concat(_appName+'.'+ _type, {newLine: ';'}))
-//		.pipe(gulp.dest(global.cfg.app.folders.temp));
-//
-//	return s;
-//}
+
+function doMagic(url, appName) {
+	var files = require(global.cfg.appRoot +'/'+ url).files;
+	var i = 0,
+		l = files.length,
+		streamsFinal = undefined,
+		streams = [];
+
+	for (; i < l; i++) {
+		var file = extend(true, {}, defaults.file, files[i]);
+
+		if(aux.isNotActive(file)){continue;}
+
+		var fileName = utils.getFileName(file.file),
+			type = utils.getExtensionFile(file.file);
+
+		//valid types and normalize it
+		var flagTypeValid = false;
+		if (type === 'css' || defaults.validCssExtensions.indexOf(type) !== -1) {
+			flagTypeValid = true;
+			type = 'css';
+		} else if(defaults.validExtensions.indexOf(type) !== -1) {
+			flagTypeValid = true;
+		}
+
+		if(!flagTypeValid){
+			console.logWarn('Invalid file type: '+ file.file);
+			continue;
+		}
+
+		file.min = file.min || utils.setPreExtensionFilename(file.file, 'min');
+
+		file.path = aux.makePath(file.path);
+
+		var source = file.path +'/'+ fileName + '.' + type;
+
+		if(file.minificated || file.makeMin){
+			source = file.path +'/'+ file.min;
+		}
+
+		var stream = gulp.src(source)
+			.pipe(debug({verbose: true}))
+			.on('error', gutil.log);
+
+		if(!file.minificated && !file.makeMin){
+			stream = _minificate(stream, file, type)
+		}
+
+		if(!streams[type]){
+			streams[type] = new StreamQueue({ objectMode: true });
+		}
+		streams[type] = streams[type].queue(stream);
+	}
+
+	streamsFinal = aux.merge(streamsFinal, _concat(streams, 'css', appName));
+	streamsFinal = aux.merge(streamsFinal, _concat(streams, 'js', appName));
+	streamsFinal = aux.merge(streamsFinal, _concat(streams, 'html', appName));
+	return streamsFinal;
+}
+
+function runJsonify(path, app){
+	console.logRed('aap '+ app);
+	var json = {};
+	json.v = global.cfg.version;
+	json.j = fs.readFileSync(global.cfg.folders.temp +'/'+ app +'.js', {encoding: 'utf8'});
+	json.c = fs.readFileSync(global.cfg.folders.temp +'/'+ app +'.css', {encoding: 'utf8'});
+	json.h = fs.readFileSync(global.cfg.folders.temp +'/'+ app +'.html', {encoding: 'utf8'});
+
+	var b = JSON.stringify(json);
+
+	if(cfg.compress){
+		b = LZString.compressToUTF16(b);
+		console.logGreen(app +' compressed!');
+	}
+
+	fs.writeFileSync(global.cfg.folders.build +'/'+ app +'.json', b);
+}
+
+function _concat(_streams, _type, _appName){
+
+	var s = _streams[_type].done();
+	s = s.pipe(concat(_appName+'.'+ _type, {newLine: ';'}))
+		.pipe(gulp.dest(global.cfg.folders.temp));
+
+	return s;
+}
 
 function _minificateAndSave(stream, file, type){
 	stream = _minificate(stream, file, type);
@@ -273,42 +272,41 @@ function _minificateAndSave(stream, file, type){
 	return stream;
 }
 
-//function _minificate(stream, file, type){
-//	//replaces previously to minimisation
-//	stream = aux.replace(stream, file.replaces.pre);
-//
-//	if (_handle[type]) {
-//		console.log('File to process: ', file.file);
-//		stream = _handle[type](stream, file);
-//	} else {
-//		console.logRed('Type not found on _minificate, file: '+ file.file);
-//	}
-//
-//	//* replaces posterity to minimisation
-//	stream = aux.replace(stream, file.replaces.post);
-//
-//	return stream;
-//}
-//
-//var _handle = {
-//	'css' : function(stream, file) {
-//		console.logWarn('CSS');
-//
-//		stream = stream
-//			.pipe(strip({safe:false, block:false}))
-//			.pipe(gif(global.cfg.app.release, minifycss()))
-//			.pipe(rename(utils.setExtensionFilename(file.min,'css')));
-//
-//		return stream;
-//	},
-//
-//	'js': function(stream, file){
-//		console.log('NADA AUN JS');
-//		return stream;
-//	},
-//	'html': function(stream, file) {
-//		console.log('NADA AUN HTML');
-//		return stream;
-//	}
-//};
-//
+function _minificate(stream, file, type){
+	//replaces previously to minimisation
+	stream = aux.replace(stream, file.replaces.pre);
+
+	if (_handle[type]) {
+		console.log('File to process: ', file.file);
+		stream = _handle[type](stream, file);
+	} else {
+		console.logRed('Type not found on _minificate, file: '+ file.file);
+	}
+
+	//* replaces posterity to minimisation
+	stream = aux.replace(stream, file.replaces.post);
+
+	return stream;
+}
+
+var _handle = {
+	'css' : function(stream, file) {
+		console.logWarn('CSS');
+
+		stream = stream
+			.pipe(strip({safe:false, block:false}))
+			.pipe(gif(global.cfg.release, minifycss()))
+			.pipe(rename(utils.setExtensionFilename(file.min,'css')));
+
+		return stream;
+	},
+
+	'js': function(stream, file){
+		console.log('NADA AUN JS');
+		return stream;
+	},
+	'html': function(stream, file) {
+		console.log('NADA AUN HTML');
+		return stream;
+	}
+};

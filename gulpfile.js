@@ -14,6 +14,7 @@ var gulp = require('gulp'),
 
 requireDir('./tasks');
 
+
 try{
 	var fileNameLocal = './project-config-local.json';
 
@@ -25,19 +26,22 @@ try{
 
 	global.cfg.pkg = require('./package.json');
 
+	global.cfg.appRoot = __dirname + '\\' + global.cfg.folders.app;
+
+
 } catch (e){
 	//console.logRed('Do you run installer?, There are some problems with project-config*, check those please');
 	console.logRed('Error: '+ e);
-	process.exit(1);
+	utils.exit(1);
 }
 
 //validations always:
 if (global.cfg.loader.release && !global.cfg.oneRequest) {
 	console.logRed('LOADER: release with oneRequest on false, does not posible to build, change the values please');
-	process.exit(1);
+	utils.exit(1);
 }
 
 if (global.cfg.compress && !global.cfg.loader.bower['lz-string']) {
 	console.logRed('LOADER: Compress option active, but library lz-string not present');
-	process.exit(1);
+	utils.exit(1);
 }

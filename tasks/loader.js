@@ -2,8 +2,9 @@
 * Created by Crystian on 10/19/2014.
 */
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
 	//debug = require('gulp-debug'),
+	commons = require('./commons'),
 	gif = require('gulp-if'),
 	htmlreplace = require('gulp-html-replace'),
 	htmlmin = require('gulp-htmlmin'),
@@ -17,10 +18,9 @@ var gulp = require('gulp'),
 	footer = require('gulp-footer'),
 	strip = require('gulp-strip-comments'),
 	fs = require('fs-extra'),
-	commons = require('./commons'),
-	gutil = require('gulp-util');
+	gulp = require('gulp');
 
-gulp.task('make:loader', ['make:loader:files'],  function () {
+gulp.task('make:loader', ['make:loader:js', 'make:loader:css', 'copy:bootstrap:fonts'],  function () {
 
 	var htmlminOptions = {
 		removeComments: true,
@@ -63,10 +63,10 @@ gulp.task('make:loader', ['make:loader:files'],  function () {
 	return stream;
 });
 
-gulp.task('make:loader:files', ['make:loader:js', 'make:loader:css', 'copy:bootstrap:fonts'], function (cb) {
-	fs.copySync(global.cfg.folders.app +'/'+ global.cfg.loader.folders.www, global.cfg.loader.folders.build);
-	cb();
-});
+//gulp.task('make:loader:files', [], function (cb) {
+//	//fs.copySync(global.cfg.folders.app +'/'+ global.cfg.folders.www, global.cfg.loader.folders.build);
+//	cb();
+//});
 
 gulp.task('make:loader:js',  function () {
 	var releasePostName = (global.cfg.loader.release) ? 'min.' : '';

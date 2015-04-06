@@ -2,14 +2,15 @@
 * Created by Crystian on 15/02/02.
 */
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
 	//debug = require('gulp-debug'),
 	commons = require('./commons'),
 	inject = require('gulp-inject'),
 	replace = require('gulp-replace'),
 	rename = require('gulp-rename'),
 	fs = require('fs-extra'),
-	cheerio = require('gulp-cheerio');
+	cheerio = require('gulp-cheerio'),
+	gulp = require('gulp');
 
 
 gulp.task('make:base', ['make:bower', 'make:index', 'make:config'], function() {
@@ -25,7 +26,7 @@ gulp.task('make:base', ['make:bower', 'make:index', 'make:config'], function() {
 });
 
 gulp.task('make:index', function () {
-	return gulp.src(global.cfg.folders.www + '/index.tpl.html')
+	return gulp.src(global.cfg.loader.folders.www + '/index.tpl.html')
 		//.on('error', gutil.log)
 		//.pipe(debug({verbose: true}))
 		.pipe(rename(global.cfg.loader.filesDest.index))
