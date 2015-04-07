@@ -2,7 +2,7 @@
 * Created by Crystian on 15/02/02.
 */
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
 	//debug = require('gulp-debug'),
 	utils = require('./project/utils'),
 	removeCode = require('gulp-remove-code'),
@@ -15,20 +15,20 @@ var gulp = require('gulp'),
 	replace = require('gulp-replace'),
 	inject = require('gulp-inject'),
 	clean = require('gulp-clean'),
-	gutil = require('gulp-util');
+	gulp = require('gulp');
 
 gulp.task('remove:build', function() {
 	//no borrar la carpeta build, da errores de sincro
 	return gulp.src([
-			global.cfg.folders.screens,
-			global.cfg.folders.build
+			global.cfg.loader.folders.screens,
+			global.cfg.loader.folders.build
 		], {read: false})
 		.pipe(clean());
 });
 
 gulp.task('remove:temp', function() {
 	return gulp.src([
-			global.cfg.folders.temp
+			global.cfg.loader.folders.temp
 		], {read: false})
 		.pipe(clean());
 });
@@ -71,13 +71,13 @@ exports.sassfixer = function(src, dest) {
 	var type = utils.getExtensionFile(src);
 	var sassOptions = {errLogToConsole: true, indentedSyntax: (type === 'sass')};
 
-	return gulp.src(src)
+    return gulp.src(src)
 		//.pipe(debug({verbose: true}))
 		//.on('error', gutil.log)
 		.pipe(sass(sassOptions))
 		.pipe(autoprefixer(global.cfg.autoprefixer))
 		.pipe(replace(' 0px', ' 0'))
 		.pipe(csslint('csslintrc.json'))
-		.pipe(csslint.reporter().on('error',gutil.log))
+		.pipe(csslint.reporter().on('error', gutil.log))
 		.pipe(gulp.dest(dest));
 };

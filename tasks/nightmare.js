@@ -4,11 +4,12 @@
  * The main propose for this file is test the loader
  */
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
 	//debug = require('gulp-debug'),
 	Nightmare = require('nightmare'),
 	async = require('async'),
-	gutil = require('gulp-util');
+    utils = require('./project/utils'),
+	gulp = require('gulp');
 
 gulp.task('test:loader',['serve:nightmare'], function(cb) {
 	'use strict';
@@ -200,9 +201,9 @@ gulp.task('test:loader',['serve:nightmare'], function(cb) {
 			.useragent(b.ua)
 			.viewport(b.width, b.height)
 			//.on('error', gutil.log)
-			.goto('http://' + global.cfg.ip + ':' + global.cfg.ports.nightmare + '/'+global.cfg.files.index)
+			.goto('http://' + global.cfg.ip + ':' + global.cfg.ports.nightmare + '/'+global.cfg.loader.filesDest.index)
 			.wait(1000)
-			.screenshot(global.cfg.folders.screens + '/' + b.name + '.jpg')
+			.screenshot(global.cfg.loader.folders.screens + '/' + b.name + '.jpg')
 			.evaluate(function () {return window;},
 			function (window){
 
@@ -277,7 +278,7 @@ gulp.task('test:loader',['serve:nightmare'], function(cb) {
 			});
 	}, function (e){
 		setTimeout(function () {
-			process.exit(0);
+			utils.exit(1)
 		},500);
 		cb();
 	});

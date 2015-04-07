@@ -2,7 +2,8 @@
  * Created by Crystian on 3/16/2015.
  */
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
+	debug = require('gulp-debug'),
 	utils = require('./utils'),
 	strip = require('gulp-strip-comments'),
 	minifycss = require('gulp-minify-css'),
@@ -15,12 +16,10 @@ var gulp = require('gulp'),
 	extend = require('extend'),
 	gif = require('gulp-if'),
 	less = require('gulp-less'),
-	debug = require('gulp-debug'),
 	rename = require('gulp-rename'),
 	StreamQueue = require('streamqueue'),
 	aux = require('./auxiliar'),
 	LZString = require('../../vendors/lz-string/libs/lz-string'),
-	gutil = require('gulp-util');
 	//es = require('event-stream')
 	//htmlreplace = require('gulp-html-replace'),
 	//htmlmin = require('gulp-htmlmin'),
@@ -29,6 +28,7 @@ var gulp = require('gulp'),
 	//header = require('gulp-header'),
 	//footer = require('gulp-footer'),
 	//runSequence = require('run-sequence'),
+	gulp = require('gulp');
 
 
 var defaults = {
@@ -42,6 +42,7 @@ var defaults = {
 		'overwrite': true,		//specially for libs, just make it once
 		'minificated': false,	//if it is a lib for don't re do the minifcation
 		'makeMin': false,		//it should be create a minificate version
+		'ignore': false,		//ignore on dev time, request by request
 		'replaces': {
 			'pre': [			//pre minificatedd
 				//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
@@ -53,6 +54,8 @@ var defaults = {
 	},
 	validCssExtensions : ['sass', 'scss','less'],
 	validExtensions : ['html', 'js'],
+
+    //??
 	options: {
 		extensionToProcess : {
 			'scss': true,
@@ -70,17 +73,17 @@ exports.runPreprocessors = function(appsJson) {
 	return runEachApp(appsJson, runEachPreprocessors);
 };
 
-exports.runMagic = function(appsJson) {
-	return runEachApp(appsJson, doMagic);
+exports.runMagic = function(appsJson, options) {
+	return runEachApp(appsJson, doMagic, options);
 };
 
-exports.runJsonify = function(appsJson) {
-	return runEachApp(appsJson, runJsonify);
+exports.runJsonify = function(appsJson, options) {
+	return runEachApp(appsJson, runJsonify, options);
 };
 
 
-function runEachApp(appsJson, fnEach){
-	var apps = require('../../../'+ appsJson).apps,
+function runEachApp(appsJson, fnEach, options){
+	var apps = require(global.cfg.appRoot +'/'+ appsJson).apps,
 		stream = undefined;
 
 	var i = 0,
@@ -88,7 +91,7 @@ function runEachApp(appsJson, fnEach){
 
 	for (; i < l; i++) {
 		var app = apps[i];
-		stream = aux.merge(stream, fnEach(global.cfg.app.folders.www +'/'+ app +'/app.json', app));
+		stream = aux.merge(stream, fnEach(global.cfg.folders.www +'/'+ app +'/app.json', app, options));
 	}
 
 	return stream;
@@ -96,7 +99,7 @@ function runEachApp(appsJson, fnEach){
 
 
 function runEachPreprocessors(url, appName){
-	var files = require('../../../'+ url).files;
+	var files = require(global.cfg.appRoot +'/'+ url).files;
 	var i = 0,
 		l = files.length,
 		streams = undefined;
@@ -113,23 +116,23 @@ function runEachPreprocessors(url, appName){
 		//valid types
 		if(defaults.validCssExtensions.indexOf(type)===-1){continue;}
 
-		file.path = aux.makePath(file.path);
+		file.path = global.cfg.appRoot +'/'+ aux.makePath(file.path);
 
 		var source = file.path + '/' + file.file,
-			final = file.path + '/' + fileName +'.css';
+			finalFileName = file.path + '/' + fileName +'.css';
 
 		//which name have min file?, default: *.min.*
 		file.min = file.min || utils.setExtensionFilename(file.file, 'min.css');
 
-		if(!fs.existsSync(source)){
+		if(!utils.fileExist(source)){
 			console.logRed('File not found: '+ source);
-			aux.exit(1);
+			utils.exit(1);
 		}
 
 		//just for detect potentian file exists
-		file._cssFile = final;
+		file._cssFile = finalFileName;
 
-		if( !(global.cfg.loader.release || file.overwrite)
+		if( !(global.cfg.release || file.overwrite)
 			&& (aux.fileDestExist(file)
 			&& !file.overwrite)) {//for the overwrite = false
 			//exist, and don't overwrite it
@@ -137,9 +140,9 @@ function runEachPreprocessors(url, appName){
 			continue;
 		}
 
-		var stream = gulp.src(source)
-			.pipe(debug({verbose: true}))
-			.on('error', gutil.log);
+		var stream = gulp.src(source);
+			//.pipe(debug({verbose: true}))
+			//.on('error', gutil.log);
 
 		switch (type){
 			case 'scss':
@@ -176,8 +179,8 @@ function runEachPreprocessors(url, appName){
 }
 
 
-function doMagic(url, appName) {
-	var files = require('../../../' + url).files;
+function doMagic(url, appName, options) {
+	var files = require(global.cfg.appRoot +'/'+ url).files;
 	var i = 0,
 		l = files.length,
 		streamsFinal = undefined,
@@ -235,13 +238,13 @@ function doMagic(url, appName) {
 	return streamsFinal;
 }
 
-function runJsonify(path, app){
-	console.logRed('aap '+ app);
+function runJsonify(path, app, options){
+
 	var json = {};
 	json.v = global.cfg.version;
-	json.j = fs.readFileSync(global.cfg.app.folders.temp +'/'+ app +'.js', {encoding: 'utf8'});
-	json.c = fs.readFileSync(global.cfg.app.folders.temp +'/'+ app +'.css', {encoding: 'utf8'});
-	json.h = fs.readFileSync(global.cfg.app.folders.temp +'/'+ app +'.html', {encoding: 'utf8'});
+	json.j = fs.readFileSync(global.cfg.folders.temp +'/'+ app +'.js', {encoding: 'utf8'});
+	json.c = fs.readFileSync(global.cfg.folders.temp +'/'+ app +'.css', {encoding: 'utf8'});
+	json.h = fs.readFileSync(global.cfg.folders.temp +'/'+ app +'.html', {encoding: 'utf8'});
 
 	var b = JSON.stringify(json);
 
@@ -250,14 +253,16 @@ function runJsonify(path, app){
 		console.logGreen(app +' compressed!');
 	}
 
-	fs.writeFileSync(global.cfg.app.folders.build +'/'+ app +'.json', b);
+	fs.writeFileSync(global.cfg.folders.build +'/'+ app +'.json', b);
+
+	console.logGreen(app +' generated!');
 }
 
 function _concat(_streams, _type, _appName){
 
 	var s = _streams[_type].done();
-	s = s.pipe(concat(_appName+'.'+ _type, {newLine: ';'}))
-		.pipe(gulp.dest(global.cfg.app.folders.temp));
+	s = s.pipe(concat(_appName+'.'+ _type, {newLine: ' '}))
+		.pipe(gulp.dest(global.cfg.folders.temp));
 
 	return s;
 }
@@ -293,7 +298,7 @@ var _handle = {
 
 		stream = stream
 			.pipe(strip({safe:false, block:false}))
-			.pipe(gif(global.cfg.app.release, minifycss()))
+			.pipe(gif(global.cfg.release, minifycss()))
 			.pipe(rename(utils.setExtensionFilename(file.min,'css')));
 
 		return stream;
@@ -308,4 +313,3 @@ var _handle = {
 		return stream;
 	}
 };
-

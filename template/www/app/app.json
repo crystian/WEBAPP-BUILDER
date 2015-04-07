@@ -1,0 +1,90 @@
+{
+	"files": [
+		{
+			"file": "angular-toastr.css",
+			"path": "vendors/bower_components/angular-toastr/dist"
+		},
+		{
+			"file": "msgBoldDirective.scss",
+			"path": "www/app/msgBold"
+		},
+		{
+			"file": "app.scss",
+			"path": "www/app",
+			"replaces": {
+				"pre": [
+					[
+						"../template/www/app/assets/img/",
+						"/assets/img/"
+					]
+				]
+			}
+		},
+		{
+			"file": "angular.js",
+			"path": "vendors/bower_components/angular"
+		},
+		{
+			"file": "angular-route.js",
+			"path": "vendors/bower_components/angular-route"
+		},
+		{
+			"file": "angular-animate.js",
+			"path": "vendors/bower_components/angular-animate"
+		},
+		{
+			"file": "angular-toastr.tpls.js",
+			"path": "vendors/bower_components/angular-toastr/dist"
+		},
+		{
+			"file": "app.js",
+			"path": "www/app",
+			"replaces": {
+				"pre": [
+					[
+						"angular.module('templates',[]);//flagTemplates",
+						""
+					]
+				]
+			}
+		},
+		{
+			"file": "mainCtrl.js",
+			"path": "www/app/main"
+		},
+		{
+			"file": "msgBoldDirective.js",
+			"path": "www/app/msgBold"
+		},
+		{
+			"file": "page.js",
+			"path": "www/app/page"
+		},
+		{
+			"file": "dataServices.js",
+			"path": "www/app/data",
+			"replaces": {
+				"pre": [
+					[
+						"loader.cfg.appRoot +'/www/app/data/local.json'",
+						"'/data/local.json'"
+					]
+				]
+			}
+		},
+		{
+			"file": "templates.js",
+			"path": "global.cfg.folders.temp",
+			"ignore": true
+
+		},
+		{
+			"file": "boot.js",
+			"path": "www/app"
+		},
+		{
+			"file": "app.html",
+			"path": "www/app"
+		}
+	]
+}

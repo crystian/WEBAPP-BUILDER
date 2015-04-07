@@ -3,9 +3,12 @@
  */
 
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
+	//debug = require('gulp-debug'),
+    utils = require('./utils'),
 	replace = require('gulp-replace'),
-	merge = require('merge-stream');
+	merge = require('merge-stream'),
+	gulp = require('gulp');
 
 exports.merge = function(stream, newStream) {
 	return (stream === undefined) ? newStream : merge(stream, newStream);
@@ -28,13 +31,13 @@ exports.makePath = function(path) {
 };
 
 //if it is minificated version, just validate this file, otherwise check the normal version
-//this is util for Libs with out min version
+//this is util for Libs without min version
 exports.fileDestExist = function(file){
 	var r = false;
 
 	//validate if exist, if exist return don't process nothing
-	var p = (global.cfg.loader.release || file.makeMin) ? file.path + '/' +file.min : file._cssFile;
-	if(fs.existsSync(p)){
+	var p = (global.cfg.release || file.makeMin) ? file.path + '/' +file.min : file._cssFile;
+	if(utils.fileExist(p)){
 		r = true;
 	}
 
@@ -59,8 +62,4 @@ exports.replace = function(stream, replaces){
 	}
 
 	return stream;
-};
-
-exports.exit = function (n){
-	process.exit(n);
 };

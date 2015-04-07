@@ -2,33 +2,35 @@
 * Created by Crystian on 15/02/02.
 */
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
 	//debug = require('gulp-debug'),
 	commons = require('./commons'),
 	inject = require('gulp-inject'),
 	replace = require('gulp-replace'),
 	rename = require('gulp-rename'),
-	fs = require('fs'),
-	cheerio = require('gulp-cheerio');
+	fs = require('fs-extra'),
+	cheerio = require('gulp-cheerio'),
+	gulp = require('gulp');
 
 
-gulp.task('make:base', ['make:bower', 'make:index', 'generate:config'], function() {
+gulp.task('make:base', ['make:bower', 'make:index', 'make:config'], function() {
 	//replace references on index.html
-	return gulp.src(global.cfg.folders.www +'/'+global.cfg.files.index)
+	return gulp.src(global.cfg.loader.folders.www +'/'+global.cfg.loader.filesDest.index)
+		//.on('error', gutil.log)
 		//.pipe(debug({verbose: true}))
-		.pipe(commons.injectContent(global.cfg.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.html','loadingHtml'))
-		.pipe(inject(gulp.src(global.cfg.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.css', {read: false}), {name: 'loadingCss', relative:'true'}))
+		.pipe(commons.injectContent(global.cfg.loader.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.html','loadingHtml'))
+		.pipe(inject(gulp.src(global.cfg.loader.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.css', {read: false}), {name: 'loadingCss', relative:'true'}))
 		.pipe(inject(gulp.src(global.cfg.varJs, {read: false}), {name: 'bower', relative:'true'}))
 		.pipe(inject(gulp.src(global.cfg.varCss, {read: false}), {name: 'bower', relative:'true'}))
-		.pipe(gulp.dest(global.cfg.folders.www));
+		.pipe(gulp.dest(global.cfg.loader.folders.www));
 });
 
 gulp.task('make:index', function () {
-	return gulp.src(global.cfg.folders.www + '/index.tpl.html')
+	return gulp.src(global.cfg.loader.folders.www + '/index.tpl.html')
 		//.on('error', gutil.log)
 		//.pipe(debug({verbose: true}))
-		.pipe(rename(global.cfg.files.index))
-		.pipe(gulp.dest(global.cfg.folders.www))
+		.pipe(rename(global.cfg.loader.filesDest.index))
+		.pipe(gulp.dest(global.cfg.loader.folders.www))
 		.pipe(cheerio({
 			run: function ($) {
 				var cfg = global.cfg;
@@ -41,45 +43,32 @@ gulp.task('make:index', function () {
 			}
 		}))
 		.pipe(replace('<!--msgTpl-->','<!-- REMEMBER, this file is generated, don\'t change it, because you can lost it -->'))
-		//.on('error', gutil.log)
-		.pipe(gulp.dest(global.cfg.folders.www));
+		.pipe(gulp.dest(global.cfg.loader.folders.www));
 });
 
-gulp.task('generate:config', function (cb) {
+gulp.task('make:config', function (cb) {
 	//variables shared between loader build and loader app
 	var json = {};
-	json.release = global.cfg.loader.release;//be carefull, it's from loader!
+	json.release = global.cfg.release;
 	json.version = global.cfg.version;
 
 	json.compress = global.cfg.compress;
 	json.isCordovaDevice = global.cfg.isCordovaDevice;
 	json.compatibilityMatrix = global.cfg.compatibilityMatrix;
 	json.debugZoneActive = global.cfg.debugZoneActive;
-
-	json.mixpanel = {
-		'installed': global.cfg.mixpanel.installed,
-		'active': global.cfg.mixpanel.active,
-		'token': global.cfg.mixpanel.token
-	};
-
-	json.analytics = {
-		'id': global.cfg.analytics.id,
-		'installed': global.cfg.analytics.installed,
-		'active': global.cfg.analytics.active,
-		'linkid': global.cfg.analytics.linkid,
-		'displayFeatures':  global.cfg.analytics.displayFeatures,
-		'appName': global.cfg.analytics.appName,
-		'appId': global.cfg.analytics.appId,
-		'appInstaller': global.cfg.analytics.appInstaller
-	};
-
+	json.mixpanel = global.cfg.mixpanel;
+	json.analytics = global.cfg.analytics;
 	json.consoleError = global.cfg.consoleError;
+	json.oneRequest = false;//flagOneRequest
+	json.firstApp = global.cfg.firstApp;
+	json.fastclick = !!(global.cfg.loader.bower.fastclick);
+	json.appRoot = '../'+ global.cfg.folders.app;
+	json.appWww = global.cfg.folders.app +'/'+ global.cfg.folders.www;
 
 	json.loader = {
 		version: global.cfg.loader.version,
-		build: false,
-		fastclick: global.cfg.loader.fastclick,
-		pathTpl: global.cfg.loader.folders.template,
+		release: global.cfg.loader.release,
+		//build: false, ??
 		text: {
 			incompatibleByFeatures: global.cfg.loader.text.incompatibleByFeatures,
 			incompatibleByDiag: global.cfg.loader.text.incompatibleByDiag,
@@ -89,10 +78,6 @@ gulp.task('generate:config', function (cb) {
 			errorTimeoutServer: global.cfg.loader.text.errorTimeoutServer
 		}
 	};
-
-	json.oneRequest = global.cfg.oneRequest;
-
-	json.firstApp = global.cfg.app.firstApp;
 
 	var compatibilityTpl =
 		'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n'+
@@ -108,7 +93,7 @@ gulp.task('generate:config', function (cb) {
 		'var _loaderCfg = '+ JSON.stringify(json, null, '\t') +';'+
 		compatibilityTpl;
 
-	fs.writeFile(global.cfg.folders.www +'/config.js',
+	fs.writeFile(global.cfg.loader.folders.www +'/config.js',
 		text,
 		function(err){
 			if(err) {

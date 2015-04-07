@@ -4,12 +4,14 @@
 
 // share with app
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
 	//debug = require('gulp-debug'),
 	jshint = require('gulp-jshint'),
 	chalk = require('chalk'),
+	fs = require('fs-extra'),
+	aux = require('./auxiliar'),
 	webserver = require('gulp-webserver'),
-	gutil = require('gulp-util');
+	gulp = require('gulp');
 
 
 //COMMONS between project and loader:
@@ -19,14 +21,8 @@ process.on('uncaughtException', function(err){
 	if (gutil.env.debug) {
 		console.logRed(err.stack);
 	}
-	process.exit(1); // exit with error
+	this.exit(1); // exit with error
 });
-
-//process.on('exit', function() {
-//	if(node){
-//		node.kill();
-//	}
-//});
 
 console.logWarn = function (m) {
 	console.log(chalk.black.bgYellow(m));
@@ -40,12 +36,18 @@ console.logRed = function (m) {
 	console.log(chalk.white.bold.bgRed(m));
 };
 
-exports.validFileExist = function(fileName){
-	if (!fs.existsSync(fileName)) {
-		console.logRed('File not found: ' + fileName);
-		aux.exit(1);
-	}
+exports.fileExist = function(fileName){
+	return fs.existsSync(fileName);
 };
+
+//exports.fileRequire = function(fileName){
+//	var r = this.fileExist(fileName);
+//	if(!r){
+//		console.logRed('File not found: ' + fileName);
+//	}
+//
+//	return r;
+//};
 
 exports.getExtensionFile = function(s) {
 	var arr = s.split('.');
@@ -103,4 +105,8 @@ exports.makeServe = function(folder, path, ip, port) {
 			open: false
 		}));
 
+};
+
+exports.exit = function (n){
+	process.exit(n);
 };
