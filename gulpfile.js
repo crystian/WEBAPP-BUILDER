@@ -24,6 +24,18 @@ try{
 		utils.fileExist(fileNameLocal) && require(fileNameLocal)
 	);
 
+	//get appName
+	var appName = global.cfg.folders.app,
+		fileApp = './'+ appName +'/project-config.json',
+		fileAppLocal = './'+ appName +'/project-config-local.json';
+
+	//merge between default and app:
+	global.cfg = extend(true, {},
+		global.cfg,
+		utils.fileExist(fileApp) && require(fileApp),
+		utils.fileExist(fileAppLocal) && require(fileAppLocal)
+	);
+
 	global.cfg.pkg = require('./package.json');
 
 	global.cfg.appRoot = __dirname + '\\' + global.cfg.folders.app;
@@ -32,6 +44,11 @@ try{
 } catch (e){
 	//console.logRed('Do you run installer?, There are some problems with project-config*, check those please');
 	console.logRed('Error: '+ e);
+	utils.exit(1);
+}
+
+if (global.cfg.release && !global.cfg.compress) {
+	console.logRed('LOADER: if it is a release, it would be compressed');
 	utils.exit(1);
 }
 

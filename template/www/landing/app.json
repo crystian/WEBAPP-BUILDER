@@ -6,7 +6,12 @@
 		},
 		{
 			"file": "style.css",
-			"path": "vendors/theme"
+			"path": "vendors/theme",
+			"replaces": {
+				"pre": [
+					["../../template/www/", ""]
+				]
+			}
 		},
 		{
 			"file": "style-responsive.css",
@@ -14,11 +19,21 @@
 		},
 		{
 			"file": "font-awesome.css",
-			"path": "vendors/theme/assets/font-awesome/css"
+			"path": "vendors/theme/assets/font-awesome/css",
+			"replaces": {
+				"pre": [
+					["../template/vendors/theme/assets/font-awesome/", "assets/"]
+				]
+			}
 		},
 		{
 			"file": "landing.scss",
-			"path": "www/landing"
+			"path": "www/landing",
+			"replaces": {
+				"pre": [
+					["../template/www/landing/", "assets/"]
+				]
+			}
 		},
 		{
 			"file": "landing.js",

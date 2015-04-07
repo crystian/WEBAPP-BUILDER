@@ -7,6 +7,7 @@ var gulp = require('gulp'),
 	shared = require('../../tasks/project/shared.js'),
 	spawn = require('child_process').spawn,
 	clean = require('gulp-clean'),
+	fs = require('fs-extra'),
 	runSequence = require('run-sequence'),
 	node;
 
@@ -27,10 +28,28 @@ gulp.task('build:full', function (cb) {
 gulp.task('build', function (cb) {
 	runSequence(
 		'build:fast',
-		'remove:temp',
+		'copy:fonts',
+		'copy:imgs',
+		//'remove:temp',
 		cb);
 });
 
+
+gulp.task('copy:fonts', function (){
+	return gulp.src([
+		'vendors/theme/assets/font-awesome/fonts/**/*',
+		global.cfg.folders.www +'/assets/fonts/**/*'
+	]).pipe(gulp.dest(global.cfg.folders.build + '/assets/fonts'));
+
+});
+
+gulp.task('copy:imgs', function (){
+	return gulp.src([
+		global.cfg.folders.www +'/landing/img/**/*',
+		global.cfg.folders.www +'/app/assets/img/**/*'
+	]).pipe(gulp.dest(global.cfg.folders.build +'/assets/img'));
+
+});
 
 gulp.task('build:fast', ['runMagic'], function (){
 	return engine.runJsonify(global.cfg.folders.www +'/apps.json');

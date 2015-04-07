@@ -117,7 +117,7 @@ gulp.task('make:loader:js',  function () {
 		global.cfg.loader.folders.www + '/modules/boot.js'
 	];
 	var loaderScripts2Stream = gulp.src(loaderScripts2)
-		.pipe(gif(global.cfg.compress, replace('if(!loader.cfg.compress){return data;}//flagCompress','')));
+		.pipe(gif(global.cfg.release, replace('if(!loader.cfg.compress){return data;}//flagCompress','')));
 
 	loaderScripts2Stream = commons.jsMaker(loaderScripts2Stream);
 	//endbody script

@@ -24,7 +24,6 @@ function loaderReplaces(file) {
 		r =	['\"oneRequest\": false,', '\"oneRequest\": true,'];
 	}
 
-	console.log('file',file, r);
 	replace({
 		regex: r[0],
 		replacement: r[1],

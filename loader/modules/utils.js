@@ -109,6 +109,7 @@ loader.utils = (function() {
 debugger
 		if(loader.cfg.oneRequest){
 			console.info('oneRequest!');
+			requestAllInOne(appName +'.json', {appName: appName}).then(loadAppSuccess, loadAppFail);
 			return;
 		}
 
@@ -152,30 +153,31 @@ debugger
 		});
 	}
 
-	//function requestAllInOne(url) {
-	//	return request(url).then(function (data) {
-	//
-	//		try {
-	//			data = JSON.parse(handleCompress(data));
-	//		} catch (e) {
-	//			return Promise.reject(e);
-	//		}
-	//
-	//		//console.dir(data);
-	//		if (data.h) {
-	//			_setHtml(data.h);
-	//		}
-	//		if (data.c) {
-	//			_setCss(data.c);
-	//		}
-	//		if (data.j) {
-	//			_setJs(data.j);
-	//		}
-	//		//if (data.d) {
-	//		//
-	//		//}
-	//	});
-	//}
+	function requestAllInOne(url, options) {
+		return request(url).then(function (data) {
+
+			try {
+				data = JSON.parse(handleCompress(data));
+			} catch (e) {
+				return Promise.reject(e);
+			}
+
+			//console.dir(data);
+			if (data.h) {
+				_setHtml(data.h, options);
+			}
+			if (data.c) {
+				_setCss(data.c);
+			}
+			if (data.j) {
+				_setJs(data.j);
+			}
+			//if (data.d) {
+			//
+			//}
+			return Promise.resolve();
+		});
+	}
 
 	//be careful, HTML option pisa old version
 	function requestMultipleAsync(requestsArray, options) {
