@@ -1,0 +1,124 @@
+$light:  #eaf7ff;
+$shadow: #bce4ff;
+
+.wrapCenter{
+	left: auto;
+	top: auto;
+	width: 250px;
+	height: auto;
+}
+
+#loadingScreen {
+	z-index: 10;
+	opacity: 1;
+	transform: translateZ(0);
+	background:black;
+	color:$light;
+
+	.bg {
+		padding:30px 180px 30px 40px;
+		background:#306f99;
+		box-shadow: inset 0 0 45px 30px black;
+
+		.loading{
+			position:relative;
+			text-align:right;
+			text-shadow: 0 0 6px $shadow;
+			height:20px; width:150px;
+			span {
+				display:block;
+				text-transform:uppercase;
+				position:absolute;
+				right:30px;
+				height:20px; width:200px;
+				line-height:20px;
+				&:after {
+					content:"";
+					display:block;
+					position:absolute;
+					top:-2px; right:-21px;
+					height:20px; width:16px;
+					background:$light;
+					box-shadow: 0 0 15px $shadow;
+				}
+				&.text {
+					opacity:0;
+				}
+			}
+		}
+
+		&.loadingAnimation.on {
+			animation: bg 1.5s linear infinite;
+
+			.loading {
+				span {
+					&:after {
+						animation: blink 3.4s infinite;
+					}
+					&.text {
+						animation: title 3.4s linear 1.7s infinite;
+					}
+				}
+				.title {
+					animation: title 3.4s linear infinite;
+				}
+
+			}
+		}
+	}
+}
+
+@mixin keyframes($name) {
+	@-webkit-keyframes #{$name} {
+		@content;
+	}
+	@-moz-keyframes #{$name} {
+		@content;
+	}
+}
+
+@include keyframes(title) {
+	0%   { opacity:0; right:130px; }
+	48%  { opacity:0; right:130px; }
+	52%  { opacity:1; right:30px; }
+	70%  { opacity:1; right:30px; }
+	100% { opacity:0; right:30px; }
+}
+
+@include keyframes(fade) {
+	0%   { opacity:1; }
+	100% { opacity:0; }
+}
+
+@include keyframes(bg) {
+	0%   { background-color:#306f99; }
+	50%  { background-color:#19470f; }
+	90%  { background-color:#734a10; }
+}
+
+@include keyframes(blink) {
+	0%    { opacity:0; }
+	5%    { opacity:1; }
+	10%   { opacity:0; }
+	15%   { opacity:1; }
+	20%   { opacity:0; }
+	25%   { opacity:1; }
+	30%   { opacity:0; }
+	35%   { opacity:1; }
+	40%   { opacity:0; right:-21px; }
+	45%   { opacity:1; right:80px; }
+	50%   { opacity:0; right:-21px; }
+	51%   { right:-21px; }
+	55%   { opacity:1; }
+	60%   { opacity:0; }
+	65%   { opacity:1; }
+	70%   { opacity:0; }
+	75%   { opacity:1; }
+	80%   { opacity:0; }
+	85%   { opacity:1; }
+	90%   { opacity:0; right:-21px; }
+	95%   { opacity:1; right:80px; }
+	96%   { right:-21px; }
+	100%  { opacity:0; right:-21px; }
+}
+

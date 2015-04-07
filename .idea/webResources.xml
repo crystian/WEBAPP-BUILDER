@@ -8,6 +8,9 @@
             <path value="file://$PROJECT_DIR$/www" />
             <path value="file://$PROJECT_DIR$/AppTemplate/APP/WWW" />
             <path value="file://$PROJECT_DIR$/AppTemplate/APP/www" />
+            <path value="file://$PROJECT_DIR$/APP/www" />
+            <path value="file://$PROJECT_DIR$/loader" />
+            <path value="file://$PROJECT_DIR$/template/www" />
           </resourceRoots>
         </entryData>
       </entry>

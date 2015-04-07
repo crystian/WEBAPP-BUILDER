@@ -1,0 +1,21 @@
+html, body, #mainContainer {
+	position: relative;
+	height: 100%;
+}
+body {
+	background: #eee;
+	//font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+}
+.kitten1 {
+	background-image: url(../template/www/app/assets/img/kitten1.jpg);
+	height: 100px;
+	margin: 0 auto;
+}
+.kitten2 {
+	background-image: url(../template/www/app/assets/img/kitten2.jpg);
+	height: 100px;
+	margin: 0 auto;
+}

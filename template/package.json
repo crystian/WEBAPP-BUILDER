@@ -1,0 +1,9 @@
+{
+  "name": "Project",
+  "author": "Crystian (Cristian Bietti) @crystian",
+  "repository": "https://github.com/crystian/project1.git",
+  "dependencies": {
+    "gulp-angular-templatecache": "^1.6.0",
+    "restify": "^3.0.1"
+  }
+}

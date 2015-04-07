@@ -1,0 +1,179 @@
+{
+	"name": "app name",
+	"version": "0.0.0",
+	"os": "win",
+	"ip": "127.0.0.1",
+
+	"release": true,
+	"compress": true,
+	"firstApp": "landing",
+	"cordova": false,
+	"isCordovaDevice": false,
+	"debugZoneActive": false,
+
+	"folders":{
+		"app": "template",
+		"www": "www",
+		"build": "build",
+		"temp": "build/.tmp",
+		"cordova": "CORDOVA",
+		"cordovaWWW": "CORDOVA/www",
+		"bower": "vendors/bower_components",
+		"api": "www/api"
+	},
+
+	"compatibilityFirst": "\n\treturn !!(window.document.querySelector &&\n\twindow.console &&window.document.addEventListener &&\n\t(window.document.getElementsByTagName('body')[0]).classList &&\n\twindow.localStorage &&\n\twindow.navigator &&\n\twindow.XMLHttpRequest &&\n\twindow.applicationCache &&\n\twindow.document.createEvent &&\n\tarr.map &&\n\tarr.every);\n\t",
+	"compatibilityMatrix": {
+		"ie": [9.9, 10.9],
+		"firefox": [23.9, 25.9],
+		"android": [3.9, 3.9],
+		"chrome": [17.9, 18.9],
+		"chromeMobile": [3.9, 3.9],
+		"safari": [6.0, 6.0],
+		"ios": [6, 6]
+	},
+
+	"autoprefixer": [
+		"ie 10",
+		"android 4",
+		"chrome 32",
+		"ff 27",
+		"ios 7",
+		"opera 19",
+		"safari 7"
+	],
+
+	"analytics": {
+		"installed": false,
+		"active": false,
+		"linkid": false,
+		"displayFeatures": false,
+		"id": "UA-00000000-0",
+		"appName": "appName",
+		"appId": "com.appName.appId",
+		"appInstaller": "com.appName.installer"
+	},
+
+	"mixpanel":{
+		"installed": false,
+		"active": false,
+		"token": "YOUR TOKEN"
+	},
+
+	"ports": {
+		"serve": 9000,
+		"build": 9001,
+		"api": 9002,
+		"nightmare": 9003
+	},
+
+	"consoleError": [
+		"Error unknown",
+		"Error about connection stablished",
+		"Error 404",
+		"Error connection lost, try again",
+		"Command unknown",
+		"undefined",
+		"Null pointer exception",
+		"Error jquery plugin",
+		"Error ferrasca the boilerplate",
+		"Error map not found",
+		"Error in obliteration rast"
+	],
+
+	"platform": {
+		"android": {
+			"keypass": "provisoryKey1",
+			"storepass": "provisoryKey1"
+		}
+	},
+
+	"loader":{
+		"name": "Power loader",
+		"version": "0.0.3",
+		"release": true,
+		"loading": 1,
+		"filesDest": {
+			"index":"index.html",
+			"indexCordova": "index-cordova.html"
+		},
+
+		"folders": {
+			"www": "loader",
+			"bower": "vendors",
+			"build": "build",
+			"temp": "build/.tmp",
+			"screens": "build/screens",
+			"loadings": "loader/loading"
+		},
+
+		"viewport": "user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height",
+
+		"bower": {
+			"platform": {
+				"version": "~1.3.0",
+				"js-dev": ["platform/platform.js"],
+				"js-prod": ["platform/platform.min.js"],
+				"generate-js": true
+			},
+			"lz-string": {
+				"version": "~1.3.7",
+				"js-dev": ["lz-string/libs/lz-string.js"],
+				"js-prod": ["lz-string/libs/lz-string.min.js"]
+			},
+			"es6-promise": {
+				"version": "~2.0.1",
+				"js-dev": ["es6-promise/promise.js"],
+				"js-prod": ["es6-promise/promise.min.js"]
+			},
+			"jquery": {
+				"version": "~2.1.3",
+				"js-dev": ["jquery/dist/jquery.js"],
+				"js-prod": ["jquery/dist/jquery.min.js"]
+			},
+			"fastclick": {
+				"version": "~1.0.6",
+				"js-dev": ["fastclick/lib/fastclick.js"],
+				"js-prod": ["fastclick/lib/fastclick.min.js"],
+				"generate-js": true
+			},
+			"swiper": {
+				"version": "~3.0.1",
+				"js-dev": ["swiper/dist/js/swiper.js"],
+				"js-prod": ["swiper/dist/js/swiper.min.js"],
+				"css-dev": ["swiper/dist/css/swiper.css"],
+				"css-prod": ["swiper/dist/css/swiper.min.css"]
+			},
+			"bootstrap": {
+				"version": "~3.3.2",
+				"js-dev": ["bootstrap/dist/js/bootstrap.js"],
+				"js-prod": ["bootstrap/dist/js/bootstrap.min.js"],
+				"css-dev": [
+					"bootstrap/dist/css/bootstrap.css"
+				],
+				"css-prod": [
+					"bootstrap/dist/css/bootstrap.min.css"
+				]
+			}
+		},
+
+		"text": {
+			"title": "Title",
+			"description": "Description",
+			"keyword": "keywords",
+			"author": "autors",
+			"noscript": "<br/>Es una broma? este sitio es una app javascript, indispensable para que funcione, actualiza el navegador o usa otro. Gracias vuelvan prontos! <br/><em>Para mas info: <a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a> : browsers incompatibles.</em><br/><br/>",
+
+			"incompatibleByFeatures": "Navegador incompatible (no se encontraron features), por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
+			"incompatibleByDiag": "Navegador incompatible, por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
+			"semiIncompatible": "Navegador no reconocido o con problemas de compatibilidad, la aplicacion funcionara pero es recomendable actualizarlo o usar otro, ver en el F.A.Q. \\nhttp://languagesgym.com/faq",
+			"faqLink": "<a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a>",
+			"errorRequestFile": "Error leyendo el archivo del servidor, por favor vuelva a intentar mas tarde",
+			"errorTimeoutServer": "Se agoto el tiempo de espera, verifica que tengas internet y este andando bien",
+
+			"header": ["<!--","<%=name%>","<%=site%>","<%=date%> (<%=version%>)","","Power by Javascript community!, Magic by Crystian","Copyright (c) 2015, @Crystian (Cristian Bietti) @crystian","-->","",""],
+			"footer": ["","","<!--'... Your future is whatever you make it. So make it a good one!' - Doc Brown to Marty McFly, BTTF (1990)-->"]
+		}
+
+	}
+}
