@@ -7,36 +7,47 @@ var gulp = require('gulp'),
 	shared = require('../../tasks/project/shared.js'),
 	spawn = require('child_process').spawn,
 	clean = require('gulp-clean'),
+	runSequence = require('run-sequence'),
 	node;
 
+//alias:
 gulp.task('default', ['build']);
+gulp.task('full', ['build:full']);
+gulp.task('css', ['css:app']);
+gulp.task('loader', ['get:loader']);
 
-gulp.task('css', ['css:app']); //just an alias
-//gulp.task('loader', ['get:loader']);
-
-gulp.task('css:app', function (){
-	return engine.runPreprocessors(global.cfg.folders.www +'/apps.json');
+gulp.task('build:full', function (cb) {
+	runSequence(
+		'remove:build',
+		'get:loader',
+		'build',
+		cb);
 });
 
-gulp.task('cssw', function() {
-	gulp.watch([global.cfg.folders.www + '/**/*.scss'], ['css:app']);
+gulp.task('build', function (cb) {
+	runSequence(
+		'build:fast',
+		'remove:temp',
+		cb);
 });
 
-gulp.task('build', ['runMagic'], function (){
+
+gulp.task('build:fast', ['runMagic'], function (){
 	return engine.runJsonify(global.cfg.folders.www +'/apps.json');
 });
 
-gulp.task('runMagic', ['get:loader'], function (){
+gulp.task('runMagic', function (){
 	return engine.runMagic(global.cfg.folders.www +'/apps.json');
+});
+
+gulp.task('get:loader', function(cb){
+	shared.getLoader(cb);
 });
 
 gulp.task('serve:build', ['build'], function() {
 	return utils.makeServe(global.cfg.folders.build, '', global.cfg.ip, global.cfg.ports.build);
 });
 
-gulp.task('get:loader', ['remove:build'], function(cb){
-	shared.getLoader(cb);
-});
 
 gulp.task('serve:api', function() {
 	if (node) node.kill();
@@ -47,6 +58,15 @@ gulp.task('serve:api', function() {
 		}
 	});
 });
+
+
+gulp.task('css:app', function (){
+	return engine.runPreprocessors(global.cfg.folders.www +'/apps.json');
+});
+gulp.task('cssw', function() {
+	gulp.watch([global.cfg.folders.www + '/**/*.scss'], ['css:app']);
+});
+
 
 gulp.task('remove:build', function() {
 	//no borrar la carpeta build, da errores de sincro

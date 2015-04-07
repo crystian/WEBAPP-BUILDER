@@ -35,12 +35,6 @@ try{
 	utils.exit(1);
 }
 
-//validations always:
-if (global.cfg.loader.release && !global.cfg.oneRequest) {
-	console.logRed('LOADER: release with oneRequest on false, does not posible to build, change the values please');
-	utils.exit(1);
-}
-
 if (global.cfg.compress && !global.cfg.loader.bower['lz-string']) {
 	console.logRed('LOADER: Compress option active, but library lz-string not present');
 	utils.exit(1);

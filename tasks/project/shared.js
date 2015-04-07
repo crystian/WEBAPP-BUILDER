@@ -6,6 +6,7 @@ var gutil = require('gulp-util'),
 	debug = require('gulp-debug'),
 	exec = require('child_process').exec,
 	fs = require('fs-extra'),
+	replace = require('replace'),
 	gulp = require('gulp');
 
 
@@ -14,6 +15,24 @@ exports.getLoader = function(cb) {
 		copyLoader(cb);
 	});
 };
+
+function loaderReplaces(file) {
+	var r =	['\"oneRequest\": false,', '\"oneRequest\": true,'];
+
+	//todo review
+	if(global.cfg.release){
+		r =	['\"oneRequest\": false,', '\"oneRequest\": true,'];
+	}
+
+	console.log('file',file, r);
+	replace({
+		regex: r[0],
+		replacement: r[1],
+		paths: [file],
+		recursive: false,
+		silent: false
+	});
+}
 
 function copyLoader(cb){
 	var pathSrc = '../' + global.cfg.loader.folders.build,
@@ -24,6 +43,8 @@ function copyLoader(cb){
 	if(global.cfg.loader.bower.bootstrap){
 		fs.copySync(pathSrc +'/assets', pathDest +'/assets');
 	}
+
+	loaderReplaces(pathDest +'/'+ global.cfg.loader.filesDest.index);
 
 	if (global.cfg.cordova) {
 		fs.copySync(pathSrc +'/'+global.cfg.loader.filesDest.indexCordova, pathDest +'/'+ global.cfg.loader.filesDest.indexCordova);

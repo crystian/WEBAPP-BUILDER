@@ -238,7 +238,7 @@ function doMagic(url, appName) {
 }
 
 function runJsonify(path, app){
-	console.logRed('aap '+ app);
+	console.logGreen(app +' generated!');
 	var json = {};
 	json.v = global.cfg.version;
 	json.j = fs.readFileSync(global.cfg.folders.temp +'/'+ app +'.js', {encoding: 'utf8'});
