@@ -7,12 +7,13 @@ var app = {};
 
 	function appInit() {
 		//FIRST before all modules!
-		app = angular.module('app', ['ngRoute', 'toastr', 'ngAnimate']);
+		app = angular.module('app', ['ngRoute', 'toastr', 'ngAnimate', 'templates']);
+		angular.module('templates',[]);//flagTemplates
 
 		app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 			$routeProvider
 				.when('/page/:n', {
-					templateUrl: loader.cfg.appRoot +'/www/app/page/page.html',
+					templateUrl: loader.cfg.appRoot +'/www/app/page/page.tpl.html',
 					controller: 'PageCtrl',
 					controllerAs: 'page'
 				})

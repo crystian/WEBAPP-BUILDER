@@ -126,6 +126,8 @@ debugger
 
 			for (; i < l; i++) {
 				var file = data[i];
+				if(file.ignore){continue;}
+
 				type = getExtensionFile(file.file);
 
 				switch (type){

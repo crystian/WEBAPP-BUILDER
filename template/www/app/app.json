@@ -14,14 +14,8 @@
 			"replaces": {
 				"pre": [
 					[
-						"kitten1",
-						"lalala1"
-					]
-				],
-				"post": [
-					[
-						"kitten2",
-						"lalala2"
+						"../template/www/app/assets/img/",
+						"/assets/img/"
 					]
 				]
 			}
@@ -44,7 +38,15 @@
 		},
 		{
 			"file": "app.js",
-			"path": "www/app"
+			"path": "www/app",
+			"replaces": {
+				"pre": [
+					[
+						"angular.module('templates',[]);//flagTemplates",
+						""
+					]
+				]
+			}
 		},
 		{
 			"file": "mainCtrl.js",
@@ -60,7 +62,21 @@
 		},
 		{
 			"file": "dataServices.js",
-			"path": "www/app/data"
+			"path": "www/app/data",
+			"replaces": {
+				"pre": [
+					[
+						"loader.cfg.appRoot +'/www/app/data/local.json'",
+						"'/data/local.json'"
+					]
+				]
+			}
+		},
+		{
+			"file": "templates.js",
+			"path": "global.cfg.folders.temp",
+			"ignore": true
+
 		},
 		{
 			"file": "boot.js",

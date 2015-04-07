@@ -42,6 +42,7 @@ var defaults = {
 		'overwrite': true,		//specially for libs, just make it once
 		'minificated': false,	//if it is a lib for don't re do the minifcation
 		'makeMin': false,		//it should be create a minificate version
+		'ignore': false,		//ignore on dev time, request by request
 		'replaces': {
 			'pre': [			//pre minificatedd
 				//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
@@ -72,16 +73,16 @@ exports.runPreprocessors = function(appsJson) {
 	return runEachApp(appsJson, runEachPreprocessors);
 };
 
-exports.runMagic = function(appsJson) {
-	return runEachApp(appsJson, doMagic);
+exports.runMagic = function(appsJson, options) {
+	return runEachApp(appsJson, doMagic, options);
 };
 
-exports.runJsonify = function(appsJson) {
-	return runEachApp(appsJson, runJsonify);
+exports.runJsonify = function(appsJson, options) {
+	return runEachApp(appsJson, runJsonify, options);
 };
 
 
-function runEachApp(appsJson, fnEach){
+function runEachApp(appsJson, fnEach, options){
 	var apps = require(global.cfg.appRoot +'/'+ appsJson).apps,
 		stream = undefined;
 
@@ -90,7 +91,7 @@ function runEachApp(appsJson, fnEach){
 
 	for (; i < l; i++) {
 		var app = apps[i];
-		stream = aux.merge(stream, fnEach(global.cfg.folders.www +'/'+ app +'/app.json', app));
+		stream = aux.merge(stream, fnEach(global.cfg.folders.www +'/'+ app +'/app.json', app, options));
 	}
 
 	return stream;
@@ -178,7 +179,7 @@ function runEachPreprocessors(url, appName){
 }
 
 
-function doMagic(url, appName) {
+function doMagic(url, appName, options) {
 	var files = require(global.cfg.appRoot +'/'+ url).files;
 	var i = 0,
 		l = files.length,
@@ -237,8 +238,8 @@ function doMagic(url, appName) {
 	return streamsFinal;
 }
 
-function runJsonify(path, app){
-	console.logGreen(app +' generated!');
+function runJsonify(path, app, options){
+
 	var json = {};
 	json.v = global.cfg.version;
 	json.j = fs.readFileSync(global.cfg.folders.temp +'/'+ app +'.js', {encoding: 'utf8'});
@@ -253,6 +254,8 @@ function runJsonify(path, app){
 	}
 
 	fs.writeFileSync(global.cfg.folders.build +'/'+ app +'.json', b);
+
+	console.logGreen(app +' generated!');
 }
 
 function _concat(_streams, _type, _appName){

@@ -2,14 +2,17 @@
  * Created by Crystian on 4/6/2015.
  */
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
+	debug = require('gulp-debug'),
 	engine = require('../../tasks/project/engine.js'),
 	shared = require('../../tasks/project/shared.js'),
 	spawn = require('child_process').spawn,
 	clean = require('gulp-clean'),
 	fs = require('fs-extra'),
+	templateCache = require('gulp-angular-templatecache'),
 	runSequence = require('run-sequence'),
-	node;
+	node,
+	gulp = require('gulp');
 
 //alias:
 gulp.task('default', ['build']);
@@ -30,10 +33,21 @@ gulp.task('build', function (cb) {
 		'build:fast',
 		'copy:fonts',
 		'copy:imgs',
+		'copy:data',
 		//'remove:temp',
 		cb);
 });
 
+gulp.task('make:ngTemplate', function () {
+	return gulp.src([global.cfg.folders.www +'/**/*.tpl.html'])
+		.pipe(debug({verbose: true}))
+		.on('error', gutil.log)
+		.pipe(templateCache({
+			standalone: true,
+			root: '../'+ global.cfg.folders.app +'/www/'
+		}))
+		.pipe(gulp.dest(global.cfg.folders.temp));
+});
 
 gulp.task('copy:fonts', function (){
 	return gulp.src([
@@ -51,11 +65,18 @@ gulp.task('copy:imgs', function (){
 
 });
 
+gulp.task('copy:data', function (){
+	return gulp.src([
+		global.cfg.folders.www +'/app/data/local.json'
+	]).pipe(gulp.dest(global.cfg.folders.build +'/data'));
+
+});
+
 gulp.task('build:fast', ['runMagic'], function (){
 	return engine.runJsonify(global.cfg.folders.www +'/apps.json');
 });
 
-gulp.task('runMagic', function (){
+gulp.task('runMagic', ['make:ngTemplate'], function (){
 	return engine.runMagic(global.cfg.folders.www +'/apps.json');
 });
 
