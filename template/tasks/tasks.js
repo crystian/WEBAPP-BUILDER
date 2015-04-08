@@ -24,6 +24,7 @@ gulp.task('build:full', function (cb) {
 	runSequence(
 		'remove:build',
 		'get:loader',
+		'css:app',
 		'build',
 		cb);
 });
@@ -39,14 +40,19 @@ gulp.task('build', function (cb) {
 });
 
 gulp.task('make:ngTemplate', function () {
-	return gulp.src([global.cfg.folders.www +'/**/*.tpl.html'])
-		.pipe(debug({verbose: true}))
-		.on('error', gutil.log)
-		.pipe(templateCache({
+	 var stream = gulp.src([global.cfg.folders.www +'/**/*.tpl.html'])
+		//.pipe(debug({verbose: true}))
+		.on('error', gutil.log);
+
+	stream = shared.htmlMin(stream);
+
+	stream = stream.pipe(templateCache({
 			standalone: true,
 			root: '../'+ global.cfg.folders.app +'/www/'
 		}))
 		.pipe(gulp.dest(global.cfg.folders.temp));
+
+	return stream;
 });
 
 gulp.task('copy:fonts', function (){
@@ -111,7 +117,7 @@ gulp.task('cssw', function() {
 gulp.task('remove:build', function() {
 	//no borrar la carpeta build, da errores de sincro
 	return gulp.src([
-		global.cfg.folders.build +'/**/*'
+		global.cfg.folders.build
 	], {read: false})
 		.pipe(clean());
 });

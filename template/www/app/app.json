@@ -2,9 +2,29 @@
 	"files": [
 		{
 			"file": "angular-toastr.css",
-			"path": "vendors/bower_components/angular-toastr/dist"
+			"path": "vendors/bower_components/angular-toastr/dist",
+			"minificated": true
 		},
 		{
+			"file": "angular.js",
+			"path": "vendors/bower_components/angular",
+			"minificated": true
+		},
+		{
+			"file": "angular-route.js",
+			"path": "vendors/bower_components/angular-route",
+			"minificated": true
+		},
+		{
+			"file": "angular-animate.js",
+			"path": "vendors/bower_components/angular-animate",
+			"minificated": true
+		},
+		{
+			"file": "angular-toastr.tpls.js",
+			"path": "vendors/bower_components/angular-toastr/dist",
+			"minificated": true
+		},{
 			"file": "msgBoldDirective.scss",
 			"path": "www/app/msgBold"
 		},
@@ -19,22 +39,6 @@
 					]
 				]
 			}
-		},
-		{
-			"file": "angular.js",
-			"path": "vendors/bower_components/angular"
-		},
-		{
-			"file": "angular-route.js",
-			"path": "vendors/bower_components/angular-route"
-		},
-		{
-			"file": "angular-animate.js",
-			"path": "vendors/bower_components/angular-animate"
-		},
-		{
-			"file": "angular-toastr.tpls.js",
-			"path": "vendors/bower_components/angular-toastr/dist"
 		},
 		{
 			"file": "app.js",

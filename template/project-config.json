@@ -4,7 +4,7 @@
 	"os": "win",
 	"ip": "127.0.0.1",
 
-	"release": false,
+	"release": true,
 	"compress": false,
 	"loader":{
 		"loading": 6

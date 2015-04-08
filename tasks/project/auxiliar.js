@@ -57,7 +57,7 @@ exports.replace = function(stream, replaces){
 			return;
 		}
 
-		console.logGreen('key: "'+ replacePair[0] +'" value: "'+ replacePair[1] +'"');
+		//console.logGreen('key: "'+ replacePair[0] +'" value: "'+ replacePair[1] +'"');
 		stream = stream.pipe(replace(replacePair[0], replacePair[1]));
 	}
 

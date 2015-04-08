@@ -29,7 +29,7 @@ app.controller('MainCtrl', ['$scope', '$location', 'DataServices', 'toastr',
 		DataServices.getRemote().then(function (data) {
 			$scope.remoteData = data;
 		}, function (m) {
-			errorHandle(m + ' (Maybe the server api is not up?)')
+			errorHandle(m + ' (Maybe the server api is not up?)');
 		});
 
 		function errorHandle(m){

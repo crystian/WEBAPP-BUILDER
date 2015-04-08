@@ -20,7 +20,7 @@
     "gulp-footer": "^1.0.5",
     "gulp-header": "^1.2.2",
     "gulp-html-replace": "^1.4.3",
-    "gulp-htmlmin": "^1.1.0",
+    "gulp-htmlmin": "^1.1.1",
     "gulp-if": "^1.2.5",
     "gulp-inject": "^1.1.1",
     "gulp-jshint": "^1.9.2",

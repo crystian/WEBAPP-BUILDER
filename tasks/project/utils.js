@@ -10,6 +10,7 @@ var gutil = require('gulp-util'),
 	chalk = require('chalk'),
 	fs = require('fs-extra'),
 	aux = require('./auxiliar'),
+	utils = require('./utils'),
 	webserver = require('gulp-webserver'),
 	gulp = require('gulp');
 
@@ -101,6 +102,7 @@ exports.makeServe = function(folder, path, ip, port) {
 			host: ip,
 			port: port,
 			//fallback: 'index.html',
+			//directoryListing: true,
 			livereload: false,
 			open: false
 		}));
@@ -108,5 +110,5 @@ exports.makeServe = function(folder, path, ip, port) {
 };
 
 exports.exit = function (n){
-	process.exit(n);
+	utils.exit(n);
 };

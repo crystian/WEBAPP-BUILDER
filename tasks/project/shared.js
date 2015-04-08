@@ -7,6 +7,10 @@ var gutil = require('gulp-util'),
 	exec = require('child_process').exec,
 	fs = require('fs-extra'),
 	replace = require('replace'),
+	utils = require('./utils.js'),
+	htmlmin = require('gulp-htmlmin'),
+	gif = require('gulp-if'),
+	strip = require('gulp-strip-comments'),
 	gulp = require('gulp');
 
 
@@ -19,9 +23,8 @@ exports.getLoader = function(cb) {
 function loaderReplaces(file) {
 	var r =	['\"oneRequest\": false,', '\"oneRequest\": true,'];
 
-	//todo review
-	if(global.cfg.release){
-		r =	['\"oneRequest\": false,', '\"oneRequest\": true,'];
+	if(global.cfg.loader.release){
+		r =	['oneRequest:!1,', 'oneRequest:1,'];
 	}
 
 	replace({
@@ -64,6 +67,7 @@ function makeLoader(cb) {
 				}
 				console.logRed('stderr: ' + stderr);
 				console.logRed('exec error: ' + error);
+				utils.exit(1);
 			} else {
 				if (gutil.env.debug) {
 					console.logGreen(stdout);
@@ -81,4 +85,17 @@ exports.getDirectoryName = function(dirname) {
 	var splitter = (global.cfg.os === 'win') ?	'\\' : '/';
 	var path = fullPath.split(splitter);
 	return path[path.length - 1];;
-}
+};
+
+exports.htmlMin = function(stream){
+	var htmlminOptions = {
+		collapseWhitespace: true,
+		removeComments: true,
+		removeRedundantAttributes: true
+	};
+	stream = stream
+		.pipe(strip({safe:false, block:false}))
+		.pipe(gif(global.cfg.release, htmlmin(htmlminOptions)));
+
+	return stream;
+};

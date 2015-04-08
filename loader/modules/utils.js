@@ -106,7 +106,6 @@ loader.utils = (function() {
 	}
 
 	function _requestOneOrAllInOne(appName, loadAppSuccess, loadAppFail){
-debugger
 		if(loader.cfg.oneRequest){
 			console.info('oneRequest!');
 			requestAllInOne(appName +'.json', {appName: appName}).then(loadAppSuccess, loadAppFail);

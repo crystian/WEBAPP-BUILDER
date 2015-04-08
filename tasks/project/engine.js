@@ -19,15 +19,9 @@ var gutil = require('gulp-util'),
 	rename = require('gulp-rename'),
 	StreamQueue = require('streamqueue'),
 	aux = require('./auxiliar'),
+	shared = require('./shared'),
+	commons = require('../commons'),
 	LZString = require('../../vendors/lz-string/libs/lz-string'),
-	//es = require('event-stream')
-	//htmlreplace = require('gulp-html-replace'),
-	//htmlmin = require('gulp-htmlmin'),
-	//concat = require('gulp-concat'),
-	//jshint = require('gulp-jshint'),
-	//header = require('gulp-header'),
-	//footer = require('gulp-footer'),
-	//runSequence = require('run-sequence'),
 	gulp = require('gulp');
 
 
@@ -52,7 +46,7 @@ var defaults = {
 			]
 		}
 	},
-	validCssExtensions : ['sass', 'scss','less'],
+	validCssExtensions : ['sass', 'scss','less', 'css'],
 	validExtensions : ['html', 'js'],
 
     //??
@@ -166,7 +160,9 @@ function runEachPreprocessors(url, appName){
 				.pipe(csslint.reporter()).on('error', gutil.log);
 		}
 
-		stream = stream.pipe(gulp.dest(file.path));
+		if(!(file.makeMin && type === 'css')) {
+			stream = stream.pipe(gulp.dest(file.path));
+		}
 
 		if(file.makeMin){
 			stream = _minificateAndSave(stream, file, 'css')
@@ -298,18 +294,27 @@ var _handle = {
 
 		stream = stream
 			.pipe(strip({safe:false, block:false}))
-			.pipe(gif(global.cfg.release, minifycss()))
+			.pipe(gif(global.cfg.release || file.makeMin, minifycss()))
 			.pipe(rename(utils.setExtensionFilename(file.min,'css')));
 
 		return stream;
 	},
 
 	'js': function(stream, file){
-		console.log('NADA AUN JS');
+		console.logWarn('JS');
+
+		if(!file.minificated){
+			stream = commons.jsMaker(stream);
+		}
+
+		stream = stream.pipe(strip({safe:true, block:true}));
+
 		return stream;
 	},
+
 	'html': function(stream, file) {
-		console.log('NADA AUN HTML');
+		console.logWarn('HTML');
+		stream = shared.htmlMin(stream);
 		return stream;
 	}
 };

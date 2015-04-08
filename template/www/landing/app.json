@@ -2,11 +2,19 @@
 	"files": [
 		{
 			"file": "bootstrap-reset.css",
-			"path": "vendors/theme"
+			"path": "vendors/theme",
+			"autoPrefix": false,
+			"linter": false,
+			"makeMin": true,
+			"overwrite": false
 		},
 		{
 			"file": "style.css",
 			"path": "vendors/theme",
+			"autoPrefix": false,
+			"linter": false,
+			"makeMin": true,
+			"overwrite": false,
 			"replaces": {
 				"pre": [
 					["../../template/www/", ""]
@@ -15,11 +23,19 @@
 		},
 		{
 			"file": "style-responsive.css",
-			"path": "vendors/theme"
+			"path": "vendors/theme",
+			"autoPrefix": false,
+			"linter": false,
+			"makeMin": true,
+			"overwrite": false
 		},
 		{
 			"file": "font-awesome.css",
 			"path": "vendors/theme/assets/font-awesome/css",
+			"autoPrefix": false,
+			"linter": false,
+			"makeMin": true,
+			"overwrite": false,
 			"replaces": {
 				"pre": [
 					["../template/vendors/theme/assets/font-awesome/", "assets/"]
