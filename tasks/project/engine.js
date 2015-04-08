@@ -14,6 +14,7 @@ var gutil = require('gulp-util'),
 	concat = require('gulp-concat'),
 	fs = require('fs-extra'),
 	extend = require('extend'),
+	uglify = require('gulp-uglify'),
 	gif = require('gulp-if'),
 	less = require('gulp-less'),
 	rename = require('gulp-rename'),
@@ -220,6 +221,14 @@ function doMagic(url, appName, options) {
 
 		if(!file.minificated && !file.makeMin){
 			stream = _minificate(stream, file, type)
+		} else {
+
+			//just for remove header a footer comments
+			if(type === 'js'){
+				stream = stream.pipe(uglify({
+					output:{beautify: false}, mangle: true}
+				));
+			}
 		}
 
 		if(!streams[type]){
@@ -228,9 +237,11 @@ function doMagic(url, appName, options) {
 		streams[type] = streams[type].queue(stream);
 	}
 
-	streamsFinal = aux.merge(streamsFinal, _concat(streams, 'css', appName));
-	streamsFinal = aux.merge(streamsFinal, _concat(streams, 'js', appName));
-	streamsFinal = aux.merge(streamsFinal, _concat(streams, 'html', appName));
+
+	['css','js','html'].map(function (v) {
+		streamsFinal = aux.merge(streamsFinal, _concat(streams, v, appName));
+	});
+
 	return streamsFinal;
 }
 
@@ -276,7 +287,7 @@ function _minificate(stream, file, type){
 	stream = aux.replace(stream, file.replaces.pre);
 
 	if (_handle[type]) {
-		console.log('File to process: ', file.file);
+		console.log('File to process:', file.file);
 		stream = _handle[type](stream, file);
 	} else {
 		console.logRed('Type not found on _minificate, file: '+ file.file);
@@ -290,7 +301,7 @@ function _minificate(stream, file, type){
 
 var _handle = {
 	'css' : function(stream, file) {
-		console.logWarn('CSS');
+		//console.logWarn('CSS');
 
 		stream = stream
 			.pipe(strip({safe:false, block:false}))
@@ -301,19 +312,18 @@ var _handle = {
 	},
 
 	'js': function(stream, file){
-		console.logWarn('JS');
+		//console.logWarn('JS');
 
-		if(!file.minificated){
+		if(!file.minificated && global.cfg.release){
 			stream = commons.jsMaker(stream);
+			stream = stream.pipe(strip({safe:false, block:false}));
 		}
-
-		stream = stream.pipe(strip({safe:true, block:true}));
 
 		return stream;
 	},
 
 	'html': function(stream, file) {
-		console.logWarn('HTML');
+		//console.logWarn('HTML');
 		stream = shared.htmlMin(stream);
 		return stream;
 	}
