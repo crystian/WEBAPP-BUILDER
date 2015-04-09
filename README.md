@@ -1,18 +1,28 @@
-# POWER LOADER!
+# APP FACTORTY!
 ---
 ### Que es este coso?
 
-Este proyecto pretender ahorrar tiempo de desarrollo, es una especie de seed o boilerplate, especialmente hecho para el bootstrap de una nueva app, dejando todo lo basico y constante listo.
+Este proyecto pretender ahorrar tiempo de desarrollo, es una especie de seed boilerplate o wrapper, especialmente hecho para el bootstrap de una nueva app, dejando todo lo basico y constante listo.
 
-Cuenta con deliciosos features y temas solucionados tipicos, esto ahorraria facil 2 semana de trabajo full time e incluso mas.
+Cuenta con deliciosos features y temas solucionados tipicos, esto ahorraria facil 3 semana de trabajo full time e incluso mas.
 
 Intente que sea lo mas simple posible, espero que asi sea para vos crystian del futuro y otros coleguillas de mucha confiaza (si llegaron a este codigo, seguro les tengo mucha confianza)
 
-Este proyecto es una extraccion de otro mas grande que luego de un tiempo me di cuenta que seria ideal separar las aguas y dejar el loader listo para otros proyectos y no solo para el que fue creado (languagesgym/subtitulame).
+Este proyecto es una extraccion de otro mas grande que luego de un tiempo me di cuenta que seria ideal separar las aguas y dejar el loader y temas de automatizacion listo para otros proyectos y no solo para el que fue creado (languagesgym/subtitulame).
 
 Tiempo estimado de desarrollo de todo esto, con multiples pruebas y demas: 3 meses en tiempo no full time.
 
 ---
+
+
+npm i
+template
+npm i
+bower i
+
+---
+
+# REVIEW!
 
 ## Tasks:
 

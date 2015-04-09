@@ -13,6 +13,7 @@ gulp.task('default', ['build']);
 gulp.task('css', ['css:loader']);
 gulp.task('config', ['make:config']);
 gulp.task('full',['build:full']);
+gulp.task('test',['test:loader']);
 
 gulp.task('build:full', function (cb) {
 	runSequence(

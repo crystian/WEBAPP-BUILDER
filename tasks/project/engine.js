@@ -215,9 +215,9 @@ function doMagic(url, appName, options) {
 			source = file.path +'/'+ file.min;
 		}
 
-		var stream = gulp.src(source)
-			.pipe(debug({verbose: true}))
-			.on('error', gutil.log);
+		var stream = gulp.src(source);
+			//.pipe(debug({verbose: true}))
+			//.on('error', gutil.log);
 
 		if(!file.minificated && !file.makeMin){
 			stream = _minificate(stream, file, type)
@@ -226,8 +226,10 @@ function doMagic(url, appName, options) {
 			//just for remove header a footer comments
 			if(type === 'js'){
 				stream = stream.pipe(uglify({
-					output:{beautify: false}, mangle: true}
-				));
+					output: {beautify: false},
+					compress: {sequences: true},
+					mangle: true
+				}));
 			}
 		}
 
@@ -236,7 +238,6 @@ function doMagic(url, appName, options) {
 		}
 		streams[type] = streams[type].queue(stream);
 	}
-
 
 	['css','js','html'].map(function (v) {
 		streamsFinal = aux.merge(streamsFinal, _concat(streams, v, appName));
