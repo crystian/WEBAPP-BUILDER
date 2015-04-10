@@ -13,6 +13,7 @@
 
 	"folders":{
 		"app": "template",
+		"template": "template",
 		"www": "www",
 		"build": "build",
 		"temp": "build/.tmp",

@@ -7,12 +7,36 @@
 var gutil = require('gulp-util'),
 	//debug = require('gulp-debug'),
 	Nightmare = require('nightmare'),
+	replace = require('replace'),
 	async = require('async'),
     utils = require('./project/utils'),
 	gulp = require('gulp');
 
 gulp.task('test:loader',['serve:nightmare'], function(cb) {
 	'use strict';
+	var index = (global.cfg.folders.template +'/' + global.cfg.folders.build + '/' + global.cfg.loader.filesDest.index);
+
+	if(!utils.fileExist(index)){
+		console.logRed('Index not found, can you made one?, rememeber you need to create it with \'gulp full\' on \'template\' folder, this is a real test');
+		utils.exit(1);
+	}
+
+	console.logWarn('REMEMBER, this change index.html! and it will be without css by issue when you load the css via ajax');
+
+	var r =	['\"phantom\": false,', '\"phantom\": true,'];
+
+	if(global.cfg.loader.release){
+		r =	['phantom:!1,', 'phantom:1,'];
+	}
+
+	replace({
+		regex: r[0],
+		replacement: r[1],
+		paths: [index],
+		recursive: false,
+		silent: false
+	});
+
 
 	var browsers =[
 

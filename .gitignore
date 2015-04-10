@@ -1,9 +1,8 @@
-/.idea/workspace.xml
-/bower.json
-/build
-/node_modules
-/vendors
-/AppTemplate/APP/WWW/**/*.css
+.idea/workspace.xml
+bower.json
+build
+node_modules
+vendors
+.idea/shelf
+project-config-local.json
 /.sass-cache
-/.idea/shelf/
-/project-config-local.json

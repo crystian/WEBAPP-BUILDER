@@ -40,7 +40,6 @@ try{
 
 	global.cfg.appRoot = __dirname + '\\' + global.cfg.folders.app;
 
-
 } catch (e){
 	//console.logRed('Do you run installer?, There are some problems with project-config*, check those please');
 	console.logRed('Error: '+ e);

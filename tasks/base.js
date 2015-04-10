@@ -59,11 +59,13 @@ gulp.task('make:config', function (cb) {
 	json.mixpanel = global.cfg.mixpanel;
 	json.analytics = global.cfg.analytics;
 	json.consoleError = global.cfg.consoleError;
-	json.oneRequest = false;//flagOneRequest
 	json.firstApp = global.cfg.firstApp;
 	json.fastclick = !!(global.cfg.loader.bower.fastclick);
 	json.appRoot = '../'+ global.cfg.folders.app;
 	json.appWww = global.cfg.folders.app +'/'+ global.cfg.folders.www;
+
+	json.oneRequest = false;//flagOneRequest
+	json.phantom = false;//flagPhantom
 
 	json.loader = {
 		version: global.cfg.loader.version,

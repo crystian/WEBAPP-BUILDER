@@ -281,7 +281,10 @@ loader.utils = (function() {
 
 	function _setCss(content) {
 		var resourceLoader = document.createElement('style');
-		resourceLoader.innerHTML = content;
+		resourceLoader.type = 'text/css';
+		if(!loader.cfg.phantom){
+			resourceLoader.innerHTML = content;
+		}
 		setNewResourceByTag(resourceLoader, 'head');
 	}
 

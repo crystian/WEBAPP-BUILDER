@@ -12,5 +12,5 @@ gulp.task('serve', function() {
 });
 
 gulp.task('serve:nightmare', function() {
-	return utils.makeServe(global.cfg.loader.folders.build, '', global.cfg.ip, global.cfg.ports.nightmare);
+	return utils.makeServe(global.cfg.folders.template +'/'+ global.cfg.loader.folders.build, '', global.cfg.ip, global.cfg.ports.nightmare);
 });

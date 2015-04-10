@@ -4,9 +4,10 @@
 	"os": "win",
 	"ip": "127.0.0.1",
 
-	"release": true,
-	"compress": true,
+	"release": false,
+	"compress": false,
 	"loader":{
+	"release": false,
 		"loading": 6
 	}
 }
