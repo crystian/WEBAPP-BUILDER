@@ -39,6 +39,8 @@
     "jshint-stylish": "^1.0.1",
     "merge-stream": "^0.1.7",
     "nightmare": "^1.8.0",
+    "pixelsmith": "^1.1.1",
+    "pngsmith": "^0.1.3",
     "replace": "^0.3.0",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.0.2",

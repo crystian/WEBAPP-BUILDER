@@ -94,9 +94,11 @@ gulp.task('sprite', [], function (){
 		//.pipe(debug({verbose: true}))
 		.on('error', gutil.log)
 		.pipe(sprite({
-			baseUrl:         "../../build",
-			spriteSheetName: "sprite.jpg",
-			spriteSheetPath: "./build",
+			baseUrl:         '../../build',
+			spriteSheetName: 'sprite.jpg',
+			spriteSheetPath: './build',
+			padding: 1,
+			engine: 'pixelsmith',
 			verbose: true
 		}));
 
