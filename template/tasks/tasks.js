@@ -6,6 +6,7 @@ var gutil = require('gulp-util'),
 	debug = require('gulp-debug'),
 	engine = require('../../tasks/project/engine.js'),
 	shared = require('../../tasks/project/shared.js'),
+	sprite = require('gulp-sprite-generator'),
 	spawn = require('child_process').spawn,
 	clean = require('gulp-clean'),
 	fs = require('fs-extra'),
@@ -84,6 +85,25 @@ gulp.task('build:fast', ['runMagic'], function (){
 
 gulp.task('runMagic', ['make:ngTemplate'], function (){
 	return engine.runMagic(global.cfg.folders.www +'/apps.json');
+});
+
+gulp.task('sprite', [], function (){
+	var spriteOutput;
+
+	spriteOutput = gulp.src('./build/.tmp/app.css')
+		//.pipe(debug({verbose: true}))
+		.on('error', gutil.log)
+		.pipe(sprite({
+			baseUrl:         "../../build",
+			spriteSheetName: "sprite.jpg",
+			spriteSheetPath: "./build",
+			verbose: true
+		}));
+
+	spriteOutput.css.pipe(gulp.dest("./build/sprite"));
+	spriteOutput.img.pipe(gulp.dest("./build/sprite"));
+
+	return spriteOutput;
 });
 
 gulp.task('get:loader', function(cb){

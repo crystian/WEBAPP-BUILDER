@@ -35,7 +35,7 @@
 				"pre": [
 					[
 						"../template/www/app/assets/img/",
-						"/assets/img/"
+						"assets/img/"
 					]
 				]
 			}
