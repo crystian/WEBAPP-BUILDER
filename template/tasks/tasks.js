@@ -6,7 +6,6 @@ var gutil = require('gulp-util'),
 	debug = require('gulp-debug'),
 	engine = require('../../tasks/project/engine.js'),
 	shared = require('../../tasks/project/shared.js'),
-	sprite = require('gulp-sprite-generator'),
 	spawn = require('child_process').spawn,
 	clean = require('gulp-clean'),
 	fs = require('fs-extra'),
@@ -20,6 +19,7 @@ gulp.task('default', ['build']);
 gulp.task('full', ['build:full']);
 gulp.task('css', ['css:app']);
 gulp.task('loader', ['get:loader']);
+
 
 gulp.task('build:full', function (cb) {
 	runSequence(
@@ -87,26 +87,6 @@ gulp.task('runMagic', ['make:ngTemplate'], function (){
 	return engine.runMagic(global.cfg.folders.www +'/apps.json');
 });
 
-gulp.task('sprite', [], function (){
-	var spriteOutput;
-
-	spriteOutput = gulp.src('./build/.tmp/app.css')
-		//.pipe(debug({verbose: true}))
-		.on('error', gutil.log)
-		.pipe(sprite({
-			baseUrl:         '../../build',
-			spriteSheetName: 'sprite.jpg',
-			spriteSheetPath: './build',
-			padding: 1,
-			engine: 'pixelsmith',
-			verbose: true
-		}));
-
-	spriteOutput.css.pipe(gulp.dest("./build/sprite"));
-	spriteOutput.img.pipe(gulp.dest("./build/sprite"));
-
-	return spriteOutput;
-});
 
 gulp.task('get:loader', function(cb){
 	shared.getLoader(cb);

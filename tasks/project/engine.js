@@ -225,7 +225,7 @@ function doMagic(url, appName, options) {
 			//.on('error', gutil.log);
 
 		if(!file.minificated && !file.makeMin){
-			stream = _minificate(stream, file, type)
+			stream = _minificate(stream, file, type, appName)
 		} else {
 
 			//just for remove header a footer comments, it's ok here, not move
@@ -288,13 +288,13 @@ function _minificateAndSave(stream, file, type){
 	return stream;
 }
 
-function _minificate(stream, file, type){
+function _minificate(stream, file, type, appName){
 	//replaces previously to minimisation
 	stream = aux.replace(stream, file.replaces.pre);
 
 	if (_handle[type]) {
 		console.log('File to process:', file.file);
-		stream = _handle[type](stream, file);
+		stream = _handle[type](stream, file, appName);
 	} else {
 		console.logRed('Type not found on _minificate, file: '+ file.file);
 	}
@@ -306,7 +306,7 @@ function _minificate(stream, file, type){
 }
 
 var _handle = {
-	'css' : function(stream, file) {
+	'css' : function(stream, file, appName) {
 		//console.logWarn('CSS');
 
 		if(!file.minificated && file.genSprite){
@@ -314,19 +314,18 @@ var _handle = {
 			var spriteOutput = stream
 				.pipe(sprite({
 					baseUrl:         '../../build',
-					spriteSheetName: 'sprite.png',
-					spriteSheetPath: './sprite',
+					spriteSheetName: 's.png',
+					spriteSheetPath: './'+ appName,
 					padding: 1,
 					algorithm: 'binary-tree',
 					//isRetina: false,
 					//engine: 'pixelsmith',
-					verbose: true
-					//groupBy: [
-					//	function(image) {
-					//		console.log('imge',image);
-					//		return 'aa';
-					//	}
-					//]
+					verbose: true,
+					groupBy: [
+						function(image) {
+							return (image.meta.group === undefined) ? '1' : ''+image.meta.group;
+						}
+					]
 				}))
 			;
 
@@ -338,7 +337,7 @@ var _handle = {
 					svgoPlugins: [{removeViewBox: false}],
 					use: [pngquant()]
 				}))
-				.pipe(gulp.dest('./build/sprite'));
+				.pipe(gulp.dest('./build/'+appName));
 
 			stream = spriteOutput.css;
 		}
