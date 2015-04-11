@@ -11,11 +11,30 @@ body {
 }
 .kitten1 {
 	background-image: url(../template/www/app/assets/img/kitten1.png);
+	background-size: 133px 100px;
 	height: 100px;
 	margin: 0 auto;
+	background-repeat: no-repeat;
 }
 .kitten2 {
 	background-image: url(../template/www/app/assets/img/kitten2.png);
+	background-size: 133px 100px;
 	height: 100px;
 	margin: 0 auto;
+	background-repeat: no-repeat;
 }
+
+//RETINA:
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {
+
+  .kitten1 {background-image: url(../template/www/app/assets/img/kitten1@2x.png);}
+  .kitten2 {background-image: url(../template/www/app/assets/img/kitten2@2x.png);}
+
+}
+

@@ -2,7 +2,7 @@
 	"name": "app name",
 	"version": "0.0.0",
 	"os": "win",
-	"ip": "127.0.0.1",
+	"ip": "10.0.1.2",
 
 	"release": false,
 	"compress": false,
