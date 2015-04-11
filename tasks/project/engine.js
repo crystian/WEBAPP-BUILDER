@@ -20,9 +20,10 @@ var gutil = require('gulp-util'),
 	rename = require('gulp-rename'),
 	sprite = require('gulp-sprite-generator'),
 	imagemin = require('gulp-imagemin'),
-	pngquant = require('imagemin-pngquant'),
 	imageminOptipng = require('imagemin-optipng'),
+	pngquant = require('imagemin-pngquant'),
 	StreamQueue = require('streamqueue'),
+	//gm = require('gulp-gm'),
 	aux = require('./auxiliar'),
 	shared = require('./shared'),
 	commons = require('../commons'),
@@ -313,19 +314,33 @@ var _handle = {
 
 			var spriteOutput = stream
 				.pipe(sprite({
-					baseUrl:         '../../build',
-					spriteSheetName: 's.png',
+					//baseUrl:         '../../build',
+					spriteSheetName: 'sprite.png',
 					spriteSheetPath: './'+ appName,
 					padding: 1,
 					algorithm: 'binary-tree',
 					//isRetina: false,
-					//engine: 'pixelsmith',
+					engine: 'gm',
 					verbose: true,
 					groupBy: [
 						function(image) {
-							return (image.meta.group === undefined) ? '1' : ''+image.meta.group;
+							//console.log('image',image);
+							//getting number of sprite folder
+							var n = /(sprite)(.)(\/)/.exec(image.url),
+								group = '1';
+
+							if(n !== undefined || n.length > 0){
+								group = n[2];
+							}
+
+							//group += '.'+utils.getExtensionFile(image.path);
+
+							return group;
 						}
-					]
+					],
+					engineOpts: {
+						imagemagick: false
+					}
 				}))
 			;
 
@@ -337,6 +352,12 @@ var _handle = {
 					svgoPlugins: [{removeViewBox: false}],
 					use: [pngquant()]
 				}))
+
+				//.pipe(gm(function(gmfile) {
+				//	gmfile.quality(85).setFormat('jpg');
+				//	return gmfile;
+				//}))
+
 				.pipe(gulp.dest('./build/'+appName));
 
 			stream = spriteOutput.css;
