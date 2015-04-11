@@ -18,6 +18,10 @@ var gutil = require('gulp-util'),
 	gif = require('gulp-if'),
 	less = require('gulp-less'),
 	rename = require('gulp-rename'),
+	sprite = require('gulp-sprite-generator'),
+	imagemin = require('gulp-imagemin'),
+	pngquant = require('imagemin-pngquant'),
+	imageminOptipng = require('imagemin-optipng'),
 	StreamQueue = require('streamqueue'),
 	aux = require('./auxiliar'),
 	shared = require('./shared'),
@@ -37,6 +41,7 @@ var defaults = {
 		'overwrite': true,		//specially for libs, just make it once
 		'minificated': false,	//if it is a lib for don't re do the minifcation
 		'makeMin': false,		//it should be create a minificate version
+		'genSprite': true,		//generate sprite
 		'ignore': false,		//ignore on dev time, request by request
 		'replaces': {
 			'pre': [			//pre minificatedd
@@ -223,7 +228,7 @@ function doMagic(url, appName, options) {
 			stream = _minificate(stream, file, type)
 		} else {
 
-			//just for remove header a footer comments
+			//just for remove header a footer comments, it's ok here, not move
 			if(type === 'js'){
 				stream = stream.pipe(uglify({
 					output: {beautify: false},
@@ -303,6 +308,40 @@ function _minificate(stream, file, type){
 var _handle = {
 	'css' : function(stream, file) {
 		//console.logWarn('CSS');
+
+		if(!file.minificated && file.genSprite){
+
+			var spriteOutput = stream
+				.pipe(sprite({
+					baseUrl:         '../../build',
+					spriteSheetName: 'sprite.png',
+					spriteSheetPath: './sprite',
+					padding: 1,
+					algorithm: 'binary-tree',
+					//isRetina: false,
+					//engine: 'pixelsmith',
+					verbose: true
+					//groupBy: [
+					//	function(image) {
+					//		console.log('imge',image);
+					//		return 'aa';
+					//	}
+					//]
+				}))
+			;
+
+			//spriteOutput.css.pipe(gulp.dest('./build/sprite'));
+			spriteOutput.img
+				.pipe(imageminOptipng({optimizationLevel: 3})())
+				.pipe(imagemin({
+					progressive: true,
+					svgoPlugins: [{removeViewBox: false}],
+					use: [pngquant()]
+				}))
+				.pipe(gulp.dest('./build/sprite'));
+
+			stream = spriteOutput.css;
+		}
 
 		stream = stream
 			.pipe(strip({safe:false, block:false}))

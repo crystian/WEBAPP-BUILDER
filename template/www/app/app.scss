@@ -9,19 +9,34 @@ body {
 	margin: 0;
 	padding: 0;
 }
+
+.normalPicture{
+  background-size: 133px 100px;
+  width: 133px;
+  height: 100px;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+}
+
 .kitten1 {
 	background-image: url(../template/www/app/assets/img/kitten1.png);
-	background-size: 133px 100px;
-	height: 100px;
-	margin: 0 auto;
-	background-repeat: no-repeat;
 }
 .kitten2 {
 	background-image: url(../template/www/app/assets/img/kitten2.png);
-	background-size: 133px 100px;
-	height: 100px;
+}
+.kitten3 {
+	background-image: url(../template/www/app/assets/img/kitten3.png);
+	background-size: 300px 122px;
+  	width: 300px;
+	height: 122px;
 	margin: 0 auto;
 	background-repeat: no-repeat;
+}
+.kitten4 {
+	background-image: url(../template/www/app/assets/img/kitten4.png);
+}
+.kitten5 {
+	background-image: url(../template/www/app/assets/img/kitten5.png);
 }
 
 //RETINA:
@@ -35,6 +50,9 @@ only screen and (                min-resolution: 2dppx) {
 
   .kitten1 {background-image: url(../template/www/app/assets/img/kitten1@2x.png);}
   .kitten2 {background-image: url(../template/www/app/assets/img/kitten2@2x.png);}
+  .kitten3 {background-image: url(../template/www/app/assets/img/kitten3@2x.png);}
+  .kitten4 {background-image: url(../template/www/app/assets/img/kitten4@2x.png);}
+  .kitten5 {background-image: url(../template/www/app/assets/img/kitten5@2x.png);}
 
 }
 

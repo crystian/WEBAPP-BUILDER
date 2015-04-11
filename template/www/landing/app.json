@@ -6,7 +6,8 @@
 			"autoPrefix": false,
 			"linter": false,
 			"makeMin": true,
-			"overwrite": false
+			"overwrite": false,
+			"genSprite": false
 		},
 		{
 			"file": "style.css",
@@ -15,6 +16,7 @@
 			"linter": false,
 			"makeMin": true,
 			"overwrite": false,
+			"genSprite": false,
 			"replaces": {
 				"pre": [
 					["../../template/www/", ""]
@@ -27,7 +29,8 @@
 			"autoPrefix": false,
 			"linter": false,
 			"makeMin": true,
-			"overwrite": false
+			"overwrite": false,
+			"genSprite": false
 		},
 		{
 			"file": "font-awesome.css",
@@ -36,6 +39,7 @@
 			"linter": false,
 			"makeMin": true,
 			"overwrite": false,
+			"genSprite": false,
 			"replaces": {
 				"pre": [
 					["../template/vendors/theme/assets/font-awesome/", "assets/"]
