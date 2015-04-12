@@ -150,7 +150,7 @@ gulp.task('make:loader:css', ['css:loader'],  function () {
 
 	return streamqueue({ objectMode: true },
 			gulp.src(cssLib)
-				.pipe(gif(global.cfg.loader.bower.bootstrap, replace('../fonts/glyphicons','assets/fonts/glyphicons')))
+				.pipe(gif(global.cfg.loader.bower.bootstrap, replace('../fonts/glyphicons','fonts/glyphicons')))
 				.pipe(strip({safe:false, block:false})),
 			merge(
 				gulp.src(cssLoader),

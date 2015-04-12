@@ -314,28 +314,27 @@ var _handle = {
 
 			var spriteOutput = stream
 				.pipe(sprite({
-					//baseUrl:         '../../build',
-					spriteSheetName: 'sprite.png',
-					spriteSheetPath: './'+ appName,
+					baseUrl:         './',
+					spriteSheetName: appName +'.png',
+					spriteSheetPath: 'img',
 					padding: 1,
 					algorithm: 'binary-tree',
 					//isRetina: false,
 					engine: 'gm',
-					verbose: true,
+					verbose: !!(gutil.env.debug),
 					groupBy: [
 						function(image) {
 							//console.log('image',image);
 							//getting number of sprite folder
-							var n = /(sprite)(.)(\/)/.exec(image.url),
-								group = '1';
+							var num = /(sprite)(.)(\/)/.exec(image.url),
+								group = 1;
 
-							if(n !== undefined || n.length > 0){
-								group = n[2];
+							if(num !== null && num.length > 0){
+								group = num[2];
 							}
 
 							//group += '.'+utils.getExtensionFile(image.path);
-
-							return group;
+							return ''+group;
 						}
 					],
 					engineOpts: {
@@ -346,21 +345,21 @@ var _handle = {
 
 			//spriteOutput.css.pipe(gulp.dest('./build/sprite'));
 			spriteOutput.img
-				.pipe(imageminOptipng({optimizationLevel: 3})())
-				.pipe(imagemin({
-					progressive: true,
-					svgoPlugins: [{removeViewBox: false}],
-					use: [pngquant()]
-				}))
+				//.pipe(imageminOptipng({optimizationLevel: 3})())
+				//.pipe(imagemin({
+				//	progressive: true,
+				//	svgoPlugins: [{removeViewBox: false}],
+				//	use: [pngquant()]
+				//}))
 
 				//.pipe(gm(function(gmfile) {
 				//	gmfile.quality(85).setFormat('jpg');
 				//	return gmfile;
 				//}))
 
-				.pipe(gulp.dest('./build/'+appName));
+				.pipe(gulp.dest('./build/img'));
 
-			stream = spriteOutput.css;
+			stream = spriteOutput.css.pipe(replace('assets/',''));
 		}
 
 		stream = stream

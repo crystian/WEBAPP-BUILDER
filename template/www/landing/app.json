@@ -19,7 +19,7 @@
 			"genSprite": false,
 			"replaces": {
 				"pre": [
-					["../../template/www/", ""]
+					["../../template/www/assets/", ""]
 				]
 			}
 		},
@@ -42,7 +42,7 @@
 			"genSprite": false,
 			"replaces": {
 				"pre": [
-					["../template/vendors/theme/assets/font-awesome/", "assets/"]
+					["../template/vendors/theme/assets/font-awesome/", ""]
 				]
 			}
 		},
@@ -51,7 +51,7 @@
 			"path": "www/landing",
 			"replaces": {
 				"pre": [
-					["../template/www/landing/", "assets/"]
+					["../template/www/landing/assets/img/", "assets/img/"]
 				]
 			}
 		},

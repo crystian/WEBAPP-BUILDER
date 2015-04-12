@@ -36,7 +36,7 @@ gulp.task('build', function (cb) {
 		'copy:fonts',
 		'copy:imgs',
 		'copy:data',
-		//'remove:temp',
+		'remove:temp',
 		cb);
 });
 
@@ -60,15 +60,16 @@ gulp.task('copy:fonts', function (){
 	return gulp.src([
 		'vendors/theme/assets/font-awesome/fonts/**/*',
 		global.cfg.folders.www +'/assets/fonts/**/*'
-	]).pipe(gulp.dest(global.cfg.folders.build + '/assets/fonts'));
+	]).pipe(gulp.dest(global.cfg.folders.build + '/fonts'));
 
 });
 
 gulp.task('copy:imgs', function (){
 	return gulp.src([
 		global.cfg.folders.www +'/landing/img/**/*',
-		global.cfg.folders.www +'/app/assets/img/**/*'
-	]).pipe(gulp.dest(global.cfg.folders.build +'/assets/img'));
+		global.cfg.folders.www +'/app/assets/img/**/*',
+		'!**/app/assets/img/sprite*{,/**}'
+	]).pipe(gulp.dest(global.cfg.folders.build +'/img'));
 
 });
 

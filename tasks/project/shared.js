@@ -43,7 +43,7 @@ function copyLoader(cb){
 	fs.copySync(pathSrc +'/'+ global.cfg.loader.filesDest.index, pathDest +'/'+ global.cfg.loader.filesDest.index);
 
 	if(global.cfg.loader.bower.bootstrap){
-		fs.copySync(pathSrc +'/assets', pathDest +'/assets');
+		fs.copySync(pathSrc +'/assets', pathDest +'/');
 	}
 
 	loaderReplaces(pathDest +'/'+ global.cfg.loader.filesDest.index);
