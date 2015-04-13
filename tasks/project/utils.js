@@ -41,15 +41,6 @@ exports.fileExist = function(fileName){
 	return fs.existsSync(fileName);
 };
 
-//exports.fileRequire = function(fileName){
-//	var r = this.fileExist(fileName);
-//	if(!r){
-//		console.logRed('File not found: ' + fileName);
-//	}
-//
-//	return r;
-//};
-
 exports.getExtensionFile = function(s) {
 	var arr = s.split('.');
 	if (arr.length === 0) {
@@ -110,5 +101,5 @@ exports.makeServe = function(folder, path, ip, port) {
 };
 
 exports.exit = function (n){
-	utils.exit(n);
+	process.exit(n);
 };

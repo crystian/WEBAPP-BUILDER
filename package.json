@@ -42,6 +42,7 @@
     "imagemin-pngquant": "^4.0.0",
     "inquirer": "^0.8.2",
     "jshint-stylish": "^1.0.1",
+    "lodash": "^3.6.0",
     "merge-stream": "^0.1.7",
     "nightmare": "^1.8.0",
     "pixelsmith": "^1.1.1",

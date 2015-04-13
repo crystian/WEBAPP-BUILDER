@@ -10,6 +10,7 @@
 var gulp = require('gulp'),
 	requireDir = require('require-dir'),
 	extend = require('extend'),
+	_ = require('lodash'),
 	utils = require('./tasks/project/utils.js');
 
 //require('time-require');
@@ -17,21 +18,22 @@ requireDir('./tasks');
 
 
 try{
-	var fileNameLocal = 'project-config-local.json';
+	var fileNameLocal = 'project-config-local.json',
+		fileNameConfig = 'project-config.json';
 
 	//merge between default and specify:
-	global.cfg = extend(true, {},
-		require('./project-config.json'),
+	global.cfg = _.merge(
+		require('./'+ fileNameConfig),
 		utils.fileExist('./'+ fileNameLocal) && require('./'+ fileNameLocal)
 	);
 
 	//get appName
 	var appName = global.cfg.appCode,
-		fileApp = './'+ appName +'/project-config.json',
+		fileApp = './'+ appName +'/'+ fileNameConfig,
 		fileAppLocal = './'+ appName +'/'+ fileNameLocal;
 
 	//merge between default and app:
-	global.cfg = extend(true, {},
+	global.cfg = _.merge(
 		global.cfg,
 		utils.fileExist(fileApp) && require(fileApp),
 		utils.fileExist(fileAppLocal) && require(fileAppLocal)

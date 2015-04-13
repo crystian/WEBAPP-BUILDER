@@ -15,7 +15,7 @@ var gutil = require('gulp-util'),
 
 gulp.task('make:base', ['make:bower', 'make:index', 'make:config'], function() {
 	//replace references on index.html
-	return gulp.src(global.cfg.loader.folders.www +'/'+global.cfg.loader.filesDest.index)
+	return gulp.src(global.cfg.loader.folders.www +'/'+ global.cfg.loader.filesDest.index)
 		//.on('error', gutil.log)
 		//.pipe(debug({verbose: true}))
 		.pipe(commons.injectContent(global.cfg.loader.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.html','loadingHtml'))

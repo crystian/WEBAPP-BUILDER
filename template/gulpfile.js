@@ -6,10 +6,10 @@ var gulp = require('gulp'),
 	requireDir = require('require-dir'),
 	extend = require('extend'),
 	gutil = require('gulp-util'),
-	shared = require('../tasks/project/shared.js');
 	utils = require('../tasks/project/utils.js');
 
 require('time-require');
+require('../tasks/project/shared.js');
 requireDir('./tasks');
 
 //merge between default and specify:

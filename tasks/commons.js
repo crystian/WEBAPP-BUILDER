@@ -17,8 +17,7 @@ var gutil = require('gulp-util'),
 	clean = require('gulp-clean'),
 	gulp = require('gulp');
 
-gulp.task('remove:build', function() {
-	//no borrar la carpeta build, da errores de sincro
+gulp.task('remove:loader:build', function() {
 	return gulp.src([
 			global.cfg.loader.folders.screens,
 			global.cfg.loader.folders.build
@@ -26,10 +25,17 @@ gulp.task('remove:build', function() {
 		.pipe(clean());
 });
 
-gulp.task('remove:temp', function() {
+gulp.task('remove:loader:temp', function() {
 	return gulp.src([
 			global.cfg.loader.folders.temp
 		], {read: false})
+		.pipe(clean());
+});
+
+gulp.task('remove:cordova:www', function () {
+	return gulp.src([
+		global.cfg.folders.cordovaWWW
+	], {read: false})
 		.pipe(clean());
 });
 

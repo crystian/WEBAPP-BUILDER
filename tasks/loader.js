@@ -63,11 +63,6 @@ gulp.task('make:loader', ['make:loader:js', 'make:loader:css', 'copy:bootstrap:f
 	return stream;
 });
 
-//gulp.task('make:loader:files', [], function (cb) {
-//	//fs.copySync(global.cfg.appCode +'/'+ global.cfg.folders.www, global.cfg.loader.folders.build);
-//	cb();
-//});
-
 gulp.task('make:loader:js',  function () {
 	var releasePostName = (global.cfg.loader.release) ? 'min.' : '';
 	//libs

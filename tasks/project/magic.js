@@ -13,7 +13,7 @@ var gutil = require('gulp-util'),
 	replace = require('gulp-replace'),
 	concat = require('gulp-concat'),
 	fs = require('fs-extra'),
-	extend = require('extend'),
+	_ = require('lodash'),
 	uglify = require('gulp-uglify'),
 	gif = require('gulp-if'),
 	less = require('gulp-less'),
@@ -29,7 +29,6 @@ var gutil = require('gulp-util'),
 	commons = require('../commons'),
 	LZString = require('../../vendors/lz-string/libs/lz-string'),
 	gulp = require('gulp');
-
 
 var defaults = {
 	file: {
@@ -69,7 +68,6 @@ var defaults = {
 	}
 };
 
-
 exports.runPreprocessors = function(appsJson) {
 	return runEachApp(appsJson, runEachPreprocessors);
 };
@@ -82,12 +80,7 @@ exports.runJsonify = function(appsJson, options) {
 	return runEachApp(appsJson, runJsonify, options);
 };
 
-exports.clearCache =function (done) {
-	return cache.clearAll(done);
-};
-
 exports.genAppCache = function() {
-
 	if(!global.cfg.release){return;}
 
 	var fileName = global.cfg.appCode + global.cfg.AppCacheFileName;
@@ -110,6 +103,7 @@ exports.genAppCache = function() {
 	return aux.merge(appFile, htmlFile);
 };
 
+
 exports.optimizeImages = function() {
 	return gulp.src(global.cfg.folders.build +'/img/**/*')
 		.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
@@ -121,6 +115,9 @@ exports.optimizeImages = function() {
 		.pipe(gulp.dest(global.cfg.folders.build +'/img'));
 };
 
+exports.clearCache =function (done) {
+	return cache.clearAll(done);
+};
 
 function runEachApp(appsJson, fnEach, options){
 	var apps = require(global.cfg.appRoot +'/'+ appsJson).apps,
@@ -145,7 +142,7 @@ function runEachPreprocessors(url, appName){
 		streams = undefined;
 
 	for (; i < l; i++) {
-		var file = extend(true, {}, defaults.file, files[i]);
+		var file =  _.assign(defaults.file, files[i]);
 
 		if(aux.isNotActive(file) || file.minificated){continue;}
 
@@ -229,7 +226,7 @@ function doMagic(url, appName, options) {
 		streams = [];
 
 	for (; i < l; i++) {
-		var file = extend(true, {}, defaults.file, files[i]);
+		var file =  _.assign(defaults.file, files[i]);
 
 		if(aux.isNotActive(file)){continue;}
 

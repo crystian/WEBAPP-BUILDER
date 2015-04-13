@@ -20,22 +20,6 @@ exports.getLoader = function(cb) {
 	});
 };
 
-function loaderReplaces(file) {
-	var r =	['\"oneRequest\": false,', '\"oneRequest\": true,'];
-
-	if(global.cfg.loader.release){
-		r =	['oneRequest:!1,', 'oneRequest:1,'];
-	}
-
-	replace({
-		regex: r[0],
-		replacement: r[1],
-		paths: [file],
-		recursive: false,
-		silent: true
-	});
-}
-
 function copyLoader(cb){
 	var pathSrc = '../' + global.cfg.loader.folders.build,
 		pathDest = './'+ global.cfg.folders.build;
@@ -53,6 +37,22 @@ function copyLoader(cb){
 	}
 
 	cb();
+}
+
+function loaderReplaces(file) {
+	var r =	['\"oneRequest\": false,', '\"oneRequest\": true,'];
+
+	if(global.cfg.loader.release){
+		r =	['oneRequest:!1,', 'oneRequest:1,'];
+	}
+
+	replace({
+		regex: r[0],
+		replacement: r[1],
+		paths: [file],
+		recursive: false,
+		silent: true
+	});
 }
 
 function makeLoader(cb) {

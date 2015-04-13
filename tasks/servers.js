@@ -4,13 +4,13 @@
 
 var	gutil = require('gulp-util'),
 	//debug = require('gulp-debug'),
-	utils = require('./project/utils'),
+	shared = require('./project/shared'),
 	gulp = require('gulp');
 
-gulp.task('serve', function() {
-	return utils.makeServe('.', global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.serve);
+gulp.task('serve:loader', function() {
+	return shared.makeServe('.', global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.serve);
 });
 
 gulp.task('serve:nightmare', function() {
-	return utils.makeServe(global.cfg.folders.template +'/'+ global.cfg.loader.folders.build, '', global.cfg.ip, global.cfg.ports.nightmare);
+	return shared.makeServe(global.cfg.folders.template +'/'+ global.cfg.loader.folders.build, '', global.cfg.ip, global.cfg.ports.nightmare);
 });

@@ -9,36 +9,33 @@ var gutil = require('gulp-util'),
 	gulp = require('gulp');
 
 //alias:
-gulp.task('default', ['build']);
-gulp.task('css', ['css:loader']);
-gulp.task('config', ['make:config']);
-gulp.task('full',['build:full']);
-gulp.task('test',['test:loader']);
+gulp.task('default',	['build:loader']);
+gulp.task('config',		['make:config']);
+gulp.task('full:loader',['build:loader:full']);
 
-gulp.task('build:full', function (cb) {
+gulp.task('build:loader:full', function (cb) {
 	runSequence(
 		'make:base',
-		'build',
+		'build:loader',
 	cb);
 });
 
-gulp.task('build',function (cb) {
+gulp.task('build:loader',function (cb) {
 	runSequence(
-		'remove:build',
+		'remove:loader:build',
 		'make:loader',
-		'remove:temp',
+		'remove:loader:temp',
 	cb);
 });
 
 gulp.task('release', function (cb) {
 	if (!global.cfg.loader.release) {
 		console.logRed('Variable "release" in project-config on "false", you will change it if you want a release');
-		cb();
 		utils.exit(1);
 	}
 
 	runSequence(
-		'build:full',
+		'build:loader:full',
 		'test:loader',
 	cb);
 });
