@@ -1,5 +1,6 @@
 {
 	"name": "app name",
+	"appCode": "appCode",
 	"version": "0.0.0",
 	"os": "win",
 	"ip": "127.0.0.1",
@@ -10,6 +11,8 @@
 	"cordova": false,
 	"isCordovaDevice": false,
 	"debugZoneActive": false,
+
+	"AppCacheFileName": ".cache",
 
 	"folders":{
 		"app": "template",

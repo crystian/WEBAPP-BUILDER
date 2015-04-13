@@ -32,7 +32,7 @@ function loaderReplaces(file) {
 		replacement: r[1],
 		paths: [file],
 		recursive: false,
-		silent: false
+		silent: true
 	});
 }
 

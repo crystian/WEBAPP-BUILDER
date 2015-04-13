@@ -20,12 +20,11 @@ var gutil = require('gulp-util'),
 	rename = require('gulp-rename'),
 	sprite = require('gulp-sprite-generator'),
 	imagemin = require('gulp-imagemin'),
-	imageminOptipng = require('imagemin-optipng'),
 	pngquant = require('imagemin-pngquant'),
 	StreamQueue = require('streamqueue'),
-	//gm = require('gulp-gm'),
 	aux = require('./auxiliar'),
 	shared = require('./shared'),
+	manifest = require('gulp-manifest'),
 	commons = require('../commons'),
 	LZString = require('../../vendors/lz-string/libs/lz-string'),
 	gulp = require('gulp');
@@ -76,6 +75,38 @@ exports.runPreprocessors = function(appsJson) {
 
 exports.runMagic = function(appsJson, options) {
 	return runEachApp(appsJson, doMagic, options);
+};
+
+exports.genAppCache = function() {
+	var fileName = global.cfg.appCode + global.cfg.AppCacheFileName;
+
+	var appFile = gulp.src([global.cfg.folders.build+ '/**/*'])
+		.pipe(manifest({
+			hash: true,
+			preferOnline: false,
+			network: ['http://*', 'https://*', '*'],
+			filename: fileName,
+			exclude: fileName
+		}))
+		.pipe(gulp.dest(global.cfg.folders.build));
+
+	var htmlFile = gulp.src(global.cfg.folders.build +'/'+ global.cfg.loader.filesDest.index)
+		.pipe(replace('<html>','<html manifest="'+ fileName +'">'))
+		.pipe(gulp.dest(global.cfg.folders.build));
+
+
+	return aux.merge(appFile, htmlFile);
+};
+
+exports.optimizeImages = function() {
+	return gulp.src(global.cfg.folders.build+ '/img/**/*')
+		.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
+		.pipe(imagemin({
+			progressive: true,
+			svgoPlugins: [{removeViewBox: false}],
+			use: [pngquant()]
+		}))
+		.pipe(gulp.dest(global.cfg.folders.build+ '/img'));
 };
 
 exports.runJsonify = function(appsJson, options) {
@@ -294,7 +325,9 @@ function _minificate(stream, file, type, appName){
 	stream = aux.replace(stream, file.replaces.pre);
 
 	if (_handle[type]) {
-		console.log('File to process:', file.file);
+		if(gutil.env.debug){
+			console.logGreen('File to process: '+ file.file);
+		}
 		stream = _handle[type](stream, file, appName);
 	} else {
 		console.logRed('Type not found on _minificate, file: '+ file.file);
@@ -340,10 +373,8 @@ var _handle = {
 					engineOpts: {
 						imagemagick: false
 					}
-				}))
-			;
+				}));
 
-			//spriteOutput.css.pipe(gulp.dest('./build/sprite'));
 			spriteOutput.img
 				//.pipe(imageminOptipng({optimizationLevel: 3})())
 				//.pipe(imagemin({
@@ -357,7 +388,7 @@ var _handle = {
 				//	return gmfile;
 				//}))
 
-				.pipe(gulp.dest('./build/img'));
+				.pipe(gulp.dest(global.cfg.folders.build +'/img'));
 
 			stream = spriteOutput.css.pipe(replace('assets/',''));
 		}

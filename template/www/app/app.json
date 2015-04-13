@@ -63,7 +63,7 @@
 			"path": "www/app/data",
 			"replaces": {
 				"pre": [
-					["loader.cfg.appRoot +'/www/app/data/local.json'","'/data/local.json'"]
+					["loader.cfg.appRoot +'/www/app/data/local.json'","'data/local.json'"]
 				]
 			}
 		},

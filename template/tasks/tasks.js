@@ -27,6 +27,8 @@ gulp.task('build:full', function (cb) {
 		'get:loader',
 		'css:app',
 		'build',
+		'optimizeImages',
+		'genAppCache',
 		cb);
 });
 
@@ -88,6 +90,13 @@ gulp.task('runMagic', ['make:ngTemplate'], function (){
 	return engine.runMagic(global.cfg.folders.www +'/apps.json');
 });
 
+gulp.task('optimizeImages', function (){
+	return engine.optimizeImages();
+});
+
+gulp.task('genAppCache', function (){
+	return engine.genAppCache();
+});
 
 gulp.task('get:loader', function(cb){
 	shared.getLoader(cb);
