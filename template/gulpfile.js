@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 	shared = require('../tasks/project/shared.js');
 	utils = require('../tasks/project/utils.js');
 
-//require('./LOADER/tasks/commons');
+require('time-require');
 requireDir('./tasks');
 
 //merge between default and specify:

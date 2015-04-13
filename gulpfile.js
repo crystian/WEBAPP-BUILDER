@@ -12,6 +12,7 @@ var gulp = require('gulp'),
 	extend = require('extend'),
 	utils = require('./tasks/project/utils.js');
 
+require('time-require');
 requireDir('./tasks');
 
 

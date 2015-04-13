@@ -23,6 +23,7 @@ var gutil = require('gulp-util'),
 	pngquant = require('imagemin-pngquant'),
 	StreamQueue = require('streamqueue'),
 	aux = require('./auxiliar'),
+	cache = require('gulp-cache'),
 	shared = require('./shared'),
 	manifest = require('gulp-manifest'),
 	commons = require('../commons'),
@@ -77,7 +78,18 @@ exports.runMagic = function(appsJson, options) {
 	return runEachApp(appsJson, doMagic, options);
 };
 
+exports.runJsonify = function(appsJson, options) {
+	return runEachApp(appsJson, runJsonify, options);
+};
+
+exports.clearCache =function (done) {
+	return cache.clearAll(done);
+};
+
 exports.genAppCache = function() {
+
+	if(!global.cfg.release){return;}
+
 	var fileName = global.cfg.appCode + global.cfg.AppCacheFileName;
 
 	var appFile = gulp.src([global.cfg.folders.build+ '/**/*'])
@@ -101,16 +113,12 @@ exports.genAppCache = function() {
 exports.optimizeImages = function() {
 	return gulp.src(global.cfg.folders.build+ '/img/**/*')
 		.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
-		.pipe(imagemin({
+		.pipe(cache(imagemin({
 			progressive: true,
 			svgoPlugins: [{removeViewBox: false}],
 			use: [pngquant()]
-		}))
+		})))
 		.pipe(gulp.dest(global.cfg.folders.build+ '/img'));
-};
-
-exports.runJsonify = function(appsJson, options) {
-	return runEachApp(appsJson, runJsonify, options);
 };
 
 

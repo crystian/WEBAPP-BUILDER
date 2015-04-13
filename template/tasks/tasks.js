@@ -58,6 +58,10 @@ gulp.task('make:ngTemplate', function () {
 	return stream;
 });
 
+gulp.task('clearCache', function (done) {
+	return engine.clearCache(done);
+});
+
 gulp.task('copy:fonts', function (){
 	return gulp.src([
 		'vendors/theme/assets/font-awesome/fonts/**/*',
