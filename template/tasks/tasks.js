@@ -4,7 +4,6 @@
 
 var gutil = require('gulp-util'),
 	debug = require('gulp-debug'),
-	engine = require('../../tasks/project/engine.js'),
 	shared = require('../../tasks/project/shared.js'),
 	spawn = require('child_process').spawn,
 	clean = require('gulp-clean'),
@@ -58,10 +57,6 @@ gulp.task('make:ngTemplate', function () {
 	return stream;
 });
 
-gulp.task('clearCache', function (done) {
-	return engine.clearCache(done);
-});
-
 gulp.task('copy:fonts', function (){
 	return gulp.src([
 		'vendors/theme/assets/font-awesome/fonts/**/*',
@@ -69,7 +64,6 @@ gulp.task('copy:fonts', function (){
 	]).pipe(gulp.dest(global.cfg.folders.build + '/fonts'));
 
 });
-
 gulp.task('copy:imgs', function (){
 	return gulp.src([
 		global.cfg.folders.www +'/landing/img/**/*',
@@ -78,36 +72,11 @@ gulp.task('copy:imgs', function (){
 	]).pipe(gulp.dest(global.cfg.folders.build +'/img'));
 
 });
-
 gulp.task('copy:data', function (){
 	return gulp.src([
 		global.cfg.folders.www +'/app/data/local.json'
 	]).pipe(gulp.dest(global.cfg.folders.build +'/data'));
 
-});
-
-gulp.task('build:fast', ['runMagic'], function (){
-	return engine.runJsonify(global.cfg.folders.www +'/apps.json');
-});
-
-gulp.task('runMagic', ['make:ngTemplate'], function (){
-	return engine.runMagic(global.cfg.folders.www +'/apps.json');
-});
-
-gulp.task('optimizeImages', function (){
-	return engine.optimizeImages();
-});
-
-gulp.task('genAppCache', function (){
-	return engine.genAppCache();
-});
-
-gulp.task('get:loader', function(cb){
-	shared.getLoader(cb);
-});
-
-gulp.task('serve:build', ['build'], function() {
-	return utils.makeServe(global.cfg.folders.build, '', global.cfg.ip, global.cfg.ports.build);
 });
 
 
@@ -120,15 +89,6 @@ gulp.task('serve:api', function() {
 		}
 	});
 });
-
-
-gulp.task('css:app', function (){
-	return engine.runPreprocessors(global.cfg.folders.www +'/apps.json');
-});
-gulp.task('cssw', function() {
-	gulp.watch([global.cfg.folders.www + '/**/*.scss'], ['css:app']);
-});
-
 
 gulp.task('remove:build', function() {
 	//no borrar la carpeta build, da errores de sincro

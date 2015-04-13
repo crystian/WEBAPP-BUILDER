@@ -19,7 +19,7 @@ var questions = [];
 
 console.logGreen('                                                                                               ');
 console.logGreen('  ╔═════════════════════════════════════════════════════════════════════════════════════════╗  ');
-console.logGreen('  ║ * Welcome to instalation of POWER-LOADER, please read the readme.md before install it * ║  ');
+console.logGreen('  ║ * Welcome to instalation of APP FACTORY!, please read the readme.md before install it * ║  ');
 console.logGreen('  ╚═════════════════════════════════════════════════════════════════════════════════════════╝  ');
 console.logGreen('                                                                                               ');
 console.log('');

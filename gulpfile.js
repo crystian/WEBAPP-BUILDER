@@ -12,7 +12,7 @@ var gulp = require('gulp'),
 	extend = require('extend'),
 	utils = require('./tasks/project/utils.js');
 
-require('time-require');
+//require('time-require');
 requireDir('./tasks');
 
 
@@ -36,6 +36,8 @@ try{
 		utils.fileExist(fileApp) && require(fileApp),
 		utils.fileExist(fileAppLocal) && require(fileAppLocal)
 	);
+
+	global.cfg.folders.app = appName;//force template app
 
 	global.cfg.pkg = require('./package.json');
 
