@@ -21,7 +21,7 @@ try{
 	global.cfg = _.merge({},
 		require('../'+ fileNameConfig),
 		require('./'+ fileNameConfig),
-		utils.fileExist(fileNameLocal) && require(fileNameLocal)
+		utils.fileExist(fileNameLocal) && require('./'+ fileNameLocal)
 	);
 	//console.log(global.cfg);
 	global.cfg.appRoot = __dirname;

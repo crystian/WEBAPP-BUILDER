@@ -6,6 +6,7 @@
 
 	"release": true,
 	"compress": true,
+	"cordova": false,
 	"loader":{
 	"release": true,
 		"loading": 6
