@@ -4,27 +4,28 @@
 
 var gulp = require('gulp'),
 	requireDir = require('require-dir'),
-	extend = require('extend'),
+	_ = require('lodash'),
 	gutil = require('gulp-util'),
 	utils = require('../tasks/project/utils.js');
 
-require('time-require');
+//require('time-require');
 require('../tasks/project/shared.js');
+require('../tasks/project/project.js');
 requireDir('./tasks');
 
 //merge between default and specify:
 try{
-	var fileNameLocal = './project-config-local.json';
+	var fileNameLocal = 'project-config-local.json',
+		fileNameConfig = 'project-config.json';
 
-	global.cfg = extend(true, {},
-		require('../project-config.json'),
-		utils.fileExist(fileNameLocal) && require(fileNameLocal),
-		require('./project-config.json')
+	global.cfg = _.merge({},
+		require('../'+ fileNameConfig),
+		require('./'+ fileNameConfig),
+		utils.fileExist(fileNameLocal) && require(fileNameLocal)
 	);
-
+	//console.log(global.cfg);
 	global.cfg.appRoot = __dirname;
-	//global.cfg.appCode = shared.getDirectoryName(__dirname);
-	//console.logRed(global.cfg.appCode);
+
 	global.cfg.pkg = require('./package.json');
 
 } catch (e){

@@ -6,18 +6,15 @@ var gutil = require('gulp-util'),
 	debug = require('gulp-debug'),
 	shared = require('../../tasks/project/shared.js'),
 	spawn = require('child_process').spawn,
-	clean = require('gulp-clean'),
 	fs = require('fs-extra'),
 	templateCache = require('gulp-angular-templatecache'),
 	runSequence = require('run-sequence'),
 	node,
 	gulp = require('gulp');
 
-//alias:
+//alias
 gulp.task('default', ['build']);
-gulp.task('full', ['build:full']);
-gulp.task('css', ['css:app']);
-gulp.task('loader', ['get:loader']);
+gulp.task('full',	['build:full']);
 
 
 gulp.task('build:full', function (cb) {
@@ -88,19 +85,4 @@ gulp.task('serve:api', function() {
 			gulp.log('Error detected, waiting for changes...');
 		}
 	});
-});
-
-gulp.task('remove:build', function() {
-	//no borrar la carpeta build, da errores de sincro
-	return gulp.src([
-		global.cfg.folders.build
-	], {read: false})
-		.pipe(clean());
-});
-
-gulp.task('remove:temp', function() {
-	return gulp.src([
-		global.cfg.folders.temp
-	], {read: false})
-		.pipe(clean());
 });

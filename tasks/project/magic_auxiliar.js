@@ -7,11 +7,11 @@ var gutil = require('gulp-util'),
 	//debug = require('gulp-debug'),
     utils = require('./utils'),
 	replace = require('gulp-replace'),
-	merge = require('merge-stream'),
+	mergeStream = require('merge-stream'),
 	gulp = require('gulp');
 
 exports.merge = function(stream, newStream) {
-	return (stream === undefined) ? newStream : merge(stream, newStream);
+	return (stream === undefined) ? newStream : mergeStream(stream, newStream);
 };
 
 exports.isNotActive = function(file) {

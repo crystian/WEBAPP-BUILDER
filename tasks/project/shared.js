@@ -10,17 +10,29 @@ var gutil = require('gulp-util'),
 	utils = require('./utils.js'),
 	htmlmin = require('gulp-htmlmin'),
 	gif = require('gulp-if'),
+	webserver = require('gulp-webserver'),
 	strip = require('gulp-strip-comments'),
 	gulp = require('gulp');
 
 
-exports.getLoader = function(cb) {
-	makeLoader(function () {
-		copyLoader(cb);
-	});
+exports.makeServe = function(folder, path, ip, port) {
+	path = (path) ? path +'/': '';
+	console.logGreen('Remember, this is the url: http://'+ip+':'+port+'/'+ path);
+
+	return gulp.src(folder)
+		.pipe(webserver({
+			host: ip,
+			port: port,
+			//fallback: 'index.html',
+			//directoryListing: true,
+			livereload: false,
+			open: false
+		}));
+
 };
 
-function copyLoader(cb){
+
+exports.copyLoader = function(cb){
 	var pathSrc = '../' + global.cfg.loader.folders.build,
 		pathDest = './'+ global.cfg.folders.build;
 
@@ -30,35 +42,19 @@ function copyLoader(cb){
 		fs.copySync(pathSrc +'/assets', pathDest +'/');
 	}
 
-	loaderReplaces(pathDest +'/'+ global.cfg.loader.filesDest.index);
+	_loaderReplaces(pathDest +'/'+ global.cfg.loader.filesDest.index);
 
 	if (global.cfg.cordova) {
 		fs.copySync(pathSrc +'/'+global.cfg.loader.filesDest.indexCordova, pathDest +'/'+ global.cfg.loader.filesDest.indexCordova);
 	}
 
 	cb();
-}
+};
 
-function loaderReplaces(file) {
-	var r =	['\"oneRequest\": false,', '\"oneRequest\": true,'];
-
-	if(global.cfg.loader.release){
-		r =	['oneRequest:!1,', 'oneRequest:1,'];
-	}
-
-	replace({
-		regex: r[0],
-		replacement: r[1],
-		paths: [file],
-		recursive: false,
-		silent: true
-	});
-}
-
-function makeLoader(cb) {
+exports.makeLoader = function(cb) {
 	console.logGreen('Making loader ...');
 
-	exec('gulp full', {cwd: '../'},
+	exec('gulp full:loader', {cwd: '../'},
 		function (error, stdout, stderr) {
 
 			if (error || (stderr && stderr !== '')) {
@@ -78,13 +74,6 @@ function makeLoader(cb) {
 
 			cb();
 		});
-}
-
-exports.getDirectoryName = function(dirname) {
-	var fullPath = dirname;
-	var splitter = (global.cfg.os === 'win') ?	'\\' : '/';
-	var path = fullPath.split(splitter);
-	return path[path.length - 1];;
 };
 
 exports.htmlMin = function(stream){
@@ -99,3 +88,26 @@ exports.htmlMin = function(stream){
 
 	return stream;
 };
+
+//exports.getDirectoryName = function(dirname) {
+//	var fullPath = dirname;
+//	var splitter = (global.cfg.os === 'win') ?	'\\' : '/';
+//	var path = fullPath.split(splitter);
+//	return path[path.length - 1];;
+//};
+
+function _loaderReplaces(file) {
+	var r =	['\"oneRequest\": false,', '\"oneRequest\": true,'];
+
+	if(global.cfg.loader.release){
+		r =	['oneRequest:!1,', 'oneRequest:1,'];
+	}
+
+	replace({
+		regex: r[0],
+		replacement: r[1],
+		paths: [file],
+		recursive: false,
+		silent: true
+	});
+}

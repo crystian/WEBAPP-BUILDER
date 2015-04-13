@@ -9,22 +9,12 @@ var gutil = require('gulp-util'),
 	jshint = require('gulp-jshint'),
 	chalk = require('chalk'),
 	fs = require('fs-extra'),
-	aux = require('./auxiliar'),
 	utils = require('./utils'),
-	webserver = require('gulp-webserver'),
+	path = require('path'),
 	gulp = require('gulp');
 
 
 //COMMONS between project and loader:
-process.on('uncaughtException', function(err){
-	if(typeof err === 'string') err = {message:err};
-	console.logRed('uncaughtException: ' + err.message);
-	if (gutil.env.debug) {
-		console.logRed(err.stack);
-	}
-	this.exit(1); // exit with error
-});
-
 console.logWarn = function (m) {
 	console.log(chalk.black.bgYellow(m));
 };
@@ -42,20 +32,11 @@ exports.fileExist = function(fileName){
 };
 
 exports.getExtensionFile = function(s) {
-	var arr = s.split('.');
-	if (arr.length === 0) {
-		return s;
-	}
-	return arr[arr.length - 1];
+	return path.extname(s).replace('.','');
 };
 
 exports.getFileName = function(s) {
-	var arr = s.split('.');
-	if (arr.length === 0) {
-		return s;
-	}
-	arr.splice(arr.length-1,1);
-	return arr.join('.');
+	return path.basename(s, path.extname(s));
 };
 
 exports.setExtensionFilename = function(s, extension) {
@@ -83,22 +64,14 @@ exports.setPreExtensionFilename = function(s, preExtension) {
 	return arr.join('.');
 };
 
-exports.makeServe = function(folder, path, ip, port) {
-
-	path = (path) ? path +'/': '';
-	console.logGreen('Remember, this is the url: http://'+ip+':'+port+'/'+ path);
-
-	return gulp.src(folder)
-		.pipe(webserver({
-			host: ip,
-			port: port,
-			//fallback: 'index.html',
-			//directoryListing: true,
-			livereload: false,
-			open: false
-		}));
-
-};
+process.on('uncaughtException', function(err){
+	if(typeof err === 'string') err = {message:err};
+	console.logRed('uncaughtException: ' + err.message);
+	if (gutil.env.debug) {
+		console.logRed(err.stack);
+	}
+	this.exit(1); // exit with error
+});
 
 exports.exit = function (n){
 	process.exit(n);

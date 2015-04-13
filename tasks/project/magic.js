@@ -1,5 +1,8 @@
 /**
  * Created by Crystian on 3/16/2015.
+ *
+ * This is the engine, it do a lot of magic, intentionally all in the same file.
+ * Don't touch or you will dead! ... some day
  */
 
 var gutil = require('gulp-util'),
@@ -22,7 +25,7 @@ var gutil = require('gulp-util'),
 	imagemin = require('gulp-imagemin'),
 	pngquant = require('imagemin-pngquant'),
 	StreamQueue = require('streamqueue'),
-	aux = require('./auxiliar'),
+	aux = require('./magic_auxiliar'),
 	cache = require('gulp-cache'),
 	shared = require('./shared'),
 	manifest = require('gulp-manifest'),
@@ -99,10 +102,8 @@ exports.genAppCache = function() {
 		.pipe(replace('<html>','<html manifest="'+ fileName +'">'))
 		.pipe(gulp.dest(global.cfg.folders.build));
 
-
 	return aux.merge(appFile, htmlFile);
 };
-
 
 exports.optimizeImages = function() {
 	return gulp.src(global.cfg.folders.build +'/img/**/*')
@@ -114,7 +115,6 @@ exports.optimizeImages = function() {
 		})))
 		.pipe(gulp.dest(global.cfg.folders.build +'/img'));
 };
-
 exports.clearCache =function (done) {
 	return cache.clearAll(done);
 };
@@ -142,7 +142,7 @@ function runEachPreprocessors(url, appName){
 		streams = undefined;
 
 	for (; i < l; i++) {
-		var file =  _.assign(defaults.file, files[i]);
+		var file =  _.merge({}, defaults.file, files[i]);
 
 		if(aux.isNotActive(file) || file.minificated){continue;}
 
@@ -226,7 +226,7 @@ function doMagic(url, appName, options) {
 		streams = [];
 
 	for (; i < l; i++) {
-		var file =  _.assign(defaults.file, files[i]);
+		var file =  _.merge({}, defaults.file, files[i]);
 
 		if(aux.isNotActive(file)){continue;}
 

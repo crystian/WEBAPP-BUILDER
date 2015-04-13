@@ -22,7 +22,7 @@ try{
 		fileNameConfig = 'project-config.json';
 
 	//merge between default and specify:
-	global.cfg = _.merge(
+	global.cfg = _.merge({},
 		require('./'+ fileNameConfig),
 		utils.fileExist('./'+ fileNameLocal) && require('./'+ fileNameLocal)
 	);
