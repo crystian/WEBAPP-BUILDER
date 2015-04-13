@@ -50,7 +50,7 @@ gulp.task('make:ngTemplate', function () {
 
 	stream = stream.pipe(templateCache({
 			standalone: true,
-			root: '../'+ global.cfg.folders.app +'/www/'
+			root: '../'+ global.cfg.appCode +'/www/'
 		}))
 		.pipe(gulp.dest(global.cfg.folders.temp));
 

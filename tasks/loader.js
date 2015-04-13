@@ -64,7 +64,7 @@ gulp.task('make:loader', ['make:loader:js', 'make:loader:css', 'copy:bootstrap:f
 });
 
 //gulp.task('make:loader:files', [], function (cb) {
-//	//fs.copySync(global.cfg.folders.app +'/'+ global.cfg.folders.www, global.cfg.loader.folders.build);
+//	//fs.copySync(global.cfg.appCode +'/'+ global.cfg.folders.www, global.cfg.loader.folders.build);
 //	cb();
 //});
 

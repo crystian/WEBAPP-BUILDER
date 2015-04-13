@@ -17,18 +17,18 @@ requireDir('./tasks');
 
 
 try{
-	var fileNameLocal = './project-config-local.json';
+	var fileNameLocal = 'project-config-local.json';
 
 	//merge between default and specify:
 	global.cfg = extend(true, {},
 		require('./project-config.json'),
-		utils.fileExist(fileNameLocal) && require(fileNameLocal)
+		utils.fileExist('./'+ fileNameLocal) && require('./'+ fileNameLocal)
 	);
 
 	//get appName
-	var appName = global.cfg.folders.app,
+	var appName = global.cfg.appCode,
 		fileApp = './'+ appName +'/project-config.json',
-		fileAppLocal = './'+ appName +'/project-config-local.json';
+		fileAppLocal = './'+ appName +'/'+ fileNameLocal;
 
 	//merge between default and app:
 	global.cfg = extend(true, {},
@@ -37,11 +37,11 @@ try{
 		utils.fileExist(fileAppLocal) && require(fileAppLocal)
 	);
 
-	global.cfg.folders.app = appName;//force template app
+	global.cfg.appCode = appName;//force template app
 
 	global.cfg.pkg = require('./package.json');
 
-	global.cfg.appRoot = __dirname + '\\' + global.cfg.folders.app;
+	global.cfg.appRoot = __dirname + '\\' + global.cfg.appCode;
 
 } catch (e){
 	//console.logRed('Do you run installer?, There are some problems with project-config*, check those please');

@@ -111,14 +111,14 @@ exports.genAppCache = function() {
 };
 
 exports.optimizeImages = function() {
-	return gulp.src(global.cfg.folders.build+ '/img/**/*')
+	return gulp.src(global.cfg.folders.build +'/img/**/*')
 		.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
 		.pipe(cache(imagemin({
 			progressive: true,
 			svgoPlugins: [{removeViewBox: false}],
 			use: [pngquant()]
 		})))
-		.pipe(gulp.dest(global.cfg.folders.build+ '/img'));
+		.pipe(gulp.dest(global.cfg.folders.build +'/img'));
 };
 
 

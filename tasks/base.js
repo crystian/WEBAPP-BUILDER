@@ -61,8 +61,8 @@ gulp.task('make:config', function (cb) {
 	json.consoleError = global.cfg.consoleError;
 	json.firstApp = global.cfg.firstApp;
 	json.fastclick = !!(global.cfg.loader.bower.fastclick);
-	json.appRoot = '../'+ global.cfg.folders.app;
-	json.appWww = global.cfg.folders.app +'/'+ global.cfg.folders.www;
+	json.appRoot = '../'+ global.cfg.appCode;
+	json.appWww = global.cfg.appCode +'/'+ global.cfg.folders.www;
 
 	json.oneRequest = false;//flagOneRequest
 	json.phantom = false;//flagPhantom

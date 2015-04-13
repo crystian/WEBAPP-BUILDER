@@ -1,9 +1,9 @@
-.idea/workspace.xml
-bower.json
-build
-node_modules
-vendors
-.idea/shelf
-project-config-local.json
+/.idea/workspace.xml
+/bower.json
+/build
+/node_modules
+/vendors
+/.idea/shelf
+/project-config-local.json
 /.sass-cache
-app
+/app

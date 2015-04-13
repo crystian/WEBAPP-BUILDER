@@ -1,6 +1,6 @@
 {
 	"name": "app name",
-	"appCode": "appCode",
+	"appCode": "template",
 	"version": "0.0.0",
 	"os": "win",
 	"ip": "127.0.0.1",
@@ -15,7 +15,6 @@
 	"AppCacheFileName": ".cache",
 
 	"folders":{
-		"app": "template",
 		"template": "template",
 		"www": "www",
 		"build": "build",

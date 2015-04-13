@@ -23,8 +23,8 @@ try{
 	);
 
 	global.cfg.appRoot = __dirname;
-	//global.cfg.folders.app = shared.getDirectoryName(__dirname);
-	//console.logRed(global.cfg.folders.app);
+	//global.cfg.appCode = shared.getDirectoryName(__dirname);
+	//console.logRed(global.cfg.appCode);
 	global.cfg.pkg = require('./package.json');
 
 } catch (e){

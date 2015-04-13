@@ -34,8 +34,18 @@ var install = [{
 
 questions = questions.concat(install);
 
-var cordova = [{
+var appCode = [{
 	when: function(r) {return r.install;},
+	type: 'input',
+	name: 'appCode',
+	message: 'App Code (without spaces and simbols):',
+	default: 'APP'
+}];
+
+questions = questions.concat(appCode);
+
+var cordova = [{
+	when: function(r) {return r.appCode;},
 	type: 'confirm',
 	name: 'cordova',
 	message: 'Install cordova?',
@@ -105,30 +115,32 @@ inquirer.prompt(questions, function( answers ) {
 	//console.dir(answers);
 
 	if (answers.install){
-		fs.copySync(cfg.app.folders.template, '../');
-		fs.outputJSONSync('../project-config-local.json',{});
-		if (answers.cordova) {
-			console.log(chalk.black.bgYellow('Cordova is instaling...'));
+		fs.copySync(cfg.folders.template, answers.appCode);
+		fs.outputJSONSync('project-config-local.json',{});
+		fs.outputJSONSync(answers.appCode +'/project-config-local.json',{});
+		if (answers.cordova){
+			console.log(chalk.black.bgYellow('Cordova project is generating...'));
 
-			exec('cordova create '+cfg.app.folders.cordova+' '+ answers.domain +' '+ answers.main,{cwd:'../'+ cfg.app.folders.app +'/'},
+			exec('cordova create '+ cfg.folders.cordova +' '+ answers.domain +' '+ answers.main, {cwd: answers.appCode +'/'},
 				function (error, stdout, stderr) {
 
 				if (error !== null) {
 					console.logRed(stdout);
 					console.logRed('stderr: ' + stderr);
 					console.logRed('exec error: ' + error);
+					console.logRed('Is Cordova installed?');
 				} else {
 					console.logGreen(stdout);
 
-					var packageJson = '../package.json';
-					var pkg = require(packageJson);
+					var packageJson = answers.appCode +'/package.json';
+					var pkg = require('./'+ packageJson);
 					pkg.domain = answers.domain;
 					pkg.mainClass = answers.main;
-					fs.outputJSONSync(packageJson,pkg);
+					fs.outputJSONSync(packageJson, pkg);
 
-					installCordovaPl('platform', answers.platforms, function () {
+					installCordovaPl('platform', answers.platforms, answers.appCode, function () {
 						if(answers.platforms.length>0){
-							installCordovaPl('plugin', answers.plugins, finalCordova);
+							installCordovaPl('plugin', answers.plugins, answers.appCode, finalCordova);
 						}
 					});
 				}
@@ -139,9 +151,9 @@ inquirer.prompt(questions, function( answers ) {
 });
 
 
-function installCordovaPl(text, pl, cb){/* plugins and platforms */
+function installCordovaPl(text, pl, appCode, cb){/* plugins and platforms */
 	if (pl.length>0){
-		exec('cordova '+ text +' add '+ pl.join(' '), {cwd:'../'+ cfg.app.folders.app +'/'+cfg.app.folders.cordova},
+		exec('cordova '+ text +' add '+ pl.join(' '), {cwd: appCode +'/'+cfg.folders.cordova},
 			function (error, stdout, stderr) {
 
 				if (error !== null) {
@@ -151,15 +163,15 @@ function installCordovaPl(text, pl, cb){/* plugins and platforms */
 				} else {
 					console.logGreen(stdout);
 				}
-				cb();
+				cb(appCode);
 			});
 	} else {
 		cb();
 	}
 }
 
-function finalCordova(){
-	var www = '../' + cfg.app.folders.app + '/' + cfg.app.folders.cordova + '/www';
+function finalCordova(appCode){
+	var www = appCode + '/' + cfg.folders.cordova + '/www';
 	fs.deleteSync(www);
 	fs.mkdirsSync(www);
 }
