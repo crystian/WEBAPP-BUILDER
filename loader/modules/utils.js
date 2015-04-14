@@ -114,26 +114,7 @@ loader.utils = (function() {
 		}
 
 		console.info('multiple request!');
-/*
-		//modo dev
-		var path = '../';
-		path += loader.cfg.projectCode +'/';
-		path += loader.cfg.www +'/';
-		path += appName +'/';
-*/
-/*
-		//buildeado local (debug and release:)
-		var path = '../';
-		//path += loader.cfg.projectCode +'/';
-		path += loader.cfg.www +'/';
-		path += appName +'/';
-		*/
-		//buildeado local (debug and release:)
-		var path = '../';
-		//path += loader.cfg.projectCode +'/';
-		path += loader.cfg.www +'/';
-		//path += appName +'/';
-
+		var path = '../'+ loader.cfg.projectCode +'/'+ loader.cfg.www +'/'+ appName +'/';
 
         return requestJson(path +'app.json').then(function (data) {
 			data = data.files;

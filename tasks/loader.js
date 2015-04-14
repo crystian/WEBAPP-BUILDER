@@ -45,6 +45,12 @@ gulp.task('make:loader', ['make:loader:js', 'make:loader:css', 'copy:bootstrap:f
 			version: global.cfg.version,
 			site: global.cfg.site})))
 		.pipe(gif(global.cfg.loader.release, footer(global.cfg.loader.text.footer.join('\n'))))
+
+		.pipe(gif(global.cfg.loader.release,
+			replace('oneRequest:!1,', 'oneRequest:1,'),
+			replace('"oneRequest": false,', '"oneRequest": true,')
+		))
+
 		.pipe(gulp.dest(global.cfg.loader.folders.build));
 
 	if(global.cfg.cordova){
@@ -57,10 +63,6 @@ gulp.task('make:loader', ['make:loader:js', 'make:loader:css', 'copy:bootstrap:f
 		.pipe(gif(global.cfg.loader.release,
 			replace(',isCordovaDevice:!1,', ',isCordovaDevice:1,'),
 			replace('"isCordovaDevice": false,', '"isCordovaDevice": true,')
-		))
-		.pipe(gif(global.cfg.loader.release,
-			replace('oneRequest:!1,', 'oneRequest:1,'),
-			replace('"oneRequest": false,', '"oneRequest": true,')
 		))
 		.pipe(gulp.dest(global.cfg.loader.folders.build));
 	}

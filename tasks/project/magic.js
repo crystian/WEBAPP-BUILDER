@@ -113,7 +113,7 @@ exports.optimizeImages = function() {
 			svgoPlugins: [{removeViewBox: false}],
 			use: [pngquant()]
 		})))
-		.pipe(gulp.dest(global.cfg.folders.build +'/img'));
+		.pipe(gulp.dest(global.cfg.folders.build + '/img'));
 };
 exports.clearCache =function (done) {
 	return cache.clearAll(done);
