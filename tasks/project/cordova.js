@@ -11,7 +11,7 @@ var gutil = require('gulp-util'),
 	clean = require('gulp-clean'),
 	gulp = require('gulp');
 
-gulp.task('copy:www:cordova', ['remove:cordova:www','build:full'], function () {
+gulp.task('copy:www:cordova', ['remove:cordova:www','full:app'], function () {
 	if(global.cfg.cordova === false || !utils.fileExist(global.cfg.folders.build +'/'+ global.cfg.loader.filesDest.indexCordova)){
 		console.logRed('Remember set var cordova on true, and it must create '+ global.cfg.loader.filesDest.indexCordova +' file');
 		utils.exit(1);

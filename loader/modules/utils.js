@@ -121,12 +121,18 @@ loader.utils = (function() {
 		path += loader.cfg.www +'/';
 		path += appName +'/';
 */
-
+/*
 		//buildeado local (debug and release:)
 		var path = '../';
 		//path += loader.cfg.projectCode +'/';
 		path += loader.cfg.www +'/';
 		path += appName +'/';
+		*/
+		//buildeado local (debug and release:)
+		var path = '../';
+		//path += loader.cfg.projectCode +'/';
+		path += loader.cfg.www +'/';
+		//path += appName +'/';
 
 
         return requestJson(path +'app.json').then(function (data) {

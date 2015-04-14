@@ -11,16 +11,15 @@ var gutil = require('gulp-util'),
 //alias:
 gulp.task('default',	['build:loader']);
 gulp.task('config',		['make:config']);
-gulp.task('full:loader',['build:loader:full']);
 
-gulp.task('build:loader:full', function (cb) {
+gulp.task('full:loader', function (cb) {
 	runSequence(
 		'make:base',
 		'build:loader',
 	cb);
 });
 
-gulp.task('build:loader',function (cb) {
+gulp.task('build:loader', function (cb) {
 	runSequence(
 		'remove:loader:build',
 		'make:loader',

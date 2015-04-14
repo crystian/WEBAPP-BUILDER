@@ -33,5 +33,4 @@ try{
 	console.log('Do you run installer?, There are some problems with gulp-config*, check those please');
 	utils.exit(1);
 }
-
 //TASK ON tasks.js

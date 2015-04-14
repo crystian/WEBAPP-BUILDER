@@ -3,7 +3,7 @@
 */
 
 var gutil = require('gulp-util'),
-	//debug = require('gulp-debug'),
+	debug = require('gulp-debug'),
 	commons = require('./commons'),
 	gif = require('gulp-if'),
 	htmlreplace = require('gulp-html-replace'),
@@ -52,10 +52,15 @@ gulp.task('make:loader', ['make:loader:js', 'make:loader:css', 'copy:bootstrap:f
 		This is ok, because it make another file equals to index but one change,
 		I prefer it than run again all process to make other file
 		*/
-		stream.pipe(rename(global.cfg.loader.filesDest.indexCordova))
+		stream = stream.pipe(rename(global.cfg.loader.filesDest.indexCordova))
+		//.pipe(debug({verbose: true}))
 		.pipe(gif(global.cfg.loader.release,
 			replace(',isCordovaDevice:!1,', ',isCordovaDevice:1,'),
 			replace('"isCordovaDevice": false,', '"isCordovaDevice": true,')
+		))
+		.pipe(gif(global.cfg.loader.release,
+			replace('oneRequest:!1,', 'oneRequest:1,'),
+			replace('"oneRequest": false,', '"oneRequest": true,')
 		))
 		.pipe(gulp.dest(global.cfg.loader.folders.build));
 	}

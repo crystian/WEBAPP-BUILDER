@@ -7,7 +7,8 @@
 
 //REMEMBER!: All public TASKS ARE ON tasks.js
 
-var gulp = require('gulp'),
+var gutil = require('gulp-util'),
+	gulp = require('gulp'),
 	requireDir = require('require-dir'),
 	extend = require('extend'),
 	_ = require('lodash'),
@@ -22,24 +23,27 @@ try{
 		fileNameConfig = 'project-config.json';
 
 	//merge between default and specify:
+	var fileConfig = require('./'+ fileNameConfig),
+		//get appName
+		appNameTemplate = fileConfig.projectCode;
+
 	global.cfg = _.merge({},
-		require('./'+ fileNameConfig),
+		fileConfig,
 		utils.fileExist('./'+ fileNameLocal) && require('./'+ fileNameLocal)
 	);
 
 	//get appName
-	var appName = global.cfg.projectCode,
-		fileApp = './'+ appName +'/'+ fileNameConfig,
-		fileAppLocal = './'+ appName +'/'+ fileNameLocal;
+	var fileApp = global.cfg.projectCode +'/'+ fileNameConfig,
+		fileAppLocal = global.cfg.projectCode +'/'+ fileNameLocal;
 
 	//merge between default and app:
 	global.cfg = _.merge(
 		global.cfg,
-		utils.fileExist(fileApp) && require(fileApp),
-		utils.fileExist(fileAppLocal) && require(fileAppLocal)
+		utils.fileExist(fileApp) && require('./'+ fileApp),
+		utils.fileExist(fileAppLocal) && require('./'+ fileAppLocal)
 	);
 
-	global.cfg.projectCode = appName;//force template app
+	//global.cfg.projectCode = appNameTemplate;//force template app
 
 	global.cfg.pkg = require('./package.json');
 

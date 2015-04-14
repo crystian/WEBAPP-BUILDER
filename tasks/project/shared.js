@@ -34,7 +34,7 @@ exports.makeServe = function(folder, path, ip, port) {
 
 exports.copyLoader = function(cb){
 	var pathSrc = '../' + global.cfg.loader.folders.build,
-		pathDest = './'+ global.cfg.folders.build;
+		pathDest = global.cfg.folders.build;
 
 	fs.copySync(pathSrc +'/'+ global.cfg.loader.filesDest.index, pathDest +'/'+ global.cfg.loader.filesDest.index);
 
@@ -42,10 +42,8 @@ exports.copyLoader = function(cb){
 		fs.copySync(pathSrc +'/assets', pathDest +'/');
 	}
 
-	_loaderReplaces(pathDest +'/'+ global.cfg.loader.filesDest.index);
-
 	if (global.cfg.cordova) {
-		fs.copySync(pathDest +'/'+global.cfg.loader.filesDest.index, pathDest +'/'+ global.cfg.loader.filesDest.indexCordova);
+		fs.copySync(pathSrc +'/'+global.cfg.loader.filesDest.indexCordova, pathDest +'/'+ global.cfg.loader.filesDest.indexCordova);
 	}
 
 	cb();
@@ -54,7 +52,7 @@ exports.copyLoader = function(cb){
 exports.makeLoader = function(cb) {
 	console.logGreen('Making loader ...');
 
-	exec('gulp full:loader', {cwd: '../'},
+	exec('gulp full:loader --appName '+ global.cfg.projectCode, {cwd: '../'},
 		function (error, stdout, stderr) {
 
 			if (error || (stderr && stderr !== '')) {
@@ -88,26 +86,3 @@ exports.htmlMin = function(stream){
 
 	return stream;
 };
-
-//exports.getDirectoryName = function(dirname) {
-//	var fullPath = dirname;
-//	var splitter = (global.cfg.os === 'win') ?	'\\' : '/';
-//	var path = fullPath.split(splitter);
-//	return path[path.length - 1];;
-//};
-
-function _loaderReplaces(file) {
-	var r =	['\"oneRequest\": false,', '\"oneRequest\": true,'];
-
-	if(global.cfg.loader.release){
-		r =	['oneRequest:!1,', 'oneRequest:1,'];
-	}
-
-	replace({
-		regex: r[0],
-		replacement: r[1],
-		paths: [file],
-		recursive: false,
-		silent: true
-	});
-}

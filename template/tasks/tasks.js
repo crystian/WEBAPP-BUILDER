@@ -13,11 +13,11 @@ var gutil = require('gulp-util'),
 	gulp = require('gulp');
 
 //alias
-gulp.task('default', ['build']);
-gulp.task('full',	['build:full']);
+gulp.task('default',['build']);
+gulp.task('full',	['full:app']);
 
 
-gulp.task('build:full', function (cb) {
+gulp.task('full:app', function (cb) {
 	runSequence(
 		'remove:build',
 		'get:loader',

@@ -116,8 +116,9 @@ inquirer.prompt(questions, function( answers ) {
 
 	if (answers.install){
 		fs.copySync(cfg.folders.template, answers.appCode);
-		fs.outputJSONSync('project-config-local.json',{appCode: answers.appCode});
-		fs.outputJSONSync(answers.appCode+ '/project-config.json', {appCode: answers.appCode});
+		var op = {projectCode: answers.appCode, cordova: answers.cordova};
+		fs.outputJSONSync('project-config-local.json',op);
+		fs.outputJSONSync(answers.appCode+ '/project-config.json', op);
 		fs.outputJSONSync(answers.appCode +'/project-config-local.json',{});
 		if (answers.cordova){
 			console.log(chalk.black.bgYellow('Cordova project is generating...'));
