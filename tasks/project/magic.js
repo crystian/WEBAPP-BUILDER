@@ -86,7 +86,7 @@ exports.runJsonify = function(appsJson, options) {
 exports.genAppCache = function() {
 	if(!global.cfg.release){return;}
 
-	var fileName = global.cfg.appCode + global.cfg.AppCacheFileName;
+	var fileName = global.cfg.projectCode + global.cfg.AppCacheFileName;
 
 	var appFile = gulp.src([global.cfg.folders.build+ '/**/*'])
 		.pipe(manifest({

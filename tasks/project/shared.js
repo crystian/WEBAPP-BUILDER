@@ -45,7 +45,7 @@ exports.copyLoader = function(cb){
 	_loaderReplaces(pathDest +'/'+ global.cfg.loader.filesDest.index);
 
 	if (global.cfg.cordova) {
-		fs.copySync(pathSrc +'/'+global.cfg.loader.filesDest.indexCordova, pathDest +'/'+ global.cfg.loader.filesDest.indexCordova);
+		fs.copySync(pathDest +'/'+global.cfg.loader.filesDest.index, pathDest +'/'+ global.cfg.loader.filesDest.indexCordova);
 	}
 
 	cb();

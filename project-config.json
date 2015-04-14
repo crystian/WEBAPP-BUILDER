@@ -1,6 +1,6 @@
 {
 	"name": "app name",
-	"appCode": "template",
+	"projectCode": "template",
 	"version": "0.0.0",
 	"os": "win",
 	"ip": "127.0.0.1",

@@ -106,6 +106,7 @@ loader.utils = (function() {
 	}
 
 	function _requestOneOrAllInOne(appName, loadAppSuccess, loadAppFail){
+		//debugger
 		if(loader.cfg.oneRequest){
 			console.info('oneRequest!');
 			requestAllInOne(appName +'.json', {appName: appName}).then(loadAppSuccess, loadAppFail);
@@ -113,9 +114,22 @@ loader.utils = (function() {
 		}
 
 		console.info('multiple request!');
-		var path = '../' + loader.cfg.appWww;
+/*
+		//modo dev
+		var path = '../';
+		path += loader.cfg.projectCode +'/';
+		path += loader.cfg.www +'/';
+		path += appName +'/';
+*/
 
-        return requestJson(path +'/'+ appName +'/app.json').then(function (data) {
+		//buildeado local (debug and release:)
+		var path = '../';
+		//path += loader.cfg.projectCode +'/';
+		path += loader.cfg.www +'/';
+		path += appName +'/';
+
+
+        return requestJson(path +'app.json').then(function (data) {
 			data = data.files;
 
 			var i = 0,

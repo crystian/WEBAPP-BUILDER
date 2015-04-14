@@ -28,7 +28,7 @@ try{
 	);
 
 	//get appName
-	var appName = global.cfg.appCode,
+	var appName = global.cfg.projectCode,
 		fileApp = './'+ appName +'/'+ fileNameConfig,
 		fileAppLocal = './'+ appName +'/'+ fileNameLocal;
 
@@ -39,11 +39,11 @@ try{
 		utils.fileExist(fileAppLocal) && require(fileAppLocal)
 	);
 
-	global.cfg.appCode = appName;//force template app
+	global.cfg.projectCode = appName;//force template app
 
 	global.cfg.pkg = require('./package.json');
 
-	global.cfg.appRoot = __dirname + '\\' + global.cfg.appCode;
+	global.cfg.appRoot = __dirname + '\\' + global.cfg.projectCode;
 
 } catch (e){
 	//console.logRed('Do you run installer?, There are some problems with project-config*, check those please');

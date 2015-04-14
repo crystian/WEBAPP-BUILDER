@@ -13,6 +13,7 @@ require('./cordova.js');
 
 
 //Alias
+gulp.task('a',		['run:android']);
 gulp.task('css',	['css:app']);
 gulp.task('loader',	['get:loader']);
 

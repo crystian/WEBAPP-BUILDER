@@ -39,16 +39,15 @@ gulp.task('build', function (cb) {
 });
 
 gulp.task('make:ngTemplate', function () {
-	 var stream = gulp.src([global.cfg.folders.www +'/**/*.tpl.html'])
+	var stream = gulp.src([global.cfg.folders.www +'/**/*.tpl.html'])
 		//.pipe(debug({verbose: true}))
 		.on('error', gutil.log);
 
 	stream = shared.htmlMin(stream);
-
 	stream = stream.pipe(templateCache({
-			standalone: true,
-			root: '../'+ global.cfg.appCode +'/www/'
-		}))
+		standalone: true,
+		root: '../'+ global.cfg.projectCode +'/www/'
+	}))
 		.pipe(gulp.dest(global.cfg.folders.temp));
 
 	return stream;
