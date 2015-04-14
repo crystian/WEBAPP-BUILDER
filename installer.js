@@ -34,18 +34,18 @@ var install = [{
 
 questions = questions.concat(install);
 
-var appCode = [{
+var projectCode = [{
 	when: function(r) {return r.install;},
 	type: 'input',
-	name: 'appCode',
+	name: 'projectCode',
 	message: 'App Code (without spaces and simbols):',
 	default: 'APP'
 }];
 
-questions = questions.concat(appCode);
+questions = questions.concat(projectCode);
 
 var cordova = [{
-	when: function(r) {return r.appCode;},
+	when: function(r) {return r.projectCode;},
 	type: 'confirm',
 	name: 'cordova',
 	message: 'Install cordova?',
@@ -114,16 +114,26 @@ questions = questions.concat(cordovaPlugins);
 inquirer.prompt(questions, function( answers ) {
 	//console.dir(answers);
 
+	var projectNameFile = 'project-active.json',
+		projectConfigFile = 'project-config.json',
+		projectConfigLocalFile = 'project-config-local.json';
+
 	if (answers.install){
-		fs.copySync(cfg.folders.template, answers.appCode);
-		var op = {projectCode: answers.appCode, cordova: answers.cordova};
-		fs.outputJSONSync('project-config-local.json',op);
-		fs.outputJSONSync(answers.appCode+ '/project-config.json', op);
-		fs.outputJSONSync(answers.appCode +'/project-config-local.json',{});
+
+		fs.copySync(cfg.folders.template, answers.projectCode);
+		fs.outputJSONSync(projectNameFile, {projectCode: answers.projectCode}, {encoding: 'utf8'});
+		fs.outputJSONSync(answers.projectCode +'/'+ projectConfigLocalFile,{}, {encoding: 'utf8'});
+
+		var op = require('./'+ cfg.folders.template +'/'+ projectConfigFile);
+		op.cordova = answers.cordova;
+
+		fs.outputJSONSync(projectConfigLocalFile, {}, {encoding: 'utf8'});
+		fs.outputJSONSync(answers.projectCode +'/'+ projectConfigFile, op, {encoding: 'utf8'});
+
 		if (answers.cordova){
 			console.log(chalk.black.bgYellow('Cordova project is generating...'));
 
-			exec('cordova create '+ cfg.folders.cordova +' '+ answers.domain +' '+ answers.main, {cwd: answers.appCode +'/'},
+			exec('cordova create '+ cfg.folders.cordova +' '+ answers.domain +' '+ answers.main, {cwd: answers.projectCode +'/'},
 				function (error, stdout, stderr) {
 
 				if (error !== null) {
@@ -134,28 +144,41 @@ inquirer.prompt(questions, function( answers ) {
 				} else {
 					console.logGreen(stdout);
 
-					var packageJson = answers.appCode +'/package.json';
+					var packageJson = answers.projectCode +'/package.json';
 					var pkg = require('./'+ packageJson);
 					pkg.domain = answers.domain;
 					pkg.mainClass = answers.main;
 					fs.outputJSONSync(packageJson, pkg);
 
-					installCordovaPl('platform', answers.platforms, answers.appCode, function () {
+					installCordovaPl('platform', answers.platforms, answers.projectCode, function () {
 						if(answers.platforms.length>0){
-							installCordovaPl('plugin', answers.plugins, answers.appCode, finalCordova);
+							installCordovaPl('plugin', answers.plugins, answers.projectCode, finalCordova);
 						}
 					});
 				}
 			});
+
 		}
+
+		updateGitignore(answers.projectCode);
+		console.logRed('');
+		console.logRed('REMEMBER: The project/folder: "'+ answers.projectCode +'", will not be include on git, it needs their own repo, and don\'t upload it to AppFactory repo, and READ THE README!');
+		console.logRed('');
 
 	}
 });
 
+function updateGitignore(code) {
+	var fileName = '.gitignore';
+	var content = fs.readFileSync(fileName);
+	content += '\n/'+ code;
+	fs.writeFileSync(fileName, content, {encoding: 'utf8'});
+}
 
-function installCordovaPl(text, pl, appCode, cb){/* plugins and platforms */
+
+function installCordovaPl(text, pl, projectCode, cb){/* plugins and platforms */
 	if (pl.length>0){
-		exec('cordova '+ text +' add '+ pl.join(' '), {cwd: appCode +'/'+cfg.folders.cordova},
+		exec('cordova '+ text +' add '+ pl.join(' '), {cwd: projectCode +'/'+cfg.folders.cordova},
 			function (error, stdout, stderr) {
 
 				if (error !== null) {
@@ -165,15 +188,15 @@ function installCordovaPl(text, pl, appCode, cb){/* plugins and platforms */
 				} else {
 					console.logGreen(stdout);
 				}
-				cb(appCode);
+				cb(projectCode);
 			});
 	} else {
 		cb();
 	}
 }
 
-function finalCordova(appCode){
-	var www = appCode + '/' + cfg.folders.cordova + '/www';
+function finalCordova(projectCode){
+	var www = projectCode + '/' + cfg.folders.cordova + '/www';
 	fs.deleteSync(www);
 	fs.mkdirsSync(www);
 }

@@ -17,33 +17,26 @@ var gutil = require('gulp-util'),
 //require('time-require');
 requireDir('./tasks');
 
-
 try{
-	var fileNameLocal = 'project-config-local.json',
-		fileNameConfig = 'project-config.json';
+	var projectConfigFile = 'project-config.json',
+		projectConfigLocalFile = 'project-config-local.json';
+
+	//first argument, second one by default
+	var projectCode = gutil.env.projectCode || 'template';
+
+	var	fileConfig = require('./'+ projectConfigFile),
+		fileApp = projectCode +'/'+ projectConfigFile,
+		fileAppLocal = projectCode +'/'+ projectConfigLocalFile;
 
 	//merge between default and specify:
-	var fileConfig = require('./'+ fileNameConfig),
-		//get appName
-		appNameTemplate = fileConfig.projectCode;
-
 	global.cfg = _.merge({},
 		fileConfig,
-		utils.fileExist('./'+ fileNameLocal) && require('./'+ fileNameLocal)
-	);
-
-	//get appName
-	var fileApp = global.cfg.projectCode +'/'+ fileNameConfig,
-		fileAppLocal = global.cfg.projectCode +'/'+ fileNameLocal;
-
-	//merge between default and app:
-	global.cfg = _.merge(
-		global.cfg,
+		utils.fileExist(projectConfigLocalFile) && require('./'+ projectConfigLocalFile),
 		utils.fileExist(fileApp) && require('./'+ fileApp),
 		utils.fileExist(fileAppLocal) && require('./'+ fileAppLocal)
 	);
 
-	//global.cfg.projectCode = appNameTemplate;//force template app
+	global.cfg.projectCode = projectCode;
 
 	global.cfg.pkg = require('./package.json');
 

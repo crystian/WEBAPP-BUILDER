@@ -52,7 +52,7 @@ exports.copyLoader = function(cb){
 exports.makeLoader = function(cb) {
 	console.logGreen('Making loader ...');
 
-	exec('gulp full:loader --appName '+ global.cfg.projectCode, {cwd: '../'},
+	exec('gulp full:loader --projectCode '+ global.cfg.projectCode, {cwd: '../'},
 		function (error, stdout, stderr) {
 
 			if (error || (stderr && stderr !== '')) {

@@ -7,7 +7,7 @@ var	gutil = require('gulp-util'),
 	shared = require('./project/shared'),
 	gulp = require('gulp');
 
-gulp.task('serve:loader', function() {
+gulp.task('serve:loader', ['full:loader'], function() {
 	return shared.makeServe('.', global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.serve);
 });
 

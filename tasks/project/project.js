@@ -55,10 +55,10 @@ gulp.task('cssw', function() {
 
 
 //servers
-gulp.task('serve', ['build:fast'], function() {
+gulp.task('serve', ['full:app'], function() {
 	return shared.makeServe('../', 'loader', global.cfg.ip, global.cfg.ports.serve);
 });
-gulp.task('serve:build', ['build'], function() {
+gulp.task('serve:build', ['full:app'], function() {
 	return shared.makeServe(global.cfg.folders.build, '', global.cfg.ip, global.cfg.ports.build);
 });
 

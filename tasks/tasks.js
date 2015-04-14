@@ -11,6 +11,7 @@ var gutil = require('gulp-util'),
 //alias:
 gulp.task('default',	['build:loader']);
 gulp.task('config',		['make:config']);
+gulp.task('test',		['test:loader']);
 
 gulp.task('full:loader', function (cb) {
 	runSequence(
