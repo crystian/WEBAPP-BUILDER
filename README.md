@@ -179,12 +179,12 @@ En modo dev hace request secuencial de cada recurso y la tarea doMagic (gulp), h
 
 **Opcionales:**
 
-* Cordova
-* Android SDK (para cordova)
-* Java (para cordova)
-* Ant (para cordova)
-* Maven (para cordova)
-* PhantomJs (tests)
+	* Cordova
+	* Android SDK (cordova)
+	* Java (cordova)
+	* Ant (cordova)
+	* Maven (cordova)
+	* PhantomJs (tests)
 
 **NOTE**:
 
@@ -192,12 +192,15 @@ Es necesario que todo este en el path, para ayudarte en esto creen un bat (windo
 
 ### Steps:
 
-* Crear carpeta donde estara el proyecto
-* Dentro de esta, clonar este repo, se tiene que llamar "LOADER": https://github.com/crystian/LOADER.git<br>
+1 Clonar repo APPFACTORY:
 	`git clone https://github.com/crystian/LOADER.git LOADER`
-* Ingrear a carpeta LOADER
-* Instalar dependencias de node: `npm i`
-	(en windows da un error que no puede instalar "weak", no te preocupes)
+2 Instalar dependencias de building para node: `npm i`
+	Note: (en windows da un error que no puede instalar "weak", no te preocupes)
+3 Ingresar a template e instalar dependencias de node y bower: `npm i`, `bower i`
+4 Ejecutar   
+
+
+
 * Deploy/instalacion de carpetas: `node installer`
 	Esto te arma la estructura necesaria pra el proyecto "wrapeandolo"
 	Con este hermoso wizard instalas lo que necesitas para el proyecto.
