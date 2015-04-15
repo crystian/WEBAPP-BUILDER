@@ -181,10 +181,10 @@ En modo dev hace request secuencial de cada recurso y la tarea doMagic (gulp), h
 **Opcionales:**
 
 * Cordova (via npm)
-* [Android SDK](https://developer.android.com/sdk/index.html#Other) (cordova)
-* [Java](https://www.java.com/en/download/manual.jsp) (cordova)
-* [Ant](http://ant.apache.org/bindownload.cgi) (cordova)
-* [Maven](https://maven.apache.org/) (cordova)
+* [Android SDK](https://developer.android.com/sdk/index.html#Other) (para cordova)
+* [Java](https://www.java.com/en/download/manual.jsp) (para cordova)
+* [Ant](http://ant.apache.org/bindownload.cgi) (para cordova)
+* [Maven](https://maven.apache.org/) (para cordova)
 
 **NOTE**:
 
@@ -192,27 +192,27 @@ Es necesario que todo este en el path, para ayudarte en esto creen un bat (windo
 
 ### Recipe:
 
-1 Clonar repo APPFACTORY:
+1. Clonar repo APPFACTORY:
 	`git clone https://github.com/crystian/APPFACTORY.git`
 	
-2 Ingresar en APPFACTORY e instalar dependencias de building para node: `npm i`
-	Note: (en windows da un error que no puede instalar "weak/python", no te preocupes)
+2. Ingresar en APPFACTORY e instalar dependencias de building para node: `npm i`
+	- Note: (en windows da un error que no puede instalar "weak/python", no te preocupes)
 
-3 Build de loader: `gulp full:loader`
+3. Build de loader: `gulp full:loader`
 
-4 Instalar con `node installer`
-	Si selecionas cordova tenes que tenerlo instalado en el path previamente.
-	Con este hermoso wizard instalas lo que necesitas para el proyecto y lo deposita en el Project Code que hayas puesto (crea la carpeta con ese nombre)
+4. Instalar con `node installer`
+	- Si selecionas cordova tenes que tenerlo instalado en el path previamente.
+	- Con este hermoso wizard instalas lo que necesitas para el proyecto y lo deposita en el Project Code que hayas puesto (crea la carpeta con ese nombre)
 	
-5 TEMPLATE o PROJECT
-	5.1 Ingresar a template/project
-	5.2 Instalar dependencias de node y bower: `npm i` y `bower i`
-	5.3 Buildear `gulp full` (si no instalas GM, comentar en magic.js: "engine: 'gm',")
+5. TEMPLATE o PROJECT
+	- Ingresar a template/project
+	- Instalar dependencias de node y bower: `npm i` y `bower i`
+	- Buildear `gulp full` (si no instalas GM, comentar en magic.js: "engine: 'gm',")
 
-6 Desde APPFACTORY, levantar server `gulp serve:loader` y comprobar: [http://127.0.0.1:9000/loader](http://127.0.0.1:9000/loader)
-	Deberia verse template (si hiciste el paso 5 en template)
+6. Desde APPFACTORY, levantar server `gulp serve:loader` y comprobar: [http://127.0.0.1:9000/loader](http://127.0.0.1:9000/loader)
+	-Deberia verse template (si hiciste el paso 5 en template)
 	
-7 Desde PROJECT comprobar servers con: `gulp serve` y gulp `serve:build`
+7. Desde PROJECT comprobar servers con: `gulp serve` [http://127.0.0.1:9000/loader](http://127.0.0.1:9000/loader) y gulp `serve:build` [http://127.0.0.1:9001](http://127.0.0.1:9001)
 
 ---
 
@@ -247,14 +247,18 @@ Los sprites se generan automaticamente siguiendo este patron:
 * CSS rule: Debe ser un background, aplicado con background-image, recomiendo aplicar a un div con el tamanio justo, ya que deberia soportar distintas densidades de pixeles, ejemplo:
 
 	* Normal:
-		`.kitten1 { background-image: url(../template/www/app/assets/img/sprite1/kitten1.png); }`
+	``` css
+		.kitten1 { background-image: url(../template/www/app/assets/img/sprite1/kitten1.png); }
+	```
 	
-	* Retina: 
+	* Retina:
+	``` css
 		@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
 			.kitten1 {
 				background-image: url(../template/www/app/assets/img/sprite1/kitten1@2x.png); 
 			}
-		}`
+		}
+	```
 		
 * Imagenes PNG en: PROJECTO/APP/assets/img/sprite*
 
