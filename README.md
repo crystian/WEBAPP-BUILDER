@@ -140,7 +140,7 @@ Toda la magia depende de estos archivos de "configuracion", que le dicen a la ap
  
 #### Formato:
 
-``` json
+``` javascript
 file: {
 	'file': 'file.css',		//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
 	'active': 'true',		//it will eval this field
@@ -216,8 +216,6 @@ APPS.JSON
 ---
 
 ## Guideline
-### gulp tasks
-* nomenclature: action:what
 
 ### Folders/files
 
@@ -240,6 +238,10 @@ APPS.JSON
 		* `/bower_components` auto generated with bower
 		* `/theme` libs of third part, it would be save on your repo
 		
+
+### gulp tasks
+* nomenclature: action:what
+
 ---
 
 
