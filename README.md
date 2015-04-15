@@ -1,6 +1,8 @@
-# APP FACTORTY!
+# APP FACTORY!
+
 ---
-### Que es este coso?
+
+## Que es este coso?
 
 Este proyecto pretender ahorrar tiempo de desarrollo, es una especie de seed boilerplate o wrapper, especialmente hecho para el bootstrap de una nueva app, dejando todo lo basico y constante listo.
 
@@ -13,6 +15,7 @@ Este proyecto es una extraccion de otro mas grande que luego de un tiempo me di 
 Tiempo estimado de desarrollo de todo esto, con multiples pruebas y demas: 4 meses en tiempo no full time.
 
 ---
+
 ## Tasks:
 
 ### From Root (loader):
@@ -54,6 +57,8 @@ LLENAR
 * Mecanismo de update de versiones
 * Otros modulos: Analytics, loading screens, deteccion de languages, appcache, otros.
 
+---
+
 ## Instrucciones de uso
 
 ### Conceptos:
@@ -64,7 +69,7 @@ LLENAR
 
 **Apps:** Son Single Page Application (SPA), y se puede contener mas de una por projecto, solo es necesario indicar cual es la app inicial.
 
-### Generales:
+----
 
 La idea es de un wrapper, el projecto nuevo deberia estar en su carpeta dentro **APPFACTORY**.
 
@@ -80,8 +85,7 @@ La animacion del loader es css puro (con una linea de html), para agregar otras 
 
 **NOTES:**
 
-1) Al momento de crear el repositorio, crearlo en la carpeta del projecto nuevo (projectCode) que creo el installer, tambien el installer modifico el gitignore, se puede subir como no al repositorio de APPFACTORY. Esto permite tener los dos projectos anidados y en distintos repos.
-
+* Al momento de crear el repositorio, crearlo en la carpeta del projecto nuevo (projectCode) que creo el installer, tambien el installer modifico el gitignore, se puede subir como no al repositorio de APPFACTORY. Esto permite tener los dos projectos anidados y en distintos repos.
 
 ### Config:
 
@@ -90,38 +94,6 @@ Recordar que solo hay que modificar el que esta dentro del proyecto y no el de A
 
 **Ejemplo:**
 ./project-config.json: loader.release=true y en PROJECT/project-config.json: loader.release=false, el valor que va a llegar en cfg de gulp sera "false"
-
-### Injections:
-
-Toda la magia depende de estos archivos de "configuracion", que le dicen a la app tanto en modo dev como en release, donde y como estan los archivos a incluir, esto es la columna vertebral de este sistema.
-
-* PROJECT/apps.json: Contiene un array con el nombre de las SPAs (folder) dentro de "apps" (e.g. APP1)
-* PROJECT/APP1/app.json: Contiene un array con informacion de cada uno de los archivos a incluir al levantar esa app (en este caso: APP1)
- 
-Formato:
-``` 
-file: {
-	'file': 'file.css',		//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
-	'active': 'true',		//it will eval this field
-	'path': 'www',			//it can be a statement, and it will be evaluated
-	//'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
-	'linter': true,			//if you want to lint, will not apply for libraries
-	'autoPrefix': true,		//auto prefix when source is active
-	'overwrite': true,		//specially for libs, just make it once
-	'minificated': false,	//if it is a lib for don't re do the minifcation
-	'makeMin': false,		//it should be create a minificate version
-	'genSprite': true,		//generate sprite
-	'ignore': false,		//ignore on dev time, request by request
-	'replaces': {
-		'pre': [			//pre minificatedd
-			//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
-		],
-		'post': [			//post minificatedd
-			//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
-		]
-	}
-}
-```
 
 #### Variables importantes a mencionar:
 
@@ -153,14 +125,48 @@ file: {
 * "loader.text": todos los textos de la app (no soporta i18n por ahora)
 * "loader.bower": componentes a usar, si no se quiere alguno de los por defalt, en el config del proyecto setearle null. Tambien soporta la generacion de los minificados si es que la libreria no lo provee, usar "generate-js": true
 
-#### config.js
-
-Este archivo se genera automaticamente con `gulp full:loader`, basado en los configs, no deberia subirse al VCS
-
 **NOTES:**
 
-Si se modifican los archivos de configuracion (`project-config*.json`), es necesario hacer un `gulp full:loader` o `gulp config` (para generar el config.js)
+1) El archivo **config.js** se genera automaticamente, **no deberia subirse al VCS**
+2) Si se modifican los archivos de configuracion (`project-config*.json`), es necesario hacer un `gulp full:loader` o `gulp config` (para generar el config.js)
 
+
+### Injections:
+
+Toda la magia depende de estos archivos de "configuracion", que le dicen a la app tanto en modo dev como en release, donde y como estan los archivos a incluir, esto es la columna vertebral de este sistema.
+
+* PROJECT/apps.json: Contiene un array con el nombre de las SPAs (folder) dentro de "apps" (e.g. APP1)
+* PROJECT/APP1/app.json: Contiene un array con informacion de cada uno de los archivos a incluir al levantar esa app (en este caso: APP1)
+ 
+#### Formato:
+
+``` json
+file: {
+	'file': 'file.css',		//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
+	'active': 'true',		//it will eval this field
+	'path': 'www',			//it can be a statement, and it will be evaluated
+	//'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
+	'linter': true,			//if you want to lint, will not apply for libraries
+	'autoPrefix': true,		//auto prefix when source is active
+	'overwrite': true,		//specially for libs, just make it once
+	'minificated': false,	//if it is a lib for don't re do the minifcation
+	'makeMin': false,		//it should be create a minificate version
+	'genSprite': true,		//generate sprite
+	'ignore': false,		//ignore on dev time, request by request
+	'replaces': {
+		'pre': [			//pre minificatedd
+			//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
+		],
+		'post': [			//post minificatedd
+			//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
+		]
+	}
+}
+```
+
+En modo dev hace request secuencial de cada recurso y la tarea doMagic (gulp), hace exactamente eso y convierte todo en un "simple" json, con todo lo necesario.
+
+---
 
 ## Installation
 
@@ -206,6 +212,42 @@ npm i
 bower i
 spritess
 APPS.JSON
+
+---
+
+## Guideline
+### gulp tasks
+* nomenclature: action:what
+
+### Folders/files
+
+#### APPFACTORY
+* `project-*` relate a project
+* `installer.js` is the executable for install a new Project
+* `config-path.bat` just for win, configure all paths, the easy way
+* `/loader` all loader modules
+	* `/loading` there are severals loadings animations, the number is correlated with param on config
+	* `config.js` auto generated (do not modify), see 'config' section.
+	* `index.html` auto generated too (do not modify), do not save it on your repo
+	* `index.tpl.html` template for 'index.html'
+* `/vendors` just for bower source
+* `/tasks` all gulp tasks
+	* *.* all tasks only for **LOADER**
+	* `/project` task shared with loader and project, almost tasks for projects would be here
+* `/template` is a complete project as sample
+	* `/tasks/tasks.js` tasks just for project (punctually, note generic, for generic you will use `/tasks/project`)
+	* `/vendors/`
+		* `/bower_components` auto generated with bower
+		* `/theme` libs of third part, it would be save on your repo
+		
+---
+
+
+### TOOLS & TIPS:
+
+* [Markdown cheatsheet](http://assemble.io/docs/Cheatsheet-Markdown.html)
+* [Android sign](https://github.com/crystian/androidSign)
+
 ---
 
 ## Pendientes:
@@ -216,25 +258,20 @@ APPS.JSON
 * folders
 
 ### TODO:
-* weinre?
-* test
-* ci
 * nightmare, revisar cada perfil
+* weinre?
+* test 
+* ci
 * si no se instala bootstrap, instalar normalized
 * pasar este doc a ingles
-* i18n
-
-## Guideline
-### gulp tasks
-* nomenclature: action:what
-
+* i18n revisar
 
 ---
 
 ## CHANGELOG:
 
 15/04/15 v0.0.3
-reestructuracion completa, injecion dinamica de recursos segun stage con los app.json
+!reestructuracion completa!, injecion dinamica de recursos segun stage con los app.json
 wrapeo de projecto
 
 14/03/15 v0.0.2
