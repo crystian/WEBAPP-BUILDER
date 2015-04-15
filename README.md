@@ -58,9 +58,9 @@ LLENAR
 
 ### Conceptos:
 
-APPFACTORY: El projecto principal (Wrapper), donde esta includo este readme, es el que hace toda la magia
+APPFACTORY: El projecto principal (Wrapper), este mismo donde esta includo este readme, es el que hace toda la magia!
 Projecto/s: Es la carpeta creada con el instalador, APPFACTORY puede manejar mas de un projecto, pero solo de a uno.
-Apps: Son Single Page Application, y se puede contener mas de una por projecto, solo es necesario indicar cual es la app inicial.
+Apps: Son Single Page Application (SPA), y se puede contener mas de una por projecto, solo es necesario indicar cual es la app inicial.
 
 ### Generales:
 
@@ -70,7 +70,7 @@ Hay un template que es la base de las apps y tambien sirve para testear el funci
 
 Luego de bajar el repo hacer instalacion con `node installer` (copia template a nueva carpeta y algunos ajustes menores) 
 
-La instalacion creara tres archivos de configuracion: `project-config.json`, `project-config-local.json` en la carpeta nueva y `project-config-local.json` en el root. La idea es sobreescribir las variables al principal config (`./project-config.json`) y mantener una herencia. Las variables de configuracion tendran prioridad en este orden: `project-config.json` <- `project-config-local.json` <- `APP/project-config.json` <- `APP/project-config-local.json` (OjO, mantener estructura), para el "config" ver esa seccion.
+La instalacion creara tres archivos de configuracion: `project-config.json`, `project-config-local.json` en la carpeta nueva y `project-config-local.json` en el root. La idea es sobreescribir las variables al principal config (`./project-config.json`) y mantener una herencia. Las variables de configuracion tendran prioridad en este orden: `project-config.json` <- `project-config-local.json` <- `PROJECT/project-config.json` <- `PROJECT/project-config-local.json` (OjO, mantener estructura), para el "config" ver esa seccion.
 
 La instalacion tambien creara un archivo `project-active.json`, la unica funcion que tiene es determinar que projecto es el activo (folder), esto es util para configuraciones con mas de un projecto en el mismo APPFACTORY, por default ya setea el creado con el installer.
 
@@ -87,7 +87,39 @@ Toda la configuracion disponible esta en `./project-config.json`, y como comente
 Recordar que solo hay que modificar el que esta dentro del proyecto y no el de APPFACTORY
 
 **Ejemplo:**
-./project-config.json: loader.release=true y en APP/project-config.json: loader.release=false, el valor que va a llegar en cfg de gulp sera "false"
+./project-config.json: loader.release=true y en PROJECT/project-config.json: loader.release=false, el valor que va a llegar en cfg de gulp sera "false"
+
+### Injections:
+
+Toda la magia depende de estos archivos de "configuracion", que le dicen a la app tanto en modo dev como en release, donde y como estan los archivos a incluir, esto es la columna vertebral de este sistema.
+
+* PROJECT/apps.json: Contiene un array con el nombre de las SPAs (folder) dentro de "apps" (e.g. APP1)
+* PROJECT/APP1/app.json: Contiene un array con informacion de cada uno de los archivos a incluir al levantar esa app (en este caso: APP1)
+ 
+Formato:
+``` 
+file: {
+	'file': 'file.css',		//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
+	'active': 'true',		//it will eval this field
+	'path': 'www',			//it can be a statement, and it will be evaluated
+	//'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
+	'linter': true,			//if you want to lint, will not apply for libraries
+	'autoPrefix': true,		//auto prefix when source is active
+	'overwrite': true,		//specially for libs, just make it once
+	'minificated': false,	//if it is a lib for don't re do the minifcation
+	'makeMin': false,		//it should be create a minificate version
+	'genSprite': true,		//generate sprite
+	'ignore': false,		//ignore on dev time, request by request
+	'replaces': {
+		'pre': [			//pre minificatedd
+			//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
+		],
+		'post': [			//post minificatedd
+			//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
+		]
+	}
+}
+```
 
 #### Variables importantes a mencionar:
 
@@ -96,6 +128,7 @@ Recordar que solo hay que modificar el que esta dentro del proyecto y no el de A
 * "ip": ip local en la que se levantaran los servers (con 0.0.0.0 se publica en todas y se puede acceder desde la LAN)
 * "release": eso mismo, minifica todo y hace completamente todas las tareas, sin usar caches
 * "compress": Comprimir la data
+* "firstApp": Primera app que va a lanzar, es requerido, tiene que saber por donde empieza
 * "cordova": Cordova instalado, creara un archivo: index-cordova.html
 * "isCordovaDevice": Uso interno, si es del archivo index-cordova.html sera true, si no, siempre false.
 * "debugZoneActive": Muestra en pantalla una zona de debug, usando loader.debugAdd o loader.debug
@@ -178,7 +211,7 @@ APPS.JSON
 ### revisar:
 * offline - cordova
 * i18n - cordova
-
+* folders
 
 ### TODO:
 * weinre?
