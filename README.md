@@ -4,7 +4,7 @@
 
 Este proyecto pretender ahorrar tiempo de desarrollo, es una especie de seed boilerplate o wrapper, especialmente hecho para el bootstrap de una nueva app, dejando todo lo basico y constante listo.
 
-Cuenta con numerosos y deliciosos features y temas solucionados tipicos, esto ahorraria facil 3 semanas de trabajo full time e incluso mas.
+Cuenta con numerosos temas tipicos solucionados y deliciosos features, esto ahorraria facil 3 semanas de trabajo full time e incluso mas.
 
 Intente que sea lo mas simple posible, espero que asi sea para vos crystian del futuro y otros coleguillas de mucha confiaza (si llegaron a este codigo, seguro les tengo mucha confianza)
 
@@ -15,7 +15,7 @@ Tiempo estimado de desarrollo de todo esto, con multiples pruebas y demas: 4 mes
 ---
 ## Tasks:
 
-From Root (loader):
+### From Root (loader):
 
 * `gulp config` Genera archivo config.js con toda la configuracion del loader & project
 * `gulp full:loader` Bower y build completo
@@ -25,7 +25,7 @@ From Root (loader):
 * `gulp serve:loader` Server directo del directorio de desarrollo (www), usando a 'template' como app
 * `gulp css:loader`
 
-From App:
+### From App:
 
 * `gulp serve:build` server del dir build
 * `gulp css` force para generar el css, especial para un watcher
@@ -34,7 +34,7 @@ LLENAR
 
 ## Features:
 
-* **Todo el producto termina en un unico archivo!**
+* **Todo el producto termina en un unico archivo por app!**
 * LIBS precargadas: platform (requerida), bootstrap, fastClick, jquery, lz-string, swiper (opcionales)
 * Todo ocupa menos 400k (con todas las libs), mientras baja el archivo y siguientes queda mostrandose un lindo loading
 * Posibilidad de contener varios projectos y dentro de cada uno multiples apps (SPA)
@@ -58,13 +58,15 @@ LLENAR
 
 ### Conceptos:
 
-APPFACTORY: El projecto principal (Wrapper), este mismo donde esta includo este readme, es el que hace toda la magia!
-Projecto/s: Es la carpeta creada con el instalador, APPFACTORY puede manejar mas de un projecto, pero solo de a uno.
-Apps: Son Single Page Application (SPA), y se puede contener mas de una por projecto, solo es necesario indicar cual es la app inicial.
+**APPFACTORY:** El projecto principal (Wrapper), este mismo donde esta includo este readme, es el que hace toda la magia!
+
+**Projecto/s:** Es la carpeta creada con el instalador, APPFACTORY puede manejar mas de un projecto, pero solo de a uno.
+
+**Apps:** Son Single Page Application (SPA), y se puede contener mas de una por projecto, solo es necesario indicar cual es la app inicial.
 
 ### Generales:
 
-La idea es de un wrapper, el projecto nuevo deberia estar en su carpeta dentro APPFACTORY.
+La idea es de un wrapper, el projecto nuevo deberia estar en su carpeta dentro **APPFACTORY**.
 
 Hay un template que es la base de las apps y tambien sirve para testear el funcionamiento del loader.
 
