@@ -38,7 +38,7 @@ var projectCode = [{
 	when: function(r) {return r.install;},
 	type: 'input',
 	name: 'projectCode',
-	message: 'App Code (without spaces and simbols):',
+	message: 'Project Code (without spaces and simbols):',
 	default: 'APP'
 }];
 
