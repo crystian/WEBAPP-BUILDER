@@ -161,8 +161,9 @@ inquirer.prompt(questions, function( answers ) {
 		}
 
 		updateGitignore(answers.projectCode);
+
 		console.logRed('');
-		console.logRed('REMEMBER: The project/folder: "'+ answers.projectCode +'", will not be include on git, it needs their own repo, and don\'t upload it to AppFactory repo, and READ THE README!');
+		console.logRed('REMEMBER: The project/folder: "'+ answers.projectCode +'", will not be include on git, it needs their own repo, and don\'t upload it to AppFactory repo, and READ THE README motherfuckerr!');
 		console.logRed('');
 
 	}

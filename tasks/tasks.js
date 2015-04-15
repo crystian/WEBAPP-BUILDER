@@ -35,7 +35,7 @@ gulp.task('release', function (cb) {
 	}
 
 	runSequence(
-		'build:loader:full',
+		'full:loader',
 		'test:loader',
 	cb);
 });
