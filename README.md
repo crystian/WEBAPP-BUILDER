@@ -223,6 +223,16 @@ Es necesario que todo este en el path, para ayudarte en esto creen un bat (windo
 	
 7. Desde PROJECT comprobar servers con: `gulp serve` [http://127.0.0.1:9000/loader](http://127.0.0.1:9000/loader) y gulp `serve:build` [http://127.0.0.1:9001](http://127.0.0.1:9001)
 
+#### MAC:
+
+We need instal a script, ios-deploy: `sudo npm i -g ios-deploy`<br>
+If you have some trouble about permissions, you can try set all permissions on cordova folder `sudo chmod -R a+rwx cordova/`<br>
+For android create enviroment variable ANDROID_HOME point to android sdk folder, ex in mac:<br>
+`sudo nano ~/.bash_profile`<br>
+and add this line:<br>
+`export ANDROID_HOME=/Users/crystian/Documents/eclipse/ADT/sdk` (with your path of course)
+
+
 ---
 
 ## Guideline
@@ -280,6 +290,11 @@ Los sprites se generan automaticamente siguiendo este patron:
 
 ### TOOLS & TIPS:
 
+I use [Webstorm IDE](http://www.jetbrains.com/webstorm), and we recommend it, because I **love** it! <3
+
+* [JShint options](http://www.jshint.com/docs/options)
+* [DOM analytics and more](http://mir.aculo.us/dom-monster)
+* [RWD on the browser](http://lab.maltewassermann.com/viewport-resizer) or firefox
 * [Markdown cheatsheet](http://assemble.io/docs/Cheatsheet-Markdown.html)
 * [Android sign](https://github.com/crystian/androidSign)
 
