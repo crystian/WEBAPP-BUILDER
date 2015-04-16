@@ -30,10 +30,19 @@ Tiempo estimado de desarrollo de todo esto, con multiples pruebas y demas: 4 mes
 
 ### From App:
 
-* `gulp serve:build` server del dir build
+* `gulp default` procesa todo el proyecto, pero no el loader, usa cache
+* `gulp full` todo el proceso de building, incluyendo sin cache
+* `gulp a` run an android
 * `gulp css` force para generar el css, especial para un watcher
-* `gulp servew` serve con watch de config e index.tpl, vuelve a ejectuar el `make:base`
-LLENAR
+* `gulp loader` genera el loader y lo deja en la carpeta `build`
+* `gulp build:fast` hace todo el procedimineto menos bower y generar el config
+* `gulp optimizeImages` todas las imagenes de la carpeta `build`
+* `gulp clearCache` de imagenes
+* `gulp genAppCache` genera el manifest de cache
+* `gulp cssw` watcher para css 
+* `gulp serve` server en modo dev directo al proyecto
+* `gulp serve:build` server del dir build
+* `gulp serve:api` server de api (a modo de ejemplo para template)
 
 ## Features:
 
@@ -278,11 +287,6 @@ Los sprites se generan automaticamente siguiendo este patron:
 
 ## Pendientes:
 
-### revisar:
-* offline - cordova
-* i18n - cordova
-
-### TODO:
 * nightmare, revisar cada perfil
 * weinre?
 * test 
