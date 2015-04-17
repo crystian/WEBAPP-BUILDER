@@ -301,7 +301,8 @@ I use [Webstorm IDE](http://www.jetbrains.com/webstorm), and we recommend it, be
 ---
 
 ## Pendientes:
-
+* cordova: replace de datos antes de build (versiones)
+* folder dist con las versiones entregadas con release
 * nightmare, revisar cada perfil
 * weinre?
 * test 
