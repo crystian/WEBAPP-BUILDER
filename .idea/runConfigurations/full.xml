@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="full" type="js.build_tools.gulp" factoryName="Gulp.js">
+    <node-options />
+    <gulpfile>$PROJECT_DIR$/gulpfile.js</gulpfile>
+    <tasks>
+      <task>full:loader</task>
+    </tasks>
+    <arguments />
+    <pass-parent-envs>true</pass-parent-envs>
+    <envs />
+    <method />
+  </configuration>
+</component>

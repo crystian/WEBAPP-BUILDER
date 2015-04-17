@@ -151,12 +151,8 @@
 				"version": "~3.3.4",
 				"js-dev": ["bootstrap/dist/js/bootstrap.js"],
 				"js-prod": ["bootstrap/dist/js/bootstrap.min.js"],
-				"css-dev": [
-					"bootstrap/dist/css/bootstrap.css"
-				],
-				"css-prod": [
-					"bootstrap/dist/css/bootstrap.min.css"
-				]
+				"css-dev": ["bootstrap/dist/css/bootstrap.css"],
+				"css-prod": ["bootstrap/dist/css/bootstrap.min.css"]
 			}
 		},
 

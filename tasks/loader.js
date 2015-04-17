@@ -75,12 +75,14 @@ gulp.task('make:loader:js',  function () {
 	//libs
     var bowerFolder = global.cfg.loader.folders.bower;
 
+	var bootstrapBower = global.cfg.loader.bower.bootstrap;
+
     var libs = [
 		bowerFolder + '/platform/platform.' + releasePostName + 'js',
 		bowerFolder + '/es6-promise/promise.' + releasePostName + 'js',
 		global.cfg.loader.bower.fastclick ? bowerFolder + '/fastclick/lib/fastclick.' + releasePostName + 'js' : '',
 		global.cfg.loader.bower.jquery ? bowerFolder + '/jquery/dist/jquery.' + releasePostName + 'js' : '',
-		global.cfg.loader.bower.bootstrap ? bowerFolder + '/bootstrap/dist/js/bootstrap.' + releasePostName + 'js' : '',
+		bootstrapBower && (bootstrapBower['js-prod'] || bootstrapBower['js-dev'])  ? bowerFolder + '/bootstrap/dist/js/bootstrap.' + releasePostName + 'js' : '',
 		global.cfg.compress ? bowerFolder + '/lz-string/libs/lz-string.' + releasePostName + 'js' : '',
 		global.cfg.loader.bower.swiper ? bowerFolder + '/swiper/dist/js/swiper.' + releasePostName + 'js' : ''
 	];
