@@ -47,6 +47,10 @@ var defaults = {
 		'genSprite': true,		//generate sprite
 		'ignore': false,		//ignore on dev time, request by request
 		'replaces': {
+			'original': {		//modificate orginal version
+				'normal': [],
+				'min': []
+			},
 			'pre': [			//pre minificatedd
 				//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
 			],
@@ -264,6 +268,7 @@ function doMagic(url, appName, options) {
 		if(!file.minificated && !file.makeMin){
 			stream = _minificate(stream, file, type, appName)
 		} else {
+			_modificateOriginal(file);
 
 			//just for remove header a footer comments, it's ok here, not move
 			if(type === 'js'){
@@ -343,6 +348,28 @@ function _minificate(stream, file, type, appName){
 
 	return stream;
 }
+
+function _modificateOriginal(file){
+	_modificateOriginalInternal(file, 'normal');
+	_modificateOriginalInternal(file, 'min');
+}
+function _modificateOriginalInternal(file, type){
+	var name = (type === 'min') ? file.min : file.file;
+
+	if(file.replaces.original[type].length > 0){
+		var filenameBackup = utils.setPreExtensionFilename(name, 'original');
+
+		if(!utils.fileExist(file.path +'/'+ filenameBackup)){
+			console.logWarn('Replaces on original file: '+ name);
+			fs.copySync(file.path +'/'+ name, file.path +'/'+ filenameBackup);
+
+			var st = gulp.src([file.path +'/'+ name]);
+			st = aux.replace(st, file.replaces.original[type]);
+			st = st.pipe(gulp.dest(file.path));
+		}
+	}
+}
+
 
 var _handle = {
 	'css' : function(stream, file, appName) {

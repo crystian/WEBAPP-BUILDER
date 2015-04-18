@@ -93,7 +93,7 @@
 
 	"loader":{
 		"name": "App Factory",
-		"version": "0.0.4",
+		"version": "0.0.5",
 		"release": true,
 		"loading": 1,
 		"filesDest": {
@@ -129,30 +129,11 @@
 				"js-dev": ["es6-promise/promise.js"],
 				"js-prod": ["es6-promise/promise.min.js"]
 			},
-			"jquery": {
-				"version": "~2.1.3",
-				"js-dev": ["jquery/dist/jquery.js"],
-				"js-prod": ["jquery/dist/jquery.min.js"]
-			},
 			"fastclick": {
 				"version": "~1.0.6",
 				"js-dev": ["fastclick/lib/fastclick.js"],
 				"js-prod": ["fastclick/lib/fastclick.min.js"],
 				"generate-js": true
-			},
-			"swiper": {
-				"version": "~3.0.6",
-				"js-dev": ["swiper/dist/js/swiper.js"],
-				"js-prod": ["swiper/dist/js/swiper.min.js"],
-				"css-dev": ["swiper/dist/css/swiper.css"],
-				"css-prod": ["swiper/dist/css/swiper.min.css"]
-			},
-			"bootstrap": {
-				"version": "~3.3.4",
-				"js-dev": ["bootstrap/dist/js/bootstrap.js"],
-				"js-prod": ["bootstrap/dist/js/bootstrap.min.js"],
-				"css-dev": ["bootstrap/dist/css/bootstrap.css"],
-				"css-prod": ["bootstrap/dist/css/bootstrap.min.css"]
 			}
 		},
 

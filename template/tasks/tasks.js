@@ -56,6 +56,7 @@ gulp.task('make:ngTemplate', function () {
 gulp.task('copy:fonts', function (){
 	return gulp.src([
 		'vendors/theme/assets/font-awesome/fonts/**/*',
+		'vendors/bower_components/bootstrap/dist/fonts/**/*',
 		global.cfg.folders.www +'/assets/fonts/**/*'
 	]).pipe(gulp.dest(global.cfg.folders.build + '/fonts'));
 

@@ -1,6 +1,26 @@
 {
 	"files": [
 		{
+			"file": "bootstrap.css",
+			"path": "vendors/bower_components/bootstrap/dist/css",
+			"minificated": true,
+			"replaces": {
+				"original": {
+					"normal": [
+						["../fonts/", "../template/vendors/bower_components/bootstrap/dist/fonts/"]
+					],
+					"min": [
+						["../fonts/", "fonts/"]
+					]
+				}
+			}
+		},
+		{
+			"file": "swiper.css",
+			"path": "vendors/bower_components/swiper/dist/css",
+			"minificated": true
+		},
+		{
 			"file": "bootstrap-reset.css",
 			"path": "vendors/theme",
 			"autoPrefix": false,
@@ -54,6 +74,21 @@
 					["../template/www/landing/assets/img/", "assets/img/"]
 				]
 			}
+		},
+		{
+			"file": "jquery.js",
+			"path": "vendors/bower_components/jquery/dist",
+			"minificated": true
+		},
+		{
+			"file": "bootstrap.js",
+			"path": "vendors/bower_components/bootstrap/dist/js",
+			"minificated": true
+		},
+		{
+			"file": "swiper.js",
+			"path": "vendors/bower_components/swiper/dist/js",
+			"minificated": true
 		},
 		{
 			"file": "landing.js",

@@ -20,7 +20,7 @@ var gutil = require('gulp-util'),
 	fs = require('fs-extra'),
 	gulp = require('gulp');
 
-gulp.task('make:loader', ['make:loader:js', 'make:loader:css', 'copy:bootstrap:fonts'],  function () {
+gulp.task('make:loader', ['make:loader:js', 'make:loader:css'],  function () {
 
 	var htmlminOptions = {
 		removeComments: true,
@@ -75,16 +75,12 @@ gulp.task('make:loader:js',  function () {
 	//libs
     var bowerFolder = global.cfg.loader.folders.bower;
 
-	var bootstrapBower = global.cfg.loader.bower.bootstrap;
-
     var libs = [
 		bowerFolder + '/platform/platform.' + releasePostName + 'js',
 		bowerFolder + '/es6-promise/promise.' + releasePostName + 'js',
 		global.cfg.loader.bower.fastclick ? bowerFolder + '/fastclick/lib/fastclick.' + releasePostName + 'js' : '',
 		global.cfg.loader.bower.jquery ? bowerFolder + '/jquery/dist/jquery.' + releasePostName + 'js' : '',
-		bootstrapBower && (bootstrapBower['js-prod'] || bootstrapBower['js-dev'])  ? bowerFolder + '/bootstrap/dist/js/bootstrap.' + releasePostName + 'js' : '',
-		global.cfg.compress ? bowerFolder + '/lz-string/libs/lz-string.' + releasePostName + 'js' : '',
-		global.cfg.loader.bower.swiper ? bowerFolder + '/swiper/dist/js/swiper.' + releasePostName + 'js' : ''
+		global.cfg.compress ? bowerFolder + '/lz-string/libs/lz-string.' + releasePostName + 'js' : ''
 	];
 	var libsMin = gulp.src(libs)
 			.pipe(gif(cfg.loader.release, strip({safe:false, block:false})));
@@ -133,50 +129,19 @@ gulp.task('make:loader:js',  function () {
 });
 
 gulp.task('make:loader:css', ['css:loader'],  function () {
-	var releasePostName = (global.cfg.loader.release) ? 'min.' : '';
-
-    var bowerFolder = global.cfg.loader.folders.bower;
-
-    var cssLib = [
-		global.cfg.loader.bower.bootstrap ? bowerFolder + '/bootstrap/dist/css/bootstrap.'+releasePostName+'css' : '',
-		//global.cfg.loader.bootstrap ? bowerFolder + '/bootstrap/dist/css/bootstrap-theme.'+releasePostName+'css ': '',
-		global.cfg.loader.bower.swiper ? bowerFolder + '/swiper/dist/css/swiper.'+releasePostName+'css' : ''
-	];
-
-	var cssLibToMin = [
-		//global.cfg.folders.bower + '/dist/css/css.css'
-	];
-
 	var cssLoader = [
 		global.cfg.loader.folders.www + '/css/loader.css',
 		global.cfg.loader.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.css'
 	];
 
 	return streamqueue({ objectMode: true },
-			gulp.src(cssLib)
-				.pipe(gif(global.cfg.loader.bower.bootstrap, replace('../fonts/glyphicons','fonts/glyphicons')))
-				.pipe(strip({safe:false, block:false})),
-			merge(
-				gulp.src(cssLoader),
-				gulp.src(cssLibToMin)
-			)
+			gulp.src(cssLoader)
 			.pipe(strip({safe:false, block:false}))
 			.pipe(gif(global.cfg.loader.release, minifycss()))
 		)
 		.on('error', gutil.log)
 		.pipe(concat('/-compiledLoader.css',{newLine: ' '}))
 		.pipe(gulp.dest(global.cfg.loader.folders.temp));
-});
-
-gulp.task('copy:bootstrap:fonts', function (cb) {
-	if(global.cfg.loader.bower.bootstrap){
-		fs.copySync(
-			global.cfg.loader.folders.bower + '/bootstrap/dist/fonts',
-			global.cfg.loader.folders.build + '/assets/fonts'
-		);
-		console.logGreen('Bootstrap fonts copied');
-	}
-	cb();
 });
 
 gulp.task('css:loader', function () {

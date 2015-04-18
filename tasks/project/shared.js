@@ -38,10 +38,6 @@ exports.copyLoader = function(cb){
 
 	fs.copySync(pathSrc +'/'+ global.cfg.loader.filesDest.index, pathDest +'/'+ global.cfg.loader.filesDest.index);
 
-	if(global.cfg.loader.bower.bootstrap){
-		fs.copySync(pathSrc +'/assets', pathDest +'/');
-	}
-
 	if (global.cfg.cordova) {
 		fs.copySync(pathSrc +'/'+global.cfg.loader.filesDest.indexCordova, pathDest +'/'+ global.cfg.loader.filesDest.indexCordova);
 	}
