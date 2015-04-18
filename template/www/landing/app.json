@@ -1,6 +1,20 @@
 {
 	"files": [
 		{
+			"file": "font-awesome.css",
+			"path": "vendors/theme/assets/font-awesome/css",
+			"autoPrefix": false,
+			"linter": false,
+			"makeMin": true,
+			"overwrite": false,
+			"genSprite": false,
+			"replaces": {
+				"pre": [
+					["../template/vendors/theme/assets/font-awesome/", ""]
+				]
+			}
+		},
+		{
 			"file": "bootstrap.css",
 			"path": "vendors/bower_components/bootstrap/dist/css",
 			"minificated": true,
@@ -14,11 +28,6 @@
 					]
 				}
 			}
-		},
-		{
-			"file": "swiper.css",
-			"path": "vendors/bower_components/swiper/dist/css",
-			"minificated": true
 		},
 		{
 			"file": "bootstrap-reset.css",
@@ -53,18 +62,9 @@
 			"genSprite": false
 		},
 		{
-			"file": "font-awesome.css",
-			"path": "vendors/theme/assets/font-awesome/css",
-			"autoPrefix": false,
-			"linter": false,
-			"makeMin": true,
-			"overwrite": false,
-			"genSprite": false,
-			"replaces": {
-				"pre": [
-					["../template/vendors/theme/assets/font-awesome/", ""]
-				]
-			}
+			"file": "swiper.css",
+			"path": "vendors/bower_components/swiper/dist/css",
+			"minificated": true
 		},
 		{
 			"file": "landing.scss",
@@ -74,6 +74,10 @@
 					["../template/www/landing/assets/img/", "assets/img/"]
 				]
 			}
+		},
+		{
+			"file": "landing.html",
+			"path": "www/landing"
 		},
 		{
 			"file": "jquery.js",
@@ -92,10 +96,6 @@
 		},
 		{
 			"file": "landing.js",
-			"path": "www/landing"
-		},
-		{
-			"file": "landing.html",
 			"path": "www/landing"
 		}
 	]

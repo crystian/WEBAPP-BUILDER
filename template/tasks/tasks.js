@@ -34,7 +34,7 @@ gulp.task('build', function (cb) {
 		'copy:fonts',
 		'copy:imgs',
 		'copy:data',
-		'remove:temp',
+		(gutil.env.debug) ? 'nothing' : 'remove:temp',
 		cb);
 });
 

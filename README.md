@@ -163,6 +163,10 @@ file: {
 	'genSprite': true,		//generate sprite
 	'ignore': false,		//ignore on dev time, request by request
 	'replaces': {
+			'original': {	//modificate orginal version, combine con minificate 
+				'normal': [],
+				'min': []
+			},
 		'pre': [			//pre minificatedd
 			//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
 		],
@@ -314,9 +318,13 @@ I use [Webstorm IDE](http://www.jetbrains.com/webstorm), and we recommend it, be
 
 ## CHANGELOG:
 
-15/04/15 v0.0.3
+15/04/18 v0.0.5:
+mejoras sobre lo anterior, bootstrap, jquery y swiper removido y pasado al projecto
+
+15/04/15 v0.0.4
 !reestructuracion completa!, injecion dinamica de recursos segun stage con los app.json
 wrapeo de projecto
+muchismas cosas mas
 
 14/03/15 v0.0.2
 muchos cambios estructurales, integrando con app angular

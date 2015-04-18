@@ -41,6 +41,8 @@ gulp.task('clearCache', function (done) {
 	return magic.clearCache(done);
 });
 
+gulp.task('nothing', function (){/*just for dummy*/});
+
 gulp.task('genAppCache', function (){
 	return magic.genAppCache();
 });
