@@ -48,8 +48,8 @@ var copyTemplate = [{
 	name: 'copyTemplate',
 	message: 'Which template do you want to use?',
 	choices: [
-		{value: 'angular', name: 'Angular', default: true},
-		{value: 'empty', name: 'Empty'}
+		{value: 'template-ng', name: 'Angular', default: true},
+		{value: 'template-empty', name: 'Empty'}
 	]
 }];
 questions = questions.concat(copyTemplate);
@@ -128,7 +128,7 @@ inquirer.prompt(questions, function( answers ) {
 	if (answers.install){
 
 		if(answers.copyTemplate){
-			fs.copySync(cfg.folders.template, answers.projectCode);
+			fs.copySync(answers.copyTemplate, answers.projectCode);
 		}
 
 		fs.outputJSONSync(projectNameFile, {projectCode: answers.projectCode}, {encoding: 'utf8'});

@@ -14,7 +14,7 @@
 	"AppCacheFileName": ".cache",
 
 	"folders":{
-		"template": "templates/angular",
+		"template": "template-ng",
 		"www": "www",
 		"build": "build",
 		"temp": "build/.tmp",
