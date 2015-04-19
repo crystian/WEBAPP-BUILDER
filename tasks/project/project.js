@@ -29,7 +29,7 @@ gulp.task('build:fast', ['runMagic'], function (){
 	return magic.runJsonify(global.cfg.folders.www +'/apps.json');
 });
 
-gulp.task('runMagic', ['make:ngTemplate'], function (){
+gulp.task('runMagic', function (){
 	return magic.runMagic(global.cfg.folders.www +'/apps.json');
 });
 
@@ -58,7 +58,7 @@ gulp.task('cssw', function() {
 
 //servers
 gulp.task('serve', ['full:app'], function() {
-	return shared.makeServe('../', 'loader', global.cfg.ip, global.cfg.ports.serve);
+	return shared.makeServe(global.cfg.folderRoot +'/', 'loader', global.cfg.ip, global.cfg.ports.serve);
 });
 gulp.task('serve:build', ['full:app'], function() {
 	return shared.makeServe(global.cfg.folders.build, '', global.cfg.ip, global.cfg.ports.build);

@@ -1,0 +1,25 @@
+html, body, .height100 {
+	position: relative;
+	height: 100%;
+}
+
+body {
+	background: #eee;
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+}
+
+.kitten {
+	background-image: url(../template-empty/www/landing/assets/img/kitten.png);
+	height: 194px;
+	width: 259px;
+	margin: 20px auto;
+}
+
+.text {
+	padding-top: 20px;
+	text-align: center;
+	width: 100%;
+}

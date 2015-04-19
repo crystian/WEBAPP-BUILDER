@@ -13,8 +13,8 @@
       <excludeFolder url="file://$MODULE_DIR$/LOADER/vendors" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
-      <excludeFolder url="file://$MODULE_DIR$/template/build" />
-      <excludeFolder url="file://$MODULE_DIR$/template/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/template-ng/build" />
+      <excludeFolder url="file://$MODULE_DIR$/template-ng/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/vendors" />
     </content>
     <orderEntry type="inheritedJdk" />

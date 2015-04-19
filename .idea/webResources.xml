@@ -11,6 +11,7 @@
             <path value="file://$PROJECT_DIR$/APP/www" />
             <path value="file://$PROJECT_DIR$/loader" />
             <path value="file://$PROJECT_DIR$/template/www" />
+            <path value="file://$PROJECT_DIR$/template-ng/www" />
           </resourceRoots>
         </entryData>
       </entry>

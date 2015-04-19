@@ -22,7 +22,7 @@ try{
 		projectConfigLocalFile = 'project-config-local.json';
 
 	//first argument, second one by default
-	var projectCode = gutil.env.projectCode || 'template';
+	var projectCode = gutil.env.projectCode || 'template-ng';
 
 	var	fileConfig = require('./'+ projectConfigFile),
 		fileApp = projectCode +'/'+ projectConfigFile,

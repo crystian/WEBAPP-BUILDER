@@ -17,7 +17,7 @@ var gutil = require('gulp-util'),
 
 exports.makeServe = function(folder, path, ip, port) {
 	path = (path) ? path +'/': '';
-	console.logGreen('Remember, this is the url: http://'+ip+':'+port+'/'+ path);
+	console.logGreen('Remember, this is the url: http://'+ ip +':'+ port +'/'+ path);
 
 	return gulp.src(folder)
 		.pipe(webserver({
@@ -31,9 +31,8 @@ exports.makeServe = function(folder, path, ip, port) {
 
 };
 
-
 exports.copyLoader = function(cb){
-	var pathSrc = '../' + global.cfg.loader.folders.build,
+	var pathSrc = global.cfg.folderRoot +'/'+ global.cfg.loader.folders.build,
 		pathDest = global.cfg.folders.build;
 
 	fs.copySync(pathSrc +'/'+ global.cfg.loader.filesDest.index, pathDest +'/'+ global.cfg.loader.filesDest.index);

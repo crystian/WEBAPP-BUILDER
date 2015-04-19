@@ -79,7 +79,6 @@ gulp.task('make:loader:js',  function () {
 		bowerFolder + '/platform/platform.' + releasePostName + 'js',
 		bowerFolder + '/es6-promise/promise.' + releasePostName + 'js',
 		global.cfg.loader.bower.fastclick ? bowerFolder + '/fastclick/lib/fastclick.' + releasePostName + 'js' : '',
-		global.cfg.loader.bower.jquery ? bowerFolder + '/jquery/dist/jquery.' + releasePostName + 'js' : '',
 		global.cfg.compress ? bowerFolder + '/lz-string/libs/lz-string.' + releasePostName + 'js' : ''
 	];
 	var libsMin = gulp.src(libs)

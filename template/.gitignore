@@ -1,9 +1,0 @@
-/build
-/.idea/workspace.xml
-/project-config-local.json
-/node_modules
-/CORDOVA/www
-/CORDOVA/platforms/android/ant-build
-/CORDOVA/platforms/android/CordovaLib/ant-build
-/CORDOVA/platforms/android/assets/www
-/www/**/*.css

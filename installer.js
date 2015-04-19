@@ -31,7 +31,6 @@ var install = [{
 	message: 'Install it? (remember, this OVERWRITE your files)',
 	default: true
 }];
-
 questions = questions.concat(install);
 
 var projectCode = [{
@@ -41,11 +40,22 @@ var projectCode = [{
 	message: 'Project Code (without spaces and simbols):',
 	default: 'APP'
 }];
-
 questions = questions.concat(projectCode);
 
-var cordova = [{
+var copyTemplate = [{
 	when: function(r) {return r.projectCode;},
+	type: 'list',
+	name: 'copyTemplate',
+	message: 'Which template do you want to use?',
+	choices: [
+		{value: 'angular', name: 'Angular', default: true},
+		{value: 'empty', name: 'Empty'}
+	]
+}];
+questions = questions.concat(copyTemplate);
+
+var cordova = [{
+	when: function(r) {return r.copyTemplate;},
 	type: 'confirm',
 	name: 'cordova',
 	message: 'Install cordova?',
@@ -63,7 +73,6 @@ var cordova = [{
 	message: 'Package:',
 	default: 'com.example.hello'
 }];
-
 questions = questions.concat(cordova);
 
 var cordovaPlatform = [{
@@ -79,7 +88,6 @@ var cordovaPlatform = [{
 		{value: "wp8", name: "Windows Phone 8"}
 	]
 }];
-
 questions = questions.concat(cordovaPlatform);
 
 var cordovaPlugins = [{
@@ -108,7 +116,6 @@ var cordovaPlugins = [{
 		{name: "console", value: "org.apache.cordova.console"}
 	]
 }];
-
 questions = questions.concat(cordovaPlugins);
 
 inquirer.prompt(questions, function( answers ) {
@@ -120,7 +127,10 @@ inquirer.prompt(questions, function( answers ) {
 
 	if (answers.install){
 
-		fs.copySync(cfg.folders.template, answers.projectCode);
+		if(answers.copyTemplate){
+			fs.copySync(cfg.folders.template, answers.projectCode);
+		}
+
 		fs.outputJSONSync(projectNameFile, {projectCode: answers.projectCode}, {encoding: 'utf8'});
 		fs.outputJSONSync(answers.projectCode +'/'+ projectConfigLocalFile,{}, {encoding: 'utf8'});
 
