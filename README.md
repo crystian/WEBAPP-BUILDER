@@ -48,7 +48,7 @@ Tiempo estimado de desarrollo de todo esto, con multiples pruebas y demas: 4 mes
 
 * **Todo el producto termina en un unico archivo por app!**
 * LIBS precargadas: platform (requerida), fastClick, jquery, lz-string (opcionales)
-* Todo ocupa menos 400k (con todas las libs), mientras baja el archivo y siguientes queda mostrandose un lindo loading
+* Todo ocupa menos 50k (con todas las libs), mientras baja el archivo y siguientes queda mostrandose un lindo loading
 * Posibilidad de contener varios projectos y dentro de cada uno multiples apps (SPA)
 * Posibilidad de hacer y seleccionar distintos loading (CSS)
 * Multiples request o solo uno, y este comprimido con lz-string
