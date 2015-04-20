@@ -216,7 +216,7 @@ var loader = (function(){
 			doc.designMode = 'on';
 		}
 
-		if( cfg.showSkeletor ){
+		if(cfg.showSkeletor){
 			utils.showSkeletor();
 		}
 	}

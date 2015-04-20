@@ -64,6 +64,9 @@ gulp.task('make:config', function (cb) {
 	json.appRoot = '../'+ global.cfg.projectCode;
 	json.projectCode = global.cfg.projectCode;
 	json.www = global.cfg.folders.www;
+	json.showDeviceInfo = global.cfg.showDeviceInfo;
+	json.showSkeletor = global.cfg.showSkeletor;
+	json.contentEditable = global.cfg.contentEditable;
 
 	json.oneRequest = false;//flagOneRequest
 	json.phantom = false;//flagPhantom

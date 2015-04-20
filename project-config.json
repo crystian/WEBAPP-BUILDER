@@ -10,6 +10,9 @@
 	"cordova": false,
 	"isCordovaDevice": false,
 	"debugZoneActive": false,
+	"showDeviceInfo": false,
+	"showSkeletor": false,
+	"contentEditable": false,
 
 	"AppCacheFileName": ".cache",
 

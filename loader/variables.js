@@ -2,11 +2,6 @@
 * Created by Crystian on 2/11/2015.
 */
 
-//default values for test:
-_loaderCfg.showDeviceInfo	= 0;
-_loaderCfg.showSkeletor		= 0;
-_loaderCfg.contentEditable	= 0;
-
 //injected automatically on the app:
 _loaderCfg.isDevice		= 0; // setter by loader
 _loaderCfg.isDesktop	= 0; // setter by loader
