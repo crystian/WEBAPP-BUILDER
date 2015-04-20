@@ -129,6 +129,32 @@ inquirer.prompt(questions, function( answers ) {
 
 		if(answers.copyTemplate){
 			fs.copySync(answers.copyTemplate, answers.projectCode);
+
+			if(answers.copyTemplate === 'template-ng'){
+				var gulp = require('gulp'),
+					debug = require('gulp-debug'),
+					clean = require('gulp-clean'),
+					replace = require('gulp-replace');
+
+				gulp.src([
+					answers.projectCode +'/vendors/theme/style.css',
+					answers.projectCode +'/www/app/app.json',
+					answers.projectCode +'/www/app/app.scss',
+					answers.projectCode +'/www/landing/app.json',
+					answers.projectCode +'/www/landing/landing.scss'
+				], {base: './'})
+				.pipe(debug({verbose: true}))
+				.pipe(replace('/'+ answers.copyTemplate +'/','/'+ answers.projectCode +'/'))
+				.pipe(gulp.dest('.'));
+
+
+				gulp.src([
+					answers.projectCode +'/node_modules',
+					answers.projectCode +'/vendors/bower_components'
+				], {read: false})
+				.pipe(clean());
+			}
+
 		}
 
 		fs.outputJSONSync(projectNameFile, {projectCode: answers.projectCode}, {encoding: 'utf8'});
