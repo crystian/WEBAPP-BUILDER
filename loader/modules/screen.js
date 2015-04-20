@@ -6,7 +6,7 @@ loader.loadingScreen = (function(el, animationElements){
 	'use strict';
 
 	var t = false,
-		duration = 1200;
+		duration = 1000;
 
 	function on(callback) {
 		toggle(true, callback);
