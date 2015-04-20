@@ -107,6 +107,7 @@ loader.diag = (function (window) {
 
 	//http://ctrlq.org/code/19616-detect-touch-screen-javascript
 	function isTouchDevice() {
+		console.warn('isTouchDevice may does not work properly');
 		/*globals DocumentTouch*/
 		return true === ('ontouchstart' in window || window.DocumentTouch && document instanceof DocumentTouch);
 	}

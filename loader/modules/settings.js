@@ -56,6 +56,7 @@ loader.settings = (function (){
 		init: init,
 		remove: remove,
 		removeAlldata: removeAlldata,
+		vars: {},
 		set: set,
 		get: get
 	};
