@@ -27,7 +27,7 @@ set PATH_TEMP="%PATH_TEMP%;%%PHANTOM_HOME%%\bin"
 
 rem ANDROID
 setx ANDROID_HOME "%WS%"\android
-set PATH_TEMP="%PATH_TEMP%;%%ANDROID_HOME%%\tools;%%ANDROID_HOME%%\platform-tools"
+set PATH_TEMP="%PATH_TEMP%;%%ANDROID_HOME%%\tools;%%ANDROID_HOME%%\platform-tools;%%ANDROID_HOME%%\build-tools\22.0.1"
 
 setx GRAPHICSMAGICK %WS%\GraphicsMagick\1.3.19-Q16
 set PATH_TEMP="%PATH_TEMP%;%%GRAPHICSMAGICK%%"

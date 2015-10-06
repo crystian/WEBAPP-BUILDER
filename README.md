@@ -84,9 +84,11 @@ La idea es de un wrapper, el projecto nuevo deberia estar en su carpeta dentro *
 
 Hay un template que es la base de las apps y tambien sirve para testear el funcionamiento del loader.
 
-Luego de bajar el repo hacer instalacion con `node installer` (copia template a nueva carpeta y algunos ajustes menores) 
+Luego de bajar el repo e instalar los modulos hacer la instalacion con `node installer` (copia template a nueva carpeta y algunos ajustes menores), ver _Recipe_ 
 
-La instalacion creara tres archivos de configuracion: `project-config.json`, `project-config-local.json` en la carpeta nueva y `project-config-local.json` en el root. La idea es sobreescribir las variables al principal config (`./project-config.json`) y mantener una herencia. Las variables de configuracion tendran prioridad en este orden: `project-config.json` <- `project-config-local.json` <- `PROJECT/project-config.json` <- `PROJECT/project-config-local.json` (OjO, mantener estructura), para el "config" ver esa seccion.
+La instalacion creara tres archivos de configuracion: `project-config.json`, `project-config-local.json` en la carpeta nueva y `project-config-local.json` en el root. La idea es sobreescribir las variables al principal config (`./project-config.json`) y mantener una herencia. Las variables de configuracion tendran prioridad en este orden:   
+`project-config.json` <- `project-config-local.json` <- `PROJECT/project-config.json` <- `PROJECT/project-config-local.json`   
+(OjO, mantener estructura), para el "config" ver esa seccion.
 
 La instalacion tambien creara un archivo `project-active.json`, la unica funcion que tiene es determinar que projecto es el activo (folder), esto es util para configuraciones con mas de un projecto en el mismo APPFACTORY, por default ya setea el creado con el installer.
 
@@ -136,7 +138,7 @@ Recordar que solo hay que modificar el que esta dentro del proyecto y no el de A
 
 **NOTES:**
 
-1) El archivo **config.js** se genera automaticamente, **no deberia subirse al VCS**
+1) El archivo **config.js** se genera automaticamente, **no deberia subirse al VCS**  
 2) Si se modifican los archivos de configuracion (`project-config*.json`), es necesario hacer un `gulp full:loader` o `gulp config` (para generar el config.js)
 
 
