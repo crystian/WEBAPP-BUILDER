@@ -181,9 +181,9 @@ function runEachPreprocessors(url, appName){
 			continue;
 		}
 
-		var stream = gulp.src(source);
-			//.pipe(debug({verbose: true}))
-			//.on('error', gutil.log);
+		var stream = gulp.src(source)
+			.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
+			.on('error', gutil.log);
 
 		switch (type){
 			case 'scss':
@@ -261,9 +261,9 @@ function doMagic(url, appName, options) {
 			source = file.path +'/'+ file.min;
 		}
 
-		var stream = gulp.src(source);
-			//.pipe(debug({verbose: true}))
-			//.on('error', gutil.log);
+		var stream = gulp.src(source)
+			.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
+			.on('error', gutil.log);
 
 		if(!file.minificated && !file.makeMin){
 			stream = _minificate(stream, file, type, appName)
@@ -385,7 +385,7 @@ var _handle = {
 					padding: 1,
 					algorithm: 'binary-tree',
 					//isRetina: false,
-					engine: 'gm',
+					//engine: 'gm',
 					verbose: !!(gutil.env.debug),
 					groupBy: [
 						function(image) {

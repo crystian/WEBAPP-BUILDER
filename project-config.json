@@ -96,7 +96,7 @@
 
 	"loader":{
 		"name": "App Factory",
-		"version": "0.0.5",
+		"version": "0.1.0",
 		"release": true,
 		"loading": 1,
 		"filesDest": {

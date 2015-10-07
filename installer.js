@@ -13,7 +13,8 @@ var fs = require('fs-extra'),
 	exec = require('child_process').exec,
 	commons = require('./tasks/commons'),
 	cfg = require('./project-config.json'),
-	chalk = require('chalk');
+	chalk = require('chalk'),
+	rimraf = require('rimraf');
 
 var questions = [];
 
@@ -29,7 +30,7 @@ var install = [{
 	type: 'confirm',
 	name: 'install',
 	message: 'Install it? (remember, this OVERWRITE your files)',
-	default: true
+	default: false
 }];
 questions = questions.concat(install);
 
@@ -96,24 +97,26 @@ var cordovaPlugins = [{
 	message: "Plugins to install:",
 	name: "plugins",
 	choices: [
-		{name:"device",value: "org.apache.cordova.device",checked: true},
-		{name: "network-information", value: "org.apache.cordova.network-information",checked: true},
-		{name: "globalization", value: "org.apache.cordova.globalization",checked: true},
-		{name: "splashscreen", value: "org.apache.cordova.splashscreen",checked: true},
-		{name: "dialogs", value: "org.apache.cordova.dialogs"},
-		{name: "battery-status", value: "org.apache.cordova.battery-status"},
-		{name: "device-motion", value: "org.apache.cordova.device-motion"},
-		{name: "device-orientation", value: "org.apache.cordova.device-orientation"},
-		{name: "geolocation", value: "org.apache.cordova.geolocation"},
-		{name: "camera", value: "org.apache.cordova.camera"},
-		{name: "media-capture", value: "org.apache.cordova.media-capture"},
-		{name: "media", value: "org.apache.cordova.media"},
-		{name: "file", value: "org.apache.cordova.file"},
-		{name: "file-transfer", value: "org.apache.cordova.file-transfer"},
-		{name: "vibration", value: "org.apache.cordova.vibration"},
-		{name: "contacts", value: "org.apache.cordova.contacts"},
-		{name: "inappbrowser", value: "org.apache.cordova.inappbrowser"},
-		{name: "console", value: "org.apache.cordova.console"}
+		{name:"device",value: "cordova-plugin-device",checked: true},
+		{name: "network-information", value: "cordova-plugin-network-information",checked: true},
+		{name: "globalization", value: "cordova-plugin-globalization",checked: true},
+		{name: "splashscreen", value: "cordova-plugin-splashscreen",checked: true},
+		{name: "whitelist", value: "cordova-plugin-whitelist",checked: true},
+		{name: "dialogs", value: "cordova-plugin-dialogs"},
+		{name: "battery-status", value: "cordova-plugin-battery-status"},
+		{name: "device-motion", value: "cordova-plugin-device-motion"},
+		{name: "device-orientation", value: "cordova-plugin-device-orientation"},
+		{name: "geolocation", value: "cordova-plugin-geolocation"},
+		{name: "camera", value: "cordova-plugin-camera"},
+		{name: "media-capture", value: "cordova-plugin-media-capture"},
+		{name: "media", value: "cordova-plugin-media"},
+		{name: "file", value: " cordova-plugin-file"},
+		{name: "file-transfer", value: "cordova-plugin-file-transfer"},
+		{name: "vibration", value: "cordova-plugin-vibration"},
+		{name: "contacts", value: "cordova-plugin-contacts"},
+		{name: "statusbar", value: "cordova-plugin-statusbar"},
+		{name: "inappbrowser", value: "cordova-plugin-inappbrowser"},
+		{name: "console", value: "cordova-plugin-console"}
 	]
 }];
 questions = questions.concat(cordovaPlugins);
@@ -234,6 +237,6 @@ function installCordovaPl(text, pl, projectCode, cb){/* plugins and platforms */
 
 function finalCordova(projectCode){
 	var www = projectCode + '/' + cfg.folders.cordova + '/www';
-	fs.deleteSync(www);
+	rimraf.sync(www);
 	fs.mkdirsSync(www);
 }
