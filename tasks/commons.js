@@ -14,7 +14,7 @@ var gutil = require('gulp-util'),
 	csslint = require('gulp-csslint'),
 	replace = require('gulp-replace'),
 	inject = require('gulp-inject'),
-	clean = require('gulp-clean'),
+	del = require('del'),
 	gulp = require('gulp');
 
 gulp.task('remove:loader:build', function() {
@@ -22,21 +22,21 @@ gulp.task('remove:loader:build', function() {
 			global.cfg.loader.folders.screens,
 			global.cfg.loader.folders.build
 		], {read: false})
-		.pipe(clean());
+		.pipe(del);
 });
 
 gulp.task('remove:loader:temp', function() {
 	return gulp.src([
 			global.cfg.loader.folders.temp
 		], {read: false})
-		.pipe(clean());
+		.pipe(del);
 });
 
 gulp.task('remove:cordova:www', function () {
 	return gulp.src([
 		global.cfg.folders.cordovaWWW
 	], {read: false})
-		.pipe(clean());
+		.pipe(del);
 });
 
 exports.jsMaker = function(stream) {

@@ -320,7 +320,10 @@ I use [Webstorm IDE](http://www.jetbrains.com/webstorm), and we recommend it, be
 
 ## CHANGELOG:
 
-15/04/18 v0.0.5:
+15/10/08 v0.1.0
+dependencias actualizadas
+
+15/04/18 v0.0.5
 mejoras sobre lo anterior, bootstrap, jquery y swiper removido y pasado al projecto
 
 15/04/15 v0.0.4

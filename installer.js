@@ -11,10 +11,11 @@ Remember, you need permission to execute this file (in *nix ambient)
 var fs = require('fs-extra'),
 	inquirer = require('inquirer'),
 	exec = require('child_process').exec,
-	commons = require('./tasks/commons'),
 	cfg = require('./project-config.json'),
 	chalk = require('chalk'),
-	rimraf = require('rimraf');
+	del = require('del');
+
+require('./tasks/commons');
 
 var questions = [];
 
@@ -136,7 +137,6 @@ inquirer.prompt(questions, function( answers ) {
 			if(answers.copyTemplate === 'template-ng'){
 				var gulp = require('gulp'),
 					debug = require('gulp-debug'),
-					clean = require('gulp-clean'),
 					replace = require('gulp-replace');
 
 				gulp.src([
@@ -150,12 +150,10 @@ inquirer.prompt(questions, function( answers ) {
 				.pipe(replace('/'+ answers.copyTemplate +'/','/'+ answers.projectCode +'/'))
 				.pipe(gulp.dest('.'));
 
-
-				gulp.src([
+				del([
 					answers.projectCode +'/node_modules',
 					answers.projectCode +'/vendors/bower_components'
-				], {read: false})
-				.pipe(clean());
+				]);
 			}
 
 		}
@@ -163,7 +161,7 @@ inquirer.prompt(questions, function( answers ) {
 		fs.outputJSONSync(projectNameFile, {projectCode: answers.projectCode}, {encoding: 'utf8'});
 		fs.outputJSONSync(answers.projectCode +'/'+ projectConfigLocalFile,{}, {encoding: 'utf8'});
 
-		var op = require('./'+ cfg.folders.template +'/'+ projectConfigFile);
+		var op = require('./'+ answers.copyTemplate +'/'+ projectConfigFile);
 		op.cordova = answers.cordova;
 
 		fs.outputJSONSync(projectConfigLocalFile, {}, {encoding: 'utf8'});
@@ -237,6 +235,5 @@ function installCordovaPl(text, pl, projectCode, cb){/* plugins and platforms */
 
 function finalCordova(projectCode){
 	var www = projectCode + '/' + cfg.folders.cordova + '/www';
-	rimraf.sync(www);
-	fs.mkdirsSync(www);
+	fs.emptyDirSync(www);
 }
