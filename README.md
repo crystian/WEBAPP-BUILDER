@@ -21,27 +21,29 @@ Tiempo estimado de desarrollo de todo esto, con multiples pruebas y demas: 4 mes
 ### From Root (loader):
 
 * `gulp config` Genera archivo config.js con toda la configuracion del loader & project
+* `gulp build:loader` Tarea por defecto. Build rapido, sin base/bower, solo build
 * `gulp full:loader` Bower y build completo
-* `gulp build:fast` Tarea por defecto. Build rapido, sin base/bower, solo build
+* `gulp serve:loader` Server directo del directorio de desarrollo (www), usando a 'template-empty' como app (cambiar desde project-active.json)
+* `gulp css:loader`
+
 * `gulp test` Test via nightmare, principalmente user-agents, validacion de compatibilidad, etc
 * `gulp release` Es un full pero con tests, recomendado antes de una release de la app producto.
-* `gulp serve:loader` Server directo del directorio de desarrollo (www), usando a 'template' como app
-* `gulp css:loader`
 
 ### From App:
 
-* `gulp default` procesa todo el proyecto, pero no el loader, usa cache
 * `gulp full` todo el proceso de building, incluyendo sin cache
-* `gulp a` run an android
+* `gulp default` procesa todo el proyecto, pero no el loader ni preprocessors, usa cache
 * `gulp css` force para generar el css, especial para un watcher
-* `gulp loader` genera el loader y lo deja en la carpeta `build`
-* `gulp build:fast` hace todo el procedimineto menos bower y generar el config
-* `gulp optimizeImages` todas las imagenes de la carpeta `build`
+* `gulp cssw` watcher para css 
 * `gulp clearCache` de imagenes
 * `gulp genAppCache` genera el manifest de cache
-* `gulp cssw` watcher para css 
+* `gulp optimizeImages` todas las imagenes de la carpeta `build`
 * `gulp serve` server en modo dev directo al proyecto
 * `gulp serve:build` server del dir build
+
+* `gulp a` run an android
+* `gulp loader` genera el loader y lo deja en la carpeta `build`
+* `gulp build:fast` hace todo el procedimineto menos bower y generar el config
 * `gulp serve:api` server de api (a modo de ejemplo para template)
 
 ## Features:

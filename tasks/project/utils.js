@@ -4,15 +4,10 @@
 
 // share with app
 
-var gutil = require('gulp-util'),
-	//debug = require('gulp-debug'),
-	jshint = require('gulp-jshint'),
-	chalk = require('chalk'),
-	fs = require('fs-extra'),
-	utils = require('./utils'),
+var chalk = require('chalk'),
 	path = require('path'),
-	gulp = require('gulp');
-
+	fs = require('fs-extra'),
+	gutil = require('gulp-util');
 
 //COMMONS between project and loader:
 console.logWarn = function (m) {
@@ -24,7 +19,7 @@ console.logGreen = function (m) {
 };
 
 console.logRed = function (m) {
-	console.log(chalk.white.bold.bgRed(m));
+	console.log(chalk.red.bold(m));
 };
 
 exports.fileExist = function(fileName){

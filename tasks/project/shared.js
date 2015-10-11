@@ -2,24 +2,23 @@
  * Created by Crystian on 3/28/2015.
  */
 
-var gutil = require('gulp-util'),
-	debug = require('gulp-debug'),
-	exec = require('child_process').exec,
-	fs = require('fs-extra'),
-	replace = require('replace'),
-	utils = require('./utils.js'),
+var gulp = require('gulp'),
+	webserver = require('gulp-webserver'),
 	htmlmin = require('gulp-htmlmin'),
 	gif = require('gulp-if'),
-	webserver = require('gulp-webserver'),
 	strip = require('gulp-strip-comments'),
-	gulp = require('gulp');
-
+	commons = require('../commons'),
+	exec = require('child_process').exec,
+	utils = require('./utils.js'),
+	fs = require('fs-extra'),
+	gutil = require('gulp-util');
 
 exports.makeServe = function(folder, path, ip, port) {
 	path = (path) ? path +'/': '';
 	console.logGreen('Remember, this is the url: http://'+ ip +':'+ port +'/'+ path);
 
 	return gulp.src(folder)
+		.pipe(commons.debugeame())
 		.pipe(webserver({
 			host: ip,
 			port: port,

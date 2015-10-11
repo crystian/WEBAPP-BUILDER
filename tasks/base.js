@@ -2,22 +2,19 @@
 * Created by Crystian on 15/02/02.
 */
 
-var gutil = require('gulp-util'),
-	//debug = require('gulp-debug'),
-	commons = require('./commons'),
-	inject = require('gulp-inject'),
-	replace = require('gulp-replace'),
-	rename = require('gulp-rename'),
+var gulp = require('gulp'),
 	fs = require('fs-extra'),
+	commons = require('./commons'),
+	rename = require('gulp-rename'),
 	cheerio = require('gulp-cheerio'),
-	gulp = require('gulp');
+	replace = require('gulp-replace'),
+	inject = require('gulp-inject'),
+	gutil = require('gulp-util');
 
-
-gulp.task('make:base', ['make:bower', 'make:index', 'make:config'], function() {
-	//replace references on index.html
+//replace references on index.html
+gulp.task('make:base:index', ['make:bower', 'make:index', 'make:config'], function() {
 	return gulp.src(global.cfg.loader.folders.www +'/'+ global.cfg.loader.filesDest.index)
-		//.on('error', gutil.log)
-		//.pipe(debug({verbose: true}))
+		.pipe(commons.debugeame())
 		.pipe(commons.injectContent(global.cfg.loader.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.html','loadingHtml'))
 		.pipe(inject(gulp.src(global.cfg.loader.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.css', {read: false}), {name: 'loadingCss', relative:'true'}))
 		.pipe(inject(gulp.src(global.cfg.varJs, {read: false}), {name: 'bower', relative:'true'}))
@@ -25,12 +22,11 @@ gulp.task('make:base', ['make:bower', 'make:index', 'make:config'], function() {
 		.pipe(gulp.dest(global.cfg.loader.folders.www));
 });
 
+// make a new index on loader folder
 gulp.task('make:index', function () {
 	return gulp.src(global.cfg.loader.folders.www + '/index.tpl.html')
-		//.on('error', gutil.log)
-		//.pipe(debug({verbose: true}))
+		.pipe(commons.debugeame())
 		.pipe(rename(global.cfg.loader.filesDest.index))
-		.pipe(gulp.dest(global.cfg.loader.folders.www))
 		.pipe(cheerio({
 			run: function ($) {
 				var cfg = global.cfg;

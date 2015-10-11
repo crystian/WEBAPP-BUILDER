@@ -2,15 +2,14 @@
  * Created by Crystian on 3/27/2015.
  */
 
-
-var gutil = require('gulp-util'),
-	//debug = require('gulp-debug'),
+var gulp = require('gulp'),
+	commons = require('./commons'),
+	bowerify = require('gulp-bower'),
 	utils = require('./project/utils.js'),
+	fs = require('fs-extra'),
 	uglify = require('gulp-uglify'),
 	rename = require('gulp-rename'),
-	fs = require('fs-extra'),
-	bowerify = require('gulp-bower'),
-	gulp = require('gulp');
+	gutil = require('gulp-util');
 
 /*
  necesitaba hacer el minificado despues de la bajada, me complico la vida...,
@@ -29,6 +28,7 @@ gulp.task('make:bower', ['download:bower'], function(cb) {
 	for (; i < len; i++) {
 		var s = global.cfg.varLibsToMin[i];
 		gulp.src(s.jsDev)
+			.pipe(commons.debugeame())
 			.pipe(uglify())
 			.pipe(rename(s.name))
 			.pipe(gulp.dest(s.pa))
@@ -40,7 +40,6 @@ gulp.task('make:bower', ['download:bower'], function(cb) {
 				}
 			});
 	}
-
 });
 
 gulp.task('download:bower',['generator:bower'], function() {
@@ -59,7 +58,6 @@ gulp.task('generator:bower',['parse:bower'],  function(cb) {
 		cb();
 	});
 });
-
 
 gulp.task('parse:bower', function(cb) {
 	var bower = Object.keys(global.cfg.loader.bower),

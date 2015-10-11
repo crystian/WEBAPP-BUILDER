@@ -4,10 +4,10 @@
 
 var gulp = require('gulp'),
 	requireDir = require('require-dir'),
-	_ = require('lodash'),
-	gutil = require('gulp-util'),
 	folderRoot = '..',
-	utils = require(folderRoot +'/tasks/project/utils.js');
+	utils = require(folderRoot+ '/tasks/project/utils.js'),
+	_ = require('lodash'),
+	gutil = require('gulp-util');
 
 //require('time-require');
 require(folderRoot +'/tasks/project/shared.js');
@@ -26,6 +26,7 @@ try{
 	}
 
 	var projectCode = require(folderRoot +'/'+ projectNameFile).projectCode;
+
 	//merge between default and specify:
 	global.cfg = _.merge({},
 		require(folderRoot +'/'+ projectConfigFile),

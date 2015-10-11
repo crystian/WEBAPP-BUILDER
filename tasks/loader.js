@@ -2,25 +2,22 @@
 * Created by Crystian on 10/19/2014.
 */
 
-var gutil = require('gulp-util'),
-	debug = require('gulp-debug'),
+var gulp = require('gulp'),
 	commons = require('./commons'),
+	streamqueue =require('streamqueue'),
+	strip = require('gulp-strip-comments'),
 	gif = require('gulp-if'),
+	minifycss = require('gulp-minify-css'),
+	concat = require('gulp-concat'),
+	replace = require('gulp-replace'),
 	htmlreplace = require('gulp-html-replace'),
 	htmlmin = require('gulp-htmlmin'),
-	concat = require('gulp-concat'),
-	minifycss = require('gulp-minify-css'),
-	rename = require('gulp-rename'),
-	streamqueue =require('streamqueue'),
-	merge =require('merge-stream'),
-	replace = require('gulp-replace'),
 	header = require('gulp-header'),
 	footer = require('gulp-footer'),
-	strip = require('gulp-strip-comments'),
-	fs = require('fs-extra'),
-	gulp = require('gulp');
+	rename = require('gulp-rename'),
+	gutil = require('gulp-util');
 
-gulp.task('make:loader', ['make:loader:js', 'make:loader:css'],  function () {
+gulp.task('make:loader:html', ['make:loader:js', 'make:loader:css'],  function () {
 
 	var htmlminOptions = {
 		removeComments: true,
@@ -31,8 +28,7 @@ gulp.task('make:loader', ['make:loader:js', 'make:loader:css'],  function () {
 	};
 
 	var stream = gulp.src(global.cfg.loader.folders.www + '/'+global.cfg.loader.filesDest.index)
-		//.pipe(debug({verbose: true}))
-		//.on('error', gutil.log)
+		.pipe(commons.debugeame())
 		.pipe(htmlreplace())
 		.pipe(commons.injectContent(global.cfg.loader.folders.temp +'/-compiledLoader.css','loaderCss','style'))
 		.pipe(commons.injectContent(global.cfg.loader.folders.temp +'/-compiledLoader.js','loaderJs','script'))
@@ -59,19 +55,21 @@ gulp.task('make:loader', ['make:loader:js', 'make:loader:css'],  function () {
 		I prefer it than run again all process to make other file
 		*/
 		stream = stream.pipe(rename(global.cfg.loader.filesDest.indexCordova))
-		//.pipe(debug({verbose: true}))
-		.pipe(gif(global.cfg.loader.release,
-			replace(',isCordovaDevice:!1,', ',isCordovaDevice:1,'),
-			replace('"isCordovaDevice": false,', '"isCordovaDevice": true,')
-		))
-		.pipe(gulp.dest(global.cfg.loader.folders.build));
+			.pipe(commons.debugeame())
+			.pipe(gif(global.cfg.loader.release,
+				replace(',isCordovaDevice:!1,', ',isCordovaDevice:1,'),
+				replace('"isCordovaDevice": false,', '"isCordovaDevice": true,')
+			))
+			.pipe(gulp.dest(global.cfg.loader.folders.build));
 	}
 
 	return stream;
 });
 
 gulp.task('make:loader:js',  function () {
-	var releasePostName = (global.cfg.loader.release) ? 'min.' : '';
+	var releasePostName = (global.cfg.loader.release) ? 'min.' : '',
+		www = global.cfg.loader.folders.www;
+
 	//libs
     var bowerFolder = global.cfg.loader.folders.bower;
 
@@ -87,33 +85,34 @@ gulp.task('make:loader:js',  function () {
 
 	//header script
 	var loaderScripts1 = [
-		global.cfg.loader.folders.www + '/config.js',
-		global.cfg.loader.folders.www + '/modules/compatibility.js'
+		www + '/config.js',
+		www + '/modules/compatibility.js'
 	];
-	var loaderScripts1Stream = gulp.src(loaderScripts1)
-		.pipe(replace(/(\"build\".*\:[ ]?)(\w*)/,'$1true'))//just for index built
-		;
+	var loaderScripts1Stream = gulp.src(loaderScripts1);
+		//TODO REVIEW
+		//.pipe(replace(/(\"build\".*\:[ ]?)(\w*)/,'$1true'))//just for index built
+		//;
 
 	loaderScripts1Stream = commons.jsMaker(loaderScripts1Stream);
 	//endheader script
 
 	//body script
 	var loaderScripts2 = [
-		global.cfg.loader.folders.www + '/modules/shortcuts.js',
-		global.cfg.loader.folders.www + '/loader.js',
-		global.cfg.loader.folders.www + '/variables.js',
-		global.cfg.loader.folders.www + '/modules/utils.js',
-		global.cfg.loader.folders.www + '/modules/diag.js',
-		global.cfg.loader.folders.www + '/modules/polyfill-ie.js',
-		global.cfg.loader.folders.www + '/modules/settings.js',
-		global.cfg.loader.folders.www + '/modules/lang.js',
-		global.cfg.loader.folders.www + '/modules/events.js',
-		global.cfg.loader.folders.www + '/modules/redefine.js',
-		global.cfg.loader.folders.www + '/modules/screen.js',
-		global.cfg.loader.folders.www + '/modules/cordovaConnection.js',
-		global.cfg.loader.folders.www + '/modules/analytics.js',
-		global.cfg.loader.folders.www + '/modules/mixpanel.js',
-		global.cfg.loader.folders.www + '/modules/boot.js'
+		www + '/modules/shortcuts.js',
+		www + '/loader.js',
+		www + '/variables.js',
+		www + '/modules/utils.js',
+		www + '/modules/diag.js',
+		www + '/modules/polyfill-ie.js',
+		www + '/modules/settings.js',
+		www + '/modules/lang.js',
+		www + '/modules/events.js',
+		www + '/modules/redefine.js',
+		www + '/modules/screen.js',
+		www + '/modules/cordovaConnection.js',
+		www + '/modules/analytics.js',
+		www + '/modules/mixpanel.js',
+		www + '/modules/boot.js'
 	];
 	var loaderScripts2Stream = gulp.src(loaderScripts2)
 		.pipe(gif(global.cfg.release && global.cfg.compress, replace('if(!loader.cfg.compress){return data;}//flagCompress','')));
@@ -122,7 +121,7 @@ gulp.task('make:loader:js',  function () {
 	//endbody script
 
 	return streamqueue({ objectMode: true }, loaderScripts1Stream, libsMin, loaderScripts2Stream)
-		.on('error', gutil.log)
+		.pipe(commons.debugeame())
 		.pipe(concat('/-compiledLoader.js',{newLine: ';'}))
 		.pipe(gulp.dest(global.cfg.loader.folders.temp));
 });
@@ -133,12 +132,12 @@ gulp.task('make:loader:css', ['css:loader'],  function () {
 		global.cfg.loader.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.css'
 	];
 
-	return streamqueue({ objectMode: true },
-			gulp.src(cssLoader)
-			.pipe(strip({safe:false, block:false}))
+	return streamqueue(
+		{ objectMode: true },
+		gulp.src(cssLoader)
+			.pipe(strip({safe:false, block:false})) //remove comments
 			.pipe(gif(global.cfg.loader.release, minifycss()))
 		)
-		.on('error', gutil.log)
 		.pipe(concat('/-compiledLoader.css',{newLine: ' '}))
 		.pipe(gulp.dest(global.cfg.loader.folders.temp));
 });

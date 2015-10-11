@@ -7,12 +7,12 @@
 
 //REMEMBER!: All public TASKS ARE ON tasks.js
 
-var gutil = require('gulp-util'),
-	gulp = require('gulp'),
+var gulp = require('gulp'),
 	requireDir = require('require-dir'),
-	extend = require('extend'),
+	folderRoot = '.',
+	utils = require(folderRoot+ '/tasks/project/utils.js'),
 	_ = require('lodash'),
-	utils = require('./tasks/project/utils.js');
+	gutil = require('gulp-util');
 
 //require('time-require');
 requireDir('./tasks');
@@ -22,15 +22,14 @@ try{
 		projectConfigLocalFile = 'project-config-local.json';
 
 	//first argument, second one by default
-	var projectCode = gutil.env.projectCode || 'template-ng';
+	var projectCode = gutil.env.projectCode || 'template-empty';
 
-	var	fileConfig = require('./'+ projectConfigFile),
-		fileApp = projectCode +'/'+ projectConfigFile,
+	var	fileApp = projectCode +'/'+ projectConfigFile,
 		fileAppLocal = projectCode +'/'+ projectConfigLocalFile;
 
 	//merge between default and specify:
 	global.cfg = _.merge({},
-		fileConfig,
+		require('./'+ projectConfigFile),
 		utils.fileExist(projectConfigLocalFile) && require('./'+ projectConfigLocalFile),
 		utils.fileExist(fileApp) && require('./'+ fileApp),
 		utils.fileExist(fileAppLocal) && require('./'+ fileAppLocal)

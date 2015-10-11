@@ -5,33 +5,32 @@
  * Don't touch or you will dead! ... some day
  */
 
-var gutil = require('gulp-util'),
-	debug = require('gulp-debug'),
+var gulp = require('gulp'),
+	aux = require('./magic_auxiliar'),
+	_ = require('lodash'),
 	utils = require('./utils'),
+	commons = require('../commons'),
 	strip = require('gulp-strip-comments'),
+	gif = require('gulp-if'),
 	minifycss = require('gulp-minify-css'),
+	rename = require('gulp-rename'),
+	uglify = require('gulp-uglify'),
+	fs = require('fs-extra'),
+	StreamQueue = require('streamqueue'),
+	concat = require('gulp-concat'),
+	shared = require('./shared'),
+	sprite = require('gulp-sprite-generator'),
+	replace = require('gulp-replace'),
 	sass = require('gulp-sass'),
+	less = require('gulp-less'),
 	autoprefixer = require('gulp-autoprefixer'),
 	csslint = require('gulp-csslint'),
-	replace = require('gulp-replace'),
-	concat = require('gulp-concat'),
-	fs = require('fs-extra'),
-	_ = require('lodash'),
-	uglify = require('gulp-uglify'),
-	gif = require('gulp-if'),
-	less = require('gulp-less'),
-	rename = require('gulp-rename'),
-	sprite = require('gulp-sprite-generator'),
+	LZString = require('../../vendors/lz-string/libs/lz-string'),
 	imagemin = require('gulp-imagemin'),
 	pngquant = require('imagemin-pngquant'),
-	StreamQueue = require('streamqueue'),
-	aux = require('./magic_auxiliar'),
 	cache = require('gulp-cache'),
-	shared = require('./shared'),
 	manifest = require('gulp-manifest'),
-	commons = require('../commons'),
-	LZString = require('../../vendors/lz-string/libs/lz-string'),
-	gulp = require('gulp');
+	gutil = require('gulp-util');
 
 var defaults = {
 	file: {
@@ -60,19 +59,19 @@ var defaults = {
 		}
 	},
 	validCssExtensions : ['sass', 'scss','less', 'css'],
-	validExtensions : ['html', 'js'],
+	validExtensions : ['html', 'js']
 
     //??
-	options: {
-		extensionToProcess : {
-			'scss': true,
-			'sass': true,
-			'less': true,
-			'css': true,
-			'js': true,
-			'html': true
-		}
-	}
+	//options: {
+		//extensionToProcess : {
+		//	'scss': true,
+		//	'sass': true,
+		//	'less': true,
+		//	'css': true,
+		//	'js': true,
+		//	'html': true
+		//}
+	//}
 };
 
 exports.runPreprocessors = function(appsJson) {
@@ -111,15 +110,16 @@ exports.genAppCache = function() {
 
 exports.optimizeImages = function() {
 	return gulp.src(global.cfg.folders.build +'/img/**/*')
-		.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
-		.pipe(cache(imagemin({
+		.pipe(commons.debugeame())
+		.pipe(imagemin({
 			progressive: true,
 			svgoPlugins: [{removeViewBox: false}],
 			use: [pngquant()]
-		})))
+		}))
 		.pipe(gulp.dest(global.cfg.folders.build + '/img'));
 };
-exports.clearCache =function (done) {
+
+exports.clearCache = function (done) {
 	return cache.clearAll(done);
 };
 
@@ -153,7 +153,6 @@ function runEachPreprocessors(url, appName){
 		var fileName = utils.getFileName(file.file),
 			type = utils.getExtensionFile(file.file);
 
-
 		//valid types
 		if(defaults.validCssExtensions.indexOf(type)===-1){continue;}
 
@@ -182,8 +181,7 @@ function runEachPreprocessors(url, appName){
 		}
 
 		var stream = gulp.src(source)
-			.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
-			.on('error', gutil.log);
+			.pipe(commons.debugeame());
 
 		switch (type){
 			case 'scss':
@@ -221,16 +219,17 @@ function runEachPreprocessors(url, appName){
 	return streams;
 }
 
-
 function doMagic(url, appName, options) {
-	var files = require(global.cfg.appRoot +'/'+ url).files;
+	//console.log(url, appName, options);
+
+	var files = require(global.cfg.appRoot + '/' + url).files;
 	var i = 0,
 		l = files.length,
 		streamsFinal = undefined,
 		streams = [];
 
 	for (; i < l; i++) {
-		var file =  _.merge({}, defaults.file, files[i]);
+		var file = _.merge({}, defaults.file, files[i]);
 
 		if(aux.isNotActive(file)){continue;}
 
@@ -251,10 +250,10 @@ function doMagic(url, appName, options) {
 			continue;
 		}
 
+		//with "min" by default
 		file.min = file.min || utils.setPreExtensionFilename(file.file, 'min');
 
 		file.path = aux.makePath(file.path);
-
 		var source = file.path +'/'+ fileName + '.' + type;
 
 		if(file.minificated || file.makeMin){
@@ -262,11 +261,11 @@ function doMagic(url, appName, options) {
 		}
 
 		var stream = gulp.src(source)
-			.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
-			.on('error', gutil.log);
+			.pipe(commons.debugeame());
+		//console.log('source',source);
 
 		if(!file.minificated && !file.makeMin){
-			stream = _minificate(stream, file, type, appName)
+			stream = _minificate(stream, file, type, appName);
 		} else {
 			_modificateOriginal(file);
 
@@ -295,11 +294,13 @@ function doMagic(url, appName, options) {
 
 function runJsonify(path, app, options){
 
-	var json = {};
+	var temp = global.cfg.folders.temp,
+		json = {};
+
 	json.v = global.cfg.version;
-	json.j = fs.readFileSync(global.cfg.folders.temp +'/'+ app +'.js', {encoding: 'utf8'});
-	json.c = fs.readFileSync(global.cfg.folders.temp +'/'+ app +'.css', {encoding: 'utf8'});
-	json.h = fs.readFileSync(global.cfg.folders.temp +'/'+ app +'.html', {encoding: 'utf8'});
+	json.j = fs.readFileSync(temp +'/'+ app +'.js', {encoding: 'utf8'});
+	json.c = fs.readFileSync(temp +'/'+ app +'.css', {encoding: 'utf8'});
+	json.h = fs.readFileSync(temp +'/'+ app +'.html', {encoding: 'utf8'});
 
 	var b = JSON.stringify(json);
 
@@ -322,13 +323,13 @@ function _concat(_streams, _type, _appName){
 	return s;
 }
 
-function _minificateAndSave(stream, file, type){
-	stream = _minificate(stream, file, type);
-
-	stream = stream.pipe(gulp.dest(file.path));
-
-	return stream;
-}
+//function _minificateAndSave(stream, file, type){
+//	stream = _minificate(stream, file, type);
+//
+//	stream = stream.pipe(gulp.dest(file.path));
+//
+//	return stream;
+//}
 
 function _minificate(stream, file, type, appName){
 	//replaces previously to minimisation
@@ -353,6 +354,7 @@ function _modificateOriginal(file){
 	_modificateOriginalInternal(file, 'normal');
 	_modificateOriginalInternal(file, 'min');
 }
+
 function _modificateOriginalInternal(file, type){
 	var name = (type === 'min') ? file.min : file.file;
 
@@ -389,7 +391,9 @@ var _handle = {
 					verbose: !!(gutil.env.debug),
 					groupBy: [
 						function(image) {
-							//console.log('image',image);
+							if (gutil.env.verbose) {
+								console.dir(image);
+							}
 							//getting number of sprite folder
 							var num = /(sprite)(.)(\/)/.exec(image.url),
 								group = 1;
@@ -446,6 +450,7 @@ var _handle = {
 
 	'html': function(stream, file) {
 		//console.logWarn('HTML');
+
 		stream = shared.htmlMin(stream);
 		return stream;
 	}

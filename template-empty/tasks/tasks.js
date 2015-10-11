@@ -2,23 +2,16 @@
  * Created by Crystian on 4/6/2015.
  */
 
-var gutil = require('gulp-util'),
-	debug = require('gulp-debug'),
-	shared = require('../../tasks/project/shared.js'),
-	spawn = require('child_process').spawn,
-	fs = require('fs-extra'),
+var gulp = require('gulp'),
 	runSequence = require('run-sequence'),
-	node,
-	gulp = require('gulp');
+	gutil = require('gulp-util');
 
 //alias
 gulp.task('default',['build']);
 gulp.task('full',	['full:app']);
 
-
-gulp.task('full:app', function (cb) {
+gulp.task('full:app', ['remove:build'], function (cb) {
 	runSequence(
-		'remove:build',
 		'get:loader',
 		'css:app',
 		'build',

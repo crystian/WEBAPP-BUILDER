@@ -2,47 +2,42 @@
 * Created by Crystian on 15/02/02.
 */
 
-var gutil = require('gulp-util'),
-	//debug = require('gulp-debug'),
+var gulp = require('gulp'),
+	debug = require('gulp-debug'),
+	del = require('del'),
 	utils = require('./project/utils'),
-	removeCode = require('gulp-remove-code'),
-	uglify = require('gulp-uglify'),
-	jshint = require('gulp-jshint'),
-	gif = require('gulp-if'),
 	sass = require('gulp-sass'),
 	autoprefixer = require('gulp-autoprefixer'),
-	csslint = require('gulp-csslint'),
 	replace = require('gulp-replace'),
+	csslint = require('gulp-csslint'),
+	gif = require('gulp-if'),
+	through = require('through2'),
+	jshint = require('gulp-jshint'),
+	removeCode = require('gulp-remove-code'),
+	uglify = require('gulp-uglify'),
 	inject = require('gulp-inject'),
-	del = require('del'),
-	gulp = require('gulp');
+	gutil = require('gulp-util');
 
 gulp.task('remove:loader:build', function() {
-	return gulp.src([
-			global.cfg.loader.folders.screens,
-			global.cfg.loader.folders.build
-		], {read: false})
-		.pipe(del);
+	return del([
+		global.cfg.loader.folders.screens,
+		global.cfg.loader.folders.build
+	]);
 });
 
 gulp.task('remove:loader:temp', function() {
-	return gulp.src([
-			global.cfg.loader.folders.temp
-		], {read: false})
-		.pipe(del);
+	return del(global.cfg.loader.folders.temp);
 });
 
-gulp.task('remove:cordova:www', function () {
-	return gulp.src([
-		global.cfg.folders.cordovaWWW
-	], {read: false})
-		.pipe(del);
-});
+//gulp.task('remove:cordova:www', function () {
+//	return gulp.src([
+//		global.cfg.folders.cordovaWWW
+//	], {read: false})
+//		.pipe(del);
+//});
 
 exports.jsMaker = function(stream) {
 	return stream
-		//.pipe(debug({verbose: true}))
-		//.on('error', gutil.log)
 		.pipe(gif(cfg.loader.release, jshint({lookup:false, debug:false})))
 		.pipe(gif(cfg.loader.release, jshint.reporter('jshint-stylish')))
 		.pipe(gif(cfg.loader.release, jshint.reporter('fail')))
@@ -78,12 +73,17 @@ exports.sassfixer = function(src, dest) {
 	var sassOptions = {errLogToConsole: true, indentedSyntax: (type === 'sass')};
 
     return gulp.src(src)
-		//.pipe(debug({verbose: true}))
-		//.on('error', gutil.log)
+		.pipe(this.debugeame())
 		.pipe(sass(sassOptions))
 		.pipe(autoprefixer(global.cfg.autoprefixer))
 		.pipe(replace(' 0px', ' 0'))
 		.pipe(csslint('csslintrc.json'))
-		.pipe(csslint.reporter().on('error', gutil.log))
+		.pipe(csslint.reporter())
 		.pipe(gulp.dest(dest));
+};
+
+exports.debugeame = function(){
+	return through.obj()
+		.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
+		.on('error', gutil.log);
 };

@@ -3,12 +3,11 @@
  */
 
 
-var gutil = require('gulp-util'),
-	//debug = require('gulp-debug'),
-    utils = require('./utils'),
-	replace = require('gulp-replace'),
+var gulp = require('gulp'),
 	mergeStream = require('merge-stream'),
-	gulp = require('gulp');
+	replace = require('gulp-replace'),
+    utils = require('./utils'),
+	gutil = require('gulp-util');
 
 exports.merge = function(stream, newStream) {
 	return (stream === undefined) ? newStream : mergeStream(stream, newStream);
@@ -43,7 +42,6 @@ exports.fileDestExist = function(file){
 
 	return r;
 };
-
 
 exports.replace = function(stream, replaces){
 	var i = 0,

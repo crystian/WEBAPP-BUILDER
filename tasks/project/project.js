@@ -2,20 +2,18 @@
  * Created by Crystian on 4/13/2015.
  */
 
-var gutil = require('gulp-util'),
-	//debug = require('gulp-debug'),
+var gulp = require('gulp'),
 	magic = require('./magic.js'),
-	clean = require('gulp-clean'),
+	del = require('del'),
 	shared = require('./shared.js'),
-	gulp = require('gulp');
+	gutil = require('gulp-util');
 
-require('./cordova.js');
+//require('./cordova.js');
 
-
-//Alias
-gulp.task('a',		['run:android']);
+////Alias
 gulp.task('css',	['css:app']);
 gulp.task('loader',	['get:loader']);
+//gulp.task('a',		['run:android']);
 
 //make and get loader
 gulp.task('get:loader', function(cb){
@@ -41,20 +39,20 @@ gulp.task('clearCache', function (done) {
 	return magic.clearCache(done);
 });
 
-gulp.task('nothing', function (){/*just for dummy*/});
-
 gulp.task('genAppCache', function (){
 	return magic.genAppCache();
 });
 
-//watches
 gulp.task('css:app', function (){
 	return magic.runPreprocessors(global.cfg.folders.www +'/apps.json');
 });
+
+//watches
 gulp.task('cssw', function() {
 	gulp.watch([global.cfg.folders.www + '/**/*.scss'], ['css:app']);
 });
 
+gulp.task('nothing', function (){/*just for dummy*/});
 
 //servers
 gulp.task('serve', ['full:app'], function() {
@@ -64,13 +62,12 @@ gulp.task('serve:build', ['full:app'], function() {
 	return shared.makeServe(global.cfg.folders.build, '', global.cfg.ip, global.cfg.ports.build);
 });
 
+
 //cleaning and others
 gulp.task('remove:build', function() {
-	return gulp.src([global.cfg.folders.build], {read: false})
-		.pipe(clean());
+	return del(global.cfg.folders.build);
 });
 
 gulp.task('remove:temp', function() {
-	return gulp.src([global.cfg.folders.temp], {read: false})
-		.pipe(clean());
+	return del(global.cfg.folders.temp);
 });
