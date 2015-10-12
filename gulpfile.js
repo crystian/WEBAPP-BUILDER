@@ -45,7 +45,7 @@ try{
 	global.cfg.appRoot = __dirname + '\\' + global.cfg.projectCode;
 
 	git.long(function (str) {
-		global.cfg.pkg.version = str;
+		global.cfg.pkg.gitVersion = str;
 		fs.writeFileSync(packageJson, JSON.stringify(global.cfg.pkg, null,'\t') , {encoding: 'utf8'});
 	});
 
