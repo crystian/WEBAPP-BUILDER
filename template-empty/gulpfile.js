@@ -7,6 +7,8 @@ var gulp = require('gulp'),
 	folderRoot = '..',
 	utils = require(folderRoot+ '/tasks/project/utils.js'),
 	_ = require('lodash'),
+	git = require('git-rev'),
+	fs = require('fs-extra'),
 	gutil = require('gulp-util');
 
 //require('time-require');
@@ -16,7 +18,8 @@ requireDir('./tasks');
 
 try{
 
-	var projectNameFile = 'project-active.json',
+	var packageJson = 'package.json',
+		projectNameFile = 'project-active.json',
 		projectConfigFile = 'project-config.json',
 		projectConfigLocalFile = 'project-config-local.json';
 
@@ -39,7 +42,12 @@ try{
 	global.cfg.appRoot = __dirname;
 	global.cfg.folderRoot = folderRoot;
 
-	global.cfg.pkg = require('./package.json');
+	global.cfg.pkg = require('./'+ packageJson);
+
+	git.long(function (str) {
+		global.cfg.pkg.version = str;
+		fs.writeFileSync(packageJson, JSON.stringify(global.cfg.pkg, null,'\t') , {encoding: 'utf8'});
+	});
 
 } catch (e){
 	console.log('Do you run installer?, There are some problems with project-config*, check those please');
