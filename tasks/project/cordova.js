@@ -2,29 +2,31 @@
  * Created by Crystian on 4/13/2015.
  */
 
-var gutil = require('gulp-util'),
-	debug = require('gulp-debug'),
-	exec = require('child_process').exec,
-	fs = require('fs-extra'),
+var gulp = require('gulp'),
 	utils = require('./utils.js'),
+	commons = require('../commons'),
 	rename = require('gulp-rename'),
-	clean = require('gulp-clean'),
-	gulp = require('gulp');
+	del = require('del'),
+	fs = require('fs-extra'),
+	exec = require('child_process').exec,
+	gutil = require('gulp-util');
 
 gulp.task('copy:www:cordova', ['remove:cordova:www','full:app'], function () {
 	if(global.cfg.cordova === false || !utils.fileExist(global.cfg.folders.build +'/'+ global.cfg.loader.filesDest.indexCordova)){
 		console.logRed('Remember set var cordova on true, and it must create '+ global.cfg.loader.filesDest.indexCordova +' file');
 		utils.exit(1);
 	}
+
+	fs.removeSync(global.cfg.folders.temp);
+
 	fs.copySync(global.cfg.folders.build, global.cfg.folders.cordovaWWW);
 
 	return gulp.src(global.cfg.folders.cordovaWWW+'/'+global.cfg.loader.filesDest.indexCordova)
-		//.pipe(debug({verbose: true}))
-		//.on('error', console.error.bind(console))
+		.pipe(commons.debugeame())
 		.pipe(rename('index.html'))
 		.pipe(gulp.dest(global.cfg.folders.cordovaWWW))
 		.on('end', function (){
-			return gulp.src(global.cfg.folders.cordovaWWW +'/'+ global.cfg.loader.filesDest.indexCordova).pipe(clean());
+			return del(global.cfg.folders.cordovaWWW +'/'+ global.cfg.loader.filesDest.indexCordova);
 		});
 });
 

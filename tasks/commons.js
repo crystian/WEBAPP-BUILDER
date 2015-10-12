@@ -29,12 +29,9 @@ gulp.task('remove:loader:temp', function() {
 	return del(global.cfg.loader.folders.temp);
 });
 
-//gulp.task('remove:cordova:www', function () {
-//	return gulp.src([
-//		global.cfg.folders.cordovaWWW
-//	], {read: false})
-//		.pipe(del);
-//});
+gulp.task('remove:cordova:www', function () {
+	return del(global.cfg.folders.cordovaWWW);
+});
 
 exports.jsMaker = function(stream) {
 	return stream

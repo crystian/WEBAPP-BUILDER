@@ -8,12 +8,12 @@ var gulp = require('gulp'),
 	shared = require('./shared.js'),
 	gutil = require('gulp-util');
 
-//require('./cordova.js');
+require('./cordova.js');
 
 ////Alias
 gulp.task('css',	['css:app']);
 gulp.task('loader',	['get:loader']);
-//gulp.task('a',		['run:android']);
+gulp.task('a',		['run:android']);
 
 //make and get loader
 gulp.task('get:loader', function(cb){

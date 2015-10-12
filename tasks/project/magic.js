@@ -60,18 +60,6 @@ var defaults = {
 	},
 	validCssExtensions : ['sass', 'scss','less', 'css'],
 	validExtensions : ['html', 'js']
-
-    //??
-	//options: {
-		//extensionToProcess : {
-		//	'scss': true,
-		//	'sass': true,
-		//	'less': true,
-		//	'css': true,
-		//	'js': true,
-		//	'html': true
-		//}
-	//}
 };
 
 exports.runPreprocessors = function(appsJson) {
@@ -323,13 +311,13 @@ function _concat(_streams, _type, _appName){
 	return s;
 }
 
-//function _minificateAndSave(stream, file, type){
-//	stream = _minificate(stream, file, type);
-//
-//	stream = stream.pipe(gulp.dest(file.path));
-//
-//	return stream;
-//}
+function _minificateAndSave(stream, file, type){
+	stream = _minificate(stream, file, type);
+
+	stream = stream.pipe(gulp.dest(file.path));
+
+	return stream;
+}
 
 function _minificate(stream, file, type, appName){
 	//replaces previously to minimisation

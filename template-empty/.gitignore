@@ -1,5 +1,5 @@
-/build
 /.idea/workspace.xml
 /project-config-local.json
+/build
 /node_modules
 /www/**/*.css

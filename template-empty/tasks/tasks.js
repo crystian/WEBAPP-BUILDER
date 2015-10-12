@@ -24,6 +24,7 @@ gulp.task('build', function (cb) {
 	runSequence(
 		'build:fast',
 		'copy:imgs',
+		'copy:others',
 		(gutil.env.debug) ? 'nothing' : 'remove:temp',
 		cb);
 });
@@ -34,4 +35,10 @@ gulp.task('copy:imgs', function (){
 		global.cfg.folders.www +'/app/assets/img/**/*',
 		'!**/app/assets/img/sprite*{,/**}'
 	]).pipe(gulp.dest(global.cfg.folders.build +'/img'));
+});
+
+gulp.task('copy:others', function (){
+	return gulp.src([
+		global.cfg.folders.www +'/favicon.ico'
+	]).pipe(gulp.dest(global.cfg.folders.build));
 });
