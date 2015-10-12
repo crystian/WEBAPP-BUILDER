@@ -6,5 +6,6 @@
 	"dependencies": {
 		"gulp-angular-templatecache": "^1.6.0",
 		"restify": "^3.0.1"
-	}
+	},
+	"version": "f961e04ab5635292ebd23178fb83ba21d804ae44"
 }

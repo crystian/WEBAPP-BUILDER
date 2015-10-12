@@ -1,17 +1,19 @@
 var restify = require('restify');
 
-function respond(req, res, next) {
-	res.send('hello ' + req.params.name);
-	next();
-}
-
-var server = restify.createServer();
+var server = restify.createServer({
+	name: 'myapp',
+	version: '1.0.0'
+});
+server.use(restify.CORS());
+server.use(restify.acceptParser(server.acceptable));
 //server.use(restify.queryParser());
 //server.use(restify.bodyParser());
-server.use(restify.CORS());
-server.get('/hello/:name', respond);
-server.head('/hello/:name', respond);
 
-server.listen(9002, function() {
+server.get('/echo/:name', function (req, res, next) {
+	res.send(req.params);
+	return next();
+});
+
+server.listen(9002, function () {
 	console.log('%s listening at %s', server.name, server.url);
 });

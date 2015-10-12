@@ -17,9 +17,8 @@ gulp.task('default',['build']);
 gulp.task('full',	['full:app']);
 
 
-gulp.task('full:app', function (cb) {
+gulp.task('full:app', ['remove:build'], function (cb) {
 	runSequence(
-		'remove:build',
 		'get:loader',
 		'css:app',
 		'build',
@@ -79,7 +78,8 @@ gulp.task('copy:data', function (){
 
 gulp.task('serve:api', function() {
 	if (node) node.kill();
-	node = spawn('node', [global.cfg.folders.www +'/api/api.js'], {stdio: 'inherit'});
+	var www = (global.cfg.folders.www + '/api/api.js');
+	node = spawn('node', [www], {stdio: 'inherit'});
 	node.on('close', function (code) {
 		if (code === 8) {
 			gulp.log('Error detected, waiting for changes...');

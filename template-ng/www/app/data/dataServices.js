@@ -22,10 +22,10 @@ app.factory('DataServices', ['$http', '$q',
 		}
 
 		function getRemote(){
-			var remoteRequest = 'http://10.0.1.2:9002/hello/pepe';
+			var remoteRequest = 'http://127.0.0.1:9002/echo/pepe';
 			return $http.get(remoteRequest).
 				then(function(response, status, headers, config) {
-					return response.data;
+					return JSON.stringify(response.data);
 				}, handleError);
 		}
 
