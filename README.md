@@ -130,11 +130,11 @@ Recordar que solo hay que modificar el que esta dentro del proyecto y no el de A
 * "analytics.*": datos para analytics
 * "mixpanel": Igual a analitics
 * "consoleError": mensajes dummy para enganiar a usuarios malicioso
-* "loader.release": buildeara en modo relese SOLO EL LOADER
+* "loader.release": buildeara en modo release SOLO EL LOADER
 * "loader.loading": Animacion template que utilizara la landing (numerico, ver instrucciones de uso)
 * "loader.viewport": configuracion del meta de html
 * "loader.text": todos los textos de la app (no soporta i18n por ahora)
-* "loader.bower": componentes a usar, si no se quiere alguno de los por defalt, en el config del proyecto setearle null. Tambien soporta la generacion de los minificados si es que la libreria no lo provee, usar "generate-js": true
+* "loader.bower": componentes a usar (solo para loader), si no se quiere alguno de los por defalt, en el config del proyecto setearle null. Tambien soporta la generacion de los minificados si es que la libreria no lo provee, usar "generate-js": true
 
 **NOTES:**
 
@@ -321,6 +321,10 @@ I use [Webstorm IDE](http://www.jetbrains.com/webstorm), and we recommend it, be
 ---
 
 ## CHANGELOG:
+
+15/10/13 v0.1.0
+Todo actualizado
+Proceso de gulp revisado y ajustado
 
 15/10/08 v0.1.0
 dependencias actualizadas
