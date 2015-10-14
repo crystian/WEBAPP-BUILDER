@@ -1,0 +1,11 @@
+{
+	"name": "APP-FACTORY-template-ng-full",
+	"author": "Crystian (Cristian Bietti) @crystian",
+	"repository": "https://github.com/crystian/APPFACTORY.git",
+	"private": true,
+	"dependencies": {
+		"gulp-angular-templatecache": "^1.8.0",
+		"restify": "^3.0.3"
+	},
+	"gitVersion": "cfe981efe8c6f55a3edc48c956ab2fe23c77e6b0"
+}

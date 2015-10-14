@@ -40,7 +40,7 @@ Tiempo estimado de desarrollo de todo esto, con multiples pruebas y demas: 4 mes
 * `gulp serve` server en modo dev directo al proyecto
 * `gulp serve:build` server del dir build
 * `gulp loader` genera el loader y lo deja en la carpeta `build`
-* `gulp serve:api` server de api (a modo de ejemplo para template-ng)
+* `gulp serve:api` server de api (a modo de ejemplo para template-ng-full)
 * `gulp a` run an android
 
 

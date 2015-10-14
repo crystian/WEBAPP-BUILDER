@@ -7,5 +7,7 @@
 		"gulp-angular-templatecache": "^1.8.0",
 		"restify": "^3.0.3"
 	},
-	"gitVersion": "52b31d4782cf90b2eb747f462d4cc7da2a0bed67"
+	"gitVersion": "17cc8cf5768b24ffdbe12cccab06c27472bfe401",
+	"domain": "com.languagesgym.colors",
+	"mainClass": "Colors"
 }

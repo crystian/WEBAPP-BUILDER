@@ -33,7 +33,7 @@
 			"path": "www/app",
 			"replaces": {
 				"pre": [
-					["../template-ng/www/app/assets/img/","assets/img/"]
+					["../template-ng-full/www/app/assets/img/","assets/img/"]
 				]
 			}
 		},
