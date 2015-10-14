@@ -248,6 +248,10 @@ function doMagic(url, appName, options) {
 			source = file.path +'/'+ file.min;
 		}
 
+		if(global.cfg.forceLibFull){
+			source = file.path +'/'+ file.file;
+		}
+
 		var stream = gulp.src(source)
 			.pipe(commons.debugeame());
 		//console.log('source',source);
@@ -258,13 +262,13 @@ function doMagic(url, appName, options) {
 			_modificateOriginal(file);
 
 			//just for remove header a footer comments, it's ok here, not move
-			if(type === 'js'){
-				stream = stream.pipe(uglify({
-					output: {beautify: false},
-					compress: {sequences: true},
-					mangle: true
-				}));
-			}
+			//if(type === 'js'){
+			//	stream = stream.pipe(uglify({
+			//		output: {beautify: false},
+			//		compress: {sequences: true},
+			//		mangle: true
+			//	}));
+			//}
 		}
 
 		if(!streams[type]){

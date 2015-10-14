@@ -8,6 +8,7 @@
 	"compress": true,
 	"firstApp": "landing",
 	"cordova": false,
+	"forceLibFull": false,
 	"isCordovaDevice": false,
 	"debugZoneActive": false,
 	"showDeviceInfo": false,
