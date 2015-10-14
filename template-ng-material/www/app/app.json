@@ -6,28 +6,13 @@
 			"minificated": true
 		},
 		{
-			"file": "angular-route.js",
-			"path": "vendors/bower_components/angular-route",
-			"minificated": true
-		},
-		{
 			"file": "angular-animate.js",
 			"path": "vendors/bower_components/angular-animate",
 			"minificated": true
 		},
 		{
-			"file": "angular-toastr.js",
-			"path": "vendors/bower_components/angular-toastr/dist",
-			"minificated": true
-		},
-		{
-			"file": "angular-toastr.tpls.js",
-			"path": "vendors/bower_components/angular-toastr/dist",
-			"minificated": true
-		},
-		{
-			"file": "angular-toastr.tpls.js",
-			"path": "vendors/bower_components/angular-toastr/dist",
+			"file": "angular-route.js",
+			"path": "vendors/bower_components/angular-route",
 			"minificated": true
 		},
 		{
@@ -38,6 +23,16 @@
 		{
 			"file": "angular-material.js",
 			"path": "vendors/bower_components/angular-material",
+			"minificated": true
+		},
+		{
+			"file": "angular-toastr.js",
+			"path": "vendors/bower_components/angular-toastr/dist",
+			"minificated": true
+		},
+		{
+			"file": "angular-toastr.tpls.js",
+			"path": "vendors/bower_components/angular-toastr/dist",
 			"minificated": true
 		},
 

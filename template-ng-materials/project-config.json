@@ -1,9 +1,0 @@
-{
-	"name": "Colors by languagesGym",
-	"version": "0.0.1",
-	"firstApp": "app",
-	"loader":{
-		"loading": 2
-	},
-	"cordova": true
-}

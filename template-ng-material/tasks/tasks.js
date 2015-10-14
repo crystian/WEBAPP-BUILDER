@@ -31,9 +31,6 @@ gulp.task('build', function (cb) {
 	runSequence(
 		'make:ngTemplate',
 		'build:fast',
-		'copy:fonts',
-		'copy:imgs',
-		'copy:data',
 		(gutil.env.debug) ? 'nothing' : 'remove:temp',
 		cb);
 });
@@ -52,37 +49,4 @@ gulp.task('make:ngTemplate', function () {
 	.pipe(gulp.dest(global.cfg.folders.temp));
 
 	return stream;
-});
-
-
-gulp.task('copy:fonts', function (){
-	return gulp.src([
-		'vendors/bower_components/bootstrap/dist/fonts/**/*',
-		'vendors/bower_components/components-font-awesome/fonts/**/*',
-		global.cfg.folders.www +'/assets/fonts/**/*'
-	]).pipe(gulp.dest(global.cfg.folders.build + '/fonts'));
-});
-gulp.task('copy:imgs', function (){
-	return gulp.src([
-		global.cfg.folders.www +'/landing/img/**/*',
-		global.cfg.folders.www +'/app/assets/img/**/*',
-		'!**/app/assets/img/sprite*{,/**}'
-	]).pipe(gulp.dest(global.cfg.folders.build +'/img'));
-});
-gulp.task('copy:data', function (){
-	return gulp.src([
-		global.cfg.folders.www +'/app/data/local.json'
-	]).pipe(gulp.dest(global.cfg.folders.build +'/data'));
-});
-
-
-gulp.task('serve:api', function() {
-	if (node) node.kill();
-	var www = (global.cfg.folders.www + '/api/api.js');
-	node = spawn('node', [www], {stdio: 'inherit'});
-	node.on('close', function (code) {
-		if (code === 8) {
-			gulp.log('Error detected, waiting for changes...');
-		}
-	});
 });

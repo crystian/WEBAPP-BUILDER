@@ -7,7 +7,7 @@ var app = {};
 
 	function appInit() {
 		//FIRST before all modules!
-		app = angular.module('app', ['ngRoute', 'toastr', 'ngAnimate', 'templates']);
+		app = angular.module('app', ['ngRoute', 'toastr', 'ngAnimate', 'templates', 'ngMaterial']);
 		angular.module('templates',[]);//flagTemplates
 
 		app.config(['$routeProvider', '$locationProvider', function ($routeProvider) {
