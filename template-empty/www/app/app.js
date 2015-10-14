@@ -1,7 +1,7 @@
 /**
  * Created by Crystian on 2/22/2015.
  */
-var landing = (function() {
+var app = (function() {
 
 	function init(){
 		loader.hide();
@@ -12,4 +12,4 @@ var landing = (function() {
 	};
 }());
 
-document.addEventListener('loaderFinished', landing.init);
+document.addEventListener('loaderFinished', app.init);

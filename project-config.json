@@ -6,7 +6,7 @@
 
 	"release": true,
 	"compress": true,
-	"firstApp": "landing",
+	"firstApp": "app",
 	"cordova": false,
 	"forceLibFull": false,
 	"isCordovaDevice": false,
