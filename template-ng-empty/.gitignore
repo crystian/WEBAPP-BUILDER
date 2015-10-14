@@ -1,0 +1,5 @@
+/build
+/.idea/workspace.xml
+/project-config-local.json
+/node_modules
+/www/**/*.css
