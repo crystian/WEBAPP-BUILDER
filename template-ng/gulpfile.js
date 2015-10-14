@@ -64,6 +64,11 @@ if (global.cfg.release && !global.cfg.compress) {
 	utils.exit(1);
 }
 
+if (global.cfg.release && global.cfg.forceLibFull) {
+	console.logRed('LOADER: if it is a release, it needs to be with mins libraries (forceLibFull)');
+	utils.exit(1);
+}
+
 if (global.cfg.compress && !global.cfg.loader.bower['lz-string']) {
 	console.logRed('LOADER: Compress option active, but library lz-string not present');
 	utils.exit(1);

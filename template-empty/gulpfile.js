@@ -45,7 +45,7 @@ try{
 	global.cfg.pkg = require('./'+ packageJson);
 
 	git.long(function (str) {
-		global.cfg.pkg.version = str;
+		global.cfg.pkg.gitVersion = str;
 		fs.writeFileSync(packageJson, JSON.stringify(global.cfg.pkg, null,'\t') , {encoding: 'utf8'});
 	});
 
@@ -61,6 +61,11 @@ try{
 
 if (global.cfg.release && !global.cfg.compress) {
 	console.logRed('LOADER: if it is a release, it would be compressed');
+	utils.exit(1);
+}
+
+if (global.cfg.release && global.cfg.forceLibFull) {
+	console.logRed('LOADER: if it is a release, it needs to be with mins libraries (forceLibFull)');
 	utils.exit(1);
 }
 

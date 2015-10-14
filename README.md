@@ -307,7 +307,8 @@ I use [Webstorm IDE](http://www.jetbrains.com/webstorm), and we recommend it, be
 ---
 
 ## Pendientes:
-* unificate gulpfiles
+* mejorar tiempos de gulp (ver doMagic con js sin uglify solo para remover comments)
+* unificate gulpfiles.js
 * test with Electron, check i18n
 * cordova: replace de datos antes de build (versiones)
 * folder dist con las versiones entregadas con release
