@@ -4,6 +4,7 @@
 
 var gulp = require('gulp'),
 	fs = require('fs-extra'),
+	_ = require('lodash'),
 	commons = require('./commons'),
 	rename = require('gulp-rename'),
 	cheerio = require('gulp-cheerio'),
@@ -30,15 +31,21 @@ gulp.task('make:index', function () {
 		.pipe(cheerio({
 			run: function ($) {
 				var cfg = global.cfg;
+
+				function attr_unescape( x ){
+					return $('<div />').html( x ).text();
+				}
 				$('#pageTitle').text(cfg.loader.text.title);
 				$('#pageDescription').attr('content',cfg.loader.text.description);
 				$('#pageKeyword').attr('content',cfg.loader.text.keyword);
 				$('#pageAuthor').attr('content',cfg.loader.text.author);
 				$('#noscript').html(cfg.loader.text.noscript);
 				$('#viewport').attr('content',cfg.loader.viewport);
+				$('#contentSecurity').attr('content',cfg.loader.contentSecurity);
 			}
 		}))
 		.pipe(replace('<!--msgTpl-->','<!-- REMEMBER, this file is generated, don\'t change it, because you can lost it -->'))
+		.pipe(replace('&apos;','\''))//it's for contentSecurity apost, we cannot inject that one
 		.pipe(gulp.dest(global.cfg.loader.folders.www));
 });
 
