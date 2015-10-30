@@ -25,6 +25,7 @@ var gulp = require('gulp'),
 	less = require('gulp-less'),
 	autoprefixer = require('gulp-autoprefixer'),
 	csslint = require('gulp-csslint'),
+	jshint = require('gulp-jshint'),
 	LZString = require('../../vendors/lz-string/libs/lz-string'),
 	imagemin = require('gulp-imagemin'),
 	pngquant = require('imagemin-pngquant'),
@@ -158,7 +159,7 @@ function runEachPreprocessors(url, appName){
 		}
 
 		//just for detect potentian file exists
-		file._cssFile = finalFileName;
+		file._fileName = finalFileName;
 
 		if( !(global.cfg.release || file.overwrite)
 			&& (aux.fileDestExist(file)
@@ -218,6 +219,8 @@ function doMagic(url, appName, options) {
 
 	for (; i < l; i++) {
 		var file = _.merge({}, defaults.file, files[i]);
+		//console.logWarn('file '+file.file);
+		//console.dir(file);
 
 		if(aux.isNotActive(file)){continue;}
 
@@ -244,7 +247,7 @@ function doMagic(url, appName, options) {
 		file.path = aux.makePath(file.path);
 		var source = file.path +'/'+ fileName + '.' + type;
 
-		if(file.minificated || file.makeMin){
+		if(file.minificated || (file.makeMin && utils.fileExist(file.path +'/'+ file.min))){
 			source = file.path +'/'+ file.min;
 		}
 
@@ -256,22 +259,22 @@ function doMagic(url, appName, options) {
 			.pipe(commons.debugeame());
 		//console.log('source',source);
 
-		if(!file.minificated && !file.makeMin){
+		if(!file.minificated && file.makeMin){
 			stream = _minificate(stream, file, type, appName);
-		} else {
-			_modificateOriginal(file);
+		}
 
-			//just for remove header a footer comments, it's ok here, not move
-			if(type === 'js'){
-				stream = stream.pipe(uglify({
-					output: {beautify: false},
-					compress: {
-						sequences: true, hoist_funs:false, dead_code: false,
-						drop_debugger: true, conditionals: false,
-						unused: false, if_return:false, side_effects:false},
-					mangle: false
-				}));
-			}
+		stream = _modificateOriginal(stream, file);
+
+		//just for remove header a footer comments from libraries, it's ok here, not move
+		if(type === 'js' && !file.makeMin && file.minificated){
+			stream = stream.pipe(uglify({
+				output: {beautify: false},
+				compress: {
+					sequences: true, hoist_funs:false, dead_code: false,
+					drop_debugger: true, conditionals: false,
+					unused: false, if_return:false, side_effects:false},
+				mangle: false
+			}));
 		}
 
 		if(!streams[type]){
@@ -345,12 +348,13 @@ function _minificate(stream, file, type, appName){
 	return stream;
 }
 
-function _modificateOriginal(file){
-	_modificateOriginalInternal(file, 'normal');
-	_modificateOriginalInternal(file, 'min');
+function _modificateOriginal(stream, file){
+	stream = _modificateOriginalInternal(stream, file, 'normal');
+	stream = _modificateOriginalInternal(stream, file, 'min');
+	return stream;
 }
 
-function _modificateOriginalInternal(file, type){
+function _modificateOriginalInternal(stream, file, type){
 	var name = (type === 'min') ? file.min : file.file;
 
 	if(file.replaces.original[type].length > 0){
@@ -360,11 +364,13 @@ function _modificateOriginalInternal(file, type){
 			console.logWarn('Replaces on original file: '+ name);
 			fs.copySync(file.path +'/'+ name, file.path +'/'+ filenameBackup);
 
-			var st = gulp.src([file.path +'/'+ name]);
-			st = aux.replace(st, file.replaces.original[type]);
-			st = st.pipe(gulp.dest(file.path));
+			//var st = gulp.src(file.path +'/'+ name);
+			stream = aux.replace(stream, file.replaces.original[type])
+				.pipe(gulp.dest(file.path));
 		}
 	}
+
+	return stream;
 }
 
 
@@ -433,12 +439,42 @@ var _handle = {
 	},
 
 	'js': function(stream, file){
-		//console.logWarn('JS');
+		//console.logWarn('JS '+ file.file);
 
-		if(!file.minificated && global.cfg.release){
-			stream = commons.jsMaker(stream);
-			stream = stream.pipe(strip({safe:false, block:false}));
+		//just for detect potentian file exists
+		if( !file.overwrite && utils.fileExist(file.path +'/'+ file.min)) {
+			//for the overwrite = false
+			//exist, and don't overwrite it
+			console.log('File found, don\'t overwrite ('+ file.min +')');
+			return stream;
 		}
+
+		if (file.linter) {
+			stream = stream
+				.pipe(jshint({lookup: false, debug: false}))
+				.pipe(jshint.reporter('jshint-stylish'))
+				.pipe(jshint.reporter('fail'));
+		}
+
+		if (!file.minificated) {
+			stream = stream.pipe(uglify({
+				output: {
+					beautify: false
+				},
+				compress: {
+					sequences: true,
+					'drop_console': false
+				}
+			}))
+		}
+
+		if(file.makeMin){
+			stream = stream
+				.pipe(rename(file.min))
+				.pipe(gulp.dest(file.path));
+		}
+
+		stream = stream.pipe(strip({safe:false, block:false}));
 
 		return stream;
 	},

@@ -35,7 +35,7 @@ exports.fileDestExist = function(file){
 	var r = false;
 
 	//validate if exist, if exist return don't process nothing
-	var p = (global.cfg.release || file.makeMin) ? file.path + '/' +file.min : file._cssFile;
+	var p = (global.cfg.release || file.makeMin) ? file.path + '/' +file.min : file._fileName;
 	if(utils.fileExist(p)){
 		r = true;
 	}

@@ -6,6 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/APP" />
       <excludeFolder url="file://$MODULE_DIR$/APP/CORDOVA/platforms" />
       <excludeFolder url="file://$MODULE_DIR$/APP/CORDOVA/www" />
+      <excludeFolder url="file://$MODULE_DIR$/COLORS" />
       <excludeFolder url="file://$MODULE_DIR$/LOADER/bower_components" />
       <excludeFolder url="file://$MODULE_DIR$/LOADER/build" />
       <excludeFolder url="file://$MODULE_DIR$/LOADER/dist" />
