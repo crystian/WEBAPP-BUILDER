@@ -200,6 +200,8 @@ function runEachPreprocessors(url, appName){
 
 		if(file.makeMin){
 			stream = _minificateAndSave(stream, file, 'css')
+		} else {
+			_minificate(stream, file, 'css', appName);
 		}
 
 		streams = aux.merge(streams, stream);
@@ -433,7 +435,7 @@ var _handle = {
 		stream = stream
 			.pipe(strip({safe:false, block:false}))
 			.pipe(gif(global.cfg.release || file.makeMin, minifycss()))
-			.pipe(rename(utils.setExtensionFilename(file.min,'css')));
+			.pipe(gif(file.makeMin, rename(utils.setExtensionFilename(file.min,'css'))));
 
 		return stream;
 	},
