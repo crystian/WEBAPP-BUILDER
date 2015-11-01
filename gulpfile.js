@@ -25,7 +25,7 @@ try{
 		projectConfigLocalFile = 'project-config-local.json';
 
 	//first argument, second one by default
-	var projectCode = gutil.env.projectCode || 'template-empty';
+	var projectCode = gutil.env.projectCode || 'template-ng-full';
 
 	var	fileApp = projectCode +'/'+ projectConfigFile,
 		fileAppLocal = projectCode +'/'+ projectConfigLocalFile;

@@ -4,8 +4,9 @@
 	"repository": "https://github.com/crystian/APPFACTORY.git",
 	"private": true,
 	"dependencies": {
+		"git-rev": "^0.2.1",
 		"gulp-angular-templatecache": "^1.8.0",
 		"restify": "^3.0.3"
 	},
-	"gitVersion": "cfe981efe8c6f55a3edc48c956ab2fe23c77e6b0"
+	"gitVersion": "88d242bdfcd3b1863d7f2c7245696da896f6aaeb"
 }

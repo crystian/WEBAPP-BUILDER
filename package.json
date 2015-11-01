@@ -10,6 +10,7 @@
 		"del": "^2.0.2",
 		"event-stream": "^3.3.1",
 		"fs-extra": "^0.24.0",
+		"git-rev": "^0.2.1",
 		"gulp": "^3.9.0",
 		"gulp-autoprefixer": "^3.0.2",
 		"gulp-bower": "0.0.10",
@@ -55,5 +56,5 @@
 		"through2": "^2.0.0",
 		"time-require": "^0.1.2"
 	},
-	"gitVersion": "a543d6dcfc9b8c9979285693d51653d81615be79"
+	"gitVersion": "88d242bdfcd3b1863d7f2c7245696da896f6aaeb"
 }

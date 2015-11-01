@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
-    <file url="file://$PROJECT_DIR$/../../../GLOBANT/ARA/ara-marketplace/dcw/app/scripts/controllers/shell_maker/ShellMakerEditCtrl.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../../GLOBANT/ARA/ara-marketplace/dcw/app/views/shell_maker/shellmaker-detail.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../../GLOBANT/ARA/ara-marketplace/dcw/app/views/shell_maker/shellmaker-edit.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../../GLOBANT/ARA/ara-marketplace/dcw/test/spec/controllers/shell_maker/ShellMakerDetailCtrlSpec.js" charset="UTF-8" />
-  </component>
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
 </project>
