@@ -5,7 +5,7 @@
 			"path": "www/app",
 			"replaces": {
 				"pre": [
-					["../template-empty/www/app/assets/img/", "assets/img/"]
+					["../templates/empty/www/app/assets/img/", "assets/img/"]
 				]
 			}
 		},
