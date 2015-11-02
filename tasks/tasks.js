@@ -55,3 +55,5 @@
 gulp.task('default', [], function () {
 	console.log('desde tasks.js WORKS!');
 });
+
+gulp.task('nothing', []);

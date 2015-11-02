@@ -4,11 +4,11 @@
 
 require('shelljs/global');
 
-describe("test the build", function()
-{
-	it('anda', function(){
-		expect(1).toBe(1);
+describe("Full test for the build system of framework (fuaaa) - ", function(){
+	it("gulp nothing", function(){
+		expect(exec('gulp nothing', {silent:true}).code).toBe(0);
 	});
+
 	//it("npm install", function()
 	//{
 	//	rm('-rf', 'node_modules');
@@ -17,12 +17,11 @@ describe("test the build", function()
 	//	expect(test('-d', 'node_modules')).toBe(true);
 	//});
 
-	//it("gulp sass", function()
-	//{
-	//	rm('-rf', 'dist');
-	//	expect(test('-d', 'dist')).toBe(false);
-	//	expect(exec('gulp sass', {silent:true}).code).toBe(0);
-	//	expect(test('-f', 'dist/main.css')).toBe(true);
+	//it("gulp nothing", function(){
+	//	//rm('-rf', 'dist');
+	//	//expect(test('-d', 'dist')).toBe(false);
+	//	expect(exec('gulp nothing', {silent:true}).code).toBe(0);
+	//	//expect(test('-f', 'dist/main.css')).toBe(true);
 	//});
 
 	//it("gulp src", function()

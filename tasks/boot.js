@@ -39,9 +39,6 @@ exports.boot = function(config){
 		//var projectCode = relativePath.split(path.sep).pop();
 		//console.log('projectcode', projectCode);
 
-		var r = utils.fileExist(projectConfigFile);
-		console.log('access '+ r);
-
 		//merge between default and specify:
 		global.cfg = _.merge({},
 			require(pathFwk +'/'+ projectConfigFile), //shoud be exist!
