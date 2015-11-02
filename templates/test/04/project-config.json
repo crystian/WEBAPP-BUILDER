@@ -1,0 +1,9 @@
+{
+	"name": "test 04 config",
+	"compress": true,
+	"loader": {
+		"bower":{
+			"lz-string": null
+		}
+	}
+}

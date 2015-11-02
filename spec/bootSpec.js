@@ -13,13 +13,25 @@ function saveJsonFile(f, c){
 	return fs.writeFileSync(f, JSON.stringify(c, null,'\t') , {encoding: 'utf8'});
 }
 
-var pkgjson = 'package.json';
+var pkgjson = 'package.json',
+	testFolder = 'templates/test';
 
 describe("Full test for the build system of framework (fuaaa) - ", function(){
-	it("should fill gitVersion field", function(){
-		var test01 = 'templates/test/01';
 
-		cd(test01);
+	beforeEach(function(){
+		cd(testFolder);
+	});
+	afterEach(function(){
+		cd('../../../');
+	});
+
+	it('should send the gulp', function(){
+		cd('01');
+		expect(exec('gulp nothing', {silent:true}).code).toBe(1);
+	});
+
+	it("should fill gitVersion field", function(){
+		cd('02');
 		expect(readJsonFile(pkgjson).gitVersion).toBeUndefined();
 
 		expect(exec('gulp nothing', {silent:true}).code).toBe(0);
@@ -27,9 +39,23 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		var pkg = readJsonFile(pkgjson);
 		expect(pkg.gitVersion).toBeDefined();
 
+		//to keep csv clean
 		delete pkg.gitVersion;
-		saveJsonFile(pkgjson,pkg);
+		saveJsonFile(pkgjson, pkg);
 	});
+
+	it("should fail with incompatible parameters (release-compress)", function(){
+		cd('03');
+		expect(exec('gulp nothing', {silent:true}).code).toBe(1);
+	});
+
+	it("should fail with incompatible parameters (compress-lz-string)", function(){
+		cd('04');
+		expect(exec('gulp nothing', {silent:true}).code).toBe(1);
+	});
+
+
+
 
 	//it("npm install", function()
 	//{
