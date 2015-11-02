@@ -49,6 +49,18 @@ exports.boot = function(config){
 
 		global.cfg.pkg = require(pathPrj +'/'+ packageJson);
 
+		//validations of compatibilities
+		if (global.cfg.release && !global.cfg.compress) {
+			console.logRed('LOADER: if it is a release, it would be compressed');
+			utils.exit(1);
+		}
+		if (global.cfg.compress && !global.cfg.loader.bower['lz-string']) {
+			console.logRed('LOADER: Compress option active, but library lz-string not present');
+			utils.exit(1);
+		}
+		//
+
+		//save gitVersion on package.json
 		git.long(function (str) {
 			global.cfg.pkg.gitVersion = str;
 			fs.writeFileSync(packageJson, JSON.stringify(global.cfg.pkg, null,'\t') , {encoding: 'utf8'});
@@ -56,16 +68,6 @@ exports.boot = function(config){
 
 	} catch (e){
 		console.logRed(e);
-		utils.exit(1);
-	}
-
-	if (global.cfg.release && !global.cfg.compress) {
-		console.logRed('LOADER: if it is a release, it would be compressed');
-		utils.exit(1);
-	}
-
-	if (global.cfg.compress && !global.cfg.loader.bower['lz-string']) {
-		console.logRed('LOADER: Compress option active, but library lz-string not present');
 		utils.exit(1);
 	}
 

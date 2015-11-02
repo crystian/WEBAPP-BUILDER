@@ -2,19 +2,25 @@
  * Created by Crystian on 01/11/2015.
  */
 
-var fs = require('fs');
+//var fs = require('fs');
 
 require('shelljs/global');
 
-function readJsonFile(f){
-	return eval('('+fs.readFileSync(f,'utf8')+')');
-}
-function saveJsonFile(f, c){
-	return fs.writeFileSync(f, JSON.stringify(c, null,'\t') , {encoding: 'utf8'});
+function readFile(f){
+	return eval('('+cat(f)+')');
 }
 
-var pkgjson = 'package.json',
-	testFolder = 'templates/test';
+function saveFile(f, c){
+	return JSON.stringify(c, null,'\t').to(f);
+}
+
+function createPkgJson(){
+	return pkgJsonContent.to(pkgJson);
+}
+
+var pkgJson = 'package.json',
+		pkgJsonContent = '{"name": "test 04","private": true,"dependencies": {}}',
+		testFolder = 'templates/test/boot';
 
 describe("Full test for the build system of framework (fuaaa) - ", function(){
 
@@ -22,7 +28,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		cd(testFolder);
 	});
 	afterEach(function(){
-		cd('../../../');
+		cd('../../../../');
 	});
 
 	it('should send the gulp', function(){
@@ -32,16 +38,12 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 
 	it("should fill gitVersion field", function(){
 		cd('02');
-		expect(readJsonFile(pkgjson).gitVersion).toBeUndefined();
+		createPkgJson();
 
 		expect(exec('gulp nothing', {silent:true}).code).toBe(0);
 
-		var pkg = readJsonFile(pkgjson);
+		var pkg = readFile(pkgJson);
 		expect(pkg.gitVersion).toBeDefined();
-
-		//to keep csv clean
-		delete pkg.gitVersion;
-		saveJsonFile(pkgjson, pkg);
 	});
 
 	it("should fail with incompatible parameters (release-compress)", function(){
@@ -54,7 +56,15 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		expect(exec('gulp nothing', {silent:true}).code).toBe(1);
 	});
 
+	//CONFIG
+	it("should not have the name attribute", function(){
+		cd('05');
+		createPkgJson();
 
+		expect(exec('gulp nothing', {silent:true}).code).toBe(0);
+	});
+
+//TODO hacer la prueba sin el local del fwk
 
 
 	//it("npm install", function()
