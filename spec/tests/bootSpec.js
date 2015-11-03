@@ -20,7 +20,10 @@ function createPkgJson(){
 
 var pkgJson = 'package.json',
 		pkgJsonContent = '{"name": "test 04","private": true,"dependencies": {}}',
-		testFolder = 'templates/test/boot';
+		testFolder = 'spec/fixture/boot',
+		rootFwk = '../../../..',
+		configjsLocal = 'project-config-local.json',
+		configjs = '/loader/config.js';
 
 describe("Full test for the build system of framework (fuaaa) - ", function(){
 
@@ -28,9 +31,10 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		cd(testFolder);
 	});
 	afterEach(function(){
-		cd('../../../../');
+		cd(rootFwk);
 	});
 
+	//BOOT
 	it('should send the gulp', function(){
 		cd('01');
 		expect(exec('gulp nothing', {silent:true}).code).toBe(1);
@@ -56,13 +60,73 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		expect(exec('gulp nothing', {silent:true}).code).toBe(1);
 	});
 
+
+
 	//CONFIG
-	it("should not have the name attribute", function(){
+	it("should be create the config.js file on loader folder", function(){
 		cd('05');
 		createPkgJson();
+		rm('-rf', rootFwk + configjs);
+		expect(test('-d', rootFwk + configjs)).toBe(false);
 
-		expect(exec('gulp nothing', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeConfig', {silent:true}).code).toBe(0);
+
+		expect(test('-e', rootFwk + configjs)).toBe(true);
 	});
+
+	it("should has the attribute name from appfactory config", function(){
+		cd('05');
+		expect(test('-e', rootFwk + configjs)).toBe(true);
+
+		var hasLocal = test('-e', rootFwk +'/'+ configjsLocal);
+
+		if(hasLocal){
+			mv(rootFwk +'/'+ configjsLocal, rootFwk + '/'+ configjsLocal +'.removed');
+		}
+
+
+		expect(exec('gulp makeConfig', {silent:true}).code).toBe(0);
+
+
+		var projectName = '';
+		cat(rootFwk + configjs).replace(/("name": ")(.*)(",)/, function($0, $1, $2){
+			projectName = $2;
+		});
+
+		expect(projectName).toBe('app name');
+
+		if(hasLocal){
+			mv(rootFwk + '/'+ configjsLocal +'.removed', rootFwk +'/'+ configjsLocal);
+		}
+	});
+
+	it("should has the attribute name from appfactory config LOCAL", function(){
+		cd('05');
+		expect(test('-e', rootFwk + configjs)).toBe(true);
+
+		var hasLocal = test('-e', rootFwk +'/'+ configjsLocal);
+
+		if(!hasLocal){
+			saveFile(rootFwk +'/'+ configjsLocal, {'name': 'from fwk local'});
+		}
+
+		expect(exec('gulp makeConfig', {silent:true}).code).toBe(0);
+
+
+		var projectName = '';
+		cat(rootFwk + configjs).replace(/("name": ")(.*)(",)/, function($0, $1, $2){
+			projectName = $2;
+		});
+
+		expect(projectName).toBe('from fwk local');
+
+		if(!hasLocal){
+			rm(rootFwk +'/'+ configjsLocal);
+		}
+	});
+
+
+
 
 //TODO hacer la prueba sin el local del fwk
 
