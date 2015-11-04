@@ -58,5 +58,8 @@
 		"through2": "^2.0.0",
 		"time-require": "^0.1.2"
 	},
+	"scripts":{
+		"test": "node_modules/.bin/jasmine"
+	},
 	"gitVersion": "4a0ac6acc3bf129cfa16a09cb77a9fa442bb7a7b"
 }

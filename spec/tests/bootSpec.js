@@ -35,12 +35,12 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 	});
 
 	//BOOT
-	it('should send the gulp', function(){
+	it('(01) should send the gulp', function(){
 		cd('01');
 		expect(exec('gulp nothing', {silent:true}).code).toBe(1);
 	});
 
-	it("should fill gitVersion field", function(){
+	it("(02) should fill gitVersion field", function(){
 		cd('02');
 		createPkgJson();
 
@@ -50,12 +50,12 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		expect(pkg.gitVersion).toBeDefined();
 	});
 
-	it("should fail with incompatible parameters (release-compress)", function(){
+	it("(03) should fail with incompatible parameters (release-compress)", function(){
 		cd('03');
 		expect(exec('gulp nothing', {silent:true}).code).toBe(1);
 	});
 
-	it("should fail with incompatible parameters (compress-lz-string)", function(){
+	it("(04) should fail with incompatible parameters (compress-lz-string)", function(){
 		cd('04');
 		expect(exec('gulp nothing', {silent:true}).code).toBe(1);
 	});
@@ -63,7 +63,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 
 
 	//CONFIG
-	it("should be create the config.js file on loader folder", function(){
+	it("(05) should be create the config.js file on loader folder", function(){
 		cd('05');
 		createPkgJson();
 		rm('-rf', rootFwk + configjs);
@@ -74,7 +74,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		expect(test('-e', rootFwk + configjs)).toBe(true);
 	});
 
-	it("should has the attribute name from appfactory config", function(){
+	it("(05) should has the attribute name from FWK config", function(){
 		cd('05');
 		expect(test('-e', rootFwk + configjs)).toBe(true);
 
@@ -100,7 +100,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		}
 	});
 
-	it("should has the attribute name from appfactory config LOCAL", function(){
+	it("(05) should has the attribute name from FWK config LOCAL", function(){
 		cd('05');
 		expect(test('-e', rootFwk + configjs)).toBe(true);
 
@@ -126,31 +126,29 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 	});
 
 
+	it("(06) should has the attribute name from APP config", function(){
+		cd('06');
+		expect(exec('gulp makeConfig', {silent:true}).code).toBe(0);
 
+		var projectName = '';
+		cat(rootFwk + configjs).replace(/("name": ")(.*)(",)/, function($0, $1, $2){
+			projectName = $2;
+		});
 
-//TODO hacer la prueba sin el local del fwk
+		expect(projectName).toBe('test 06 config');
+	});
 
+	it("(07) should has the attribute name from APP config LOCAL", function(){
+		cd('07');
+		expect(test('-e', configjsLocal)).toBe(true);
 
-	//it("npm install", function()
-	//{
-	//	rm('-rf', 'node_modules');
-	//	expect(test('-d', 'node_modules')).toBe(false);
-	//	expect(exec('npm install', {silent:true}).code).toBe(0);
-	//	expect(test('-d', 'node_modules')).toBe(true);
-	//});
+		expect(exec('gulp makeConfig', {silent:true}).code).toBe(0);
 
-	//it("gulp nothing", function(){
-	//	//rm('-rf', 'dist');
-	//	//expect(test('-d', 'dist')).toBe(false);
-	//	expect(exec('gulp nothing', {silent:true}).code).toBe(0);
-	//	//expect(test('-f', 'dist/main.css')).toBe(true);
-	//});
+		var projectName = '';
+		cat(rootFwk + configjs).replace(/("name": ")(.*)(",)/, function($0, $1, $2){
+			projectName = $2;
+		});
 
-	//it("gulp src", function()
-	//{
-	//	rm('-rf', 'dist');
-	//	expect(test('-d', 'dist')).toBe(false);
-	//	expect(exec('gulp src', {silent:true}).code).toBe(0);
-	//	expect(test('-f', 'dist/all.js')).toBe(true);
-	//});
+		expect(projectName).toBe('test 07 config local');
+	});
 });
