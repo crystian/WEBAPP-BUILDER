@@ -80,7 +80,3 @@
 //
 //	return stream;
 //};
-
-gulp.task('otrofile', function () {
-	console.log('desde otra FILE');
-});

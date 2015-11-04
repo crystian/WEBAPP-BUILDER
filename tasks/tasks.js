@@ -1,13 +1,13 @@
-///**
-//* Created by Crystian on 10/16/2014.
-//*/
-//
-//var gutil = require('gulp-util'),
-//	utils = require('./project/utils.js'),
-//	runSequence = require('run-sequence'),
-//	gulp = require('gulp');
-//
-////alias:
+/**
+* Created by Crystian on 10/16/2014.
+*/
+
+var gutil = require('gulp-util'),
+	utils = require('./framework/utils.js'),
+	runSequence = require('run-sequence'),
+	gulp = require('gulp');
+
+//alias:
 //gulp.task('default',	['build:loader']);
 //gulp.task('full:loader',['build:loader:full']);
 //gulp.task('config',		['make:config']);
@@ -26,7 +26,7 @@
 //		'remove:loader:temp',
 //	cb);
 //});
-//
+
 //gulp.task('build:loader:full', ['make:base'], function (cb) {
 //	runSequence(
 //		'build:loader',

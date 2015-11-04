@@ -2,7 +2,7 @@
  * Created by Crystian on 01/11/2015.
  */
 
-var	utils = require('./project/utils.js'),
+var	utils = require('./framework/utils.js'),
 	requireDir = require('require-dir'),
 	_ = require('lodash'),
 	git = require('git-rev'),
@@ -34,8 +34,8 @@ exports.boot = function(config){
 			pathFwk = path.resolve(__dirname,'../'),
 			pathPrj = config.dirname;
 
-		var relativePath = path.relative(__dirname, config.dirname);
-		console.log(relativePath);
+		//var relativePath = path.relative(__dirname, config.dirname);
+		//console.log(relativePath);
 		//var projectCode = relativePath.split(path.sep).pop();
 		//console.log('projectcode', projectCode);
 
@@ -56,7 +56,7 @@ exports.boot = function(config){
 		utils.exit(1);
 	}
 
-	//validations of compatibilities
+	//validations of compatibilities of configs
 	if (global.cfg.release && !global.cfg.compress) {
 		console.logRed('LOADER: if it is a release, it would be compressed');
 		utils.exit(1);

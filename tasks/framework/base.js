@@ -4,7 +4,7 @@
 
 var fs = require('fs-extra'),
 	_ = require('lodash'),
-	commons = require('./commons'),
+	//commons = require('./commons'),
 	rename = require('gulp-rename'),
 	cheerio = require('gulp-cheerio'),
 	replace = require('gulp-replace'),
