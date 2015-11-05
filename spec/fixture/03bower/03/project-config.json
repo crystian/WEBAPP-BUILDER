@@ -1,0 +1,10 @@
+{
+	"name": "index test 03",
+	"loader":{
+		"bower": {
+			"platform": {
+				"version": "1.0.0"
+			}
+		}
+	}
+}

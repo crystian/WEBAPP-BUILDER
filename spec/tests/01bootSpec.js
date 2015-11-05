@@ -2,24 +2,16 @@
  * Created by Crystian on 01/11/2015.
  */
 
-//var fs = require('fs');
-
+var utils = require('../../tasks/framework/utils');
 require('shelljs/global');
 
-function readFile(f){
-	return eval('('+cat(f)+')');
-}
-
-function saveFile(f, c){
-	return JSON.stringify(c, null,'\t').to(f);
-}
-
-var testFolder = 'spec/fixture/boot',
+var testFolder = 'spec/fixture/01boot',
 		rootFwk = '../../../..',
 		pkgJson = 'package.json',
 		pkgJsonContent = '{"name": "test 04","private": true,"dependencies": {}}',
 		configjsLocal = 'project-config-local.json',
-		configjs = '/loader/config.js';
+		configjs = '/loader/config.js',
+		configJson = 'config.json';
 
 describe("Full test for the build system of framework (fuaaa) - ", function(){
 
@@ -46,13 +38,8 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 
 		expect(exec('gulp nothing', {silent:true}).code).toBe(0);
 
-		var pkg = readFile(pkgJson);
+		var pkg = utils.readJsonFile(pkgJson);
 		expect(pkg.gitVersion).toBeDefined();
-	});
-
-	it("(03) should fail with incompatible parameters (release-compress)", function(){
-		cd('03');
-		expect(exec('gulp nothing', {silent:true}).code).toBe(1);
 	});
 
 	it("(04) should fail with incompatible parameters (compress-lz-string)", function(){
@@ -67,9 +54,19 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		rm('-rf', rootFwk + configjs);
 		expect(test('-e', rootFwk + configjs)).toBe(false);
 
-		expect(exec('gulp makeConfig --noUpdateGit', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
 
 		expect(test('-e', rootFwk + configjs)).toBe(true);
+	});
+
+	it("(05) should create json config to test it", function(){
+		cd('05');
+		rm('-rf', configJson);
+		expect(test('-e', configJson)).toBe(false);
+
+		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
+
+		expect(test('-e', configJson)).toBe(true);
 	});
 
 	it("(05) should has the attribute name from FWK config", function(){
@@ -82,16 +79,11 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 			mv(rootFwk +'/'+ configjsLocal, rootFwk + '/'+ configjsLocal +'.removed');
 		}
 
+		rm('-rf', configJson);
 
-		expect(exec('gulp makeConfig --noUpdateGit', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
 
-
-		var projectName = '';
-		cat(rootFwk + configjs).replace(/("name": ")(.*)(",)/, function($0, $1, $2){
-			projectName = $2;
-		});
-
-		expect(projectName).toBe('app name');
+		expect(utils.readJsonFile(configJson).name).toBe('app name');
 
 		if(hasLocal){
 			mv(rootFwk + '/'+ configjsLocal +'.removed', rootFwk +'/'+ configjsLocal);
@@ -105,18 +97,14 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		var hasLocal = test('-e', rootFwk +'/'+ configjsLocal);
 
 		if(!hasLocal){
-			saveFile(rootFwk +'/'+ configjsLocal, {'name': 'from fwk local'});
+			utils.saveFile(rootFwk +'/'+ configjsLocal, {'name': 'from fwk local'});
 		}
 
-		expect(exec('gulp makeConfig --noUpdateGit', {silent:true}).code).toBe(0);
+		rm('-rf', configJson);
 
+		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
 
-		var projectName = '';
-		cat(rootFwk + configjs).replace(/("name": ")(.*)(",)/, function($0, $1, $2){
-			projectName = $2;
-		});
-
-		expect(projectName).toBe('from fwk local');
+		expect(utils.readJsonFile(configJson).name).toBe('from fwk local');
 
 		if(!hasLocal){
 			rm(rootFwk +'/'+ configjsLocal);
@@ -126,27 +114,20 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 
 	it("(06) should has the attribute name from APP config", function(){
 		cd('06');
-		expect(exec('gulp makeConfig --noUpdateGit', {silent:true}).code).toBe(0);
+		rm('-rf', configJson);
 
-		var projectName = '';
-		cat(rootFwk + configjs).replace(/("name": ")(.*)(",)/, function($0, $1, $2){
-			projectName = $2;
-		});
+		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
 
-		expect(projectName).toBe('test 06 config');
+		expect(utils.readJsonFile(configJson).name).toBe('test 06 config');
 	});
 
 	it("(07) should has the attribute name from APP config LOCAL", function(){
 		cd('07');
 		expect(test('-e', configjsLocal)).toBe(true);
+		rm('-rf', configJson);
 
-		expect(exec('gulp makeConfig --noUpdateGit', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
 
-		var projectName = '';
-		cat(rootFwk + configjs).replace(/("name": ")(.*)(",)/, function($0, $1, $2){
-			projectName = $2;
-		});
-
-		expect(projectName).toBe('test 07 config local');
+		expect(utils.readJsonFile(configJson).name).toBe('test 07 config local');
 	});
 });

@@ -12,7 +12,7 @@ var fs = require('fs-extra'),
 	gutil = require('gulp-util');
 
 //replace references on index.html
-//gulp.task('make:base:index', ['make:bower', 'make:index', 'make:config'], function() {
+//gulp.task('make:base:index', ['make:bower', 'makeIndex', 'makeConfig'], function() {
 //	return gulp.src(global.cfg.loader.folders.www +'/'+ global.cfg.loader.filesDest.index)
 //		.pipe(commons.debugeame())
 //		.pipe(commons.injectContent(global.cfg.loader.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.html','loadingHtml'))
@@ -21,7 +21,7 @@ var fs = require('fs-extra'),
 //		.pipe(inject(gulp.src(global.cfg.varCss, {read: false}), {name: 'bower', relative:'true'}))
 //		.pipe(gulp.dest(global.cfg.loader.folders.www));
 //});
-//
+
 // make a new index on loader folder
 gulp.task('makeIndex', function () {
 	return gulp.src(global.cfg.folders.fwk +'/'+ global.cfg.loader.folders.www + '/index.tpl.html')
@@ -70,8 +70,8 @@ gulp.task('makeConfig', function (cb) {
 	//json.phantom = false;//flagPhantom
 
 	json.loader = {
-		//version: global.cfg.loader.version,
-		//release: global.cfg.loader.release,
+		version: global.cfg.loader.version,
+		release: global.cfg.loader.release,
 		////build: false, ??
 		text: {
 			//incompatibleByFeatures: global.cfg.loader.text.incompatibleByFeatures,
@@ -96,6 +96,19 @@ gulp.task('makeConfig', function (cb) {
 		'//jshint maxlen:false\n'+
 		'var _loaderCfg = '+ JSON.stringify(json, null, '\t') +';'+
 		compatibilityTpl;
+
+	var jsonCloned = _.clone(json);
+	jsonCloned.cfg = global.cfg;
+
+	if(gutil.env.testMode){
+		fs.writeFile('./config.json',
+				JSON.stringify(jsonCloned, null, '\t'),
+				function(err){
+					if(err) {
+						console.logRed(err);
+					}
+				});
+	}
 
 	fs.writeFile(global.cfg.folders.fwk +'/'+ global.cfg.loader.folders.www +'/config.js',
 		text,

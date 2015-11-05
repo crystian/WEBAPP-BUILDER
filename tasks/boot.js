@@ -42,7 +42,6 @@ exports.boot = function(config){
 			utils.fileExist(pathPrj +'/'+ projectConfigLocalFile) && require(pathPrj +'/'+  projectConfigLocalFile)
 		);
 
-
 		global.cfg.pkg = require(pathPrj +'/'+ packageJson);
 		global.cfg.fromFwk = false;
 
@@ -56,8 +55,8 @@ exports.boot = function(config){
 		}
 
 		global.cfg.folders.fwk = pathFwk;
-		global.cfg.loader.folders.relativePathFrom = relativePathFrom;
-		global.cfg.loader.folders.relativePathTo = relativePathTo;
+		//global.cfg.loader.folders.relativePathFrom = relativePathFrom;
+		//global.cfg.loader.folders.relativePathTo = relativePathTo;
 		//global.cfg.loader.folders.www = relativePathTo + global.cfg.loader.folders.www;
 		//global.cfg.loader.folders.bower = relativePathFrom + global.cfg.loader.folders.bower;
 		//global.cfg.loader.folders.build = relativePathFrom + global.cfg.loader.folders.build;
@@ -72,10 +71,6 @@ exports.boot = function(config){
 	}
 
 	//validations of compatibilities of configs
-	if (global.cfg.release && !global.cfg.compress) {
-		console.logRed('LOADER: if it is a release, it would be compressed');
-		utils.exit(1);
-	}
 	if (global.cfg.compress && !global.cfg.loader.bower['lz-string']) {
 		console.logRed('LOADER: Compress option active, but library lz-string not present');
 		utils.exit(1);
@@ -83,7 +78,7 @@ exports.boot = function(config){
 	//
 
 	//save gitVersion on package.json
-	if(!gutil.env.noUpdateGit){
+	if(!gutil.env.testMode){
 		git.long(function (str) {
 			global.cfg.pkg.gitVersion = str;
 			fs.writeFileSync(packageJson, JSON.stringify(global.cfg.pkg, null,'\t') , {encoding: 'utf8'});

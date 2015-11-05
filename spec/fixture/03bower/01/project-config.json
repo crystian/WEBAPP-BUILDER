@@ -1,0 +1,9 @@
+{
+	"name": "index test 02",
+	"compress": true,
+	"loader":{
+		"bower": {
+			"lz-string": null
+		}
+	}
+}

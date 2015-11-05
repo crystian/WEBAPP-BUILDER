@@ -1,0 +1,12 @@
+{
+	"name": "index test 04",
+	"loader":{
+		"bower": {
+			"other": {
+				"version": "1.0.0",
+				"js-dev": ["other/other.js"],
+				"js-prod": ["other/other.min.js"]
+			}
+		}
+	}
+}

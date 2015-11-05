@@ -25,6 +25,14 @@ console.logRed = function (m) {
 	console.log(chalk.red.bold(m));
 };
 
+exports.readJsonFile = function(f){
+	return eval('('+cat(f)+')');
+};
+
+exports.saveFile = function(f, c){
+	return JSON.stringify(c, null,'\t').to(f);
+};
+
 exports.fileExist = function(fileName){
 	// I tried using accessSync but doesn't work properly on node 4.2.1
 	return fs.existsSync(fileName);

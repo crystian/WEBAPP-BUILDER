@@ -4,7 +4,7 @@
 var cheerio = require('cheerio');
 require('shelljs/global');
 
-var testFolder = 'spec/fixture/index',
+var testFolder = 'spec/fixture/02index',
 		rootFwk = '../../../..',
 		pathLoader = '/loader',
 		index = '/index.html';
@@ -26,7 +26,7 @@ describe("Index template to index - ", function(){
 		rm('-rf', rootFwk + pathLoader + index);
 		expect(test('-e', rootFwk + pathLoader + index)).toBe(false);
 
-		expect(exec('gulp makeIndex --noUpdateGit', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeIndex --testMode', {silent:true}).code).toBe(0);
 
 		expect(test('-e', rootFwk + pathLoader + index)).toBe(true);
 	});
@@ -34,7 +34,7 @@ describe("Index template to index - ", function(){
 	it('(01) should modificate metadata', function(){
 		cd('01');
 
-		expect(exec('gulp makeIndex --noUpdateGit', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeIndex --testMode', {silent:true}).code).toBe(0);
 
 		var indexContent = cat(rootFwk +'/'+ pathLoader +'/'+ index);
 		$ = cheerio.load(indexContent);
@@ -51,12 +51,12 @@ describe("Index template to index - ", function(){
 	it('(02) should replace quote on contentSecurity', function(){
 		cd('02');
 
-		expect(exec('gulp makeIndex --noUpdateGit', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeIndex --testMode', {silent:true}).code).toBe(0);
 
 		var indexContent = cat(rootFwk +'/'+ pathLoader +'/'+ index);
 		$ = cheerio.load(indexContent);
 
-		expect($('#contentSecurity').attr('content')).toBe('Test2');
+		expect($('#contentSecurity').attr('content')).toBe('Test2 apos: \'');
 	});
 
 });
