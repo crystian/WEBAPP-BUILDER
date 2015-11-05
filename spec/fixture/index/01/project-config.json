@@ -1,0 +1,16 @@
+{
+	"name": "index test 01",
+	"loader":{
+		"viewport": "Test1",
+		"contentSecurity": "Test2",
+
+		"text": {
+			"title": "Test3",
+			"description": "Test4",
+			"keyword": "Test5",
+			"author": "Test6",
+			"noscript": "Test7"
+		}
+
+	}
+}

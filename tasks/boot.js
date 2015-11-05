@@ -34,11 +34,6 @@ exports.boot = function(config){
 			pathFwk = path.resolve(__dirname,'../'),
 			pathPrj = config.dirname;
 
-		//var relativePath = path.relative(__dirname, config.dirname);
-		//console.log(relativePath);
-		//var projectCode = relativePath.split(path.sep).pop();
-		//console.log('projectcode', projectCode);
-
 		//merge between default and specify:
 		global.cfg = _.merge({},
 			require(pathFwk +'/'+ projectConfigFile), //shoud be exist!
@@ -47,9 +42,29 @@ exports.boot = function(config){
 			utils.fileExist(pathPrj +'/'+ projectConfigLocalFile) && require(pathPrj +'/'+  projectConfigLocalFile)
 		);
 
-		global.cfg.folders.fwk = pathFwk;
 
 		global.cfg.pkg = require(pathPrj +'/'+ packageJson);
+		global.cfg.fromFwk = false;
+
+		//reconfigure folders:
+		var relativePathFrom = path.relative(config.dirname, __dirname +'/..')  +'/';
+		var relativePathTo = path.relative(__dirname +'/..', config.dirname)  +'/';
+		if(relativePathFrom === '/'){
+			relativePathFrom = '';
+			relativePathTo = '';
+			global.cfg.fromFwk = true;
+		}
+
+		global.cfg.folders.fwk = pathFwk;
+		global.cfg.loader.folders.relativePathFrom = relativePathFrom;
+		global.cfg.loader.folders.relativePathTo = relativePathTo;
+		//global.cfg.loader.folders.www = relativePathTo + global.cfg.loader.folders.www;
+		//global.cfg.loader.folders.bower = relativePathFrom + global.cfg.loader.folders.bower;
+		//global.cfg.loader.folders.build = relativePathFrom + global.cfg.loader.folders.build;
+		//global.cfg.loader.folders.temp = relativePathFrom + global.cfg.loader.folders.temp;
+		//global.cfg.loader.folders.screens = relativePathFrom + global.cfg.loader.folders.screens;
+		//global.cfg.loader.folders.loadings = relativePathFrom + global.cfg.loader.folders.loadings;
+
 
 	} catch (e){
 		console.logRed(e);
@@ -68,10 +83,12 @@ exports.boot = function(config){
 	//
 
 	//save gitVersion on package.json
-	git.long(function (str) {
-		global.cfg.pkg.gitVersion = str;
-		fs.writeFileSync(packageJson, JSON.stringify(global.cfg.pkg, null,'\t') , {encoding: 'utf8'});
-	});
+	if(!gutil.env.noUpdateGit){
+		git.long(function (str) {
+			global.cfg.pkg.gitVersion = str;
+			fs.writeFileSync(packageJson, JSON.stringify(global.cfg.pkg, null,'\t') , {encoding: 'utf8'});
+		});
+	}
 
 	//include others tasks on this folder
 	requireDir('.', {recurse: true});

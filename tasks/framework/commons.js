@@ -79,8 +79,3 @@
 //		.pipe(gulp.dest(dest));
 //};
 //
-//exports.debugeame = function(){
-//	return through.obj()
-//		.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
-//		.on('error', gutil.log);
-//};

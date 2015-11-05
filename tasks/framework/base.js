@@ -4,14 +4,14 @@
 
 var fs = require('fs-extra'),
 	_ = require('lodash'),
-	//commons = require('./commons'),
+	utils = require('./utils'),
 	rename = require('gulp-rename'),
 	cheerio = require('gulp-cheerio'),
 	replace = require('gulp-replace'),
-	inject = require('gulp-inject'),
+	//inject = require('gulp-inject'),
 	gutil = require('gulp-util');
 
-////replace references on index.html
+//replace references on index.html
 //gulp.task('make:base:index', ['make:bower', 'make:index', 'make:config'], function() {
 //	return gulp.src(global.cfg.loader.folders.www +'/'+ global.cfg.loader.filesDest.index)
 //		.pipe(commons.debugeame())
@@ -22,31 +22,27 @@ var fs = require('fs-extra'),
 //		.pipe(gulp.dest(global.cfg.loader.folders.www));
 //});
 //
-//// make a new index on loader folder
-//gulp.task('make:index', function () {
-//	return gulp.src(global.cfg.loader.folders.www + '/index.tpl.html')
-//		.pipe(commons.debugeame())
-//		.pipe(rename(global.cfg.loader.filesDest.index))
-//		.pipe(cheerio({
-//			run: function ($) {
-//				var cfg = global.cfg;
-//
-//				function attr_unescape( x ){
-//					return $('<div />').html( x ).text();
-//				}
-//				$('#pageTitle').text(cfg.loader.text.title);
-//				$('#pageDescription').attr('content',cfg.loader.text.description);
-//				$('#pageKeyword').attr('content',cfg.loader.text.keyword);
-//				$('#pageAuthor').attr('content',cfg.loader.text.author);
-//				$('#noscript').html(cfg.loader.text.noscript);
-//				$('#viewport').attr('content',cfg.loader.viewport);
-//				$('#contentSecurity').attr('content',cfg.loader.contentSecurity);
-//			}
-//		}))
-//		.pipe(replace('<!--msgTpl-->','<!-- REMEMBER, this file is generated, don\'t change it, because you can lost it -->'))
-//		.pipe(replace('&apos;','\''))//it's for contentSecurity apost, we cannot inject that one
-//		.pipe(gulp.dest(global.cfg.loader.folders.www));
-//});
+// make a new index on loader folder
+gulp.task('makeIndex', function () {
+	return gulp.src(global.cfg.folders.fwk +'/'+ global.cfg.loader.folders.www + '/index.tpl.html')
+		.pipe(utils.debugeame())
+		.pipe(rename(global.cfg.loader.filesDest.index))
+		.pipe(cheerio({
+			run: function ($) {
+				var cfg = global.cfg;
+				$('#pageTitle').text(cfg.loader.text.title);
+				$('#pageDescription').attr('content',cfg.loader.text.description);
+				$('#pageKeyword').attr('content',cfg.loader.text.keyword);
+				$('#pageAuthor').attr('content',cfg.loader.text.author);
+				$('#noscript').html(cfg.loader.text.noscript);
+				$('#viewport').attr('content',cfg.loader.viewport);
+				$('#contentSecurity').attr('content',cfg.loader.contentSecurity);
+			}
+		}))
+		.pipe(replace('<!--msgTpl-->','<!-- REMEMBER, this file is generated, don\'t change it, because you can lost it -->'))
+		.pipe(replace('&apos;','\''))//it's for contentSecurity apost, we cannot inject that one
+		.pipe(gulp.dest(global.cfg.folders.fwk +'/'+ global.cfg.loader.folders.www));
+});
 
 gulp.task('makeConfig', function (cb) {
 	//variables shared between loader build and loader app
@@ -54,7 +50,6 @@ gulp.task('makeConfig', function (cb) {
 	json.name = global.cfg.name;
 	json.release = global.cfg.release;
 	json.version = global.cfg.version;
-
 	json.compress = global.cfg.compress;
 	//json.isCordovaDevice = global.cfg.isCordovaDevice;
 	//json.compatibilityMatrix = global.cfg.compatibilityMatrix;

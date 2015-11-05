@@ -7,8 +7,10 @@
 var chalk = require('chalk'),
 	path = require('path'),
 	fs = require('fs'),
+	debug = require('gulp-debug'),
+	gif = require('gulp-if'),
+	through = require('through2'),
 	gutil = require('gulp-util');
-
 
 //COMMONS between project and loader:
 console.logWarn = function (m) {
@@ -60,6 +62,12 @@ exports.fileExist = function(fileName){
 //
 //	return arr.join('.');
 //};
+
+exports.debugeame = function(){
+	return through.obj()
+			.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
+			.on('error', gutil.log);
+};
 
 process.on('uncaughtException', function(err){
 	if(typeof err === 'string') err = {message:err};

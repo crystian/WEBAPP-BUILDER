@@ -7,6 +7,7 @@
 	"dependencies": {
 		"async": "^1.4.2",
 		"chalk": "^1.1.1",
+		"cheerio": "^0.19.0",
 		"del": "^2.0.2",
 		"event-stream": "^3.3.1",
 		"fs-extra": "^0.24.0",
@@ -58,8 +59,8 @@
 		"through2": "^2.0.0",
 		"time-require": "^0.1.2"
 	},
-	"scripts":{
+	"scripts": {
 		"test": "node_modules/.bin/jasmine"
 	},
-	"gitVersion": "4a0ac6acc3bf129cfa16a09cb77a9fa442bb7a7b"
+	"gitVersion": "a11d0a32457a9f5e4b60407bc8cbb0d094750826"
 }
