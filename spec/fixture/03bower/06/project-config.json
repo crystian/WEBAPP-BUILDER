@@ -1,0 +1,17 @@
+{
+	"name": "index test 05",
+	"compress": false,
+	"loader":{
+		"bower": {
+			"platform": {
+				"version": "1.3.0",
+				"js-dev": ["platform/platform.js"],
+				"js-prod": ["platform/platform.min.js"],
+				"generate-js": true
+			},
+			"lz-string": null,
+			"es6-promise": null,
+			"fastclick": null
+		}
+	}
+}

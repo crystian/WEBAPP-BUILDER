@@ -52,19 +52,7 @@
 //	);
 //};
 //
-//exports.injectContent = function(filePath, name, tagHtm) {
-//	return inject(gulp.src([filePath]), {
-//		starttag: '<!-- inject:'+ name +' -->',
-//		transform: function (filePath, file) {
-//			var r = file.contents.toString('utf8');
-//			if (tagHtm) {
-//				r = '<'+tagHtm+'>'+r+'</'+tagHtm+'>';
-//			}
-//			return r;
-//		}
-//	});
-//};
-//
+
 //exports.sassfixer = function(src, dest) {
 //	var type = utils.getExtensionFile(src);
 //	var sassOptions = {errLogToConsole: true, indentedSyntax: (type === 'sass')};

@@ -8,19 +8,23 @@ var fs = require('fs-extra'),
 	rename = require('gulp-rename'),
 	cheerio = require('gulp-cheerio'),
 	replace = require('gulp-replace'),
+	injectors = require('./injectors'),
 	//inject = require('gulp-inject'),
 	gutil = require('gulp-util');
 
 //replace references on index.html
-//gulp.task('make:base:index', ['make:bower', 'makeIndex', 'makeConfig'], function() {
-//	return gulp.src(global.cfg.loader.folders.www +'/'+ global.cfg.loader.filesDest.index)
-//		.pipe(commons.debugeame())
-//		.pipe(commons.injectContent(global.cfg.loader.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.html','loadingHtml'))
-//		.pipe(inject(gulp.src(global.cfg.loader.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.css', {read: false}), {name: 'loadingCss', relative:'true'}))
+gulp.task('makeBase', ['makeBower', 'makeIndex', 'makeConfig', 'cssLoading'], function() {
+	var loadingHtml = global.cfg.folders.fwk +'/'+ global.cfg.loader.folders.loadings +'/'+ global.cfg.loader.loading +'/loading.html',
+			loadingCSS = 	global.cfg.folders.fwk +'/'+ global.cfg.loader.folders.loadings +'/'+ global.cfg.loader.loading +'/loading.css';
+
+	return gulp.src(global.cfg.folders.fwk +'/'+ global.cfg.loader.folders.www +'/'+ global.cfg.loader.filesDest.index)
+		.pipe(utils.debugeame())
+		.pipe(injectors.injectContent(loadingHtml,'loadingHtml'))
+		.pipe(inject(gulp.src(loadingCSS, {read: false}), {name: 'loadingCss', relative:'true'}))
 //		.pipe(inject(gulp.src(global.cfg.varJs, {read: false}), {name: 'bower', relative:'true'}))
 //		.pipe(inject(gulp.src(global.cfg.varCss, {read: false}), {name: 'bower', relative:'true'}))
-//		.pipe(gulp.dest(global.cfg.loader.folders.www));
-//});
+		.pipe(gulp.dest(global.cfg.folders.fwk +'/'+ global.cfg.loader.folders.www));
+});
 
 // make a new index on loader folder
 gulp.task('makeIndex', function () {

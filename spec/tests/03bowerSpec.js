@@ -2,17 +2,16 @@
  * Created by Crystian on 01/11/2015.
  */
 
-var utils = require('../../tasks/framework/utils');
+var utils = require('../../tasks/framework/utils'),
+		fs = require('fs');
+
 require('shelljs/global');
 
 var testFolder = 'spec/fixture/03bower',
 		rootFwk = '../../../..',
 		bowerJson = '/bower.json',
-		configJson = 'config.json'
-		//pkgJsonContent = '{"name": "test 04","private": true,"dependencies": {}}',
-		//configjsLocal = 'project-config-local.json',
-		//configjs = '/loader/config.js';
-;
+		configJson = 'config.json';
+
 describe("Bower dependencies and more - ", function(){
 
 	beforeEach(function(){
@@ -60,23 +59,38 @@ describe("Bower dependencies and more - ", function(){
 		expect(bowerFile.dependencies.other).toBe('1.0.0');
 	});
 
-	fit('(05) should download resources with bower', function(){
+	it('(05) should download resources with bower', function(){
 		cd('05');
 
 		rm('-rf', configJson);
 		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
 		var bowerFolder = utils.readJsonFile(configJson).cfg.loader.folders.bower;
 
-		expect(exec('gulp makeBower --testMode', {silent:false}).code).toBe(0);
+		rm('-rf', rootFwk +'/'+ bowerFolder);
+		expect(test('-e', rootFwk +'/'+ bowerFolder)).toBe(false);
 
-		//rm('-rf', rootFwk +'/'+ bowerFolder);
+		expect(exec('gulp makeBower --testMode', {silent:true}).code).toBe(0);
+
 		expect(test('-e', rootFwk +'/'+ bowerFolder)).toBe(true);
-		//pkgJsonContent.to(pkgJson);
-		//expect(test('-e', pkgJson)).toBe(true);
-		//
-		//
-		//var bowerFile = utils.readFile(rootFwk + bowerJson);
-		//expect(bowerFile.dependencies.other).toBe('1.0.0');
+	});
+
+	it('(06) should create a minificated version for libs', function(){
+		cd('06');
+
+		rm('-rf', configJson);
+		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
+		var bowerFolder = utils.readJsonFile(configJson).cfg.loader.folders.bower;
+		rm('-rf', rootFwk +'/'+ bowerFolder);
+
+		expect(exec('gulp makeBower --testMode', {silent:true}).code).toBe(0);
+
+		expect(test('-e', rootFwk +'/'+ bowerFolder +'/platform/platform.min.js')).toBe(true);
+
+		//check minification
+		var file = fs.statSync(rootFwk +'/'+ bowerFolder +'/platform/platform.min.js');
+		expect(file.size).toBeGreaterThan(12000);
+		expect(file.size).toBeLessThan(14000);
+
 	});
 
 

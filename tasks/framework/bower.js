@@ -3,7 +3,7 @@
  */
 
 var utils = require('./utils.js'),
-	bowerify = require('gulp-bower'),
+	bower = require('gulp-bower'),
 	fs = require('fs-extra'),
 	uglify = require('gulp-uglify'),
 	rename = require('gulp-rename'),
@@ -25,11 +25,11 @@ gulp.task('makeBower', ['downloadBower'], function(cb) {
 
 	for (; i < len; i++) {
 		var s = global.cfg.varLibsToMin[i];
-		gulp.src(s.jsDev)
+		gulp.src(global.cfg.folders.fwk +'/'+ s.jsDev)
 			.pipe(utils.debugeame())
 			.pipe(uglify())
 			.pipe(rename(s.name))
-			.pipe(gulp.dest(s.pa))
+			.pipe(gulp.dest(global.cfg.folders.fwk +'/'+ s.pa))
 			.on('finish', function (a,b,c) {
 				console.logGreen('Minification of '+global.cfg.varLibsToMin[global.cfg.varLibsToMinI].name+'...');
 				global.cfg.varLibsToMinI++;
@@ -41,7 +41,7 @@ gulp.task('makeBower', ['downloadBower'], function(cb) {
 });
 
 gulp.task('downloadBower',['generatorBower'], function() {
-	return bowerify({ directory: global.cfg.folders.fwk +'/'+ global.cfg.loader.folders.bower});
+	return bower({ directory: global.cfg.loader.folders.bower, cwd: global.cfg.folders.fwk });
 });
 
 gulp.task('generatorBower',['parseBower'],  function(cb) {
