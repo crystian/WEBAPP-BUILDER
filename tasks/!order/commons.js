@@ -52,18 +52,3 @@
 //	);
 //};
 //
-
-//exports.sassfixer = function(src, dest) {
-//	var type = utils.getExtensionFile(src);
-//	var sassOptions = {errLogToConsole: true, indentedSyntax: (type === 'sass')};
-//
-//    return gulp.src(src)
-//		.pipe(this.debugeame())
-//		.pipe(sass(sassOptions))
-//		.pipe(autoprefixer(global.cfg.autoprefixer))
-//		.pipe(replace(' 0px', ' 0'))
-//		.pipe(csslint('csslintrc.json'))
-//		.pipe(csslint.reporter())
-//		.pipe(gulp.dest(dest));
-//};
-//

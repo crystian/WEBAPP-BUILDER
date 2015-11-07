@@ -62,5 +62,5 @@
 	"scripts": {
 		"test": "node_modules/.bin/jasmine"
 	},
-	"gitVersion": "7eb2309214e25a8aaefb47f2c618966f1b24c8ab"
+	"gitVersion": "984644e0b3800026591e2134930d6efbad21c43c"
 }

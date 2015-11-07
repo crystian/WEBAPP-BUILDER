@@ -7,10 +7,11 @@ var utils = require('../../tasks/framework/utils'),
 
 require('shelljs/global');
 
-var testFolder = 'spec/fixture/04base',
+var testFolder = 'spec/fixture/04css',
 		rootFwk = '../../../..',
 		pathLoader = '/loader',
-		index = '/index.html'
+		cssLoader = '/css/loader.css',
+		cssLoading = '/loading/1/loading.css'
 		//bowerJson = '/bower.json',
 		//configJson = 'config.json'
 		//configjsLocal = 'project-config-local.json',
@@ -25,19 +26,23 @@ fdescribe("Base (index) - ", function(){
 		cd(rootFwk);
 	});
 
-	//BOOT
-	it('(01) should inject snippets on index.html', function(){
+
+	it('(01) should create css files', function(){
 		cd('01');
 
-		rm('-rf', rootFwk + pathLoader + index);
-		expect(test('-e', rootFwk + pathLoader + index)).toBe(false);
+		rm('-rf', rootFwk + pathLoader + cssLoader);
+		rm('-rf', rootFwk + pathLoader + cssLoading);
+		expect(test('-e', rootFwk + pathLoader + cssLoader)).toBe(false);
+		expect(test('-e', rootFwk + pathLoader + cssLoading)).toBe(false);
 
-		expect(exec('gulp makeBase --testMode', {silent:false}).code).toBe(0);
+		expect(exec('gulp makeCss --testMode', {silent:false}).code).toBe(0);
 
-		expect(test('-e', rootFwk + pathLoader + index)).toBe(true);
-
-		var indexFile = cat(rootFwk + pathLoader + index);
-		expect(indexFile.indexOf('<!--comment for test, don\'t remove it-->')).not.toBe(-1);
+		//expect(test('-e', rootFwk + pathLoader + index)).toBe(true);
+		//
+		//var indexFile = cat(rootFwk + pathLoader + index);
+		//expect(indexFile.indexOf('<!--comment for test, don\'t remove it-->')).not.toBe(-1);
 	});
+
+
 
 });
