@@ -13,13 +13,13 @@ var fs = require('fs-extra'),
 	gutil = require('gulp-util');
 
 //replace references on index.html
-gulp.task('makeBase', ['makeBower', 'makeIndex', 'makeConfig', 'css'], function() {
+gulp.task('makeBase', ['makeBower', 'makeIndex', 'makeConfig', 'makeCss'], function() {
 	var loadingHtml = global.cfg.folders.fwk +'/'+ global.cfg.loader.folders.loadings +'/'+ global.cfg.loader.loading +'/loading.html',
 			loadingCSS = 	global.cfg.folders.fwk +'/'+ global.cfg.loader.folders.loadings +'/'+ global.cfg.loader.loading +'/loading.css';
 
 	return gulp.src(global.cfg.folders.fwk +'/'+ global.cfg.loader.folders.www +'/'+ global.cfg.loader.filesDest.index)
 		.pipe(utils.debugeame())
-		.pipe(injectors.injectContent(loadingHtml,'loadingHtml'))
+		//.pipe(injectors.injectContent(loadingHtml,'loadingHtml'))
 		//.pipe(inject(gulp.src(loadingCSS, {read: false}), {name: 'loadingCss', relative:'true'}))
 //		.pipe(inject(gulp.src(global.cfg.varJs, {read: false}), {name: 'bower', relative:'true'}))
 //		.pipe(inject(gulp.src(global.cfg.varCss, {read: false}), {name: 'bower', relative:'true'}))
@@ -101,10 +101,11 @@ gulp.task('makeConfig', function (cb) {
 		'var _loaderCfg = '+ JSON.stringify(json, null, '\t') +';'+
 		compatibilityTpl;
 
-	var jsonCloned = _.clone(json);
-	jsonCloned.cfg = global.cfg;
 
 	if(gutil.env.testMode){
+		var jsonCloned = _.clone(json);
+		jsonCloned.cfg = global.cfg;
+
 		fs.writeFile('./config.json',
 				JSON.stringify(jsonCloned, null, '\t'),
 				function(err){

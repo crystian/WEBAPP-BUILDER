@@ -51,12 +51,13 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 	//CONFIG
 	it("(05) should be create the config.js file on loader folder", function(){
 		cd('05');
-		rm('-rf', rootFwk + configjs);
-		expect(test('-e', rootFwk + configjs)).toBe(false);
+		var pathConfig = rootFwk + configjs;
+		rm('-rf', pathConfig);
+		expect(test('-e', pathConfig)).toBe(false);
 
 		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
 
-		expect(test('-e', rootFwk + configjs)).toBe(true);
+		expect(test('-e', pathConfig)).toBe(true);
 	});
 
 	it("(05) should create json config to test it", function(){
@@ -71,12 +72,14 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 
 	it("(05) should has the attribute name from FWK config", function(){
 		cd('05');
+
 		expect(test('-e', rootFwk + configjs)).toBe(true);
 
-		var hasLocal = test('-e', rootFwk +'/'+ configjsLocal);
+		var pathConfigLocal = rootFwk +'/'+ configjsLocal;
+		var hasLocal = test('-e', pathConfigLocal);
 
 		if(hasLocal){
-			mv(rootFwk +'/'+ configjsLocal, rootFwk + '/'+ configjsLocal +'.removed');
+			mv(pathConfigLocal, pathConfigLocal +'.removed');
 		}
 
 		rm('-rf', configJson);
@@ -86,7 +89,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		expect(utils.readJsonFile(configJson).name).toBe('app name');
 
 		if(hasLocal){
-			mv(rootFwk + '/'+ configjsLocal +'.removed', rootFwk +'/'+ configjsLocal);
+			mv(pathConfigLocal +'.removed', pathConfigLocal);
 		}
 	});
 
@@ -94,10 +97,11 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		cd('05');
 		expect(test('-e', rootFwk + configjs)).toBe(true);
 
-		var hasLocal = test('-e', rootFwk +'/'+ configjsLocal);
+		var pathConfigLocal = rootFwk +'/'+ configjsLocal;
+		var hasLocal = test('-e', pathConfigLocal);
 
 		if(!hasLocal){
-			utils.saveFile(rootFwk +'/'+ configjsLocal, {'name': 'from fwk local'});
+			utils.saveFile(pathConfigLocal, {'name': 'from fwk local'});
 		}
 
 		rm('-rf', configJson);
@@ -107,7 +111,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		expect(utils.readJsonFile(configJson).name).toBe('from fwk local');
 
 		if(!hasLocal){
-			rm(rootFwk +'/'+ configjsLocal);
+			rm(pathConfigLocal);
 		}
 	});
 

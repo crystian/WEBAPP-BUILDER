@@ -29,33 +29,36 @@ describe("Bower dependencies and more - ", function(){
 
 	it('(02) should be platform == null', function(){
 		cd('02');
-		rm('-rf', rootFwk + bowerJson);
-		expect(test('-e', rootFwk + bowerJson)).toBe(false);
+		var pathBower = rootFwk + bowerJson;
+		rm('-rf', pathBower);
+		expect(test('-e', pathBower)).toBe(false);
 
 		expect(exec('gulp generatorBower --testMode', {silent:true}).code).toBe(0);
 
-		expect(test('-e', rootFwk + bowerJson)).toBe(true);
-		var bowerFile = utils.readJsonFile(rootFwk + bowerJson);
+		expect(test('-e', pathBower)).toBe(true);
+		var bowerFile = utils.readJsonFile(pathBower);
 		expect(bowerFile.dependencies.platform).toBeUndefined();
 	});
 
 	it('(03) should be platform with other version', function(){
 		cd('03');
-		rm('-rf', rootFwk + bowerJson);
+		var pathBower = rootFwk + bowerJson;
+		rm('-rf', pathBower);
 
 		expect(exec('gulp generatorBower --testMode', {silent:true}).code).toBe(0);
 
-		var bowerFile = utils.readJsonFile(rootFwk + bowerJson);
+		var bowerFile = utils.readJsonFile(pathBower);
 		expect(bowerFile.dependencies.platform).toBe('1.0.0');
 	});
 
 	it('(04) should be add other component', function(){
 		cd('04');
-		rm('-rf', rootFwk + bowerJson);
+		var pathBower = rootFwk + bowerJson;
+		rm('-rf', pathBower);
 
 		expect(exec('gulp generatorBower --testMode', {silent:true}).code).toBe(0);
 
-		var bowerFile = utils.readJsonFile(rootFwk + bowerJson);
+		var bowerFile = utils.readJsonFile(pathBower);
 		expect(bowerFile.dependencies.other).toBe('1.0.0');
 	});
 
@@ -66,12 +69,13 @@ describe("Bower dependencies and more - ", function(){
 		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
 		var bowerFolder = utils.readJsonFile(configJson).cfg.loader.folders.bower;
 
-		rm('-rf', rootFwk +'/'+ bowerFolder);
-		expect(test('-e', rootFwk +'/'+ bowerFolder)).toBe(false);
+		var pathBowerFolder = rootFwk +'/'+ bowerFolder;
+		rm('-rf', pathBowerFolder);
+		expect(test('-e', pathBowerFolder)).toBe(false);
 
 		expect(exec('gulp makeBower --testMode', {silent:true}).code).toBe(0);
 
-		expect(test('-e', rootFwk +'/'+ bowerFolder)).toBe(true);
+		expect(test('-e', pathBowerFolder)).toBe(true);
 	});
 
 	it('(06) should create a minificated version for libs', function(){
@@ -80,14 +84,16 @@ describe("Bower dependencies and more - ", function(){
 		rm('-rf', configJson);
 		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
 		var bowerFolder = utils.readJsonFile(configJson).cfg.loader.folders.bower;
-		rm('-rf', rootFwk +'/'+ bowerFolder);
+		var pathBowerFolder = rootFwk +'/'+ bowerFolder;
+		rm('-rf', pathBowerFolder);
 
 		expect(exec('gulp makeBower --testMode', {silent:true}).code).toBe(0);
 
-		expect(test('-e', rootFwk +'/'+ bowerFolder +'/platform/platform.min.js')).toBe(true);
+		var platformMin = pathBowerFolder +'/platform/platform.min.js';
+		expect(test('-e', platformMin)).toBe(true);
 
 		//check minification
-		var file = fs.statSync(rootFwk +'/'+ bowerFolder +'/platform/platform.min.js');
+		var file = fs.statSync(platformMin);
 		expect(file.size).toBeGreaterThan(12000);
 		expect(file.size).toBeLessThan(14000);
 

@@ -35,11 +35,11 @@ exports.boot = function(config){
 			pathPrj = config.dirname;
 
 		//merge between default and specify:
-		global.cfg = _.merge({},
-			require(pathFwk +'/'+ projectConfigFile), //shoud be exist!
-			utils.fileExist(pathFwk +'/'+ projectConfigLocalFile) && require(pathFwk +'/'+  projectConfigLocalFile),
-			utils.fileExist(pathPrj +'/'+ projectConfigFile) 			&& require(pathPrj +'/'+ projectConfigFile),
-			utils.fileExist(pathPrj +'/'+ projectConfigLocalFile) && require(pathPrj +'/'+  projectConfigLocalFile)
+		global.cfg = _.merge(
+				require(pathFwk +'/'+ projectConfigFile), //shoud be exist!
+				utils.fileExist(pathFwk +'/'+ projectConfigLocalFile) ? require(pathFwk +'/'+ projectConfigLocalFile) : {},
+				utils.fileExist(pathPrj +'/'+ projectConfigFile) ? require(pathPrj +'/'+ projectConfigFile) : {},
+				utils.fileExist(pathPrj +'/'+ projectConfigLocalFile) ? require(pathPrj +'/'+ projectConfigLocalFile) : {}
 		);
 
 		global.cfg.pkg = require(pathPrj +'/'+ packageJson);
@@ -69,7 +69,6 @@ exports.boot = function(config){
 		console.logRed(e);
 		utils.exit(1);
 	}
-
 	//validations of compatibilities of configs
 	if (global.cfg.compress && !global.cfg.loader.bower['lz-string']) {
 		console.logRed('LOADER: Compress option active, but library lz-string not present');

@@ -12,7 +12,9 @@ var gutil = require('gulp-util'),
 //gulp.task('full:loader',['build:loader:full']);
 //gulp.task('config',		['make:config']);
 //gulp.task('test',		['test:loader']);
-//
+gulp.task('css',		['makeCss']);
+gulp.task('cssw',		['watcherCss']);
+
 //gulp.task('build:loader', function (cb) {
 //
 //	if(!utils.fileExist(global.cfg.loader.folders.www + '/'+global.cfg.loader.filesDest.index)

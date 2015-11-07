@@ -22,13 +22,14 @@ describe("Index template to index - ", function(){
 
 	it('(01) should create a copy', function(){
 		cd('01');
+		var indexFile = rootFwk + pathLoader + index;
 
-		rm('-rf', rootFwk + pathLoader + index);
-		expect(test('-e', rootFwk + pathLoader + index)).toBe(false);
+		rm('-rf', indexFile);
+		expect(test('-e', indexFile)).toBe(false);
 
 		expect(exec('gulp makeIndex --testMode', {silent:true}).code).toBe(0);
 
-		expect(test('-e', rootFwk + pathLoader + index)).toBe(true);
+		expect(test('-e', indexFile)).toBe(true);
 	});
 
 	it('(01) should modificate metadata', function(){
