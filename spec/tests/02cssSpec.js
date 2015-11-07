@@ -7,7 +7,7 @@ var utils = require('../../tasks/framework/utils'),
 
 require('shelljs/global');
 
-var testFolder  = 'spec/fixture/04css',
+var testFolder  = 'spec/fixture/02css',
 		rootFwk     = '../../../..',
 		cssTestFile = '/css/test',
 		pathCssTest = 'loader'+ cssTestFile,
@@ -31,7 +31,7 @@ function removeCssTest(){
 	rm(pathCssTest +'.*');
 }
 
-describe("CSS - ", function(){
+describe("CSS generation - ", function(){
 
 	beforeEach(function(){
 		createCssTest();
