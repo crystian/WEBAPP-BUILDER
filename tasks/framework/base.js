@@ -16,13 +16,13 @@ var fs        = require('fs-extra'),
 gulp.task('makeBase', ['makeBower', 'makeIndex', 'makeConfig', 'makeCss'], function(){
 	var loadingHtml = global.cfg.folders.fwk + '/' + global.cfg.loader.folders.loadings + '/' + global.cfg.loader.loading + '/loading.html',
 			loadingCSS  = global.cfg.folders.fwk + '/' + global.cfg.loader.folders.loadings + '/' + global.cfg.loader.loading + '/loading.css';
-	console.log(global.cfg.varCss);
+
 	return gulp.src(global.cfg.folders.fwk + '/' + global.cfg.loader.folders.www + '/' + global.cfg.loader.filesDest.index)
 		.pipe(utils.debugeame())
 		.pipe(injectors.injectContent(loadingHtml, 'loadingHtml'))
-		.pipe(inject(gulp.src(loadingCSS, {read: false}), {name: 'loadingCss', relative: 'true'}))
-		//.pipe(inject(gulp.src(global.cfg.varJs, {read: false}), {name: 'bower', relative:'true'}))
-		.pipe(inject(gulp.src(global.cfg.varCss, {read: false}), {name: 'bower', relative: 'true'}))
+		.pipe(inject(gulp.src(loadingCSS, {read: false}), {name: 'loadingCss', relative: true, removeTags: true}))
+		.pipe(inject(gulp.src(global.cfg.varCss, {read: false}), {name: 'bower', relative: true, removeTags: true}))
+		.pipe(inject(gulp.src(global.cfg.varJs, {read: false}), {name: 'bower', relative: true, removeTags: true}))
 		.pipe(gulp.dest(global.cfg.folders.fwk + '/' + global.cfg.loader.folders.www));
 });
 

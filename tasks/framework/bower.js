@@ -90,9 +90,9 @@ gulp.task('parseBower', function(cb){
 			continue;
 		}
 
-		resolveLibs(o, ambient, libsToMin, rCss, 'css');
+		rCss = resolveLibs(o, ambient, libsToMin, rCss, 'css');
 
-		resolveLibs(o, ambient, libsToMin, rJs, 'js');
+		rJs = resolveLibs(o, ambient, libsToMin, rJs, 'js');
 
 		if(o.version !== ''){
 			rBower.dependencies[bower[i]] = o.version;
@@ -108,7 +108,7 @@ gulp.task('parseBower', function(cb){
 	cb();
 });
 
-function resolveLibs(item, ambient, libsToMin, libs, type){
+function resolveLibs(item, ambient, libsToMin, collection, type){
 	var lib;
 
 	if(item[type + '-' + ambient]){
@@ -141,6 +141,9 @@ function resolveLibs(item, ambient, libsToMin, libs, type){
 			});
 
 		}
-		libs.concat(lib);
+
+		collection = collection.concat(lib);
 	}
+
+	return collection;
 }

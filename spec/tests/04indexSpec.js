@@ -59,7 +59,7 @@ describe("Index template to index - ", function(){
 		expect($('#contentSecurity').attr('content')).toBe('Test2 apos: \'');
 	});
 
-	it('(03) should ', function(){
+	it('(03) should inject content', function(){
 		cd('03');
 
 		expect(exec('gulp makeBase --testMode', {silent:true}).code).toBe(0);
