@@ -1,5 +1,5 @@
 {
-	"name": "index test 03-01",
+	"app": {"name": "index test 03-01"},
 	"compress": true,
 	"loader":{
 		"bower": {

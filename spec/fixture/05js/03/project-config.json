@@ -1,5 +1,5 @@
 {
-	"name": "index test 05-03",
+	"app": {"name": "index test 05-03"},
 	"compress": false,
 	"loader": {
 		"release": true,

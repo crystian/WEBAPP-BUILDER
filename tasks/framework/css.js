@@ -15,6 +15,22 @@ var utils        = require('../shared/utils'),
 		StreamQueue  = require('streamqueue'),
 		sass         = require('gulp-sass');
 
+gulp.task('makeCssFinal', ['makeCss'], function(){
+	var cssLoader = [
+		global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/css/loader.css',
+		global.cfg.pathFwk + '/' + global.cfg.loader.folders.loadings + '/' + global.cfg.loader.loading + '/loading.css'
+	];
+
+	return StreamQueue(
+			{objectMode: true},
+			gulp.src(cssLoader)
+					.pipe(utils.debugeame())
+					.pipe(strip({safe: false, block: false})) //remove comments
+	)
+			.pipe(concat('/-compiledLoader.css', {newLine: ' '}))
+			.pipe(gulp.dest(global.cfg.pathFwk + '/' + global.cfg.loader.folders.temp));
+});
+
 gulp.task('makeCss', ['cleanCss', 'makeConfig'], function(){
 	var src  = global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/**/*.s+(a|c)ss',
 			dest = global.cfg.pathFwk + '/' + global.cfg.loader.folders.www;
@@ -51,19 +67,3 @@ var customReporter = function(file){
 		gutil.log(result.error.message + ' on line ' + result.error.line);
 	});
 };
-
-gulp.task('makeCssFinal', ['makeCss'], function(){
-	var cssLoader = [
-		global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/css/loader.css',
-		global.cfg.pathFwk + '/' + global.cfg.loader.folders.loadings + '/' + global.cfg.loader.loading + '/loading.css'
-	];
-
-	return StreamQueue(
-		{objectMode: true},
-		gulp.src(cssLoader)
-			.pipe(utils.debugeame())
-			.pipe(strip({safe: false, block: false})) //remove comments
-	)
-		.pipe(concat('/-compiledLoader.css', {newLine: ' '}))
-		.pipe(gulp.dest(global.cfg.pathFwk + '/' + global.cfg.loader.folders.temp));
-});

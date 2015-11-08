@@ -1,5 +1,5 @@
 {
-	"name": "index test 03-05",
+	"app": {"name": "index test 03-05"},
 	"loader":{
 		"bower": {
 			"platform": {
