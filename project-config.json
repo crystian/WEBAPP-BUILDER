@@ -11,7 +11,6 @@
 
 	"autoprefixer": "ie 10|android 4|chrome 32|ff 27|ios 7|opera 19|safari 7",
 	"xprojectCode": "empty",
-	"xfirstApp": "app",
 	"xcordova": false,
 	"xforceLibFull": false,
 	"xisCordovaDevice": false,
@@ -20,16 +19,7 @@
 	"xshowSkeletor": false,
 	"xcontentEditable": false,
 	"xAppCacheFileName": ".cache",
-	"xfolders": {
-		"xtemplate": "template-empty",
-		"xwww": "www",
-		"xbuild": "build",
-		"xtemp": "build/.tmp",
-		"xcordova": "CORDOVA",
-		"xcordovaWWW": "CORDOVA/www",
-		"xbower": "vendors/bower_components",
-		"xapi": "www/api"
-	},
+
 	"xrelease": true,
 	"xconsoleError": [
 		"Error unknown",
@@ -55,6 +45,18 @@
 	"app": {
 		"name": "app name",
 		"version": "0.0.0",
+		"firstApp": "app",
+
+		"folders": {
+			"project": "templates/empty",
+			"www": "www",
+			"xbuild": "build",
+			"xtemp": "build/.tmp",
+			"xcordova": "CORDOVA",
+			"xcordovaWWW": "CORDOVA/www",
+			"xbower": "vendors/bower_components",
+			"xapi": "www/api"
+		},
 
 		"compatibilityMatrix": {
 			"ie": [9.9,10.9],

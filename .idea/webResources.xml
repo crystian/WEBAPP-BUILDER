@@ -12,6 +12,10 @@
             <path value="file://$PROJECT_DIR$/loader" />
             <path value="file://$PROJECT_DIR$/template/www" />
             <path value="file://$PROJECT_DIR$/template-ng/www" />
+            <path value="file://$PROJECT_DIR$/templates/angular-full/www" />
+            <path value="file://$PROJECT_DIR$/templates/angular-empty/www" />
+            <path value="file://$PROJECT_DIR$/templates/angular-material/www" />
+            <path value="file://$PROJECT_DIR$/templates/empty/www" />
           </resourceRoots>
         </entryData>
       </entry>

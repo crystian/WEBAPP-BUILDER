@@ -7,7 +7,7 @@
 			"replaces": {
 				"original": {
 					"normal": [
-						["../fonts/", "../template-ng-full/vendors/bower_components/components-font-awesome/fonts/"]
+						["../fonts/", "../templates/angular-full/vendors/bower_components/components-font-awesome/fonts/"]
 					],
 					"min": [
 						["../fonts/", "fonts/"]
@@ -22,7 +22,7 @@
 			"replaces": {
 				"original": {
 					"normal": [
-						["../fonts/", "../template-ng-full/vendors/bower_components/bootstrap/dist/fonts/"]
+						["../fonts/", "../templates/angular-full/vendors/bower_components/bootstrap/dist/fonts/"]
 					],
 					"min": [
 						["../fonts/", "fonts/"]
@@ -49,7 +49,7 @@
 			"genSprite": false,
 			"replaces": {
 				"pre": [
-					["../../template-ng-full/www/assets/", ""]
+					["../../templates/angular-full/www/assets/", ""]
 				]
 			}
 		},
@@ -72,7 +72,7 @@
 			"path": "www/landing",
 			"replaces": {
 				"pre": [
-					["../template-ng-full/www/landing/assets/img/", "assets/img/"]
+					["../templates/angular-full/www/landing/assets/img/", "assets/img/"]
 				]
 			}
 		},

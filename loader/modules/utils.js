@@ -2,15 +2,15 @@
  * Created by Crystian on 3/3/14.
  */
 
-//jshint maxstatements:false
-loader.utils = (function() {
+	//jshint maxstatements:false
+loader.utils = (function(){
 	'use strict';
 
 	var _cache = [];
 
 	//return 0 === equals, 1 === a > b, -1 === a < b
-	function compareSemVer(a, b) {
-		if (a === b) {
+	function compareSemVer(a, b){
+		if(a === b){
 			return 0;
 		}
 
@@ -20,24 +20,24 @@ loader.utils = (function() {
 		var len = Math.min(aComponents.length, bComponents.length);
 
 		// loop while the components are equal
-		for (var i = 0; i < len; i++) {
+		for(var i = 0; i < len; i++){
 			// A bigger than B
-			if (parseInt(aComponents[i], 10) > parseInt(bComponents[i], 10)) {
+			if(parseInt(aComponents[i], 10) > parseInt(bComponents[i], 10)){
 				return 1;
 			}
 
 			// B bigger than A
-			if (parseInt(aComponents[i], 10) < parseInt(bComponents[i], 10)) {
+			if(parseInt(aComponents[i], 10) < parseInt(bComponents[i], 10)){
 				return -1;
 			}
 		}
 
 		// If one's a prefix of the other, the longer one is greater.
-		if (aComponents.length > bComponents.length) {
+		if(aComponents.length > bComponents.length){
 			return 1;
 		}
 
-		if (aComponents.length < bComponents.length) {
+		if(aComponents.length < bComponents.length){
 			return -1;
 		}
 
@@ -45,17 +45,17 @@ loader.utils = (function() {
 		return 0;
 	}
 
-	function getExtensionFile(s) {
+	function getExtensionFile(s){
 		var arr = s.split('.');
-		if (arr.length === 0) {
+		if(arr.length === 0){
 			return s;
 		}
 		return arr[arr.length - 1];
 	}
 
-	function setExtensionFilename(s, extension) {
+	function setExtensionFilename(s, extension){
 		var arr = s.split('.');
-		if (arr.length <= 1) {
+		if(arr.length <= 1){
 			console.logRed('Extension not found!');
 			return s;
 		}
@@ -66,27 +66,27 @@ loader.utils = (function() {
 		return arr.join('.');
 	}
 
-	function request(url) {
-		return new Promise(function (resolve, reject) {
+	function request(url){
+		return new Promise(function(resolve, reject){
 			console.log('request: ' + url);
 			var xhr = new XMLHttpRequest();
 
-			function errorDetected(er) {
+			function errorDetected(er){
 				reject(er);
 			}
 
-			xhr.onreadystatechange = function () {
-				if (this.readyState === 4 &&
+			xhr.onreadystatechange = function(){
+				if(this.readyState === 4 &&
 					this.status === 200 &&
-					this.responseText !== null) {
+					this.responseText !== null){
 
 					resolve(this.responseText);
-				} else if (this.readyState === 4) {
+				} else if(this.readyState === 4){
 					errorDetected(loader.cfg.loader.text.errorRequestFile);
 				}
 			};
 
-			xhr.ontimeout = function () {
+			xhr.ontimeout = function(){
 				errorDetected(loader.cfg.loader.text.errorTimeoutServer);
 			};
 			xhr.open('GET', url, true);
@@ -96,7 +96,7 @@ loader.utils = (function() {
 		});
 	}
 
-	function requestJson(url) {
+	function requestJson(url){
 		return request(url).then(JSON.parse);
 	}
 
@@ -109,22 +109,22 @@ loader.utils = (function() {
 		//debugger
 		if(loader.cfg.oneRequest){
 			console.info('oneRequest!');
-			requestAllInOne(appName +'.json', {appName: appName}).then(loadAppSuccess, loadAppFail);
+			requestAllInOne(appName + '.json', {appName: appName}).then(loadAppSuccess, loadAppFail);
 			return;
 		}
 
 		console.info('multiple request!');
-		var path = '../'+ loader.cfg.projectCode +'/'+ loader.cfg.www +'/'+ appName +'/';
+		var path = '../' + loader.cfg.folders.project + '/' + loader.cfg.folders.www + '/' + appName + '/';
 
-        return requestJson(path +'app.json').then(function (data) {
+		return requestJson(path + 'app.json').then(function(data){
 			data = data.files;
 
-			var i = 0,
-				l = data.length,
-				type = '',
-				urls = [];
+			var i    = 0,
+					l    = data.length,
+					type = '',
+					urls = [];
 
-			for (; i < l; i++) {
+			for(; i < l; i++){
 				var file = data[i];
 				if(file.ignore){continue;}
 
@@ -148,15 +148,15 @@ loader.utils = (function() {
 						break;
 				}
 
-				urls.push(loader.cfg.appRoot +'/' + file.path + '/' + setExtensionFilename(file.file, type));
+				urls.push('../'+ loader.cfg.folders.project + '/' + file.path + '/' + setExtensionFilename(file.file, type));
 			}
 
 			return requestMultipleSync(urls, {appName: appName}).then(loadAppSuccess);
 		});
 	}
 
-	function requestAllInOne(url, options) {
-		return request(url).then(function (data) {
+	function requestAllInOne(url, options){
+		return request(url).then(function(data){
 
 			try {
 				data = JSON.parse(handleCompress(data));
@@ -165,13 +165,13 @@ loader.utils = (function() {
 			}
 
 			//console.dir(data);
-			if (data.h) {
+			if(data.h){
 				_setHtml(data.h, options);
 			}
-			if (data.c) {
+			if(data.c){
 				_setCss(data.c);
 			}
-			if (data.j) {
+			if(data.j){
 				_setJs(data.j);
 			}
 			//if (data.d) {
@@ -182,14 +182,14 @@ loader.utils = (function() {
 	}
 
 	//be careful, HTML option pisa old version
-	function requestMultipleAsync(requestsArray, options) {
+	function requestMultipleAsync(requestsArray, options){
 
-		return Promise.all(requestsArray.map(function (url) {
+		return Promise.all(requestsArray.map(function(url){
 			var q = {};
 
 			var type = getExtensionFile(url);
 
-			switch (type) {
+			switch (type){
 				case 'html':
 					q = requestAndSetHtml(url, options);
 					break;
@@ -207,28 +207,29 @@ loader.utils = (function() {
 		}));
 	}
 
-	function requestMultipleSync(requestsArray, options) {
-		if (requestsArray.length === 0) {
+	function requestMultipleSync(requestsArray, options){
+		if(requestsArray.length === 0){
 			return Promise.resolve();
 		}
 
 		var url = requestsArray.shift();
 		return requestMultimpleSyncUnique(url, options)
-			.then(function () {
+			.then(function(){
 				return requestMultipleSync(requestsArray, options);
 			});
 
 	}
-	function requestMultimpleSyncUnique(url, options) {
-		return new Promise(function (resolve, reject) {
+
+	function requestMultimpleSyncUnique(url, options){
+		return new Promise(function(resolve, reject){
 			//console.group('requestMultipleSync: ' + url);
 
 			var type = getExtensionFile(url),
-				fn;
+					fn;
 
-			switch (type) {
+			switch (type){
 				case 'html':
-					fn = function (data) {
+					fn = function(data){
 						return requestAndSetHtml(data, options);
 					};
 					break;
@@ -244,18 +245,18 @@ loader.utils = (function() {
 			}
 
 			//console.log('type:', type);
-			fn(url).then(function () {
+			fn(url).then(function(){
 				//console.log('resolved');
 				//console.groupEnd();
 				resolve();
-			}, function (m) {
+			}, function(m){
 				reject(m);
 			});
 		});
 	}
 
 	//potential issue about security, review it
-	function getJsFile(file) {
+	function getJsFile(file){
 		var resourceLoader = document.createElement('script');
 		resourceLoader.type = 'text/javascript';
 		resourceLoader.async = true;
@@ -264,11 +265,11 @@ loader.utils = (function() {
 		setNewResourceByTag(resourceLoader, 'head');
 	}
 
-	function requestAndSetJs(url) {
+	function requestAndSetJs(url){
 		return request(url).then(_setJs);
 	}
 
-	function _setJs(content) {
+	function _setJs(content){
 		var resourceLoader = document.createElement('script');
 		resourceLoader.type = 'text\/javascript';
 		resourceLoader.async = false;
@@ -276,11 +277,11 @@ loader.utils = (function() {
 		setNewResourceByTag(resourceLoader, 'head');
 	}
 
-	function requestAndSetCss(url) {
+	function requestAndSetCss(url){
 		return request(url).then(_setCss);
 	}
 
-	function _setCss(content) {
+	function _setCss(content){
 		var resourceLoader = document.createElement('style');
 		resourceLoader.type = 'text/css';
 		if(!loader.cfg.phantom){
@@ -289,13 +290,13 @@ loader.utils = (function() {
 		setNewResourceByTag(resourceLoader, 'head');
 	}
 
-	function requestAndSetHtml(url, options) {
-		return request(url).then(function (data) {
+	function requestAndSetHtml(url, options){
+		return request(url).then(function(data){
 			_setHtml(data, options);
 		});
 	}
 
-	function _setHtml(data, options) {
+	function _setHtml(data, options){
 		var el = document.getElementById('mainContainer');
 
 		options = options || {appName: 'app'};
@@ -314,62 +315,62 @@ loader.utils = (function() {
 		}
 	}
 
-	function setNewResourceByTag(resourceLoader, tagWhere) {
+	function setNewResourceByTag(resourceLoader, tagWhere){
 		var tag = document.getElementsByTagName(tagWhere)[0];
 		tag.appendChild(resourceLoader);
 	}
 
-	function setNewResourceById(resourceLoader, id) {
+	function setNewResourceById(resourceLoader, id){
 		var el = document.getElementById(id);
 		el.appendChild(resourceLoader);
 	}
 
-//	//via: http://stackoverflow.com/questions/8917921/cross-browser-javascript-not-jquery-scroll-to-top-animation
-//	function scrollTo(element, to, duration) {
-//		var start = element.scrollTop,
-//			change = to - start,
-//			currentTime = 0,
-//			increment = 20;
-//
-//		var animateScroll = function(){
-//			currentTime += increment;
-//			element.scrollTop = Math.easeInOutQuad(currentTime, start, change, duration);
-//			if(currentTime < duration) {
-//				setTimeout(animateScroll, increment);
-//			}
-//		};
-//		animateScroll();
-//	}
-//
-//	//t = current time
-//	//b = start value
-//	//c = change in value
-//	//d = duration
-//	Math.easeInOutQuad = function (t, b, c, d) {
-//		t /= d/2;
-//		if (t < 1){ return c/2*t*t + b;}
-//		t--;
-//		return -c/2 * (t*(t-2) - 1) + b;
-//	};
-//	////
+	//	//via: http://stackoverflow.com/questions/8917921/cross-browser-javascript-not-jquery-scroll-to-top-animation
+	//	function scrollTo(element, to, duration) {
+	//		var start = element.scrollTop,
+	//			change = to - start,
+	//			currentTime = 0,
+	//			increment = 20;
+	//
+	//		var animateScroll = function(){
+	//			currentTime += increment;
+	//			element.scrollTop = Math.easeInOutQuad(currentTime, start, change, duration);
+	//			if(currentTime < duration) {
+	//				setTimeout(animateScroll, increment);
+	//			}
+	//		};
+	//		animateScroll();
+	//	}
+	//
+	//	//t = current time
+	//	//b = start value
+	//	//c = change in value
+	//	//d = duration
+	//	Math.easeInOutQuad = function (t, b, c, d) {
+	//		t /= d/2;
+	//		if (t < 1){ return c/2*t*t + b;}
+	//		t--;
+	//		return -c/2 * (t*(t-2) - 1) + b;
+	//	};
+	//	////
 
-	function showSkeletor() {
+	function showSkeletor(){
 		toggleSkeletor(false);
 	}
 
-	function hideSkeletor() {
+	function hideSkeletor(){
 		toggleSkeletor(true);
 	}
 
-	function toggleSkeletor(v) {
+	function toggleSkeletor(v){
 		//removeIf(production)
-		var el = document.getElementsByTagName('body')[0],
-			className = 'skeletor',
-			byValue = false;
+		var el        = document.getElementsByTagName('body')[0],
+				className = 'skeletor',
+				byValue   = false;
 
 		byValue = (v === true || v === false) ? v : el.classList.contains(className);
 
-		if (byValue) {
+		if(byValue){
 			el.classList.remove(className);
 		} else {
 			el.classList.add(className);
@@ -377,8 +378,8 @@ loader.utils = (function() {
 		//endRemoveIf(production)
 	}
 
-	function showPanicError(m) {
-		if (window.console) {
+	function showPanicError(m){
+		if(window.console){
 			window.console.error(m);
 		}
 		var body = document.getElementsByTagName('body')[0];
@@ -386,19 +387,19 @@ loader.utils = (function() {
 		loader.hide();
 	}
 
-	function getRandomInt(max) {
+	function getRandomInt(max){
 		return Math.round(getRandomRange(0, max));
 	}
 
-	function getRandom(max) {
+	function getRandom(max){
 		return getRandomRange(0, max);
 	}
 
-	function getRandomRange(min, max) {
+	function getRandomRange(min, max){
 		return Math.random() * (max - min) + min;
 	}
 
-	function handleCompress(data) {
+	function handleCompress(data){
 		//anchor for compress, DON't touch it!
 		if(!loader.cfg.compress){return data;}//flagCompress
 		console.log('Resource compressed');
@@ -406,8 +407,8 @@ loader.utils = (function() {
 	}
 
 	//two arguments are set, one is a get, just for encapsular y no ver las variables
-	function cache(key, value) {
-		if (value !== undefined) {
+	function cache(key, value){
+		if(value !== undefined){
 			_cache[key] = value;
 		} else {
 			return _cache[key];
@@ -423,7 +424,7 @@ loader.utils = (function() {
 		setExtensionFilename: setExtensionFilename,
 		hideSkeletor: hideSkeletor,
 		toggleSkeletor: toggleSkeletor,
-//		scrollTo: scrollTo,
+		//		scrollTo: scrollTo,
 		getRandom: getRandom,
 		getRandomInt: getRandomInt,
 		getRandomRange: getRandomRange,
@@ -441,7 +442,7 @@ loader.utils = (function() {
 
 		showPanicError: showPanicError,
 		setNewResourceByTag: setNewResourceByTag
-//		setNewResourceById: setNewResourceById,
+		//		setNewResourceById: setNewResourceById,
 	};
 
 })();

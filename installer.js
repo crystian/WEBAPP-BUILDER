@@ -51,7 +51,7 @@ var copyTemplate = [{
 	message: 'Which template do you want to use?',
 	choices: [
 		{value: 'template-empty', name: 'Empty'},
-		{value: 'template-ng-full', name: 'Angular full', default: true},
+		{value: 'templates/angular-full', name: 'Angular full', default: true},
 		{value: 'template-ng-empty', name: 'Angular empty', default: true},
 		{value: 'template-ng-materials', name: 'Angular materials empty', default: true}
 	]
@@ -136,7 +136,7 @@ inquirer.prompt(questions, function( answers ) {
 		if(answers.copyTemplate){
 			fs.copySync(answers.copyTemplate, answers.projectCode);
 
-			if(answers.copyTemplate === 'template-ng-full'){
+			if(answers.copyTemplate === 'templates/angular-full'){
 				var gulp = require('gulp'),
 					debug = require('gulp-debug'),
 					replace = require('gulp-replace');
