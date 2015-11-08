@@ -2,7 +2,7 @@
  * Created by Crystian on 3/27/2015.
  */
 
-var utils     = require('./utils.js'),
+var utils     = require('../shared/utils.js'),
 		bower     = require('gulp-bower'),
 		fs        = require('fs-extra'),
 		gif       = require('gulp-if'),
@@ -47,11 +47,11 @@ gulp.task('makeBower', ['downloadBower'], function(cb){
 
 gulp.task('downloadBower', ['generatorBower'], function(){
 	return bower(
-			{
-				directory: global.cfg.loader.folders.bower,
-				cwd: global.cfg.folders.fwk,
-				offline: global.cfg.offline
-			});
+		{
+			directory: global.cfg.loader.folders.bower,
+			cwd: global.cfg.folders.fwk,
+			offline: global.cfg.offline
+		});
 });
 
 gulp.task('generatorBower', ['parseBower'], function(cb){

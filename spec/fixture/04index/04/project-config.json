@@ -3,6 +3,11 @@
 	"loader": {
 		"release": false,
 		"bower": {
+			"jquery": {
+				"version": "2.1.4",
+				"js-dev": ["jquery/dist/jquery.js"],
+				"js-prod": ["jquery/dist/jquery.min.js"]
+			},
 			"bootstrap": {
 				"version": "3.3.5",
 				"js-dev": ["bootstrap/dist/js/bootstrap.js"],

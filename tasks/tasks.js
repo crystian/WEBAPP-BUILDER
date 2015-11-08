@@ -3,7 +3,7 @@
  */
 
 var gutil       = require('gulp-util'),
-		utils       = require('./framework/utils.js'),
+		utils       = require('./shared/utils.js'),
 		runSequence = require('run-sequence'),
 		gulp        = require('gulp');
 

@@ -2,7 +2,7 @@
  * Created by Crystian on 01/11/2015.
  */
 
-var utils      = require('./framework/utils.js'),
+var utils      = require('./shared/utils.js'),
 		requireDir = require('require-dir'),
 		_          = require('lodash'),
 		git        = require('git-rev'),

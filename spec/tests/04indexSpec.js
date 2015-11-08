@@ -60,7 +60,7 @@ describe("Index template to index - ", function(){
 		expect($('#contentSecurity').attr('content')).toBe('Test2 apos: \'');
 	});
 
-	fit('(03) should inject content (prod)', function(){
+	it('(03) should inject content (prod)', function(){
 		cd('03');
 
 		expect(exec('gulp makeBase --testMode '+ args, {silent:true}).code).toBe(0);
@@ -74,7 +74,7 @@ describe("Index template to index - ", function(){
 		expect(indexContent).toContain('platform.min.js');
 	});
 
-	fit('(04) should inject content (dev)', function(){
+	it('(04) should inject content (dev)', function(){
 		cd('04');
 
 		expect(exec('gulp makeBase --testMode '+ args, {silent:true}).code).toBe(0);

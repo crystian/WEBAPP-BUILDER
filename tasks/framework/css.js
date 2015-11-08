@@ -2,7 +2,7 @@
  * Created by Crystian on 06/11/2015.
  */
 
-var utils        = require('./utils'),
+var utils        = require('../shared/utils'),
 		del          = require('del'),
 		autoprefixer = require('gulp-autoprefixer'),
 		replace      = require('gulp-replace'),

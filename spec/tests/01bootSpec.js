@@ -2,7 +2,7 @@
  * Created by Crystian on 01/11/2015.
  */
 
-var utils = require('../../tasks/framework/utils');
+var utils = require('../../tasks/shared/utils');
 var args = process.argv.slice(2).join();
 require('shelljs/global');
 

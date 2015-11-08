@@ -4,7 +4,7 @@
 
 var fs        = require('fs-extra'),
 		_         = require('lodash'),
-		utils     = require('./utils'),
+		utils     = require('../shared/utils'),
 		rename    = require('gulp-rename'),
 		cheerio   = require('gulp-cheerio'),
 		replace   = require('gulp-replace'),
@@ -31,7 +31,7 @@ gulp.task('makeBase', ['makeBower', 'makeIndex', 'makeConfig', 'makeCss'], funct
 
 function normalize(collection){
 	return collection.map(function(_item){
-		return global.cfg.folders.fwk +'/'+ _item;
+		return global.cfg.folders.fwk + '/' + _item;
 	});
 }
 
@@ -65,16 +65,16 @@ gulp.task('makeConfig', function(cb){
 	json.version = global.cfg.version;
 	json.compress = global.cfg.compress;
 	//json.isCordovaDevice = global.cfg.isCordovaDevice;
-	//json.compatibilityMatrix = global.cfg.compatibilityMatrix;
+	json.compatibilityMatrix = global.cfg.compatibilityMatrix;
 	//json.debugZoneActive = global.cfg.debugZoneActive;
-	//json.mixpanel = global.cfg.mixpanel;
-	//json.analytics = global.cfg.analytics;
+	json.mixpanel = global.cfg.mixpanel;
+	json.analytics = global.cfg.analytics;
 	//json.consoleError = global.cfg.consoleError;
-	//json.firstApp = global.cfg.firstApp;
+	json.firstApp = global.cfg.firstApp;
 	//json.fastclick = !!(global.cfg.loader.bower.fastclick);
 	//json.appRoot = '../../templates/'+ global.cfg.projectCode;
-	//json.projectCode = global.cfg.projectCode;
-	//json.www = global.cfg.folders.www;
+	json.projectCode = global.cfg.projectCode;
+	json.www = global.cfg.folders.www;
 	//json.showDeviceInfo = global.cfg.showDeviceInfo;
 	//json.showSkeletor = global.cfg.showSkeletor;
 	//json.contentEditable = global.cfg.contentEditable;
