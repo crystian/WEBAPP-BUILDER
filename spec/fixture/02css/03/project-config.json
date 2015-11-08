@@ -1,4 +1,7 @@
 {
-	"name": "index test 02-03",
-	"autoprefixer": "chrome 44"
+	"app": {"name": "index test 02-03"},
+	"autoprefixer": "chrome 30",
+	"loader": {
+		"release": true
+	}
 }

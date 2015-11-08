@@ -8,9 +8,14 @@ var utils        = require('../shared/utils'),
 		replace      = require('gulp-replace'),
 		csslint      = require('gulp-csslint'),
 		gutil        = require('gulp-util'),
+		strip        = require('gulp-strip-comments'),
+		gif          = require('gulp-if'),
+		minifycss    = require('gulp-minify-css'),
+		concat       = require('gulp-concat'),
+		StreamQueue  = require('streamqueue'),
 		sass         = require('gulp-sass');
 
-gulp.task('makeCss', ['cleanCss'], function(){
+gulp.task('makeCss', ['cleanCss', 'makeConfig'], function(){
 	var src  = global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/**/*.s+(a|c)ss',
 			dest = global.cfg.pathFwk + '/' + global.cfg.loader.folders.www;
 
@@ -24,11 +29,12 @@ gulp.task('makeCss', ['cleanCss'], function(){
 		.pipe(csslint(global.cfg.pathFwk + '/csslintrc.json'))
 		.pipe(csslint.reporter(customReporter))
 		.pipe(csslint.failReporter())
+		.pipe(gif(global.cfg.loader.release, minifycss()))
 		.pipe(gulp.dest(dest))
 		;
 });
 
-gulp.task('watchCss', function(){
+gulp.task('watchCss', ['makeCss'], function(){
 	return gulp.watch([global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/**/*.s+(a|c)ss'], ['makeCss']);
 });
 
@@ -45,3 +51,19 @@ var customReporter = function(file){
 		gutil.log(result.error.message + ' on line ' + result.error.line);
 	});
 };
+
+gulp.task('makeCssFinal', ['makeCss'], function(){
+	var cssLoader = [
+		global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/css/loader.css',
+		global.cfg.pathFwk + '/' + global.cfg.loader.folders.loadings + '/' + global.cfg.loader.loading + '/loading.css'
+	];
+
+	return StreamQueue(
+		{objectMode: true},
+		gulp.src(cssLoader)
+			.pipe(utils.debugeame())
+			.pipe(strip({safe: false, block: false})) //remove comments
+	)
+		.pipe(concat('/-compiledLoader.css', {newLine: ' '}))
+		.pipe(gulp.dest(global.cfg.pathFwk + '/' + global.cfg.loader.folders.temp));
+});

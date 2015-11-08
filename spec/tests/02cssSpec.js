@@ -13,7 +13,8 @@ var testFolder  = 'spec/fixture/02css',
 		rootFwk     = '../../../..',
 		cssTestFile = '/css/test',
 		pathCssTest = 'loader'+ cssTestFile,
-		cssFile = rootFwk +'/'+pathCssTest +'.css'
+		cssFile = rootFwk +'/'+pathCssTest +'.css',
+		configJson = 'config.json'
 	;
 
 //create and remove a css test file
@@ -57,7 +58,6 @@ describe("CSS generation - ", function(){
 	it('(02) should do the autoprefixer', function(){
 		cd('02');
 
-		expect(exec('gulp makeConfig --testMode '+ args, {silent: true}).code).toBe(0);
 		expect(exec('gulp makeCss --testMode '+ args, {silent: true}).code).toBe(0);
 
 		var testFile = cat(cssFile);
@@ -65,15 +65,70 @@ describe("CSS generation - ", function(){
 		expect(testFile).toContain('border: 0;');
 	});
 
-	it('(03) should do the autoprefixer - without change', function(){
+	it('(02) should do not minificated', function(){
+		cd('02');
+
+		expect(exec('gulp makeCss --testMode '+ args, {silent: true}).code).toBe(0);
+
+		var file = fs.statSync(cssFile);
+		expect(file.size).toBeGreaterThan(224);
+	});
+
+	it('(03) should do minificated', function(){
 		cd('03');
 
-		expect(exec('gulp makeConfig --testMode '+ args, {silent: true}).code).toBe(0);
+		expect(exec('gulp makeCss --testMode '+ args, {silent: true}).code).toBe(0);
+
+		var file = fs.statSync(cssFile);
+		expect(file.size).toBeLessThan(182);
+	});
+
+	it('(04) should do the autoprefixer - without change', function(){
+		cd('04');
+
 		expect(exec('gulp makeCss --testMode '+ args, {silent: true}).code).toBe(0);
 
 		var testFile = cat(cssFile);
 		expect(testFile).not.toContain('webkit');
 	});
+
+	it('(05) should make the compile version - without minimize', function(){
+		cd('05');
+
+		expect(exec('gulp makeConfig --testMode '+ args, {silent: true}).code).toBe(0);
+		var temp = utils.readJsonFile(configJson).cfg.loader.folders.temp,
+				compileLoaderCSS = rootFwk +'/'+ temp +'/-compiledLoader.css';
+
+		rm('-rf', compileLoaderCSS);
+		expect(test('-e', compileLoaderCSS)).toBe(false);
+
+		expect(exec('gulp makeCssFinal --testMode '+ args, {silent: true}).code).toBe(0);
+
+		expect(test('-e', compileLoaderCSS)).toBe(true);
+
+		var file = fs.statSync(compileLoaderCSS);
+		expect(file.size).toBeGreaterThan(3700);
+	});
+
+	it('(06) should make the compile version - with minimize', function(){
+		cd('06');
+
+		expect(exec('gulp makeConfig --testMode '+ args, {silent: true}).code).toBe(0);
+		var temp = utils.readJsonFile(configJson).cfg.loader.folders.temp,
+				compileLoaderCSS = rootFwk +'/'+ temp +'/-compiledLoader.css';
+
+		rm('-rf', compileLoaderCSS);
+		expect(test('-e', compileLoaderCSS)).toBe(false);
+
+		expect(exec('gulp makeCssFinal --testMode '+ args, {silent: true}).code).toBe(0);
+
+		expect(test('-e', compileLoaderCSS)).toBe(true);
+
+		var file = fs.statSync(compileLoaderCSS);
+		expect(file.size).toBeLessThan(2900);
+	});
+
+
 
 
 });

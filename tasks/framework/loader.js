@@ -125,24 +125,3 @@
 //		.pipe(concat('/-compiledLoader.js',{newLine: ';'}))
 //		.pipe(gulp.dest(global.cfg.loader.folders.temp));
 //});
-//
-//gulp.task('make:loader:css', ['css:loader'],  function () {
-//	var cssLoader = [
-//		global.cfg.loader.folders.www + '/css/loader.css',
-//		global.cfg.loader.folders.loadings+'/'+ global.cfg.loader.loading +'/loading.css'
-//	];
-//
-//	return streamqueue(
-//		{ objectMode: true },
-//		gulp.src(cssLoader)
-//			.pipe(strip({safe:false, block:false})) //remove comments
-//			.pipe(gif(global.cfg.loader.release, minifycss()))
-//		)
-//		.pipe(concat('/-compiledLoader.css',{newLine: ' '}))
-//		.pipe(gulp.dest(global.cfg.loader.folders.temp));
-//});
-//
-//gulp.task('css:loader', function () {
-//	return commons.sassfixer(global.cfg.loader.folders.www + '/**/*.scss', global.cfg.loader.folders.www);
-//});
-//

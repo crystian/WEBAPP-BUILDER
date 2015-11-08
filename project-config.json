@@ -104,7 +104,7 @@
 			"www": "loader",
 			"bower": "vendors",
 			"xbuild": "build",
-			"xtemp": "build/.tmp",
+			"temp": "build/.tmp",
 			"xscreens": "build/screens",
 			"loadings": "loader/loading"
 		},
