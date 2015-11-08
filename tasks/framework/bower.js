@@ -46,7 +46,12 @@ gulp.task('makeBower', ['downloadBower'], function(cb){
 });
 
 gulp.task('downloadBower', ['generatorBower'], function(){
-	return bower({directory: global.cfg.loader.folders.bower, cwd: global.cfg.folders.fwk});
+	return bower(
+			{
+				directory: global.cfg.loader.folders.bower,
+				cwd: global.cfg.folders.fwk,
+				offline: global.cfg.offline
+			});
 });
 
 gulp.task('generatorBower', ['parseBower'], function(cb){

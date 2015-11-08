@@ -1,0 +1,15 @@
+{
+	"name": "index test 03",
+	"loader": {
+		"release": false,
+		"bower": {
+			"bootstrap": {
+				"version": "3.3.5",
+				"js-dev": ["bootstrap/dist/js/bootstrap.js"],
+				"js-prod": ["bootstrap/dist/js/bootstrap.min.js"],
+				"css-dev": ["bootstrap/dist/css/bootstrap.css"],
+				"css-prod": ["bootstrap/dist/css/bootstrap.min.css"]
+			}
+		}
+	}
+}

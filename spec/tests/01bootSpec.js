@@ -3,7 +3,10 @@
  */
 
 var utils = require('../../tasks/framework/utils');
+var args = process.argv.slice(2).join();
 require('shelljs/global');
+
+
 
 var testFolder = 'spec/fixture/01boot',
 		rootFwk = '../../../..',
@@ -25,7 +28,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 	//BOOT
 	it('(01) should send the gulp', function(){
 		cd('01');
-		expect(exec('gulp nothing', {silent:true}).code).toBe(1);
+		expect(exec('gulp nothing '+ args, {silent:true}).code).toBe(1);
 	});
 
 	it("(02) should fill gitVersion field", function(){
@@ -36,7 +39,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		pkgJsonContent.to(pkgJson);
 		expect(test('-e', pkgJson)).toBe(true);
 
-		expect(exec('gulp nothing', {silent:true}).code).toBe(0);
+		expect(exec('gulp nothing '+ args, {silent:true}).code).toBe(0);
 
 		var pkg = utils.readJsonFile(pkgJson);
 		expect(pkg.gitVersion).toBeDefined();
@@ -44,7 +47,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 
 	it("(04) should fail with incompatible parameters (compress-lz-string)", function(){
 		cd('04');
-		expect(exec('gulp nothing', {silent:true}).code).toBe(1);
+		expect(exec('gulp nothing '+ args, {silent:true}).code).toBe(1);
 	});
 
 
@@ -55,7 +58,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		rm('-rf', pathConfig);
 		expect(test('-e', pathConfig)).toBe(false);
 
-		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
 
 		expect(test('-e', pathConfig)).toBe(true);
 	});
@@ -65,7 +68,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		rm('-rf', configJson);
 		expect(test('-e', configJson)).toBe(false);
 
-		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
 
 		expect(test('-e', configJson)).toBe(true);
 	});
@@ -84,7 +87,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 
 		rm('-rf', configJson);
 
-		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
 
 		expect(utils.readJsonFile(configJson).name).toBe('app name');
 
@@ -106,7 +109,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 
 		rm('-rf', configJson);
 
-		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
 
 		expect(utils.readJsonFile(configJson).name).toBe('from fwk local');
 
@@ -120,7 +123,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		cd('06');
 		rm('-rf', configJson);
 
-		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
 
 		expect(utils.readJsonFile(configJson).name).toBe('test 06 config');
 	});
@@ -130,7 +133,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		expect(test('-e', configjsLocal)).toBe(true);
 		rm('-rf', configJson);
 
-		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
 
 		expect(utils.readJsonFile(configJson).name).toBe('test 07 config local');
 	});

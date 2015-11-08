@@ -44,6 +44,7 @@ exports.boot = function(config){
 
 		global.cfg.pkg = require(pathPrj + '/' + packageJson);
 		global.cfg.fromFwk = false;
+		global.cfg.offline = !!(gutil.env.offline);
 
 		//reconfigure folders:
 		var relativePathFrom = path.relative(config.dirname, __dirname + '/..') + '/';

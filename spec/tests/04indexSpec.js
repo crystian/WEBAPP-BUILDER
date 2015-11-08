@@ -2,6 +2,7 @@
  * Created by Crystian on 01/11/2015.
  */
 var cheerio = require('cheerio');
+var args = process.argv.slice(2).join();
 require('shelljs/global');
 
 var testFolder = 'spec/fixture/04index',
@@ -26,7 +27,7 @@ describe("Index template to index - ", function(){
 		rm('-rf', indexFile);
 		expect(test('-e', indexFile)).toBe(false);
 
-		expect(exec('gulp makeIndex --testMode', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeIndex --testMode '+ args, {silent:true}).code).toBe(0);
 
 		expect(test('-e', indexFile)).toBe(true);
 	});
@@ -34,7 +35,7 @@ describe("Index template to index - ", function(){
 	it('(01) should modificate metadata', function(){
 		cd('01');
 
-		expect(exec('gulp makeIndex --testMode', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeIndex --testMode '+ args, {silent:true}).code).toBe(0);
 
 		var indexContent = cat(rootFwk +'/'+ pathLoader +'/'+ index);
 		$ = cheerio.load(indexContent);
@@ -51,7 +52,7 @@ describe("Index template to index - ", function(){
 	it('(02) should replace quote on contentSecurity', function(){
 		cd('02');
 
-		expect(exec('gulp makeIndex --testMode', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeIndex --testMode '+ args, {silent:true}).code).toBe(0);
 
 		var indexContent = cat(rootFwk +'/'+ pathLoader +'/'+ index);
 		$ = cheerio.load(indexContent);
@@ -59,16 +60,32 @@ describe("Index template to index - ", function(){
 		expect($('#contentSecurity').attr('content')).toBe('Test2 apos: \'');
 	});
 
-	it('(03) should inject content', function(){
+	fit('(03) should inject content (prod)', function(){
 		cd('03');
 
-		expect(exec('gulp makeBase --testMode', {silent:true}).code).toBe(0);
+		expect(exec('gulp makeBase --testMode '+ args, {silent:true}).code).toBe(0);
 
 		var indexContent = cat(rootFwk +'/'+ pathLoader +'/'+ index);
 		$ = cheerio.load(indexContent);
 
 		expect($('.spinner').length).toBe(1);
-		expect($('link').length).toBe(3);
+		expect($('link').length).toBe(4);
+		expect($('script').length).toBe(22);
+		expect(indexContent).toContain('platform.min.js');
+	});
+
+	fit('(04) should inject content (dev)', function(){
+		cd('04');
+
+		expect(exec('gulp makeBase --testMode '+ args, {silent:true}).code).toBe(0);
+
+		var indexContent = cat(rootFwk +'/'+ pathLoader +'/'+ index);
+		$ = cheerio.load(indexContent);
+
+		expect($('.spinner').length).toBe(1);
+		expect($('link').length).toBe(4);
+		expect($('script').length).toBe(22);
+		expect(indexContent).toContain('platform.js');
 	});
 
 });

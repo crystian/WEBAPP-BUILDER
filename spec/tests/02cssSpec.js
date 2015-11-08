@@ -5,6 +5,8 @@
 var utils = require('../../tasks/framework/utils'),
 		fs    = require('fs');
 
+var args = process.argv.slice(2).join();
+
 require('shelljs/global');
 
 var testFolder  = 'spec/fixture/02css',
@@ -47,7 +49,7 @@ describe("CSS generation - ", function(){
 
 		expect(test('-e', cssFile)).toBe(false);
 
-		expect(exec('gulp makeCss --testMode', {silent: true}).code).toBe(0);
+		expect(exec('gulp makeCss --testMode '+ args, {silent: true}).code).toBe(0);
 
 		expect(test('-e', cssFile)).toBe(true);
 	});
@@ -55,8 +57,8 @@ describe("CSS generation - ", function(){
 	it('(02) should do the autoprefixer', function(){
 		cd('02');
 
-		expect(exec('gulp makeConfig --testMode', {silent: true}).code).toBe(0);
-		expect(exec('gulp makeCss --testMode', {silent: true}).code).toBe(0);
+		expect(exec('gulp makeConfig --testMode '+ args, {silent: true}).code).toBe(0);
+		expect(exec('gulp makeCss --testMode '+ args, {silent: true}).code).toBe(0);
 
 		var testFile = cat(cssFile);
 		expect(testFile).toContain('webkit');
@@ -66,8 +68,8 @@ describe("CSS generation - ", function(){
 	it('(03) should do the autoprefixer - without change', function(){
 		cd('03');
 
-		expect(exec('gulp makeConfig --testMode', {silent: true}).code).toBe(0);
-		expect(exec('gulp makeCss --testMode', {silent: true}).code).toBe(0);
+		expect(exec('gulp makeConfig --testMode '+ args, {silent: true}).code).toBe(0);
+		expect(exec('gulp makeCss --testMode '+ args, {silent: true}).code).toBe(0);
 
 		var testFile = cat(cssFile);
 		expect(testFile).not.toContain('webkit');
