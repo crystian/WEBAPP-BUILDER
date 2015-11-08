@@ -104,7 +104,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		var hasLocal = test('-e', pathConfigLocal);
 
 		if(!hasLocal){
-			utils.saveFile(pathConfigLocal, {'name': 'from fwk local'});
+			utils.saveFile(pathConfigLocal, {app: {'name': 'from fwk local'}});
 		}
 
 		rm('-rf', configJson);

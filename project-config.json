@@ -1,73 +1,37 @@
 {
-	"name": "app name",
-	"version": "0.0.0",
-	"os": "win",
+	"xos": "win",
 	"ip": "127.0.0.1",
-	"projectCode": "templates/empty",
-
-	"release": true,
 	"compress": true,
-	"firstApp": "app",
-	"cordova": false,
-	"forceLibFull": false,
-	"isCordovaDevice": false,
-	"debugZoneActive": false,
-	"showDeviceInfo": false,
-	"showSkeletor": false,
-	"contentEditable": false,
-
-	"AppCacheFileName": ".cache",
-
-	"folders":{
-		"template": "template-empty",
-		"www": "www",
-		"build": "build",
-		"temp": "build/.tmp",
-		"cordova": "CORDOVA",
-		"cordovaWWW": "CORDOVA/www",
-		"bower": "vendors/bower_components",
-		"api": "www/api"
-	},
-
-	"compatibilityFirst": "\n\treturn !!(window.document.querySelector &&\n\twindow.console &&window.document.addEventListener &&\n\t(window.document.getElementsByTagName('body')[0]).classList &&\n\twindow.localStorage &&\n\twindow.navigator &&\n\twindow.XMLHttpRequest &&\n\twindow.applicationCache &&\n\twindow.document.createEvent &&\n\tarr.map &&\n\tarr.every);\n\t",
-
-	"compatibilityMatrix": {
-		"ie": [9.9, 10.9],
-		"firefox": [23.9, 25.9],
-		"android": [3.9, 3.9],
-		"chrome": [17.9, 18.9],
-		"chromeMobile": [3.9, 3.9],
-		"safari": [6.0, 6.0],
-		"ios": [6, 6]
+	"ports": {
+		"serve": 9000,
+		"xbuild": 9001,
+		"xapi": 9002,
+		"xnightmare": 9003
 	},
 
 	"autoprefixer": "ie 10|android 4|chrome 32|ff 27|ios 7|opera 19|safari 7",
-
-	"analytics": {
-		"installed": false,
-		"active": false,
-		"linkid": false,
-		"displayFeatures": false,
-		"id": "UA-00000000-0",
-		"appName": "appName",
-		"appId": "com.appName.appId",
-		"appInstaller": "com.appName.installer"
+	"xprojectCode": "empty",
+	"xfirstApp": "app",
+	"xcordova": false,
+	"xforceLibFull": false,
+	"xisCordovaDevice": false,
+	"xdebugZoneActive": false,
+	"xshowDeviceInfo": false,
+	"xshowSkeletor": false,
+	"xcontentEditable": false,
+	"xAppCacheFileName": ".cache",
+	"xfolders": {
+		"xtemplate": "template-empty",
+		"xwww": "www",
+		"xbuild": "build",
+		"xtemp": "build/.tmp",
+		"xcordova": "CORDOVA",
+		"xcordovaWWW": "CORDOVA/www",
+		"xbower": "vendors/bower_components",
+		"xapi": "www/api"
 	},
-
-	"mixpanel":{
-		"installed": false,
-		"active": false,
-		"token": "YOUR TOKEN"
-	},
-
-	"ports": {
-		"serve": 9000,
-		"build": 9001,
-		"api": 9002,
-		"nightmare": 9003
-	},
-
-	"consoleError": [
+	"xrelease": true,
+	"xconsoleError": [
 		"Error unknown",
 		"Error about connection stablished",
 		"Error 404",
@@ -80,34 +44,71 @@
 		"Error map not found",
 		"Error in obliteration rast"
 	],
-
-	"platform": {
+	"xplatform": {
 		"android": {
 			"keypass": "provisoryKey1",
 			"storepass": "provisoryKey1"
 		}
 	},
 
-	"loader":{
+
+	"app": {
+		"name": "app name",
+		"version": "0.0.0",
+
+		"compatibilityMatrix": {
+			"ie": [9.9,10.9],
+			"firefox": [23.9,25.9],
+			"android": [3.9,3.9],
+			"chrome": [17.9,18.9],
+			"chromeMobile": [3.9,3.9],
+			"safari": [6.0,6.0],
+			"ios": [6,6]
+		},
+
+		"analytics": {
+			"installed": false,
+			"xactive": false,
+			"xlinkid": false,
+			"xdisplayFeatures": false,
+			"xid": "UA-00000000-0",
+			"xappName": "appName",
+			"xappId": "com.appName.appId",
+			"xappInstaller": "com.appName.installer"
+		},
+
+		"mixpanel": {
+			"installed": false,
+			"xactive": false,
+			"xtoken": "YOUR TOKEN"
+		}
+	},
+
+
+	"loader": {
 		"name": "App Factory",
 		"version": "0.1.0",
 		"release": true,
 		"loading": 1,
+
+		"compatibilityFirst": "\n\treturn !!(window.document.querySelector &&\n\twindow.console &&window.document.addEventListener &&\n\t(window.document.getElementsByTagName('body')[0]).classList &&\n\twindow.localStorage &&\n\twindow.navigator &&\n\twindow.XMLHttpRequest &&\n\twindow.applicationCache &&\n\twindow.document.createEvent &&\n\tarr.map &&\n\tarr.every);\n\t",
+
 		"filesDest": {
-			"index":"index.html",
-			"indexCordova": "index-cordova.html"
+			"index": "index.html",
+			"xindexCordova": "index-cordova.html"
 		},
 
 		"folders": {
 			"www": "loader",
 			"bower": "vendors",
-			"build": "build",
-			"temp": "build/.tmp",
-			"screens": "build/screens",
+			"xbuild": "build",
+			"xtemp": "build/.tmp",
+			"xscreens": "build/screens",
 			"loadings": "loader/loading"
 		},
 
 		"viewport": "user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height",
+
 		"contentSecurity": "default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'",
 
 		"bower": {
@@ -134,24 +135,35 @@
 				"generate-js": true
 			}
 		},
-
 		"text": {
 			"title": "Title",
 			"description": "Description",
 			"keyword": "keywords",
 			"author": "autors",
 			"noscript": "<br/>Es una broma? este sitio es una app javascript, indispensable para que funcione, actualiza el navegador o usa otro. Gracias vuelvan prontos! <br/><em>Para mas info: <a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a> : browsers incompatibles.</em><br/><br/>",
-
-			"incompatibleByFeatures": "Navegador incompatible (no se encontraron features), por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
-			"incompatibleByDiag": "Navegador incompatible, por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
-			"semiIncompatible": "Navegador no reconocido o con problemas de compatibilidad, la aplicacion funcionara pero es recomendable actualizarlo o usar otro, ver en el F.A.Q. \\nhttp://languagesgym.com/faq",
-			"faqLink": "<a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a>",
-			"errorRequestFile": "Error leyendo el archivo del servidor, por favor vuelva a intentar mas tarde",
-			"errorTimeoutServer": "Se agoto el tiempo de espera, verifica que tengas internet y este andando bien",
-
-			"header": ["<!--","<%=name%>","<%=site%>","<%=date%> (<%=version%>)","","Power by Javascript community!, Magic by Crystian","Copyright (c) 2015, @Crystian (Cristian Bietti) @crystian","-->","",""],
-			"footer": ["","","<!--'... Your future is whatever you make it. So make it a good one!' - Doc Brown to Marty McFly, BTTF (1990)-->"]
+			"xincompatibleByFeatures": "Navegador incompatible (no se encontraron features), por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
+			"xincompatibleByDiag": "Navegador incompatible, por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
+			"xsemiIncompatible": "Navegador no reconocido o con problemas de compatibilidad, la aplicacion funcionara pero es recomendable actualizarlo o usar otro, ver en el F.A.Q. \\nhttp://languagesgym.com/faq",
+			"xfaqLink": "<a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a>",
+			"xerrorRequestFile": "Error leyendo el archivo del servidor, por favor vuelva a intentar mas tarde",
+			"xerrorTimeoutServer": "Se agoto el tiempo de espera, verifica que tengas internet y este andando bien",
+			"xheader": [
+				"<!--",
+				"<%=name%>",
+				"<%=site%>",
+				"<%=date%> (<%=version%>)",
+				"",
+				"Power by Javascript community!, Magic by Crystian",
+				"Copyright (c) 2015, @Crystian (Cristian Bietti) @crystian",
+				"-->",
+				"",
+				""
+			],
+			"xfooter": [
+				"",
+				"",
+				"<!--'... Your future is whatever you make it. So make it a good one!' - Doc Brown to Marty McFly, BTTF (1990)-->"
+			]
 		}
-
 	}
 }

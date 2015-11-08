@@ -14,30 +14,30 @@ var fs        = require('fs-extra'),
 
 //replace references on index.html
 gulp.task('makeBase', ['makeBower', 'makeIndex', 'makeConfig', 'makeCss'], function(){
-	var loadingHtml = global.cfg.folders.fwk + '/' + global.cfg.loader.folders.loadings + '/' + global.cfg.loader.loading + '/loading.html',
-			loadingCSS  = global.cfg.folders.fwk + '/' + global.cfg.loader.folders.loadings + '/' + global.cfg.loader.loading + '/loading.css';
+	var loadingHtml = global.cfg.pathFwk + '/' + global.cfg.loader.folders.loadings + '/' + global.cfg.loader.loading + '/loading.html',
+			loadingCSS  = global.cfg.pathFwk + '/' + global.cfg.loader.folders.loadings + '/' + global.cfg.loader.loading + '/loading.css';
 
 	global.cfg.varCss = normalize(global.cfg.varCss);
 	global.cfg.varJs = normalize(global.cfg.varJs);
 
-	return gulp.src(global.cfg.folders.fwk + '/' + global.cfg.loader.folders.www + '/' + global.cfg.loader.filesDest.index)
+	return gulp.src(global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/' + global.cfg.loader.filesDest.index)
 		.pipe(utils.debugeame())
 		.pipe(injectors.injectContent(loadingHtml, 'loadingHtml'))
 		.pipe(inject(gulp.src(loadingCSS, {read: false}), {name: 'loadingCss', relative: true, removeTags: true}))
 		.pipe(inject(gulp.src(global.cfg.varCss, {read: false}), {name: 'bower', relative: true, removeTags: true}))
 		.pipe(inject(gulp.src(global.cfg.varJs, {read: false}), {name: 'bower', relative: true, removeTags: true}))
-		.pipe(gulp.dest(global.cfg.folders.fwk + '/' + global.cfg.loader.folders.www));
+		.pipe(gulp.dest(global.cfg.pathFwk + '/' + global.cfg.loader.folders.www));
 });
 
 function normalize(collection){
 	return collection.map(function(_item){
-		return global.cfg.folders.fwk + '/' + _item;
+		return global.cfg.pathFwk + '/' + _item;
 	});
 }
 
 // make a new index on loader folder
 gulp.task('makeIndex', function(){
-	return gulp.src(global.cfg.folders.fwk + '/' + global.cfg.loader.folders.www + '/index.tpl.html')
+	return gulp.src(global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/index.tpl.html')
 		.pipe(utils.debugeame())
 		.pipe(rename(global.cfg.loader.filesDest.index))
 		.pipe(cheerio({
@@ -54,27 +54,34 @@ gulp.task('makeIndex', function(){
 		}))
 		.pipe(replace('<!--msgTpl-->', '<!-- REMEMBER, this file is generated, don\'t change it, because you can lost it -->'))
 		.pipe(replace('&apos;', '\''))//it's for contentSecurity apost, we cannot inject that one
-		.pipe(gulp.dest(global.cfg.folders.fwk + '/' + global.cfg.loader.folders.www));
+		.pipe(gulp.dest(global.cfg.pathFwk + '/' + global.cfg.loader.folders.www));
 });
 
 gulp.task('makeConfig', function(cb){
+
+	//all variables in app, will pass to app
+	var json = global.cfg.app;
+
 	//variables shared between loader build and loader app
-	var json = {};
-	json.name = global.cfg.name;
-	json.release = global.cfg.release;
-	json.version = global.cfg.version;
-	json.compress = global.cfg.compress;
+	json.loader = {
+		version: global.cfg.loader.version
+	};
+
+	//json.name = global.cfg.app.name;
+	//json.release = global.cfg.release;
+	//json.version = global.cfg.version;
+	//json.compress = global.cfg.compress;
 	//json.isCordovaDevice = global.cfg.isCordovaDevice;
-	json.compatibilityMatrix = global.cfg.compatibilityMatrix;
+	//json.compatibilityMatrix = global.cfg.compatibilityMatrix;
 	//json.debugZoneActive = global.cfg.debugZoneActive;
-	json.mixpanel = global.cfg.mixpanel;
-	json.analytics = global.cfg.analytics;
+	//json.mixpanel = global.cfg.mixpanel;
+	//json.analytics = global.cfg.analytics;
 	//json.consoleError = global.cfg.consoleError;
-	json.firstApp = global.cfg.firstApp;
+	//json.firstApp = global.cfg.firstApp;
 	//json.fastclick = !!(global.cfg.loader.bower.fastclick);
 	//json.appRoot = '../../templates/'+ global.cfg.projectCode;
-	json.projectCode = global.cfg.projectCode;
-	json.www = global.cfg.folders.www;
+	//json.projectCode = global.cfg.projectCode;
+	//json.www = global.cfg.folders.www;
 	//json.showDeviceInfo = global.cfg.showDeviceInfo;
 	//json.showSkeletor = global.cfg.showSkeletor;
 	//json.contentEditable = global.cfg.contentEditable;
@@ -82,19 +89,19 @@ gulp.task('makeConfig', function(cb){
 	//json.oneRequest = false;//flagOneRequest
 	//json.phantom = false;//flagPhantom
 
-	json.loader = {
-		version: global.cfg.loader.version,
-		release: global.cfg.loader.release,
+	//json.loader = {
+		//version: global.cfg.loader.version,
+		//release: global.cfg.loader.release,
 		////build: false, ??
-		text: {
+		//text: {
 			//incompatibleByFeatures: global.cfg.loader.text.incompatibleByFeatures,
 			//incompatibleByDiag: global.cfg.loader.text.incompatibleByDiag,
 			//semiIncompatible: global.cfg.loader.text.semiIncompatible,
 			//faqLink: global.cfg.loader.text.faqLink,
 			//errorRequestFile: global.cfg.loader.text.errorRequestFile,
 			//errorTimeoutServer: global.cfg.loader.text.errorTimeoutServer
-		}
-	};
+		//}
+	//};
 
 	var compatibilityTpl =
 				'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n' +
@@ -102,7 +109,7 @@ gulp.task('makeConfig', function(cb){
 				'	//jshint maxcomplexity:false, quotmark:false\n' +
 				'	\'use strict\';\n' +
 				'	var arr = [];\n' +
-				global.cfg.compatibilityFirst +
+				global.cfg.loader.compatibilityFirst +
 				'};\n';
 
 	var text = '/* Remember, this file is autogenerate, don\'t change it */\n\n' +
@@ -124,7 +131,7 @@ gulp.task('makeConfig', function(cb){
 			});
 	}
 
-	fs.writeFile(global.cfg.folders.fwk + '/' + global.cfg.loader.folders.www + '/config.js',
+	fs.writeFile(global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/config.js',
 		text,
 		function(err){
 			if(err){

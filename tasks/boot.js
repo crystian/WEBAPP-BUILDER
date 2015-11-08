@@ -48,14 +48,14 @@ exports.boot = function(config){
 
 		//reconfigure folders:
 		var relativePathFrom = path.relative(config.dirname, __dirname + '/..') + '/';
-		var relativePathTo = path.relative(__dirname + '/..', config.dirname) + '/';
+		//var relativePathTo = path.relative(__dirname + '/..', config.dirname) + '/';
 		if(relativePathFrom === '/'){
-			relativePathFrom = '';
-			relativePathTo = '';
+			//relativePathFrom = '';
+			//relativePathTo = '';
 			global.cfg.fromFwk = true;
 		}
 
-		global.cfg.folders.fwk = pathFwk;
+		global.cfg.pathFwk = pathFwk;
 		//global.cfg.loader.folders.relativePathFrom = relativePathFrom;
 		//global.cfg.loader.folders.relativePathTo = relativePathTo;
 		//global.cfg.loader.folders.www = relativePathTo + global.cfg.loader.folders.www;

@@ -14,7 +14,7 @@ var webserver = require('gulp-webserver'),
 
 
 gulp.task('serveLoader', function(){
-	return makeServe(global.cfg.folders.fwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.serve);
+	return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.serve);
 });
 
 //gulp.task('serve:nightmare', function(){

@@ -30,11 +30,11 @@ gulp.task('makeBower', ['downloadBower'], function(cb){
 	for(; i < len; i++){
 		var s = global.cfg.varLibsToMin[i];
 
-		gulp.src(global.cfg.folders.fwk + '/' + s.dev)
+		gulp.src(global.cfg.pathFwk + '/' + s.dev)
 			.pipe(utils.debugeame())
 			.pipe(gif(s.type === 'js', uglify(), minifycss()))
 			.pipe(rename(s.name))
-			.pipe(gulp.dest(global.cfg.folders.fwk + '/' + s.pa))
+			.pipe(gulp.dest(global.cfg.pathFwk + '/' + s.pa))
 			.on('finish', function(a, b, c){
 				console.logGreen('Minification of ' + global.cfg.varLibsToMin[global.cfg.varLibsToMinI].name + '...');
 				global.cfg.varLibsToMinI++;
@@ -49,14 +49,14 @@ gulp.task('downloadBower', ['generatorBower'], function(){
 	return bower(
 		{
 			directory: global.cfg.loader.folders.bower,
-			cwd: global.cfg.folders.fwk,
+			cwd: global.cfg.pathFwk,
 			offline: global.cfg.offline
 		});
 });
 
 gulp.task('generatorBower', ['parseBower'], function(cb){
 	//update bower.json file
-	fs.writeFile(global.cfg.folders.fwk + '/bower.json', JSON.stringify(global.cfg.varBower, null, '\t'), function(err){
+	fs.writeFile(global.cfg.pathFwk + '/bower.json', JSON.stringify(global.cfg.varBower, null, '\t'), function(err){
 		if(err){
 			console.logRed('Error:');
 			console.error(err);
