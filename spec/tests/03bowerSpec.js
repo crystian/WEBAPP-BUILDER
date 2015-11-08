@@ -78,7 +78,7 @@ describe("Bower dependencies and more - ", function(){
 		expect(test('-e', pathBowerFolder)).toBe(true);
 	});
 
-	it('(06) should create a minificated version for libs', function(){
+	it('(06) should create a minificated version for js libs', function(){
 		cd('06');
 
 		rm('-rf', configJson);
@@ -99,5 +99,32 @@ describe("Bower dependencies and more - ", function(){
 
 	});
 
+	it('(07) should create a minificated version for css libs', function(){
+		cd('07');
 
+		rm('-rf', configJson);
+		expect(exec('gulp makeConfig --testMode', {silent:true}).code).toBe(0);
+		var bowerFolder = utils.readJsonFile(configJson).cfg.loader.folders.bower,
+				pathBowerFolder = rootFwk +'/'+ bowerFolder;
+		rm('-rf', pathBowerFolder);
+
+		var bootstrapMin = pathBowerFolder +'/bootstrap/dist/',
+				bootstrapJs = bootstrapMin + 'js/bootstrap.other.min.js',
+				bootstrapNpm = bootstrapMin + 'js/npm.other.min.js',
+				bootstrapCss = bootstrapMin + 'css/bootstrap.other.min.css',
+				bootstrapCssTheme = bootstrapMin + 'css/bootstrap-theme.other.min.css';
+
+		expect(exec('gulp makeBower --testMode', {silent:true}).code).toBe(0);
+
+		expect(test('-e', bootstrapJs)).toBe(true);
+		expect(test('-e', bootstrapNpm)).toBe(true);
+		expect(test('-e', bootstrapCss)).toBe(true);
+		expect(test('-e', bootstrapCssTheme)).toBe(true);
+
+		//check size of minification
+		expect(fs.statSync(bootstrapJs).size).toBeLessThan(40000);
+		expect(fs.statSync(bootstrapNpm).size).toBeLessThan(400);
+		expect(fs.statSync(bootstrapCss).size).toBeLessThan(190000);
+		expect(fs.statSync(bootstrapCssTheme).size).toBeLessThan(24000);
+	});
 });

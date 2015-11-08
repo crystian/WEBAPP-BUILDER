@@ -1,0 +1,21 @@
+{
+	"name": "index test 07",
+	"compress": false,
+	"loader":{
+		"bower": {
+			"bootstrap": {
+				"version": "3.3.5",
+				"js-dev": ["bootstrap/dist/js/bootstrap.js", "bootstrap/dist/js/npm.js"],
+				"js-prod": ["bootstrap/dist/js/bootstrap.other.min.js", "bootstrap/dist/js/npm.other.min.js"],
+				"css-dev": ["bootstrap/dist/css/bootstrap.css", "bootstrap/dist/css/bootstrap-theme.css"],
+				"css-prod": ["bootstrap/dist/css/bootstrap.other.min.css",  "bootstrap/dist/css/bootstrap-theme.other.min.css"],
+				"generate-js": true,
+				"generate-css": true
+			},
+			"platform": null,
+			"lz-string": null,
+			"es6-promise": null,
+			"fastclick": null
+		}
+	}
+}

@@ -13,7 +13,6 @@ describe("Index template to index - ", function(){
 
 	beforeEach(function(){
 		cd(testFolder);
-		//createPkgJson();
 	});
 	afterEach(function(){
 		cd(rootFwk);
@@ -58,6 +57,18 @@ describe("Index template to index - ", function(){
 		$ = cheerio.load(indexContent);
 
 		expect($('#contentSecurity').attr('content')).toBe('Test2 apos: \'');
+	});
+
+	it('(03) should ', function(){
+		cd('03');
+
+		expect(exec('gulp makeBase --testMode', {silent:true}).code).toBe(0);
+
+		var indexContent = cat(rootFwk +'/'+ pathLoader +'/'+ index);
+		$ = cheerio.load(indexContent);
+
+		expect($('.spinner').length).toBe(1);
+		expect($('link').length).toBe(3);
 	});
 
 });
