@@ -1,7 +1,6 @@
 {
-	"name": "index test 01",
+	"name": "index test 05-01",
 	"loader": {
-		"release": false,
 		"bower": {
 			"jquery": {
 				"version": "2.1.4",

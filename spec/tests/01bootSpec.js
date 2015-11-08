@@ -11,7 +11,7 @@ require('shelljs/global');
 var testFolder = 'spec/fixture/01boot',
 		rootFwk = '../../../..',
 		pkgJson = 'package.json',
-		pkgJsonContent = '{"name": "test 04","private": true,"dependencies": {}}',
+		pkgJsonContent = '{"name": "test 01-02","private": true,"dependencies": {}}',
 		configjsLocal = 'project-config-local.json',
 		configjs = '/loader/config.js',
 		configJson = 'config.json';
@@ -125,7 +125,7 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 
 		expect(exec('gulp makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
 
-		expect(utils.readJsonFile(configJson).name).toBe('test 06 config');
+		expect(utils.readJsonFile(configJson).name).toBe('test 01-06 config');
 	});
 
 	it("(07) should has the attribute name from APP config LOCAL", function(){
@@ -135,6 +135,6 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 
 		expect(exec('gulp makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
 
-		expect(utils.readJsonFile(configJson).name).toBe('test 07 config local');
+		expect(utils.readJsonFile(configJson).name).toBe('test 01-07 config local');
 	});
 });

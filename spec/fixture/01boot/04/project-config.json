@@ -1,6 +1,6 @@
 {
-	"name": "test 04 config",
 	"compress": true,
+	"app": {"name": "test 01-04 config"},
 	"loader": {
 		"bower":{
 			"lz-string": null
