@@ -12,9 +12,7 @@
 				"generate-js": true,
 				"generate-css": true
 			},
-			"platform": null,
 			"lz-string": null,
-			"es6-promise": null,
 			"fastclick": null
 		}
 	}

@@ -17,8 +17,8 @@ gulp.task('makeBase', ['makeBower', 'makeIndex', 'makeConfig', 'makeCss'], funct
 	var loadingHtml = global.cfg.pathFwk + '/' + global.cfg.loader.folders.loadings + '/' + global.cfg.loader.loading + '/loading.html',
 			loadingCSS  = global.cfg.pathFwk + '/' + global.cfg.loader.folders.loadings + '/' + global.cfg.loader.loading + '/loading.css';
 
-	global.cfg.varCss = normalize(global.cfg.varCss);
-	global.cfg.varJs = normalize(global.cfg.varJs);
+	global.cfg.varCss = utils.normalizePathFwk(global.cfg.varCss);
+	global.cfg.varJs = utils.normalizePathFwk(global.cfg.varJs);
 
 	return gulp.src(global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/' + global.cfg.loader.filesDest.index)
 		.pipe(utils.debugeame())
@@ -29,11 +29,6 @@ gulp.task('makeBase', ['makeBower', 'makeIndex', 'makeConfig', 'makeCss'], funct
 		.pipe(gulp.dest(global.cfg.pathFwk + '/' + global.cfg.loader.folders.www));
 });
 
-function normalize(collection){
-	return collection.map(function(_item){
-		return global.cfg.pathFwk + '/' + _item;
-	});
-}
 
 // make a new index on loader folder
 gulp.task('makeIndex', function(){

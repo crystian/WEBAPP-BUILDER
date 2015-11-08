@@ -1,0 +1,8 @@
+{
+	"app": {"name": "test 01-08 config"},
+	"loader":{
+		"bower": {
+			"platform": null
+		}
+	}
+}

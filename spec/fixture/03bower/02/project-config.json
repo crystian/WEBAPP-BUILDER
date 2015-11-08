@@ -2,7 +2,7 @@
 	"name": "index test 03-02",
 	"loader":{
 		"bower": {
-			"platform": null
+			"fastclick": null
 		}
 	}
 }

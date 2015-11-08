@@ -118,7 +118,6 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		}
 	});
 
-
 	it("(06) should has the attribute name from APP config", function(){
 		cd('06');
 		rm('-rf', configJson);
@@ -136,5 +135,17 @@ describe("Full test for the build system of framework (fuaaa) - ", function(){
 		expect(exec('gulp makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
 
 		expect(utils.readJsonFile(configJson).name).toBe('test 01-07 config local');
+	});
+
+	it("(08) should has the platform component", function(){
+		cd('08');
+
+		expect(exec('gulp makeConfig --testMode '+ args, {silent:true}).code).toBe(1);
+	});
+
+	it("(09) should has the es6-promise component", function(){
+		cd('09');
+
+		expect(exec('gulp makeConfig --testMode '+ args, {silent:true}).code).toBe(1);
 	});
 });

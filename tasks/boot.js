@@ -75,6 +75,10 @@ exports.boot = function(config){
 		console.logRed('LOADER: Compress option active, but library lz-string not present');
 		utils.exit(1);
 	}
+	if(!global.cfg.loader.bower['es6-promise'] || !global.cfg.loader.bower['platform']){
+		console.logRed('LOADER: It must use platform and es6-promise, don\'t remove them.');
+		utils.exit(1);
+	}
 	//
 
 	//save gitVersion on package.json

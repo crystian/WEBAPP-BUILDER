@@ -1,0 +1,8 @@
+{
+	"app": {"name": "test 01-09 config"},
+	"loader":{
+		"bower": {
+			"es6-promise": null
+		}
+	}
+}

@@ -29,7 +29,7 @@ describe("Bower dependencies and more - ", function(){
 		expect(exec('gulp generatorBower --testMode '+ args, {silent:true}).code).toBe(1);
 	});
 
-	it('(02) should be platform == null', function(){
+	it('(02) should be fastclick == null', function(){
 		cd('02');
 		var pathBower = rootFwk + bowerJson;
 		rm('-rf', pathBower);
@@ -39,7 +39,7 @@ describe("Bower dependencies and more - ", function(){
 
 		expect(test('-e', pathBower)).toBe(true);
 		var bowerFile = utils.readJsonFile(pathBower);
-		expect(bowerFile.dependencies.platform).toBeUndefined();
+		expect(bowerFile.dependencies.fastclick).toBeUndefined();
 	});
 
 	it('(03) should be platform with other version', function(){

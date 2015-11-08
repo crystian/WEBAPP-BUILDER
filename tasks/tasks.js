@@ -8,12 +8,13 @@ var gutil       = require('gulp-util'),
 		gulp        = require('gulp');
 
 //alias:
-//gulp.task('default',	['build:loader']);
+gulp.task('default',	['makeBase']);
 //gulp.task('full:loader',['build:loader:full']);
 //gulp.task('config',		['make:config']);
 //gulp.task('test',		['test:loader']);
 gulp.task('css', ['makeCss']);
 gulp.task('cssw', ['watcherCss']);
+gulp.task('nothing', []);
 
 //gulp.task('build:loader', function (cb) {
 //
@@ -54,8 +55,3 @@ gulp.task('cssw', ['watcherCss']);
 //});
 
 
-gulp.task('default', [], function(){
-	console.log('desde tasks.js WORKS!');
-});
-
-gulp.task('nothing', []);

@@ -70,22 +70,3 @@
 //	return del(global.cfg.folders.cordovaWWW);
 //});
 //
-//exports.jsMaker = function(stream) {
-//	return stream
-//		.pipe(gif(cfg.loader.release, jshint({lookup:false, debug:false})))
-//		.pipe(gif(cfg.loader.release, jshint.reporter('jshint-stylish')))
-//		.pipe(gif(cfg.loader.release, jshint.reporter('fail')))
-//
-//		.pipe(removeCode({ production: cfg.loader.release }))
-//		.pipe(gif(cfg.loader.release, uglify({
-//			output:{
-//				beautify: false
-//			},
-//			compress:{
-//				sequences: true,
-//				drop_console: false
-//			}
-//		}))
-//	);
-//};
-//

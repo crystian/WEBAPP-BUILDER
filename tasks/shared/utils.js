@@ -38,6 +38,12 @@ exports.fileExist = function(fileName){
 	return fs.existsSync(fileName);
 };
 
+exports.normalizePathFwk = function(collection){
+	return collection.map(function(_item){
+		return global.cfg.pathFwk + '/' + _item;
+	});
+};
+
 //exports.getExtensionFile = function(s) {
 //	return path.extname(s).replace('.','');
 //};
