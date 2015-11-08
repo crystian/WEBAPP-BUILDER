@@ -2,14 +2,14 @@
  * Created by Crystian on 3/27/2015.
  */
 
-var utils  = require('./utils.js'),
-		bower  = require('gulp-bower'),
-		fs     = require('fs-extra'),
-		gif = require('gulp-if'),
+var utils     = require('./utils.js'),
+		bower     = require('gulp-bower'),
+		fs        = require('fs-extra'),
+		gif       = require('gulp-if'),
 		minifycss = require('gulp-minify-css'),
-		uglify = require('gulp-uglify'),
-		rename = require('gulp-rename'),
-		gutil  = require('gulp-util');
+		uglify    = require('gulp-uglify'),
+		rename    = require('gulp-rename'),
+		gutil     = require('gulp-util');
 
 /*
  necesitaba hacer el minificado despues de la bajada, me complico la vida...,

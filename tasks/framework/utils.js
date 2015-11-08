@@ -4,33 +4,33 @@
 
 // share with app
 
-var chalk = require('chalk'),
-	path = require('path'),
-	fs = require('fs'),
-	debug = require('gulp-debug'),
-	gif = require('gulp-if'),
-	through = require('through2'),
-	gutil = require('gulp-util');
+var chalk   = require('chalk'),
+		path    = require('path'),
+		fs      = require('fs'),
+		debug   = require('gulp-debug'),
+		gif     = require('gulp-if'),
+		through = require('through2'),
+		gutil   = require('gulp-util');
 
 //COMMONS between project and loader:
-console.logWarn = function (m) {
+console.logWarn = function(m){
 	console.log(chalk.black.bgYellow(m));
 };
 
-console.logGreen = function (m) {
+console.logGreen = function(m){
 	console.log(chalk.black.bgGreen(m));
 };
 
-console.logRed = function (m) {
+console.logRed = function(m){
 	console.log(chalk.red.bold(m));
 };
 
 exports.readJsonFile = function(f){
-	return eval('('+cat(f)+')');
+	return eval('(' + cat(f) + ')');
 };
 
 exports.saveFile = function(f, c){
-	return JSON.stringify(c, null,'\t').to(f);
+	return JSON.stringify(c, null, '\t').to(f);
 };
 
 exports.fileExist = function(fileName){
@@ -73,20 +73,20 @@ exports.fileExist = function(fileName){
 
 exports.debugeame = function(){
 	return through.obj()
-			.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
-			.on('error', gutil.log);
+		.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
+		.on('error', gutil.log);
 };
 
 process.on('uncaughtException', function(err){
-	if(typeof err === 'string') err = {message:err};
+	if(typeof err === 'string') err = {message: err};
 	console.logRed('uncaughtException: ' + err.message);
-	if (gutil.env.debug) {
+	if(gutil.env.debug){
 		console.logRed(err.stack);
 	}
 	this.exit(1); // exit with error
 });
 
-exports.exit = function (n){
+exports.exit = function(n){
 	process.exit(n);
 };
 

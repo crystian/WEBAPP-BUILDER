@@ -1,19 +1,19 @@
 /**
-* Created by Crystian on 10/16/2014.
-*/
+ * Created by Crystian on 10/16/2014.
+ */
 
-var gutil = require('gulp-util'),
-	utils = require('./framework/utils.js'),
-	runSequence = require('run-sequence'),
-	gulp = require('gulp');
+var gutil       = require('gulp-util'),
+		utils       = require('./framework/utils.js'),
+		runSequence = require('run-sequence'),
+		gulp        = require('gulp');
 
 //alias:
 //gulp.task('default',	['build:loader']);
 //gulp.task('full:loader',['build:loader:full']);
 //gulp.task('config',		['make:config']);
 //gulp.task('test',		['test:loader']);
-gulp.task('css',		['makeCss']);
-gulp.task('cssw',		['watcherCss']);
+gulp.task('css', ['makeCss']);
+gulp.task('cssw', ['watcherCss']);
 
 //gulp.task('build:loader', function (cb) {
 //
@@ -54,7 +54,7 @@ gulp.task('cssw',		['watcherCss']);
 //});
 
 
-gulp.task('default', [], function () {
+gulp.task('default', [], function(){
 	console.log('desde tasks.js WORKS!');
 });
 

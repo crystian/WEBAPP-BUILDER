@@ -4,13 +4,13 @@
 
 var inject = require('gulp-inject');
 
-exports.injectContent = function(filePath, name, tagHtm) {
+exports.injectContent = function(filePath, name, tagHtm){
 	return inject(gulp.src([filePath]), {
-		starttag: '<!-- inject:'+ name +' -->',
-		transform: function (filePath, file) {
+		starttag: '<!-- inject:' + name + ' -->',
+		transform: function(filePath, file){
 			var r = file.contents.toString('utf8');
-			if (tagHtm) {
-				r = '<'+tagHtm+'>'+r+'</'+tagHtm+'>';
+			if(tagHtm){
+				r = '<' + tagHtm + '>' + r + '</' + tagHtm + '>';
 			}
 			return r;
 		}
