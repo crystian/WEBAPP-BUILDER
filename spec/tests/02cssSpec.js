@@ -13,7 +13,7 @@ var testFolder  = 'spec/fixture/02css',
 		rootFwk     = '../../../..',
 		cssTestFile = '/css/test',
 		pathCssTest = 'loader'+ cssTestFile,
-		cssFile = rootFwk +'/'+pathCssTest +'.css',
+		cssFile = rootFwk +'/'+ pathCssTest +'.css',
 		configJson = 'config.json'
 	;
 

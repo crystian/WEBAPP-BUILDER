@@ -6,7 +6,7 @@ var utils       = require('../shared/utils'),
 		streamqueue = require('streamqueue'),
 		strip       = require('gulp-strip-comments'),
 		gif         = require('gulp-if'),
-		concat = require('gulp-concat'),
+		concat      = require('gulp-concat'),
 		replace     = require('gulp-replace'),
 		jshint      = require('gulp-jshint'),
 		removeCode  = require('gulp-remove-code'),
@@ -14,7 +14,7 @@ var utils       = require('../shared/utils'),
 		gutil       = require('gulp-util');
 
 gulp.task('makeJsFinal', ['makeBower'], function(){
-	var www = global.cfg.pathFwk + '/' + global.cfg.loader.folders.www,
+	var www  = global.cfg.pathFwk + '/' + global.cfg.loader.folders.www,
 			libs = utils.normalizePathFwk(global.cfg.varJs),
 			libsMinStream,
 			loaderScripts1,
@@ -54,9 +54,15 @@ gulp.task('makeJsFinal', ['makeBower'], function(){
 		www + '/modules/mixpanel.js',
 		www + '/modules/boot.js'
 	];
+
+	if(global.cfg.loader.release && gutil.env.forceError){
+		//just for force an error
+		loaderScripts2.push(www + '/modules/jshintTest.js');
+	}
+
 	loaderScripts2Stream = gulp.src(loaderScripts2)
 		.pipe(gif(global.cfg.loader.release && global.cfg.compress,
-				replace('if(!loader.cfg.compress){return data;}//flagCompress', '')));
+			replace('if(!loader.cfg.compress){return data;}//flagCompress', '')));
 
 	loaderScripts2Stream = jsMaker(loaderScripts2Stream, global.cfg.loader.release);
 	//endbody script
@@ -64,7 +70,7 @@ gulp.task('makeJsFinal', ['makeBower'], function(){
 	return streamqueue({objectMode: true}, loaderScripts1Stream, libsMinStream, loaderScripts2Stream)
 		.pipe(utils.debugeame())
 		.pipe(concat('/-compiledLoader.js', {newLine: ';'}))
-		.pipe(gulp.dest(global.cfg.pathFwk +'/'+ global.cfg.loader.folders.temp));
+		.pipe(gulp.dest(global.cfg.pathFwk + '/' + global.cfg.loader.folders.temp));
 });
 
 function jsMaker(stream, release){

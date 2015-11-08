@@ -1,8 +1,8 @@
 {
-	"name": "index test 05-01",
+	"name": "index test 05-02",
 	"compress": false,
 	"loader": {
-		"release": false,
+		"release": true,
 		"bower": {
 			"lz-string": null,
 			"fastclick": null
