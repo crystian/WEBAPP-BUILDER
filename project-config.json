@@ -12,9 +12,7 @@
 	"autoprefixer": "ie 10|android 4|chrome 32|ff 27|ios 7|opera 19|safari 7",
 
 	"xprojectCode": "empty",
-	"xcordova": false,
 	"xforceLibFull": false,
-	"xisCordovaDevice": false,
 	"xdebugZoneActive": false,
 	"xshowDeviceInfo": false,
 	"xshowSkeletor": false,
@@ -35,6 +33,8 @@
 		"version": "0.0.0",
 		"firstApp": "app",
 		"site": "http://",
+		"cordova": false,
+		"isCordovaDevice": false,
 
 		"folders": {
 			"project": "templates/angular-full",
@@ -100,7 +100,7 @@
 
 		"filesDest": {
 			"index": "index.html",
-			"xindexCordova": "index-cordova.html"
+			"indexCordova": "index-cordova.html"
 		},
 
 		"folders": {

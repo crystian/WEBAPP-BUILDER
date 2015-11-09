@@ -1,0 +1,9 @@
+{
+	"app": {
+		"name": "index test 06-05",
+		"cordova": true
+	},
+	"loader": {
+		"release": false
+	}
+}

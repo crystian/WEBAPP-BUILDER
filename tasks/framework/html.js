@@ -5,6 +5,7 @@
 var utils       = require('../shared/utils'),
 		injector    = require('./injector'),
 		gif         = require('gulp-if'),
+		rename    = require('gulp-rename'),
 		replace     = require('gulp-replace'),
 		htmlreplace = require('gulp-html-replace'),
 		htmlmin     = require('gulp-htmlmin'),
@@ -45,19 +46,19 @@ gulp.task('makeHtmlFinal', ['makeJsFinal', 'makeCssFinal', 'makeBase'], function
 
 		.pipe(gulp.dest(global.cfg.pathFwk + '/' + global.cfg.loader.folders.build));
 
-	//if(global.cfg.cordova){
-	//	/*
-	//	This is ok, because it make another file equals to index but one change,
-	//	I prefer it than run again all process to make other file
-	//	*/
-	//	stream = stream.pipe(rename(global.cfg.loader.filesDest.indexCordova))
-	//		.pipe(commons.debugeame())
-	//		.pipe(gif(global.cfg.loader.release,
-	//			replace(',isCordovaDevice:!1,', ',isCordovaDevice:1,'),
-	//			replace('"isCordovaDevice": false,', '"isCordovaDevice": true,')
-	//		))
-	//		.pipe(gulp.dest(global.cfg.loader.folders.build));
-	//}
+	if(global.cfg.app.cordova){
+		/*
+		This is ok, because it make another file equals to index but one change,
+		I prefer it than run again all process to make other file
+		*/
+		stream = stream.pipe(rename(global.cfg.loader.filesDest.indexCordova))
+			.pipe(utils.debugeame())
+			.pipe(gif(global.cfg.loader.release,
+				replace(',isCordovaDevice:!1,', ',isCordovaDevice:1,'),
+				replace('"isCordovaDevice": false,', '"isCordovaDevice": true,')
+			))
+			.pipe(gulp.dest(global.cfg.pathFwk + '/' + global.cfg.loader.folders.build));
+	}
 
 	return stream;
 });
