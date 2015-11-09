@@ -27,7 +27,6 @@
 		}
 	},
 
-
 	"app": {
 		"name": "app name",
 		"version": "0.0.0",
@@ -37,7 +36,7 @@
 		"isCordovaDevice": false,
 
 		"folders": {
-			"project": "templates/angular-full",
+			"project": "templates/empty",
 			"www": "www",
 			"xbuild": "build",
 			"xtemp": "build/.tmp",
@@ -151,8 +150,8 @@
 			"xincompatibleByDiag": "Navegador incompatible, por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
 			"xsemiIncompatible": "Navegador no reconocido o con problemas de compatibilidad, la aplicacion funcionara pero es recomendable actualizarlo o usar otro, ver en el F.A.Q. \\nhttp://languagesgym.com/faq",
 			"xfaqLink": "<a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a>",
-			"xerrorRequestFile": "Error leyendo el archivo del servidor, por favor vuelva a intentar mas tarde",
-			"xerrorTimeoutServer": "Se agoto el tiempo de espera, verifica que tengas internet y este andando bien",
+			"errorRequestFile": "Error leyendo el archivo del servidor, por favor vuelva a intentar mas tarde",
+			"errorTimeoutServer": "Se agoto el tiempo de espera, verifica que tengas internet y este andando bien",
 			"header": [
 				"<!--",
 				"<%=name%>",

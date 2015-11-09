@@ -1,4 +1,9 @@
 {
-	"name": "template app empty2",
-	"version": "0.0.1"
+	"app": {
+		"name": "template empty",
+		"version": "0.0.1",
+		"folders": {
+			"project": "templates/empty"
+		}
+	}
 }

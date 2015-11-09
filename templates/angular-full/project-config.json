@@ -1,5 +1,10 @@
 {
-	"name": "template app ng full",
-	"version": "0.0.1",
-	"firstApp": "landing"
+	"app": {
+		"name": "template angular full",
+		"version": "0.0.1",
+		"firstApp": "landing",
+		"folders": {
+			"project": "templates/angular-full"
+		}
+	}
 }

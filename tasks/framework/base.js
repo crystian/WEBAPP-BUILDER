@@ -60,7 +60,8 @@ gulp.task('makeConfig', function(cb){
 
 	//variables shared between loader build and loader app
 	json.loader = {
-		version: global.cfg.loader.version
+		version: global.cfg.loader.version,
+		text: global.cfg.loader.text
 	};
 
 	//json.name = global.cfg.app.name;
