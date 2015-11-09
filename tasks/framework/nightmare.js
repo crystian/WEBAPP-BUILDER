@@ -1,9 +1,9 @@
-///**
-// * Created by Crystian on 10/16/2014.
-// *
-// * The main propose for this file is test the loader
-// */
-//
+/**
+ * Created by Crystian on 10/16/2014.
+ *
+ * The main propose for this file is test the loader
+ */
+
 //var gutil = require('gulp-util'),
 //	Nightmare = require('nightmare'),
 //	replace = require('replace'),
@@ -14,8 +14,8 @@
 //	Promise = require('q').Promise,
 //	gulp = require('gulp');
 //
-////debug mode: on console: set DEBUG=nightmare
-//gulp.task('test:loader',['serve:nightmare'], function(cb) {
+//debug mode: on console: set DEBUG=nightmare
+gulp.task('_test',['_serveNightmare'], function(cb) {
 //	'use strict';
 //	var index = (global.cfg.folders.template +'/' + global.cfg.folders.build + '/' + global.cfg.loader.filesDest.index),
 //		page = 'http://' + global.cfg.ip + ':' + global.cfg.ports.nightmare + '/' + global.cfg.loader.filesDest.index;
@@ -326,8 +326,8 @@
 //			utils.exit(1);
 //		}, 200);
 //
-//		cb();
+		cb();
 //	});
 //
-//});
-//
+});
+

@@ -25,14 +25,14 @@ describe("JS mechanics - ", function(){
 	it('(01) should create compile loader', function(){
 		cd('01');
 
-		expect(exec('gulp makeConfig --testMode ' + args, {silent: true}).code).toBe(0);
+		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
 		var temp            = utils.readJsonFile(configJson).cfg.loader.folders.temp,
 				compileLoaderJs = rootFwk + '/' + temp + '/' + compileLoaderJsName;
 
 		rm('-rf', compileLoaderJs);
 		expect(test('-e', compileLoaderJs)).toBe(false);
 
-		expect(exec('gulp makeJsFinal --testMode ' + args, {silent: true}).code).toBe(0);
+		expect(exec('gulp _buildJs --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		expect(test('-e', compileLoaderJs)).toBe(true);
 
@@ -43,14 +43,14 @@ describe("JS mechanics - ", function(){
 	it('(02) should create compile loader - minificated', function(){
 		cd('02');
 
-		expect(exec('gulp makeConfig --testMode ' + args, {silent: true}).code).toBe(0);
+		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
 		var temp            = utils.readJsonFile(configJson).cfg.loader.folders.temp,
 				compileLoaderJs = rootFwk + '/' + temp + '/' + compileLoaderJsName;
 
 		rm('-rf', compileLoaderJs);
 		expect(test('-e', compileLoaderJs)).toBe(false);
 
-		expect(exec('gulp makeJsFinal --testMode ' + args, {silent: true}).code).toBe(0);
+		expect(exec('gulp _buildJs --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		expect(test('-e', compileLoaderJs)).toBe(true);
 
@@ -61,14 +61,14 @@ describe("JS mechanics - ", function(){
 	it('(03) should jshint validate the code', function(){
 		cd('03');
 
-		expect(exec('gulp makeConfig --testMode ' + args, {silent: true}).code).toBe(0);
+		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
 		var temp            = utils.readJsonFile(configJson).cfg.loader.folders.temp,
 				compileLoaderJs = rootFwk + '/' + temp + '/' + compileLoaderJsName;
 
 		rm('-rf', compileLoaderJs);
 		expect(test('-e', compileLoaderJs)).toBe(false);
 
-		expect(exec('gulp makeJsFinal --testMode --forceError ' + args, {silent: true}).code).toBe(1);
+		expect(exec('gulp _buildJs --testMode --forceError ' + args, {silent: 1}).code).toBe(1);
 
 		expect(test('-e', compileLoaderJs)).toBe(false);
 	});

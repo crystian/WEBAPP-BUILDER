@@ -16,7 +16,7 @@ var utils     = require('../shared/utils.js'),
  esto fue lo mejor que me quedo, luego de varias horas ...
  problemas con syncronismo y argumentos
  */
-gulp.task('makeBower', ['downloadBower'], function(cb){
+gulp.task('_makeBower', ['_downloadBower'], function(cb){
 
 	var i   = 0,
 			len = global.cfg.varLibsToMin.length;
@@ -45,7 +45,7 @@ gulp.task('makeBower', ['downloadBower'], function(cb){
 	}
 });
 
-gulp.task('downloadBower', ['generatorBower'], function(){
+gulp.task('_downloadBower', ['_generatorBower'], function(){
 	return bower(
 		{
 			directory: global.cfg.loader.folders.bower,
@@ -54,7 +54,7 @@ gulp.task('downloadBower', ['generatorBower'], function(){
 		});
 });
 
-gulp.task('generatorBower', ['parseBower'], function(cb){
+gulp.task('_generatorBower', ['_parseBower'], function(cb){
 	//update bower.json file
 	fs.writeFile(global.cfg.pathFwk + '/bower.json', JSON.stringify(global.cfg.varBower, null, '\t'), function(err){
 		if(err){
@@ -67,7 +67,7 @@ gulp.task('generatorBower', ['parseBower'], function(cb){
 	});
 });
 
-gulp.task('parseBower', function(cb){
+gulp.task('_parseBower', function(cb){
 	var bower     = Object.keys(global.cfg.loader.bower),
 			ambient   = global.cfg.loader.release ? 'prod' : 'dev',
 			rJs       = [],

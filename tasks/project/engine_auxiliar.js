@@ -1,13 +1,13 @@
-///**
-// * Created by Crystian on 3/27/2015.
-// */
-//
-//
-//var gulp = require('gulp'),
+/**
+ * Created by Crystian on 3/27/2015.
+ */
+
+
+var
 //	mergeStream = require('merge-stream'),
 //	replace = require('gulp-replace'),
 //    utils = require('./utils'),
-//	gutil = require('gulp-util');
+	gutil = require('gulp-util');
 //
 //exports.merge = function(stream, newStream) {
 //	return (stream === undefined) ? newStream : mergeStream(stream, newStream);

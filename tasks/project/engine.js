@@ -1,12 +1,11 @@
-///**
-// * Created by Crystian on 3/16/2015.
-// *
-// * This is the engine, it do a lot of magic, intentionally all in the same file.
-// * Don't touch or you will dead! ... some day
-// */
-//
-//var gulp = require('gulp'),
-//	aux = require('./magic_auxiliar'),
+/**
+ * Created by Crystian on 3/16/2015.
+ *
+ * This is the engine, it do a lot of magic, intentionally all in the same file.
+ * Don't touch or you will dead! ... some day
+ */
+
+var aux = require('./engine_auxiliar'),
 //	_ = require('lodash'),
 //	utils = require('./utils'),
 //	commons = require('../commons'),
@@ -30,38 +29,38 @@
 //	pngquant = require('imagemin-pngquant'),
 //	cache = require('gulp-cache'),
 //	manifest = require('gulp-manifest'),
-//	gutil = require('gulp-util');
-//
-//var defaults = {
-//	file: {
-//		'file': 'file.css',		//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
-//		'active': 'true',		//it will eval this field
-//		'path': 'www',			//it can be a statement, and it will be evaluated
-//		//'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
-//		'linter': true,			//if you want to lint, will not apply for libraries
-//		'autoPrefix': true,		//auto prefix when source is active
-//		'overwrite': true,		//specially for libs, just make it once
-//		'minificated': false,	//if it is a lib for don't re do the minifcation
-//		'makeMin': false,		//it should be create a minificate version
-//		'genSprite': true,		//generate sprite
-//		'ignore': false,		//ignore on dev time, request by request
-//		'replaces': {
-//			'original': {		//modificate orginal version
-//				'normal': [],
-//				'min': []
-//			},
-//			'pre': [			//pre minificatedd
-//				//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
-//			],
-//			'post': [			//post minificatedd
-//				//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
-//			]
-//		}
-//	},
-//	validCssExtensions : ['sass', 'scss','less', 'css'],
-//	validExtensions : ['html', 'js']
-//};
-//
+	gutil = require('gulp-util');
+
+var defaults = {
+	file: {
+		//'file': 'file.css',	//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
+		//'active': 'true',		//it will eval this field
+		//'path': 'www',			//it can be a statement, and it will be evaluated
+		////'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
+		//'linter': true,			//if you want to lint, will not apply for libraries
+		//'autoPrefix': true,	//auto prefix when source is active
+		//'overwrite': true,	//specially for libs, just make it once
+		//'minificated': false,//if it is a lib for don't re do the minifcation
+		//'makeMin': false,		//it should be create a minificate version
+		//'genSprite': true,	//generate sprite
+		//'ignore': false,		//ignore on dev time, request by request
+		//'replaces': {
+		//	'original': {			//modificate orginal version
+		//		'normal': [],
+		//		'min': []
+		//	},
+		//	'pre': [					//pre minificatedd
+		//		['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
+			//],
+			//'post': [					//post minificatedd
+			//	['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
+			//]
+		//}
+	}
+	//validCssExtensions: ['sass', 'scss', 'less', 'css'],
+	//validExtensions: ['html', 'js']
+};
+
 //exports.runPreprocessors = function(appsJson) {
 //	return runEachApp(appsJson, runEachPreprocessors);
 //};

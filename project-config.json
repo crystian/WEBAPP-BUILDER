@@ -6,7 +6,7 @@
 		"serve": 9000,
 		"build": 9001,
 		"xapi": 9002,
-		"xnightmare": 9003
+		"nightmare": 9003
 	},
 
 	"autoprefixer": "ie 10|android 4|chrome 32|ff 27|ios 7|opera 19|safari 7",
@@ -107,7 +107,7 @@
 			"bower": "vendors",
 			"build": "build",
 			"temp": "build/.tmp",
-			"xscreens": "build/screens",
+			"screens": "build/screens",
 			"loadings": "loader/loading"
 		},
 
@@ -146,10 +146,10 @@
 			"keyword": "keywords",
 			"author": "autors",
 			"noscript": "<br/>Es una broma? este sitio es una app javascript, indispensable para que funcione, actualiza el navegador o usa otro. Gracias vuelvan prontos! <br/><em>Para mas info: <a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a> : browsers incompatibles.</em><br/><br/>",
-			"xincompatibleByFeatures": "Navegador incompatible (no se encontraron features), por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
-			"xincompatibleByDiag": "Navegador incompatible, por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
-			"xsemiIncompatible": "Navegador no reconocido o con problemas de compatibilidad, la aplicacion funcionara pero es recomendable actualizarlo o usar otro, ver en el F.A.Q. \\nhttp://languagesgym.com/faq",
-			"xfaqLink": "<a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a>",
+			"incompatibleByFeatures": "Navegador incompatible (no se encontraron features), por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
+			"incompatibleByDiag": "Navegador incompatible, por tu seguridad actualizalo o usa otro, ver en F.A.Q.",
+			"semiIncompatible": "Navegador no reconocido o con problemas de compatibilidad, la aplicacion funcionara pero es recomendable actualizarlo o usar otro, ver en el F.A.Q. \\nhttp://languagesgym.com/faq",
+			"faqLink": "<a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a>",
 			"errorRequestFile": "Error leyendo el archivo del servidor, por favor vuelva a intentar mas tarde",
 			"errorTimeoutServer": "Se agoto el tiempo de espera, verifica que tengas internet y este andando bien",
 			"header": [

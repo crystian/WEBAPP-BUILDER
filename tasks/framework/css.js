@@ -15,23 +15,23 @@ var utils        = require('../shared/utils'),
 		StreamQueue  = require('streamqueue'),
 		sass         = require('gulp-sass');
 
-gulp.task('makeCssFinal', ['makeCss', 'removeBuild'], function(){
+gulp.task('_buildCss', ['_makeCss', '_removeBuild'], function(){
 	var cssLoader = [
 		global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/css/loader.css',
 		global.cfg.pathFwk + '/' + global.cfg.loader.folders.loadings + '/' + global.cfg.loader.loading + '/loading.css'
 	];
 
 	return StreamQueue(
-			{objectMode: true},
-			gulp.src(cssLoader)
-					.pipe(utils.debugeame())
-					.pipe(strip({safe: false, block: false})) //remove comments
+		{objectMode: true},
+		gulp.src(cssLoader)
+			.pipe(utils.debugeame())
+			.pipe(strip({safe: false, block: false})) //remove comments
 	)
-			.pipe(concat('/-compiledLoader.css', {newLine: ' '}))
-			.pipe(gulp.dest(global.cfg.pathFwk + '/' + global.cfg.loader.folders.temp));
+		.pipe(concat('/-compiledLoader.css', {newLine: ' '}))
+		.pipe(gulp.dest(global.cfg.pathFwk + '/' + global.cfg.loader.folders.temp));
 });
 
-gulp.task('makeCss', ['cleanCss', 'makeConfig'], function(){
+gulp.task('_makeCss', ['_cleanCss', '_makeConfig'], function(){
 	var src  = global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/**/*.s+(a|c)ss',
 			dest = global.cfg.pathFwk + '/' + global.cfg.loader.folders.www;
 
@@ -50,11 +50,11 @@ gulp.task('makeCss', ['cleanCss', 'makeConfig'], function(){
 		;
 });
 
-gulp.task('watchCss', ['makeCss'], function(){
+gulp.task('_watchCss', ['_makeCss'], function(){
 	return gulp.watch([global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/**/*.s+(a|c)ss'], ['makeCss']);
 });
 
-gulp.task('cleanCss', function(){
+gulp.task('_cleanCss', function(){
 	return del([
 		global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/**/*.css'
 	], {force: true});

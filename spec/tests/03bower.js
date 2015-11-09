@@ -35,7 +35,7 @@ describe("Bower dependencies and more - ", function(){
 		rm('-rf', pathBower);
 		expect(test('-e', pathBower)).toBe(false);
 
-		expect(exec('gulp generatorBower --testMode '+ args, {silent:true}).code).toBe(0);
+		expect(exec('gulp _generatorBower --testMode '+ args, {silent:true}).code).toBe(0);
 
 		expect(test('-e', pathBower)).toBe(true);
 		var bowerFile = utils.readJsonFile(pathBower);
@@ -47,7 +47,7 @@ describe("Bower dependencies and more - ", function(){
 		var pathBower = rootFwk + bowerJson;
 		rm('-rf', pathBower);
 
-		expect(exec('gulp generatorBower --testMode '+ args, {silent:true}).code).toBe(0);
+		expect(exec('gulp _generatorBower --testMode '+ args, {silent:true}).code).toBe(0);
 
 		var bowerFile = utils.readJsonFile(pathBower);
 		expect(bowerFile.dependencies.platform).toBe('1.0.0');
@@ -58,7 +58,7 @@ describe("Bower dependencies and more - ", function(){
 		var pathBower = rootFwk + bowerJson;
 		rm('-rf', pathBower);
 
-		expect(exec('gulp generatorBower --testMode '+ args, {silent:true}).code).toBe(0);
+		expect(exec('gulp _generatorBower --testMode '+ args, {silent:true}).code).toBe(0);
 
 		var bowerFile = utils.readJsonFile(pathBower);
 		expect(bowerFile.dependencies.other).toBe('1.0.0');
@@ -68,14 +68,14 @@ describe("Bower dependencies and more - ", function(){
 		cd('05');
 
 		rm('-rf', configJson);
-		expect(exec('gulp makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
+		expect(exec('gulp _makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
 		var bowerFolder = utils.readJsonFile(configJson).cfg.loader.folders.bower;
 
 		var pathBowerFolder = rootFwk +'/'+ bowerFolder;
 		rm('-rf', pathBowerFolder);
 		expect(test('-e', pathBowerFolder)).toBe(false);
 
-		expect(exec('gulp makeBower --testMode '+ args, {silent:true}).code).toBe(0);
+		expect(exec('gulp _makeBower --testMode '+ args, {silent:true}).code).toBe(0);
 
 		expect(test('-e', pathBowerFolder)).toBe(true);
 	});
@@ -84,12 +84,12 @@ describe("Bower dependencies and more - ", function(){
 		cd('06');
 
 		rm('-rf', configJson);
-		expect(exec('gulp makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
+		expect(exec('gulp _makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
 		var bowerFolder = utils.readJsonFile(configJson).cfg.loader.folders.bower;
 		var pathBowerFolder = rootFwk +'/'+ bowerFolder;
 		rm('-rf', pathBowerFolder);
 
-		expect(exec('gulp makeBower --testMode '+ args, {silent:true}).code).toBe(0);
+		expect(exec('gulp _makeBower --testMode '+ args, {silent:true}).code).toBe(0);
 
 		var platformMin = pathBowerFolder +'/platform/platform.min.js';
 		expect(test('-e', platformMin)).toBe(true);
@@ -105,7 +105,7 @@ describe("Bower dependencies and more - ", function(){
 		cd('07');
 
 		rm('-rf', configJson);
-		expect(exec('gulp makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
+		expect(exec('gulp _makeConfig --testMode '+ args, {silent:true}).code).toBe(0);
 		var bowerFolder = utils.readJsonFile(configJson).cfg.loader.folders.bower,
 				pathBowerFolder = rootFwk +'/'+ bowerFolder;
 		rm('-rf', pathBowerFolder);
@@ -116,7 +116,7 @@ describe("Bower dependencies and more - ", function(){
 				bootstrapCss = bootstrapMin + 'css/bootstrap.other.min.css',
 				bootstrapCssTheme = bootstrapMin + 'css/bootstrap-theme.other.min.css';
 
-		expect(exec('gulp makeBower --testMode '+ args, {silent:true}).code).toBe(0);
+		expect(exec('gulp _makeBower --testMode '+ args, {silent:true}).code).toBe(0);
 
 		expect(test('-e', bootstrapJs)).toBe(true);
 		expect(test('-e', bootstrapNpm)).toBe(true);

@@ -13,7 +13,7 @@ var utils       = require('../shared/utils'),
 		uglify      = require('gulp-uglify'),
 		gutil       = require('gulp-util');
 
-gulp.task('makeJsFinal', ['makeBower', 'removeBuild'], function(){
+gulp.task('_buildJs', ['_makeBower', '_removeBuild'], function(){
 	var www  = global.cfg.pathFwk + '/' + global.cfg.loader.folders.www,
 			libs = utils.normalizePathFwk(global.cfg.varJs),
 			libsMinStream,
