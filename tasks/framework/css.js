@@ -15,7 +15,7 @@ var utils        = require('../shared/utils'),
 		StreamQueue  = require('streamqueue'),
 		sass         = require('gulp-sass');
 
-gulp.task('makeCssFinal', ['makeCss'], function(){
+gulp.task('makeCssFinal', ['makeCss', 'removeBuild'], function(){
 	var cssLoader = [
 		global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/css/loader.css',
 		global.cfg.pathFwk + '/' + global.cfg.loader.folders.loadings + '/' + global.cfg.loader.loading + '/loading.css'

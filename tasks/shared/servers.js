@@ -3,19 +3,16 @@
  */
 
 var webserver = require('gulp-webserver'),
-		//htmlmin   = require('gulp-htmlmin'),
-		//gif       = require('gulp-if'),
-		//strip     = require('gulp-strip-comments'),
-		//commons   = require('../commons'),
-		//exec      = require('child_process').exec,
 		utils     = require('./utils'),
-		//fs        = require('fs-extra'),
 		gutil     = require('gulp-util');
-
 
 gulp.task('serveLoader', function(){
 	return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.serve);
 });
+
+//gulp.task('serveBuild', function(){
+//	return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.build, global.cfg.ip, global.cfg.ports.build);
+//});
 
 //gulp.task('serve:nightmare', function(){
 //	return this.makeServe(global.cfg.folders.template + '/' + global.cfg.loader.folders.build, '', global.cfg.ip, global.cfg.ports.nightmare);

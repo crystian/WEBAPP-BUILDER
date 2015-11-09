@@ -8,7 +8,7 @@ var gutil       = require('gulp-util'),
 		gulp        = require('gulp');
 
 //alias:
-gulp.task('default',	['makeBase']);
+gulp.task('default',	['makeHtmlFinal']);
 //gulp.task('full:loader',['build:loader:full']);
 //gulp.task('config',		['make:config']);
 //gulp.task('test',		['test:loader']);

@@ -3,12 +3,13 @@
  */
 
 var fs        = require('fs-extra'),
+		del          = require('del'),
 		_         = require('lodash'),
 		utils     = require('../shared/utils'),
 		rename    = require('gulp-rename'),
 		cheerio   = require('gulp-cheerio'),
 		replace   = require('gulp-replace'),
-		injectors = require('./injectors'),
+		injector = require('./injector'),
 		inject    = require('gulp-inject'),
 		gutil     = require('gulp-util');
 
@@ -22,7 +23,7 @@ gulp.task('makeBase', ['makeBower', 'makeIndex', 'makeConfig', 'makeCss'], funct
 
 	return gulp.src(global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/' + global.cfg.loader.filesDest.index)
 		.pipe(utils.debugeame())
-		.pipe(injectors.injectContent(loadingHtml, 'loadingHtml'))
+		.pipe(injector.injectContent(loadingHtml, 'loadingHtml'))
 		.pipe(inject(gulp.src(loadingCSS, {read: false}), {name: 'loadingCss', relative: true, removeTags: true}))
 		.pipe(inject(gulp.src(global.cfg.varCss, {read: false}), {name: 'bower', relative: true, removeTags: true}))
 		.pipe(inject(gulp.src(global.cfg.varJs, {read: false}), {name: 'bower', relative: true, removeTags: true}))
@@ -81,7 +82,7 @@ gulp.task('makeConfig', function(cb){
 	//json.showSkeletor = global.cfg.showSkeletor;
 	//json.contentEditable = global.cfg.contentEditable;
 
-	//json.oneRequest = false;//flagOneRequest
+	json.oneRequest = false;//flagOneRequest
 	//json.phantom = false;//flagPhantom
 
 	//json.loader = {
@@ -138,3 +139,6 @@ gulp.task('makeConfig', function(cb){
 		});
 });
 
+gulp.task('removeBuild', function(){
+	return del([global.cfg.pathFwk + '/' + global.cfg.loader.folders.build], {force: true});
+});

@@ -4,12 +4,13 @@
 	"compress": true,
 	"ports": {
 		"serve": 9000,
-		"xbuild": 9001,
+		"build": 9001,
 		"xapi": 9002,
 		"xnightmare": 9003
 	},
 
 	"autoprefixer": "ie 10|android 4|chrome 32|ff 27|ios 7|opera 19|safari 7",
+
 	"xprojectCode": "empty",
 	"xcordova": false,
 	"xforceLibFull": false,
@@ -21,19 +22,6 @@
 	"xAppCacheFileName": ".cache",
 
 	"xrelease": true,
-	"xconsoleError": [
-		"Error unknown",
-		"Error about connection stablished",
-		"Error 404",
-		"Error connection lost, try again",
-		"Command unknown",
-		"undefined",
-		"Null pointer exception",
-		"Error jquery plugin",
-		"Error ferrasca the boilerplate",
-		"Error map not found",
-		"Error in obliteration rast"
-	],
 	"xplatform": {
 		"android": {
 			"keypass": "provisoryKey1",
@@ -46,9 +34,10 @@
 		"name": "app name",
 		"version": "0.0.0",
 		"firstApp": "app",
+		"site": "http://",
 
 		"folders": {
-			"project": "templates/empty",
+			"project": "templates/angular-full",
 			"www": "www",
 			"xbuild": "build",
 			"xtemp": "build/.tmp",
@@ -83,7 +72,21 @@
 			"installed": false,
 			"xactive": false,
 			"xtoken": "YOUR TOKEN"
-		}
+		},
+
+		"consoleError": [
+			"Error unknown",
+			"Error about connection stablished",
+			"Error 404",
+			"Error connection lost, try again",
+			"Command unknown",
+			"undefined",
+			"Null pointer exception",
+			"Error jquery plugin",
+			"Error ferrasca the boilerplate",
+			"Error map not found",
+			"Error in obliteration rast"
+		]
 	},
 
 
@@ -103,7 +106,7 @@
 		"folders": {
 			"www": "loader",
 			"bower": "vendors",
-			"xbuild": "build",
+			"build": "build",
 			"temp": "build/.tmp",
 			"xscreens": "build/screens",
 			"loadings": "loader/loading"
@@ -137,6 +140,7 @@
 				"generate-js": true
 			}
 		},
+
 		"text": {
 			"title": "Title",
 			"description": "Description",
@@ -149,19 +153,19 @@
 			"xfaqLink": "<a href=\"http://languagesgym.com/faq\">http://languagesgym.com/faq</a>",
 			"xerrorRequestFile": "Error leyendo el archivo del servidor, por favor vuelva a intentar mas tarde",
 			"xerrorTimeoutServer": "Se agoto el tiempo de espera, verifica que tengas internet y este andando bien",
-			"xheader": [
+			"header": [
 				"<!--",
 				"<%=name%>",
 				"<%=site%>",
 				"<%=date%> (<%=version%>)",
 				"",
 				"Power by Javascript community!, Magic by Crystian",
-				"Copyright (c) 2015, @Crystian (Cristian Bietti) @crystian",
+				"Copyright (c) 2015, @Crystian (Cristian Bietti)",
 				"-->",
 				"",
 				""
 			],
-			"xfooter": [
+			"footer": [
 				"",
 				"",
 				"<!--'... Your future is whatever you make it. So make it a good one!' - Doc Brown to Marty McFly, BTTF (1990)-->"
