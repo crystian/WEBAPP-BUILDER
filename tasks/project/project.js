@@ -1,17 +1,16 @@
-///**
-// * Created by Crystian on 4/13/2015.
-// */
-//
-//var gulp = require('gulp'),
-//	magic = require('./magic.js'),
+/**
+ * Created by Crystian on 4/13/2015.
+ */
+
+var	engine = require('./engine.js');
 //	del = require('del'),
 //	shared = require('./shared.js'),
 //	gutil = require('gulp-util');
-//
+
 //require('./cordova.js');
-//
-//////Alias
-//gulp.task('css',	['css:app']);
+
+//Alias
+gulp.task('css',	['makeCss']);
 //gulp.task('loader',	['get:loader']);
 //gulp.task('a',		['run:android']);
 //
@@ -42,11 +41,11 @@
 //gulp.task('genAppCache', function (){
 //	return magic.genAppCache();
 //});
-//
-//gulp.task('css:app', function (){
-//	return magic.runPreprocessors(global.cfg.folders.www +'/apps.json');
-//});
-//
+
+gulp.task('makeCss', function (){
+	return engine.runPreprocessors(global.cfg.pathFwk + global.cfg.folders.www +'/apps.json');
+});
+
 ////watches
 //gulp.task('cssw', function() {
 //	gulp.watch([global.cfg.folders.www + '/**/*.scss'], ['css:app']);

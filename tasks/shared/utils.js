@@ -5,6 +5,7 @@
 // share with app
 
 var chalk   = require('chalk'),
+		_       = require('lodash'),
 		path    = require('path'),
 		fs      = require('fs'),
 		debug   = require('gulp-debug'),
@@ -40,8 +41,19 @@ exports.fileExist = function(fileName){
 
 exports.normalizePathFwk = function(collection){
 	return collection.map(function(_item){
-		return global.cfg.pathFwk + '/' + _item;
+		return global.cfg.pathFwk + _item;
 	});
+};
+
+exports.addSlash = function(dictionary){
+	var arr = Object.keys(dictionary),
+			r   = {};
+
+	_.forEach(arr, function(key){
+		r[key] = dictionary[key] + '/';
+	});
+
+	return r;
 };
 
 //exports.getExtensionFile = function(s) {

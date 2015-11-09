@@ -13,18 +13,6 @@
 //	cb);
 //});
 
-//gulp.task('build:loader:full', ['make:base'], function (cb) {
-//	runSequence(
-//		'build:loader',
-//		cb);
-//});
-//
-//gulp.task('make:base', ['remove:loader:build'], function (cb) {
-//	runSequence(
-//		'make:base:index',
-//		cb);
-//});
-//
 //gulp.task('release', function (cb) {
 //	if (!global.cfg.loader.release) {
 //		console.logRed('Variable "release" in project-config on "false", you will change it if you want a release');

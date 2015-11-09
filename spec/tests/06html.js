@@ -8,14 +8,14 @@ var utils = require('../../tasks/shared/utils'),
 var args = process.argv.slice(2).join();
 require('shelljs/global');
 
-var testFolder = 'spec/fixture/06html',
-		rootFwk    = '../../../..',
-		pathLoader = '/loader',
-		index      = '/index.html',
-		indexCordova      = '/index-cordova.html',
-		configJson = 'config.json',
-		indexFile  = rootFwk + pathLoader + index,
-		indexFileCordova  = rootFwk + pathLoader + indexCordova;
+var testFolder       = 'spec/fixture/06html',
+		rootFwk          = '../../../..',
+		pathLoader       = '/loader',
+		index            = '/index.html',
+		indexCordova     = '/index-cordova.html',
+		configJson       = 'config.json',
+		indexFile        = rootFwk + pathLoader + index,
+		indexFileCordova = rootFwk + pathLoader + indexCordova;
 
 describe("Index template to index - ", function(){
 
@@ -33,7 +33,7 @@ describe("Index template to index - ", function(){
 		rm('-rf', indexFile);
 		expect(test('-e', indexFile)).toBe(false);
 
-		expect(exec('gulp makeHtmlFinal --testMode ' + args, {silent: true}).code).toBe(0);
+		expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		var build             = utils.readJsonFile(configJson).cfg.loader.folders.build,
 				indexFileCompiled = rootFwk + '/' + build + index;
@@ -47,7 +47,7 @@ describe("Index template to index - ", function(){
 		rm('-rf', indexFile);
 		expect(test('-e', indexFile)).toBe(false);
 
-		expect(exec('gulp makeHtmlFinal --testMode ' + args, {silent: true}).code).toBe(0);
+		expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		var build             = utils.readJsonFile(configJson).cfg.loader.folders.build,
 				indexFileCompiled = rootFwk + '/' + build + index;
@@ -55,7 +55,7 @@ describe("Index template to index - ", function(){
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
 		var file = fs.statSync(indexFileCompiled);
-		expect(file.size).toBeLessThan(66000);
+		expect(file.size).toBeLessThan(68000);
 		expect(file.size).toBeGreaterThan(65000);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
@@ -74,7 +74,7 @@ describe("Index template to index - ", function(){
 		rm('-rf', indexFile);
 		expect(test('-e', indexFile)).toBe(false);
 
-		expect(exec('gulp makeHtmlFinal --testMode ' + args, {silent: true}).code).toBe(0);
+		expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		var build             = utils.readJsonFile(configJson).cfg.loader.folders.build,
 				indexFileCompiled = rootFwk + '/' + build + index;
@@ -82,7 +82,7 @@ describe("Index template to index - ", function(){
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
 		var file = fs.statSync(indexFileCompiled);
-		expect(file.size).toBeLessThan(156000);
+		expect(file.size).toBeLessThan(158000);
 		expect(file.size).toBeGreaterThan(155000);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
@@ -101,7 +101,7 @@ describe("Index template to index - ", function(){
 		rm('-rf', indexFileCordova);
 		expect(test('-e', indexFileCordova)).toBe(false);
 
-		expect(exec('gulp makeHtmlFinal --testMode ' + args, {silent: true}).code).toBe(0);
+		expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		var build             = utils.readJsonFile(configJson).cfg.loader.folders.build,
 				indexFileCompiled = rootFwk + '/' + build + indexCordova;
@@ -109,7 +109,7 @@ describe("Index template to index - ", function(){
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
 		var file = fs.statSync(indexFileCompiled);
-		expect(file.size).toBeLessThan(66000);
+		expect(file.size).toBeLessThan(68000);
 		expect(file.size).toBeGreaterThan(65000);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
@@ -123,7 +123,7 @@ describe("Index template to index - ", function(){
 		rm('-rf', indexFileCordova);
 		expect(test('-e', indexFileCordova)).toBe(false);
 
-		expect(exec('gulp makeHtmlFinal --testMode ' + args, {silent: true}).code).toBe(0);
+		expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		var build             = utils.readJsonFile(configJson).cfg.loader.folders.build,
 				indexFileCompiled = rootFwk + '/' + build + indexCordova;
@@ -131,7 +131,7 @@ describe("Index template to index - ", function(){
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
 		var file = fs.statSync(indexFileCompiled);
-		expect(file.size).toBeLessThan(156000);
+		expect(file.size).toBeLessThan(158000);
 		expect(file.size).toBeGreaterThan(155000);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);

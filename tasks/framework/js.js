@@ -13,8 +13,8 @@ var utils       = require('../shared/utils'),
 		uglify      = require('gulp-uglify'),
 		gutil       = require('gulp-util');
 
-gulp.task('makeJsFinal', ['makeBower', 'removeBuild'], function(){
-	var www  = global.cfg.pathFwk + '/' + global.cfg.loader.folders.www,
+gulp.task('_buildJs', ['_makeBower', '_removeBuild'], function(){
+	var www  = global.cfg.pathFwk + global.cfg.loader.folders.www,
 			libs = utils.normalizePathFwk(global.cfg.varJs),
 			libsMinStream,
 			loaderScripts1,
@@ -28,8 +28,8 @@ gulp.task('makeJsFinal', ['makeBower', 'removeBuild'], function(){
 
 	//header script
 	loaderScripts1 = [
-		www + '/config.js',
-		www + '/modules/compatibility.js'
+		www + 'config.js',
+		www + 'modules/compatibility.js'
 	];
 	loaderScripts1Stream = gulp.src(loaderScripts1);
 
@@ -38,26 +38,26 @@ gulp.task('makeJsFinal', ['makeBower', 'removeBuild'], function(){
 
 	//body script
 	loaderScripts2 = [
-		www + '/modules/shortcuts.js',
-		www + '/loader.js',
-		www + '/variables.js',
-		www + '/modules/utils.js',
-		www + '/modules/diag.js',
-		www + '/modules/polyfill-ie.js',
-		www + '/modules/settings.js',
-		www + '/modules/lang.js',
-		www + '/modules/events.js',
-		www + '/modules/redefine.js',
-		www + '/modules/screen.js',
-		www + '/modules/cordovaConnection.js',
-		www + '/modules/analytics.js',
-		www + '/modules/mixpanel.js',
-		www + '/modules/boot.js'
+		www + 'modules/shortcuts.js',
+		www + 'loader.js',
+		www + 'variables.js',
+		www + 'modules/utils.js',
+		www + 'modules/diag.js',
+		www + 'modules/polyfill-ie.js',
+		www + 'modules/settings.js',
+		www + 'modules/lang.js',
+		www + 'modules/events.js',
+		www + 'modules/redefine.js',
+		www + 'modules/screen.js',
+		www + 'modules/cordovaConnection.js',
+		www + 'modules/analytics.js',
+		www + 'modules/mixpanel.js',
+		www + 'modules/boot.js'
 	];
 
 	if(global.cfg.loader.release && gutil.env.forceError){
 		//just for force an error
-		loaderScripts2.push(www + '/modules/jshintTest.js');
+		loaderScripts2.push(www + 'modules/jshintTest.js');
 	}
 
 	loaderScripts2Stream = gulp.src(loaderScripts2)
@@ -69,8 +69,8 @@ gulp.task('makeJsFinal', ['makeBower', 'removeBuild'], function(){
 
 	return streamqueue({objectMode: true}, loaderScripts1Stream, libsMinStream, loaderScripts2Stream)
 		.pipe(utils.debugeame())
-		.pipe(concat('/-compiledLoader.js', {newLine: ';'}))
-		.pipe(gulp.dest(global.cfg.pathFwk + '/' + global.cfg.loader.folders.temp));
+		.pipe(concat('-compiledLoader.js', {newLine: ';'}))
+		.pipe(gulp.dest(global.cfg.pathFwk + global.cfg.loader.folders.temp));
 });
 
 function jsMaker(stream, release){

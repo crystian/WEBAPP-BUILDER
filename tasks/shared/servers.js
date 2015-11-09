@@ -3,10 +3,11 @@
  */
 
 var webserver = require('gulp-webserver'),
+		path      = require('path'),
 		utils     = require('./utils'),
 		gutil     = require('gulp-util');
 
-gulp.task('serveLoader', function(){
+gulp.task('_serve', function(){
 	return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.serve);
 });
 
@@ -14,13 +15,14 @@ gulp.task('serveLoader', function(){
 //	return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.build, global.cfg.ip, global.cfg.ports.build);
 //});
 
-//gulp.task('serve:nightmare', function(){
-//	return this.makeServe(global.cfg.folders.template + '/' + global.cfg.loader.folders.build, '', global.cfg.ip, global.cfg.ports.nightmare);
+//gulp.task('_serveNightmare', function(){
+//	return makeServe(global.cfg.pathFwk +'/'+ global.cfg.loader.folders.build, '', global.cfg.ip, global.cfg.ports.nightmare);
 //});
 
-function makeServe(folder, path, ip, port){
-	path = (path) ? path + '/' : '';
-	console.logGreen('Remember, this is the url: http://' + ip + ':' + port + '/' + path);
+function makeServe(folder, _path, ip, port){
+	_path = (_path) ? _path + '/' : '';
+	console.logGreen('Remember, this is the url: http://' + ip + ':' + port + '/' + _path);
+	console.log('Serving: ', path.resolve(folder));
 
 	return gulp.src(folder)
 		.pipe(utils.debugeame())

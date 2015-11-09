@@ -5,7 +5,7 @@
 var utils       = require('../shared/utils'),
 		injector    = require('./injector'),
 		gif         = require('gulp-if'),
-		rename    = require('gulp-rename'),
+		rename      = require('gulp-rename'),
 		replace     = require('gulp-replace'),
 		htmlreplace = require('gulp-html-replace'),
 		htmlmin     = require('gulp-htmlmin'),
@@ -13,7 +13,7 @@ var utils       = require('../shared/utils'),
 		footer      = require('gulp-footer'),
 		gutil       = require('gulp-util');
 
-gulp.task('makeHtmlFinal', ['makeJsFinal', 'makeCssFinal', 'makeBase'], function(){
+gulp.task('_buildFull', ['_buildJs', '_buildCss', '_makeBase'], function(){
 
 	var htmlminOptions = {
 		removeComments: true,
@@ -23,11 +23,11 @@ gulp.task('makeHtmlFinal', ['makeJsFinal', 'makeCssFinal', 'makeBase'], function
 		removeOptionalTags: false
 	};
 
-	var stream = gulp.src(global.cfg.pathFwk + '/' + global.cfg.loader.folders.www + '/' + global.cfg.loader.filesDest.index)
+	var stream = gulp.src(global.cfg.pathFwk + global.cfg.loader.folders.www + global.cfg.loader.filesDest.index)
 		.pipe(utils.debugeame())
 		.pipe(htmlreplace())
-		.pipe(injector.injectContent(global.cfg.pathFwk + '/' + global.cfg.loader.folders.temp + '/-compiledLoader.css', 'loaderCss', 'style'))
-		.pipe(injector.injectContent(global.cfg.pathFwk + '/' + global.cfg.loader.folders.temp + '/-compiledLoader.js', 'loaderJs', 'script'))
+		.pipe(injector.injectContent(global.cfg.pathFwk + global.cfg.loader.folders.temp + '-compiledLoader.css', 'loaderCss', 'style'))
+		.pipe(injector.injectContent(global.cfg.pathFwk + global.cfg.loader.folders.temp + '-compiledLoader.js', 'loaderJs', 'script'))
 		.pipe(gif(global.cfg.loader.release, htmlmin(htmlminOptions)))
 
 		//header and footers:
@@ -44,20 +44,20 @@ gulp.task('makeHtmlFinal', ['makeJsFinal', 'makeCssFinal', 'makeBase'], function
 			replace('"oneRequest": false', '"oneRequest": true')
 		))
 
-		.pipe(gulp.dest(global.cfg.pathFwk + '/' + global.cfg.loader.folders.build));
+		.pipe(gulp.dest(global.cfg.pathFwk + global.cfg.loader.folders.build));
 
 	if(global.cfg.app.cordova){
 		/*
-		This is ok, because it make another file equals to index but one change,
-		I prefer it than run again all process to make other file
-		*/
+		 This is ok, because it make another file equals to index but one change,
+		 I prefer it than run again all process to make other file
+		 */
 		stream = stream.pipe(rename(global.cfg.loader.filesDest.indexCordova))
 			.pipe(utils.debugeame())
 			.pipe(gif(global.cfg.loader.release,
 				replace(',isCordovaDevice:!1,', ',isCordovaDevice:1,'),
 				replace('"isCordovaDevice": false,', '"isCordovaDevice": true,')
 			))
-			.pipe(gulp.dest(global.cfg.pathFwk + '/' + global.cfg.loader.folders.build));
+			.pipe(gulp.dest(global.cfg.pathFwk + global.cfg.loader.folders.build));
 	}
 
 	return stream;

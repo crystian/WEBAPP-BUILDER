@@ -31,18 +31,18 @@ exports.boot = function(config){
 		var packageJson            = 'package.json',
 				projectConfigFile      = 'project-config.json',
 				projectConfigLocalFile = 'project-config-local.json',
-				pathFwk                = path.resolve(__dirname, '../'),
-				pathPrj                = config.dirname;
+				pathFwk                = path.resolve(__dirname, '../') +'/',
+				pathPrj                = config.dirname +'/';
 
 		//merge between default and specify:
 		global.cfg = _.merge(
-			require(pathFwk + '/' + projectConfigFile), //shoud be exist!
-			utils.fileExist(pathFwk + '/' + projectConfigLocalFile) ? require(pathFwk + '/' + projectConfigLocalFile) : {},
-			utils.fileExist(pathPrj + '/' + projectConfigFile) ? require(pathPrj + '/' + projectConfigFile) : {},
-			utils.fileExist(pathPrj + '/' + projectConfigLocalFile) ? require(pathPrj + '/' + projectConfigLocalFile) : {}
+			require(pathFwk + projectConfigFile), //shoud be exist!
+			utils.fileExist(pathFwk + projectConfigLocalFile) ? require(pathFwk + projectConfigLocalFile) : {},
+			utils.fileExist(pathPrj + projectConfigFile) ? require(pathPrj + projectConfigFile) : {},
+			utils.fileExist(pathPrj + projectConfigLocalFile) ? require(pathPrj + projectConfigLocalFile) : {}
 		);
 
-		global.cfg.pkg = require(pathPrj + '/' + packageJson);
+		global.cfg.pkg = require(pathPrj + packageJson);
 		global.cfg.fromFwk = false;
 		global.cfg.offline = !!(gutil.env.offline);
 
@@ -56,6 +56,9 @@ exports.boot = function(config){
 		}
 
 		global.cfg.pathFwk = pathFwk;
+		global.cfg.loader.folders = utils.addSlash(global.cfg.loader.folders);
+		global.cfg.app.folders = utils.addSlash(global.cfg.app.folders);
+
 		//global.cfg.loader.folders.relativePathFrom = relativePathFrom;
 		//global.cfg.loader.folders.relativePathTo = relativePathTo;
 		//global.cfg.loader.folders.www = relativePathTo + global.cfg.loader.folders.www;

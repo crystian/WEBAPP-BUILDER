@@ -16,7 +16,7 @@ var utils     = require('../shared/utils.js'),
  esto fue lo mejor que me quedo, luego de varias horas ...
  problemas con syncronismo y argumentos
  */
-gulp.task('makeBower', ['downloadBower'], function(cb){
+gulp.task('_makeBower', ['_downloadBower'], function(cb){
 
 	var i   = 0,
 			len = global.cfg.varLibsToMin.length;
@@ -30,11 +30,11 @@ gulp.task('makeBower', ['downloadBower'], function(cb){
 	for(; i < len; i++){
 		var s = global.cfg.varLibsToMin[i];
 
-		gulp.src(global.cfg.pathFwk + '/' + s.dev)
+		gulp.src(global.cfg.pathFwk + s.dev)
 			.pipe(utils.debugeame())
 			.pipe(gif(s.type === 'js', uglify(), minifycss()))
 			.pipe(rename(s.name))
-			.pipe(gulp.dest(global.cfg.pathFwk + '/' + s.pa))
+			.pipe(gulp.dest(global.cfg.pathFwk + s.pa))
 			.on('finish', function(a, b, c){
 				console.logGreen('Minification of ' + global.cfg.varLibsToMin[global.cfg.varLibsToMinI].name + '...');
 				global.cfg.varLibsToMinI++;
@@ -45,7 +45,7 @@ gulp.task('makeBower', ['downloadBower'], function(cb){
 	}
 });
 
-gulp.task('downloadBower', ['generatorBower'], function(){
+gulp.task('_downloadBower', ['_generatorBower'], function(){
 	return bower(
 		{
 			directory: global.cfg.loader.folders.bower,
@@ -54,9 +54,9 @@ gulp.task('downloadBower', ['generatorBower'], function(){
 		});
 });
 
-gulp.task('generatorBower', ['parseBower'], function(cb){
+gulp.task('_generatorBower', ['_parseBower'], function(cb){
 	//update bower.json file
-	fs.writeFile(global.cfg.pathFwk + '/bower.json', JSON.stringify(global.cfg.varBower, null, '\t'), function(err){
+	fs.writeFile(global.cfg.pathFwk + 'bower.json', JSON.stringify(global.cfg.varBower, null, '\t'), function(err){
 		if(err){
 			console.logRed('Error:');
 			console.error(err);
@@ -67,7 +67,7 @@ gulp.task('generatorBower', ['parseBower'], function(cb){
 	});
 });
 
-gulp.task('parseBower', function(cb){
+gulp.task('_parseBower', function(cb){
 	var bower     = Object.keys(global.cfg.loader.bower),
 			ambient   = global.cfg.loader.release ? 'prod' : 'dev',
 			rJs       = [],
@@ -118,7 +118,7 @@ function resolveLibs(item, ambient, libsToMin, collection, type){
 
 	if(item[type + '-' + ambient]){
 		lib = item[type + '-' + ambient].map(function(_item){
-			return global.cfg.loader.folders.bower + '/' + _item;
+			return global.cfg.loader.folders.bower + _item;
 		});
 	}
 
@@ -127,7 +127,7 @@ function resolveLibs(item, ambient, libsToMin, collection, type){
 		if(ambient === 'prod' && item['generate-' + type]){
 
 			var dev = item[type + '-dev'].map(function(_item){
-				return global.cfg.loader.folders.bower + '/' + _item;
+				return global.cfg.loader.folders.bower + _item;
 			});
 
 			lib.forEach(function(element, pos){
