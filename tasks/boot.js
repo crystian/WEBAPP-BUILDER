@@ -55,9 +55,11 @@ exports.boot = function(config){
 			global.cfg.fromFwk = true;
 		}
 
-		global.cfg.pathFwk = pathFwk;
 		global.cfg.loader.folders = utils.addSlash(global.cfg.loader.folders);
 		global.cfg.app.folders = utils.addSlash(global.cfg.app.folders);
+
+		global.cfg.pathFwk = pathFwk;
+		global.cfg.pathPrj = pathFwk + global.cfg.app.folders.project;
 
 		//global.cfg.loader.folders.relativePathFrom = relativePathFrom;
 		//global.cfg.loader.folders.relativePathTo = relativePathTo;

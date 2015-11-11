@@ -43,7 +43,11 @@ gulp.task('css',	['makeCss']);
 //});
 
 gulp.task('makeCss', function (){
-	return engine.runPreprocessors(global.cfg.pathFwk + global.cfg.folders.www +'/apps.json');
+	return engine.runPreprocessors('apps.json');
+});
+
+gulp.task('makeJsons', function (){
+	return engine.makeJsons();
 });
 
 ////watches

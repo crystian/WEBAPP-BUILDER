@@ -5,42 +5,45 @@
  * Don't touch or you will dead! ... some day
  */
 
-var aux = require('./engine_auxiliar'),
-//	_ = require('lodash'),
-//	utils = require('./utils'),
-//	commons = require('../commons'),
-//	strip = require('gulp-strip-comments'),
-//	gif = require('gulp-if'),
-//	minifycss = require('gulp-minify-css'),
-//	rename = require('gulp-rename'),
-//	uglify = require('gulp-uglify'),
-//	fs = require('fs-extra'),
-//	StreamQueue = require('streamqueue'),
-//	concat = require('gulp-concat'),
-//	shared = require('./shared'),
-//	sprite = require('gulp-sprite-generator'),
-//	replace = require('gulp-replace'),
-//	sass = require('gulp-sass'),
-//	less = require('gulp-less'),
-//	autoprefixer = require('gulp-autoprefixer'),
-//	csslint = require('gulp-csslint'),
-//	LZString = require('../../vendors/lz-string/libs/lz-string'),
-//	imagemin = require('gulp-imagemin'),
-//	pngquant = require('imagemin-pngquant'),
-//	cache = require('gulp-cache'),
-//	manifest = require('gulp-manifest'),
-	gutil = require('gulp-util');
+var aux   = require('./engine_auxiliar'),
+		_     = require('lodash'),
+		utils = require('../shared/utils'),
+		globby = require('globby'),
+		path  = require('path'),
+		fs  = require('fs'),
+		//	commons = require('../commons'),
+		//	strip = require('gulp-strip-comments'),
+		//	gif = require('gulp-if'),
+		//	minifycss = require('gulp-minify-css'),
+		//	rename = require('gulp-rename'),
+		//	uglify = require('gulp-uglify'),
+		//	fs = require('fs-extra'),
+		//	StreamQueue = require('streamqueue'),
+		//	concat = require('gulp-concat'),
+		//	shared = require('./shared'),
+		//	sprite = require('gulp-sprite-generator'),
+		//	replace = require('gulp-replace'),
+		//	sass = require('gulp-sass'),
+		//	less = require('gulp-less'),
+		//	autoprefixer = require('gulp-autoprefixer'),
+		//	csslint = require('gulp-csslint'),
+		//	LZString = require('../../vendors/lz-string/libs/lz-string'),
+		//	imagemin = require('gulp-imagemin'),
+		//	pngquant = require('imagemin-pngquant'),
+		//	cache = require('gulp-cache'),
+		//	manifest = require('gulp-manifest'),
+		gutil = require('gulp-util');
 
 var defaults = {
 	file: {
-		//'file': 'file.css',	//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
-		//'active': 'true',		//it will eval this field
-		//'path': 'www',			//it can be a statement, and it will be evaluated
+		'files': [],				//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
+		'active': 'true',		//it will eval this field
+		'path': 'www',			//it can be a statement, and it will be evaluated
 		////'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
 		//'linter': true,			//if you want to lint, will not apply for libraries
 		//'autoPrefix': true,	//auto prefix when source is active
 		//'overwrite': true,	//specially for libs, just make it once
-		//'minificated': false,//if it is a lib for don't re do the minifcation
+		'minificated': false	//if it is a lib for don't re do the minifcation
 		//'makeMin': false,		//it should be create a minificate version
 		//'genSprite': true,	//generate sprite
 		//'ignore': false,		//ignore on dev time, request by request
@@ -51,20 +54,38 @@ var defaults = {
 		//	},
 		//	'pre': [					//pre minificatedd
 		//		['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
-			//],
-			//'post': [					//post minificatedd
-			//	['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
-			//]
+		//],
+		//'post': [					//post minificatedd
+		//	['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
+		//]
 		//}
-	}
-	//validCssExtensions: ['sass', 'scss', 'less', 'css'],
+	},
+	validPreproExtensions: ['sass', 'scss', 'less']
 	//validExtensions: ['html', 'js']
 };
+
+exports.makeJsons = function(){
+	var apps = runEachGroup(makeJsons);
+
+	Object.keys(apps).forEach(function(key, index) {
+		fs.writeFile(global.cfg.pathPrj + global.cfg.app.folders.www + key + '/app2.json',
+				JSON.stringify(this[key], null, '\t'),
+			function(err){
+				if(err){
+					console.logRed(err);
+				} else {
+					console.logGreen(key +' generated');
+				}
+			});
+	}, apps);
+
+};
+
 
 //exports.runPreprocessors = function(appsJson) {
 //	return runEachApp(appsJson, runEachPreprocessors);
 //};
-//
+
 //exports.runMagic = function(appsJson, options) {
 //	return runEachApp(appsJson, doMagic, options);
 //};
@@ -109,45 +130,107 @@ var defaults = {
 //exports.clearCache = function (done) {
 //	return cache.clearAll(done);
 //};
+
+/**
+ * run each app and each group from apps.json and app.json sent
+ */
+function runEachGroup(fnEach, options){
+	var _path  = global.cfg.pathPrj + global.cfg.app.folders.www,
+			apps   = require(_path + 'apps.json'),
+			r = [];
+
+	var i = 0,
+			l = apps.length;
+
+	for(; i < l; i++){
+		var jl = j = 0,
+				app = apps[i],
+				groups = require(_path + app + '/app.json');
+
+		jl = groups.length;
+		if(jl===0){continue;}
+
+		r[app] = [];
+
+		for(; j < jl; j++){
+			r[app] = r[app].concat(fnEach(groups[j], _path, options));
+		}
+	}
+
+	return r;
+}
+
+
+function makeJsons(group, _path, options){
+	_path = path.resolve(_path, '../') +'/'+ group.files;
+	var files = globby.sync(_path, {debug: false});
+
+	//console.log(files);
+	var i       = 0,
+			l       = files.length,
+			r = [];
+
+	for(; i < l; i++){
+		r.push(files[i]);
+	}
+
+	//console.log('r',r);
+	return r;
+}
+
+//function runEachFileFromApp(fnEach, url, appName, options){
+//	console.log('>>', url, appName);
 //
-//function runEachApp(appsJson, fnEach, options){
-//	var apps = require(global.cfg.appRoot +'/'+ appsJson).apps,
-//		stream = undefined;
+//	//groups can have serveral files
+//	var group = require(url);
+//	var i       = 0,
+//			l       = group.length,
+//			streams = undefined;
 //
-//	var i = 0,
-//		l = apps.length;
+//	for(; i < l; i++){
+//		var file = _.merge({}, defaults.file, group[i]);
+//		 fnEach(file, options);
+//		streams = aux.mergeStreams(streams, runEachFileFromApp(fnEach, _path + app + '/app.json', app, options));
+//		//console.log('group[i]', group[i]);
+//		//glob.sync
 //
-//	for (; i < l; i++) {
-//		var app = apps[i];
-//		stream = aux.merge(stream, fnEach(global.cfg.folders.www +'/'+ app +'/app.json', app, options));
 //	}
 //
-//	return stream;
+//	return streams;
 //}
-//
-//
+
+
+
 //function runEachPreprocessors(url, appName){
-//	var files = require(global.cfg.appRoot +'/'+ url).files;
-//	var i = 0,
-//		l = files.length,
-//		streams = undefined;
-//
-//	for (; i < l; i++) {
-//		var file =  _.merge({}, defaults.file, files[i]);
-//
-//		if(aux.isNotActive(file) || file.minificated){continue;}
-//
-//		var fileName = utils.getFileName(file.file),
-//			type = utils.getExtensionFile(file.file);
-//
-//		//valid types
-//		if(defaults.validCssExtensions.indexOf(type)===-1){continue;}
-//
-//		file.path = global.cfg.appRoot +'/'+ aux.makePath(file.path);
-//
-//		var source = file.path + '/' + file.file,
-//			finalFileName = file.path + '/' + fileName +'.css';
-//
+	//console.log('>>',url, appName);
+	////archive can have serveral files
+	//var archive = require(global.cfg.pathPrj + url);
+	//var i = 0,
+	//	l = archive.length,
+	//	streams = undefined;
+	//
+	//for (; i < l; i++) {
+	//	var file =  _.merge({}, defaults.file, archive[i]);
+	//
+	//	console.log('archive[i]',archive[i]);
+	//	//glob.sync
+	//
+	//	continue;
+	//
+	//	if(aux.isNotActive(file) || file.minificated){continue;}
+	//
+	//	var fileName = utils.getFileName(file.file),
+	//		type = utils.getExtensionFile(file.file);
+	//
+	//	//valid types
+	//	if(defaults.validCssExtensions.indexOf(type)===-1){continue;}
+	//
+	//	file.path = global.cfg.pathPrj + aux.makePath(file.path) +'/';
+	//
+	//	var source = file.path + file.file,
+	//		finalFileName = file.path + fileName +'.css';
+	//
+	//	console.log('file', source);
 //		//which name have min file?, default: *.min.*
 //		file.min = file.min || utils.setExtensionFilename(file.file, 'min.css');
 //
@@ -205,7 +288,7 @@ var defaults = {
 //
 //	return streams;
 //}
-//
+
 //function doMagic(url, appName, options) {
 //	//console.log(url, appName, options);
 //

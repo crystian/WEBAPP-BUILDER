@@ -1,6 +1,4 @@
-{
-	"apps": [
-		"landing",
-		"app"
-	]
-}
+[
+	"landing",
+	"app"
+]

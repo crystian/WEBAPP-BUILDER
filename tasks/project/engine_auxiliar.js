@@ -3,32 +3,31 @@
  */
 
 
-var
-//	mergeStream = require('merge-stream'),
+var mergeStream = require('merge-stream'),
 //	replace = require('gulp-replace'),
 //    utils = require('./utils'),
 	gutil = require('gulp-util');
-//
-//exports.merge = function(stream, newStream) {
-//	return (stream === undefined) ? newStream : mergeStream(stream, newStream);
-//};
-//
-//exports.isNotActive = function(file) {
-//	//eval, yes, with pleasure! :)
-//	return (!eval(file.active));
-//};
-//
-//exports.makePath = function(path) {
-//	var r = path;
-//	//if fail, it is a string
-//	try {
-//		//eval, yes, with pleasure! :)
-//		r = eval(path);
-//	} catch (e) {
-//	}
-//	return r;
-//};
-//
+
+exports.mergeStreams = function(stream, newStream) {
+	return (stream === undefined) ? newStream : mergeStream(stream, newStream);
+};
+
+exports.isNotActive = function(file) {
+	//eval, yes, with pleasure! :)
+	return (!eval(file.active));
+};
+
+exports.makePath = function(path) {
+	var r = path;
+	//if fail, it is a string
+	try {
+		//eval, yes, with pleasure! :)
+		r = eval(path);
+	} catch (e) {
+	}
+	return r;
+};
+
 ////if it is minificated version, just validate this file, otherwise check the normal version
 ////this is util for Libs without min version
 //exports.fileDestExist = function(file){

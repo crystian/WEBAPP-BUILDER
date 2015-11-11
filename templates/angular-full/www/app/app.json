@@ -1,85 +1,78 @@
-{
-	"files": [
-		{
-			"file": "angular-toastr.css",
-			"path": "vendors/bower_components/angular-toastr/dist",
-			"minificated": true
-		},
-		{
-			"file": "angular.js",
-			"path": "vendors/bower_components/angular",
-			"minificated": true
-		},
-		{
-			"file": "angular-route.js",
-			"path": "vendors/bower_components/angular-route",
-			"minificated": true
-		},
-		{
-			"file": "angular-animate.js",
-			"path": "vendors/bower_components/angular-animate",
-			"minificated": true
-		},
-		{
-			"file": "angular-toastr.tpls.js",
-			"path": "vendors/bower_components/angular-toastr/dist",
-			"minificated": true
-		},{
-			"file": "msgBoldDirective.scss",
-			"path": "www/app/msgBold"
-		},
-		{
-			"file": "app.scss",
-			"path": "www/app",
-			"replaces": {
-				"pre": [
-					["../templates/angular-full/www/app/assets/img/","assets/img/"]
+[
+	{
+		"files": ["vendors/bower_components/angular-toastr/dist/angular-toastr.css"],
+		"minificated": true
+	},
+	{
+		"files": ["vendors/bower_components/angular/angular.js"],
+		"minificated": true
+	},
+	{
+		"files": ["vendors/bower_components/angular-route/angular-route.js"],
+		"minificated": true
+	},
+	{
+		"files": ["vendors/bower_components/angular-animate/angular-animate.js"],
+		"minificated": true
+	},
+	{
+		"files": ["vendors/bower_components/angular-toastr/dist/angular-toastr.tpls.js"],
+		"minificated": true
+	},
+	{
+		"files": ["www/app/msgBold/msgBoldDirective.scss"]
+	},
+	{
+		"files": ["www/app/app.scss"],
+		"replaces": {
+			"pre": [
+				[
+					"../templates/angular-full/www/app/assets/img/",
+					"assets/img/"
 				]
-			}
-		},
-		{
-			"file": "app.js",
-			"path": "www/app",
-			"replaces": {
-				"pre": [
-					["angular.module('templates',[]);//flagTemplates",""]
-				]
-			}
-		},
-		{
-			"file": "mainCtrl.js",
-			"path": "www/app/main"
-		},
-		{
-			"file": "msgBoldDirective.js",
-			"path": "www/app/msgBold"
-		},
-		{
-			"file": "page.js",
-			"path": "www/app/page"
-		},
-		{
-			"file": "dataServices.js",
-			"path": "www/app/data",
-			"replaces": {
-				"pre": [
-					["loader.cfg.appRoot +'/www/app/data/local.json'","'data/local.json'"]
-				]
-			}
-		},
-		{
-			"file": "templates.js",
-			"path": "global.cfg.folders.temp",
-			"ignore": true
-
-		},
-		{
-			"file": "boot.js",
-			"path": "www/app"
-		},
-		{
-			"file": "app.html",
-			"path": "www/app"
+			]
 		}
-	]
-}
+	},
+	{
+		"files": ["www/app/app.js"],
+		"replaces": {
+			"pre": [
+				[
+					"angular.module('templates',[]);//flagTemplates",
+					""
+				]
+			]
+		}
+	},
+	{
+		"files": ["www/app/main/mainCtrl.js"]
+	},
+	{
+		"files": ["www/app/msgBold/msgBoldDirective.js"]
+	},
+	{
+		"files": ["www/app/page/page.js"]
+	},
+	{
+		"files": ["www/app/data/dataServices.js"],
+		"replaces": {
+			"pre": [
+				[
+					"loader.cfg.appRoot +'/www/app/data/local.json'",
+					"'data/local.json'"
+				]
+			]
+		}
+	},
+	{
+		"files": ["templates.js"],
+		"path": "global.cfg.folders.temp",
+		"ignore": true
+	},
+	{
+		"files": ["www/app/boot.js"]
+	},
+	{
+		"files": ["www/app/app.html"]
+	}
+]
