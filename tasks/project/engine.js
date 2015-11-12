@@ -9,6 +9,9 @@ var aux   = require('./engine_auxiliar'),
 		_     = require('lodash'),
 		utils = require('../shared/utils'),
 		globby = require('globby'),
+		through = require('through2'),
+		filenames = require('gulp-filenames'),
+		filelog = require('gulp-filelog'),
 		path  = require('path'),
 		fs  = require('fs'),
 		//	commons = require('../commons'),
@@ -65,22 +68,84 @@ var defaults = {
 };
 
 exports.makeJsons = function(){
-	var apps = runEachGroup(makeJsons);
+	//var apps = runEachGroup(makeJsons);
+	//gulp.src('./templates/angular-full/www/app/*.*').pipe(utils.debugeame()).pipe(gulp.dest('lala'));
+	gulp.src('./templates/angular-full/www/app/*.*')
+			.pipe(utils.debugeame())
+			.pipe(function(){
+					return through.obj(function (file, enc, callback) {
+						console.log('entro?');
+					});
+			})
+			.pipe(gulp.dest('lala'));
 
-	Object.keys(apps).forEach(function(key, index) {
-		fs.writeFile(global.cfg.pathPrj + global.cfg.app.folders.www + key + '/app2.json',
-				JSON.stringify(this[key], null, '\t'),
-			function(err){
-				if(err){
-					console.logRed(err);
-				} else {
-					console.logGreen(key +' generated');
-				}
-			});
-	}, apps);
+	//console.log(filenames.get('aa'));
+	//Object.keys(apps).forEach(function(key, index) {
+	//	fs.writeFile(global.cfg.pathPrj + global.cfg.app.folders.www + key + '/www.json',
+	//			JSON.stringify(this[key], null, '\t'),
+	//		function(err){
+	//			if(err){
+	//				console.logRed(err);
+	//			} else {
+	//				console.logGreen(key +' generated');
+	//			}
+	//		});
+	//}, apps);
 
+	//gulp.src('loader/modules/**.js').pipe()
 };
 
+
+/**
+ * run each app and each group from apps.json and app.json sent
+ */
+function runEachGroup(fnEach, options){
+	var _path  = global.cfg.pathPrj + global.cfg.app.folders.www,
+			apps   = require(_path + 'apps.json'),
+			r = [],
+			streams = undefined;
+
+	var i = 0,
+			l = apps.length;
+
+	for(; i < l; i++){
+		var jl = j = 0,
+				app = apps[i],
+				groups = require(_path + app + '/app.json');
+
+		jl = groups.length;
+		if(jl===0){continue;}
+
+		r[app] = [];
+
+		for(; j < jl; j++){
+			streams = aux.mergeStreams(streams, fnEach(gulp.src(groups[j].files), groups[j], _path, options));
+			//runEachFileFromApp(fnEach, _path + app + '/app.json', app, options));
+			//r[app] = r[app].concat(fnEach(groups[j], _path, options));
+		}
+	}
+
+	return r;
+}
+
+
+function makeJsons(stream, group, _path, options){
+	//console.log('g',group.files);
+	return stream.pipe(utils.debugeame()).pipe(filenames('aa')).pipe(gulp.dest('lala'));
+	//var newPath = path.resolve(_path, '../') +'/'+ group.files;
+	//var files = globby.sync(newPath, {debug: false});
+	//
+	//var i       = 0,
+	//		l       = files.length,
+	//		r = [];
+	//
+	//for(; i < l; i++){
+	//	var relative = path.relative(_path, files[i]);
+	//	r.push(relative);
+	//}
+	//
+	//return r;
+}
 
 //exports.runPreprocessors = function(appsJson) {
 //	return runEachApp(appsJson, runEachPreprocessors);
@@ -130,53 +195,6 @@ exports.makeJsons = function(){
 //exports.clearCache = function (done) {
 //	return cache.clearAll(done);
 //};
-
-/**
- * run each app and each group from apps.json and app.json sent
- */
-function runEachGroup(fnEach, options){
-	var _path  = global.cfg.pathPrj + global.cfg.app.folders.www,
-			apps   = require(_path + 'apps.json'),
-			r = [];
-
-	var i = 0,
-			l = apps.length;
-
-	for(; i < l; i++){
-		var jl = j = 0,
-				app = apps[i],
-				groups = require(_path + app + '/app.json');
-
-		jl = groups.length;
-		if(jl===0){continue;}
-
-		r[app] = [];
-
-		for(; j < jl; j++){
-			r[app] = r[app].concat(fnEach(groups[j], _path, options));
-		}
-	}
-
-	return r;
-}
-
-
-function makeJsons(group, _path, options){
-	_path = path.resolve(_path, '../') +'/'+ group.files;
-	var files = globby.sync(_path, {debug: false});
-
-	//console.log(files);
-	var i       = 0,
-			l       = files.length,
-			r = [];
-
-	for(; i < l; i++){
-		r.push(files[i]);
-	}
-
-	//console.log('r',r);
-	return r;
-}
 
 //function runEachFileFromApp(fnEach, url, appName, options){
 //	console.log('>>', url, appName);

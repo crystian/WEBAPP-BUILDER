@@ -8,6 +8,7 @@ var chalk   = require('chalk'),
 		_       = require('lodash'),
 		path    = require('path'),
 		fs      = require('fs'),
+		filelog = require('gulp-filelog'),
 		debug   = require('gulp-debug'),
 		gif     = require('gulp-if'),
 		through = require('through2'),
@@ -91,7 +92,8 @@ exports.getFileName = function(s) {
 
 exports.debugeame = function(){
 	return through.obj()
-		.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
+		.pipe(gif(!!(gutil.env.debug), filelog()))
+		//.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
 		.on('error', gutil.log);
 };
 

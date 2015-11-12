@@ -5,7 +5,7 @@
     <tasks>
       <task>makeJsons</task>
     </tasks>
-    <arguments />
+    <arguments>--debug</arguments>
     <envs />
     <method />
   </configuration>

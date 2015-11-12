@@ -63,5 +63,9 @@
 	"scripts": {
 		"test": "node_modules/.bin/jasmine"
 	},
-	"gitVersion": "6944dcf8ed46b462efdd9b25348a4940b9a179af"
+	"gitVersion": "58e2bdfc143d24ea3d9c0716553328d07d86ff50",
+	"devDependencies": {
+		"gulp-filelog": "^0.4.1",
+		"gulp-filenames": "^2.0.0"
+	}
 }
