@@ -8,9 +8,6 @@ var mergeStream = require('merge-stream'),
 //    utils = require('./utils'),
 	gutil = require('gulp-util');
 
-exports.mergeStreams = function(stream, newStream) {
-	return (stream === undefined) ? newStream : mergeStream(stream, newStream);
-};
 
 exports.isNotActive = function(file) {
 	//eval, yes, with pleasure! :)
@@ -28,6 +25,15 @@ exports.makePath = function(path) {
 	return r;
 };
 
+
+
+
+//----------
+
+
+//exports.mergeStreams = function(stream, newStream) {
+//	return (stream === undefined) ? newStream : mergeStream(stream, newStream);
+//};
 ////if it is minificated version, just validate this file, otherwise check the normal version
 ////this is util for Libs without min version
 //exports.fileDestExist = function(file){

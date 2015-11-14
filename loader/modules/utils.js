@@ -114,41 +114,18 @@ loader.utils = (function(){
 		}
 
 		console.info('multiple request!');
-		var path = '../' + loader.cfg.folders.project + '/' + loader.cfg.folders.www + '/' + appName + '/';
+		var path = '../' + loader.cfg.folders.project + loader.cfg.folders.www + appName + '/';
 
-		return requestJson(path + 'app.json').then(function(data){
-			data = data.files;
+		return requestJson(path + 'www.json').then(function(data){
 
 			var i    = 0,
 					l    = data.length,
-					type = '',
 					urls = [];
 
 			for(; i < l; i++){
 				var file = data[i];
-				if(file.ignore){continue;}
 
-				type = getExtensionFile(file.file);
-
-				switch (type){
-					case 'scss':
-					case 'sass':
-					case 'less':
-					case 'css':
-						type = 'css';
-						console.log('css detected');
-						break;
-					case 'js':
-					case 'html':
-						console.log('js or html detected');
-						break;
-					default:
-						console.error('Error, type not found');
-						loadAppFail();
-						break;
-				}
-
-				urls.push('../'+ loader.cfg.folders.project + '/' + file.path + '/' + setExtensionFilename(file.file, type));
+				urls.push('../'+ loader.cfg.folders.project + loader.cfg.folders.www + file);
 			}
 
 			return requestMultipleSync(urls, {appName: appName}).then(loadAppSuccess);

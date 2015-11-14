@@ -2,15 +2,25 @@
  * Created by Crystian on 4/13/2015.
  */
 
-var	engine = require('./engine.js');
+var	engine = require('./engine/main.js');
+
+//Alias
+gulp.task('css',	['makeCss']);
+
+gulp.task('makeWwwJson', function (){
+	return engine.makeWwwJson();
+});
+
+
+//---
+
 //	del = require('del'),
 //	shared = require('./shared.js'),
 //	gutil = require('gulp-util');
 
 //require('./cordova.js');
 
-//Alias
-gulp.task('css',	['makeCss']);
+
 //gulp.task('loader',	['get:loader']);
 //gulp.task('a',		['run:android']);
 //
@@ -41,14 +51,11 @@ gulp.task('css',	['makeCss']);
 //gulp.task('genAppCache', function (){
 //	return magic.genAppCache();
 //});
+//
+//gulp.task('makeCss', function (){
+//	return engine.runPreprocessors('apps.json');
+//});
 
-gulp.task('makeCss', function (){
-	return engine.runPreprocessors('apps.json');
-});
-
-gulp.task('makeJsons', function (){
-	return engine.makeJsons();
-});
 
 ////watches
 //gulp.task('cssw', function() {

@@ -4,134 +4,130 @@
  * This is the engine, it do a lot of magic, intentionally all in the same file.
  * Don't touch or you will dead! ... some day
  */
+(function(){
+	'use strict';
 
-var aux   = require('./engine_auxiliar'),
-		_     = require('lodash'),
-		utils = require('../shared/utils'),
-		globby = require('globby'),
-		through = require('through2'),
-		filenames = require('gulp-filenames'),
-		filelog = require('gulp-filelog'),
-		path  = require('path'),
-		fs  = require('fs'),
-		//	commons = require('../commons'),
-		//	strip = require('gulp-strip-comments'),
-		//	gif = require('gulp-if'),
-		//	minifycss = require('gulp-minify-css'),
-		//	rename = require('gulp-rename'),
-		//	uglify = require('gulp-uglify'),
-		//	fs = require('fs-extra'),
-		//	StreamQueue = require('streamqueue'),
-		//	concat = require('gulp-concat'),
-		//	shared = require('./shared'),
-		//	sprite = require('gulp-sprite-generator'),
-		//	replace = require('gulp-replace'),
-		//	sass = require('gulp-sass'),
-		//	less = require('gulp-less'),
-		//	autoprefixer = require('gulp-autoprefixer'),
-		//	csslint = require('gulp-csslint'),
-		//	LZString = require('../../vendors/lz-string/libs/lz-string'),
-		//	imagemin = require('gulp-imagemin'),
-		//	pngquant = require('imagemin-pngquant'),
-		//	cache = require('gulp-cache'),
-		//	manifest = require('gulp-manifest'),
-		gutil = require('gulp-util');
+	//libs
+	var	_         = require('lodash'),
+			//path      = require('path'),
+			//fs        = require('fs'),
+			merge2    = require('merge2'),
+			//	commons = require('../commons'),
+			//	strip = require('gulp-strip-comments'),
+			//	gif = require('gulp-if'),
+			//	minifycss = require('gulp-minify-css'),
+			//	rename = require('gulp-rename'),
+			//	uglify = require('gulp-uglify'),
+			//	fs = require('fs-extra'),
+			//	StreamQueue = require('streamqueue'),
+			//	concat = require('gulp-concat'),
+			//	shared = require('./shared'),
+			//	sprite = require('gulp-sprite-generator'),
+			//	replace = require('gulp-replace'),
+			//	sass = require('gulp-sass'),
+			//	less = require('gulp-less'),
+			//	autoprefixer = require('gulp-autoprefixer'),
+			//	csslint = require('gulp-csslint'),
+			//	LZString = require('../../vendors/lz-string/libs/lz-string'),
+			//	imagemin = require('gulp-imagemin'),
+			//	pngquant = require('imagemin-pngquant'),
+			//	cache = require('gulp-cache'),
+			//	manifest = require('gulp-manifest'),
+			gutil     = require('gulp-util');
 
-var defaults = {
-	file: {
-		'files': [],				//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
-		'active': 'true',		//it will eval this field
-		'path': 'www',			//it can be a statement, and it will be evaluated
-		////'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
-		//'linter': true,			//if you want to lint, will not apply for libraries
-		//'autoPrefix': true,	//auto prefix when source is active
-		//'overwrite': true,	//specially for libs, just make it once
-		'minificated': false	//if it is a lib for don't re do the minifcation
-		//'makeMin': false,		//it should be create a minificate version
-		//'genSprite': true,	//generate sprite
-		//'ignore': false,		//ignore on dev time, request by request
-		//'replaces': {
-		//	'original': {			//modificate orginal version
-		//		'normal': [],
-		//		'min': []
-		//	},
-		//	'pre': [					//pre minificatedd
-		//		['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
-		//],
-		//'post': [					//post minificatedd
-		//	['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
-		//]
-		//}
-	},
-	validPreproExtensions: ['sass', 'scss', 'less']
-	//validExtensions: ['html', 'js']
-};
+	//engine libs
+	var utils     = require('../../shared/utils'),
+			aux       = require('./auxiliar'),
+			www       = require('./www');
 
-exports.makeJsons = function(){
-	//var apps = runEachGroup(makeJsons);
-	//gulp.src('./templates/angular-full/www/app/*.*').pipe(utils.debugeame()).pipe(gulp.dest('lala'));
-	gulp.src('./templates/angular-full/www/app/*.*')
-			.pipe(utils.debugeame())
-			.pipe(function(){
-					return through.obj(function (file, enc, callback) {
-						console.log('entro?');
-					});
-			})
-			.pipe(gulp.dest('lala'));
+	//vars
+	var appsJson = 'apps.json',
+			appJson = 'app.json',
 
-	//console.log(filenames.get('aa'));
-	//Object.keys(apps).forEach(function(key, index) {
-	//	fs.writeFile(global.cfg.pathPrj + global.cfg.app.folders.www + key + '/www.json',
-	//			JSON.stringify(this[key], null, '\t'),
-	//		function(err){
-	//			if(err){
-	//				console.logRed(err);
-	//			} else {
-	//				console.logGreen(key +' generated');
-	//			}
-	//		});
-	//}, apps);
+			defaults = {
+				file: {
+					'files': [],				//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
+					'active': 'true',		//it will eval this field
+					'path': 'www',			//it can be a statement, and it will be evaluated
+					////'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
+					//'linter': true,			//if you want to lint, will not apply for libraries
+					//'autoPrefix': true,	//auto prefix when source is active
+					//'overwrite': true,	//specially for libs, just make it once
+					'minificated': false	//if it is a lib for don't re do the minifcation
+					//'makeMin': false,		//it should be create a minificate version
+					//'genSprite': true,	//generate sprite
+					//'ignore': false,		//ignore on dev time, request by request
+					//'replaces': {
+					//	'original': {			//modificate orginal version
+					//		'normal': [],
+					//		'min': []
+					//	},
+					//	'pre': [					//pre minificatedd
+					//		['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
+					//],
+					//'post': [					//post minificatedd
+					//	['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
+					//]
+					//}
+				},
+				validPreproExtensions: ['sass', 'scss', 'less']
+				//validExtensions: ['html', 'js']
+			};
 
-	//gulp.src('loader/modules/**.js').pipe()
-};
+	exports.makeWwwJson = function(){
+		runEachGroupAndApp(www.makeWwwJson);
+	};
 
+	/**
+	 * this method run each app, and after groups from app, you can intercep each app or group
+	 *
+	 * @param fnEachFile()
+	 * @param fnEachApp()
+	 * @param options{}
+	 * @returns {stream}
+	 */
+	function runEachGroupAndApp(fnEachApp, fnEachFile, options){
+		var pth   = global.cfg.pathPrj + global.cfg.app.folders.www,
+				apps    = require(pth + appsJson),
+				streams = merge2(),
+				i       = 0,
+				l       = apps.length;
 
-/**
- * run each app and each group from apps.json and app.json sent
- */
-function runEachGroup(fnEach, options){
-	var _path  = global.cfg.pathPrj + global.cfg.app.folders.www,
-			apps   = require(_path + 'apps.json'),
-			r = [],
-			streams = undefined;
+		for(; i < l; i++){
+			var appName = apps[i],
+					appStream = runEachGroup(fnEachFile, appName, pth, options);
 
-	var i = 0,
-			l = apps.length;
-
-	for(; i < l; i++){
-		var jl = j = 0,
-				app = apps[i],
-				groups = require(_path + app + '/app.json');
-
-		jl = groups.length;
-		if(jl===0){continue;}
-
-		r[app] = [];
-
-		for(; j < jl; j++){
-			streams = aux.mergeStreams(streams, fnEach(gulp.src(groups[j].files), groups[j], _path, options));
-			//runEachFileFromApp(fnEach, _path + app + '/app.json', app, options));
-			//r[app] = r[app].concat(fnEach(groups[j], _path, options));
+			streams.add(fnEachApp ? fnEachApp(appStream, appName, pth, options) : appStream);
 		}
+
+		return streams;
 	}
 
-	return r;
-}
+	/**
+	 * run each app and each file group from apps.json and app.json sent
+	 */
+	function runEachGroup(fnEachFile, appName, pth, options){
+		var streams = merge2(),
+				groups  = require(pth + appName + '/' + appJson),
+				i       = 0,
+				l       = groups.length;
 
+		if(l === 0){
+			return;
+		}
 
-function makeJsons(stream, group, _path, options){
-	//console.log('g',group.files);
-	return stream.pipe(utils.debugeame()).pipe(filenames('aa')).pipe(gulp.dest('lala'));
+		for(; i < l; i++){
+			if(groups[i].ignore){continue;}
+
+			var groupStream = gulp.src(groups[i].files, {cwd: pth + appName});
+			streams.add(fnEachFile ? fnEachFile(groupStream, groups[i], pth, options) : groupStream);
+		}
+
+		return streams;
+	}
+
+}());
+
 	//var newPath = path.resolve(_path, '../') +'/'+ group.files;
 	//var files = globby.sync(newPath, {debug: false});
 	//
@@ -145,7 +141,7 @@ function makeJsons(stream, group, _path, options){
 	//}
 	//
 	//return r;
-}
+//}
 
 //exports.runPreprocessors = function(appsJson) {
 //	return runEachApp(appsJson, runEachPreprocessors);

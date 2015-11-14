@@ -20,7 +20,7 @@ gulp.task('_serve', function(){
 //});
 
 function makeServe(folder, _path, ip, port){
-	_path = (_path) ? _path + '/' : '';
+	//_path = (_path) ? _path : '';
 	console.logGreen('Remember, this is the url: http://' + ip + ':' + port + '/' + _path);
 	console.log('Serving: ', path.resolve(folder));
 

@@ -1,29 +1,82 @@
 [
 	{
-		"files": ["vendors/bower_components/angular-toastr/dist/angular-toastr.css"],
+		"files": ["templates/angular-full/vendors/bower_components/components-font-awesome/css/font-awesome.css"],
+		"minificated": true,
+		"replaces": {
+			"original": {
+				"normal": [
+					[
+						"../fonts/",
+						"../templates/angular-full/vendors/bower_components/components-font-awesome/fonts/"
+					]
+				],
+				"min": [
+					[
+						"../fonts/",
+						"fonts/"
+					]
+				]
+			}
+		}
+	},
+	{
+		"files": ["templates/angular-full/vendors/bower_components/bootstrap/dist/css/bootstrap.css"],
+		"minificated": true,
+		"replaces": {
+			"original": {
+				"normal": [
+					[
+						"../fonts/",
+						"../templates/angular-full/vendors/bower_components/bootstrap/dist/fonts/"
+					]
+				],
+				"min": [
+					[
+						"../fonts/",
+						"fonts/"
+					]
+				]
+			}
+		}
+	},
+	{
+		"files": ["templates/angular-full/vendors/theme/bootstrap-reset.css"],
+		"autoPrefix": false,
+		"linter": false,
+		"makeMin": true,
+		"overwrite": false,
+		"genSprite": false
+	},
+	{
+		"files": ["templates/angular-full/vendors/theme/style.css"],
+		"autoPrefix": false,
+		"linter": false,
+		"makeMin": true,
+		"overwrite": false,
+		"genSprite": false,
+		"replaces": {
+			"pre": [
+				[
+					"../../templates/angular-full/www/assets/",
+					""
+				]
+			]
+		}
+	},
+	{
+		"files": ["templates/angular-full/vendors/theme/style-responsive.css"],
+		"autoPrefix": false,
+		"linter": false,
+		"makeMin": true,
+		"overwrite": false,
+		"genSprite": false
+	},
+	{
+		"files": ["templates/angular-full/vendors/bower_components/swiper/dist/css/swiper.css"],
 		"minificated": true
 	},
 	{
-		"files": ["vendors/bower_components/angular/angular.js"],
-		"minificated": true
-	},
-	{
-		"files": ["vendors/bower_components/angular-route/angular-route.js"],
-		"minificated": true
-	},
-	{
-		"files": ["vendors/bower_components/angular-animate/angular-animate.js"],
-		"minificated": true
-	},
-	{
-		"files": ["vendors/bower_components/angular-toastr/dist/angular-toastr.tpls.js"],
-		"minificated": true
-	},
-	{
-		"files": ["www/app/msgBold/msgBoldDirective.scss"]
-	},
-	{
-		"files": ["www/app/app.scss"],
+		"files": ["templates/angular-full/www/app/landing.scss"],
 		"replaces": {
 			"pre": [
 				[
@@ -34,45 +87,21 @@
 		}
 	},
 	{
-		"files": ["www/app/app.js"],
-		"replaces": {
-			"pre": [
-				[
-					"angular.module('templates',[]);//flagTemplates",
-					""
-				]
-			]
-		}
+		"files": ["templates/angular-full/www/app/landing.html"]
 	},
 	{
-		"files": ["www/app/main/mainCtrl.js"]
+		"files": ["templates/angular-full/vendors/bower_components/jquery/dist/jquery.js"],
+		"minificated": true
 	},
 	{
-		"files": ["www/app/msgBold/msgBoldDirective.js"]
+		"files": ["templates/angular-full/vendors/bower_components/bootstrap/dist/js/bootstrap.js"],
+		"minificated": true
 	},
 	{
-		"files": ["www/app/page/page.js"]
+		"files": ["templates/angular-full/vendors/bower_components/swiper/dist/js/swiper.js"],
+		"minificated": true
 	},
 	{
-		"files": ["www/app/data/dataServices.js"],
-		"replaces": {
-			"pre": [
-				[
-					"loader.cfg.appRoot +'/www/app/data/local.json'",
-					"'data/local.json'"
-				]
-			]
-		}
-	},
-	{
-		"files": ["templates.js"],
-		"path": "global.cfg.folders.temp",
-		"ignore": true
-	},
-	{
-		"files": ["www/app/boot.js"]
-	},
-	{
-		"files": ["www/app/app.html"]
+		"files": ["templates/angular-full/www/app/landing.js"]
 	}
 ]

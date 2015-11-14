@@ -13,12 +13,12 @@ var app = {};
 		app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 			$routeProvider
 				.when('/page/:n', {
-					templateUrl: loader.cfg.appRoot +'/www/app/page/page.tpl.html',
+					templateUrl: loader.cfg.appRoot +'/www/app2/page/page.tpl.html',
 					controller: 'PageCtrl',
 					controllerAs: 'page'
 				})
 				.when('/about', {
-					templateUrl: 'app/about.html',
+					templateUrl: 'app2/about.html',
 					controller: 'AboutCtrl',
 					controllerAs: 'about'
 				}).otherwise({

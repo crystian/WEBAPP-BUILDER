@@ -4,7 +4,7 @@
 
 var utils = require('../../tasks/shared/utils'),
 		fs    = require('fs'),
-		args  = process.argv.slice(2).join();
+		args  = process.argv.slice(2).join(' ');
 
 require('shelljs/global');
 

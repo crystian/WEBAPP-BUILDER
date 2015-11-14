@@ -26,7 +26,7 @@ var landing = (function() {
 
 	function loadApp(){
         loader.show();
-        loader.utils.requestApp('app', function () {
+        loader.utils.requestApp('app2', function () {
             //need it into a function
             appInit();
 

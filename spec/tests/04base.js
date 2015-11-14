@@ -2,7 +2,7 @@
  * Created by Crystian on 01/11/2015.
  */
 var cheerio = require('cheerio');
-var args = process.argv.slice(2).join();
+var args = process.argv.slice(2).join(' ');
 require('shelljs/global');
 
 var testFolder = 'spec/fixture/04base',

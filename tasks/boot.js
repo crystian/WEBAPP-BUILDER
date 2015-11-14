@@ -10,7 +10,9 @@ var utils      = require('./shared/utils.js'),
 		path       = require('path'),
 		gutil      = require('gulp-util');
 
-//require('time-require');
+if(gutil.env.time){
+	require('time-require');
+}
 
 exports.boot = function(config){
 	if(!config.gulp){
@@ -45,24 +47,25 @@ exports.boot = function(config){
 		global.cfg.pkg = require(pathPrj + packageJson);
 		global.cfg.fromFwk = false;
 		global.cfg.offline = !!(gutil.env.offline);
+		global.cfg.pathFwk = pathFwk;
+		global.cfg.pathPrj = pathPrj;
 
 		//reconfigure folders:
 		var relativePathFrom = path.relative(config.dirname, __dirname + '/..') + '/';
-		//var relativePathTo = path.relative(__dirname + '/..', config.dirname) + '/';
+		var relativePathTo = path.relative(__dirname + '/..', config.dirname) + '/';
+
 		if(relativePathFrom === '/'){
-			//relativePathFrom = '';
+			relativePathFrom = '';
 			//relativePathTo = '';
+			global.cfg.pathPrj = pathFwk + global.cfg.app.folders.project +'/';
 			global.cfg.fromFwk = true;
 		}
 
 		global.cfg.loader.folders = utils.addSlash(global.cfg.loader.folders);
 		global.cfg.app.folders = utils.addSlash(global.cfg.app.folders);
 
-		global.cfg.pathFwk = pathFwk;
-		global.cfg.pathPrj = pathFwk + global.cfg.app.folders.project;
-
-		//global.cfg.loader.folders.relativePathFrom = relativePathFrom;
-		//global.cfg.loader.folders.relativePathTo = relativePathTo;
+		global.cfg.loader.folders.relativePathFrom = relativePathFrom;
+		global.cfg.loader.folders.relativePathTo = relativePathTo;
 		//global.cfg.loader.folders.www = relativePathTo + global.cfg.loader.folders.www;
 		//global.cfg.loader.folders.bower = relativePathFrom + global.cfg.loader.folders.bower;
 		//global.cfg.loader.folders.build = relativePathFrom + global.cfg.loader.folders.build;

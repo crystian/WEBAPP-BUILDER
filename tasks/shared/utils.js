@@ -65,18 +65,18 @@ exports.getFileName = function(s) {
 	return path.basename(s, path.extname(s));
 };
 
-//exports.setExtensionFilename = function(s, extension) {
-//	var arr = s.split('.');
-//	if (arr.length <= 1) {
-//		console.logRed('Extension not found!');
-//		return s;
-//	}
-//
-//	arr.pop();
-//	arr.push(extension);
-//
-//	return arr.join('.');
-//};
+exports.setExtensionFilename = function(s, extension) {
+	var arr = s.split('.');
+	if (arr.length <= 1) {
+		console.logRed('Extension not found!');
+		return s;
+	}
+
+	arr.pop();
+	arr.push(extension);
+
+	return arr.join('.');
+};
 //
 //exports.setPreExtensionFilename = function(s, preExtension) {
 //	var arr = s.split('.');
