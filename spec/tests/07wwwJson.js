@@ -18,7 +18,7 @@ var testFolder       = 'spec/fixture/07wwwJson',
 		//indexFileCordova = rootFwk + pathLoader + indexCordova;
 ;
 
-describe("make www.json files - ", function(){
+fdescribe("make www.json files - ", function(){
 
 	beforeEach(function(){
 		cd(testFolder);

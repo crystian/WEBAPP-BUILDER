@@ -12,7 +12,7 @@ exports.makeWwwJson = function(appStream, appName, pth, option){
 	var result = [];
 
 	return appStream
-		//.pipe(utils.debugeame())
+		.pipe(utils.debugeame())
 		.pipe(through.obj(function(file, enc, cb){
 			var filePath = file.path;
 			filePath = path.relative(pth, filePath);

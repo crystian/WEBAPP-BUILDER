@@ -1,40 +1,40 @@
 [
 	{
-		"files": ["templates/angular-full/vendors/bower_components/angular-toastr/dist/angular-toastr.css"],
+		"files": ["../../vendors/bower_components/angular-toastr/dist/angular-toastr.css"],
 		"minificated": true
 	},
 	{
-		"files": ["templates/angular-full/vendors/bower_components/angular/angular.js"],
+		"files": ["../../vendors/bower_components/angular/angular.js"],
 		"minificated": true
 	},
 	{
-		"files": ["templates/angular-full/vendors/bower_components/angular-route/angular-route.js"],
+		"files": ["../../vendors/bower_components/angular-route/angular-route.js"],
 		"minificated": true
 	},
 	{
-		"files": ["templates/angular-full/vendors/bower_components/angular-animate/angular-animate.js"],
+		"files": ["../../vendors/bower_components/angular-animate/angular-animate.js"],
 		"minificated": true
 	},
 	{
-		"files": ["templates/angular-full/vendors/bower_components/angular-toastr/dist/angular-toastr.tpls.js"],
+		"files": ["../../vendors/bower_components/angular-toastr/dist/angular-toastr.tpls.js"],
 		"minificated": true
 	},
 	{
-		"files": ["templates/angular-full/www/app2/msgBold/msgBoldDirective.scss"]
+		"files": ["msgBold/msgBoldDirective.scss"]
 	},
 	{
-		"files": ["templates/angular-full/www/app2/app.scss"],
+		"files": ["app.scss"],
 		"replaces": {
 			"pre": [
 				[
-					"../templates/angular-full/www/app2/assets/img/",
+					"../assets/img/",
 					"assets/img/"
 				]
 			]
 		}
 	},
 	{
-		"files": ["templates/angular-full/www/app2/app.js"],
+		"files": ["app.js"],
 		"replaces": {
 			"pre": [
 				[
@@ -45,16 +45,16 @@
 		}
 	},
 	{
-		"files": ["templates/angular-full/www/app2/main/mainCtrl.js"]
+		"files": ["main/mainCtrl.js"]
 	},
 	{
-		"files": ["templates/angular-full/www/app2/msgBold/msgBoldDirective.js"]
+		"files": ["msgBold/msgBoldDirective.js"]
 	},
 	{
-		"files": ["templates/angular-full/www/app2/page/page.js"]
+		"files": ["page/page.js"]
 	},
 	{
-		"files": ["templates/angular-full/www/app2/data/dataServices.js"],
+		"files": ["data/dataServices.js"],
 		"replaces": {
 			"pre": [
 				[
@@ -65,14 +65,14 @@
 		}
 	},
 	{
-		"files": ["templates/angular-full/templates.js"],
+		"files": ["../../templates.js"],
 		"path": "global.cfg.folders.temp",
 		"ignore": true
 	},
 	{
-		"files": ["templates/angular-full/www/app2/boot.js"]
+		"files": ["boot.js"]
 	},
 	{
-		"files": ["templates/angular-full/www/app2/app.html"]
+		"files": ["app.html"]
 	}
 ]

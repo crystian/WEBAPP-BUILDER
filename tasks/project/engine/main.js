@@ -110,6 +110,7 @@
 		var streams = merge2(),
 				groups  = require(pth + appName + '/' + appJson),
 				i       = 0,
+				_path   = pth + appName,
 				l       = groups.length;
 
 		if(l === 0){
@@ -117,9 +118,10 @@
 		}
 
 		for(; i < l; i++){
-			if(groups[i].ignore){continue;}
-
-			var groupStream = gulp.src(groups[i].files, {cwd: pth + appName});
+			if(groups[i].ignore){
+				continue;
+			}
+			var groupStream = gulp.src(groups[i].files, {cwd: _path});
 			streams.add(fnEachFile ? fnEachFile(groupStream, groups[i], pth, options) : groupStream);
 		}
 

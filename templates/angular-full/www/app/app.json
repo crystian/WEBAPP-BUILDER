@@ -1,13 +1,13 @@
 [
 	{
-		"files": ["templates/angular-full/vendors/bower_components/components-font-awesome/css/font-awesome.css"],
+		"files": ["../../vendors/bower_components/components-font-awesome/css/font-awesome.css"],
 		"minificated": true,
 		"replaces": {
 			"original": {
 				"normal": [
 					[
 						"../fonts/",
-						"../templates/angular-full/vendors/bower_components/components-font-awesome/fonts/"
+						"../../../vendors/bower_components/components-font-awesome/fonts/"
 					]
 				],
 				"min": [
@@ -20,14 +20,14 @@
 		}
 	},
 	{
-		"files": ["templates/angular-full/vendors/bower_components/bootstrap/dist/css/bootstrap.css"],
+		"files": ["../../vendors/bower_components/bootstrap/dist/css/bootstrap.css"],
 		"minificated": true,
 		"replaces": {
 			"original": {
 				"normal": [
 					[
 						"../fonts/",
-						"../templates/angular-full/vendors/bower_components/bootstrap/dist/fonts/"
+						"../../../vendors/bower_components/bootstrap/dist/fonts/"
 					]
 				],
 				"min": [
@@ -40,7 +40,7 @@
 		}
 	},
 	{
-		"files": ["templates/angular-full/vendors/theme/bootstrap-reset.css"],
+		"files": ["../../vendors/theme/bootstrap-reset.css"],
 		"autoPrefix": false,
 		"linter": false,
 		"makeMin": true,
@@ -48,7 +48,7 @@
 		"genSprite": false
 	},
 	{
-		"files": ["templates/angular-full/vendors/theme/style.css"],
+		"files": ["../../vendors/theme/style.css"],
 		"autoPrefix": false,
 		"linter": false,
 		"makeMin": true,
@@ -57,14 +57,14 @@
 		"replaces": {
 			"pre": [
 				[
-					"../../templates/angular-full/www/assets/",
+					"../../../../www/assets/",
 					""
 				]
 			]
 		}
 	},
 	{
-		"files": ["templates/angular-full/vendors/theme/style-responsive.css"],
+		"files": ["../../vendors/theme/style-responsive.css"],
 		"autoPrefix": false,
 		"linter": false,
 		"makeMin": true,
@@ -72,36 +72,36 @@
 		"genSprite": false
 	},
 	{
-		"files": ["templates/angular-full/vendors/bower_components/swiper/dist/css/swiper.css"],
+		"files": ["../../vendors/bower_components/swiper/dist/css/swiper.css"],
 		"minificated": true
 	},
 	{
-		"files": ["templates/angular-full/www/app/landing.scss"],
+		"files": ["landing.scss"],
 		"replaces": {
 			"pre": [
 				[
-					"../templates/angular-full/www/app/assets/img/",
+					"../../../www/app/assets/img/",
 					"assets/img/"
 				]
 			]
 		}
 	},
 	{
-		"files": ["templates/angular-full/www/app/landing.html"]
+		"files": ["landing.html"]
 	},
 	{
-		"files": ["templates/angular-full/vendors/bower_components/jquery/dist/jquery.js"],
+		"files": ["../../vendors/bower_components/jquery/dist/jquery.js"],
 		"minificated": true
 	},
 	{
-		"files": ["templates/angular-full/vendors/bower_components/bootstrap/dist/js/bootstrap.js"],
+		"files": ["../../vendors/bower_components/bootstrap/dist/js/bootstrap.js"],
 		"minificated": true
 	},
 	{
-		"files": ["templates/angular-full/vendors/bower_components/swiper/dist/js/swiper.js"],
+		"files": ["../../vendors/bower_components/swiper/dist/js/swiper.js"],
 		"minificated": true
 	},
 	{
-		"files": ["templates/angular-full/www/app/landing.js"]
+		"files": ["landing.js"]
 	}
 ]
