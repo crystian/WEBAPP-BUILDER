@@ -1,0 +1,23 @@
+[
+	{
+		"files": [
+			"index1.scss"
+		]
+	},
+	{
+		"files": [
+			"index2.less"
+		]
+	},
+	{
+		"files": [
+			"index3.sass"
+		]
+	},
+	{
+		"files": [
+			"index4.css"
+		],
+		"ignore": true
+	}
+]

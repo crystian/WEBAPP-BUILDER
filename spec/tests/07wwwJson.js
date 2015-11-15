@@ -18,7 +18,7 @@ var testFolder       = 'spec/fixture/07wwwJson',
 		//indexFileCordova = rootFwk + pathLoader + indexCordova;
 ;
 
-fdescribe("make www.json files - ", function(){
+describe("make www.json files - ", function(){
 
 	beforeEach(function(){
 		cd(testFolder);
@@ -46,7 +46,7 @@ fdescribe("make www.json files - ", function(){
 		expect(test('-e', w2)).toBe(true);
 	});
 
-	fit('(01) should create index.html', function(){
+	it('(01) should get an item from each file', function(){
 		cd('01');
 
 		var w1 = 'www/app1/www.json',
@@ -55,13 +55,139 @@ fdescribe("make www.json files - ", function(){
 		rm('-rf', w1);
 		rm('-rf', w2);
 
-		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 0}).code).toBe(0);
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		var json1 = utils.readJsonFile(w1);
 		var json2 = utils.readJsonFile(w2);
 
-		expect(json1.length).toBeGreaterThan(0);
-		expect(json2.length).toBeGreaterThan(0);
+		expect(json1.length).toBe(1);
+		expect(json2.length).toBe(1);
+
+		expect(json1[0]).toBe('app1/index.html');
+		expect(json2[0]).toBe('app2/index.html');
+	});
+
+	it('(02) should fail because there are a definition but there are not files', function(){
+		cd('02');
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(1);
+
+	});
+
+	it('(03) should works but doesn\'t append an inexesting file', function(){
+		cd('03');
+
+		var w1 = 'www/app1/www.json';
+
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+
+		expect(json1.length).toBe(0);
+
+	});
+
+	it('(04) should has three items - unique glob', function(){
+		cd('04');
+
+		var w1 = 'www/app1/www.json';
+
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+
+		expect(json1.length).toBe(3);
+
+	});
+
+	it('(05) should has three items - independent', function(){
+		cd('05');
+
+		var w1 = 'www/app1/www.json';
+
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+
+		expect(json1.length).toBe(3);
+
+	});
+
+	it('(07) should rename to css extension', function(){
+		cd('07');
+
+		var w1 = 'www/app1/www.json';
+
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+
+		expect(json1.length).toBe(4);
+		expect(json1[0]).toBe('app1/index1.css');
+		expect(json1[1]).toBe('app1/index2.css');
+		expect(json1[2]).toBe('app1/index3.css');
+		expect(json1[3]).toBe('app1/index4.css');
+	});
+
+	it('(08) should rename to css extension - glob', function(){
+		cd('08');
+
+		var w1 = 'www/app1/www.json';
+
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+
+		expect(json1.length).toBe(4);
+		expect(json1[0]).toBe('app1/index1.css');
+		expect(json1[1]).toBe('app1/index2.css');
+		expect(json1[2]).toBe('app1/index3.css');
+		expect(json1[3]).toBe('app1/index4.css');
+	});
+
+	it('(09) should ignore a file - glob', function(){
+		cd('09');
+
+		var w1 = 'www/app1/www.json';
+
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+
+		expect(json1.length).toBe(3);
+	});
+
+	it('(10) should ignore file by attribute', function(){
+		cd('10');
+
+		var w1 = 'www/app1/www.json';
+
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+
+		expect(json1.length).toBe(3);
+	});
+
+	it('(11) should fail because not recognice extension', function(){
+		cd('11');
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(1);
+
 	});
 
 });
