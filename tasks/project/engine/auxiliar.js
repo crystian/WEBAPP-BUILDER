@@ -2,29 +2,32 @@
  * Created by Crystian on 3/27/2015.
  */
 
+(function(){
+	'use strict';
+/*
+	var
+	//mergeStream = require('merge-stream'),
+	//	replace = require('gulp-replace'),
+	//    utils = require('./utils'),
+	gutil = require('gulp-util');*/
 
-var mergeStream = require('merge-stream'),
-//	replace = require('gulp-replace'),
-//    utils = require('./utils'),
-	gutil = require('gulp-util');
 
-
-exports.isNotActive = function(file) {
-	//eval, yes, with pleasure! :)
-	return (!eval(file.active));
-};
-
-exports.makePath = function(path) {
-	var r = path;
-	//if fail, it is a string
-	try {
+	exports.isNotActive = function(file){
 		//eval, yes, with pleasure! :)
-		r = eval(path);
-	} catch (e) {
-	}
-	return r;
-};
+		return (!eval(file.active));
+	};
 
+	exports.makePath = function(path){
+		var r = path;
+		//if fail, it is a string
+		try {
+			//eval, yes, with pleasure! :)
+			r = eval(path);
+		} catch (e) {
+		}
+		return r;
+	};
+}());
 
 
 

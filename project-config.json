@@ -19,7 +19,6 @@
 	"xcontentEditable": false,
 	"xAppCacheFileName": ".cache",
 
-	"xrelease": true,
 	"xplatform": {
 		"android": {
 			"keypass": "provisoryKey1",
@@ -30,6 +29,7 @@
 	"app": {
 		"name": "app name",
 		"version": "0.0.0",
+		"release": true,
 		"firstApp": "app",
 		"site": "http://",
 		"cordova": false,

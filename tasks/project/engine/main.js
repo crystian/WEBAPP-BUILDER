@@ -8,10 +8,10 @@
 	'use strict';
 
 	//libs
-	var	_         = require('lodash'),
+	var _      = require('lodash'),
 			//path      = require('path'),
 			//fs        = require('fs'),
-			merge2    = require('merge2'),
+			merge2 = require('merge2'),
 			//	commons = require('../commons'),
 			//	strip = require('gulp-strip-comments'),
 			//	gif = require('gulp-if'),
@@ -33,30 +33,31 @@
 			//	pngquant = require('imagemin-pngquant'),
 			//	cache = require('gulp-cache'),
 			//	manifest = require('gulp-manifest'),
-			gutil     = require('gulp-util');
+			gutil  = require('gulp-util');
 
 	//engine libs
-	var utils     = require('../../shared/utils'),
-			aux       = require('./auxiliar'),
-			www       = require('./www');
+	var utils = require('../../shared/utils'),
+			aux   = require('./auxiliar'),
+			www   = require('./www'),
+			prepro   = require('./preprocessors');
 
 	//vars
 	var appsJson = 'apps.json',
-			appJson = 'app.json',
+			appJson  = 'app.json';
 
-			defaults = {
+	var defaults = exports.defaults = {
 				file: {
 					'files': [],				//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
-					'active': 'true',		//it will eval this field
+					'active': 'true',		//it will eval this field, for temp use
 					'path': 'www',			//it can be a statement, and it will be evaluated
 					////'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
 					//'linter': true,			//if you want to lint, will not apply for libraries
 					//'autoPrefix': true,	//auto prefix when source is active
 					//'overwrite': true,	//specially for libs, just make it once
-					'minificated': false	//if it is a lib for don't re do the minifcation
+					'minificated': false,	//if it is a lib for don't re do the minifcation
 					//'makeMin': false,		//it should be create a minificate version
 					//'genSprite': true,	//generate sprite
-					//'ignore': false,		//ignore on dev time, request by request
+					'ignoreOnRelease': false		//ignore on dev time, request by request
 					//'replaces': {
 					//	'original': {			//modificate orginal version
 					//		'normal': [],
@@ -75,7 +76,11 @@
 			};
 
 	exports.makeWwwJson = function(){
-		runEachGroupAndApp(www.makeWwwJson);
+		return runEachGroupAndApp(www.makeWwwJson);
+	};
+
+	exports.runPreprocessors = function() {
+		return runEachGroupAndApp(null, prepro.runPreprocessors);
 	};
 
 	/**
@@ -87,14 +92,14 @@
 	 * @returns {stream}
 	 */
 	function runEachGroupAndApp(fnEachApp, fnEachFile, options){
-		var pth   = global.cfg.pathPrj + global.cfg.app.folders.www,
+		var pth     = global.cfg.pathPrj + global.cfg.app.folders.www,
 				apps    = require(pth + appsJson),
 				streams = merge2(),
 				i       = 0,
 				l       = apps.length;
 
 		for(; i < l; i++){
-			var appName = apps[i],
+			var appName   = apps[i],
 					appStream = runEachGroup(fnEachFile, appName, pth, options);
 
 			streams.add(fnEachApp ? fnEachApp(appStream, appName, pth, options) : appStream);
@@ -116,13 +121,14 @@
 		if(l === 0){
 			return;
 		}
-
 		for(; i < l; i++){
-			if(groups[i].ignore){
+			var group = _.merge({}, defaults.file, groups[i]);
+
+			if(aux.isNotActive(group) || (global.cfg.app.release && groups[i].ignoreOnRelease)){
 				continue;
 			}
-			var groupStream = gulp.src(groups[i].files, {cwd: _path});
-			streams.add(fnEachFile ? fnEachFile(groupStream, groups[i], pth, options) : groupStream);
+			var groupStream = gulp.src(group.files, {cwd: _path});
+			streams.add(fnEachFile ? fnEachFile(groupStream, group, pth, options) : groupStream);
 		}
 
 		return streams;
@@ -193,117 +199,6 @@
 //exports.clearCache = function (done) {
 //	return cache.clearAll(done);
 //};
-
-//function runEachFileFromApp(fnEach, url, appName, options){
-//	console.log('>>', url, appName);
-//
-//	//groups can have serveral files
-//	var group = require(url);
-//	var i       = 0,
-//			l       = group.length,
-//			streams = undefined;
-//
-//	for(; i < l; i++){
-//		var file = _.merge({}, defaults.file, group[i]);
-//		 fnEach(file, options);
-//		streams = aux.mergeStreams(streams, runEachFileFromApp(fnEach, _path + app + '/app.json', app, options));
-//		//console.log('group[i]', group[i]);
-//		//glob.sync
-//
-//	}
-//
-//	return streams;
-//}
-
-
-
-//function runEachPreprocessors(url, appName){
-	//console.log('>>',url, appName);
-	////archive can have serveral files
-	//var archive = require(global.cfg.pathPrj + url);
-	//var i = 0,
-	//	l = archive.length,
-	//	streams = undefined;
-	//
-	//for (; i < l; i++) {
-	//	var file =  _.merge({}, defaults.file, archive[i]);
-	//
-	//	console.log('archive[i]',archive[i]);
-	//	//glob.sync
-	//
-	//	continue;
-	//
-	//	if(aux.isNotActive(file) || file.minificated){continue;}
-	//
-	//	var fileName = utils.getFileName(file.file),
-	//		type = utils.getExtensionFile(file.file);
-	//
-	//	//valid types
-	//	if(defaults.validCssExtensions.indexOf(type)===-1){continue;}
-	//
-	//	file.path = global.cfg.pathPrj + aux.makePath(file.path) +'/';
-	//
-	//	var source = file.path + file.file,
-	//		finalFileName = file.path + fileName +'.css';
-	//
-	//	console.log('file', source);
-//		//which name have min file?, default: *.min.*
-//		file.min = file.min || utils.setExtensionFilename(file.file, 'min.css');
-//
-//		if(!utils.fileExist(source)){
-//			console.logRed('File not found: '+ source);
-//			utils.exit(1);
-//		}
-//
-//		//just for detect potentian file exists
-//		file._cssFile = finalFileName;
-//
-//		if( !(global.cfg.release || file.overwrite)
-//			&& (aux.fileDestExist(file)
-//			&& !file.overwrite)) {//for the overwrite = false
-//			//exist, and don't overwrite it
-//			console.log('File found, don\'t overwrite ('+ file.file +')');
-//			continue;
-//		}
-//
-//		var stream = gulp.src(source)
-//			.pipe(commons.debugeame());
-//
-//		switch (type){
-//			case 'scss':
-//			case 'sass':
-//				var sassOptions = {errLogToConsole: true, indentedSyntax: (type === 'sass')};
-//
-//				stream = stream.pipe(sass(sassOptions));
-//				break;
-//			case 'less':
-//				stream = stream.pipe(less());
-//				break;
-//		}
-//
-//		if (file.autoPrefix) {
-//			stream = stream.pipe(autoprefixer(global.cfg.autoprefixer))
-//				.pipe(replace(' 0px', ' 0'));
-//		}
-//
-//		if (file.linter) {
-//			stream = stream.pipe(csslint('csslintrc.json'))
-//				.pipe(csslint.reporter()).on('error', gutil.log);
-//		}
-//
-//		if(!(file.makeMin && type === 'css')) {
-//			stream = stream.pipe(gulp.dest(file.path));
-//		}
-//
-//		if(file.makeMin){
-//			stream = _minificateAndSave(stream, file, 'css')
-//		}
-//
-//		streams = aux.merge(streams, stream);
-//	}
-//
-//	return streams;
-//}
 
 //function doMagic(url, appName, options) {
 //	//console.log(url, appName, options);

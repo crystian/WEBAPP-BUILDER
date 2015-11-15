@@ -3,7 +3,7 @@
     <node-options />
     <gulpfile>$PROJECT_DIR$/templates/angular-full/gulpfile.js</gulpfile>
     <tasks>
-      <task>makeJsons</task>
+      <task>css</task>
     </tasks>
     <arguments>--debug</arguments>
     <envs />

@@ -12,7 +12,8 @@
 	{
 		"files": [
 			"index3.sass"
-		]
+		],
+		"ignoreOnRelease": true
 	},
 	{
 		"files": [

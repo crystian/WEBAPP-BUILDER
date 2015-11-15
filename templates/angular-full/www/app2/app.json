@@ -67,7 +67,7 @@
 	{
 		"files": ["../../templates.js"],
 		"path": "global.cfg.folders.temp",
-		"ignore": true
+		"ignoreOnRelease": true
 	},
 	{
 		"files": ["boot.js"]

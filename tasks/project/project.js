@@ -11,6 +11,10 @@ gulp.task('makeWwwJson', function (){
 	return engine.makeWwwJson();
 });
 
+gulp.task('css', function (){
+	return engine.runPreprocessors();
+});
+
 
 //---
 
@@ -61,17 +65,6 @@ gulp.task('makeWwwJson', function (){
 //gulp.task('cssw', function() {
 //	gulp.watch([global.cfg.folders.www + '/**/*.scss'], ['css:app']);
 //});
-//
-//gulp.task('nothing', function (){/*just for dummy*/});
-//
-////servers
-//gulp.task('serve', ['full:app'], function() {
-//	return shared.makeServe(global.cfg.folderRoot +'/', 'loader', global.cfg.ip, global.cfg.ports.serve);
-//});
-//gulp.task('serve:build', ['full:app'], function() {
-//	return shared.makeServe(global.cfg.folders.build, '', global.cfg.ip, global.cfg.ports.build);
-//});
-//
 //
 ////cleaning and others
 //gulp.task('remove:build', function() {

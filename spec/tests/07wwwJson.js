@@ -190,4 +190,17 @@ fdescribe("make www.json files - ", function(){
 
 	});
 
+	it('(12) should ignore file by ignoreOnRelease on release mode', function(){
+		cd('12');
+
+		var w1 = 'www/app1/www.json';
+
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+
+		expect(json1.length).toBe(2);
+	});
 });

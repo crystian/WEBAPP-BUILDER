@@ -52,7 +52,7 @@ exports.boot = function(config){
 
 		//reconfigure folders:
 		var relativePathFrom = path.relative(config.dirname, __dirname + '/..') + '/';
-		var relativePathTo = path.relative(__dirname + '/..', config.dirname) + '/';
+		//var relativePathTo = path.relative(__dirname + '/..', config.dirname) + '/';
 
 		if(relativePathFrom === '/'){
 			relativePathFrom = '';
@@ -64,8 +64,8 @@ exports.boot = function(config){
 		global.cfg.loader.folders = utils.addSlash(global.cfg.loader.folders);
 		global.cfg.app.folders = utils.addSlash(global.cfg.app.folders);
 
-		global.cfg.loader.folders.relativePathFrom = relativePathFrom;
-		global.cfg.loader.folders.relativePathTo = relativePathTo;
+		//global.cfg.loader.folders.relativePathFrom = relativePathFrom;
+		//global.cfg.loader.folders.relativePathTo = relativePathTo;
 		//global.cfg.loader.folders.www = relativePathTo + global.cfg.loader.folders.www;
 		//global.cfg.loader.folders.bower = relativePathFrom + global.cfg.loader.folders.bower;
 		//global.cfg.loader.folders.build = relativePathFrom + global.cfg.loader.folders.build;
@@ -80,7 +80,7 @@ exports.boot = function(config){
 	}
 	//validations of compatibilities of configs
 	if(global.cfg.compress && !global.cfg.loader.bower['lz-string']){
-		console.logRed('LOADER: Compress option active, but library lz-string not present');
+		console.logRed('LOADER: Compress option is active, but library lz-string not present');
 		utils.exit(1);
 	}
 	if(!global.cfg.loader.bower['es6-promise'] || !global.cfg.loader.bower['platform']){
