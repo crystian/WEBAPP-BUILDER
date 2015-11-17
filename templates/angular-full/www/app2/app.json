@@ -65,8 +65,7 @@
 		}
 	},
 	{
-		"files": ["../../templates.js"],
-		"path": "global.cfg.folders.temp",
+		"files": ["templates.js"],
 		"ignoreOnRelease": true
 	},
 	{

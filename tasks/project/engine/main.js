@@ -49,16 +49,17 @@
 	var defaults = exports.defaults = {
 				file: {
 					'files': [],				//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
-					'active': 'true',		//it will eval this field, for temp use
-					'path': 'www',			//it can be a statement, and it will be evaluated
-					////'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
+					'overwrite': true,	//specially for libs, just make it once
+					'ignoreOnRelease': false,	//ignore on dev time, request by request
+					'active': 'true'		//it will eval this field, for temp use
+
+					//'path': 'www',			//it can be a variable on global.cfg to be evaluated
+					//'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
 					//'linter': true,			//if you want to lint, will not apply for libraries
 					//'autoPrefix': true,	//auto prefix when source is active
-					//'overwrite': true,	//specially for libs, just make it once
-					'minificated': false,	//if it is a lib for don't re do the minifcation
-					//'makeMin': false,		//it should be create a minificate version
+					//'minificated': false,	//if it is a lib for don't re do the minifcation
+					//'makeMin': false		//it should be create a minificate version
 					//'genSprite': true,	//generate sprite
-					'ignoreOnRelease': false		//ignore on dev time, request by request
 					//'replaces': {
 					//	'original': {			//modificate orginal version
 					//		'normal': [],
@@ -128,6 +129,7 @@
 			if(aux.isNotActive(group) || (global.cfg.app.release && groups[i].ignoreOnRelease)){
 				continue;
 			}
+
 			var groupStream = gulp.src(group.files, {cwd: _path})
 					.pipe(filesRequired())
 					.on('error', function(e){

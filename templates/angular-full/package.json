@@ -8,5 +8,5 @@
 		"gulp-angular-templatecache": "^1.8.0",
 		"restify": "^3.0.3"
 	},
-	"gitVersion": "3d89a7cfc191867646be802b593f9b8e024128cb"
+	"gitVersion": "65d0bf3b4c96f4024537d414f4a50a8c258e6b54"
 }

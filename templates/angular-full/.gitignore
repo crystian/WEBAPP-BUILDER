@@ -3,4 +3,5 @@
 /project-config-local.json
 /node_modules
 /www/**/*.css
+/www/app2/templates.js
 www.json

@@ -21,16 +21,29 @@
 			var fileName = utils.getFileName(file),
 				type = utils.getExtensionFile(file);
 
+			console.log('file', file);
+			console.log('filename: ', fileName);
+			console.log('type: ', type);
+			//console.log('min: ', fileMin);
+
 			//valid types
 			if(main.defaults.validPreproExtensions.indexOf(type)===-1){continue;}
 
-			console.log('filename: ', fileName);
-			console.log('type: ', type);
+			//which name have min file?, default: *.min.*
+			var fileMin = group.min || fileName + '.min.css';
+
+
+			if(
+					utils.fileExist(group, file)
+			){
+				//!(global.cfg.app.release || group.overwrite)
+				//	&& (aux.fileDestExist(group, file) && !group.overwrite)) {//for the overwrite = false
+				//exist, and don't overwrite it
+				console.log('File found, don\'t overwrite ('+ file +')');
+				continue;
+			}
+
 		}
-
-
-
-
 
 		return groupStream;
 	};
@@ -39,33 +52,13 @@
 
 
 //
-//
-//
-//	file.path = global.cfg.pathPrj + aux.makePath(file.path) +'/';
-//
 //	var source = file.path + file.file,
 //		finalFileName = file.path + fileName +'.css';
-//
-//	console.log('file', source);
-//		//which name have min file?, default: *.min.*
-//		file.min = file.min || utils.setExtensionFilename(file.file, 'min.css');
-//
-//		if(!utils.fileExist(source)){
-//			console.logRed('File not found: '+ source);
-//			utils.exit(1);
-//		}
-//
-//		//just for detect potentian file exists
-//		file._cssFile = finalFileName;
-//
-//		if( !(global.cfg.release || file.overwrite)
-//			&& (aux.fileDestExist(file)
-//			&& !file.overwrite)) {//for the overwrite = false
-//			//exist, and don't overwrite it
-//			console.log('File found, don\'t overwrite ('+ file.file +')');
-//			continue;
-//		}
-//
+
+		//just for detect potentian file exists
+		//file._cssFile = finalFileName;
+
+
 //		var stream = gulp.src(source)
 //			.pipe(commons.debugeame());
 //

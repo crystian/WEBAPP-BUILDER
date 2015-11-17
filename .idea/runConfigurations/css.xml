@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="css" type="js.build_tools.gulp" factoryName="Gulp.js">
     <node-options />
-    <gulpfile>$PROJECT_DIR$/templates/angular-full/gulpfile.js</gulpfile>
+    <gulpfile>$PROJECT_DIR$/spec/fixture/07wwwJson/14/gulpfile.js</gulpfile>
     <tasks>
       <task>css</task>
     </tasks>

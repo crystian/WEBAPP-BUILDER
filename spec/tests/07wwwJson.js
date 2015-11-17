@@ -10,12 +10,6 @@ require('shelljs/global');
 
 var testFolder       = 'spec/fixture/07wwwJson',
 		rootFwk          = '../../../..'
-		//pathLoader       = '/loader',
-		//index            = '/index.html',
-		//indexCordova     = '/index-cordova.html',
-		//configJson       = 'config.json',
-		//indexFile        = rootFwk + pathLoader + index,
-		//indexFileCordova = rootFwk + pathLoader + indexCordova;
 ;
 
 describe("make www.json files - ", function(){
@@ -140,6 +134,24 @@ describe("make www.json files - ", function(){
 		expect(json1[3]).toBe('app1/index4.css');
 	});
 
+	it('(03) should rename to css extension - glob - release = false', function(){
+		cd('03');
+
+		var w1 = 'www/app1/www.json';
+
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+
+		expect(json1.length).toBe(4);
+		expect(json1[0]).toBe('app1/index1.css');
+		expect(json1[1]).toBe('app1/index2.css');
+		expect(json1[2]).toBe('app1/index3.css');
+		expect(json1[3]).toBe('app1/index4.css');
+	});
+
 	it('(09) should ignore a file - glob', function(){
 		cd('09');
 
@@ -195,4 +207,15 @@ describe("make www.json files - ", function(){
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(1);
 
 	});
+
+	it('(14) should not override file', function(){
+		cd('14');
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var file = cat('www/app1/index.scss');
+
+		expect(file).toBe('not overwritten');
+	});
+
 });
