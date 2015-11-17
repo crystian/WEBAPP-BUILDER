@@ -33,6 +33,7 @@
 			//	pngquant = require('imagemin-pngquant'),
 			//	cache = require('gulp-cache'),
 			//	manifest = require('gulp-manifest'),
+			filesRequired = require('gulp-files-required'),
 			gutil  = require('gulp-util');
 
 	//engine libs
@@ -127,29 +128,37 @@
 			if(aux.isNotActive(group) || (global.cfg.app.release && groups[i].ignoreOnRelease)){
 				continue;
 			}
-			var groupStream = gulp.src(group.files, {cwd: _path});
+			var groupStream = gulp.src(group.files, {cwd: _path})
+					.pipe(filesRequired())
+					.on('error', function(e){
+						console.log(e.message);
+						utils.exit(1);
+					});
 			streams.add(fnEachFile ? fnEachFile(groupStream, group, pth, options) : groupStream);
 		}
 
 		return streams;
 	}
 
+
+
 }());
 
-	//var newPath = path.resolve(_path, '../') +'/'+ group.files;
-	//var files = globby.sync(newPath, {debug: false});
-	//
-	//var i       = 0,
-	//		l       = files.length,
-	//		r = [];
-	//
-	//for(; i < l; i++){
-	//	var relative = path.relative(_path, files[i]);
-	//	r.push(relative);
-	//}
-	//
-	//return r;
+//var newPath = path.resolve(_path, '../') +'/'+ group.files;
+//var files = globby.sync(newPath, {debug: false});
+//
+//var i       = 0,
+//		l       = files.length,
+//		r = [];
+//
+//for(; i < l; i++){
+//	var relative = path.relative(_path, files[i]);
+//	r.push(relative);
 //}
+//
+//return r;
+//}
+
 
 //exports.runPreprocessors = function(appsJson) {
 //	return runEachApp(appsJson, runEachPreprocessors);

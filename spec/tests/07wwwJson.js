@@ -18,7 +18,7 @@ var testFolder       = 'spec/fixture/07wwwJson',
 		//indexFileCordova = rootFwk + pathLoader + indexCordova;
 ;
 
-fdescribe("make www.json files - ", function(){
+describe("make www.json files - ", function(){
 
 	beforeEach(function(){
 		cd(testFolder);
@@ -71,21 +71,6 @@ fdescribe("make www.json files - ", function(){
 		cd('02');
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(1);
-
-	});
-
-	it('(03) should works but doesn\'t append an inexesting file', function(){
-		cd('03');
-
-		var w1 = 'www/app1/www.json';
-
-		rm('-rf', w1);
-
-		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
-
-		var json1 = utils.readJsonFile(w1);
-
-		expect(json1.length).toBe(0);
 
 	});
 
@@ -202,5 +187,12 @@ fdescribe("make www.json files - ", function(){
 		var json1 = utils.readJsonFile(w1);
 
 		expect(json1.length).toBe(2);
+	});
+
+	it('(13) should fail because file not found', function(){
+		cd('13');
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(1);
+
 	});
 });
