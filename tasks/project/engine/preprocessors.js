@@ -6,47 +6,78 @@
 
 	var utils   = require('../../shared/utils'),
 			main   = require('./main'),
-		aux    = require('./auxiliar');
+			aux    = require('./auxiliar'),
+			gutil    = require('gulp-util'),
+			through = require('through2');
 
-	exports.runPreprocessors = function(groupStream, group, pth, options){
-		if(group.minificated){return groupStream;}
+	exports.runPreprocessors = function(groupStream, groupConfig, pth, options){
+		if(groupConfig.minificated){return groupStream;}
 
-		//console.log('min: '+group.files);
+		return groupStream
+				.pipe(preprocess(groupConfig))
+				//.pipe(utils.debugeame())
+				.pipe(gulp.dest('.'));
+	};
 
-		var i = 0,
-			l = group.files.length;
+function preprocess(config){
+	if(!config){
+		console.logRed('error: configuration is required');
+		utils.exit(1)
+	}
 
-		for(;i<l;i++){
-			var file = group.files[i];
-			var fileName = utils.getFileName(file),
-				type = utils.getExtensionFile(file);
-
-			console.log('file', file);
-			console.log('filename: ', fileName);
-			console.log('type: ', type);
-			//console.log('min: ', fileMin);
+	return through.obj(function(file, enc, cb) {
+			var fileName = utils.getFileName(file.path),
+				type = utils.getExtensionFile(file.path);
 
 			//valid types
-			if(main.defaults.validPreproExtensions.indexOf(type)===-1){continue;}
+			if(main.defaults.validPreproExtensions.indexOf(type)===-1){return cb(null, file);}
+
 
 			//which name have min file?, default: *.min.*
-			var fileMin = group.min || fileName + '.min.css';
+			var fileMin = config.min || fileName + '.min.css';
 
+			console.log('filename: ', fileName);
+			console.log('type: ', type);
+			console.log('min:', fileMin);
 
-			if(
-					utils.fileExist(group, file)
-			){
-				//!(global.cfg.app.release || group.overwrite)
-				//	&& (aux.fileDestExist(group, file) && !group.overwrite)) {//for the overwrite = false
-				//exist, and don't overwrite it
-				console.log('File found, don\'t overwrite ('+ file +')');
-				continue;
+		var fileName2 = file.base + fileMin;
+		console.log(fileName2);
+		if(utils.fileExist(fileName2) && config.overwrite){
+		//		//!(global.cfg.app.release || groupConfig.overwrite)
+		//		//	&& (aux.fileDestExist(groupConfig, file) && !groupConfig.overwrite)) {//for the overwrite = false
+		//		//exist, and don't overwrite it
+		//		console.log('File found, don\'t overwrite ('+ file +')');
+		//		continue;
+				console.log('A');
+			} else {
+				console.log('B');
 			}
 
-		}
 
-		return groupStream;
-	};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		cb(null, file);
+	});
+}
+
+
 
 }());
 
