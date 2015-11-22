@@ -9,7 +9,9 @@ var args = process.argv.slice(2).join(' ');
 require('shelljs/global');
 
 var testFolder       = 'spec/fixture/07wwwJson',
-		rootFwk          = '../../../..'
+		rootFwk          = '../../../..',
+		w1 = 'www/app1/www.json',
+		w2 = 'www/app2/www.json'
 ;
 
 describe("make www.json files - ", function(){
@@ -25,9 +27,6 @@ describe("make www.json files - ", function(){
 	it('(01) should create www.json', function(){
 		cd('01');
 
-		var w1 = 'www/app1/www.json',
-				w2 = 'www/app2/www.json';
-
 		rm('-rf', w1);
 		rm('-rf', w2);
 
@@ -42,9 +41,6 @@ describe("make www.json files - ", function(){
 
 	it('(01) should get an item from each file', function(){
 		cd('01');
-
-		var w1 = 'www/app1/www.json',
-				w2 = 'www/app2/www.json';
 
 		rm('-rf', w1);
 		rm('-rf', w2);
@@ -71,8 +67,6 @@ describe("make www.json files - ", function(){
 	it('(04) should has three items - unique glob', function(){
 		cd('04');
 
-		var w1 = 'www/app1/www.json';
-
 		rm('-rf', w1);
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
@@ -86,8 +80,6 @@ describe("make www.json files - ", function(){
 	it('(05) should has three items - independent', function(){
 		cd('05');
 
-		var w1 = 'www/app1/www.json';
-
 		rm('-rf', w1);
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
@@ -100,8 +92,6 @@ describe("make www.json files - ", function(){
 
 	it('(07) should rename to css extension', function(){
 		cd('07');
-
-		var w1 = 'www/app1/www.json';
 
 		rm('-rf', w1);
 
@@ -119,8 +109,6 @@ describe("make www.json files - ", function(){
 	it('(08) should rename to css extension - glob', function(){
 		cd('08');
 
-		var w1 = 'www/app1/www.json';
-
 		rm('-rf', w1);
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
@@ -136,8 +124,6 @@ describe("make www.json files - ", function(){
 
 	it('(03) should rename to css extension - glob - release = false', function(){
 		cd('03');
-
-		var w1 = 'www/app1/www.json';
 
 		rm('-rf', w1);
 
@@ -155,8 +141,6 @@ describe("make www.json files - ", function(){
 	it('(09) should ignore a file - glob', function(){
 		cd('09');
 
-		var w1 = 'www/app1/www.json';
-
 		rm('-rf', w1);
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
@@ -168,8 +152,6 @@ describe("make www.json files - ", function(){
 
 	it('(10) should ignore file by attribute', function(){
 		cd('10');
-
-		var w1 = 'www/app1/www.json';
 
 		rm('-rf', w1);
 
@@ -190,8 +172,6 @@ describe("make www.json files - ", function(){
 	it('(12) should ignore file by ignoreOnRelease on release mode', function(){
 		cd('12');
 
-		var w1 = 'www/app1/www.json';
-
 		rm('-rf', w1);
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
@@ -208,14 +188,18 @@ describe("make www.json files - ", function(){
 
 	});
 
-	it('(14) should not override file', function(){
+	it('(14) should works with a complex case', function(){
 		cd('14');
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var file = cat('www/app1/index.scss');
+		var json1 = utils.readJsonFile(w1);
+		expect(json1.length).toBe(4);
 
-		expect(file).toBe('not overwritten');
+		var json2 = utils.readJsonFile(w2);
+		expect(json2.length).toBe(5);
+
+
 	});
 
 });

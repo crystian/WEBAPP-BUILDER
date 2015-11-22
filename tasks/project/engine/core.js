@@ -11,7 +11,8 @@
 	var _      = require('lodash'),
 			//path      = require('path'),
 			//fs        = require('fs'),
-			merge2 = require('merge2'),
+			//merge2 = require('merge2'),
+			globby = require('globby'),
 			//	commons = require('../commons'),
 			//	strip = require('gulp-strip-comments'),
 			//	gif = require('gulp-if'),
@@ -47,7 +48,7 @@
 			appJson  = 'app.json';
 
 	var defaults = exports.defaults = {
-				file: {
+				group: {
 					'files': [],				//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
 					'overwrite': true,	//specially for libs, just make it once
 					'ignoreOnRelease': false,	//ignore on dev time, request by request
@@ -73,12 +74,12 @@
 					//]
 					//}
 				},
-				validPreproExtensions: ['sass', 'scss', 'less']
-				//validExtensions: ['html', 'js']
+				validPreproExtensions: ['sass', 'scss', 'less', 'styl'],
+				validExtensions: ['html', 'js', 'css']
 			};
 
 	exports.makeWwwJson = function(){
-		return runEachGroupAndApp(www.makeWwwJson);
+		return getFilesByGroupAndApps(www.makeWwwJson);
 	};
 
 	exports.runPreprocessors = function() {
@@ -88,58 +89,63 @@
 	/**
 	 * this method run each app, and after groups from app, you can intercep each app or group
 	 *
-	 * @param fnEachFile()
 	 * @param fnEachApp()
-	 * @param options{}
-	 * @returns {stream}
+	 * @param fnEachFile()
+	 * @returns {Array}
 	 */
-	function runEachGroupAndApp(fnEachApp, fnEachFile, options){
+	function getFilesByGroupAndApps(fnEachApp, fnEachFile){
 		var pth     = global.cfg.pathPrj + global.cfg.app.folders.www,
 				apps    = require(pth + appsJson),
-				streams = merge2(),
-				i       = 0,
-				l       = apps.length;
+				fnEachApp = fnEachApp || function(a){return a;},
+				r =	[];
 
-		for(; i < l; i++){
-			var appName   = apps[i],
-					appStream = runEachGroup(fnEachFile, appName, pth, options);
+		apps.forEach(function(appName){
+			var appFiles = fnEachApp(getFilesByGroup(fnEachFile, appName, pth), appName, pth);
 
-			streams.add(fnEachApp ? fnEachApp(appStream, appName, pth, options) : appStream);
-		}
+			r.push({app: appName, files: appFiles});
+		});
 
-		return streams;
+		return r;
 	}
 
 	/**
-	 * run each app and each file group from apps.json and app.json sent
+	 * run each app and each file config from apps.json and app.json sent
 	 */
-	function runEachGroup(fnEachFile, appName, pth, options){
-		var streams = merge2(),
-				groups  = require(pth + appName + '/' + appJson),
-				i       = 0,
+	function getFilesByGroup(fnEachFile, appName, pth){
+		var groups  = require(pth + appName + '/' + appJson),
 				_path   = pth + appName,
-				l       = groups.length;
+				fnEachFile = fnEachFile || function(a){return a;},
+				r	= [];
 
-		if(l === 0){
+		if(groups.length === 0){
 			return;
 		}
-		for(; i < l; i++){
-			var group = _.merge({}, defaults.file, groups[i]);
 
-			if(aux.isNotActive(group) || (global.cfg.app.release && groups[i].ignoreOnRelease)){
-				continue;
+		groups.forEach(function(group){
+			var config = _.merge({}, defaults.group, group);
+
+			if(aux.isNotActive(config) || (global.cfg.app.release && group.ignoreOnRelease)){
+				return;
+			}
+			var files = globby.sync(config.files, {cwd: _path});
+
+			if(files.length === 0){
+				console.logRed('APPFACTORY: Files not found');
+				utils.exit(1);
 			}
 
-			var groupStream = gulp.src(group.files, {cwd: _path})
-					.pipe(filesRequired())
-					.on('error', function(e){
-						console.log(e.message);
-						utils.exit(1);
-					});
-			streams.add(fnEachFile ? fnEachFile(groupStream, group, pth, options) : groupStream);
-		}
+			files.forEach(function(file){
+				var _file = new gutil.File({
+					base: pth + appName,
+					cwd: pth,
+					path: pth + appName +'/'+ file
+				});
 
-		return streams;
+				r.push(fnEachFile(_file, appName, pth));
+			});
+		});
+
+		return r;
 	}
 
 

@@ -4,53 +4,40 @@
 (function(){
 	'use strict';
 
-	var through = require('through2'),
+	var utils   = require('../../shared/utils'),
+			core = require('./core.js'),
 			fs      = require('fs'),
 			path    = require('path'),
-			utils   = require('../../shared/utils'),
 			wwwJson = 'www.json';
 
-	exports.makeWwwJson = function(appStream, appName, pth, option){
+	exports.makeWwwJson = function(files, appName, pth){
 		var result = [];
 
-		return appStream
-			.pipe(utils.debugeame())
-			.pipe(through.obj(function(file, enc, cb){
-				var filePath = file.path;
-				filePath = path.relative(pth, filePath);
+		files.forEach(function(file){
+			var filePath = file.path;
+			filePath = path.relative(pth, filePath);
 
-				var type = utils.getExtensionFile(filePath);
+			var type = utils.getExtensionFile(filePath);
 
-				switch (type){
-					case 'scss':
-					case 'sass':
-					case 'less':
-					case 'css':
-						type = 'css';
-						break;
-					case 'js':
-					case 'html':
-						break;
-					default:
-						console.logRed('LOADER: Error, type not found');
-						utils.exit(1);
-						break;
-				}
+			if(core.defaults.validPreproExtensions.indexOf(type) !== -1){
+				type = 'css';
+			} else if (core.defaults.validExtensions.indexOf(type) === -1){
+					console.logRed('APPFACTORY: Error, type not found');
+					utils.exit(1);
+			}
 
-				filePath = utils.setExtensionFilename(filePath, type);
+			filePath = utils.setExtensionFilename(filePath, type);
 
-				filePath = filePath.split('\\').join('/');
+			filePath = filePath.split('\\').join('/');
 
-				result.push(filePath);
-				cb();
-			}, function(cb){
-				makeWwwFile(appName, result);
-				cb();
-			}));
+			result.push(filePath);
+		});
+
+		return makeWwwFile(appName, result);
 	};
 
 	function makeWwwFile(appName, result){
-		fs.writeFile(global.cfg.pathPrj + global.cfg.app.folders.www + appName + '/' + wwwJson,
+		return fs.writeFile(global.cfg.pathPrj + global.cfg.app.folders.www + appName + '/' + wwwJson,
 			JSON.stringify(result, null, '\t'),
 			function(err){
 				if(err){

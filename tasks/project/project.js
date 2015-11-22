@@ -2,7 +2,7 @@
  * Created by Crystian on 4/13/2015.
  */
 
-var	engine = require('./engine/main.js');
+var	engine = require('./engine/core.js');
 
 //Alias
 gulp.task('css',	['makeCss']);
