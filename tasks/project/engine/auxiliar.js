@@ -28,19 +28,21 @@
 	//	return r;
 	//};
 
-	//if it is minificated version, just validate this file, otherwise check the normal version
-	//this is util for Libs without min version
-	exports.fileDestExist = function(group, file){
-		var r = false;
-
-		//validate if exist, if exist return don't process nothing
-		var p = (global.cfg.app.release || group.makeMin) ? file.path + '/' +file.min : file._cssFile;
-		if(utils.fileExist(p)){
-			r = true;
-		}
-
-		return r;
-	};
+	///**
+	// * if it is minificated version, just validate this file, otherwise check the normal version
+	// * this is util for Libs without min version
+	// */
+	//exports.fileDestExist = function(group, file){
+	//	var r = false;
+	//
+	//	//validate if exist, if exist return don't process nothing
+	//	var p = (global.cfg.app.release || group.makeMin) ? file.path + '/' +file.min : file._cssFile;
+	//	if(utils.fileExist(p)){
+	//		r = true;
+	//	}
+	//
+	//	return r;
+	//};
 
 
 }());

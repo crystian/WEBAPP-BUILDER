@@ -9,10 +9,11 @@
 
 	//libs
 	var _      = require('lodash'),
+			globby = require('globby'),
+			gutil  = require('gulp-util');
 			//path      = require('path'),
 			//fs        = require('fs'),
 			//merge2 = require('merge2'),
-			globby = require('globby'),
 			//	commons = require('../commons'),
 			//	strip = require('gulp-strip-comments'),
 			//	gif = require('gulp-if'),
@@ -34,8 +35,7 @@
 			//	pngquant = require('imagemin-pngquant'),
 			//	cache = require('gulp-cache'),
 			//	manifest = require('gulp-manifest'),
-			filesRequired = require('gulp-files-required'),
-			gutil  = require('gulp-util');
+			//filesRequired = require('gulp-files-required'),
 
 	//engine libs
 	var utils = require('../../shared/utils'),
@@ -52,13 +52,13 @@
 					'files': [],				//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
 					'overwrite': true,	//specially for libs, just make it once
 					'ignoreOnRelease': false,	//ignore on dev time, request by request
+					'minificated': false,	//if it is a lib for don't re do the minifcation
 					'active': 'true'		//it will eval this field, for temp use
 
 					//'path': 'www',			//it can be a variable on global.cfg to be evaluated
 					//'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
 					//'linter': true,			//if you want to lint, will not apply for libraries
 					//'autoPrefix': true,	//auto prefix when source is active
-					//'minificated': false,	//if it is a lib for don't re do the minifcation
 					//'makeMin': false		//it should be create a minificate version
 					//'genSprite': true,	//generate sprite
 					//'replaces': {
@@ -83,7 +83,7 @@
 	};
 
 	exports.runPreprocessors = function() {
-		return runEachGroupAndApp(null, prepro.runPreprocessors);
+		return getFilesByGroupAndApps(null, prepro.runPreprocessors);
 	};
 
 	/**
@@ -141,14 +141,12 @@
 					path: pth + appName +'/'+ file
 				});
 
-				r.push(fnEachFile(_file, appName, pth));
+				r.push(fnEachFile(_file, config, appName, pth));
 			});
 		});
 
 		return r;
 	}
-
-
 
 }());
 

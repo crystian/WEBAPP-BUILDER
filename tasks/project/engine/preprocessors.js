@@ -1,38 +1,32 @@
-///**
-// * Created by Crystian on 15/11/2015.
-// */
-//(function(){
-//	'use strict';
-//
-//	var utils   = require('../../shared/utils'),
-//			main   = require('./core'),
+/**
+ * Created by Crystian on 15/11/2015.
+ */
+(function(){
+	'use strict';
+
+	var utils   = require('../../shared/utils'),
+			core   = require('./core');
 //			aux    = require('./auxiliar'),
 //			gutil    = require('gulp-util'),
 //			through = require('through2');
 //
-//	exports.runPreprocessors = function(groupStream, groupConfig, pth, options){
-//		if(groupConfig.minificated){return groupStream;}
-//
-//		return groupStream
-//				.pipe(preprocess(groupConfig))
-//				//.pipe(utils.debugeame())
-//				.pipe(gulp.dest('.'));
-//	};
-//
-//function preprocess(config){
-//	if(!config){
-//		console.logRed('error: configuration is required');
-//		utils.exit(1);
-//	}
-//
-//	return through.obj(function(file, enc, cb) {
-//			var fileName = utils.getFileName(file.path),
-//				type = utils.getExtensionFile(file.path);
-//
-//			//valid types
-//			if(main.defaults.validPreproExtensions.indexOf(type)===-1){return cb(null, file);}
-//
-//
+	exports.runPreprocessors = function(files, config, appName, pth){
+		if(!config){
+			console.logRed('Preprocessors: configuration is required');
+			utils.exit(1);
+		}
+		console.log('f',files, appName, pth);
+		if(config.minificated){return;}
+
+			var fileName = utils.getFileName(file.path),
+				type = utils.getExtensionFile(file.path);
+
+			//valid types
+			if(core.defaults.validPreproExtensions.indexOf(type)===-1){return;}
+	};
+
+
+
 //			//which name have min file?, default: *.min.*
 //			var fileMin = config.min || fileName + '.min.css';
 //
@@ -76,13 +70,13 @@
 //		cb(null, file);
 //	});
 //}
-//
-//
-//
-//}());
-//
-//
-////
+
+
+
+}());
+
+
+
 ////	var source = file.path + file.file,
 ////		finalFileName = file.path + fileName +'.css';
 //

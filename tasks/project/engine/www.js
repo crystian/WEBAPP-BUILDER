@@ -5,7 +5,7 @@
 	'use strict';
 
 	var utils   = require('../../shared/utils'),
-			core = require('./core.js'),
+			core    = require('./core.js'),
 			fs      = require('fs'),
 			path    = require('path'),
 			wwwJson = 'www.json';
@@ -21,9 +21,9 @@
 
 			if(core.defaults.validPreproExtensions.indexOf(type) !== -1){
 				type = 'css';
-			} else if (core.defaults.validExtensions.indexOf(type) === -1){
-					console.logRed('APPFACTORY: Error, type not found');
-					utils.exit(1);
+			} else if(core.defaults.validExtensions.indexOf(type) === -1){
+				console.logRed('APPFACTORY: Error, type not found');
+				utils.exit(1);
 			}
 
 			filePath = utils.setExtensionFilename(filePath, type);

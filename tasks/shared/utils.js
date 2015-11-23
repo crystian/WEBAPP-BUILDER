@@ -57,17 +57,17 @@ exports.addSlash = function(dictionary){
 	return r;
 };
 
-exports.getExtensionFile = function(s) {
-	return path.extname(s).replace('.','');
+exports.getExtensionFile = function(s){
+	return path.extname(s).replace('.', '');
 };
 
-exports.getFileName = function(s) {
+exports.getFileName = function(s){
 	return path.basename(s, path.extname(s));
 };
 
-exports.setExtensionFilename = function(s, extension) {
+exports.setExtensionFilename = function(s, extension){
 	var arr = s.split('.');
-	if (arr.length <= 1) {
+	if(arr.length <= 1){
 		console.logRed('Extension not found!');
 		return s;
 	}

@@ -2,16 +2,16 @@
  * Created by Crystian on 4/13/2015.
  */
 
-var	engine = require('./engine/core.js');
+var engine = require('./engine/core.js');
 
 //Alias
-gulp.task('css',	['makeCss']);
+gulp.task('css', ['makeCss']);
 
-gulp.task('makeWwwJson', function (){
+gulp.task('makeWwwJson', function(){
 	return engine.makeWwwJson();
 });
 
-gulp.task('css', function (){
+gulp.task('css', function(){
 	return engine.runPreprocessors();
 });
 

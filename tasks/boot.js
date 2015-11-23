@@ -33,8 +33,8 @@ exports.boot = function(config){
 		var packageJson            = 'package.json',
 				projectConfigFile      = 'project-config.json',
 				projectConfigLocalFile = 'project-config-local.json',
-				pathFwk                = path.resolve(__dirname, '../') +'/',
-				pathPrj                = config.dirname +'/';
+				pathFwk                = path.resolve(__dirname, '../') + '/',
+				pathPrj                = config.dirname + '/';
 
 		//merge between default and specify:
 		global.cfg = _.merge(
@@ -57,7 +57,7 @@ exports.boot = function(config){
 		if(relativePathFrom === '/'){
 			relativePathFrom = '';
 			//relativePathTo = '';
-			global.cfg.pathPrj = pathFwk + global.cfg.app.folders.project +'/';
+			global.cfg.pathPrj = pathFwk + global.cfg.app.folders.project + '/';
 			global.cfg.fromFwk = true;
 		}
 
