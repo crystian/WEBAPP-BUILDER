@@ -198,7 +198,12 @@ describe("make www.json files - ", function(){
 
 		var json2 = utils.readJsonFile(w2);
 		expect(json2.length).toBe(5);
+	});
 
+	it('(15) should fail by same name', function(){
+		cd('15');
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(1);
 
 	});
 

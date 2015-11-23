@@ -30,6 +30,12 @@
 
 			filePath = filePath.split('\\').join('/');
 
+
+			if(result.indexOf(filePath) > -1){
+				console.logRed('APPFACTORY: Error, more than one file with the same name, check css files');
+				utils.exit(1);
+			}
+
 			result.push(filePath);
 		});
 

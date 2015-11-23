@@ -52,14 +52,13 @@
 					'files': [],				//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
 					'overwrite': true,	//specially for libs, just make it once
 					'ignoreOnRelease': false,	//ignore on dev time, request by request
-					'minificated': false,	//if it is a lib for don't re do the minifcation
+					'minificated': false,	//if it is a lib for don't re do the minifcation (over overwrite!)
 					'active': 'true'		//it will eval this field, for temp use
 
-					//'path': 'www',			//it can be a variable on global.cfg to be evaluated
+					//'makeMin': false		//it should be create a minificate version
+					//'autoPrefix': true,	//auto prefix when source is active
 					//'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
 					//'linter': true,			//if you want to lint, will not apply for libraries
-					//'autoPrefix': true,	//auto prefix when source is active
-					//'makeMin': false		//it should be create a minificate version
 					//'genSprite': true,	//generate sprite
 					//'replaces': {
 					//	'original': {			//modificate orginal version
