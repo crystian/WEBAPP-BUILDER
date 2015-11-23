@@ -10,78 +10,75 @@
 	//libs
 	var _      = require('lodash'),
 			globby = require('globby'),
+			fs     = require('fs-extra'),
+			path   = require('path'),
 			gutil  = require('gulp-util');
-			//path      = require('path'),
-			//fs        = require('fs'),
-			//merge2 = require('merge2'),
-			//	commons = require('../commons'),
-			//	strip = require('gulp-strip-comments'),
-			//	gif = require('gulp-if'),
-			//	minifycss = require('gulp-minify-css'),
-			//	rename = require('gulp-rename'),
-			//	uglify = require('gulp-uglify'),
-			//	fs = require('fs-extra'),
-			//	StreamQueue = require('streamqueue'),
-			//	concat = require('gulp-concat'),
-			//	shared = require('./shared'),
-			//	sprite = require('gulp-sprite-generator'),
-			//	replace = require('gulp-replace'),
-			//	sass = require('gulp-sass'),
-			//	less = require('gulp-less'),
-			//	autoprefixer = require('gulp-autoprefixer'),
-			//	csslint = require('gulp-csslint'),
-			//	LZString = require('../../vendors/lz-string/libs/lz-string'),
-			//	imagemin = require('gulp-imagemin'),
-			//	pngquant = require('imagemin-pngquant'),
-			//	cache = require('gulp-cache'),
-			//	manifest = require('gulp-manifest'),
-			//filesRequired = require('gulp-files-required'),
+	//merge2 = require('merge2'),
+	//	commons = require('../commons'),
+	//	strip = require('gulp-strip-comments'),
+	//	gif = require('gulp-if'),
+	//	minifycss = require('gulp-minify-css'),
+	//	rename = require('gulp-rename'),
+	//	uglify = require('gulp-uglify'),
+	//	fs = require('fs-extra'),
+	//	StreamQueue = require('streamqueue'),
+	//	concat = require('gulp-concat'),
+	//	shared = require('./shared'),
+	//	sprite = require('gulp-sprite-generator'),
+	//	replace = require('gulp-replace'),
+	//	sass = require('gulp-sass'),
+	//	less = require('gulp-less'),
+	//	autoprefixer = require('gulp-autoprefixer'),
+	//	csslint = require('gulp-csslint'),
+	//	LZString = require('../../vendors/lz-string/libs/lz-string'),
+	//	imagemin = require('gulp-imagemin'),
+	//	pngquant = require('imagemin-pngquant'),
+	//	cache = require('gulp-cache'),
+	//	manifest = require('gulp-manifest'),
+	//filesRequired = require('gulp-files-required'),
 
 	//engine libs
-	var utils = require('../../shared/utils'),
-			aux   = require('./auxiliar'),
-			www   = require('./www'),
-			prepro   = require('./preprocessors');
+	var utils  = require('../../shared/utils'),
+			aux    = require('./auxiliar'),
+			www    = require('./www'),
+			prepro = require('./preprocessors');
 
 	//vars
 	var appsJson = 'apps.json',
 			appJson  = 'app.json';
 
 	var defaults = exports.defaults = {
-				group: {
-					'files': [],				//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
-					'overwrite': true,	//specially for libs, just make it once
-					'ignoreOnRelease': false,	//ignore on dev time, request by request
-					'minificated': false,	//if it is a lib for don't re do the minifcation (over overwrite!)
-					'active': 'true'		//it will eval this field, for temp use
+		group: {
+			'files': [],				//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
+			'overwrite': true,	//specially for libs, just make it once
+			'ignoreOnRelease': false,	//ignore on dev time, request by request
+			'minificated': false,	//if it is a lib for don't re do the minifcation (over overwrite!)
+			'minExtension': '.min',//prefix for file name minificated
 
-					//'makeMin': false		//it should be create a minificate version
-					//'autoPrefix': true,	//auto prefix when source is active
-					//'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
-					//'linter': true,			//if you want to lint, will not apply for libraries
-					//'genSprite': true,	//generate sprite
-					//'replaces': {
-					//	'original': {			//modificate orginal version
-					//		'normal': [],
-					//		'min': []
-					//	},
-					//	'pre': [					//pre minificatedd
-					//		['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
-					//],
-					//'post': [					//post minificatedd
-					//	['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
-					//]
-					//}
-				},
-				validPreproExtensions: ['sass', 'scss', 'less', 'styl'],
-				validExtensions: ['html', 'js', 'css']
-			};
+			//'makeMin': false		//it should be create a minificate version
+			//'autoPrefix': true,	//auto prefix when source is active
+			//'linter': true,			//if you want to lint, will not apply for libraries
+			//'genSprite': true,	//generate sprite
+			'replaces': {
+				'original': [] //modificate orginal version
+				//	'pre': [					//pre minificatedd
+				//		['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
+				//],
+				//'post': [					//post minificatedd
+				//	['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
+				//]
+			},
+			'active': 'true'		//it will eval this field, for temp use
+		},
+		validPreproExtensions: ['sass', 'scss', 'less', 'styl'],
+		validExtensions: ['html', 'js', 'css']
+	};
 
 	exports.makeWwwJson = function(){
 		return getFilesByGroupAndApps(www.makeWwwJson);
 	};
 
-	exports.runPreprocessors = function() {
+	exports.runPreprocessors = function(){
 		return getFilesByGroupAndApps(null, prepro.runPreprocessors);
 	};
 
@@ -93,10 +90,10 @@
 	 * @returns {Array}
 	 */
 	function getFilesByGroupAndApps(fnEachApp, fnEachFile){
-		var pth     = global.cfg.pathPrj + global.cfg.app.folders.www,
-				apps    = require(pth + appsJson),
+		var pth       = global.cfg.pathPrj + global.cfg.app.folders.www,
+				apps      = require(pth + appsJson),
 				fnEachApp = fnEachApp || function(a){return a;},
-				r =	[];
+				r         = [];
 
 		apps.forEach(function(appName){
 			var appFiles = fnEachApp(getFilesByGroup(fnEachFile, appName, pth), appName, pth);
@@ -111,10 +108,10 @@
 	 * run each app and each file config from apps.json and app.json sent
 	 */
 	function getFilesByGroup(fnEachFile, appName, pth){
-		var groups  = require(pth + appName + '/' + appJson),
-				_path   = pth + appName,
+		var groups     = require(pth + appName + '/' + appJson),
+				_path      = pth + appName,
 				fnEachFile = fnEachFile || function(a){return a;},
-				r	= [];
+				r          = [];
 
 		if(groups.length === 0){
 			return;
@@ -137,7 +134,7 @@
 				var _file = new gutil.File({
 					base: pth + appName,
 					cwd: pth,
-					path: pth + appName +'/'+ file
+					path: pth + appName + '/' + file
 				});
 
 				r.push(fnEachFile(_file, config, appName, pth));
@@ -146,6 +143,26 @@
 
 		return r;
 	}
+
+
+	exports.modificateOriginal = function(file, config, type){
+		if(config.replaces.original.length > 0){
+			var filenameBackup = utils.setPreExtensionFilename(file, 'original');
+
+			if(!utils.fileExist(filenameBackup)){
+				console.log('Replaces on original file: ' + utils.getFileNameWithExtension(file));
+				fs.copySync(file, filenameBackup);
+
+				var st = gulp.src(file)
+						//.pipe(utils.debugeame())
+						;
+
+				aux.replace(st, config.replaces.original)
+						.pipe(gulp.dest(path.dirname(file)));
+
+			}
+		}
+	};
 
 }());
 
@@ -351,29 +368,8 @@
 //
 //	return stream;
 //}
-//
-//function _modificateOriginal(file){
-//	_modificateOriginalInternal(file, 'normal');
-//	_modificateOriginalInternal(file, 'min');
-//}
-//
-//function _modificateOriginalInternal(file, type){
-//	var name = (type === 'min') ? file.min : file.file;
-//
-//	if(file.replaces.original[type].length > 0){
-//		var filenameBackup = utils.setPreExtensionFilename(name, 'original');
-//
-//		if(!utils.fileExist(file.path +'/'+ filenameBackup)){
-//			console.logWarn('Replaces on original file: '+ name);
-//			fs.copySync(file.path +'/'+ name, file.path +'/'+ filenameBackup);
-//
-//			var st = gulp.src([file.path +'/'+ name]);
-//			st = aux.replace(st, file.replaces.original[type]);
-//			st = st.pipe(gulp.dest(file.path));
-//		}
-//	}
-//}
-//
+
+
 //
 //var _handle = {
 //	'css' : function(stream, file, appName) {

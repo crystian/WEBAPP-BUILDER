@@ -65,6 +65,10 @@ exports.getFileName = function(s){
 	return path.basename(s, path.extname(s));
 };
 
+exports.getFileNameWithExtension = function(s){
+	return path.basename(s);
+};
+
 exports.setExtensionFilename = function(s, extension){
 	var arr = s.split('.');
 	if(arr.length <= 1){
@@ -77,18 +81,18 @@ exports.setExtensionFilename = function(s, extension){
 
 	return arr.join('.');
 };
-//
-//exports.setPreExtensionFilename = function(s, preExtension) {
-//	var arr = s.split('.');
-//	if (arr.length <= 1) {
-//		console.logRed('Extension not found!');
-//		return s;
-//	}
-//
-//	arr.splice(arr.length-1, 0, preExtension);
-//
-//	return arr.join('.');
-//};
+
+exports.setPreExtensionFilename = function(s, preExtension) {
+	var arr = s.split('.');
+	if (arr.length <= 1) {
+		console.logRed('Extension not found!');
+		return s;
+	}
+
+	arr.splice(arr.length-1, 0, preExtension);
+
+	return arr.join('.');
+};
 
 exports.debugeame = function(){
 	return through.obj()
