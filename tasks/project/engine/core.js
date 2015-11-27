@@ -18,18 +18,13 @@
 	//	strip = require('gulp-strip-comments'),
 	//	gif = require('gulp-if'),
 	//	minifycss = require('gulp-minify-css'),
-	//	rename = require('gulp-rename'),
+
 	//	uglify = require('gulp-uglify'),
 	//	fs = require('fs-extra'),
 	//	StreamQueue = require('streamqueue'),
 	//	concat = require('gulp-concat'),
 	//	shared = require('./shared'),
 	//	sprite = require('gulp-sprite-generator'),
-	//	replace = require('gulp-replace'),
-	//	sass = require('gulp-sass'),
-	//	less = require('gulp-less'),
-	//	autoprefixer = require('gulp-autoprefixer'),
-	//	csslint = require('gulp-csslint'),
 	//	LZString = require('../../vendors/lz-string/libs/lz-string'),
 	//	imagemin = require('gulp-imagemin'),
 	//	pngquant = require('imagemin-pngquant'),
@@ -53,11 +48,12 @@
 			'overwrite': true,	//specially for libs, just make it once
 			'ignoreOnRelease': false,	//ignore on dev time, request by request
 			'minificated': false,	//if it is a lib for don't re do the minifcation (over overwrite!)
+			'backupExtension': 'original', //if it has replaces it will make a backup with this postfix
+			'autoPrefix': true,	//auto prefix when source is active
+			'linter': true,			//if you want to lint, will not apply for libraries
 			'minExtension': '.min',//prefix for file name minificated
 
 			//'makeMin': false		//it should be create a minificate version
-			//'autoPrefix': true,	//auto prefix when source is active
-			//'linter': true,			//if you want to lint, will not apply for libraries
 			//'genSprite': true,	//generate sprite
 			'replaces': {
 				'original': [] //modificate orginal version
@@ -145,46 +141,25 @@
 	}
 
 
-	exports.modificateOriginal = function(file, config, type){
-		if(config.replaces.original.length > 0){
-			var filenameBackup = utils.setPreExtensionFilename(file, 'original');
+	exports.modificateOriginal = function(file, config){
+		var filenameBackup = utils.setPreExtensionFilename(file, config.backupExtension);
 
-			if(!utils.fileExist(filenameBackup)){
-				console.log('Replaces on original file: ' + utils.getFileNameWithExtension(file));
-				fs.copySync(file, filenameBackup);
+		if(!utils.fileExist(filenameBackup)){
+			console.logGreen('Replaces on original file: ' + utils.getFileNameWithExtension(file));
+			fs.copySync(file, filenameBackup);
 
-				var st = gulp.src(file)
-						//.pipe(utils.debugeame())
-						;
+			var st = gulp.src(file)
+					//.pipe(utils.debugeame())
+					;
 
-				aux.replace(st, config.replaces.original)
-						.pipe(gulp.dest(path.dirname(file)));
+			aux.replace(st, config.replaces.original)
+					.pipe(gulp.dest(path.dirname(file)));
 
-			}
 		}
 	};
 
 }());
 
-//var newPath = path.resolve(_path, '../') +'/'+ group.files;
-//var files = globby.sync(newPath, {debug: false});
-//
-//var i       = 0,
-//		l       = files.length,
-//		r = [];
-//
-//for(; i < l; i++){
-//	var relative = path.relative(_path, files[i]);
-//	r.push(relative);
-//}
-//
-//return r;
-//}
-
-
-//exports.runPreprocessors = function(appsJson) {
-//	return runEachApp(appsJson, runEachPreprocessors);
-//};
 
 //exports.runMagic = function(appsJson, options) {
 //	return runEachApp(appsJson, doMagic, options);

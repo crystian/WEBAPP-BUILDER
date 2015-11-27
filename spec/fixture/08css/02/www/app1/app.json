@@ -1,0 +1,12 @@
+[
+	{
+		"files": [
+			"index*.*"
+		],
+		"replaces":{
+			"original": [
+				["yellow","yellow"]
+			]
+		}
+	}
+]

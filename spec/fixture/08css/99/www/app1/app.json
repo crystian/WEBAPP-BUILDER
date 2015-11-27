@@ -1,0 +1,10 @@
+[
+	{
+		"files": [
+			"index*.*"
+		],
+		"replaces": {
+			"original": [["aa","bb"]]
+		}
+	}
+]

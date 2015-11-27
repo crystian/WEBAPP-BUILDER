@@ -5,39 +5,45 @@
 	'use strict';
 
 	var utils = require('../../shared/utils'),
+				sass = require('gulp-sass'),
+			//	less = require('gulp-less'),
+			//stylus = require('gulp-stylus'),
+				csslint = require('gulp-csslint'),
+				replace = require('gulp-replace'),
+				autoprefixer = require('gulp-autoprefixer'),
+				rename = require('gulp-rename'),
+				gutil    = require('gulp-util'),
 			core  = require('./core');
 	//			aux    = require('./auxiliar'),
-	//			gutil    = require('gulp-util'),
 
 	exports.runPreprocessors = function(file, config, appName, pth){
+		var fileName = utils.getFileName(file.path),
+				type     = utils.getExtensionFile(file.path),
+				fileNameExt = utils.getFileNameWithExtension(file.path),
+				stream = {};
+
+		//console.log('filename: ', fileName);
+		//console.log('type: ', type);
+
 		if(!config){
 			console.logRed('Preprocessors: configuration is required');
 			utils.exit(1);
 		}
 
-		//if it is minificate, it'll ignore
-		if(config.minificated){
-			return;
-		}
-
 		/*
-		validExtension
-
-		new stream
-
-		minName = min.css || min.*
-
-		replacesOriginal
-
-		isMin { return}
-
-
-		notCss && !exist (css) && overwrite {
+		* minificated
+		* validExtension
+		* new stream
+		* minName = min.css || min.*
+		* replacesOriginal
+		* isMin { return}
+		notCss
+		&& !exist (css) && overwrite {
 				preprocess
 			 autoPrefix
 			 linter
-			 genSprite
 
+			 genSprite
 		}
 
 		makeMin{
@@ -45,7 +51,6 @@
 		 		minStream
 				createMinFile
 			}
-
 		} else {
 			!debug{
 				minStream
@@ -57,127 +62,85 @@
 		min
 	 	replacePost
 	 }
-
 		*/
 
-		var fileName = utils.getFileName(file.path),
-				type     = utils.getExtensionFile(file.path),
-				fileNameExt = utils.getFileNameWithExtension(file.path),
-				isMin = false;
+		//if it is minificate, it'll ignore
+		if(config.minificated){
+			return;
+		}
 
 		//valid types
 		if(core.defaults.validPreproExtensions.indexOf(type) === -1 &&
-				type !== 'css'){
+				type !== 'css'){//css is the exception
 			return;
 		}
 
-		var stream = gulp.src(file.path)
-				//.pipe(utils.debugeame())
-				;
+		if(config.replaces.original.length > 0){
 
-		//console.log('filename: ', fileName);
-		//console.log('type: ', type);
+			if(fileName.indexOf('.' + config.backupExtension) >= 0){
+				//console.log(fileNameExt +': original detected, it will ignore');
+				return;
+			}
+
+			core.modificateOriginal(file.path, config);
+		}
 
 		if(fileName.indexOf(config.minExtension) >= 0){
 			//console.log(fileNameExt +': minificated detected');
-			isMin = true;
-		}
-
-		if(fileName.indexOf('.original') >= 0){
-			//console.log(fileNameExt +': original detected, it will ignore');
 			return;
 		}
 
-		//console.log('min:', fileNameMin);
-		//var	fileNameMin = fileName + config.minExtension +'.'+ type;
-		//console.log(fileNameMin);
-		//console.log(file.path);
-		//console.log(file.base);
-		core.modificateOriginal(file.path, config, 'normal');
-		//core.modificateOriginal(file.base + fileNameMin, config, 'min');
-		if(isMin){
-			//si?
-			return;
+		stream = gulp.src(file.path)
+			//.pipe(utils.debugeame())
+		;
+
+		//preprocessors
+		if(core.defaults.validPreproExtensions.indexOf(type) !== -1){
+			var dest = file.base + '/' + fileName + '.css';
+
+			if(!config.overwrite && utils.fileExist(dest)){
+				console.logWarn('File found, don\'t overwrite ('+ file +')');
+			} else {
+
+				switch (type){
+					case 'scss':
+					case 'sass':
+						var sassOptions = {errLogToConsole: true, indentedSyntax: (type === 'sass')};
+
+						stream = stream.pipe(sass(sassOptions));
+						break;
+					case 'styl':
+						stream.pipe(stylus());
+						break;
+					case 'less':
+						stream.pipe(less());
+						break;
+				}
+
+				if (config.autoPrefix) {
+					stream = stream.pipe(autoprefixer({browser:global.cfg.autoprefixer}))
+						.pipe(replace(' 0px', ' 0'));
+				}
+
+				if (config.linter) {
+					stream.pipe(csslint('csslintrc.json'))
+						.pipe(csslint.reporter()).on('error', gutil.log);
+				}
+
+
+			}
 		}
+
+
+		stream
+				.pipe(rename(fileName+ '.css'))
+				.pipe(gulp.dest(file.base, {overwrite: true}));
+
 	};
-
-
-
-
-//		var fileName2 = file.base + fileMin;
-//		console.log(fileName2);
-//		if(utils.fileExist(fileName2) && config.overwrite){
-//		//		//!(global.cfg.app.release || groupConfig.overwrite)
-//		//		//	&& (aux.fileDestExist(groupConfig, file) && !groupConfig.overwrite)) {//for the overwrite = false
-//		//		//exist, and don't overwrite it
-//		//		console.log('File found, don\'t overwrite ('+ file +')');
-//		//		continue;
-//				console.log('A');
-//			} else {
-//				console.log('B');
-//			}
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//		cb(null, file);
-//	});
-//}
-
-
 
 }());
 
 
-
-////	var source = file.path + file.file,
-////		finalFileName = file.path + fileName +'.css';
-//
-//		//just for detect potentian file exists
-//		//file._cssFile = finalFileName;
-//
-//
-////		var stream = gulp.src(source)
-////			.pipe(commons.debugeame());
-////
-////		switch (type){
-////			case 'scss':
-////			case 'sass':
-////				var sassOptions = {errLogToConsole: true, indentedSyntax: (type === 'sass')};
-////
-////				stream = stream.pipe(sass(sassOptions));
-////				break;
-////			case 'less':
-////				stream = stream.pipe(less());
-////				break;
-////		}
-////
-////		if (file.autoPrefix) {
-////			stream = stream.pipe(autoprefixer(global.cfg.autoprefixer))
-////				.pipe(replace(' 0px', ' 0'));
-////		}
-////
-////		if (file.linter) {
-////			stream = stream.pipe(csslint('csslintrc.json'))
-////				.pipe(csslint.reporter()).on('error', gutil.log);
-////		}
 ////
 ////		if(!(file.makeMin && type === 'css')) {
 ////			stream = stream.pipe(gulp.dest(file.path));
