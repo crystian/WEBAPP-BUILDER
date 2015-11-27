@@ -1,0 +1,14 @@
+$primary-color: #FF0;
+
+body {
+	color: $primary-color;
+	transform: rotateX(150deg);
+	display: flex;
+	border: 0px;
+	known-properties: true;
+	div {
+		background: red;
+		transform: rotate(7deg);
+	}
+}
+

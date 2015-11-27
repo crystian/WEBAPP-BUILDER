@@ -6,8 +6,10 @@
 
 	var utils = require('../../shared/utils'),
 				sass = require('gulp-sass'),
-			//	less = require('gulp-less'),
-			//stylus = require('gulp-stylus'),
+				less = require('gulp-less'),
+			stylus = require('gulp-stylus'),
+
+				gif = require('gulp-if'),
 				csslint = require('gulp-csslint'),
 				replace = require('gulp-replace'),
 				autoprefixer = require('gulp-autoprefixer'),
@@ -37,14 +39,13 @@
 		* minName = min.css || min.*
 		* replacesOriginal
 		* isMin { return}
-		notCss
-		&& !exist (css) && overwrite {
-				preprocess
-			 autoPrefix
-			 linter
-
+		* notCss
+		* && !exist (css) && overwrite {
+		*	preprocess
+		*	 autoPrefix
+		*	 linter
 			 genSprite
-		}
+		*}
 
 		makeMin{
 		 !exist(min.css) && overwrite {
@@ -75,6 +76,10 @@
 			return;
 		}
 
+		stream = gulp.src(file.path)
+			.pipe(utils.debugeame())
+		;
+
 		if(config.replaces.original.length > 0){
 
 			if(fileName.indexOf('.' + config.backupExtension) >= 0){
@@ -82,7 +87,7 @@
 				return;
 			}
 
-			core.modificateOriginal(file.path, config);
+			core.modificateOriginal(stream, file.path, config);
 		}
 
 		if(fileName.indexOf(config.minExtension) >= 0){
@@ -90,16 +95,13 @@
 			return;
 		}
 
-		stream = gulp.src(file.path)
-			//.pipe(utils.debugeame())
-		;
 
-		//preprocessors
+		//preprocessors tasks
 		if(core.defaults.validPreproExtensions.indexOf(type) !== -1){
 			var dest = file.base + '/' + fileName + '.css';
 
 			if(!config.overwrite && utils.fileExist(dest)){
-				console.logWarn('File found, don\'t overwrite ('+ file +')');
+				console.logWarn('File found, don\'t overwrite (' + file + ')');
 			} else {
 
 				switch (type){
@@ -110,48 +112,56 @@
 						stream = stream.pipe(sass(sassOptions));
 						break;
 					case 'styl':
-						stream.pipe(stylus());
+						stream = stream.pipe(stylus());
 						break;
 					case 'less':
-						stream.pipe(less());
+						stream = stream.pipe(less());
 						break;
 				}
 
-				if (config.autoPrefix) {
-					stream = stream.pipe(autoprefixer({browser:global.cfg.autoprefixer}))
-						.pipe(replace(' 0px', ' 0'));
+				if(config.autoPrefixer){
+					stream = stream.pipe(autoprefixer({browsers: global.cfg.autoprefixer}))
+
 				}
 
-				if (config.linter) {
-					stream.pipe(csslint('csslintrc.json'))
-						.pipe(csslint.reporter()).on('error', gutil.log);
+				if(config.linter){
+					stream
+							.pipe(replace(' 0px', ' 0'))
+							.pipe(csslint('csslintrc.json'))
+							.pipe(csslint.reporter(cssLintCustomReporter))
+							.pipe(gif(config.linterForce, csslint.reporter('fail')));
 				}
 
-
+				stream.pipe(rename(fileName + '.css'));
 			}
 		}
 
 
-		stream
-				.pipe(rename(fileName+ '.css'))
-				.pipe(gulp.dest(file.base, {overwrite: true}));
+		return stream.pipe(gulp.dest(file.base, {overwrite: true}));
+	};
 
+	var cssLintCustomReporter = function(file){
+		gutil.log(gutil.colors.cyan(file.csslint.errorCount) + ' errors in ' + gutil.colors.magenta(file.path));
+
+		file.csslint.results.forEach(function(result){
+			gutil.log(result.error.message + ' on line ' + result.error.line);
+		});
 	};
 
 }());
 
 
-////
-////		if(!(file.makeMin && type === 'css')) {
-////			stream = stream.pipe(gulp.dest(file.path));
-////		}
-////
-////		if(file.makeMin){
-////			stream = _minificateAndSave(stream, file, 'css')
-////		}
-////
-////		streams = aux.merge(streams, stream);
-////	}
-////
-////	return streams;
-////}
+//
+//		if(!(file.makeMin && type === 'css')) {
+//			stream = stream.pipe(gulp.dest(file.path));
+//		}
+//
+//		if(file.makeMin){
+//			stream = _minificateAndSave(stream, file, 'css')
+//		}
+//
+//		streams = aux.merge(streams, stream);
+//	}
+//
+//	return streams;
+//}

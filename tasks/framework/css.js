@@ -40,7 +40,7 @@ gulp.task('_makeCss', ['_cleanCss', '_makeConfig'], function(){
 	return gulp.src(src)
 		.pipe(utils.debugeame())
 		.pipe(sass(sassOptions))
-		.pipe(autoprefixer(global.cfg.autoprefixer && global.cfg.autoprefixer.split('|')))
+		.pipe(autoprefixer({browsers: global.cfg.autoprefixer}))
 		.pipe(replace(' 0px', ' 0'))
 		.pipe(csslint(global.cfg.pathFwk + 'csslintrc.json'))
 		.pipe(csslint.reporter(customReporter))

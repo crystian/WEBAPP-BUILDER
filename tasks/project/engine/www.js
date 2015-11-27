@@ -11,15 +11,20 @@
 			wwwJson = 'www.json';
 
 	exports.makeWwwJson = function(files, appName, pth){
-		var result = [];
+		var result = [],
+				preprocessFiles = [];
 
 		files.forEach(function(file){
-			var filePath = file.path;
+			var filePath = file.path,
+					preprocess = false,
+					type;
+
 			filePath = path.relative(pth, filePath);
 
-			var type = utils.getExtensionFile(filePath);
+			type = utils.getExtensionFile(filePath);
 
 			if(core.defaults.validPreproExtensions.indexOf(type) !== -1){
+				preprocess = true;
 				type = 'css';
 			} else if(core.defaults.validExtensions.indexOf(type) === -1){
 				console.logRed('APPFACTORY: Error, type not found');
@@ -30,9 +35,13 @@
 
 			filePath = filePath.split('\\').join('/');
 
-			if(result.indexOf(filePath) > -1){
+			if(preprocessFiles.indexOf(filePath) > -1){
 				console.logRed('APPFACTORY: Error, more than one file with the same name, check css files');
 				utils.exit(1);
+			}
+
+			if(preprocess){
+				preprocessFiles.push(filePath);
 			}
 
 			result.push(filePath);

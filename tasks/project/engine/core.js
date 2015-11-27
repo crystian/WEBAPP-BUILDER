@@ -16,7 +16,6 @@
 	//merge2 = require('merge2'),
 	//	commons = require('../commons'),
 	//	strip = require('gulp-strip-comments'),
-	//	gif = require('gulp-if'),
 	//	minifycss = require('gulp-minify-css'),
 
 	//	uglify = require('gulp-uglify'),
@@ -48,9 +47,10 @@
 			'overwrite': true,	//specially for libs, just make it once
 			'ignoreOnRelease': false,	//ignore on dev time, request by request
 			'minificated': false,	//if it is a lib for don't re do the minifcation (over overwrite!)
-			'backupExtension': 'original', //if it has replaces it will make a backup with this postfix
-			'autoPrefix': true,	//auto prefix when source is active
+			'autoPrefixer': true,	//auto prefix when source is active
 			'linter': true,			//if you want to lint, will not apply for libraries
+			'linterForce': true,			//if fail, return an error, otherwise continue without break the process
+			'backupExtension': 'original', //if it has replaces it will make a backup with this postfix
 			'minExtension': '.min',//prefix for file name minificated
 
 			//'makeMin': false		//it should be create a minificate version
@@ -141,18 +141,14 @@
 	}
 
 
-	exports.modificateOriginal = function(file, config){
+	exports.modificateOriginal = function(stream, file, config){
 		var filenameBackup = utils.setPreExtensionFilename(file, config.backupExtension);
 
 		if(!utils.fileExist(filenameBackup)){
 			console.logGreen('Replaces on original file: ' + utils.getFileNameWithExtension(file));
 			fs.copySync(file, filenameBackup);
 
-			var st = gulp.src(file)
-					//.pipe(utils.debugeame())
-					;
-
-			aux.replace(st, config.replaces.original)
+			aux.replace(stream, config.replaces.original)
 					.pipe(gulp.dest(path.dirname(file)));
 
 		}

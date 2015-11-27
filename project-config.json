@@ -9,7 +9,7 @@
 		"nightmare": 9003
 	},
 
-	"autoprefixer": "ie 10|android 4|chrome 32|ff 27|ios 7|opera 19|safari 7",
+	"autoprefixer": ["ie 10","android 4","chrome 42","ff 27","ios 7","opera 19","safari 7"],
 
 	"xprojectCode": "empty",
 	"xforceLibFull": false,
