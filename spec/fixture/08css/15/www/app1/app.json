@@ -1,0 +1,13 @@
+[
+	{
+		"files": [
+			"index*.*"
+		],
+		"linter": false,
+		"replaces":{
+			"pre": [
+				["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
+			]
+		}
+	}
+]

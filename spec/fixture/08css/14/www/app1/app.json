@@ -1,0 +1,13 @@
+[
+	{
+		"files": [
+			"index*.*"
+		],
+		"linter": false,
+		"replaces":{
+			"pre": [
+				["#FF0","yellow"]
+			]
+		}
+	}
+]

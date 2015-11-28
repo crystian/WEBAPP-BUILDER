@@ -26,12 +26,12 @@
 
 			if(!replacePair || !(replacePair instanceof Array) || replacePair.length !== 2){
 				console.logRed('Replace pair not correct format, check it, it should be two items: 0 = value searched, 1 = replace, elements found: ' + replacePair.length);
-				this.exit(-1);
+				utils.exit(-1);
 				return;
 			}
 
 			//console.log('key: "'+ replacePair[0] +'" value: "'+ replacePair[1] +'"');
-			stream.pipe(replace(replacePair[0], replacePair[1]));
+			stream.pipe(replace(new RegExp(replacePair[0], 'i'), replacePair[1]));
 		}
 
 		return stream;

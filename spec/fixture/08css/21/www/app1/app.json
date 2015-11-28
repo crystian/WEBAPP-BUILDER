@@ -1,0 +1,15 @@
+[
+	{
+		"files": [
+			"index*.scss"
+		],
+		"linter": false
+	},
+	{
+		"files": [
+			"index*.css"
+		],
+		"linter": false,
+		"minificated": true
+	}
+]

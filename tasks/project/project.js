@@ -8,7 +8,7 @@ var engine = require('./engine/core.js');
 gulp.task('css', ['makeCss']);
 
 gulp.task('makeWwwJson', function(){
-	return engine.makeWwwJson();
+	engine.makeWwwJson();
 });
 
 gulp.task('css', function(){

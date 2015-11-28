@@ -1,0 +1,14 @@
+[
+	{
+		"files": [
+			"index*.*"
+		],
+		"linter": false,
+		"generateMin": true,
+		"replaces":{
+			"post": [
+				["(border:)(\\w*)", "$150em"]
+			]
+		}
+	}
+]

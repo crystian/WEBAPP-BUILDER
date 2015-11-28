@@ -15,6 +15,12 @@ var chalk   = require('chalk'),
 		gutil   = require('gulp-util');
 
 //COMMONS between project and loader:
+console.debug = function(){
+	if(gutil.env.debug){
+		console.log.apply(this, arguments);
+	}
+};
+
 console.logWarn = function(m){
 	console.log(chalk.black.bgYellow(m));
 };

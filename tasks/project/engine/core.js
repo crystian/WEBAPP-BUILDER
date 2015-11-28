@@ -12,11 +12,9 @@
 			globby = require('globby'),
 			fs     = require('fs-extra'),
 			path   = require('path'),
+			merge2 = require('merge2'),
 			gutil  = require('gulp-util');
-	//merge2 = require('merge2'),
 	//	commons = require('../commons'),
-	//	strip = require('gulp-strip-comments'),
-	//	minifycss = require('gulp-minify-css'),
 
 	//	uglify = require('gulp-uglify'),
 	//	fs = require('fs-extra'),
@@ -46,23 +44,23 @@
 			'files': [],				//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
 			'overwrite': true,	//specially for libs, just make it once
 			'ignoreOnRelease': false,	//ignore on dev time, request by request
+			'overwriteOnRelease': false,	//
 			'minificated': false,	//if it is a lib for don't re do the minifcation (over overwrite!)
 			'autoPrefixer': true,	//auto prefix when source is active
 			'linter': true,			//if you want to lint, will not apply for libraries
 			'linterForce': true,			//if fail, return an error, otherwise continue without break the process
 			'backupExtension': 'original', //if it has replaces it will make a backup with this postfix
-			'minExtension': '.min',//prefix for file name minificated
-
-			//'makeMin': false		//it should be create a minificate version
 			//'genSprite': true,	//generate sprite
+			'generateMin': false,		//it should be create a minificate version
+			'minExtension': '.min',//prefix for file name minificated
 			'replaces': {
-				'original': [] //modificate orginal version
-				//	'pre': [					//pre minificatedd
-				//		['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
-				//],
-				//'post': [					//post minificatedd
-				//	['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
-				//]
+				'original': [], //modificate orginal version
+				'pre': [					//pre minificatedd
+					//["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
+				],
+				'post': [					//post minificatedd
+					//["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
+				]
 			},
 			'active': 'true'		//it will eval this field, for temp use
 		},
@@ -71,12 +69,27 @@
 	};
 
 	exports.makeWwwJson = function(){
-		return getFilesByGroupAndApps(www.makeWwwJson);
+		getFilesByGroupAndApps(www.makeWwwJson);
 	};
 
 	exports.runPreprocessors = function(){
-		return getFilesByGroupAndApps(null, prepro.runPreprocessors);
+		return getFilesByGroupAndAppsStream(null, prepro.runPreprocessors);
 	};
+
+	function getFilesByGroupAndAppsStream(byApp, byFile){
+		var mainStream = merge2(gulp.src('noop')),
+				apps       = getFilesByGroupAndApps(byApp, byFile);
+
+		apps.forEach(function(app){
+			app.files.forEach(function(file){
+				if(file){
+					mainStream.add(file);
+				}
+			});
+		});
+
+		return mainStream;
+	}
 
 	/**
 	 * this method run each app, and after groups from app, you can intercep each app or group
@@ -94,7 +107,7 @@
 		apps.forEach(function(appName){
 			var appFiles = fnEachApp(getFilesByGroup(fnEachFile, appName, pth), appName, pth);
 
-			r.push({app: appName, files: appFiles});
+			r.push({name: appName, files: appFiles});
 		});
 
 		return r;
@@ -141,7 +154,7 @@
 	}
 
 
-	exports.modificateOriginal = function(stream, file, config){
+	exports.modifyOriginal = function(stream, file, config){
 		var filenameBackup = utils.setPreExtensionFilename(file, config.backupExtension);
 
 		if(!utils.fileExist(filenameBackup)){
@@ -149,9 +162,21 @@
 			fs.copySync(file, filenameBackup);
 
 			aux.replace(stream, config.replaces.original)
-					.pipe(gulp.dest(path.dirname(file)));
+				.pipe(gulp.dest(path.dirname(file)));
 
 		}
+	};
+
+	exports.replaces = function(stream, replaces, file){
+		if(gutil.env.debug){
+			console.logGreen('Replaces on file: ' + file);
+		}
+
+		if(replaces && replaces.length > 0){
+			return aux.replace(stream, replaces);
+		}
+
+		return stream;
 	};
 
 }());
@@ -313,13 +338,6 @@
 //	return s;
 //}
 //
-//function _minificateAndSave(stream, file, type){
-//	stream = _minificate(stream, file, type);
-//
-//	stream = stream.pipe(gulp.dest(file.path));
-//
-//	return stream;
-//}
 //
 //function _minificate(stream, file, type, appName){
 //	//replaces previously to minimisation

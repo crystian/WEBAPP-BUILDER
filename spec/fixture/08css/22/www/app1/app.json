@@ -1,0 +1,10 @@
+[
+	{
+		"files": [
+			"index*.scss"
+		],
+		"linter": false,
+		"overwrite": false,
+		"overwriteOnRelease": true
+	}
+]

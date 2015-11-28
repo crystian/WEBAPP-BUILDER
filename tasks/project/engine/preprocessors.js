@@ -4,78 +4,67 @@
 (function(){
 	'use strict';
 
-	var utils = require('../../shared/utils'),
-				sass = require('gulp-sass'),
-				less = require('gulp-less'),
-			stylus = require('gulp-stylus'),
-
-				gif = require('gulp-if'),
-				csslint = require('gulp-csslint'),
-				replace = require('gulp-replace'),
-				autoprefixer = require('gulp-autoprefixer'),
-				rename = require('gulp-rename'),
-				gutil    = require('gulp-util'),
-			core  = require('./core');
-	//			aux    = require('./auxiliar'),
+	var utils        = require('../../shared/utils'),
+			sass         = require('gulp-sass'),
+			less         = require('gulp-less'),
+			stylus       = require('gulp-stylus'),
+			minifycss    = require('gulp-minify-css'),
+			strip        = require('gulp-strip-comments'),
+			gif          = require('gulp-if'),
+			csslint      = require('gulp-csslint'),
+			replace      = require('gulp-replace'),
+			autoprefixer = require('gulp-autoprefixer'),
+			rename       = require('gulp-rename'),
+			gutil        = require('gulp-util'),
+			core         = require('./core');
 
 	exports.runPreprocessors = function(file, config, appName, pth){
-		var fileName = utils.getFileName(file.path),
-				type     = utils.getExtensionFile(file.path),
+		var fileName    = utils.getFileName(file.path),
+				type        = utils.getExtensionFile(file.path),
 				fileNameExt = utils.getFileNameWithExtension(file.path),
-				stream = {};
-
-		//console.log('filename: ', fileName);
-		//console.log('type: ', type);
-
-		if(!config){
-			console.logRed('Preprocessors: configuration is required');
-			utils.exit(1);
-		}
-
-		/*
-		* minificated
-		* validExtension
-		* new stream
-		* minName = min.css || min.*
-		* replacesOriginal
-		* isMin { return}
-		* notCss
-		* && !exist (css) && overwrite {
-		*	preprocess
-		*	 autoPrefix
-		*	 linter
-			 genSprite
-		*}
-
-		makeMin{
-		 !exist(min.css) && overwrite {
-		 		minStream
-				createMinFile
-			}
-		} else {
-			!debug{
-				minStream
-			}
-		}
-
-	 minStream fn{
-		replacePre
-		min
-	 	replacePost
-	 }
-		*/
+				fileNameMin = file.base + '/' + fileName + config.minExtension + '.css',
+				dest        = file.base + '/' + fileName + '.css',
+				genMinFile  = false,
+				stream;
 
 		//if it is minificate, it'll ignore
 		if(config.minificated){
 			return;
 		}
 
-		//valid types
+		//valid types, css is the exception
 		if(core.defaults.validPreproExtensions.indexOf(type) === -1 &&
-				type !== 'css'){//css is the exception
+			type !== 'css'){
 			return;
 		}
 
+		var forceOverwrite = (global.cfg.app.release && config.overwriteOnRelease);
+
+		//It is a complex condition, I prefer more explict (and redundant)
+		if(!config.overwrite || forceOverwrite){
+			if(config.generateMin){
+
+				if(utils.fileExist(fileNameMin) && !forceOverwrite){
+					console.debug('File to min found, it doesn\'t overwrite (' + fileNameExt + ')');
+					return;
+				}
+
+				genMinFile = true;
+
+			} else {
+
+				if(utils.fileExist(dest) && !forceOverwrite){
+					console.debug('File to preprocess found, it doesn\'t overwrite (' + fileNameExt + ')','otro','y otro');
+					return;
+				}
+			}
+		} else {
+			if(config.generateMin){
+				genMinFile = true;
+			}
+		}
+
+		//starting a new stream
 		stream = gulp.src(file.path)
 			.pipe(utils.debugeame())
 		;
@@ -83,85 +72,83 @@
 		if(config.replaces.original.length > 0){
 
 			if(fileName.indexOf('.' + config.backupExtension) >= 0){
-				//console.log(fileNameExt +': original detected, it will ignore');
+				console.debug(fileNameExt + ': original detected, it will ignore');
 				return;
 			}
 
-			core.modificateOriginal(stream, file.path, config);
+			core.modifyOriginal(stream, file.path, config);
 		}
 
-		if(fileName.indexOf(config.minExtension) >= 0){
-			//console.log(fileNameExt +': minificated detected');
-			return;
+		if(fileName.indexOf(config.minExtension) >= 0 && type === 'css'){
+			console.debug(fileNameExt + ': minificated detected'); //and ingnored it
+			return stream;
 		}
-
 
 		//preprocessors tasks
 		if(core.defaults.validPreproExtensions.indexOf(type) !== -1){
-			var dest = file.base + '/' + fileName + '.css';
+			stream = preprocessFile(stream, config, fileName, type);
+		}
 
-			if(!config.overwrite && utils.fileExist(dest)){
-				console.logWarn('File found, don\'t overwrite (' + file + ')');
-			} else {
+		stream = core.replaces(stream, config.replaces.pre, fileNameExt);
 
-				switch (type){
-					case 'scss':
-					case 'sass':
-						var sassOptions = {errLogToConsole: true, indentedSyntax: (type === 'sass')};
+		if(genMinFile || global.cfg.app.release){
+			stream = stream
+				.pipe(strip({safe: false, block: false}))
+				.pipe(minifycss());
 
-						stream = stream.pipe(sass(sassOptions));
-						break;
-					case 'styl':
-						stream = stream.pipe(stylus());
-						break;
-					case 'less':
-						stream = stream.pipe(less());
-						break;
-				}
+			stream = core.replaces(stream, config.replaces.post, fileNameExt);
 
-				if(config.autoPrefixer){
-					stream = stream.pipe(autoprefixer({browsers: global.cfg.autoprefixer}))
-
-				}
-
-				if(config.linter){
-					stream
-							.pipe(replace(' 0px', ' 0'))
-							.pipe(csslint('csslintrc.json'))
-							.pipe(csslint.reporter(cssLintCustomReporter))
-							.pipe(gif(config.linterForce, csslint.reporter('fail')));
-				}
-
-				stream.pipe(rename(fileName + '.css'));
+			if(genMinFile){
+				stream = stream.pipe(rename(fileNameMin));
 			}
 		}
 
+		if(!genMinFile && type === 'css'){
+			return stream;
+		}
 
 		return stream.pipe(gulp.dest(file.base, {overwrite: true}));
 	};
 
-	var cssLintCustomReporter = function(file){
+	function preprocessFile(stream, config, fileName, type){
+
+		switch (type){
+			case 'scss':
+			case 'sass':
+				var sassOptions = {errLogToConsole: true, indentedSyntax: (type === 'sass')};
+
+				stream = stream.pipe(sass(sassOptions));
+				break;
+			case 'styl':
+				stream = stream.pipe(stylus());
+				break;
+			case 'less':
+				stream = stream.pipe(less());
+				break;
+		}
+
+		if(config.autoPrefixer){
+			stream = stream.pipe(autoprefixer({browsers: global.cfg.autoprefixer}));
+		}
+
+		if(config.linter){
+			stream
+				.pipe(replace(' 0px', ' 0'))
+				.pipe(csslint('csslintrc.json'))
+				.pipe(csslint.reporter(cssLintCustomReporter))
+				.pipe(gif(config.linterForce, csslint.reporter('fail')));
+		}
+
+		stream = stream.pipe(rename(fileName + '.css'));
+		return stream;
+	}
+
+	function cssLintCustomReporter(file){
 		gutil.log(gutil.colors.cyan(file.csslint.errorCount) + ' errors in ' + gutil.colors.magenta(file.path));
 
 		file.csslint.results.forEach(function(result){
 			gutil.log(result.error.message + ' on line ' + result.error.line);
 		});
-	};
+	}
 
 }());
-
-
-//
-//		if(!(file.makeMin && type === 'css')) {
-//			stream = stream.pipe(gulp.dest(file.path));
-//		}
-//
-//		if(file.makeMin){
-//			stream = _minificateAndSave(stream, file, 'css')
-//		}
-//
-//		streams = aux.merge(streams, stream);
-//	}
-//
-//	return streams;
-//}

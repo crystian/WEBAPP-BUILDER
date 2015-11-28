@@ -2,6 +2,7 @@
 	"autoprefixer": "chrome 32",
 	"app": {
 		"name": "index test 08-10",
-		"firstApp": "app1"
+		"firstApp": "app1",
+		"release": false
 	}
 }

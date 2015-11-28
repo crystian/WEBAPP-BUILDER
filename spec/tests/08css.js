@@ -11,11 +11,12 @@ require('shelljs/global');
 var testFolder       = 'spec/fixture/08css',
 		rootFwk          = '../../../..',
 		indexCssOri = 'www/app1/indexCss.original.css',
-		indexCss = 'www/app1/indexCss.css',
+		indexCss = 'www/app1/indexCss',
 		indexSass = 'www/app1/indexSass',
 		indexScss = 'www/app1/indexScss',
 		indexLess = 'www/app1/indexLess',
-		indexStyl = 'www/app1/indexStyl'
+		indexStyl = 'www/app1/indexStyl',
+		keyNotOverw = 'not overwritten'
 ;
 
 function createCssTest(){
@@ -24,10 +25,10 @@ function createCssTest(){
 		'	color: #ff0;'+
 		'}';
 
-	cssTestContent.to(indexCss);
+	cssTestContent.to(indexCss +'.css');
 }
 
-fdescribe("css", function(){
+fdescribe("preprocessors (css)", function(){
 
 	beforeEach(function(){
 		cd(testFolder);
@@ -64,14 +65,14 @@ fdescribe("css", function(){
 	it('(03) should create backup files and modificate the css', function(){
 		cd('03');
 
-		rm('-rf', indexCss);
+		rm('-rf', indexCss +'.css');
 		rm('-rf', indexCssOri);
 
 		createCssTest();
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCssContent = cat(indexCss);
+		var indexCssContent = cat(indexCss +'.css');
 
 		expect(indexCssContent).toContain('yellow');
 	});
@@ -81,7 +82,7 @@ fdescribe("css", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCssContent = cat(indexCss);
+		var indexCssContent = cat(indexCss +'.css');
 
 		expect(indexCssContent).not.toContain('yellow');
 	});
@@ -103,10 +104,12 @@ fdescribe("css", function(){
 
 	it('(06) should create css files', function(){
 		cd('06');
-		rm('-rf', indexSass +'.css');
-		rm('-rf', indexScss +'.css');
-		rm('-rf', indexLess +'.css');
-		rm('-rf', indexStyl +'.css');
+		var ext = '.css';
+
+		rm('-rf', indexSass + ext);
+		rm('-rf', indexScss + ext);
+		rm('-rf', indexLess + ext);
+		rm('-rf', indexStyl + ext);
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
@@ -136,10 +139,12 @@ fdescribe("css", function(){
 
 	it('(09) should create css files (width css values)', function(){
 		cd('09');
-		rm('-rf', indexSass +'.css');
-		rm('-rf', indexScss +'.css');
-		rm('-rf', indexLess +'.css');
-		rm('-rf', indexStyl +'.css');
+		var ext = '.css';
+
+		rm('-rf', indexSass + ext);
+		rm('-rf', indexScss + ext);
+		rm('-rf', indexLess + ext);
+		rm('-rf', indexStyl + ext);
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
@@ -157,10 +162,12 @@ fdescribe("css", function(){
 
 	it('(10) should perfix css (only chrome)', function(){
 		cd('10');
-		rm('-rf', indexSass +'.css');
-		rm('-rf', indexScss +'.css');
-		rm('-rf', indexLess +'.css');
-		rm('-rf', indexStyl +'.css');
+		var ext = '.css';
+
+		rm('-rf', indexSass + ext);
+		rm('-rf', indexScss + ext);
+		rm('-rf', indexLess + ext);
+		rm('-rf', indexStyl + ext);
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
@@ -175,19 +182,21 @@ fdescribe("css", function(){
 		expect(indexLessContent).toContain(keyword);
 		expect(indexStylContent).toContain(keyword);
 
-		var keywordNot = 'display: -ms-flexbox;';
-		expect(indexSassContent).not.toContain(keywordNot);
-		expect(indexScssContent).not.toContain(keywordNot);
-		expect(indexLessContent).not.toContain(keywordNot);
-		expect(indexStylContent).not.toContain(keywordNot);
+		var keyNotOverwNot = 'display: -ms-flexbox;';
+		expect(indexSassContent).not.toContain(keyNotOverwNot);
+		expect(indexScssContent).not.toContain(keyNotOverwNot);
+		expect(indexLessContent).not.toContain(keyNotOverwNot);
+		expect(indexStylContent).not.toContain(keyNotOverwNot);
 	});
 
 	it('(11) should NOT perfix css', function(){
 		cd('11');
-		rm('-rf', indexSass +'.css');
-		rm('-rf', indexScss +'.css');
-		rm('-rf', indexLess +'.css');
-		rm('-rf', indexStyl +'.css');
+		var ext = '.css';
+
+		rm('-rf', indexSass + ext);
+		rm('-rf', indexScss + ext);
+		rm('-rf', indexLess + ext);
+		rm('-rf', indexStyl + ext);
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
@@ -196,16 +205,216 @@ fdescribe("css", function(){
 				indexLessContent = cat(indexLess +'.css'),
 				indexStylContent = cat(indexStyl +'.css');
 
-		var keywordNot1 = '-webkit-transform: rotateX(150deg);';
-		expect(indexSassContent).not.toContain(keywordNot1);
-		expect(indexScssContent).not.toContain(keywordNot1);
-		expect(indexLessContent).not.toContain(keywordNot1);
-		expect(indexStylContent).not.toContain(keywordNot1);
+		var keyNotOverwNot1 = '-webkit-transform: rotateX(150deg);';
+		expect(indexSassContent).not.toContain(keyNotOverwNot1);
+		expect(indexScssContent).not.toContain(keyNotOverwNot1);
+		expect(indexLessContent).not.toContain(keyNotOverwNot1);
+		expect(indexStylContent).not.toContain(keyNotOverwNot1);
 
-		var keywordNot2 = 'display: -ms-flexbox;';
-		expect(indexSassContent).not.toContain(keywordNot2);
-		expect(indexScssContent).not.toContain(keywordNot2);
-		expect(indexLessContent).not.toContain(keywordNot2);
-		expect(indexStylContent).not.toContain(keywordNot2);
+		var keyNotOverwNot2 = 'display: -ms-flexbox;';
+		expect(indexSassContent).not.toContain(keyNotOverwNot2);
+		expect(indexScssContent).not.toContain(keyNotOverwNot2);
+		expect(indexLessContent).not.toContain(keyNotOverwNot2);
+		expect(indexStylContent).not.toContain(keyNotOverwNot2);
 	});
+
+	it('(12) generate min files', function(){
+		cd('12');
+		var ext = '.min.css';
+
+		rm('-rf', indexSass + ext);
+		rm('-rf', indexScss + ext);
+		rm('-rf', indexLess + ext);
+		rm('-rf', indexStyl + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(test('-e', indexSass + ext)).toBe(true);
+		expect(test('-e', indexScss + ext)).toBe(true);
+		expect(test('-e', indexLess + ext)).toBe(true);
+		expect(test('-e', indexStyl + ext)).toBe(true);
+
+		var file = fs.statSync(indexSass + ext);
+		expect(file.size).toBeLessThan(240);
+	});
+
+	it('(13) generate min files with other extension', function(){
+		cd('13');
+		var ext = '.other.css';
+
+		rm('-rf', indexSass + ext);
+		rm('-rf', indexScss + ext);
+		rm('-rf', indexLess + ext);
+		rm('-rf', indexStyl + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(test('-e', indexSass + ext)).toBe(true);
+		expect(test('-e', indexScss + ext)).toBe(true);
+		expect(test('-e', indexLess + ext)).toBe(true);
+		expect(test('-e', indexStyl + ext)).toBe(true);
+
+		var file = fs.statSync(indexSass + ext);
+		expect(file.size).toBeLessThan(240);
+	});
+
+	it('(14) should replace pre min', function(){
+		cd('14');
+		var ext = '.css';
+
+		rm('-rf', indexLess + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var indexCssContent = cat(indexLess + ext);
+
+		expect(indexCssContent).toContain('yellow');
+	});
+
+	it('(15) should replace pre min (regular expr)', function(){
+		cd('15');
+		var ext = '.css';
+
+		rm('-rf', indexLess + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var indexCssContent = cat(indexLess + ext);
+
+		expect(indexCssContent).toContain('border: 50em;');
+	});
+
+	it('(16) should replace post min', function(){
+		cd('16');
+		var ext = '.min.css';
+
+		rm('-rf', indexLess + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var indexCssContent = cat(indexLess + ext);
+
+		expect(indexCssContent).toContain('border:50em');
+
+		var file = fs.statSync(indexLess + ext);
+		expect(file.size).toBeLessThan(250);
+	});
+
+	it('(17) should minify css file', function(){
+		cd('17');
+		var ext = '.min.css';
+
+		rm('-rf', indexLess + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var indexCssContent = cat(indexCss + ext);
+
+		expect(indexCssContent).toContain('border:0}');
+
+		var file = fs.statSync(indexCss + ext);
+		expect(file.size).toBeLessThan(240);
+	});
+
+	it('(18) should minify css file because it is a release', function(){
+		cd('18');
+		var ext = '.css';
+
+		rm('-rf', indexSass + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var indexCssContent = cat(indexSass + ext);
+
+		expect(indexCssContent).toContain('border:0}');
+
+		var file = fs.statSync(indexSass + ext);
+		expect(file.size).toBeLessThan(240);
+	});
+
+	it('(19) should not process overwrite files - min', function(){
+		cd('19');
+		var ext = '.min.css';
+
+		rm('-rf', indexScss + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var indexSassContent = cat(indexSass + ext),
+				indexScssContent = cat(indexScss + ext),
+				indexLessContent = cat(indexLess + ext),
+				indexStylContent = cat(indexStyl + ext);
+
+		expect(indexSassContent).toContain(keyNotOverw);
+		expect(indexLessContent).toContain(keyNotOverw);
+		expect(indexStylContent).toContain(keyNotOverw);
+
+		expect(indexScssContent).toContain('color:#FF0');
+
+		var file = fs.statSync(indexScss + ext);
+		expect(file.size).toBeLessThan(240);
+	});
+
+	it('(20) should not process overwrite files', function(){
+		cd('20');
+		var ext = '.css';
+
+		rm('-rf', indexScss + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var indexSassContent = cat(indexSass + ext),
+				indexScssContent = cat(indexScss + ext),
+				indexLessContent = cat(indexLess + ext),
+				indexStylContent = cat(indexStyl + ext);
+
+		expect(indexSassContent).toContain(keyNotOverw);
+		expect(indexLessContent).toContain(keyNotOverw);
+		expect(indexStylContent).toContain(keyNotOverw);
+
+		expect(indexScssContent).toContain('color:#FF0');
+	});
+
+	it('(21) should not process minificated file', function(){
+		cd('21');
+		var ext = '.css';
+
+		rm('-rf', indexScss + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var indexCssContent = cat(indexCss + ext);
+
+		expect(indexCssContent).toContain(keyNotOverw);
+
+	});
+
+	it('(22) should overwriteOnRelease without release', function(){
+		cd('22');
+		var ext = '.css';
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var indexCssContent = cat(indexScss + ext);
+
+		expect(indexCssContent).toContain(keyNotOverw);
+
+	});
+
+	it('(23) should overwriteOnRelease with release', function(){
+		cd('23');
+		var ext = '.css';
+
+		rm('-rf', indexScss + ext);
+		keyNotOverw.to(indexScss + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var indexCssContent = cat(indexScss + ext);
+
+		expect(indexCssContent).not.toContain(keyNotOverw);
+
+	});
+
+
 });

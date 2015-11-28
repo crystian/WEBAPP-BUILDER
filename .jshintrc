@@ -72,6 +72,8 @@
 	"white":	false,
 
 	"globals":{
+		"global": true,
+		"gulp": true,
 		"loader": true,
 		"_loaderCfg": true,
 		"polyfills": true,

@@ -1,0 +1,29 @@
+[
+	{
+		"files": [
+			"index*.*",
+			"!*.css"
+		],
+		"replaces":{
+			"origial": []
+		}
+	},
+	{
+		"files": [
+			"indexCss.css"
+		],
+		"replaces":{
+			"origial": [
+				["#ff0","yellow"]
+			],
+			"pre": [
+				["yellow","red"]
+			],
+			"post": [
+				["red","blue"]
+			]
+		},
+		"minExtension": ".m",
+		"generateMin": true
+	}
+]
