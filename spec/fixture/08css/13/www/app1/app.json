@@ -3,7 +3,7 @@
 		"files": [
 			"index*.*"
 		],
-		"minExtension": ".other",
+		"minExtension": "other",
 		"linter": false,
 		"generateMin": true
 	}

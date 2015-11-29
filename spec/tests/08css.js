@@ -8,27 +8,27 @@ var utils = require('../../tasks/shared/utils'),
 var args = process.argv.slice(2).join(' ');
 require('shelljs/global');
 
-var testFolder       = 'spec/fixture/08css',
-		rootFwk          = '../../../..',
+var testFolder  = 'spec/fixture/08css',
+		rootFwk     = '../../../..',
 		indexCssOri = 'www/app1/indexCss.original.css',
-		indexCss = 'www/app1/indexCss',
-		indexSass = 'www/app1/indexSass',
-		indexScss = 'www/app1/indexScss',
-		indexLess = 'www/app1/indexLess',
-		indexStyl = 'www/app1/indexStyl',
+		indexCss    = 'www/app1/indexCss',
+		indexSass   = 'www/app1/indexSass',
+		indexScss   = 'www/app1/indexScss',
+		indexLess   = 'www/app1/indexLess',
+		indexStyl   = 'www/app1/indexStyl',
 		keyNotOverw = 'not overwritten'
-;
+	;
 
 function createCssTest(){
 	var cssTestContent =
-		'body {'+
-		'	color: #ff0;'+
-		'}';
+				'body {' +
+				'	color: #ff0;' +
+				'}';
 
-	cssTestContent.to(indexCss +'.css');
+	cssTestContent.to(indexCss + '.css');
 }
 
-fdescribe("preprocessors (css)", function(){
+describe("preprocessors (css)", function(){
 
 	beforeEach(function(){
 		cd(testFolder);
@@ -65,14 +65,14 @@ fdescribe("preprocessors (css)", function(){
 	it('(03) should create backup files and modificate the css', function(){
 		cd('03');
 
-		rm('-rf', indexCss +'.css');
+		rm('-rf', indexCss + '.css');
 		rm('-rf', indexCssOri);
 
 		createCssTest();
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCssContent = cat(indexCss +'.css');
+		var indexCssContent = cat(indexCss + '.css');
 
 		expect(indexCssContent).toContain('yellow');
 	});
@@ -82,7 +82,7 @@ fdescribe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCssContent = cat(indexCss +'.css');
+		var indexCssContent = cat(indexCss + '.css');
 
 		expect(indexCssContent).not.toContain('yellow');
 	});
@@ -113,28 +113,28 @@ fdescribe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(test('-e', indexSass +'.css')).toBe(true);
-		expect(test('-e', indexScss +'.css')).toBe(true);
-		expect(test('-e', indexLess +'.css')).toBe(true);
-		expect(test('-e', indexStyl +'.css')).toBe(true);
+		expect(test('-e', indexSass + '.css')).toBe(true);
+		expect(test('-e', indexScss + '.css')).toBe(true);
+		expect(test('-e', indexLess + '.css')).toBe(true);
+		expect(test('-e', indexStyl + '.css')).toBe(true);
 	});
 
 	it('(07) should works with css linter but with errors', function(){
 		cd('07');
-		rm('-rf', indexScss +'.css');
+		rm('-rf', indexScss + '.css');
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(test('-e', indexScss +'.css')).toBe(true);
+		expect(test('-e', indexScss + '.css')).toBe(true);
 	});
 
 	it('(08) should fail because use linterForce:true', function(){
 		cd('08');
-		rm('-rf', indexScss +'.css');
+		rm('-rf', indexScss + '.css');
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(1);
 
-		expect(test('-e', indexScss +'.css')).toBe(false);
+		expect(test('-e', indexScss + '.css')).toBe(false);
 	});
 
 	it('(09) should create css files (width css values)', function(){
@@ -148,10 +148,10 @@ fdescribe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexSassContent = cat(indexSass +'.css'),
-				indexScssContent = cat(indexScss +'.css'),
-				indexLessContent = cat(indexLess +'.css'),
-				indexStylContent = cat(indexStyl +'.css');
+		var indexSassContent = cat(indexSass + '.css'),
+				indexScssContent = cat(indexScss + '.css'),
+				indexLessContent = cat(indexLess + '.css'),
+				indexStylContent = cat(indexStyl + '.css');
 
 		var keyword = 'color: #FF0;';
 		expect(indexSassContent).toContain(keyword);
@@ -171,10 +171,10 @@ fdescribe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexSassContent = cat(indexSass +'.css'),
-				indexScssContent = cat(indexScss +'.css'),
-				indexLessContent = cat(indexLess +'.css'),
-				indexStylContent = cat(indexStyl +'.css');
+		var indexSassContent = cat(indexSass + '.css'),
+				indexScssContent = cat(indexScss + '.css'),
+				indexLessContent = cat(indexLess + '.css'),
+				indexStylContent = cat(indexStyl + '.css');
 
 		var keyword = '-webkit-transform: rotateX(150deg);';
 		expect(indexSassContent).toContain(keyword);
@@ -200,10 +200,10 @@ fdescribe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexSassContent = cat(indexSass +'.css'),
-				indexScssContent = cat(indexScss +'.css'),
-				indexLessContent = cat(indexLess +'.css'),
-				indexStylContent = cat(indexStyl +'.css');
+		var indexSassContent = cat(indexSass + '.css'),
+				indexScssContent = cat(indexScss + '.css'),
+				indexLessContent = cat(indexLess + '.css'),
+				indexStylContent = cat(indexStyl + '.css');
 
 		var keyNotOverwNot1 = '-webkit-transform: rotateX(150deg);';
 		expect(indexSassContent).not.toContain(keyNotOverwNot1);
@@ -235,7 +235,7 @@ fdescribe("preprocessors (css)", function(){
 		expect(test('-e', indexStyl + ext)).toBe(true);
 
 		var file = fs.statSync(indexSass + ext);
-		expect(file.size).toBeLessThan(240);
+		expect(file.size).toBe(237);
 	});
 
 	it('(13) generate min files with other extension', function(){
@@ -255,7 +255,7 @@ fdescribe("preprocessors (css)", function(){
 		expect(test('-e', indexStyl + ext)).toBe(true);
 
 		var file = fs.statSync(indexSass + ext);
-		expect(file.size).toBeLessThan(240);
+		expect(file.size).toBe(237);
 	});
 
 	it('(14) should replace pre min', function(){
@@ -297,7 +297,7 @@ fdescribe("preprocessors (css)", function(){
 		expect(indexCssContent).toContain('border:50em');
 
 		var file = fs.statSync(indexLess + ext);
-		expect(file.size).toBeLessThan(250);
+		expect(file.size).toBe(240);
 	});
 
 	it('(17) should minify css file', function(){
@@ -313,7 +313,7 @@ fdescribe("preprocessors (css)", function(){
 		expect(indexCssContent).toContain('border:0}');
 
 		var file = fs.statSync(indexCss + ext);
-		expect(file.size).toBeLessThan(240);
+		expect(file.size).toBe(237);
 	});
 
 	it('(18) should minify css file because it is a release', function(){
@@ -329,7 +329,7 @@ fdescribe("preprocessors (css)", function(){
 		expect(indexCssContent).toContain('border:0}');
 
 		var file = fs.statSync(indexSass + ext);
-		expect(file.size).toBeLessThan(240);
+		expect(file.size).toBe(237);
 	});
 
 	it('(19) should not process overwrite files - min', function(){
@@ -352,7 +352,7 @@ fdescribe("preprocessors (css)", function(){
 		expect(indexScssContent).toContain('color:#FF0');
 
 		var file = fs.statSync(indexScss + ext);
-		expect(file.size).toBeLessThan(240);
+		expect(file.size).toBe(237);
 	});
 
 	it('(20) should not process overwrite files', function(){
@@ -414,6 +414,71 @@ fdescribe("preprocessors (css)", function(){
 
 		expect(indexCssContent).not.toContain(keyNotOverw);
 
+	});
+
+	it('(24) should not make a backup file', function(){
+		cd('24');
+		var indexScssC = indexScss + '.css',
+				indexScssS = indexScss + '.scss';
+
+		rm('-rf', indexScssC);
+		rm('-rf', indexScssS);
+
+		cp('-f', 'www/app1/ori/*', 'www/app1');
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var file1 = fs.statSync(indexScssC);
+		expect(file1.size).toBe(237);
+
+		var file2 = fs.statSync(indexScssS);
+		expect(file2.size).toBe(170);
+
+		expect(cat(indexScssS)).toContain('$primaryColor: #00F');
+		expect(cat(indexScssC)).toContain('color:#00F');
+
+		expect(test('-e', indexScss + '.original.scss')).toBe(false); //should not exist
+	});
+
+	it('(90) complex case 1', function(){
+		cd('90');
+
+		rm('-rf', indexSass + '*');
+		rm('-rf', indexScss + '*');
+		rm('-rf', indexLess + '*');
+		rm('-rf', indexStyl + '*');
+
+		cp('-f', 'www/app1/ori/*', 'www/app1');
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		//first app:
+		expect(cat(indexScss + '.original.scss')).toContain('$primaryColor: #FF0'); //should not change it
+		expect(cat(indexScss + '.scss')).toContain('$primaryColor: #00F;');
+		expect(cat(indexScss + '.css')).toContain('color:#00F');
+
+		expect(cat(indexLess + '.original.less')).toContain('@primaryColor: #FF0');
+		expect(cat(indexLess + '.less')).toContain('@primaryColor: #00F;');
+		expect(cat(indexLess + '.css')).toContain('color:#00F');
+
+		expect(fs.statSync(indexScss + '.css').size).toBe(237);
+
+		expect(fs.statSync(indexLess + '.css').size).toBe(237);
+
+		//complex
+		expect(test('-e', indexCss + '.css')).toBe(true);
+		expect(test('-e', indexCss + '.b.css')).toBe(true);//original backup with other extension
+		expect(test('-e', indexCss + '.m.css')).toBe(true);//minificated with other extension
+
+		expect(fs.statSync(indexCss + '.m.css').size).toBe(237);
+
+		expect(cat(indexCss + '.css')).toContain('color: yellow;');//replace: original
+		expect(cat(indexCss + '.m.css')).toContain('color:blue;');//replace: pre & post
+		expect(cat(indexCss + '.b.css')).toContain('color: #FF0;');//original value
+
+		//second app:
+		expect(test('-e', 'www/app2/indexSass.css')).toBe(false);//should not exist
+		expect(cat('www/app2/indexCss.css')).toContain(keyNotOverw);
 	});
 
 

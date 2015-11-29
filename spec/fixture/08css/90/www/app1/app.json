@@ -5,7 +5,9 @@
 			"!*.css"
 		],
 		"replaces":{
-			"origial": []
+			"original": [
+				["#FF0","#00F"]
+			]
 		}
 	},
 	{
@@ -13,8 +15,8 @@
 			"indexCss.css"
 		],
 		"replaces":{
-			"origial": [
-				["#ff0","yellow"]
+			"original": [
+				["#FF0","yellow"]
 			],
 			"pre": [
 				["yellow","red"]
@@ -23,7 +25,8 @@
 				["red","blue"]
 			]
 		},
-		"minExtension": ".m",
+		"minExtension": "m",
+		"backupExtension": "b",
 		"generateMin": true
 	}
 ]

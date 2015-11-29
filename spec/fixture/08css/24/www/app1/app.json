@@ -1,0 +1,14 @@
+[
+	{
+		"files": [
+			"index*.scss"
+		],
+		"linter": false,
+		"makeBackup": false,
+		"replaces":{
+			"original": [
+				["#FF0","#00F"]
+			]
+		}
+	}
+]

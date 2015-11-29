@@ -50,9 +50,10 @@
 			'linter': true,			//if you want to lint, will not apply for libraries
 			'linterForce': true,			//if fail, return an error, otherwise continue without break the process
 			'backupExtension': 'original', //if it has replaces it will make a backup with this postfix
+			'makeBackup': true, //if there are replaces (original)
 			//'genSprite': true,	//generate sprite
 			'generateMin': false,		//it should be create a minificate version
-			'minExtension': '.min',//prefix for file name minificated
+			'minExtension': 'min',//prefix for file name minificated
 			'replaces': {
 				'original': [], //modificate orginal version
 				'pre': [					//pre minificatedd
@@ -157,20 +158,19 @@
 	exports.modifyOriginal = function(stream, file, config){
 		var filenameBackup = utils.setPreExtensionFilename(file, config.backupExtension);
 
-		if(!utils.fileExist(filenameBackup)){
-			console.logGreen('Replaces on original file: ' + utils.getFileNameWithExtension(file));
-			fs.copySync(file, filenameBackup);
+		if(config.makeBackup && !utils.fileExist(filenameBackup)){
+				console.debug('Replaces on original file: ' + utils.getFileNameWithExtension(file));
+				fs.copySync(file, filenameBackup);
+		}
 
-			aux.replace(stream, config.replaces.original)
+		stream = aux.replace(stream, config.replaces.original)
 				.pipe(gulp.dest(path.dirname(file)));
 
-		}
+		return stream;
 	};
 
 	exports.replaces = function(stream, replaces, file){
-		if(gutil.env.debug){
-			console.logGreen('Replaces on file: ' + file);
-		}
+		console.debug('Replaces on file: ' + file);
 
 		if(replaces && replaces.length > 0){
 			return aux.replace(stream, replaces);

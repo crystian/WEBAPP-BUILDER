@@ -1,6 +1,7 @@
 /**
  * Created by Crystian on 15/11/2015.
  */
+	//TODO sprites
 (function(){
 	'use strict';
 
@@ -22,7 +23,7 @@
 		var fileName    = utils.getFileName(file.path),
 				type        = utils.getExtensionFile(file.path),
 				fileNameExt = utils.getFileNameWithExtension(file.path),
-				fileNameMin = file.base + '/' + fileName + config.minExtension + '.css',
+				fileNameMin = file.base + '/' + fileName + '.' + config.minExtension + '.css',
 				dest        = file.base + '/' + fileName + '.css',
 				genMinFile  = false,
 				stream;
@@ -54,7 +55,7 @@
 			} else {
 
 				if(utils.fileExist(dest) && !forceOverwrite){
-					console.debug('File to preprocess found, it doesn\'t overwrite (' + fileNameExt + ')','otro','y otro');
+					console.debug('File to preprocess found, it doesn\'t overwrite (' + fileNameExt + ')', 'otro', 'y otro');
 					return;
 				}
 			}
@@ -64,22 +65,21 @@
 			}
 		}
 
+		if(fileName.indexOf('.' + config.backupExtension) >= 0){
+			console.debug(fileNameExt + ': original detected, it will ignore');
+			return;
+		}
+
 		//starting a new stream
 		stream = gulp.src(file.path)
 			.pipe(utils.debugeame())
 		;
 
 		if(config.replaces.original.length > 0){
-
-			if(fileName.indexOf('.' + config.backupExtension) >= 0){
-				console.debug(fileNameExt + ': original detected, it will ignore');
-				return;
-			}
-
-			core.modifyOriginal(stream, file.path, config);
+			stream = core.modifyOriginal(stream, file.path, config);
 		}
 
-		if(fileName.indexOf(config.minExtension) >= 0 && type === 'css'){
+		if(fileName.indexOf('.' + config.minExtension) >= 0 && type === 'css'){
 			console.debug(fileNameExt + ': minificated detected'); //and ingnored it
 			return stream;
 		}
@@ -109,6 +109,7 @@
 
 		return stream.pipe(gulp.dest(file.base, {overwrite: true}));
 	};
+
 
 	function preprocessFile(stream, config, fileName, type){
 

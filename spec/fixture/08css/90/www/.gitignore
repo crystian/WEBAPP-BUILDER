@@ -1,1 +1,5 @@
 /app*/*.css
+/app1/*.less
+/app1/*.sass
+/app1/*.scss
+/app1/*.styl
