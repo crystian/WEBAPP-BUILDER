@@ -9,7 +9,7 @@ var args = process.argv.slice(2).join(' ');
 
 require('shelljs/global');
 
-var testFolder = 'spec/fixture/03Fbower',
+var testFolder = 'spec/fixture/03Lbower',
 		rootFwk = '../../../..',
 		bowerJson = '/bower.json',
 		configJson = 'config.json';

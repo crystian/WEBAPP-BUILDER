@@ -8,7 +8,7 @@ var utils = require('../../tasks/shared/utils'),
 var args = process.argv.slice(2).join(' ');
 require('shelljs/global');
 
-var testFolder       = 'spec/fixture/06Fhtml',
+var testFolder       = 'spec/fixture/06Lhtml',
 		rootFwk          = '../../../..',
 		pathLoader       = '/loader',
 		index            = '/index.html',
