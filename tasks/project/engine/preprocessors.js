@@ -20,96 +20,26 @@
 			core         = require('./core');
 
 	exports.runPreprocessors = function(file, config, appName, pth){
-		var fileName    = utils.getFileName(file.path),
-				type        = utils.getExtensionFile(file.path),
-				fileNameExt = utils.getFileNameWithExtension(file.path),
-				fileNameMin = file.base + '/' + fileName + '.' + config.minExtension + '.css',
-				dest        = file.base + '/' + fileName + '.css',
-				genMinFile  = false,
-				stream;
-
-		//if it is minificate, it'll ignore
-		if(config.minificated){
-			return;
-		}
-
-		//valid types, css is the exception
-		if(core.defaults.validPreproExtensions.indexOf(type) === -1 &&
-			type !== 'css'){
-			return;
-		}
-
-		var forceOverwrite = (global.cfg.app.release && config.overwriteOnRelease);
-
-		//It is a complex condition, I prefer more explict (and redundant)
-		if(!config.overwrite || forceOverwrite){
-			if(config.generateMin){
-
-				if(utils.fileExist(fileNameMin) && !forceOverwrite){
-					console.debug('File to min found, it doesn\'t overwrite (' + fileNameExt + ')');
-					return;
+		core.doMagic(file, config, appName, pth, {
+			typeValidation: function(type){
+				//valid types, css is the exception
+				return (core.defaults.validPreproExtensions.indexOf(type) === -1 && type !== 'css');
+			},
+			processFile: function(stream, config, fileName, type){
+				//preprocessors tasks
+				if(core.defaults.validPreproExtensions.indexOf(type) !== -1){
+					stream = preprocessFile(stream, config, fileName, type);
 				}
-
-				genMinFile = true;
-
-			} else {
-
-				if(utils.fileExist(dest) && !forceOverwrite){
-					console.debug('File to preprocess found, it doesn\'t overwrite (' + fileNameExt + ')', 'otro', 'y otro');
-					return;
-				}
-			}
-		} else {
-			if(config.generateMin){
-				genMinFile = true;
-			}
-		}
-
-		if(fileName.indexOf('.' + config.backupExtension) !== -1){
-			console.debug(fileNameExt + ': original detected, it will ignore');
-			return;
-		}
-
-		//starting a new stream
-		stream = gulp.src(file.path)
-			.pipe(utils.debugeame())
-		;
-
-		if(config.replaces.original.length > 0){
-			stream = core.modifyOriginal(stream, file.path, config);
-		}
-
-		if(fileName.indexOf('.' + config.minExtension) >= 0 && type === 'css'){
-			console.debug(fileNameExt + ': minificated detected'); //and ingnored it
-			return stream;
-		}
-
-		//preprocessors tasks
-		if(core.defaults.validPreproExtensions.indexOf(type) !== -1){
-			stream = preprocessFile(stream, config, fileName, type);
-		}
-
-		stream = core.replaces(stream, config.replaces.pre, fileNameExt);
-
-		if(genMinFile || global.cfg.app.release){
-			stream = stream
-				.pipe(strip({safe: false, block: false}))
-				.pipe(minifycss());
-
-			stream = core.replaces(stream, config.replaces.post, fileNameExt);
-
-			if(genMinFile){
-				stream = stream.pipe(rename(fileNameMin));
-			}
-		}
-
-		if(!genMinFile && type === 'css'){
-			return stream;
-		}
-
-		return stream.pipe(gulp.dest(file.base, {overwrite: true}));
+				return stream;
+			},
+			minifyFile: function(stream){
+				return stream
+					.pipe(strip({safe: false, block: false}))
+					.pipe(minifycss());
+			},
+			extensionMin: 'css'
+		});
 	};
-
 
 	function preprocessFile(stream, config, fileName, type){
 

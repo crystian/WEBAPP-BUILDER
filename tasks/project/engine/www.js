@@ -21,13 +21,13 @@
 			return;
 		}
 
-		if(file.basename.indexOf('.'+ config.backupExtension +'.')!==-1){
-			console.debug('WWWJSON:'+ file.basename +' Backup detected, skipped');
+		if(file.basename.indexOf('.' + config.backupExtension + '.') !== -1){
+			console.debug('WWWJSON:' + file.basename + ' Backup detected, skipped');
 			return;
 		}
 
-		if(config.generateMin && file.basename.indexOf('.'+ config.minExtension +'.')===-1){
-			console.debug('WWWJSON:'+ file.basename +' GenerateMin origin version detected, skipped');
+		if(config.generateMin && file.basename.indexOf('.' + config.minExtension + '.') === -1){
+			console.debug('WWWJSON:' + file.basename + ' GenerateMin origin version detected, skipped');
 			return;
 		}
 
@@ -42,7 +42,7 @@
 		var result = [];
 
 		files.forEach(function(file){
-			if(file && result.indexOf(file)===-1){
+			if(file && result.indexOf(file) === -1){
 				result.push(file)
 			}
 		});

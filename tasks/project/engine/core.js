@@ -13,6 +13,7 @@
 			fs     = require('fs-extra'),
 			path   = require('path'),
 			merge2 = require('merge2'),
+			rename = require('gulp-rename'),
 			gutil  = require('gulp-util');
 	//	commons = require('../commons'),
 	//	uglify = require('gulp-uglify'),
@@ -153,22 +154,107 @@
 		return r;
 	}
 
+	exports.doMagic = function(file, config, appName, pth, typeConfig){
+		var fileName    = utils.getFileName(file.path),
+				type        = utils.getExtensionFile(file.path),
+				fileNameExt = utils.getFileNameWithExtension(file.path),
+				fileNameMin = file.base + '/' + fileName + '.' + config.minExtension + '.' + typeConfig.extensionMin,
+				dest        = file.base + '/' + fileName + '.' + typeConfig.extensionMin,
+				genMinFile  = false,
+				stream;
 
-	exports.modifyOriginal = function(stream, file, config){
+		//if it is minificate, it'll ignore
+		if(config.minificated){
+			return;
+		}
+
+		if(typeConfig.typeValidation(type)){
+			return;
+		}
+
+		var forceOverwrite = (global.cfg.app.release && config.overwriteOnRelease);
+
+		//It is a complex condition, I prefer more explict (and redundant)
+		if(!config.overwrite || forceOverwrite){
+			if(config.generateMin){
+
+				if(utils.fileExist(fileNameMin) && !forceOverwrite){
+					console.debug('File to min found, it doesn\'t overwrite (' + fileNameExt + ')');
+					return;
+				}
+
+				genMinFile = true;
+
+			} else {
+
+				if(utils.fileExist(dest) && !forceOverwrite){
+					console.debug('File to preprocess found, it doesn\'t overwrite (' + fileNameExt + ')');
+					return;
+				}
+			}
+		} else {
+			if(config.generateMin){
+				genMinFile = true;
+			}
+		}
+
+		if(fileName.indexOf('.' + config.backupExtension) !== -1){
+			console.debug(fileNameExt + ': original detected, it will ignore');
+			return;
+		}
+
+		//starting a new stream
+		stream = gulp.src(file.path)
+			.pipe(utils.debugeame())
+		;
+
+		if(config.replaces.original.length > 0){
+			stream = modifyOriginal(stream, file.path, config);
+		}
+
+		if(fileName.indexOf('.' + config.minExtension) >= 0 && type === typeConfig.extensionMin){
+			console.debug(fileNameExt + ': minificated detected'); //and ingnored it
+			return stream;
+		}
+
+		stream = typeConfig.processFile(stream, config, fileName, type);
+
+		stream = replaces(stream, config.replaces.pre, fileNameExt);
+
+		if(genMinFile || global.cfg.app.release){
+
+			stream = typeConfig.minifyFile(stream);
+
+			stream = replaces(stream, config.replaces.post, fileNameExt);
+
+			if(genMinFile){
+				stream = stream.pipe(rename(fileNameMin));
+			}
+		}
+
+		if(!genMinFile && type === typeConfig.extensionMin){
+			return stream;
+		}
+
+		return stream.pipe(gulp.dest(file.base, {overwrite: true}));
+	};
+
+
+	var modifyOriginal = exports.modifyOriginal = function(stream, file, config){
 		var filenameBackup = utils.setPreExtensionFilename(file, config.backupExtension);
 
 		if(config.makeBackup && !utils.fileExist(filenameBackup)){
-				console.debug('Replaces on original file: ' + utils.getFileNameWithExtension(file));
-				fs.copySync(file, filenameBackup);
+			console.debug('Replaces on original file: ' + utils.getFileNameWithExtension(file));
+			fs.copySync(file, filenameBackup);
 		}
 
 		stream = aux.replace(stream, config.replaces.original)
-				.pipe(gulp.dest(path.dirname(file)));
+			.pipe(gulp.dest(path.dirname(file)));
 
 		return stream;
 	};
 
-	exports.replaces = function(stream, replaces, file){
+	var replaces = exports.replaces = function(stream, replaces, file){
 		console.debug('Replaces on file: ' + file);
 
 		if(replaces && replaces.length > 0){
