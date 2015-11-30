@@ -1,10 +1,7 @@
 [
 	{
 		"files": [
-			"index1.scss",
-			"index2.less",
-			"index3.sass",
-			"index4.css"
+			"index*.*"
 		]
 	}
 ]

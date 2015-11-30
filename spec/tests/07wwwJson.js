@@ -8,11 +8,16 @@ var utils = require('../../tasks/shared/utils'),
 var args = process.argv.slice(2).join(' ');
 require('shelljs/global');
 
-var testFolder       = 'spec/fixture/07wwwJson',
-		rootFwk          = '../../../..',
-		w1 = 'www/app1/www.json',
-		w2 = 'www/app2/www.json'
-;
+var testFolder = 'spec/fixture/07wwwJson',
+		rootFwk    = '../../../..',
+		w1         = 'www/app1/www.json',
+		w2         = 'www/app2/www.json',
+		indexCss   = 'www/app1/indexCss',
+		indexSass  = 'www/app1/indexSass',
+		indexScss  = 'www/app1/indexScss',
+		indexLess  = 'www/app1/indexLess',
+		indexStyl  = 'www/app1/indexStyl'
+	;
 
 describe("make www.json files - ", function(){
 
@@ -90,7 +95,7 @@ describe("make www.json files - ", function(){
 
 	});
 
-	it('(07) should rename to css extension', function(){
+	it('(07) should detect 5 files', function(){
 		cd('07');
 
 		rm('-rf', w1);
@@ -162,13 +167,6 @@ describe("make www.json files - ", function(){
 		expect(json1.length).toBe(3);
 	});
 
-	it('(11) should fail because not recognice extension', function(){
-		cd('11');
-
-		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(1);
-
-	});
-
 	it('(12) should ignore file by ignoreOnRelease on release mode', function(){
 		cd('12');
 
@@ -205,6 +203,29 @@ describe("make www.json files - ", function(){
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(1);
 
+	});
+
+	it('(90) complex case 1', function(){
+		cd('90');
+
+		rm('-rf', indexCss + '*');
+		rm('-rf', indexSass + '*');
+		rm('-rf', indexScss + '*');
+		rm('-rf', indexLess + '*');
+		rm('-rf', indexStyl + '*');
+
+		cp('-f', 'www/app1/ori/*', 'www/app1');
+
+		expect(exec('gulp makeWwwJson --testMode --debug ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+
+		expect(json1.length).toBe(5);
+		expect(json1[0]).toBe('app1/indexCss.mini.css');
+		expect(json1[1]).toBe('app1/indexLess.mini.css');
+		expect(json1[2]).toBe('app1/indexSass.mini.css');
+		expect(json1[3]).toBe('app1/indexScss.mini.css');
+		expect(json1[4]).toBe('app1/indexStyl.mini.css');
 	});
 
 });

@@ -3,6 +3,7 @@
 		"files": [
 			"index*.*"
 		],
+		"linter": true,
 		"linterForce": true
 	}
 ]

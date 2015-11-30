@@ -7,11 +7,11 @@ var engine = require('./engine/core.js');
 //Alias
 gulp.task('css', ['makeCss']);
 
-gulp.task('makeWwwJson', function(){
+gulp.task('makeWwwJson', ['makeCss'], function(){
 	engine.makeWwwJson();
 });
 
-gulp.task('css', function(){
+gulp.task('makeCss', function(){
 	return engine.runPreprocessors();
 });
 

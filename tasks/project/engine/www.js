@@ -10,41 +10,41 @@
 			path    = require('path'),
 			wwwJson = 'www.json';
 
+	exports.resolveFiles = function(file, config, appName, pth){
+		var type = utils.getExtensionFile(file.path);
+
+		if(core.defaults.validPreproExtensions.indexOf(type) !== -1){
+			type = 'css';
+		}
+
+		if(core.defaults.validExtensions.indexOf(type) === -1){
+			return;
+		}
+
+		if(file.basename.indexOf('.'+ config.backupExtension +'.')!==-1){
+			console.debug('WWWJSON:'+ file.basename +' Backup detected, skipped');
+			return;
+		}
+
+		if(config.generateMin && file.basename.indexOf('.'+ config.minExtension +'.')===-1){
+			console.debug('WWWJSON:'+ file.basename +' GenerateMin origin version detected, skipped');
+			return;
+		}
+
+		var filePath = utils.setExtensionFilename(file.path, type);
+		filePath = path.relative(pth, filePath);
+		filePath = filePath.split('\\').join('/');
+
+		return filePath;
+	};
+
 	exports.makeWwwJson = function(files, appName, pth){
-		var result = [],
-				preprocessFiles = [];
+		var result = [];
 
 		files.forEach(function(file){
-			var filePath = file.path,
-					preprocess = false,
-					type;
-
-			filePath = path.relative(pth, filePath);
-
-			type = utils.getExtensionFile(filePath);
-
-			if(core.defaults.validPreproExtensions.indexOf(type) !== -1){
-				preprocess = true;
-				type = 'css';
-			} else if(core.defaults.validExtensions.indexOf(type) === -1){
-				console.logRed('APPFACTORY: Error, type not found');
-				utils.exit(1);
+			if(file && result.indexOf(file)===-1){
+				result.push(file)
 			}
-
-			filePath = utils.setExtensionFilename(filePath, type);
-
-			filePath = filePath.split('\\').join('/');
-
-			if(preprocessFiles.indexOf(filePath) > -1){
-				console.logRed('APPFACTORY: Error, more than one file with the same name, check css files');
-				utils.exit(1);
-			}
-
-			if(preprocess){
-				preprocessFiles.push(filePath);
-			}
-
-			result.push(filePath);
 		});
 
 		return makeWwwFile(appName, result);

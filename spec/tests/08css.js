@@ -75,6 +75,8 @@ describe("preprocessors (css)", function(){
 		var indexCssContent = cat(indexCss + '.css');
 
 		expect(indexCssContent).toContain('yellow');
+
+		expect(test('-e', indexCssOri)).toBe(true);
 	});
 
 	it('(04) should do nothing, becasuse there an original file', function(){

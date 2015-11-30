@@ -1,5 +1,6 @@
 # APP FACTORY!
 
+tener en cuenta que si usas el patron glob para una app con dos grupos, si uno de ellos crea un backup, el otro lo puede estar leyendo, debes ignorarlo con "!"
 ---
 
 ## Que es este coso?

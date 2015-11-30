@@ -6,9 +6,9 @@ var args = process.argv.slice(2).join(' ');
 require('shelljs/global');
 
 var testFolder = 'spec/fixture/04Lbase',
-		rootFwk = '../../../..',
+		rootFwk    = '../../../..',
 		pathLoader = '/loader',
-		index = '/index.html';
+		index      = '/index.html';
 
 describe("Index template to index - ", function(){
 
@@ -27,7 +27,7 @@ describe("Index template to index - ", function(){
 		rm('-rf', indexFile);
 		expect(test('-e', indexFile)).toBe(false);
 
-		expect(exec('gulp _makeIndex --testMode '+ args, {silent:1}).code).toBe(0);
+		expect(exec('gulp _makeIndex --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		expect(test('-e', indexFile)).toBe(true);
 	});
@@ -35,9 +35,9 @@ describe("Index template to index - ", function(){
 	it('(01) should modificate metadata', function(){
 		cd('01');
 
-		expect(exec('gulp _makeIndex --testMode '+ args, {silent:1}).code).toBe(0);
+		expect(exec('gulp _makeIndex --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexContent = cat(rootFwk +'/'+ pathLoader +'/'+ index);
+		var indexContent = cat(rootFwk + '/' + pathLoader + '/' + index);
 		$ = cheerio.load(indexContent);
 
 		expect($('#viewport').attr('content')).toBe('Test1');
@@ -52,9 +52,9 @@ describe("Index template to index - ", function(){
 	it('(02) should replace quote on contentSecurity', function(){
 		cd('02');
 
-		expect(exec('gulp _makeIndex --testMode '+ args, {silent:1}).code).toBe(0);
+		expect(exec('gulp _makeIndex --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexContent = cat(rootFwk +'/'+ pathLoader +'/'+ index);
+		var indexContent = cat(rootFwk + '/' + pathLoader + '/' + index);
 		$ = cheerio.load(indexContent);
 
 		expect($('#contentSecurity').attr('content')).toBe('Test2 apos: \'');
@@ -63,9 +63,9 @@ describe("Index template to index - ", function(){
 	it('(03) should inject content (prod)', function(){
 		cd('03');
 
-		expect(exec('gulp _makeBase --testMode '+ args, {silent:1}).code).toBe(0);
+		expect(exec('gulp _makeBase --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexContent = cat(rootFwk +'/'+ pathLoader +'/'+ index);
+		var indexContent = cat(rootFwk + '/' + pathLoader + '/' + index);
 		$ = cheerio.load(indexContent);
 
 		expect($('.spinner').length).toBe(1);
@@ -77,9 +77,9 @@ describe("Index template to index - ", function(){
 	it('(04) should inject content (dev)', function(){
 		cd('04');
 
-		expect(exec('gulp _makeBase --testMode '+ args, {silent:1}).code).toBe(0);
+		expect(exec('gulp _makeBase --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexContent = cat(rootFwk +'/'+ pathLoader +'/'+ index);
+		var indexContent = cat(rootFwk + '/' + pathLoader + '/' + index);
 		$ = cheerio.load(indexContent);
 
 		expect($('.spinner').length).toBe(1);

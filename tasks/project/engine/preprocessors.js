@@ -65,7 +65,7 @@
 			}
 		}
 
-		if(fileName.indexOf('.' + config.backupExtension) >= 0){
+		if(fileName.indexOf('.' + config.backupExtension) !== -1){
 			console.debug(fileNameExt + ': original detected, it will ignore');
 			return;
 		}

@@ -15,7 +15,6 @@
 			merge2 = require('merge2'),
 			gutil  = require('gulp-util');
 	//	commons = require('../commons'),
-
 	//	uglify = require('gulp-uglify'),
 	//	fs = require('fs-extra'),
 	//	StreamQueue = require('streamqueue'),
@@ -41,36 +40,36 @@
 
 	var defaults = exports.defaults = {
 		group: {
-			'files': [],				//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
-			'overwrite': true,	//specially for libs, just make it once
-			'ignoreOnRelease': false,	//ignore on dev time, request by request
-			'overwriteOnRelease': false,	//
-			'minificated': false,	//if it is a lib for don't re do the minifcation (over overwrite!)
-			'autoPrefixer': true,	//auto prefix when source is active
-			'linter': true,			//if you want to lint, will not apply for libraries
-			'linterForce': true,			//if fail, return an error, otherwise continue without break the process
-			'backupExtension': 'original', //if it has replaces it will make a backup with this postfix
-			'makeBackup': true, //if there are replaces (original)
-			//'genSprite': true,	//generate sprite
-			'generateMin': false,		//it should be create a minificate version
-			'minExtension': 'min',//prefix for file name minificated
+			'files': [],								//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
+			'overwrite': true,					//specially for libs, just make it once
+			'ignoreOnRelease': false,		//ignore on dev time, request by request
+			'overwriteOnRelease': false,//
+			'minificated': false,				//if it is a lib for don't re do the minifcation (over overwrite!)
+			'autoPrefixer': true,				//auto prefix when source is active
+			'linter': false,						//if you want to lint, will not apply for libraries
+			'linterForce': false,				//if fail, return an error, otherwise continue without break the process
+			'backupExtension': 'original',//if it has replaces it will make a backup with this postfix
+			'makeBackup': true,					//if there are replaces (original)
+			//'genSprite': true,				//generate sprite
+			'generateMin': false,				//it should be create a minificate version
+			'minExtension': 'min',			//prefix for file name minificated
 			'replaces': {
-				'original': [], //modificate orginal version
-				'pre': [					//pre minificatedd
+				'original': [], 					//modificate orginal version
+				'pre': [									//pre minificatedd
 					//["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
 				],
-				'post': [					//post minificatedd
+				'post': [									//post minificatedd
 					//["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
 				]
 			},
-			'active': 'true'		//it will eval this field, for temp use
+			'active': 'true'						//it will eval this field, for temp use
 		},
 		validPreproExtensions: ['sass', 'scss', 'less', 'styl'],
 		validExtensions: ['html', 'js', 'css']
 	};
 
 	exports.makeWwwJson = function(){
-		getFilesByGroupAndApps(www.makeWwwJson);
+		return getFilesByGroupAndApps(www.makeWwwJson, www.resolveFiles);
 	};
 
 	exports.runPreprocessors = function(){
@@ -182,14 +181,6 @@
 }());
 
 
-//exports.runMagic = function(appsJson, options) {
-//	return runEachApp(appsJson, doMagic, options);
-//};
-//
-//exports.runJsonify = function(appsJson, options) {
-//	return runEachApp(appsJson, runJsonify, options);
-//};
-//
 //exports.genAppCache = function() {
 //	if(!global.cfg.release){return;}
 //

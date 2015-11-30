@@ -1,0 +1,10 @@
+[
+	{
+		"files": [
+			"index*.*"
+		],
+		"minExtension": "mini",
+		"backupExtension": "ori",
+		"generateMin": true
+	}
+]
