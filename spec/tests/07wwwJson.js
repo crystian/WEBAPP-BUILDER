@@ -216,7 +216,7 @@ describe("make www.json files - ", function(){
 
 		cp('-f', 'www/app1/ori/*', 'www/app1');
 
-		expect(exec('gulp makeWwwJson --testMode --debug ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		var json1 = utils.readJsonFile(w1);
 

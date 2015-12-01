@@ -51,15 +51,10 @@
 	};
 
 	function makeWwwFile(appName, result){
-		return fs.writeFile(global.cfg.pathPrj + global.cfg.app.folders.www + appName + '/' + wwwJson,
-			JSON.stringify(result, null, '\t'),
-			function(err){
-				if(err){
-					console.logRed(err);
-				} else {
-					console.logGreen(appName + ' generated');
-				}
-			});
+		fs.writeFileSync(global.cfg.pathPrj + global.cfg.app.folders.www + appName + '/' + wwwJson,
+			JSON.stringify(result, null, '\t'));
+
+		console.debug(appName + ' generated');
 	}
 
 }());

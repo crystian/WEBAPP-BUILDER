@@ -20,7 +20,7 @@
 			core         = require('./core');
 
 	exports.runPreprocessors = function(file, config, appName, pth){
-		core.doMagic(file, config, appName, pth, {
+		return core.doMagic(file, config, appName, pth, {
 			typeValidation: function(type){
 				//valid types, css is the exception
 				return (core.defaults.validPreproExtensions.indexOf(type) === -1 && type !== 'css');
@@ -70,8 +70,7 @@
 				.pipe(gif(config.linterForce, csslint.reporter('fail')));
 		}
 
-		stream = stream.pipe(rename(fileName + '.css'));
-		return stream;
+		return stream.pipe(rename(fileName + '.css'));
 	}
 
 	function cssLintCustomReporter(file){
