@@ -1,0 +1,13 @@
+[
+	{
+		"files": [
+			"index*.*"
+		],
+		"backupExtension": "other",
+		"replaces":{
+			"original": [
+				["#ff0","yellow"]
+			]
+		}
+	}
+]

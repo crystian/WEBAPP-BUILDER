@@ -6,6 +6,7 @@ var engine = require('./engine/engine.js');
 
 //Alias
 gulp.task('css', ['makeCss']);
+gulp.task('js', ['makeJs']);
 
 gulp.task('makeWwwJson', ['makeCss'/*, 'makeJs'*/], function(){
 	engine.makeWwwJson();

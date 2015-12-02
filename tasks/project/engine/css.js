@@ -23,7 +23,7 @@
 		return core.doMagic(file, config, appName, pth, {
 			extensionFinal: 'css',
 			isValidation: function(type){
-				//valid types, css is the exception
+				//valid types
 				return (core.defaults.validCssPreproExtensions.indexOf(type) !== -1 || type === this.extensionFinal);
 			},
 			processFile: function(stream, config, fileName, type){
@@ -31,6 +31,9 @@
 				if(core.defaults.validCssPreproExtensions.indexOf(type) !== -1){
 					stream = preprocessFile(stream, config, fileName, type);
 				}
+				return stream;
+			},
+			removeCode: function(stream){
 				return stream;
 			},
 			linter: function(stream, config){
@@ -52,7 +55,7 @@
 	}
 
 	function preprocessFile(stream, config, fileName, type){
-
+		//TODO add config option for each type
 		switch (type){
 			case 'scss':
 			case 'sass':

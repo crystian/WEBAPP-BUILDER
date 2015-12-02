@@ -7,10 +7,6 @@
 	var
 		utils = require('../../shared/utils'),
 		replace = require('gulp-replace');
-	/*
-	 //mergeStream = require('merge-stream'),
-	 gutil = require('gulp-util');*/
-
 
 	exports.isNotActive = function(file){
 		//eval, yes, with pleasure! :)
@@ -31,7 +27,7 @@
 			}
 
 			//console.log('key: "'+ replacePair[0] +'" value: "'+ replacePair[1] +'"');
-			stream.pipe(replace(new RegExp(replacePair[0], 'i'), replacePair[1]));
+			stream.pipe(replace(new RegExp(replacePair[0], 'gi'), replacePair[1]));
 		}
 
 		return stream;

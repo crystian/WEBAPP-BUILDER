@@ -2,6 +2,6 @@
 	"app": {
 		"name": "index test 08-15",
 		"firstApp": "app1",
-		"release": false
+		"release": true
 	}
 }

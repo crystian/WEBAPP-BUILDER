@@ -79,7 +79,7 @@ describe("preprocessors (css)", function(){
 		expect(test('-e', indexCssOri)).toBe(true);
 	});
 
-	it('(04) should do nothing, becasuse there an original file', function(){
+	it('(04) should do nothing, because there an original file', function(){
 		cd('04');
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
@@ -260,7 +260,7 @@ describe("preprocessors (css)", function(){
 		expect(file.size).toBe(237);
 	});
 
-	it('(14) should replace pre min', function(){
+	it('(14)should not replace pre min (not release or not generateMin)', function(){
 		cd('14');
 		var ext = '.css';
 
@@ -270,7 +270,7 @@ describe("preprocessors (css)", function(){
 
 		var indexCssContent = cat(indexLess + ext);
 
-		expect(indexCssContent).toContain('yellow');
+		expect(indexCssContent).not.toContain('yellow');
 	});
 
 	it('(15) should replace pre min (regular expr)', function(){
@@ -283,7 +283,7 @@ describe("preprocessors (css)", function(){
 
 		var indexCssContent = cat(indexLess + ext);
 
-		expect(indexCssContent).toContain('border: 50em;');
+		expect(indexCssContent).toContain('border:50em');
 	});
 
 	it('(16) should replace post min', function(){
@@ -478,7 +478,7 @@ describe("preprocessors (css)", function(){
 		expect(test('-e', indexCss + '.b.css')).toBe(true);//original backup with other extension
 		expect(test('-e', indexCss + '.m.css')).toBe(true);//minificated with other extension
 
-		expect(fs.statSync(indexCss + '.m.css').size).toBe(237);
+		expect(fs.statSync(indexCss + '.m.css').size).toBe(238);
 
 		expect(cat(indexCss + '.css')).toContain('color: yellow;');//replace: original
 		expect(cat(indexCss + '.m.css')).toContain('color:blue;');//replace: pre & post

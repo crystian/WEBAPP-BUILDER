@@ -16,11 +16,11 @@
 			rename = require('gulp-rename'),
 			gutil  = require('gulp-util');
 	//	commons = require('../commons'),
-	//	uglify = require('gulp-uglify'),
 	//	fs = require('fs-extra'),
 	//	StreamQueue = require('streamqueue'),
 	//	concat = require('gulp-concat'),
 	//	shared = require('./shared'),
+
 	//	sprite = require('gulp-sprite-generator'),
 	//	LZString = require('../../vendors/lz-string/libs/lz-string'),
 	//	imagemin = require('gulp-imagemin'),
@@ -66,7 +66,7 @@
 			'active': 'true'						//it will eval this field, for temp use
 		},
 		validCssPreproExtensions: ['sass', 'scss', 'less', 'styl'],
-		validJsPreproExtensions: ['cs', 'ts'],
+		validJsPreproExtensions: ['coffee', 'ts'],
 		validHtmlPreproExtensions: ['jade'],
 		validExtensions: ['html', 'js', 'css']
 	};
@@ -215,9 +215,11 @@
 
 		stream = typeConfig.linter(stream, config);
 
-		stream = replaces(stream, config.replaces.pre, fileNameExt);
+		//TODO test it!
+		stream = typeConfig.removeCode(stream);
 
 		if(genMinFile || global.cfg.app.release){
+			stream = replaces(stream, config.replaces.pre, fileNameExt);
 
 			stream = typeConfig.minifyFile(stream);
 
@@ -411,19 +413,7 @@
 //			stream = spriteOutput.css.pipe(replace('assets/',''));
 //		}
 //
-//		stream = stream
-//			.pipe(strip({safe:false, block:false}))
-//			.pipe(gif(global.cfg.release || file.makeMin, minifycss()))
-//			.pipe(rename(utils.setExtensionFilename(file.min,'css')));
-//
-//		return stream;
-//	},
 
-//		if(!file.minificated && global.cfg.release){
-//			stream = commons.jsMaker(stream);
-//			stream = stream.pipe(strip({safe:false, block:false}));
-//		}
-//
 //	'html': function(stream, file) {
 //		//console.logWarn('HTML');
 //

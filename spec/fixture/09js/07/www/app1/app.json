@@ -1,0 +1,9 @@
+[
+	{
+		"files": [
+			"index*.*"
+		],
+		"linter": true,
+		"linterForce": false
+	}
+]
