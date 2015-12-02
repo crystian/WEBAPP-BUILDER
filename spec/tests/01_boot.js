@@ -7,7 +7,7 @@ var args = process.argv.slice(2).join(' ');
 require('shelljs/global');
 
 
-var testFolder     = 'spec/fixture/01Lboot',
+var testFolder     = 'spec/fixture/01_boot',
 		rootFwk        = '../../../../',
 		pkgJson        = 'package.json',
 		pkgJsonContent = '{"name": "test 01-02","private": true,"dependencies": {}}',

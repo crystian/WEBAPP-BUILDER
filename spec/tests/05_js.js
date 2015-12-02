@@ -8,7 +8,7 @@ var utils = require('../../tasks/shared/utils'),
 
 require('shelljs/global');
 
-var testFolder          = 'spec/fixture/05Ljs',
+var testFolder          = 'spec/fixture/05_js',
 		rootFwk             = '../../../..',
 		configJson          = 'config.json',
 		compileLoaderJsName = '-compiledloader.js';

@@ -442,6 +442,12 @@ describe("preprocessors (css)", function(){
 		expect(test('-e', indexScss + '.original.scss')).toBe(false); //should not exist
 	});
 
+	it('(25) should fail by linter on css file', function(){
+		cd('25');
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(1);
+	});
+
 	it('(90) complex case 1', function(){
 		cd('90');
 

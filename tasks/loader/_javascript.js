@@ -90,4 +90,4 @@ function jsMaker(stream, release){
 				}
 			}))
 		);
-};
+}

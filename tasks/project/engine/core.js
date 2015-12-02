@@ -106,7 +106,7 @@
 		});
 
 		return r;
-	};
+	}
 
 	/**
 	 * run each app and each file config from apps.json and app.json sent
@@ -213,6 +213,8 @@
 
 		stream = typeConfig.processFile(stream, config, fileName, type);
 
+		stream = typeConfig.linter(stream, config);
+
 		stream = replaces(stream, config.replaces.pre, fileNameExt);
 
 		if(genMinFile || global.cfg.app.release){
@@ -230,7 +232,7 @@
 			return stream;
 		}
 
-		return stream.pipe(gulp.dest(file.base, {overwrite: true}));
+		return stream.pipe(gulp.dest(file.base));
 	}
 
 	function modifyOriginal(stream, file, config){
@@ -416,17 +418,11 @@
 //
 //		return stream;
 //	},
-//
-//	'js': function(stream, file){
-//		//console.logWarn('JS');
-//
+
 //		if(!file.minificated && global.cfg.release){
 //			stream = commons.jsMaker(stream);
 //			stream = stream.pipe(strip({safe:false, block:false}));
 //		}
-//
-//		return stream;
-//	},
 //
 //	'html': function(stream, file) {
 //		//console.logWarn('HTML');

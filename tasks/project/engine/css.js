@@ -33,6 +33,16 @@
 				}
 				return stream;
 			},
+			linter: function(stream, config){
+				if(config.linter){
+					stream
+						.pipe(replace(' 0px', ' 0'))
+						.pipe(csslint('csslintrc.json'))
+						.pipe(csslint.reporter(cssLintCustomReporter))
+						.pipe(gif(config.linterForce, csslint.reporter('fail')));
+				}
+				return stream;
+			},
 			minifyFile: function(stream){
 				return stream
 					.pipe(strip({safe: false, block: false}))
@@ -60,14 +70,6 @@
 
 		if(config.autoPrefixer){
 			stream = stream.pipe(autoprefixer({browsers: global.cfg.autoprefixer}));
-		}
-
-		if(config.linter){
-			stream
-				.pipe(replace(' 0px', ' 0'))
-				.pipe(csslint('csslintrc.json'))
-				.pipe(csslint.reporter(cssLintCustomReporter))
-				.pipe(gif(config.linterForce, csslint.reporter('fail')));
 		}
 
 		return stream.pipe(rename(fileName + '.css'));

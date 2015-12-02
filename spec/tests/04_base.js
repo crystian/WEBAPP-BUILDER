@@ -5,7 +5,7 @@ var cheerio = require('cheerio');
 var args = process.argv.slice(2).join(' ');
 require('shelljs/global');
 
-var testFolder = 'spec/fixture/04Lbase',
+var testFolder = 'spec/fixture/04_base',
 		rootFwk    = '../../../..',
 		pathLoader = '/loader',
 		index      = '/index.html';

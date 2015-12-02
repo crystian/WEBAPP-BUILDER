@@ -9,7 +9,7 @@ var args = process.argv.slice(2).join(' ');
 
 require('shelljs/global');
 
-var testFolder  = 'spec/fixture/02Lcss',
+var testFolder  = 'spec/fixture/02_css',
 		rootFwk     = '../../../..',
 		cssTestFile = '/css/test',
 		pathCssTest = 'loader' + cssTestFile,

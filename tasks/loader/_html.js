@@ -3,7 +3,7 @@
  */
 
 var utils       = require('../shared/utils'),
-		injector    = require('./injector'),
+		injector    = require('./_injector'),
 		gif         = require('gulp-if'),
 		rename      = require('gulp-rename'),
 		replace     = require('gulp-replace'),

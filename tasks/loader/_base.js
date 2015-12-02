@@ -9,7 +9,7 @@ var fs       = require('fs-extra'),
 		rename   = require('gulp-rename'),
 		cheerio  = require('gulp-cheerio'),
 		replace  = require('gulp-replace'),
-		injector = require('./injector'),
+		injector = require('./_injector'),
 		inject   = require('gulp-inject'),
 		gutil    = require('gulp-util');
 
