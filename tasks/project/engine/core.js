@@ -39,7 +39,7 @@
 	var appsJson = 'apps.json',
 			appJson  = 'app.json';
 
-	var defaults = exports.defaults = {
+	var defaults = {
 		group: {
 			'files': [],								//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
 			'overwrite': true,					//specially for libs, just make it once
@@ -67,14 +67,6 @@
 		},
 		validPreproExtensions: ['sass', 'scss', 'less', 'styl'],
 		validExtensions: ['html', 'js', 'css']
-	};
-
-	exports.makeWwwJson = function(){
-		return getFilesByGroupAndApps(www.makeWwwJson, www.resolveFiles);
-	};
-
-	exports.runPreprocessors = function(){
-		return getFilesByGroupAndAppsStream(null, prepro.runPreprocessors);
 	};
 
 	function getFilesByGroupAndAppsStream(byApp, byFile){
@@ -112,7 +104,7 @@
 		});
 
 		return r;
-	}
+	};
 
 	/**
 	 * run each app and each file config from apps.json and app.json sent
@@ -154,7 +146,7 @@
 		return r;
 	}
 
-	exports.doMagic = function(file, config, appName, pth, typeConfig){
+	function doMagic(file, config, appName, pth, typeConfig){
 		var fileName    = utils.getFileName(file.path),
 				type        = utils.getExtensionFile(file.path),
 				fileNameExt = utils.getFileNameWithExtension(file.path),
@@ -168,7 +160,7 @@
 			return;
 		}
 
-		if(typeConfig.typeValidation(type)){
+		if(!typeConfig.isValidation(type)){
 			return;
 		}
 
@@ -237,10 +229,9 @@
 		}
 
 		return stream.pipe(gulp.dest(file.base, {overwrite: true}));
-	};
+	}
 
-
-	var modifyOriginal = exports.modifyOriginal = function(stream, file, config){
+	function modifyOriginal(stream, file, config){
 		var filenameBackup = utils.setPreExtensionFilename(file, config.backupExtension);
 
 		if(config.makeBackup && !utils.fileExist(filenameBackup)){
@@ -252,9 +243,9 @@
 			.pipe(gulp.dest(path.dirname(file)));
 
 		return stream;
-	};
+	}
 
-	var replaces = exports.replaces = function(stream, replaces, file){
+	function replaces(stream, replaces, file){
 		console.debug('Replaces on file: ' + file);
 
 		if(replaces && replaces.length > 0){
@@ -262,9 +253,18 @@
 		}
 
 		return stream;
-	};
+	}
+
+	exports.getFilesByGroupAndAppsStream = getFilesByGroupAndAppsStream;
+	exports.getFilesByGroupAndApps = getFilesByGroupAndApps;
+	exports.getFilesByGroup = getFilesByGroup;
+	exports.doMagic = doMagic;
+	exports.modifyOriginal = modifyOriginal;
+	exports.replaces = replaces;
+	exports.defaults = defaults;
 
 }());
+
 
 
 //exports.genAppCache = function() {

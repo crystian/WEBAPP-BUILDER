@@ -1,29 +1,28 @@
 /**
  * Created by Crystian on 15/11/2015.
  */
-	//TODO sprites
+
 (function(){
 	'use strict';
 
 	var utils        = require('../../shared/utils'),
-			sass         = require('gulp-sass'),
-			less         = require('gulp-less'),
-			stylus       = require('gulp-stylus'),
-			minifycss    = require('gulp-minify-css'),
-			strip        = require('gulp-strip-comments'),
-			gif          = require('gulp-if'),
-			csslint      = require('gulp-csslint'),
-			replace      = require('gulp-replace'),
-			autoprefixer = require('gulp-autoprefixer'),
-			rename       = require('gulp-rename'),
+			//sass         = require('gulp-sass'),
+			//less         = require('gulp-less'),
+			//stylus       = require('gulp-stylus'),
+			//minifycss    = require('gulp-minify-css'),
+			//strip        = require('gulp-strip-comments'),
+			//gif          = require('gulp-if'),
+			//csslint      = require('gulp-csslint'),
+			//replace      = require('gulp-replace'),
+			//autoprefixer = require('gulp-autoprefixer'),
+			//rename       = require('gulp-rename'),
 			gutil        = require('gulp-util'),
 			core         = require('./core');
 
-	exports.runPreprocessors = function(file, config, appName, pth){
+	exports.runJsProcess = function(file, config, appName, pth){
 		return core.doMagic(file, config, appName, pth, {
 			isValidation: function(type){
-				//valid types, css is the exception
-				return (core.defaults.validPreproExtensions.indexOf(type) !== -1 || type === 'css');
+				return (type !== 'css');
 			},
 			processFile: function(stream, config, fileName, type){
 				//preprocessors tasks
