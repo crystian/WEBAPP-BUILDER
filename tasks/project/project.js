@@ -12,11 +12,11 @@ gulp.task('makeWwwJson', ['makeCss'/*, 'makeJs'*/], function(){
 });
 
 gulp.task('makeCss', function(){
-	return engine.runPreprocessors();
+	return engine.runCssPreprocessors();
 });
 
 gulp.task('makeJs', function(){
-	return engine.runJsProcess();
+	return engine.runJsPreprocessors();
 });
 
 

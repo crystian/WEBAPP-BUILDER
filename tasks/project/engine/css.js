@@ -19,15 +19,16 @@
 			gutil        = require('gulp-util'),
 			core         = require('./core');
 
-	exports.runPreprocessors = function(file, config, appName, pth){
+	function runPreprocessors(file, config, appName, pth){
 		return core.doMagic(file, config, appName, pth, {
+			extensionFinal: 'css',
 			isValidation: function(type){
 				//valid types, css is the exception
-				return (core.defaults.validPreproExtensions.indexOf(type) !== -1 || type === 'css');
+				return (core.defaults.validCssPreproExtensions.indexOf(type) !== -1 || type === this.extensionFinal);
 			},
 			processFile: function(stream, config, fileName, type){
 				//preprocessors tasks
-				if(core.defaults.validPreproExtensions.indexOf(type) !== -1){
+				if(core.defaults.validCssPreproExtensions.indexOf(type) !== -1){
 					stream = preprocessFile(stream, config, fileName, type);
 				}
 				return stream;
@@ -36,10 +37,9 @@
 				return stream
 					.pipe(strip({safe: false, block: false}))
 					.pipe(minifycss());
-			},
-			extensionMin: 'css'
+			}
 		});
-	};
+	}
 
 	function preprocessFile(stream, config, fileName, type){
 
@@ -81,4 +81,5 @@
 		});
 	}
 
+	exports.runPreprocessors = runPreprocessors;
 }());

@@ -30,10 +30,10 @@
 	//filesRequired = require('gulp-files-required'),
 
 	//engine libs
-	var utils  = require('../../shared/utils'),
-			aux    = require('./auxiliar'),
-			www    = require('./www'),
-			prepro = require('./preprocessors');
+	var utils = require('../../shared/utils'),
+			aux   = require('./auxiliar'),
+			www   = require('./www'),
+			css   = require('./css');
 
 	//vars
 	var appsJson = 'apps.json',
@@ -65,7 +65,9 @@
 			},
 			'active': 'true'						//it will eval this field, for temp use
 		},
-		validPreproExtensions: ['sass', 'scss', 'less', 'styl'],
+		validCssPreproExtensions: ['sass', 'scss', 'less', 'styl'],
+		validJsPreproExtensions: ['cs', 'ts'],
+		validHtmlPreproExtensions: ['jade'],
 		validExtensions: ['html', 'js', 'css']
 	};
 
@@ -150,8 +152,8 @@
 		var fileName    = utils.getFileName(file.path),
 				type        = utils.getExtensionFile(file.path),
 				fileNameExt = utils.getFileNameWithExtension(file.path),
-				fileNameMin = file.base + '/' + fileName + '.' + config.minExtension + '.' + typeConfig.extensionMin,
-				dest        = file.base + '/' + fileName + '.' + typeConfig.extensionMin,
+				fileNameMin = file.base + '/' + fileName + '.' + config.minExtension + '.' + typeConfig.extensionFinal,
+				dest        = file.base + '/' + fileName + '.' + typeConfig.extensionFinal,
 				genMinFile  = false,
 				stream;
 
@@ -204,7 +206,7 @@
 			stream = modifyOriginal(stream, file.path, config);
 		}
 
-		if(fileName.indexOf('.' + config.minExtension) >= 0 && type === typeConfig.extensionMin){
+		if(fileName.indexOf('.' + config.minExtension) >= 0 && type === typeConfig.extensionFinal){
 			console.debug(fileNameExt + ': minificated detected'); //and ingnored it
 			return stream;
 		}
@@ -224,7 +226,7 @@
 			}
 		}
 
-		if(!genMinFile && type === typeConfig.extensionMin){
+		if(!genMinFile && type === typeConfig.extensionFinal){
 			return stream;
 		}
 
@@ -264,7 +266,6 @@
 	exports.defaults = defaults;
 
 }());
-
 
 
 //exports.genAppCache = function() {

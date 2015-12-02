@@ -13,7 +13,7 @@
 	exports.resolveFiles = function(file, config, appName, pth){
 		var type = utils.getExtensionFile(file.path);
 
-		if(core.defaults.validPreproExtensions.indexOf(type) !== -1){
+		if(core.defaults.validCssPreproExtensions.indexOf(type) !== -1){
 			type = 'css';
 		}
 
