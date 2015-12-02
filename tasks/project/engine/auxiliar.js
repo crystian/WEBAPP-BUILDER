@@ -5,8 +5,8 @@
 (function(){
 	'use strict';
 	var
-			utils = require('../../shared/utils'),
-			replace = require('gulp-replace');
+		utils = require('../../shared/utils'),
+		replace = require('gulp-replace');
 	/*
 	 //mergeStream = require('merge-stream'),
 	 gutil = require('gulp-util');*/
@@ -41,9 +41,7 @@
 }());
 
 
-
 //----------
-
 
 //exports.makePath = function(path){
 //	var r = path;
@@ -53,22 +51,6 @@
 //		r = eval('global.cfg.'+path);
 //	} catch (e) {
 //	}
-//	return r;
-//};
-
-///**
-// * if it is minificated version, just validate this file, otherwise check the normal version
-// * this is util for Libs without min version
-// */
-//exports.fileDestExist = function(group, file){
-//	var r = false;
-//
-//	//validate if exist, if exist return don't process nothing
-//	var p = (global.cfg.app.release || group.makeMin) ? file.path + '/' +file.min : file._cssFile;
-//	if(utils.fileExist(p)){
-//		r = true;
-//	}
-//
 //	return r;
 //};
 

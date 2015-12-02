@@ -78,7 +78,7 @@
 	};
 
 	function getFilesByGroupAndAppsStream(byApp, byFile){
-		var mainStream = merge2(gulp.src('noop')),
+		var mainStream = merge2(gulp.src('noop')),//because if have not one, might give an error
 				apps       = getFilesByGroupAndApps(byApp, byFile);
 
 		apps.forEach(function(app){
@@ -304,60 +304,6 @@
 //	return cache.clearAll(done);
 //};
 
-//function doMagic(url, appName, options) {
-//	//console.log(url, appName, options);
-//
-//	var files = require(global.cfg.appRoot + '/' + url).files;
-//	var i = 0,
-//		l = files.length,
-//		streamsFinal = undefined,
-//		streams = [];
-//
-//	for (; i < l; i++) {
-//		var file = _.merge({}, defaults.file, files[i]);
-//
-//		if(aux.isNotActive(file)){continue;}
-//
-//		var fileName = utils.getFileName(file.file),
-//			type = utils.getExtensionFile(file.file);
-//
-//		//valid types and normalize it
-//		var flagTypeValid = false;
-//		if (type === 'css' || defaults.validCssExtensions.indexOf(type) !== -1) {
-//			flagTypeValid = true;
-//			type = 'css';
-//		} else if(defaults.validExtensions.indexOf(type) !== -1) {
-//			flagTypeValid = true;
-//		}
-//
-//		if(!flagTypeValid){
-//			console.logWarn('Invalid file type: '+ file.file);
-//			continue;
-//		}
-//
-//		//with "min" by default
-//		file.min = file.min || utils.setPreExtensionFilename(file.file, 'min');
-//
-//		file.path = aux.makePath(file.path);
-//		var source = file.path +'/'+ fileName + '.' + type;
-//
-//		if(file.minificated || file.makeMin){
-//			source = file.path +'/'+ file.min;
-//		}
-//
-//		if(global.cfg.forceLibFull){
-//			source = file.path +'/'+ file.file;
-//		}
-//
-//		var stream = gulp.src(source)
-//			.pipe(commons.debugeame());
-//		//console.log('source',source);
-//
-//		if(!file.minificated && !file.makeMin){
-//			stream = _minificate(stream, file, type, appName);
-//		} else {
-//			_modificateOriginal(file);
-//
 //			//just for remove header a footer comments, it's ok here, not move
 //			if(type === 'js'){
 //				stream = stream.pipe(uglify({
@@ -369,20 +315,10 @@
 //					mangle: false
 //				}));
 //			}
-//		}
-//
-//		if(!streams[type]){
-//			streams[type] = new StreamQueue({ objectMode: true });
-//		}
-//		streams[type] = streams[type].queue(stream);
-//	}
 //
 //	['css','js','html'].map(function (v) {
 //		streamsFinal = aux.merge(streamsFinal, _concat(streams, v, appName));
 //	});
-//
-//	return streamsFinal;
-//}
 //
 //function runJsonify(path, app, options){
 //
@@ -415,27 +351,6 @@
 //	return s;
 //}
 //
-//
-//function _minificate(stream, file, type, appName){
-//	//replaces previously to minimisation
-//	stream = aux.replace(stream, file.replaces.pre);
-//
-//	if (_handle[type]) {
-//		if(gutil.env.debug){
-//			console.logGreen('File to process: '+ file.file);
-//		}
-//		stream = _handle[type](stream, file, appName);
-//	} else {
-//		console.logRed('Type not found on _minificate, file: '+ file.file);
-//	}
-//
-//	//* replaces posterity to minimisation
-//	stream = aux.replace(stream, file.replaces.post);
-//
-//	return stream;
-//}
-
-
 //
 //var _handle = {
 //	'css' : function(stream, file, appName) {

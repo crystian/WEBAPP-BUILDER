@@ -1,0 +1,16 @@
+[
+	{
+		"files": [
+			"indexCss.*",
+			"indexLess.*"
+		],
+		"generateMin": true
+	},
+	{
+		"files": [
+			"indexS*ss.*",
+			"indexStyl.*"
+		],
+		"generateMin": false
+	}
+]
