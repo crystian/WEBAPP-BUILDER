@@ -18,10 +18,10 @@
 			"original": [
 				["#FF0","yellow"]
 			],
-			"pre": [
+			"preMin": [
 				["yellow","red"]
 			],
-			"post": [
+			"postPost": [
 				["red","blue"]
 			]
 		},

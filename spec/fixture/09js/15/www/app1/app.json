@@ -4,10 +4,9 @@
 			"index*.*"
 		],
 		"linter": false,
-		"generateMin": true,
 		"replaces":{
-			"postMin": [
-				["(border:)(\\w*)", "$150em"]
+			"pre": [
+				["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
 			]
 		}
 	}

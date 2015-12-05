@@ -260,7 +260,7 @@ describe("preprocessors (css)", function(){
 		expect(file.size).toBe(237);
 	});
 
-	it('(14)should not replace pre min (not release or not generateMin)', function(){
+	it('(14)should replace pre min', function(){
 		cd('14');
 		var ext = '.css';
 
@@ -270,7 +270,7 @@ describe("preprocessors (css)", function(){
 
 		var indexCssContent = cat(indexLess + ext);
 
-		expect(indexCssContent).not.toContain('yellow');
+		expect(indexCssContent).toContain('yellow');
 	});
 
 	it('(15) should replace pre min (regular expr)', function(){
@@ -283,7 +283,7 @@ describe("preprocessors (css)", function(){
 
 		var indexCssContent = cat(indexLess + ext);
 
-		expect(indexCssContent).toContain('border:50em');
+		expect(indexCssContent).toContain('border: 50em');
 	});
 
 	it('(16) should replace post min', function(){

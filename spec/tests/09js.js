@@ -211,7 +211,7 @@ describe("preprocessors (js)", function(){
 		expect(file.size).toBe(65);
 	});
 
-	it('(14) should not replace pre min (not release or not generateMin)', function(){
+	it('(14) should replace pre min', function(){
 		cd('14');
 		var ext = '.js';
 
@@ -219,7 +219,19 @@ describe("preprocessors (js)", function(){
 
 		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(cat(indexCoffee + ext)).not.toContain('methodReplaced');
-		expect(cat(indexTs + ext)).not.toContain('methodReplaced');
+		expect(cat(indexCoffee + ext)).toContain('methodReplaced');
+		expect(cat(indexTs + ext)).toContain('methodReplaced');
 	});
+
+	it('(15) should replace pre min (regular expr)', function(){
+		cd('15');
+		var ext = '.js';
+
+		rm('-rf', indexCoffee + ext);
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexCoffee + ext)).toContain('methodReplaced');
+	});
+
 });

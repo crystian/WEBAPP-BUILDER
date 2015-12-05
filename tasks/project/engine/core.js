@@ -56,10 +56,11 @@
 			'minExtension': 'min',			//prefix for file name minificated
 			'replaces': {
 				'original': [], 					//modificate orginal version
-				'pre': [									//pre minificatedd
+				'current': [],
+				'preMin': [									//pre minificatedd
 					//["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
 				],
-				'post': [									//post minificatedd
+				'postMin': [									//post minificatedd
 					//["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
 				]
 			},
@@ -218,12 +219,14 @@
 		//TODO test it!
 		stream = typeConfig.removeCode(stream);
 
+		stream = replaces(stream, config.replaces.current, fileNameExt);
+
 		if(genMinFile || global.cfg.app.release){
-			stream = replaces(stream, config.replaces.pre, fileNameExt);
+			stream = replaces(stream, config.replaces.preMin, fileNameExt);
 
 			stream = typeConfig.minifyFile(stream);
 
-			stream = replaces(stream, config.replaces.post, fileNameExt);
+			stream = replaces(stream, config.replaces.postMin, fileNameExt);
 
 			if(genMinFile){
 				stream = stream.pipe(rename(fileNameMin));
