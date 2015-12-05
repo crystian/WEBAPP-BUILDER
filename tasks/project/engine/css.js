@@ -26,7 +26,7 @@
 				return (core.defaults.validCssPreproExtensions.indexOf(type) !== -1);
 			},
 			isValid: function(type){
-				return (this.isPrepro() !== -1 || type === this.extensionFinal);
+				return (this.isPrepro(type) || type === this.extensionFinal);
 			},
 			processFile: function(stream, config, fileName, type){
 				return preprocessFile(stream, config, fileName, type);

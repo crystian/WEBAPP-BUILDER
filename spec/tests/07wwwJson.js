@@ -76,9 +76,7 @@ describe("make www.json files - ", function(){
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var json1 = utils.readJsonFile(w1);
-
-		expect(json1.length).toBe(3);
+		expect(utils.readJsonFile(w1).length).toBe(3);
 
 	});
 
@@ -89,9 +87,7 @@ describe("make www.json files - ", function(){
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var json1 = utils.readJsonFile(w1);
-
-		expect(json1.length).toBe(3);
+		expect(utils.readJsonFile(w1).length).toBe(3);
 
 	});
 
@@ -150,9 +146,7 @@ describe("make www.json files - ", function(){
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var json1 = utils.readJsonFile(w1);
-
-		expect(json1.length).toBe(3);
+		expect(utils.readJsonFile(w1).length).toBe(3);
 	});
 
 	it('(10) should ignore file by attribute', function(){
@@ -162,9 +156,7 @@ describe("make www.json files - ", function(){
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var json1 = utils.readJsonFile(w1);
-
-		expect(json1.length).toBe(3);
+		expect(utils.readJsonFile(w1).length).toBe(3);
 	});
 
 	it('(12) should ignore file by ignoreOnRelease on release mode', function(){
@@ -174,9 +166,7 @@ describe("make www.json files - ", function(){
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var json1 = utils.readJsonFile(w1);
-
-		expect(json1.length).toBe(2);
+		expect(utils.readJsonFile(w1).length).toBe(2);
 	});
 
 	it('(13) should fail because file not found', function(){
@@ -191,18 +181,9 @@ describe("make www.json files - ", function(){
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var json1 = utils.readJsonFile(w1);
-		expect(json1.length).toBe(4);
+		expect(utils.readJsonFile(w1).length).toBe(4);
 
-		var json2 = utils.readJsonFile(w2);
-		expect(json2.length).toBe(5);
-	});
-
-	it('(15) should fail by same name', function(){
-		cd('15');
-
-		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(1);
-
+		expect(utils.readJsonFile(w2).length).toBe(5);
 	});
 
 	it('(90) complex case 1', function(){

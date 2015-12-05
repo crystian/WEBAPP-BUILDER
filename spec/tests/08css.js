@@ -16,8 +16,7 @@ var testFolder  = 'spec/fixture/08css',
 		indexScss   = 'www/app1/indexScss',
 		indexLess   = 'www/app1/indexLess',
 		indexStyl   = 'www/app1/indexStyl',
-		keyNotOverw = 'not overwritten'
-	;
+		keyNotOverw = 'not overwritten';
 
 function createCssTest(){
 	var cssTestContent =
@@ -72,9 +71,7 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCssContent = cat(indexCss + '.css');
-
-		expect(indexCssContent).toContain('yellow');
+		expect(cat(indexCss + '.css')).toContain('yellow');
 
 		expect(test('-e', indexCssOri)).toBe(true);
 	});
@@ -84,9 +81,7 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCssContent = cat(indexCss + '.css');
-
-		expect(indexCssContent).not.toContain('yellow');
+		expect(cat(indexCss + '.css')).not.toContain('yellow');
 	});
 
 	it('(05) should support another filename (postfix)', function(){
@@ -150,16 +145,11 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexSassContent = cat(indexSass + '.css'),
-				indexScssContent = cat(indexScss + '.css'),
-				indexLessContent = cat(indexLess + '.css'),
-				indexStylContent = cat(indexStyl + '.css');
-
 		var keyword = 'color: #FF0;';
-		expect(indexSassContent).toContain(keyword);
-		expect(indexScssContent).toContain(keyword);
-		expect(indexLessContent).toContain(keyword);
-		expect(indexStylContent).toContain(keyword.toLowerCase());
+		expect(cat(indexSass + '.css')).toContain(keyword);
+		expect(cat(indexScss + '.css')).toContain(keyword);
+		expect(cat(indexLess + '.css')).toContain(keyword);
+		expect(cat(indexStyl + '.css')).toContain(keyword.toLowerCase());
 	});
 
 	it('(10) should perfix css (only chrome)', function(){
@@ -236,8 +226,7 @@ describe("preprocessors (css)", function(){
 		expect(test('-e', indexLess + ext)).toBe(true);
 		expect(test('-e', indexStyl + ext)).toBe(true);
 
-		var file = fs.statSync(indexSass + ext);
-		expect(file.size).toBe(237);
+		expect(fs.statSync(indexSass + ext).size).toBe(237);
 	});
 
 	it('(13) generate min files with other extension', function(){
@@ -256,8 +245,7 @@ describe("preprocessors (css)", function(){
 		expect(test('-e', indexLess + ext)).toBe(true);
 		expect(test('-e', indexStyl + ext)).toBe(true);
 
-		var file = fs.statSync(indexSass + ext);
-		expect(file.size).toBe(237);
+		expect(fs.statSync(indexSass + ext).size).toBe(237);
 	});
 
 	it('(14)should replace pre min', function(){
@@ -268,9 +256,18 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCssContent = cat(indexLess + ext);
+		expect(cat(indexLess + ext)).toContain('#00F');
+	});
 
-		expect(indexCssContent).toContain('yellow');
+	it('(26)should not replace pre min', function(){
+		cd('26');
+		var ext = '.css';
+
+		rm('-rf', indexLess + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexLess + ext)).not.toContain('#00F');
 	});
 
 	it('(15) should replace pre min (regular expr)', function(){
@@ -281,9 +278,40 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCssContent = cat(indexLess + ext);
+		expect(cat(indexLess + ext)).toContain('border:50em');
+	});
 
-		expect(indexCssContent).toContain('border: 50em');
+	it('(27) should not replace pre min (regular expr)', function(){
+		cd('27');
+		var ext = '.css';
+
+		rm('-rf', indexLess + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexLess + ext)).toContain('border: 0px');
+	});
+
+	it('(28)should replace pre prepro', function(){
+		cd('28');
+		var ext = '.css';
+
+		rm('-rf', indexLess + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexLess + ext)).toContain('border: 50em;');
+	});
+
+	it('(29)should replace post prepro', function(){
+		cd('29');
+		var ext = '.css';
+
+		rm('-rf', indexLess + ext);
+
+		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexLess + ext)).toContain('other-value');
 	});
 
 	it('(16) should replace post min', function(){
@@ -294,12 +322,9 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCssContent = cat(indexLess + ext);
+		expect(cat(indexLess + ext)).toContain('border:50em');
 
-		expect(indexCssContent).toContain('border:50em');
-
-		var file = fs.statSync(indexLess + ext);
-		expect(file.size).toBe(240);
+		expect(fs.statSync(indexLess + ext).size).toBe(240);
 	});
 
 	it('(17) should minify css file', function(){
@@ -310,12 +335,9 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCssContent = cat(indexCss + ext);
+		expect(cat(indexCss + ext)).toContain('border:0}');
 
-		expect(indexCssContent).toContain('border:0}');
-
-		var file = fs.statSync(indexCss + ext);
-		expect(file.size).toBe(237);
+		expect(fs.statSync(indexCss + ext).size).toBe(237);
 	});
 
 	it('(18) should minify css file because it is a release', function(){
@@ -326,12 +348,9 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCssContent = cat(indexSass + ext);
+		expect(cat(indexSass + ext)).toContain('border:0}');
 
-		expect(indexCssContent).toContain('border:0}');
-
-		var file = fs.statSync(indexSass + ext);
-		expect(file.size).toBe(237);
+		expect(fs.statSync(indexSass + ext).size).toBe(237);
 	});
 
 	it('(19) should not process overwrite files - min', function(){
@@ -342,19 +361,13 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexSassContent = cat(indexSass + ext),
-				indexScssContent = cat(indexScss + ext),
-				indexLessContent = cat(indexLess + ext),
-				indexStylContent = cat(indexStyl + ext);
+		expect(cat(indexSass + ext)).toContain(keyNotOverw);
+		expect(cat(indexLess + ext)).toContain(keyNotOverw);
+		expect(cat(indexStyl + ext)).toContain(keyNotOverw);
 
-		expect(indexSassContent).toContain(keyNotOverw);
-		expect(indexLessContent).toContain(keyNotOverw);
-		expect(indexStylContent).toContain(keyNotOverw);
+		expect(cat(indexScss + ext)).toContain('color:#FF0');
 
-		expect(indexScssContent).toContain('color:#FF0');
-
-		var file = fs.statSync(indexScss + ext);
-		expect(file.size).toBe(237);
+		expect(fs.statSync(indexScss + ext).size).toBe(237);
 	});
 
 	it('(20) should not process overwrite files', function(){
@@ -365,16 +378,11 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexSassContent = cat(indexSass + ext),
-				indexScssContent = cat(indexScss + ext),
-				indexLessContent = cat(indexLess + ext),
-				indexStylContent = cat(indexStyl + ext);
+		expect(cat(indexSass + ext)).toContain(keyNotOverw);
+		expect(cat(indexLess + ext)).toContain(keyNotOverw);
+		expect(cat(indexStyl + ext)).toContain(keyNotOverw);
 
-		expect(indexSassContent).toContain(keyNotOverw);
-		expect(indexLessContent).toContain(keyNotOverw);
-		expect(indexStylContent).toContain(keyNotOverw);
-
-		expect(indexScssContent).toContain('color:#FF0');
+		expect(cat(indexScss + ext)).toContain('color:#FF0');
 	});
 
 	it('(21) should not process minificated file', function(){
@@ -385,9 +393,7 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCssContent = cat(indexCss + ext);
-
-		expect(indexCssContent).toContain(keyNotOverw);
+		expect(cat(indexCss + ext)).toContain(keyNotOverw);
 
 	});
 
@@ -397,9 +403,7 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCssContent = cat(indexScss + ext);
-
-		expect(indexCssContent).toContain(keyNotOverw);
+		expect(cat(indexScss + ext)).toContain(keyNotOverw);
 
 	});
 
@@ -412,9 +416,7 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCssContent = cat(indexScss + ext);
-
-		expect(indexCssContent).not.toContain(keyNotOverw);
+		expect(cat(indexScss + ext)).not.toContain(keyNotOverw);
 
 	});
 
@@ -430,11 +432,9 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var file1 = fs.statSync(indexScssC);
-		expect(file1.size).toBe(237);
+		expect(fs.statSync(indexScssC).size).toBe(237);
 
-		var file2 = fs.statSync(indexScssS);
-		expect(file2.size).toBe(170);
+		expect(fs.statSync(indexScssS).size).toBe(170);
 
 		expect(cat(indexScssS)).toContain('$primaryColor: #00F');
 		expect(cat(indexScssC)).toContain('color:#00F');

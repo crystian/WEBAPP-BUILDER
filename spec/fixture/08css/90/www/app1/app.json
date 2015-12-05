@@ -21,7 +21,7 @@
 			"preMin": [
 				["yellow","red"]
 			],
-			"postPost": [
+			"postMin": [
 				["red","blue"]
 			]
 		},

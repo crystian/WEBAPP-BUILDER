@@ -24,7 +24,7 @@
 				return (core.defaults.validJsPreproExtensions.indexOf(type) !== -1);
 			},
 			isValid: function(type){
-				return (this.isPrepro() || type === this.extensionFinal);
+				return (this.isPrepro(type) || type === this.extensionFinal);
 			},
 			processFile: function(stream, config, fileName, type){
 				return preprocessFile(stream, config, fileName, type);

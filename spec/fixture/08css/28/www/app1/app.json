@@ -4,8 +4,8 @@
 			"index*.*"
 		],
 		"replaces":{
-			"preMin": [
-				["#FF0","#00F"]
+			"prePreprocess": [
+				["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
 			]
 		}
 	}
