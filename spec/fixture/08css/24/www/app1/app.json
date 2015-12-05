@@ -3,7 +3,6 @@
 		"files": [
 			"index*.scss"
 		],
-		"linter": false,
 		"makeBackup": false,
 		"replaces":{
 			"original": [

@@ -4,7 +4,7 @@
 			"index*.*"
 		],
 		"replaces":{
-			"pre": [
+			"preMin": [
 				["publicMethod","methodReplaced"]
 			]
 		}

@@ -223,7 +223,7 @@ describe("preprocessors (js)", function(){
 		expect(cat(indexTs + ext)).toContain('methodReplaced');
 	});
 
-	it('(15) should replace pre min (regular expr)', function(){
+	xit('(15) should replace pre min (regular expr)', function(){
 		cd('15');
 		var ext = '.js';
 

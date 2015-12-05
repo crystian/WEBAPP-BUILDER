@@ -22,23 +22,21 @@
 	function runPreprocessors(file, config, appName, pth){
 		return core.doMagic(file, config, appName, pth, {
 			extensionFinal: 'css',
-			isValidation: function(type){
-				//valid types
-				return (core.defaults.validCssPreproExtensions.indexOf(type) !== -1 || type === this.extensionFinal);
+			isPrepro: function(type){
+				return (core.defaults.validCssPreproExtensions.indexOf(type) !== -1);
+			},
+			isValid: function(type){
+				return (this.isPrepro() !== -1 || type === this.extensionFinal);
 			},
 			processFile: function(stream, config, fileName, type){
-				//preprocessors tasks
-				if(core.defaults.validCssPreproExtensions.indexOf(type) !== -1){
-					stream = preprocessFile(stream, config, fileName, type);
-				}
-				return stream;
+				return preprocessFile(stream, config, fileName, type);
 			},
 			removeCode: function(stream){
 				return stream;
 			},
 			linter: function(stream, config){
 				if(config.linter){
-					stream
+					stream = stream
 						.pipe(replace(' 0px', ' 0'))
 						.pipe(csslint('csslintrc.json'))
 						.pipe(csslint.reporter(cssLintCustomReporter))

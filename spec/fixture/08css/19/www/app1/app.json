@@ -3,7 +3,6 @@
 		"files": [
 			"index*.*"
 		],
-		"linter": false,
 		"overwrite": false,
 		"generateMin": true
 	}

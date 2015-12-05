@@ -9,7 +9,6 @@
 		"files": [
 			"index*.css"
 		],
-		"linter": false,
 		"minificated": true
 	}
 ]

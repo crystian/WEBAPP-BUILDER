@@ -4,7 +4,6 @@
 			"index*.*"
 		],
 		"minExtension": "other",
-		"linter": false,
 		"generateMin": true
 	}
 ]

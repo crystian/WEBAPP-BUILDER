@@ -20,16 +20,14 @@
 	function runPreprocessors(file, config, appName, pth){
 		return core.doMagic(file, config, appName, pth, {
 			extensionFinal: 'js',
-			isValidation: function(type){
-				//valid types
-				return (core.defaults.validJsPreproExtensions.indexOf(type) !== -1 || type === this.extensionFinal);
+			isPrepro: function(type){
+				return (core.defaults.validJsPreproExtensions.indexOf(type) !== -1);
+			},
+			isValid: function(type){
+				return (this.isPrepro() || type === this.extensionFinal);
 			},
 			processFile: function(stream, config, fileName, type){
-				//preprocessors tasks
-				if(core.defaults.validJsPreproExtensions.indexOf(type) !== -1){
-					stream = preprocessFile(stream, config, fileName, type);
-				}
-				return stream;
+				return preprocessFile(stream, config, fileName, type);
 			},
 			removeCode: function(stream){
 				return stream.pipe(removeCode({production: global.cfg.app.release}));

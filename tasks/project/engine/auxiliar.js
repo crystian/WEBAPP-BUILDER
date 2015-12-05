@@ -27,7 +27,7 @@
 			}
 
 			//console.log('key: "'+ replacePair[0] +'" value: "'+ replacePair[1] +'"');
-			stream.pipe(replace(new RegExp(replacePair[0], 'gi'), replacePair[1]));
+			stream = stream.pipe(replace(new RegExp(replacePair[0], 'gi'), replacePair[1]));
 		}
 
 		return stream;

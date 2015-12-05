@@ -3,10 +3,9 @@
 		"files": [
 			"index*.*"
 		],
-		"linter": false,
 		"replaces":{
-			"pre": [
-				["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
+			"preMin": [
+				["(console.*\\:)[ ]?(\\w*)", "$1 50em"]
 			]
 		}
 	}

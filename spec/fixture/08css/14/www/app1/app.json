@@ -3,10 +3,9 @@
 		"files": [
 			"index*.*"
 		],
-		"linter": false,
 		"replaces":{
-			"pre": [
-				["#FF0","yellow"]
+			"preMin": [
+				["#ff0","yellow"]
 			]
 		}
 	}

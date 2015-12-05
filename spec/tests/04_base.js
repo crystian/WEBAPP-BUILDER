@@ -10,7 +10,7 @@ var testFolder = 'spec/fixture/04_base',
 		pathLoader = '/loader',
 		index      = '/index.html';
 
-describe("Index template to index - ", function(){
+xdescribe("Index template to index - ", function(){
 
 	beforeEach(function(){
 		cd(testFolder);

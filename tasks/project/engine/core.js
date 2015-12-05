@@ -56,7 +56,8 @@
 			'minExtension': 'min',			//prefix for file name minificated
 			'replaces': {
 				'original': [], 					//modificate orginal version
-				'current': [],
+				'prePreprocess': [],
+				'postPreprocess': [],
 				'preMin': [									//pre minificatedd
 					//["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
 				],
@@ -163,7 +164,7 @@
 			return;
 		}
 
-		if(!typeConfig.isValidation(type)){
+		if(!typeConfig.isValid(type)){
 			return;
 		}
 
@@ -212,14 +213,19 @@
 			return stream;
 		}
 
-		stream = typeConfig.processFile(stream, config, fileName, type);
+		if(typeConfig.isPrepro(type)){
+			stream = replaces(stream, config.replaces.prePreprocess, fileNameExt);
+
+			stream = typeConfig.processFile(stream, config, fileName, type);
+
+			stream = replaces(stream, config.replaces.postPreprocess, fileNameExt);
+		}
 
 		stream = typeConfig.linter(stream, config);
 
 		//TODO test it!
 		stream = typeConfig.removeCode(stream);
 
-		stream = replaces(stream, config.replaces.current, fileNameExt);
 
 		if(genMinFile || global.cfg.app.release){
 			stream = replaces(stream, config.replaces.preMin, fileNameExt);
@@ -255,10 +261,10 @@
 	}
 
 	function replaces(stream, replaces, file){
-		console.debug('Replaces on file: ' + file);
 
 		if(replaces && replaces.length > 0){
-			return aux.replace(stream, replaces);
+			console.debug('Replaces on file: ' + file +' replace: ' + replaces);
+			stream = aux.replace(stream, replaces);
 		}
 
 		return stream;
