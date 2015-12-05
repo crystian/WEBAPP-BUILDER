@@ -125,7 +125,7 @@ exports.occurrences = function(string, subString, allowOverlapping) {
 		} else break;
 	}
 	return n;
-}
+};
 
 exports.debugeame = function(){
 	return through.obj()

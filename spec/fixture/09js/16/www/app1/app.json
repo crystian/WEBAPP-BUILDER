@@ -1,0 +1,13 @@
+[
+	{
+		"files": [
+			"index*.*"
+		],
+		"generateMin": true,
+		"replaces":{
+			"postMin": [
+				["var publicMethod", "var methodReplaced"]
+			]
+		}
+	}
+]

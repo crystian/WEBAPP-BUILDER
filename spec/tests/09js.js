@@ -44,8 +44,6 @@ describe("preprocessors (js)", function(){
 	it('(01) should NOT create backup files', function(){
 		cd('01');
 
-		rm('-rf', indexOri);
-
 		expect(test('-e', indexOri)).toBe(false);
 
 		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
@@ -57,9 +55,6 @@ describe("preprocessors (js)", function(){
 		cd('02');
 
 		rm('-rf', indexOri);
-		rm('-rf', indexJs + '.js');
-
-		createFileTest();
 
 		expect(test('-e', indexOri)).toBe(false);
 
@@ -78,9 +73,7 @@ describe("preprocessors (js)", function(){
 
 		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexContent = cat(indexJs + '.js');
-
-		expect(indexContent).toContain('methodReplaced');
+		expect(cat(indexJs + '.js')).toContain('methodReplaced');
 
 		expect(test('-e', indexOri)).toBe(true);
 	});
@@ -95,9 +88,7 @@ describe("preprocessors (js)", function(){
 
 		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexContent = cat(indexJs + '.js');
-
-		expect(utils.occurrences(indexContent, 'methodReplaced')).toBe(2);
+		expect(utils.occurrences(cat(indexJs + '.js'), 'methodReplaced')).toBe(2);
 	});
 
 	it('(04) should do nothing, because there an original file', function(){
@@ -105,9 +96,7 @@ describe("preprocessors (js)", function(){
 
 		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexContent = cat(indexJs + '.js');
-
-		expect(indexContent).not.toContain('methodReplaced');
+		expect(cat(indexJs + '.js')).not.toContain('methodReplaced');
 	});
 
 	it('(05) should support another filename (postfix)', function(){
@@ -115,8 +104,6 @@ describe("preprocessors (js)", function(){
 
 		var indexOther = 'www/app1/index.other.js';
 		rm('-rf', indexOther);
-
-		createFileTest();
 
 		expect(test('-e', indexOther)).toBe(false);
 
@@ -161,12 +148,9 @@ describe("preprocessors (js)", function(){
 
 		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexCoffeeContent = cat(indexCoffee + ext),
-				indexTsContent = cat(indexTs + ext);
-
 		var keyword = 'var publicMethod;';
-		expect(indexCoffeeContent).toContain(keyword);
-		expect(indexTsContent).toContain(keyword);
+		expect(cat(indexCoffee + ext)).toContain(keyword);
+		expect(cat(indexTs + ext)).toContain(keyword);
 	});
 
 	it('(12) generate min files', function(){
@@ -183,14 +167,9 @@ describe("preprocessors (js)", function(){
 		expect(test('-e', indexTs + ext)).toBe(true);
 		expect(test('-e', indexJs + ext)).toBe(true);
 
-		var file = fs.statSync(indexCoffee + ext);
-		expect(file.size).toBe(74);
-
-		file = fs.statSync(indexTs + ext);
-		expect(file.size).toBe(396);
-
-		file = fs.statSync(indexJs + ext);
-		expect(file.size).toBe(65);
+		expect(fs.statSync(indexCoffee + ext).size).toBe(74);
+		expect(fs.statSync(indexTs + ext).size).toBe(396);
+		expect(fs.statSync(indexJs + ext).size).toBe(65);
 	});
 
 	it('(13) generate min files with other extension', function(){
@@ -207,31 +186,235 @@ describe("preprocessors (js)", function(){
 		expect(test('-e', indexTs + ext)).toBe(true);
 		expect(test('-e', indexJs + ext)).toBe(true);
 
-		var file = fs.statSync(indexJs + ext);
-		expect(file.size).toBe(65);
+		expect(fs.statSync(indexJs + ext).size).toBe(65);
 	});
 
 	it('(14) should replace pre min', function(){
 		cd('14');
 		var ext = '.js';
 
-		rm('-rf', indexCoffee + ext);
+		rm('-rf', indexTs + ext);
 
 		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(cat(indexCoffee + ext)).toContain('methodReplaced');
 		expect(cat(indexTs + ext)).toContain('methodReplaced');
 	});
 
-	xit('(15) should replace pre min (regular expr)', function(){
-		cd('15');
+	it('(26)should not replace pre min', function(){
+		cd('26');
 		var ext = '.js';
 
-		rm('-rf', indexCoffee + ext);
+		rm('-rf', indexTs + ext);
 
 		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(cat(indexCoffee + ext)).toContain('methodReplaced');
+		expect(cat(indexTs + ext)).not.toContain('methodReplaced');
 	});
+
+	it('(15) should replace pre min (regular expr)', function(){
+		cd('15');
+		var ext = '.js';
+
+		rm('-rf', indexTs + ext);
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexTs + ext)).toContain('MethodReplaced');
+	});
+
+	it('(27) should not replace pre min (regular expr)', function(){
+		cd('27');
+		var file = indexTs + '.js';
+
+		rm('-rf', file);
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(file)).not.toContain('MethodReplaced');
+	});
+
+	it('(28) should replace pre prepro', function(){
+		cd('28');
+		var indexTsJs = indexTs +'.js';
+
+		rm('-rf', indexTsJs);
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexTsJs)).toContain('MethodReplaced');
+	});
+
+	it('(29) should replace post prepro', function(){
+		cd('29');
+		var indexTsJs = indexTs +'.js';
+
+		rm('-rf', indexTsJs);
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexTsJs)).toContain('var OtherGreeter');
+	});
+
+	it('(16) should replace post min', function(){
+		cd('16');
+		var indexJsMin = indexTs +'.min.js';
+
+		rm('-rf', indexJsMin);
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexJsMin)).toContain('var methodReplaced;');
+
+		expect(fs.statSync(indexJsMin).size).toBe(398);
+	});
+
+	it('(17) should minify file', function(){
+		cd('17');
+		var indexJsMin = indexTs +'.min.js';
+
+		rm('-rf', indexJsMin);
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexJsMin)).toContain('button.onclick=function');
+
+		expect(fs.statSync(indexJsMin).size).toBe(396);
+	});
+
+	it('(18) should minify file because it is a release', function(){
+		cd('18');
+		var indexJsMin = indexTs +'.js';
+
+		rm('-rf', indexJsMin);
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexJsMin)).toContain('button.onclick=function');
+
+		expect(fs.statSync(indexJsMin).size).toBe(396);
+	});
+
+	it('(19) should not process overwrite files - min', function(){
+		cd('19');
+		var ext = '.min.js';
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexTs + ext)).toContain(keyNotOverw);
+		expect(cat(indexCoffee + ext)).toContain(keyNotOverw);
+
+		expect(fs.statSync(indexTs + ext).size).toBe(15);
+	});
+
+	it('(20) should not process overwrited files', function(){
+		cd('20');
+		var ext = '.js';
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexTs + ext)).toContain(keyNotOverw);
+		expect(cat(indexCoffee + ext)).toContain(keyNotOverw);
+	});
+
+	it('(21) should not process minificated file', function(){
+		cd('21');
+		var ext = '.js';
+
+		rm('-rf', indexTs + ext);
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexJs + ext)).toContain(keyNotOverw);
+	});
+
+	it('(22) should overwriteOnRelease without release', function(){
+		cd('22');
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexTs + '.js')).toContain(keyNotOverw);
+
+	});
+
+	it('(23) should overwriteOnRelease with release', function(){
+		cd('23');
+		var indexTsJs = indexTs + '.js';
+
+		rm('-rf', indexTsJs);
+		keyNotOverw.to(indexTsJs);
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexTsJs)).not.toContain(keyNotOverw);
+
+	});
+
+	it('(24) should not make a backup file', function(){
+		cd('24');
+		var indexJsC = indexTs + '.js',
+				indexTsS = indexTs + '.ts';
+
+		rm('-rf', indexJsC);
+		rm('-rf', indexTsS);
+
+		cp('-f', 'www/app1/ori/*', 'www/app1');
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(fs.statSync(indexJsC).size).toBe(404);
+
+		expect(fs.statSync(indexTsS).size).toBe(493);
+
+		expect(cat(indexTsS)).toContain('module MethodReplaced');
+		expect(cat(indexJsC)).toContain('var MethodReplaced;');
+
+		expect(test('-e', indexTs + '.original.js')).toBe(false); //should not exist
+	});
+
+	it('(90) complex case 1', function(){
+		cd('90');
+		var indexJsPrePost = indexJs + 'PrePostPreprocess';
+
+		rm('-rf', indexTs + '*');
+		rm('-rf', indexCoffee + '*');
+		rm('-rf', indexJs + '*');
+
+		cp('-f', 'www/app1/ori/*', 'www/app1');
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		//first app:
+		expect(cat(indexTs + '.original.ts')).toContain('var greeter = new publicMethod.Greeter("world");'); //should not change it
+		expect(cat(indexTs + '.original.ts')).not.toContain('//ORIGINAL FILE'); //should not get it
+		expect(cat(indexTs + '2.original.ts')).toContain('var greeter = new publicMethod.Greeter("world");'); //should not change it
+		expect(cat(indexTs + '2.original.ts')).toContain('//ORIGINAL FILE'); //should not change it
+		expect(cat(indexTs + '2.ts')).toContain('module MethodReplaced'); //replaced
+		expect(cat(indexTs + '2.js')).toContain('var MethodReplaced'); //with replace
+
+		expect(cat(indexCoffee + '.original.coffee')).toContain('publicMethod = (m)');
+		expect(cat(indexCoffee + '.coffee')).toContain('MethodReplaced = (m)');
+		expect(cat(indexCoffee + '.js')).toContain('{Method2Replaced;');
+
+		expect(fs.statSync(indexTs + '2.js').size).toBe(404);
+
+		expect(fs.statSync(indexCoffee + '.js').size).toBe(90);
+
+		//complex
+		expect(test('-e', indexJsPrePost + '.js')).toBe(true);
+		expect(test('-e', indexJsPrePost + '.bbb.ts')).toBe(true);//backup
+		expect(cat(indexJsPrePost + '.js')).toContain('public4Method');
+
+		expect(test('-e', indexJs + '.js')).not.toBe(true);
+		expect(test('-e', indexJs + '.bb.coffee')).toBe(true);//original backup with other extension
+		expect(cat(indexJs + '.bb.coffee')).toContain('publicMethod');
+		expect(test('-e', indexJs + '.mm.js')).toBe(true);//minificated with other extension
+		expect(cat(indexJs + '.mm.js')).toContain('public6Method');
+
+		expect(fs.statSync(indexJs + '.mm.js').size).toBe(100);
+
+		//second app:
+		expect(cat('www/app2/index.min.js')).toContain(keyNotOverw);
+	});
+
 
 });

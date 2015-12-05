@@ -78,13 +78,18 @@ exports.boot = function(config){
 		console.logRed(e);
 		utils.exit(1);
 	}
-	//TODO clean csss
-	//validations of compatibilities of configs
+
 	//TODO uncomment
 	//if(global.cfg.app.release && gutil.env.debug){
 	//	console.logRed('APPFACTORY: app.release and argument "debug" is not compatible');
 	//	utils.exit(1);
 	//}
+
+	if(global.cfg.app.release && gutil.env.noMin){
+		console.logRed('APPFACTORY: app.release and argument "noMin" is not compatible');
+		utils.exit(1);
+	}
+
 	if(global.cfg.compress && !global.cfg.loader.bower['lz-string']){
 		console.logRed('LOADER: Compress option is active, but library lz-string not present');
 		utils.exit(1);

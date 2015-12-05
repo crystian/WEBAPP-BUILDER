@@ -1,0 +1,12 @@
+[
+	{
+		"files": [
+			"index*.*"
+		],
+		"replaces":{
+			"preMin": [
+				["publicMethod","methodReplaced"]
+			]
+		}
+	}
+]

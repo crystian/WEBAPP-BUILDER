@@ -1,0 +1,9 @@
+[
+	{
+		"files": [
+			"index*.ts"
+		],
+		"overwrite": false,
+		"overwriteOnRelease": true
+	}
+]

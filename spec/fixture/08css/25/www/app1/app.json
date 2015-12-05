@@ -1,9 +1,0 @@
-[
-	{
-		"files": [
-			"index*.css"
-		],
-		"linter": true,
-		"linterForce": true
-	}
-]

@@ -64,14 +64,15 @@ describe("preprocessors (css)", function(){
 	it('(03) should create backup files and modificate the css', function(){
 		cd('03');
 
-		rm('-rf', indexCss + '.css');
+		var indexCssCss = indexCss + '.css';
+		rm('-rf', indexCssCss);
 		rm('-rf', indexCssOri);
 
 		createCssTest();
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(cat(indexCss + '.css')).toContain('yellow');
+		expect(cat(indexCssCss)).toContain('yellow');
 
 		expect(test('-e', indexCssOri)).toBe(true);
 	});
@@ -110,10 +111,10 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(test('-e', indexSass + '.css')).toBe(true);
-		expect(test('-e', indexScss + '.css')).toBe(true);
-		expect(test('-e', indexLess + '.css')).toBe(true);
-		expect(test('-e', indexStyl + '.css')).toBe(true);
+		expect(test('-e', indexSass + ext)).toBe(true);
+		expect(test('-e', indexScss + ext)).toBe(true);
+		expect(test('-e', indexLess + ext)).toBe(true);
+		expect(test('-e', indexStyl + ext)).toBe(true);
 	});
 
 	it('(07) should works with css linter but with errors', function(){
@@ -146,10 +147,10 @@ describe("preprocessors (css)", function(){
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		var keyword = 'color: #FF0;';
-		expect(cat(indexSass + '.css')).toContain(keyword);
-		expect(cat(indexScss + '.css')).toContain(keyword);
-		expect(cat(indexLess + '.css')).toContain(keyword);
-		expect(cat(indexStyl + '.css')).toContain(keyword.toLowerCase());
+		expect(cat(indexSass + ext)).toContain(keyword);
+		expect(cat(indexScss + ext)).toContain(keyword);
+		expect(cat(indexLess + ext)).toContain(keyword);
+		expect(cat(indexStyl + ext)).toContain(keyword.toLowerCase());
 	});
 
 	it('(10) should perfix css (only chrome)', function(){
@@ -163,10 +164,10 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexSassContent = cat(indexSass + '.css'),
-				indexScssContent = cat(indexScss + '.css'),
-				indexLessContent = cat(indexLess + '.css'),
-				indexStylContent = cat(indexStyl + '.css');
+		var indexSassContent = cat(indexSass + ext),
+				indexScssContent = cat(indexScss + ext),
+				indexLessContent = cat(indexLess + ext),
+				indexStylContent = cat(indexStyl + ext);
 
 		var keyword = '-webkit-transform: rotateX(150deg);';
 		expect(indexSassContent).toContain(keyword);
@@ -192,10 +193,10 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var indexSassContent = cat(indexSass + '.css'),
-				indexScssContent = cat(indexScss + '.css'),
-				indexLessContent = cat(indexLess + '.css'),
-				indexStylContent = cat(indexStyl + '.css');
+		var indexSassContent = cat(indexSass + ext),
+				indexScssContent = cat(indexScss + ext),
+				indexLessContent = cat(indexLess + ext),
+				indexStylContent = cat(indexStyl + ext);
 
 		var keyNotOverwNot1 = '-webkit-transform: rotateX(150deg);';
 		expect(indexSassContent).not.toContain(keyNotOverwNot1);
@@ -292,7 +293,7 @@ describe("preprocessors (css)", function(){
 		expect(cat(indexLess + ext)).toContain('border: 0px');
 	});
 
-	it('(28)should replace pre prepro', function(){
+	it('(28) should replace pre prepro', function(){
 		cd('28');
 		var ext = '.css';
 
@@ -303,15 +304,17 @@ describe("preprocessors (css)", function(){
 		expect(cat(indexLess + ext)).toContain('border: 50em;');
 	});
 
-	it('(29)should replace post prepro', function(){
+	it('(29) should replace post prepro', function(){
 		cd('29');
-		var ext = '.css';
+		var indexLessCss = indexLess +'.css';
 
-		rm('-rf', indexLess + ext);
+		rm('-rf', indexLessCss);
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(cat(indexLess + ext)).toContain('other-value');
+		expect(cat(indexLessCss)).toContain('other-value');
+
+		expect(utils.occurrences(cat(indexLessCss), 'other-value')).toBe(4);
 	});
 
 	it('(16) should replace post min', function(){
@@ -327,7 +330,7 @@ describe("preprocessors (css)", function(){
 		expect(fs.statSync(indexLess + ext).size).toBe(240);
 	});
 
-	it('(17) should minify css file', function(){
+	it('(17) should minify file', function(){
 		cd('17');
 		var ext = '.min.css';
 
@@ -340,7 +343,7 @@ describe("preprocessors (css)", function(){
 		expect(fs.statSync(indexCss + ext).size).toBe(237);
 	});
 
-	it('(18) should minify css file because it is a release', function(){
+	it('(18) should minify file because it is a release', function(){
 		cd('18');
 		var ext = '.css';
 
@@ -370,7 +373,7 @@ describe("preprocessors (css)", function(){
 		expect(fs.statSync(indexScss + ext).size).toBe(237);
 	});
 
-	it('(20) should not process overwrite files', function(){
+	it('(20) should not process overwrited files', function(){
 		cd('20');
 		var ext = '.css';
 
@@ -399,11 +402,9 @@ describe("preprocessors (css)", function(){
 
 	it('(22) should overwriteOnRelease without release', function(){
 		cd('22');
-		var ext = '.css';
-
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(cat(indexScss + ext)).toContain(keyNotOverw);
+		expect(cat(indexScss + '.css')).toContain(keyNotOverw);
 
 	});
 
@@ -442,12 +443,6 @@ describe("preprocessors (css)", function(){
 		expect(test('-e', indexScss + '.original.scss')).toBe(false); //should not exist
 	});
 
-	it('(25) should fail by linter on css file', function(){
-		cd('25');
-
-		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(1);
-	});
-
 	it('(90) complex case 1', function(){
 		cd('90');
 
@@ -481,7 +476,7 @@ describe("preprocessors (css)", function(){
 		expect(fs.statSync(indexCss + '.m.css').size).toBe(238);
 
 		expect(cat(indexCss + '.css')).toContain('color: yellow;');//replace: original
-		expect(cat(indexCss + '.m.css')).toContain('color:blue;');//replace: pre & post
+		expect(cat(indexCss + '.m.css')).toContain('color:blue;');//replace: pre & post min
 		expect(cat(indexCss + '.b.css')).toContain('color: #FF0;');//original value
 
 		//second app:

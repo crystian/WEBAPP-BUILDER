@@ -1,0 +1,57 @@
+[
+	{
+		"files": [
+			"index*.*",
+			"!*.js",
+			"!indexPrePostPreprocess.ts",
+			"!index.coffee"
+		],
+		"replaces":{
+			"original": [
+				["(public)(.\\w*)(.*[ \\.\\;])","$2Replaced$3"]
+			]
+		}
+	},
+	{
+		"files": [
+			"index.coffee"
+		],
+		"replaces":{
+			"original": [
+				["publicMethod","public2Method"]
+			],
+			"prePreprocess":[
+				["public2Method","public3Method"]
+			],
+			"postPreprocess":[
+				["public3Method","public4Method"]
+			],
+			"preMin": [
+				["public4Method","public5Method"]
+			],
+			"postMin": [
+				["public5Method","public6Method"]
+			]
+		},
+		"minExtension": "mm",
+		"backupExtension": "bb",
+		"generateMin": true
+	},
+	{
+		"files": [
+			"indexPrePostPreprocess.ts"
+		],
+		"replaces":{
+			"original": [
+				["publicMethod","public2Method"]
+			],
+			"prePreprocess":[
+				["public2Method","public3Method"]
+			],
+			"postPreprocess":[
+				["public3Method","public4Method"]
+			]
+		},
+		"backupExtension": "bbb"
+	}
+]

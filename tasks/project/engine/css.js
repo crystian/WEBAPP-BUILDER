@@ -25,7 +25,7 @@
 			isPrepro: function(type){
 				return (core.defaults.validCssPreproExtensions.indexOf(type) !== -1);
 			},
-			isValid: function(type){
+			isValidType: function(type){
 				return (this.isPrepro(type) || type === this.extensionFinal);
 			},
 			processFile: function(stream, config, fileName, type){

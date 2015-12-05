@@ -4,7 +4,7 @@
 			"index*.*"
 		],
 		"replaces":{
-			"prePreprocess": [
+			"postPreprocess": [
 				["(display.*\\:)[ ]?(\\w*)", "$1 other-value"]
 			]
 		}

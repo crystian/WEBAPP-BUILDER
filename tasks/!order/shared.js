@@ -40,7 +40,3 @@
 //	return stream;
 //};
 
-//gulp.task('remove:cordova:www', function () {
-//	return del(global.cfg.folders.cordovaWWW);
-//});
-//

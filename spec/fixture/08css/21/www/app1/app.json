@@ -2,8 +2,7 @@
 	{
 		"files": [
 			"index*.scss"
-		],
-		"linter": false
+		]
 	},
 	{
 		"files": [

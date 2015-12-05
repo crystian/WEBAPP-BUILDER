@@ -1,0 +1,13 @@
+[
+	{
+		"files": [
+			"index*.ts"
+		],
+		"makeBackup": false,
+		"replaces":{
+			"original": [
+				["(public)(.\\w*)(.*[ \\.])","$2Replaced$3"]
+			]
+		}
+	}
+]

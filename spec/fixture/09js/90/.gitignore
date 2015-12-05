@@ -1,0 +1,4 @@
+/www/app*/*.js
+!/www/app2/index.min.js
+/www/app1/*.coffee
+/www/app1/*.ts

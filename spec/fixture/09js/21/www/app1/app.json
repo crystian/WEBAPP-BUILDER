@@ -1,0 +1,13 @@
+[
+	{
+		"files": [
+			"index*.ts"
+		]
+	},
+	{
+		"files": [
+			"index.js"
+		],
+		"minificated": true
+	}
+]

@@ -1,0 +1,12 @@
+[
+	{
+		"files": [
+			"index*.*"
+		],
+		"replaces":{
+			"prePreprocess": [
+				["(public)(.*d)","$2Replaced"]
+			]
+		}
+	}
+]

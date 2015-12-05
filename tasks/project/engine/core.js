@@ -164,7 +164,7 @@
 			return;
 		}
 
-		if(!typeConfig.isValid(type)){
+		if(!typeConfig.isValidType(type)){
 			return;
 		}
 
@@ -230,7 +230,9 @@
 		if(genMinFile || global.cfg.app.release){
 			stream = replaces(stream, config.replaces.preMin, fileNameExt);
 
-			stream = typeConfig.minifyFile(stream);
+			if(!gutil.env.noMin){//for debug
+				stream = typeConfig.minifyFile(stream);
+			}
 
 			stream = replaces(stream, config.replaces.postMin, fileNameExt);
 
