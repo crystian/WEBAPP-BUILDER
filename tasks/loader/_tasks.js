@@ -7,8 +7,6 @@ var gutil       = require('gulp-util'),
 
 //alias:
 gulp.task('default', ['buildLoader']);
-
-
 gulp.task('loaderConfig', ['_makeConfig']);
 gulp.task('loaderCss', ['_makeCss']);
 gulp.task('loaderCssw', ['_watchCss']);

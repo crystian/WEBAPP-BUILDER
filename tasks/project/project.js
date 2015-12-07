@@ -9,20 +9,20 @@ gulp.task('css', ['makeCss']);
 gulp.task('js', ['makeJs']);
 gulp.task('html', ['makeHtml']);
 
-gulp.task('makeWwwJson', ['makeCss', 'makeJs'/*, 'makeHtml'*/], function(){
+gulp.task('makeWwwJson', ['makeCss', 'makeJs', 'makeHtml'], function(){
 	engine.makeWwwJson();
 });
 
 gulp.task('makeCss', function(){
-	return engine.runCssPreprocessors();
+	return engine.css();
 });
 
 gulp.task('makeJs', function(){
-	return engine.runJsPreprocessors();
+	return engine.js();
 });
 
 gulp.task('makeHtml', function(){
-	return engine.runHtmlPreprocessors();
+	return engine.html();
 });
 
 

@@ -2,8 +2,6 @@
 	"app": {
 		"name": "template empty",
 		"version": "0.0.1",
-		"folders": {
-			"project": "templates/empty"
-		}
+		"release": false
 	}
 }

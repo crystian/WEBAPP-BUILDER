@@ -1,21 +1,18 @@
-{
-	"files": [
-		{
-			"file": "app.scss",
-			"path": "www/app",
-			"replaces": {
-				"pre": [
-					["../templates/empty/www/app/assets/img/", "assets/img/"]
-				]
-			}
-		},
-		{
-			"file": "app.html",
-			"path": "www/app"
-		},
-		{
-			"file": "app.js",
-			"path": "www/app"
+[
+	{
+		"files": [
+			"*.*",
+			"!*.scss"
+		]
+	},
+	{
+		"files": [
+			"*.scss"
+		],
+		"replaces":{
+			"prePreprocess": [
+				["dsa../templates/empty/www/app/assets/img/", "assets/img/"]
+			]
 		}
-	]
-}
+	}
+]

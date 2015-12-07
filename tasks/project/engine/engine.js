@@ -14,15 +14,15 @@
 		return core.getFilesByGroupAndApps(www.makeWwwJson, www.resolveFiles);
 	};
 
-	exports.runCssPreprocessors = function(){
+	exports.css = function(){
 		return core.getFilesByGroupAndAppsStream(null, css.runPreprocessors);
 	};
 
-	exports.runJsPreprocessors = function(){
+	exports.js = function(){
 		return core.getFilesByGroupAndAppsStream(null, js.runPreprocessors);
 	};
 
-	exports.runHtmlPreprocessors = function(){
+	exports.html = function(){
 		return core.getFilesByGroupAndAppsStream(null, html.runPreprocessors);
 	};
 
