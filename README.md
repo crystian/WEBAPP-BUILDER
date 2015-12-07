@@ -1,5 +1,6 @@
 # APP FACTORY!
-                      gutil.env.noMin
+                      modificar orignal no preoducto cuando es tiene replaces.original
+                      gutil.env.noMin  time
 coliciones de nombres de productos
 tener en cuenta que si usas el patron glob para una app con dos grupos, si uno de ellos crea un backup, el otro lo puede estar leyendo, debes ignorarlo con "!"
 ---

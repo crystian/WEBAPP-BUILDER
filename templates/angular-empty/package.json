@@ -6,5 +6,5 @@
 	"dependencies": {
 		"gulp-angular-templatecache": "^1.8.0"
 	},
-	"gitVersion": "0a0faf8ac89fc86eee5fff61e38523dff0d831c3"
+	"gitVersion": "c41f274a623dfa54d2f4ceb3ff048b653a06d44a"
 }

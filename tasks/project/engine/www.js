@@ -16,6 +16,12 @@
 		if(core.defaults.validCssPreproExtensions.indexOf(type) !== -1){
 			type = 'css';
 		}
+		if(core.defaults.validJsPreproExtensions.indexOf(type) !== -1){
+			type = 'js';
+		}
+		if(core.defaults.validHtmlPreproExtensions.indexOf(type) !== -1){
+			type = 'html';
+		}
 
 		if(core.defaults.validExtensions.indexOf(type) === -1){
 			return;
@@ -26,12 +32,18 @@
 			return;
 		}
 
-		if(config.generateMin && file.basename.indexOf('.' + config.minExtension + '.') === -1){
+		if(config.generateMin && file.basename.indexOf('.' + config.minExtension + '.') !== -1){
 			console.debug('WWWJSON:' + file.basename + ' GenerateMin origin version detected, skipped');
 			return;
 		}
 
 		var filePath = utils.setExtensionFilename(file.path, type);
+
+		//calculate over exist
+		if(global.cfg.app.release && (config.generateMin || config.minificated)){
+			filePath = utils.setPreExtensionFilename(filePath, config.minExtension);
+		}
+
 		filePath = path.relative(pth, filePath);
 		filePath = filePath.split('\\').join('/');
 

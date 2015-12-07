@@ -421,28 +421,6 @@ describe("preprocessors (css)", function(){
 
 	});
 
-	it('(24) should not make a backup file', function(){
-		cd('24');
-		var indexScssC = indexScss + '.css',
-				indexScssS = indexScss + '.scss';
-
-		rm('-rf', indexScssC);
-		rm('-rf', indexScssS);
-
-		cp('-f', 'www/app1/ori/*', 'www/app1');
-
-		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
-
-		expect(fs.statSync(indexScssC).size).toBe(237);
-
-		expect(fs.statSync(indexScssS).size).toBe(170);
-
-		expect(cat(indexScssS)).toContain('$primaryColor: #00F');
-		expect(cat(indexScssC)).toContain('color:#00F');
-
-		expect(test('-e', indexScss + '.original.scss')).toBe(false); //should not exist
-	});
-
 	it('(90) complex case 1', function(){
 		cd('90');
 

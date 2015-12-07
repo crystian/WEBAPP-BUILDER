@@ -42,17 +42,17 @@
 			'overwrite': true,					//specially for libs, just make it once
 			'ignoreOnRelease': false,		//ignore on dev time, request by request
 			'overwriteOnRelease': false,//
-			'minificated': false,				//if it is a lib for don't re do the minifcation (over overwrite!)
+			'minificated': false,				//if it is a lib for don't re do the minifcation (over overwrite!) and it has two versions, ensure use minExtension
 			'autoPrefixer': true,				//auto prefix when source is active
 			'linter': false,						//if you want to lint, will not apply for libraries
 			'linterForce': false,				//if fail, return an error, otherwise continue without break the process
 			'backupExtension': 'original',//if it has replaces it will make a backup with this postfix
-			'makeBackup': true,					//if there are replaces (original)
 			//'genSprite': true,				//generate sprite
 			'generateMin': false,				//it should be create a minificate version
 			'minExtension': 'min',			//prefix for file name minificated
 			'replaces': {
 				'original': [], 					//modificate orginal version
+				'originalMin': [], 					//modificate min orginal version
 				'prePreprocess': [],
 				'postPreprocess': [],
 				'preMin': [									//pre minificatedd
@@ -99,9 +99,8 @@
 				r         = [];
 
 		apps.forEach(function(appName){
-			var appFiles = fnEachApp(getFilesByGroup(fnEachFile, appName, pth), appName, pth);
-
-			r.push({name: appName, files: appFiles});
+			var appFilesStream = fnEachApp(getFilesByGroup(fnEachFile, appName, pth), appName, pth);
+			r.push({name: appName, files: appFilesStream});
 		});
 
 		return r;
@@ -128,16 +127,14 @@
 			}
 			var files = globby.sync(config.files, {cwd: _path});
 
-			if(files.length === 0){
-				console.logRed('APPFACTORY: Files not found');
-				utils.exit(1);
-			}
+			configValidator(files, config);
 
 			files.forEach(function(file){
+				var pathResolved = path.resolve(pth,appName,path.dirname(file));
 				var _file = new gutil.File({
-					base: pth + appName,
+					base: pathResolved,
 					cwd: pth,
-					path: pth + appName + '/' + file
+					path: path.resolve(pathResolved, path.basename(file))
 				});
 
 				r.push(fnEachFile(_file, config, appName, pth));
@@ -145,6 +142,18 @@
 		});
 
 		return r;
+	}
+
+	function configValidator(files, config){
+		if(files.length === 0){
+			console.logRed('APPFACTORY: Files not found');
+			utils.exit(1);
+		}
+
+		if(config.minificated && config.generateMin){
+			console.logRed('APPFACTORY Config: generateMin and minificated option are not compatibles (on "' + files + '")');
+			utils.exit(1);
+		}
 	}
 
 	function doMagic(file, config, appName, pth, typeConfig){
@@ -158,13 +167,22 @@
 
 		//if it is minificate, it'll ignore
 		if(config.minificated){
-			return;
+			if(config.replaces.original.length > 0){
+				stream = modifyOriginal(gulp.src(file.path), file.path, config);
+			}
+			if(config.replaces.originalMin.length > 0){
+				var filenameMin = utils.setPreExtensionFilename(file.path, config.minExtension);
+				stream = modifyOriginal(gulp.src(filenameMin), filenameMin, config);
+			}
+			return stream;
 		}
 
+		//just valid extensions
 		if(!(typeConfig.validPreproExtension.indexOf(type) !== -1 || type === typeConfig.extensionFinal)){
 			return;
 		}
 
+		//overwrite
 		var forceOverwrite = (global.cfg.app.release && config.overwriteOnRelease);
 
 		//It is a complex condition, I prefer more explict (and redundant)
@@ -201,11 +219,11 @@
 				.pipe(utils.debugeame())
 		;
 
-		if(config.replaces.original.length > 0){
+		if(config.replaces.original.length > 0 || config.replaces.originalMin.length > 0){
 			stream = modifyOriginal(stream, file.path, config);
 		}
 
-		if(fileName.indexOf('.' + config.minExtension) >= 0 && type === typeConfig.extensionFinal){
+		if(fileName.indexOf('.' + config.minExtension) !== -1 && type === typeConfig.extensionFinal){
 			console.debug(fileNameExt + ': minificated detected'); //and ingnored it
 			return stream;
 		}
@@ -252,13 +270,20 @@
 	function modifyOriginal(stream, file, config){
 		var filenameBackup = utils.setPreExtensionFilename(file, config.backupExtension);
 
-		if(config.makeBackup && !utils.fileExist(filenameBackup)){
-			console.debug('Replaces on original file: ' + utils.getFileNameWithExtension(file));
+		if(!utils.fileExist(filenameBackup)){
+			console.debug('Backup file: ' + utils.getFileNameWithExtension(file));
 			fs.copySync(file, filenameBackup);
+		} else {
+			console.debug('Recover backup file: ' + utils.getFileNameWithExtension(file));
+			fs.copySync(filenameBackup, file);
 		}
 
-		stream = aux.replace(stream, config.replaces.original)
-				.pipe(gulp.dest(path.dirname(file)));
+		var replaces = file.indexOf('.' + config.minExtension +'.') === -1 ? config.replaces.original : config.replaces.originalMin;
+
+		if(replaces.length > 0){
+			stream = aux.replace(stream, replaces)
+					.pipe(gulp.dest(path.dirname(file)));
+		}
 
 		return stream;
 	}

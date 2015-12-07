@@ -10,7 +10,6 @@
 			less         = require('gulp-less'),
 			stylus       = require('gulp-stylus'),
 			minifycss    = require('gulp-minify-css'),
-			strip        = require('gulp-strip-comments'),
 			gif          = require('gulp-if'),
 			csslint      = require('gulp-csslint'),
 			replace      = require('gulp-replace'),
@@ -35,7 +34,6 @@
 			},
 			minifyFile: function(stream){
 				return stream
-					.pipe(strip({safe: false, block: false}))
 					.pipe(minifycss());
 			}
 		});

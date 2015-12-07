@@ -10,8 +10,8 @@
 			"*.scss"
 		],
 		"replaces":{
-			"prePreprocess": [
-				["dsa../templates/empty/www/app/assets/img/", "assets/img/"]
+			"preMin": [
+				["../templates/empty/www/app/assets/img/", "assets/img/"]
 			]
 		}
 	}

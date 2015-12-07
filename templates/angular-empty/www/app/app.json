@@ -1,47 +1,24 @@
-{
-	"files": [
-		{
-			"file": "angular.js",
-			"path": "vendors/bower_components/angular",
-			"minificated": true
-		},
-		{
-			"file": "angular-animate.js",
-			"path": "vendors/bower_components/angular-animate",
-			"minificated": true
-		},
-		{
-			"file": "angular-route.js",
-			"path": "vendors/bower_components/angular-route",
-			"minificated": true
-		},
+[
+	{
+		"files": [
+			"../../vendors/bower_components/angular/angular.js",
+			"../../vendors/bower_components/angular-animate/angular-animate.js",
+			"../../vendors/bower_components/angular-route/angular-route.js"
+		],
+		"minificated": true
+	},
+	{
+		"files": [
+			"**/*.*",
+			"!templates.js"
+		]
+	},
+	{
+		"files": [
+			"templates.js"
+		],
+		"path": "global.cfg.folders.temp",
+		"ignoreOnRelease": true
+	}
+]
 
-
-		{
-			"file": "app.scss",
-			"path": "www/app"
-		},
-		{
-			"file": "app.js",
-			"path": "www/app"
-		},
-		{
-			"file": "mainCtrl.js",
-			"path": "www/app/main"
-		},
-		{
-			"file": "templates.js",
-			"path": "global.cfg.folders.temp",
-			"ignoreOnRelease": true
-		},
-
-		{
-			"file": "boot.js",
-			"path": "www/app"
-		},
-		{
-			"file": "app.html",
-			"path": "www/app"
-		}
-	]
-}

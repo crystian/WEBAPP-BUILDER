@@ -186,6 +186,24 @@ describe("make www.json files - ", function(){
 		expect(utils.readJsonFile(w2).length).toBe(5);
 	});
 
+	it('(15) should put min file', function(){
+		cd('15');
+		rm('-rf', w1);
+		rm('-rf', 'www/app1/index.min.css');
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(utils.readJsonFile(w1).length).toBe(1);
+
+		expect(utils.readJsonFile(w1)).toContain('app1/index.min.css');
+	});
+
+	it('(16) should fail for incompatible opions', function(){
+		cd('16');
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(1);
+	});
+
 	it('(90) complex case 1', function(){
 		cd('90');
 

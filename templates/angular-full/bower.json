@@ -12,7 +12,7 @@
     "angular-route": "1.4.7",
     "angular-animate": "1.4.7",
     "angular-toastr": "1.4.1",
-    "bootstrap": "3.3.5",
+    "bootstrap": "3.3.6",
     "Swiper": "swiper#~3.1.7",
     "jquery": "2.1.4",
     "components-font-awesome": "4.4.0"

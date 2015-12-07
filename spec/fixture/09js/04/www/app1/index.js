@@ -1,5 +1,5 @@
 (function(){
-	function publicMethod(m){
+function publicMethod(m){
 		console.log("m", m);
 	}
 	return {

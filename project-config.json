@@ -36,7 +36,7 @@
 		"isCordovaDevice": false,
 
 		"folders": {
-			"project": "templates/empty",
+			"project": "templates/angular-full",
 			"www": "www",
 			"xbuild": "build",
 			"xtemp": "build/.tmp",

@@ -31,24 +31,6 @@ function createFileTest(){
 	testContent.to(indexJs + '.js');
 }
 
-function createFileTestWithRemoveCode(){
-	var testContent =
-				'//removeIf(production)\n' +
-				'alert("remove me on production");\n' +
-				'//endRemoveIf(production)\n' +
-				'\n' +
-				'(function(){\n' +
-				'function publicMethod(m){\n' +
-				'		console.log("m", m);\n' +
-				'	}\n' +
-				'	return {\n' +
-				'		method: publicMethod\n' +
-				'	};\n' +
-				'}());';
-
-	testContent.to(indexJs + '.js');
-}
-
 describe("preprocessors (js)", function(){
 
 	beforeEach(function(){
@@ -365,28 +347,6 @@ describe("preprocessors (js)", function(){
 
 		expect(cat(indexTsJs)).not.toContain(keyNotOverw);
 
-	});
-
-	it('(24) should not make a backup file', function(){
-		cd('24');
-		var indexJsC = indexTs + '.js',
-				indexTsS = indexTs + '.ts';
-
-		rm('-rf', indexJsC);
-		rm('-rf', indexTsS);
-
-		cp('-f', 'www/app1/ori/*', 'www/app1');
-
-		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
-
-		expect(fs.statSync(indexJsC).size).toBe(404);
-
-		expect(fs.statSync(indexTsS).size).toBe(493);
-
-		expect(cat(indexTsS)).toContain('module MethodReplaced');
-		expect(cat(indexJsC)).toContain('var MethodReplaced;');
-
-		expect(test('-e', indexTs + '.original.js')).toBe(false); //should not exist
 	});
 
 	it('(30) should not remove code for production (not release)', function(){
