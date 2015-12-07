@@ -6,7 +6,6 @@
 	'use strict';
 
 	var utils      = require('../../shared/utils'),
-			//strip        = require('gulp-strip-comments'),
 			gif        = require('gulp-if'),
 			jshint     = require('gulp-jshint'),
 			removeCode = require('gulp-remove-code'),
@@ -17,29 +16,21 @@
 			gutil      = require('gulp-util'),
 			core       = require('./core');
 
+	var extensionFinal = 'js';
+
 	function runPreprocessors(file, config, appName, pth){
 		return core.doMagic(file, config, appName, pth, {
-			extensionFinal: 'js',
-			isPrepro: function(type){
-				return (core.defaults.validJsPreproExtensions.indexOf(type) !== -1);
-			},
-			isValidType: function(type){
-				return (this.isPrepro(type) || type === this.extensionFinal);
-			},
-			processFile: function(stream, config, fileName, type){
-				return preprocessFile(stream, config, fileName, type);
-			},
+			extensionFinal: extensionFinal,
+			validPreproExtension: core.defaults.validJsPreproExtensions,
+			processFile: preprocessFile,
 			removeCode: function(stream){
 				return stream.pipe(removeCode({production: global.cfg.app.release}));
 			},
 			linter: function(stream, config){
-				if(config.linter){
-					stream = stream
-						.pipe(jshint({lookup: false, debug: false}))
-						.pipe(jshint.reporter('jshint-stylish'))
-						.pipe(gif(config.linterForce, jshint.reporter('fail')));
-				}
-				return stream;
+				return stream
+					.pipe(jshint({lookup: false, debug: false}))
+					.pipe(jshint.reporter('jshint-stylish'))
+					.pipe(gif(config.linterForce, jshint.reporter('fail')));
 			},
 			minifyFile: function(stream){
 				return stream
@@ -58,7 +49,7 @@
 	}
 
 	function preprocessFile(stream, config, fileName, type){
-		//TODO add config option for each type
+		//TODO add config option (from app.json) for each type
 		switch (type){
 			case 'coffee':
 				stream = stream.pipe(coffee().on('error', gutil.log));
@@ -68,8 +59,7 @@
 				break;
 		}
 
-
-		return stream.pipe(rename(fileName + '.js'));
+		return stream.pipe(rename(fileName + '.' + extensionFinal));
 	}
 
 

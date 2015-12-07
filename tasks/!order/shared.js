@@ -4,9 +4,7 @@
 //
 //var gulp = require('gulp'),
 //	webserver = require('gulp-webserver'),
-//	htmlmin = require('gulp-htmlmin'),
 //	gif = require('gulp-if'),
-//	strip = require('gulp-strip-comments'),
 //	commons = require('../commons'),
 //	exec = require('child_process').exec,
 //	utils = require('./utils.js'),
@@ -26,17 +24,3 @@
 //
 //	cb();
 //};
-//
-//exports.htmlMin = function(stream){
-//	var htmlminOptions = {
-//		collapseWhitespace: true,
-//		removeComments: true,
-//		removeRedundantAttributes: true
-//	};
-//	stream = stream
-//		.pipe(strip({safe:false, block:false}))
-//		.pipe(gif(global.cfg.release, htmlmin(htmlminOptions)));
-//
-//	return stream;
-//};
-

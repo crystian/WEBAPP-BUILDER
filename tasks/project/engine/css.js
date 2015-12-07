@@ -19,30 +19,19 @@
 			gutil        = require('gulp-util'),
 			core         = require('./core');
 
+	var extensionFinal = 'css';
+
 	function runPreprocessors(file, config, appName, pth){
 		return core.doMagic(file, config, appName, pth, {
-			extensionFinal: 'css',
-			isPrepro: function(type){
-				return (core.defaults.validCssPreproExtensions.indexOf(type) !== -1);
-			},
-			isValidType: function(type){
-				return (this.isPrepro(type) || type === this.extensionFinal);
-			},
-			processFile: function(stream, config, fileName, type){
-				return preprocessFile(stream, config, fileName, type);
-			},
-			removeCode: function(stream){
-				return stream;
-			},
+			extensionFinal: extensionFinal,
+			validPreproExtension: core.defaults.validCssPreproExtensions,
+			processFile: preprocessFile,
 			linter: function(stream, config){
-				if(config.linter){
-					stream = stream
-						.pipe(replace(' 0px', ' 0'))
-						.pipe(csslint('csslintrc.json'))
-						.pipe(csslint.reporter(cssLintCustomReporter))
-						.pipe(gif(config.linterForce, csslint.reporter('fail')));
-				}
-				return stream;
+				return stream
+					.pipe(replace(' 0px', ' 0'))
+					.pipe(csslint('csslintrc.json'))
+					.pipe(csslint.reporter(cssLintCustomReporter))
+					.pipe(gif(config.linterForce, csslint.reporter('fail')));
 			},
 			minifyFile: function(stream){
 				return stream
@@ -53,7 +42,7 @@
 	}
 
 	function preprocessFile(stream, config, fileName, type){
-		//TODO add config option for each type
+		//TODO add config option (from app.json) for each type
 		switch (type){
 			case 'scss':
 			case 'sass':
@@ -73,7 +62,7 @@
 			stream = stream.pipe(autoprefixer({browsers: global.cfg.autoprefixer}));
 		}
 
-		return stream.pipe(rename(fileName + '.css'));
+		return stream.pipe(rename(fileName + '.' + extensionFinal));
 	}
 
 	function cssLintCustomReporter(file){

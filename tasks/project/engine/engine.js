@@ -4,10 +4,11 @@
 
 (function(){
 
-	var core   = require('./core'),
-			www    = require('./www'),
-			js    = require('./javascript'),
-			css = require('./css');
+	var core = require('./core'),
+			www  = require('./www'),
+			js   = require('./javascript'),
+			html = require('./html'),
+			css  = require('./css');
 
 	exports.makeWwwJson = function(){
 		return core.getFilesByGroupAndApps(www.makeWwwJson, www.resolveFiles);
@@ -19,6 +20,10 @@
 
 	exports.runJsPreprocessors = function(){
 		return core.getFilesByGroupAndAppsStream(null, js.runPreprocessors);
+	};
+
+	exports.runHtmlPreprocessors = function(){
+		return core.getFilesByGroupAndAppsStream(null, html.runPreprocessors);
 	};
 
 }());

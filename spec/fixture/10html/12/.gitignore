@@ -1,0 +1,2 @@
+/www/app1/*.html
+!/www/app1/index.html

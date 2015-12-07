@@ -30,6 +30,7 @@
     "gulp-if": "^2.0.0",
     "gulp-imagemin": "^2.3.0",
     "gulp-inject": "^3.0.0",
+    "gulp-jade": "^1.1.0",
     "gulp-jshint": "^1.11.2",
     "gulp-less": "^3.0.3",
     "gulp-manifest": "^0.1.0",

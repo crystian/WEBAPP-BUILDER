@@ -64,16 +64,6 @@ exports.boot = function(config){
 		global.cfg.loader.folders = utils.addSlash(global.cfg.loader.folders);
 		global.cfg.app.folders = utils.addSlash(global.cfg.app.folders);
 
-		//global.cfg.loader.folders.relativePathFrom = relativePathFrom;
-		//global.cfg.loader.folders.relativePathTo = relativePathTo;
-		//global.cfg.loader.folders.www = relativePathTo + global.cfg.loader.folders.www;
-		//global.cfg.loader.folders.bower = relativePathFrom + global.cfg.loader.folders.bower;
-		//global.cfg.loader.folders.build = relativePathFrom + global.cfg.loader.folders.build;
-		//global.cfg.loader.folders.temp = relativePathFrom + global.cfg.loader.folders.temp;
-		//global.cfg.loader.folders.screens = relativePathFrom + global.cfg.loader.folders.screens;
-		//global.cfg.loader.folders.loadings = relativePathFrom + global.cfg.loader.folders.loadings;
-
-
 	} catch (e) {
 		console.logRed(e);
 		utils.exit(1);

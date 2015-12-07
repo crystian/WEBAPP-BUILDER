@@ -15,19 +15,16 @@
 			merge2 = require('merge2'),
 			rename = require('gulp-rename'),
 			gutil  = require('gulp-util');
-	//	commons = require('../commons'),
 	//	fs = require('fs-extra'),
 	//	StreamQueue = require('streamqueue'),
 	//	concat = require('gulp-concat'),
 	//	shared = require('./shared'),
-
-	//	sprite = require('gulp-sprite-generator'),
+	// 	sprite = require('gulp-sprite-generator'),
 	//	LZString = require('../../vendors/lz-string/libs/lz-string'),
 	//	imagemin = require('gulp-imagemin'),
 	//	pngquant = require('imagemin-pngquant'),
 	//	cache = require('gulp-cache'),
 	//	manifest = require('gulp-manifest'),
-	//filesRequired = require('gulp-files-required'),
 
 	//engine libs
 	var utils = require('../../shared/utils'),
@@ -164,7 +161,7 @@
 			return;
 		}
 
-		if(!typeConfig.isValidType(type)){
+		if(!(typeConfig.validPreproExtension.indexOf(type) !== -1 || type === typeConfig.extensionFinal)){
 			return;
 		}
 
@@ -213,7 +210,7 @@
 			return stream;
 		}
 
-		if(typeConfig.isPrepro(type)){
+		if(typeConfig.validPreproExtension.indexOf(type) !== -1){
 			stream = replaces(stream, config.replaces.prePreprocess, fileNameExt);
 
 			stream = typeConfig.processFile(stream, config, fileName, type);
@@ -221,11 +218,13 @@
 			stream = replaces(stream, config.replaces.postPreprocess, fileNameExt);
 		}
 
-		stream = typeConfig.linter(stream, config);
+		if(config.linter){
+			stream = typeConfig.linter(stream, config);
+		}
 
-		//TODO test it!
-		stream = typeConfig.removeCode(stream);
-
+		if(typeConfig.removeCode){
+			stream = typeConfig.removeCode(stream);
+		}
 
 		if(genMinFile || global.cfg.app.release){
 			stream = replaces(stream, config.replaces.preMin, fileNameExt);
@@ -241,10 +240,12 @@
 			}
 		}
 
+		//don't overwrite the same source file
 		if(!genMinFile && type === typeConfig.extensionFinal){
 			return stream;
 		}
 
+		//just for min files
 		return stream.pipe(gulp.dest(file.base));
 	}
 
@@ -265,7 +266,7 @@
 	function replaces(stream, replaces, file){
 
 		if(replaces && replaces.length > 0){
-			console.debug('Replaces on file: ' + file +' replace: ' + replaces);
+			console.debug('Replaces on file: ' + file + ' replace: ' + replaces);
 			stream = aux.replace(stream, replaces);
 		}
 

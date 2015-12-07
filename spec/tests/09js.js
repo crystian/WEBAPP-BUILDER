@@ -31,6 +31,24 @@ function createFileTest(){
 	testContent.to(indexJs + '.js');
 }
 
+function createFileTestWithRemoveCode(){
+	var testContent =
+				'//removeIf(production)\n' +
+				'alert("remove me on production");\n' +
+				'//endRemoveIf(production)\n' +
+				'\n' +
+				'(function(){\n' +
+				'function publicMethod(m){\n' +
+				'		console.log("m", m);\n' +
+				'	}\n' +
+				'	return {\n' +
+				'		method: publicMethod\n' +
+				'	};\n' +
+				'}());';
+
+	testContent.to(indexJs + '.js');
+}
+
 describe("preprocessors (js)", function(){
 
 	beforeEach(function(){
@@ -369,6 +387,38 @@ describe("preprocessors (js)", function(){
 		expect(cat(indexJsC)).toContain('var MethodReplaced;');
 
 		expect(test('-e', indexTs + '.original.js')).toBe(false); //should not exist
+	});
+
+	it('(30) should not remove code for production (not release)', function(){
+		cd('30');
+		var indexTsJs = indexTs + '.js',
+				keyword = 'alert("remove me on production")';
+
+		rm('-rf', indexTsJs);
+
+		expect(cat(indexTs +'.ts')).toContain(keyword);
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexTsJs)).toContain(keyword);
+
+		expect(fs.statSync(indexTsJs).size).toBe(687);
+	});
+
+	it('(31) should remove code for production (release)', function(){
+		cd('31');
+		var indexTsJs = indexTs + '.js',
+				keyword = 'alert("remove me on production")';
+
+		rm('-rf', indexTsJs);
+
+		expect(cat(indexTs +'.ts')).toContain(keyword);
+
+		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexTsJs)).not.toContain(keyword);
+
+		expect(fs.statSync(indexTsJs).size).toBe(396);
 	});
 
 	it('(90) complex case 1', function(){

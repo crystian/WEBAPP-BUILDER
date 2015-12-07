@@ -1,8 +1,8 @@
 /**
  * Created by Crystian on 2/21/2015.
+ *
+ * COMMONS methods between project and loader
  */
-
-// share with app
 
 var chalk   = require('chalk'),
 		_       = require('lodash'),
@@ -14,7 +14,6 @@ var chalk   = require('chalk'),
 		through = require('through2'),
 		gutil   = require('gulp-util');
 
-//COMMONS between project and loader:
 console.debug = function(){
 	if(gutil.env.debug){
 		console.log.apply(this, arguments);

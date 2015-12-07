@@ -1,0 +1,8 @@
+[
+	{
+		"files": [
+			"index*.*"
+		],
+		"generateMin": true
+	}
+]

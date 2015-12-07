@@ -1,0 +1,12 @@
+[
+	{
+		"files": [
+			"index*.*"
+		],
+		"replaces":{
+			"original": [
+				["charset=\"UTF-8\"","charset=\"UTF-16\""]
+			]
+		}
+	}
+]
