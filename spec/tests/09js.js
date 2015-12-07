@@ -253,7 +253,7 @@ describe("preprocessors (js)", function(){
 
 	it('(28) should replace pre prepro', function(){
 		cd('28');
-		var indexTsJs = indexTs +'.js';
+		var indexTsJs = indexTs + '.js';
 
 		rm('-rf', indexTsJs);
 
@@ -264,7 +264,7 @@ describe("preprocessors (js)", function(){
 
 	it('(29) should replace post prepro', function(){
 		cd('29');
-		var indexTsJs = indexTs +'.js';
+		var indexTsJs = indexTs + '.js';
 
 		rm('-rf', indexTsJs);
 
@@ -275,7 +275,7 @@ describe("preprocessors (js)", function(){
 
 	it('(16) should replace post min', function(){
 		cd('16');
-		var indexJsMin = indexTs +'.min.js';
+		var indexJsMin = indexTs + '.min.js';
 
 		rm('-rf', indexJsMin);
 
@@ -288,7 +288,7 @@ describe("preprocessors (js)", function(){
 
 	it('(17) should minify file', function(){
 		cd('17');
-		var indexJsMin = indexTs +'.min.js';
+		var indexJsMin = indexTs + '.min.js';
 
 		rm('-rf', indexJsMin);
 
@@ -301,7 +301,7 @@ describe("preprocessors (js)", function(){
 
 	it('(18) should minify file because it is a release', function(){
 		cd('18');
-		var indexJsMin = indexTs +'.js';
+		var indexJsMin = indexTs + '.js';
 
 		rm('-rf', indexJsMin);
 
@@ -392,11 +392,11 @@ describe("preprocessors (js)", function(){
 	it('(30) should not remove code for production (not release)', function(){
 		cd('30');
 		var indexTsJs = indexTs + '.js',
-				keyword = 'alert("remove me on production")';
+				keyword   = 'alert("remove me on production")';
 
 		rm('-rf', indexTsJs);
 
-		expect(cat(indexTs +'.ts')).toContain(keyword);
+		expect(cat(indexTs + '.ts')).toContain(keyword);
 
 		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
 
@@ -408,11 +408,11 @@ describe("preprocessors (js)", function(){
 	it('(31) should remove code for production (release)', function(){
 		cd('31');
 		var indexTsJs = indexTs + '.js',
-				keyword = 'alert("remove me on production")';
+				keyword   = 'alert("remove me on production")';
 
 		rm('-rf', indexTsJs);
 
-		expect(cat(indexTs +'.ts')).toContain(keyword);
+		expect(cat(indexTs + '.ts')).toContain(keyword);
 
 		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
 

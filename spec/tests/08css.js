@@ -306,7 +306,7 @@ describe("preprocessors (css)", function(){
 
 	it('(29) should replace post prepro', function(){
 		cd('29');
-		var indexLessCss = indexLess +'.css';
+		var indexLessCss = indexLess + '.css';
 
 		rm('-rf', indexLessCss);
 

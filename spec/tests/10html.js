@@ -11,23 +11,23 @@ require('shelljs/global');
 var testFolder  = 'spec/fixture/10html',
 		rootFwk     = '../../../..',
 		indexOri    = 'www/app1/index.original.html',
-		index     = 'www/app1/index',
-		indexJade = 'www/app1/indexJade',
+		index       = 'www/app1/index',
+		indexJade   = 'www/app1/indexJade',
 		keyNotOverw = 'not overwritten'
 	;
 
 function createFileTest(){
 	var testContent =
-			'<!DOCTYPE html>\n'+
-			'<html lang="en">\n'+
-			'<head>\n'+
-			'	<meta charset="UTF-8">\n'+
-			'	<title>test</title>\n'+
-			'</head>\n'+
-			'<body>\n'+
-			'	body\n'+
-			'</body>\n'+
-			'</html>';
+				'<!DOCTYPE html>\n' +
+				'<html lang="en">\n' +
+				'<head>\n' +
+				'	<meta charset="UTF-8">\n' +
+				'	<title>test</title>\n' +
+				'</head>\n' +
+				'<body>\n' +
+				'	body\n' +
+				'</body>\n' +
+				'</html>';
 	testContent.to(index + '.html');
 }
 
@@ -87,7 +87,7 @@ describe("preprocessors (html)", function(){
 
 	it('(06) should create html files', function(){
 		cd('06');
-		var indexHtml = index +'.html';
+		var indexHtml = index + '.html';
 
 		rm('-rf', indexHtml);
 
@@ -98,7 +98,7 @@ describe("preprocessors (html)", function(){
 
 	it('(09) should create files (width values)', function(){
 		cd('09');
-		var indexHtml = index +'.html';
+		var indexHtml = index + '.html';
 		rm('-rf', indexHtml);
 
 		expect(exec('gulp html --testMode ' + args, {silent: 1}).code).toBe(0);
@@ -125,11 +125,11 @@ describe("preprocessors (html)", function(){
 	it('(30) should not remove code for production (not release)', function(){
 		cd('30');
 		var indexJadeHtml = indexJade + '.html',
-				keyword = 'remove me on production';
+				keyword       = 'remove me on production';
 
 		rm('-rf', indexJadeHtml);
 
-		expect(cat(indexJade +'.jade')).toContain(keyword);
+		expect(cat(indexJade + '.jade')).toContain(keyword);
 
 		expect(exec('gulp html --testMode ' + args, {silent: 1}).code).toBe(0);
 
@@ -141,11 +141,11 @@ describe("preprocessors (html)", function(){
 	it('(31) should remove code for production (release)', function(){
 		cd('31');
 		var indexJadeHtml = indexJade + '.html',
-				keyword = 'remove me on production';
+				keyword       = 'remove me on production';
 
 		rm('-rf', indexJadeHtml);
 
-		expect(cat(indexJade +'.jade')).toContain(keyword);
+		expect(cat(indexJade + '.jade')).toContain(keyword);
 
 		expect(exec('gulp html --testMode ' + args, {silent: 1}).code).toBe(0);
 

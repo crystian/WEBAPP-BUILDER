@@ -62,6 +62,5 @@
 		return stream.pipe(rename(fileName + '.' + extensionFinal));
 	}
 
-
 	exports.runPreprocessors = runPreprocessors;
 }());
