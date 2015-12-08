@@ -99,6 +99,21 @@ exports.setPreExtensionFilename = function(s, preExtension){
 	return arr.join('.');
 };
 
+exports.removePreExtensionFilename = function(s, preExtension){
+	var arr = s.split('.');
+	if(arr.length <= 1){
+		console.logRed('Extension not found!');
+		return s;
+	}
+
+	var extFound = arr.indexOf(preExtension);
+	if(extFound!==-1){
+		arr.splice(extFound, 1);
+	}
+
+	return arr.join('.');
+};
+
 
 /** Function count the occurrences of substring in a string;
  * @param {String} string   Required. The string;

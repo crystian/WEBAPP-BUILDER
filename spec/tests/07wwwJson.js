@@ -12,6 +12,7 @@ var testFolder = 'spec/fixture/07wwwJson',
 		rootFwk    = '../../../..',
 		w1         = 'www/app1/www.json',
 		w2         = 'www/app2/www.json',
+		appPath    = 'www/app1/',
 		indexCss   = 'www/app1/indexCss',
 		indexSass  = 'www/app1/indexSass',
 		indexScss  = 'www/app1/indexScss',
@@ -204,6 +205,137 @@ describe("make www.json files - ", function(){
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(1);
 	});
 
+	it('(17) should fail because there is not a minificate version with option "minificated"', function(){
+		cd('17');
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(1);
+	});
+
+	it('(18) should fail because there is not a normal version with option "minificated"', function(){
+		cd('18');
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(1);
+	});
+
+	it('(19) should make backup on minificated and use it as base', function(){
+		cd('19');
+
+		rm('-rf', appPath +'/*original*');
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 0}).code).toBe(0);
+
+		expect(test('-e', w1)).toBe(true);
+		expect(test('-e', appPath +'/index.min.original.css')).toBe(true);
+		expect(test('-e', appPath +'/index.original.css')).toBe(true);
+	});
+
+	it('(20) should put 1 item. Release: true, minificated: true, generateMin: false, force: false', function(){
+		cd('20');
+
+		rm('-rf', appPath +'/*original*');
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+		expect(json1.length).toBe(1);
+		expect(json1[0]).toBe('app1/index.min.css');
+	});
+
+	it('(21) should put 1 item. Release: true, minificated: false, generateMin: true, force: false', function(){
+		cd('21');
+
+		rm('-rf', appPath +'/*original*');
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+		expect(json1.length).toBe(1);
+		expect(json1[0]).toBe('app1/index.min.css');
+	});
+
+	it('(22) should put 1 item. Release: true, minificated: false, generateMin: false, force: false', function(){
+		cd('22');
+
+		rm('-rf', appPath +'/*original*');
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+		//yes there are 2 items, css and min.css, because there are "differents" files
+		expect(json1.length).toBe(2);
+		expect(json1[0]).toBe('app1/index.css');
+		expect(json1[1]).toBe('app1/index.min.css');
+	});
+
+	it('(23) should put 1 item. Release: false, minificated: false, generateMin: false, force: false', function(){
+		cd('23');
+
+		rm('-rf', appPath +'/*original*');
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+		//yes there are 2 items, css and min.css, because there are "differents" files
+		expect(json1.length).toBe(2);
+		expect(json1[0]).toBe('app1/index.css');
+		expect(json1[1]).toBe('app1/index.min.css');
+	});
+
+	it('(24) should put 1 item. Release: false, minificated: true, generateMin: false, force: false', function(){
+		cd('24');
+
+		rm('-rf', appPath +'/*original*');
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+		expect(json1.length).toBe(1);
+		expect(json1[0]).toBe('app1/index.css');
+	});
+
+	it('(25) should put 1 item. Release: false, minificated: true, generateMin: false, force: true', function(){
+		cd('25');
+
+		rm('-rf', appPath +'/*original*');
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+		expect(json1.length).toBe(1);
+		expect(json1[0]).toBe('app1/index.min.css');
+	});
+
+	it('(26) should put 1 item. Release: false, minificated: false, generateMin: true, force: false', function(){
+		cd('26');
+
+		rm('-rf', appPath +'/*original*');
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+		expect(json1.length).toBe(1);
+		expect(json1[0]).toBe('app1/index.css');
+	});
+
+	it('(27) should put 1 item. Release: false, minificated: false, generateMin: true, force: true', function(){
+		cd('27');
+
+		rm('-rf', appPath +'/*original*');
+		rm('-rf', w1);
+
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var json1 = utils.readJsonFile(w1);
+		expect(json1.length).toBe(1);
+		expect(json1[0]).toBe('app1/index.min.css');
+	});
+
 	it('(90) complex case 1', function(){
 		cd('90');
 
@@ -213,7 +345,7 @@ describe("make www.json files - ", function(){
 		rm('-rf', indexLess + '*');
 		rm('-rf', indexStyl + '*');
 
-		cp('-f', 'www/app1/ori/*', 'www/app1');
+		cp('-f', appPath +'/ori/*', appPath);
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
 
@@ -236,7 +368,7 @@ describe("make www.json files - ", function(){
 		rm('-rf', indexLess + '*');
 		rm('-rf', indexStyl + '*');
 
-		cp('-f', 'www/app1/ori/*', 'www/app1');
+		cp('-f', appPath +'/ori/*', appPath);
 
 		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
 

@@ -1,0 +1,24 @@
+[
+	{
+		"files": [
+			"index*.css"
+		],
+		"forceUseMin": false,
+		"minificated": false,
+		"generateMin": false,
+		"replaces": {
+			"original": [
+				[
+					"something",
+					"nothing"
+				]
+			],
+			"originalMin": [
+				[
+					"something",
+					"nothing"
+				]
+			]
+		}
+	}
+]

@@ -49,6 +49,7 @@
 			'backupExtension': 'original',//if it has replaces it will make a backup with this postfix
 			//'genSprite': true,				//generate sprite
 			'generateMin': false,				//it should be create a minificate version
+			'forceUseMin': false,// for generateMin and minificated for dev time on release = false
 			'minExtension': 'min',			//prefix for file name minificated
 			'replaces': {
 				'original': [], 					//modificate orginal version
@@ -130,7 +131,7 @@
 			configValidator(files, config);
 
 			files.forEach(function(file){
-				var pathResolved = path.resolve(pth,appName,path.dirname(file));
+				var pathResolved = path.resolve(pth, appName, path.dirname(file));
 				var _file = new gutil.File({
 					base: pathResolved,
 					cwd: pth,
@@ -157,29 +158,46 @@
 	}
 
 	function doMagic(file, config, appName, pth, typeConfig){
-		var fileName    = utils.getFileName(file.path),
-				type        = utils.getExtensionFile(file.path),
-				fileNameExt = utils.getFileNameWithExtension(file.path),
-				fileNameMin = file.base + '/' + fileName + '.' + config.minExtension + '.' + typeConfig.extensionFinal,
-				dest        = file.base + '/' + fileName + '.' + typeConfig.extensionFinal,
-				genMinFile  = false,
+		var fileName      = utils.getFileName(file.path),
+				type          = utils.getExtensionFile(file.path),
+				fileNameExt   = utils.getFileNameWithExtension(file.path),
+				fileNameWOMin = utils.removePreExtensionFilename(file.path, config.minExtension),
+				fileNameMin   = file.base + '/' + fileName + '.' + config.minExtension + '.' + typeConfig.extensionFinal,
+				dest          = file.base + '/' + fileName + '.' + typeConfig.extensionFinal,
+				genMinFile    = false,
 				stream;
-
-		//if it is minificate, it'll ignore
-		if(config.minificated){
-			if(config.replaces.original.length > 0){
-				stream = modifyOriginal(gulp.src(file.path), file.path, config);
-			}
-			if(config.replaces.originalMin.length > 0){
-				var filenameMin = utils.setPreExtensionFilename(file.path, config.minExtension);
-				stream = modifyOriginal(gulp.src(filenameMin), filenameMin, config);
-			}
-			return stream;
-		}
 
 		//just valid extensions
 		if(!(typeConfig.validPreproExtension.indexOf(type) !== -1 || type === typeConfig.extensionFinal)){
 			return;
+		}
+
+		//if it is minificate, it'll ignore
+		if(config.minificated){
+			if(fileName.indexOf('.' + config.backupExtension) !== -1){
+				return;
+			}
+
+			//yes, it can be on a function, but I want to be more explicit
+			//TODO refactor
+			if(fileName.indexOf('.' + config.minExtension) !== -1){//minified file
+				if(config.replaces.originalMin.length > 0){
+					stream = modifyOriginal(gulp.src(file.path), file.path, config);
+				}
+				if(config.replaces.original.length > 0){
+					stream = modifyOriginal(gulp.src(fileNameWOMin), fileNameWOMin, config);
+				}
+			} else {//normal file
+				if(config.replaces.originalMin.length > 0){
+					//var fileNameMin = utils.setPreExtensionFilename(file.path, config.minExtension);
+					stream = modifyOriginal(gulp.src(fileNameMin), fileNameMin, config);
+				}
+				if(config.replaces.original.length > 0){
+					stream = modifyOriginal(gulp.src(file.path), file.path, config);
+				}
+			}
+
+			return stream;
 		}
 
 		//overwrite
@@ -272,13 +290,24 @@
 
 		if(!utils.fileExist(filenameBackup)){
 			console.debug('Backup file: ' + utils.getFileNameWithExtension(file));
-			fs.copySync(file, filenameBackup);
+			try {
+				fs.copySync(file, filenameBackup);
+			} catch (e) {
+				console.logRed('File not found: ' + file + ' ensure exist or not use "minificated" option');
+				utils.exit(1);
+			}
 		} else {
 			console.debug('Recover backup file: ' + utils.getFileNameWithExtension(file));
-			fs.copySync(filenameBackup, file);
+			try {
+				fs.copySync(filenameBackup, file);
+			} catch (e) {
+				console.logRed('File not found: ' + file + ' ensure exist or not use "minificated" option');
+				utils.exit(1);
+			}
+
 		}
 
-		var replaces = file.indexOf('.' + config.minExtension +'.') === -1 ? config.replaces.original : config.replaces.originalMin;
+		var replaces = file.indexOf('.' + config.minExtension + '.') === -1 ? config.replaces.original : config.replaces.originalMin;
 
 		if(replaces.length > 0){
 			stream = aux.replace(stream, replaces)

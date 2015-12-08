@@ -37,11 +37,21 @@
 			return;
 		}
 
-		var filePath = utils.setExtensionFilename(file.path, type);
+		var filePath    = utils.setExtensionFilename(file.path, type),
+				isMin       = filePath.indexOf('.' + config.minExtension) !== -1,
+				shouldBeMin = (config.generateMin || config.minificated),
+				useMin      = (global.cfg.app.release || config.forceUseMin);
 
-		//calculate over exist
-		if(global.cfg.app.release && (config.generateMin || config.minificated)){
-			filePath = utils.setPreExtensionFilename(filePath, config.minExtension);
+		if(shouldBeMin){
+			if(isMin){
+				if(!useMin){
+					filePath = utils.removePreExtensionFilename(filePath, config.minExtension);
+				}
+			} else {
+				if(useMin){
+					filePath = utils.setPreExtensionFilename(filePath, config.minExtension);
+				}
+			}
 		}
 
 		filePath = path.relative(pth, filePath);
