@@ -43,14 +43,10 @@
 				useMin      = (global.cfg.app.release || config.forceUseMin);
 
 		if(shouldBeMin){
-			if(isMin){
-				if(!useMin){
-					filePath = utils.removePreExtensionFilename(filePath, config.minExtension);
-				}
-			} else {
-				if(useMin){
-					filePath = utils.setPreExtensionFilename(filePath, config.minExtension);
-				}
+			if(isMin && !useMin){
+				filePath = utils.removePreExtensionFilename(filePath, config.minExtension);
+			} else if(!isMin && useMin){
+				filePath = utils.setPreExtensionFilename(filePath, config.minExtension);
 			}
 		}
 

@@ -1,6 +1,11 @@
 {
 	"app": {
 		"name": "template angular full",
-		"version": "0.0.1"
+		"version": "0.0.1",
+		"release": false
+	},
+	"loader": {
+		"contentSecurity": "",
+		"release": false
 	}
 }

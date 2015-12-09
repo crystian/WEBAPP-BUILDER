@@ -1,0 +1,21 @@
+[
+	{
+		"files": [
+			"index*.css"
+		],
+		"replaces": {
+			"original": [
+				[
+					"yellow",
+					"red"
+				]
+			],
+			"originalMin": [
+				[
+					"#FF0",
+					"#00F"
+				]
+			]
+		}
+	}
+]

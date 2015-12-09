@@ -8,7 +8,7 @@
 			"original": [
 				[
 					"../fonts/",
-					"../../../vendors/bower_components/components-font-awesome/fonts/"
+					"../templates/angular-full/vendors/bower_components/components-font-awesome/fonts/"
 				]
 			],
 			"originalMin": [
@@ -25,33 +25,25 @@
 		],
 		"minificated": true,
 		"replaces": {
-			"original": {
-				"normal": [
-					[
-						"../fonts/",
-						"../../../vendors/bower_components/bootstrap/dist/fonts/"
-					]
-				],
-				"min": [
-					[
-						"../fonts/",
-						"fonts/"
-					]
+			"original": [
+				[
+					"../fonts/",
+					"../templates/angular-full/vendors/bower_components/bootstrap/dist/fonts/"
 				]
-			}
+			],
+			"originalMin": [
+				[
+					"../fonts/",
+					"fonts/"
+				]
+			]
 		}
-	},
-	{
-		"files": [
-			"../../vendors/bower_components/swiper/dist/css/swiper.css"
-		],
-		"minificated": true
 	},
 	{
 		"files": [
 			"landing.scss"
 		],
-		"Xreplaces": {
+		"replaces": {
 			"preMin": [
 				[
 					"../../../www/app/assets/img/",
@@ -62,6 +54,7 @@
 	},
 	{
 		"files": [
+			"../../vendors/bower_components/swiper/dist/css/swiper.css",
 			"../../vendors/bower_components/jquery/dist/jquery.js",
 			"../../vendors/bower_components/bootstrap/dist/js/bootstrap.js",
 			"../../vendors/bower_components/swiper/dist/js/swiper.js"

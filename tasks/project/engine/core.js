@@ -63,7 +63,7 @@
 					//["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
 				]
 			},
-			'active': 'true'						//it will eval this field, for temp use
+			'active': 'true'						//it will eval this field, for temporal use
 		},
 		validCssPreproExtensions: ['sass', 'scss', 'less', 'styl'],
 		validJsPreproExtensions: ['coffee', 'ts'],
@@ -164,6 +164,7 @@
 				fileNameWOMin = utils.removePreExtensionFilename(file.path, config.minExtension),
 				fileNameMin   = file.base + '/' + fileName + '.' + config.minExtension + '.' + typeConfig.extensionFinal,
 				dest          = file.base + '/' + fileName + '.' + typeConfig.extensionFinal,
+				isMin = fileName.indexOf('.' + config.minExtension) !== -1,
 				genMinFile    = false,
 				stream;
 
@@ -172,15 +173,14 @@
 			return;
 		}
 
-		//if it is minificate, it'll ignore
+		//if it is minificate, it'll ignore, just check for replaces on original
 		if(config.minificated){
 			if(fileName.indexOf('.' + config.backupExtension) !== -1){
 				return;
 			}
 
-			//yes, it can be on a function, but I want to be more explicit
-			//TODO refactor
-			if(fileName.indexOf('.' + config.minExtension) !== -1){//minified file
+			//yes, it can refactor, but is so complex for 3am, and I want to be more explicit
+			if(isMin){//minified file
 				if(config.replaces.originalMin.length > 0){
 					stream = modifyOriginal(gulp.src(file.path), file.path, config);
 				}
@@ -241,7 +241,7 @@
 			stream = modifyOriginal(stream, file.path, config);
 		}
 
-		if(fileName.indexOf('.' + config.minExtension) !== -1 && type === typeConfig.extensionFinal){
+		if(isMin && type === typeConfig.extensionFinal){
 			console.debug(fileNameExt + ': minificated detected'); //and ingnored it
 			return stream;
 		}

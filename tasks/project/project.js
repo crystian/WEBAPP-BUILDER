@@ -14,6 +14,10 @@ gulp.task('makeWwwJson', ['makeCss', 'makeJs', 'makeHtml'], function(){
 	engine.makeWwwJson();
 });
 
+gulp.task('on', function(){
+	gulp.watch([global.cfg.pathPrj + '**/app?(s).json'], ['makeWwwJson']);
+});
+
 gulp.task('makeCss', function(){
 	return engine.css();
 });

@@ -20,14 +20,12 @@ var landing = (function() {
 	function landingFinished(){
 		loader.hide();
 		//loadApp();
-
-
 	}
 
 	function loadApp(){
         loader.show();
         loader.utils.requestApp('app2', function () {
-            //need it into a function
+            //load second app
             appInit();
 
         }, function (e) {
