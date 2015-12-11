@@ -4,3 +4,4 @@
 /node_modules
 /www/**/*.css
 /www/app/www.json
+/config.json

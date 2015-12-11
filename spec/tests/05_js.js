@@ -26,8 +26,8 @@ xdescribe("JS mechanics - ", function(){
 		cd('01');
 
 		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
-		var temp            = utils.readJsonFile(configJson).cfg.loader.folders.temp,
-				compileLoaderJs = rootFwk + '/' + temp + '/' + compileLoaderJsName;
+		var temp            = utils.readJsonFile(configJson).cfg.app.folders.temp,
+				compileLoaderJs = utils.readJsonFile(configJson).cfg.app.folders.build + temp + '/' + compileLoaderJsName;
 
 		rm('-rf', compileLoaderJs);
 		expect(test('-e', compileLoaderJs)).toBe(false);
@@ -44,8 +44,8 @@ xdescribe("JS mechanics - ", function(){
 		cd('02');
 
 		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
-		var temp            = utils.readJsonFile(configJson).cfg.loader.folders.temp,
-				compileLoaderJs = rootFwk + '/' + temp + '/' + compileLoaderJsName;
+		var temp            = utils.readJsonFile(configJson).cfg.app.folders.temp,
+				compileLoaderJs = utils.readJsonFile(configJson).cfg.app.folders.build + temp + '/' + compileLoaderJsName;
 
 		rm('-rf', compileLoaderJs);
 		expect(test('-e', compileLoaderJs)).toBe(false);
@@ -62,8 +62,8 @@ xdescribe("JS mechanics - ", function(){
 		cd('03');
 
 		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
-		var temp            = utils.readJsonFile(configJson).cfg.loader.folders.temp,
-				compileLoaderJs = rootFwk + '/' + temp + '/' + compileLoaderJsName;
+		var temp            = utils.readJsonFile(configJson).cfg.app.folders.temp,
+				compileLoaderJs = utils.readJsonFile(configJson).cfg.app.folders.build + temp + '/' + compileLoaderJsName;
 
 		rm('-rf', compileLoaderJs);
 		expect(test('-e', compileLoaderJs)).toBe(false);

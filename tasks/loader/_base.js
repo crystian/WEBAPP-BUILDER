@@ -141,10 +141,10 @@ gulp.task('_makeConfig', function(cb){
 });
 
 gulp.task('_removeBuild', function(){
-	return del([global.cfg.pathFwk + global.cfg.loader.folders.build,
-		global.cfg.pathFwk + global.cfg.loader.folders.screens], {force: true});
+	return del([global.cfg.pathPrjBuild,
+		global.cfg.pathPrjBuild + global.cfg.loader.folders.screens], {force: true});
 });
 
 gulp.task('_removeTemp', function(){
-	return del([global.cfg.pathFwk + global.cfg.loader.folders.temp], {force: true});
+	return del([global.cfg.pathPrjBuild + global.cfg.app.folders.temp], {force: true});
 });

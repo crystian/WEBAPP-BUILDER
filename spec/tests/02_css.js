@@ -96,8 +96,8 @@ xdescribe("CSS generation - ", function(){
 		cd('05');
 
 		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
-		var temp             = utils.readJsonFile(configJson).cfg.loader.folders.temp,
-				compileLoaderCSS = rootFwk + '/' + temp + '/-compiledLoader.css';
+		var temp             = utils.readJsonFile(configJson).cfg.app.folders.temp,
+				compileLoaderCSS = utils.readJsonFile(configJson).cfg.app.folders.build + temp + '/-compiledLoader.css';
 
 		rm('-rf', compileLoaderCSS);
 		expect(test('-e', compileLoaderCSS)).toBe(false);
@@ -114,8 +114,8 @@ xdescribe("CSS generation - ", function(){
 		cd('06');
 
 		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
-		var temp             = utils.readJsonFile(configJson).cfg.loader.folders.temp,
-				compileLoaderCSS = rootFwk + '/' + temp + '/-compiledLoader.css';
+		var temp             = utils.readJsonFile(configJson).cfg.app.folders.temp,
+				compileLoaderCSS = utils.readJsonFile(configJson).cfg.app.folders.build + temp + '/-compiledLoader.css';
 
 		rm('-rf', compileLoaderCSS);
 		expect(test('-e', compileLoaderCSS)).toBe(false);

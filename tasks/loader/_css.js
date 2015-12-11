@@ -28,7 +28,7 @@ gulp.task('_buildCss', ['_makeCss', '_removeBuild'], function(){
 			.pipe(strip({safe: false, block: false})) //remove comments
 	)
 		.pipe(concat('-compiledLoader.css', {newLine: ' '}))
-		.pipe(gulp.dest(global.cfg.pathFwk + global.cfg.loader.folders.temp));
+		.pipe(gulp.dest(global.cfg.pathPrjBuild + global.cfg.app.folders.temp));
 });
 
 gulp.task('_makeCss', ['_cleanCss', '_makeConfig'], function(){

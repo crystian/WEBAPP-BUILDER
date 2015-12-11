@@ -70,7 +70,7 @@ gulp.task('_buildJs', ['_makeBower', '_removeBuild'], function(){
 	return streamqueue({objectMode: true}, loaderScripts1Stream, libsMinStream, loaderScripts2Stream)
 		.pipe(utils.debugeame())
 		.pipe(concat('-compiledLoader.js', {newLine: ';'}))
-		.pipe(gulp.dest(global.cfg.pathFwk + global.cfg.loader.folders.temp));
+		.pipe(gulp.dest(global.cfg.pathPrjBuild + global.cfg.app.folders.temp));
 });
 
 function jsMaker(stream, release){

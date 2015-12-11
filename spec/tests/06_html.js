@@ -34,9 +34,8 @@ xdescribe("Index template to index - ", function(){
 		expect(test('-e', indexFile)).toBe(false);
 
 		expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
-
-		var build             = utils.readJsonFile(configJson).cfg.loader.folders.build,
-				indexFileCompiled = rootFwk + '/' + build + index;
+		var build             = utils.readJsonFile(configJson).cfg.app.folders.build,
+				indexFileCompiled = build + index;
 
 		expect(test('-e', indexFileCompiled)).toBe(true);
 	});
@@ -49,8 +48,8 @@ xdescribe("Index template to index - ", function(){
 
 		expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var build             = utils.readJsonFile(configJson).cfg.loader.folders.build,
-				indexFileCompiled = rootFwk + '/' + build + index;
+		var build             = utils.readJsonFile(configJson).cfg.app.folders.build,
+				indexFileCompiled = build + index;
 
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
@@ -76,8 +75,8 @@ xdescribe("Index template to index - ", function(){
 
 		expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var build             = utils.readJsonFile(configJson).cfg.loader.folders.build,
-				indexFileCompiled = rootFwk + '/' + build + index;
+		var build             = utils.readJsonFile(configJson).cfg.app.folders.build,
+				indexFileCompiled = build + index;
 
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
@@ -103,8 +102,8 @@ xdescribe("Index template to index - ", function(){
 
 		expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var build             = utils.readJsonFile(configJson).cfg.loader.folders.build,
-				indexFileCompiled = rootFwk + '/' + build + indexCordova;
+		var build             = utils.readJsonFile(configJson).cfg.app.folders.build,
+				indexFileCompiled = build + indexCordova;
 
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
@@ -125,8 +124,8 @@ xdescribe("Index template to index - ", function(){
 
 		expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		var build             = utils.readJsonFile(configJson).cfg.loader.folders.build,
-				indexFileCompiled = rootFwk + '/' + build + indexCordova;
+		var build             = utils.readJsonFile(configJson).cfg.app.folders.build,
+				indexFileCompiled = build + indexCordova;
 
 		expect(test('-e', indexFileCompiled)).toBe(true);
 

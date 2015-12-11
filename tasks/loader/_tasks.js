@@ -6,7 +6,7 @@ var gutil       = require('gulp-util'),
 		runSequence = require('run-sequence');
 
 //alias:
-gulp.task('default', ['buildLoader']);
+//main task: buildLoader
 gulp.task('loaderConfig', ['_makeConfig']);
 gulp.task('loaderCss', ['_makeCss']);
 gulp.task('loaderCssw', ['_watchCss']);
@@ -17,8 +17,8 @@ gulp.task('nothing', []);
 
 gulp.task('buildLoader', function(cb){
 	runSequence(
-			'_buildFull',
-			gutil.env.debug ? 'nothing' : '_removeTemp',
+		'_buildFull',
+		gutil.env.debug ? 'nothing' : '_removeTemp',
 		cb);
 });
 

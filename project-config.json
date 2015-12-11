@@ -36,10 +36,10 @@
 		"isCordovaDevice": false,
 
 		"folders": {
-			"project": "templates/angular-full",
+			"project": "templates/empty",
 			"www": "www",
-			"xbuild": "build",
-			"xtemp": "build/.tmp",
+			"build": "build",
+			"temp": ".tmp",
 			"xcordova": "CORDOVA",
 			"xcordovaWWW": "CORDOVA/www",
 			"xbower": "vendors/bower_components",
@@ -105,8 +105,6 @@
 		"folders": {
 			"www": "loader",
 			"bower": "vendors",
-			"build": "build",
-			"temp": "build/.tmp",
 			"screens": "build/screens",
 			"loadings": "loader/loading"
 		},

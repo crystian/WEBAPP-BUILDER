@@ -26,8 +26,8 @@ gulp.task('_buildFull', ['_buildJs', '_buildCss', '_makeBase'], function(){
 	var stream = gulp.src(global.cfg.pathFwk + global.cfg.loader.folders.www + global.cfg.loader.filesDest.index)
 		.pipe(utils.debugeame())
 		.pipe(htmlreplace())
-		.pipe(injector.injectContent(global.cfg.pathFwk + global.cfg.loader.folders.temp + '-compiledLoader.css', 'loaderCss', 'style'))
-		.pipe(injector.injectContent(global.cfg.pathFwk + global.cfg.loader.folders.temp + '-compiledLoader.js', 'loaderJs', 'script'))
+		.pipe(injector.injectContent(global.cfg.pathPrjBuild + global.cfg.app.folders.temp + '-compiledLoader.css', 'loaderCss', 'style'))
+		.pipe(injector.injectContent(global.cfg.pathPrjBuild + global.cfg.app.folders.temp + '-compiledLoader.js', 'loaderJs', 'script'))
 		.pipe(gif(global.cfg.loader.release, htmlmin(htmlminOptions)))
 
 		//header and footers:
@@ -44,7 +44,7 @@ gulp.task('_buildFull', ['_buildJs', '_buildCss', '_makeBase'], function(){
 			replace('"oneRequest": false', '"oneRequest": true')
 		))
 
-		.pipe(gulp.dest(global.cfg.pathFwk + global.cfg.loader.folders.build));
+		.pipe(gulp.dest(global.cfg.pathPrjBuild));
 
 	if(global.cfg.app.cordova){
 		/*
@@ -57,7 +57,7 @@ gulp.task('_buildFull', ['_buildJs', '_buildCss', '_makeBase'], function(){
 				replace(',isCordovaDevice:!1,', ',isCordovaDevice:1,'),
 				replace('"isCordovaDevice": false,', '"isCordovaDevice": true,')
 			))
-			.pipe(gulp.dest(global.cfg.pathFwk + global.cfg.loader.folders.build));
+			.pipe(gulp.dest(global.cfg.pathPrjBuild));
 	}
 
 	return stream;
