@@ -1,17 +1,17 @@
-///**
-// * Created by Crystian on 4/6/2015.
-// */
-//
-//var gutil = require('gulp-util'),
+/**
+ * Created by Crystian on 4/6/2015.
+ */
+
+var gutil = require('gulp-util'),
 //	debug = require('gulp-debug'),
 //	shared = require('../../tasks/project/shared.js'),
-//	spawn = require('child_process').spawn,
+	spawn = require('child_process').spawn,
 //	fs = require('fs-extra'),
 //	templateCache = require('gulp-angular-templatecache'),
 //	runSequence = require('run-sequence'),
-//	node,
+	node
 //	gulp = require('gulp');
-//
+;
 ////alias
 //gulp.task('default',['build']);
 //gulp.task('full',	['full:app']);
@@ -74,15 +74,15 @@
 //		global.cfg.folders.www +'/app/data/local.json'
 //	]).pipe(gulp.dest(global.cfg.folders.build +'/data'));
 //});
-//
-//
-//gulp.task('serve:api', function() {
-//	if (node) node.kill();
-//	var www = (global.cfg.folders.www + '/api/api.js');
-//	node = spawn('node', [www], {stdio: 'inherit'});
-//	node.on('close', function (code) {
-//		if (code === 8) {
-//			gulp.log('Error detected, waiting for changes...');
-//		}
-//	});
-//});
+
+
+gulp.task('apiServe', function() {
+	if (node) node.kill();
+	var www = (global.cfg.pathPrj + 'www/api/api.js');
+	node = spawn('node', [www], {stdio: 'inherit'});
+	node.on('close', function (code) {
+		if (code === 8) {
+			gulp.log('Error detected, waiting for changes...');
+		}
+	});
+});
