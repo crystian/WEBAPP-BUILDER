@@ -2,8 +2,6 @@
 	"app": {
 		"name": "template angular material",
 		"version": "0.0.1",
-		"folders": {
-			"project": "templates/angular-material"
-		}
+		"release": false
 	}
 }
