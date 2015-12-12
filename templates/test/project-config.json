@@ -2,12 +2,12 @@
 	"app": {
 		"name": "template empty",
 		"version": "0.0.1",
-		"release": false,
+		"release": true,
 		"folders":{
-			"template": "templates/empty"
+			"template": "templates/test"
 		}
 	},
 	"loader":{
-		"release": false
+		"release": true
 	}
 }

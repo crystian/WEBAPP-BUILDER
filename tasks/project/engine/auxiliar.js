@@ -49,7 +49,3 @@
 //	}
 //	return r;
 //};
-
-//exports.mergeStreams = function(stream, newStream) {
-//	return (stream === undefined) ? newStream : mergeStream(stream, newStream);
-//};

@@ -4,9 +4,10 @@
 	"compress": true,
 	"ports": {
 		"serve": 9000,
-		"build": 9001,
-		"xapi": 9002,
-		"nightmare": 9003
+		"project": 9001,
+		"build": 9002,
+		"xnightmare": 9003,
+		"xapi": 9002
 	},
 
 	"autoprefixer": ["ie 10","android 4","chrome 42","ff 27","ios 7","opera 19","safari 7"],
@@ -36,7 +37,6 @@
 		"isCordovaDevice": false,
 
 		"folders": {
-			"project": "templates/empty",
 			"www": "www",
 			"build": "build",
 			"temp": ".tmp",

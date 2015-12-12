@@ -114,7 +114,7 @@ loader.utils = (function(){
 		}
 
 		console.info('multiple request!');
-		var path = '../' + loader.cfg.folders.project + loader.cfg.folders.www + appName + '/';
+		var path = '../' + loader.cfg.folders.template + loader.cfg.folders.www + appName + '/';
 
 		return requestJson(path + 'www.json').then(function(data){
 
@@ -125,7 +125,7 @@ loader.utils = (function(){
 			for(; i < l; i++){
 				var file = data[i];
 
-				urls.push('../'+ loader.cfg.folders.project + loader.cfg.folders.www + file);
+				urls.push('../'+ loader.cfg.folders.template + loader.cfg.folders.www + file);
 			}
 
 			return requestMultipleSync(urls, {appName: appName}).then(loadAppSuccess);

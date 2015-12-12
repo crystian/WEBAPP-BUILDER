@@ -46,20 +46,27 @@ exports.boot = function(config){
 
 		global.cfg.pkg = require(pathPrj + packageJson);
 		global.cfg.fromFwk = false;
+		global.cfg.isTemplate = false;
 		global.cfg.offline = !!(gutil.env.offline);
 		global.cfg.pathFwk = pathFwk;
 		global.cfg.pathPrj = pathPrj;
 		global.cfg.pathPrjBuild = global.cfg.pathPrj + global.cfg.app.folders.build + '/';
 
 		//reconfigure folders:
-		var relativePathFrom = path.relative(config.dirname, __dirname + '/..') + '/';
-		//var relativePathTo = path.relative(__dirname + '/..', config.dirname) + '/';
+		var relativePathFrom = path.relative(config.dirname, __dirname + '/..') + '/',
+				relativePathTo = path.relative(__dirname + '/..', config.dirname) + '/';
 
 		if(relativePathFrom === '/'){
 			relativePathFrom = '';
 			//relativePathTo = '';
-			global.cfg.pathPrj = pathFwk + global.cfg.app.folders.project + '/';
+			global.cfg.pathPrj = pathFwk + global.cfg.app.folders.template + '/';
 			global.cfg.fromFwk = true;
+		}
+
+		//if it is template should use loader on raw mode
+		if(relativePathTo.indexOf('templates\\') === 0){
+			global.cfg.isTemplate = true;
+			global.cfg.pathPrjBuild = '../../'+ global.cfg.app.folders.build + '/';
 		}
 
 		global.cfg.loader.folders = utils.addSlash(global.cfg.loader.folders);

@@ -1,10 +1,10 @@
 {
 	"app": {
-		"name": "template empty",
+		"name": "index test 11-01",
 		"version": "0.0.1",
 		"release": false,
 		"folders":{
-			"template": "templates/empty"
+			"project": ""
 		}
 	},
 	"loader":{

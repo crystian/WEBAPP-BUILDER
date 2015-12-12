@@ -90,7 +90,7 @@ xdescribe("Index template to index - ", function(){
 		expect(indexFileCompiledContent).toContain('_loaderCfg');
 		expect(indexFileCompiledContent).toContain('<!--comment for test, don\'t remove it-->');
 		expect(indexFileCompiledContent.indexOf('<!--')).toBe(0);//header
-		expect(indexFileCompiledContent).toContain('"oneRequest": true');
+		//expect(indexFileCompiledContent).toContain('"oneRequest": true');
 		expect(indexFileCompiledContent).toContain('if(true){return;}');
 	});
 
