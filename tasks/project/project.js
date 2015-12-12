@@ -2,20 +2,34 @@
  * Created by Crystian on 4/13/2015.
  */
 
-var engine = require('./engine/engine.js');
+var runSequence = require('run-sequence'),
+		engine      = require('./engine/engine.js');
 
 //Alias
 gulp.task('css', ['makeCss']);
 gulp.task('js', ['makeJs']);
 gulp.task('html', ['makeHtml']);
+gulp.task('on', ['watch']);
+gulp.task('removeBuild', ['_removeBuild']);
+gulp.task('removeTemp', ['_removeTemp']);
 
 
-gulp.task('makeWwwJson', ['makeCss', 'makeJs', 'makeHtml'], function(){
+gulp.task('buildFull', function(cb){
+	return runSequence(
+		'buildLoader',
+		'buildProject'
+	);
+});
+
+gulp.task('buildProject', ['makeCss', 'makeJs', 'makeHtml'], function(){
 	engine.makeWwwJson();
 });
 
-gulp.task('on', function(){
-	gulp.watch([global.cfg.pathPrj + '**/app?(s).json'], ['makeWwwJson']);
+gulp.task('watch', function(){
+	gulp.watch([global.cfg.pathPrj + '**/app?(s).json'], ['makeFiles']);
+	gulp.watch([global.cfg.pathPrj + '**/?(*.scss|*.sass|*.less|*.styl)'], ['makeCss']);
+	gulp.watch([global.cfg.pathPrj + '**/?(*.ts|*.coffee)'], ['makeJs']);
+	gulp.watch([global.cfg.pathPrj + '**/?(*.html)'], ['makeHtml']);
 });
 
 gulp.task('makeCss', function(){
@@ -30,24 +44,22 @@ gulp.task('makeHtml', function(){
 	return engine.html();
 });
 
+gulp.task('release', function (cb) {
+	if (!global.cfg.loader.release || !global.cfg.app.release) {
+		console.logRed('Release mode fail. Set your app and loader on release: true');
+		utils.exit(1);
+	}
 
-//---
-//	del = require('del'),
-//	shared = require('./shared.js'),
+	//TODO continuar
+	runSequence(
+		'full:loader',
+		'test:loader',
+	cb);
+});
+
 
 //require('./cordova.js');
 
-
-//gulp.task('loader',	['get:loader']);
-//gulp.task('a',		['run:android']);
-//
-////make and get loader
-//gulp.task('get:loader', function(cb){
-//	shared.makeLoader(function () {
-//		shared.copyLoader(cb);
-//	});
-//});
-//
 ////building
 //gulp.task('build:fast', ['runMagic'], function (){
 //	return magic.runJsonify(global.cfg.folders.www +'/apps.json');
@@ -68,50 +80,3 @@ gulp.task('makeHtml', function(){
 //gulp.task('genAppCache', function (){
 //	return magic.genAppCache();
 //});
-//
-//gulp.task('makeCss', function (){
-//	return engine.runPreprocessors('apps.json');
-//});
-
-
-////watches
-//gulp.task('cssw', function() {
-//	gulp.watch([global.cfg.folders.www + '/**/*.scss'], ['css:app']);
-//});
-//
-////cleaning and others
-//gulp.task('remove:build', function() {
-//	return del(global.cfg.folders.build);
-//});
-//
-//gulp.task('remove:temp', function() {
-//	return del(global.cfg.folders.temp);
-//});
-
-//gulp.task('build:loader', function (cb) {
-//
-//	if(!utils.fileExist(global.cfg.loader.folders.www + '/'+global.cfg.loader.filesDest.index)
-//	|| !utils.fileExist(global.cfg.loader.folders.www + '/config.js')){
-//		console.logRed('Index not found, run `make:base` to generate');
-//		utils.exit(1);
-//	}
-//
-//	runSequence(
-//		'make:loader:html',
-//		'remove:loader:temp',
-//	cb);
-//});
-
-//gulp.task('release', function (cb) {
-//	if (!global.cfg.loader.release) {
-//		console.logRed('Variable "release" in project-config on "false", you will change it if you want a release');
-//		utils.exit(1);
-//	}
-//
-//	runSequence(
-//		'full:loader',
-//		'test:loader',
-//	cb);
-//});
-
-

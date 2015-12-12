@@ -7,19 +7,18 @@ var runSequence = require('run-sequence'),
 
 //alias
 //gulp.task('default',['build']);
-gulp.task('full',	['buildFull']);
 
-gulp.task('buildFull', ['buildLoader'], function (cb) {
+gulp.task('build', function (cb) {
 	runSequence(
-		'build',
+		'buildProject',
 //		'optimizeImages',
 //		(gutil.env.debug) ? 'nothing' : 'genAppCache',
 		cb);
 });
 
-gulp.task('build', function (cb) {
+gulp.task('full', function (cb) {
 	runSequence(
-		'makeWwwJson',
+		'buildFull',
 //		'copy:imgs',
 //		'copy:others',
 //		(gutil.env.debug) ? 'nothing' : 'remove:temp',
