@@ -26,6 +26,13 @@
 		}
 	}
 
+	function breakIfIsTemplate(){
+		if(global.cfg.isTemplate){
+			console.logRed('APPFACTORY: it is a template');
+			utils.exit(1);
+		}
+	}
+
 	gulp.task('buildFull', function(){
 		breakIfIsLoader();
 
@@ -37,6 +44,7 @@
 
 	gulp.task('serveProject', function(){
 		breakIfIsLoader();
+		breakIfIsTemplate();
 
 		return serve.makeServe(global.cfg.pathPrj + global.cfg.app.folders.www, '/', global.cfg.ip, global.cfg.ports.project);
 	});

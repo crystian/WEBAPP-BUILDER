@@ -50,8 +50,8 @@
 	});
 
 	function breakIfIsTemplate(){
-		if(global.cfg.isTemplate){
-			console.logRed('APPFACTORY: it is template, you need to run the command on project folder');
+		if(!global.cfg.isTemplate){
+			console.logRed('APPFACTORY: it is not a template');
 			utils.exit(1);
 		}
 	}

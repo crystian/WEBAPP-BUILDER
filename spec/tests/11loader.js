@@ -14,9 +14,9 @@ var testFolder  = 'spec/fixture/11loader',
 		wwwIndex    = 'www/index.html',
 		index       = buildFolder + '/index.html';
 
-fdescribe('', function(){
+fdescribe('check basic commands for build', function(){
 
-	describe("check basic commands for build", function(){
+	describe('from project', function(){
 
 		beforeEach(function(){
 			cd(testFolder);
@@ -42,9 +42,17 @@ fdescribe('', function(){
 			expect(ind.indexOf('"oneRequest": false')).toBeGreaterThan(0);
 		});
 
+		it('should fail because it is project', function(){
+			cd('01');
+
+			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
+			expect(exec('gulp serveLoader --testMode ' + args, {silent: 1}).code).toBe(1);
+
+		});
+
 	});
 
-	describe("check basic commands for build from root", function(){
+	describe('from root', function(){
 
 		it('should create index and has oneRequest:1', function(){
 			rm('-rf', buildFolder);
@@ -65,9 +73,24 @@ fdescribe('', function(){
 
 			expect(exec('gulp buildProject --testMode ' + args, {silent: 1}).code).toBe(1);
 		});
+
+		it('should fail because it is root', function(){
+			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
+			expect(exec('gulp serveLoader --testMode ' + args, {silent: 1}).code).toBe(1);
+
+			rm('-rf', buildFolder);
+			rm('-rf', 'config.json');
+		});
+
+		it('should fail because it is project', function(){
+
+			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
+			expect(exec('gulp serveProject --testMode ' + args, {silent: 1}).code).toBe(1);
+
+		});
 	});
 
-	describe("check basic commands for build from template", function(){
+	describe("from template", function(){
 
 		it('buildLoader', function(){
 
@@ -88,12 +111,14 @@ fdescribe('', function(){
 			expect(ind.indexOf('oneRequest:1')).toBeGreaterThan(0);
 		});
 
-		fit('', function(){
+		it('should fail because it is template', function(){
 
-			rm('-rf', buildFolder);
-			expect(test('-e', buildFolder)).toBe(false);
+			cd('templates/test');
 
-			expect(exec('gulp buildProject --testMode ' + args, {silent: 0}).code).toBe(0);
+			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
+			expect(exec('gulp serveProject --testMode ' + args, {silent: 1}).code).toBe(1);
+
+			cd('../../');
 		});
 
 	});
