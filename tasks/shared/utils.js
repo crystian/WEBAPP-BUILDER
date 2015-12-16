@@ -42,14 +42,14 @@ exports.breakIfIsLoader = function(){
 exports.breakIfIsTemplate = function (){
 	if(global.cfg.isTemplate){
 		console.logRed('APPFACTORY: it is a template');
-		utils.exit(1);
+		exit(1);
 	}
 };
 
 exports.breakIfIsNotTemplate = function (){
 	if(!global.cfg.isTemplate){
 		console.logRed('APPFACTORY: it is not a template');
-		utils.exit(1);
+		exit(1);
 	}
 };
 

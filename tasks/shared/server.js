@@ -21,6 +21,12 @@
 		return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.serve);
 	});
 
+	gulp.task('serveBuild', function(){
+		utils.breakIfIsLoader();
+
+		return makeServe(global.cfg.pathPrj + global.cfg.app.folders.build, '/', global.cfg.ip, global.cfg.ports.build);
+	});
+
 	gulp.task('serveProject', function(){
 		utils.breakIfIsLoader();
 		utils.breakIfIsTemplate();
@@ -29,8 +35,6 @@
 	});
 
 	gulp.task('serve', function(){
-		utils.breakIfIsLoader();
-
 		var r = 'serveProject';
 
 		if(global.cfg.isTemplate){

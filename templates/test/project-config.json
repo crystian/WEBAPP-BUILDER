@@ -4,7 +4,8 @@
 		"version": "0.0.1",
 		"release": true,
 		"folders":{
-			"template": "templates/test"
+			"template": "templates/test",
+			"build": "templates/test/build"
 		}
 	},
 	"loader":{

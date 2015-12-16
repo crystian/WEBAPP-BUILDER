@@ -88,6 +88,13 @@ fdescribe('check basic commands for build', function(){
 			expect(exec('gulp serveProject --testMode ' + args, {silent: 1}).code).toBe(1);
 
 		});
+
+		it('should fail because it is not project', function(){
+
+			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
+			expect(exec('gulp serveBuild --testMode ' + args, {silent: 1}).code).toBe(1);
+
+		});
 	});
 
 	describe("from template", function(){
@@ -101,14 +108,15 @@ fdescribe('check basic commands for build', function(){
 
 			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
 
-			expect(test('-e', buildFolder)).toBe(false);
-
-			cd('../../');
-
 			expect(test('-e', buildFolder)).toBe(true);
 
 			var ind = cat(index);
 			expect(ind.indexOf('oneRequest:1')).toBeGreaterThan(0);
+
+			cd('../../');
+
+			expect(test('-e', buildFolder)).toBe(false);
+
 		});
 
 		it('should fail because it is template', function(){
