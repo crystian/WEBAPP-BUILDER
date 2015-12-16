@@ -24,7 +24,8 @@
 	gulp.task('serveBuild', function(){
 		utils.breakIfIsLoader();
 
-		return makeServe(global.cfg.pathPrj + global.cfg.app.folders.build, '/', global.cfg.ip, global.cfg.ports.build);
+		var pathPrj = global.cfg.isTemplate ? '../../' : global.cfg.pathPrj;
+		return makeServe(pathPrj + global.cfg.app.folders.build, '/', global.cfg.ip, global.cfg.ports.build);
 	});
 
 	gulp.task('serveProject', function(){
