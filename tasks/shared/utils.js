@@ -32,6 +32,27 @@ console.logRed = function(m){
 	console.log(chalk.red.bold(m));
 };
 
+exports.breakIfIsLoader = function(){
+	if(global.cfg.fromFwk){
+		console.logRed('APPFACTORY: it is loader, you need to run the command on project folder or template');
+		exit(1);
+	}
+};
+
+exports.breakIfIsTemplate = function (){
+	if(global.cfg.isTemplate){
+		console.logRed('APPFACTORY: it is a template');
+		utils.exit(1);
+	}
+};
+
+exports.breakIfIsNotTemplate = function (){
+	if(!global.cfg.isTemplate){
+		console.logRed('APPFACTORY: it is not a template');
+		utils.exit(1);
+	}
+};
+
 exports.readJsonFile = function(f){
 	return eval('(' + cat(f) + ')');
 };
@@ -157,7 +178,7 @@ process.on('uncaughtException', function(err){
 	this.exit(1); // exit with error
 });
 
-exports.exit = function(n){
+exports.exit = exit = function(n){
 	process.exit(n);
 };
 

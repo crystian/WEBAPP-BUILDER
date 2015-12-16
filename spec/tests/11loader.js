@@ -82,7 +82,7 @@ fdescribe('check basic commands for build', function(){
 			rm('-rf', 'config.json');
 		});
 
-		it('should fail because it is project', function(){
+		it('should fail because it is not project', function(){
 
 			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
 			expect(exec('gulp serveProject --testMode ' + args, {silent: 1}).code).toBe(1);

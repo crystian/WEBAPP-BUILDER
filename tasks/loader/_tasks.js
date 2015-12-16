@@ -8,15 +8,13 @@
 	var gutil       = require('gulp-util'),
 			runSequence = require('run-sequence'),
 			fs          = require('fs-extra'),
-			utils       = require('../shared/utils.js'),
-			serve       = require('../shared/server');
+			utils       = require('../shared/utils.js');
 
 	//alias:
 	//main task: buildLoader
 	gulp.task('configLoader', ['_makeConfig']);
 	gulp.task('cssLoader', ['_makeCss']);
 	gulp.task('csswLoader', ['_watchCss']);
-	gulp.task('serveLoader', ['_serve']);
 	//gulp.task('loaderTest',		['_test']);
 
 	gulp.task('nothing', []);
@@ -48,19 +46,5 @@
 		}
 
 	});
-
-	function breakIfIsTemplate(){
-		if(!global.cfg.isTemplate){
-			console.logRed('APPFACTORY: it is not a template');
-			utils.exit(1);
-		}
-	}
-
-	gulp.task('_serve', function(){
-		breakIfIsTemplate();
-
-		return serve.makeServe(global.cfg.pathFwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.serve);
-	});
-
 
 }());

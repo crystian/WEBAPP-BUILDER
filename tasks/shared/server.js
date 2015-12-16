@@ -7,12 +7,38 @@
 
 	var webserver = require('gulp-webserver'),
 			path      = require('path'),
+			runSequence = require('run-sequence'),
 			utils     = require('./utils'),
 			gutil     = require('gulp-util');
 
 	//gulp.task('_serveNightmare', function(){
 	//	return makeServe(global.cfg.pathFwk +'/'+ global.cfg.loader.folders.build, '', global.cfg.ip, global.cfg.ports.nightmare);
 	//});
+
+	gulp.task('serveLoader', function(){
+		utils.breakIfIsNotTemplate();
+
+		return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.serve);
+	});
+
+	gulp.task('serveProject', function(){
+		utils.breakIfIsLoader();
+		utils.breakIfIsTemplate();
+
+		return makeServe(global.cfg.pathPrj + global.cfg.app.folders.www, '/', global.cfg.ip, global.cfg.ports.project);
+	});
+
+	gulp.task('serve', function(){
+		utils.breakIfIsLoader();
+
+		var r = 'serveProject';
+
+		if(global.cfg.isTemplate){
+			r = 'serveLoader';
+		}
+
+		return runSequence(r);
+	});
 
 	function makeServe(folder, _path, ip, port){
 		//_path = (_path) ? _path : '';
