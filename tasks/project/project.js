@@ -76,10 +76,6 @@
 	//	return magic.runJsonify(global.cfg.folders.www +'/apps.json');
 	//});
 	//
-	//gulp.task('runMagic', function (){
-	//	return magic.runMagic(global.cfg.folders.www +'/apps.json');
-	//});
-	//
 	//gulp.task('optimizeImages', function (){
 	//	return magic.optimizeImages();
 	//});

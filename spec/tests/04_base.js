@@ -70,7 +70,7 @@ xdescribe("Index template to index - ", function(){
 
 		expect($('.spinner').length).toBe(1);
 		expect($('link').length).toBe(4);
-		expect($('script').length).toBe(22);
+		expect($('script').length).toBe(23);
 		expect(indexContent).toContain('platform.min.js');
 	});
 
@@ -84,7 +84,7 @@ xdescribe("Index template to index - ", function(){
 
 		expect($('.spinner').length).toBe(1);
 		expect($('link').length).toBe(4);
-		expect($('script').length).toBe(23);
+		expect($('script').length).toBe(24);
 		expect(indexContent).toContain('platform.js');
 	});
 

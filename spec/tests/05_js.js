@@ -37,7 +37,7 @@ xdescribe("JS mechanics - ", function(){
 		expect(test('-e', compileLoaderJs)).toBe(true);
 
 		var file = fs.statSync(compileLoaderJs);
-		expect(file.size).toBeGreaterThan(105000);
+		expect(file.size).toBeGreaterThan(103000);
 	});
 
 	it('(02) should create compile loader - minificated', function(){

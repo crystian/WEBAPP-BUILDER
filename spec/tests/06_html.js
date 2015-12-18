@@ -55,7 +55,7 @@ xdescribe("Index template to index - ", function(){
 
 		var file = fs.statSync(indexFileCompiled);
 		expect(file.size).toBeLessThan(68000);
-		expect(file.size).toBeGreaterThan(65000);
+		expect(file.size).toBeGreaterThan(64000);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 
@@ -82,7 +82,7 @@ xdescribe("Index template to index - ", function(){
 
 		var file = fs.statSync(indexFileCompiled);
 		expect(file.size).toBeLessThan(158000);
-		expect(file.size).toBeGreaterThan(155000);
+		expect(file.size).toBeGreaterThan(150000);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 
@@ -109,7 +109,7 @@ xdescribe("Index template to index - ", function(){
 
 		var file = fs.statSync(indexFileCompiled);
 		expect(file.size).toBeLessThan(68000);
-		expect(file.size).toBeGreaterThan(65000);
+		expect(file.size).toBeGreaterThan(64000);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 
@@ -131,7 +131,7 @@ xdescribe("Index template to index - ", function(){
 
 		var file = fs.statSync(indexFileCompiled);
 		expect(file.size).toBeLessThan(158000);
-		expect(file.size).toBeGreaterThan(155000);
+		expect(file.size).toBeGreaterThan(150000);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 

@@ -6,7 +6,7 @@
 var loader = (function(){
 	'use strict';
 
-	var cfg, diag, platform, utils, settings, events, doc, loadingScreen, applicationCache, location, ga, mx;
+	var cfg, diag, platform, utils, settings, events, doc, loadingScreen, applicationCache, location, ga, mx, xhr;
 
 	//just for ofuscation
 	function setters() {
@@ -14,6 +14,7 @@ var loader = (function(){
 		diag = loader.diag;
 		platform = loader.platform;
 		utils = loader.utils;
+		xhr = loader.xhr;
 		settings = loader.settings;
 		events = loader.events;
 		loadingScreen = loader.loadingScreen;
@@ -129,7 +130,7 @@ var loader = (function(){
 		}
 
 		console.log('load appName '+ cfg.firstApp);
-		utils.requestApp(cfg.firstApp, _loadAppSuccess, _loadAppFail);
+		xhr.requestApp(cfg.firstApp, _loadAppSuccess, _loadAppFail);
 	}
 
 	function _loadAppSuccess(){
@@ -167,7 +168,7 @@ var loader = (function(){
 		console.log("     -=[ I SEE YOU! / TE VEO! ]=-");
 		console.log("");
 
-		//these errors are lies, solo para enganiar al malisioso
+		//these errors are lies, just a joke
 		console.warn(cfg.consoleError[utils.getRandomInt(cfg.consoleError.length-1)]);
 
 		//delete window.console; //error al testear con nightmare

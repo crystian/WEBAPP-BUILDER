@@ -38,12 +38,13 @@
 		loaderScripts1Stream = jsMaker(loaderScripts1Stream, global.cfg.loader.release);
 		//endheader script
 
-		//body script
+		//body script in order
 		loaderScripts2 = [
 			www + 'modules/shortcuts.js',
 			www + 'loader.js',
 			www + 'variables.js',
 			www + 'modules/utils.js',
+			www + 'modules/xhr.js',
 			www + 'modules/diag.js',
 			www + 'modules/polyfill-ie.js',
 			www + 'modules/settings.js',
