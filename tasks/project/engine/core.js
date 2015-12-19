@@ -14,7 +14,6 @@
 			path     = require('path'),
 			merge2   = require('merge2'),
 			rename   = require('gulp-rename'),
-			LZString = require('../../../vendors/lz-string/libs/lz-string'),
 			gutil    = require('gulp-util');
 	//	fs = require('fs-extra'),
 	//	StreamQueue = require('streamqueue'),
@@ -339,6 +338,7 @@
 		var files = JSON.stringify(json);
 
 		if(cfg.compress){
+			var LZString = require('../../../vendors/lz-string/libs/lz-string');
 			files = LZString.compressToUTF16(files);
 			console.logGreen(appName + ' compressed!');
 		}

@@ -40,22 +40,20 @@ xdescribe("Index template to index - ", function(){
 		expect(test('-e', indexFileCompiled)).toBe(true);
 	});
 
-	it('(02) should minificate index.html', function(){
+	it('(02) should minificate index.html DIST', function(){
 		cd('02');
 
 		rm('-rf', indexFile);
 		expect(test('-e', indexFile)).toBe(false);
 
-		expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp buildLoaderDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		var build             = utils.readJsonFile(configJson).cfg.app.folders.build,
 				indexFileCompiled = build + index;
 
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
-		var file = fs.statSync(indexFileCompiled);
-		expect(file.size).toBeLessThan(68000);
-		expect(file.size).toBeGreaterThan(64000);
+		expect(fs.statSync(indexFileCompiled).size).toBe(66945);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 
@@ -67,22 +65,45 @@ xdescribe("Index template to index - ", function(){
 		expect(indexFileCompiledContent).not.toContain('if(true){return;}');
 	});
 
+	it('(02) should minificate index.html', function(){
+		cd('02');
+		var wwwIndex = 'www/index.html';
+
+		rm('-rf', indexFile);
+		rm('-rf', wwwIndex);
+		expect(test('-e', indexFile)).toBe(false);
+		expect(test('-e', wwwIndex)).toBe(false);
+
+		expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(test('-e', wwwIndex)).toBe(true);
+
+		expect(fs.statSync(wwwIndex).size).toBe(156821);
+
+		var indexFileCompiledContent = cat(wwwIndex);
+
+		expect(indexFileCompiledContent).toContain('.testLoader');
+		expect(indexFileCompiledContent).toContain('_loaderCfg');
+		expect(indexFileCompiledContent).toContain('<!--comment for test, don\'t remove it-->');
+		expect(indexFileCompiledContent.indexOf('<!--')).toBe(0);//header
+		expect(indexFileCompiledContent).toContain('"oneRequest": false');
+		expect(indexFileCompiledContent).toContain('if(true){return;}');
+	});
+
 	it('(03) should non-minificate index.html', function(){
 		cd('03');
 
 		rm('-rf', indexFile);
 		expect(test('-e', indexFile)).toBe(false);
 
-		expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp buildLoaderDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		var build             = utils.readJsonFile(configJson).cfg.app.folders.build,
 				indexFileCompiled = build + index;
 
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
-		var file = fs.statSync(indexFileCompiled);
-		expect(file.size).toBeLessThan(158000);
-		expect(file.size).toBeGreaterThan(150000);
+		expect(fs.statSync(indexFileCompiled).size).toBe(156820);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 
@@ -100,16 +121,14 @@ xdescribe("Index template to index - ", function(){
 		rm('-rf', indexFileCordova);
 		expect(test('-e', indexFileCordova)).toBe(false);
 
-		expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp buildLoaderDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		var build             = utils.readJsonFile(configJson).cfg.app.folders.build,
 				indexFileCompiled = build + indexCordova;
 
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
-		var file = fs.statSync(indexFileCompiled);
-		expect(file.size).toBeLessThan(68000);
-		expect(file.size).toBeGreaterThan(64000);
+		expect(fs.statSync(indexFileCompiled).size).toBe(66944);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 
@@ -129,9 +148,7 @@ xdescribe("Index template to index - ", function(){
 
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
-		var file = fs.statSync(indexFileCompiled);
-		expect(file.size).toBeLessThan(158000);
-		expect(file.size).toBeGreaterThan(150000);
+		expect(fs.statSync(indexFileCompiled).size).toBe(156819);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 

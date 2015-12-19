@@ -95,9 +95,7 @@ xdescribe("Bower dependencies and more - ", function(){
 		expect(test('-e', platformMin)).toBe(true);
 
 		//check minification
-		var file = fs.statSync(platformMin);
-		expect(file.size).toBeGreaterThan(12000);
-		expect(file.size).toBeLessThan(14000);
+		expect(fs.statSync(platformMin).size).toBe(12322);
 
 	});
 
@@ -124,9 +122,9 @@ xdescribe("Bower dependencies and more - ", function(){
 		expect(test('-e', bootstrapCssTheme)).toBe(true);
 
 		//check size of minification
-		expect(fs.statSync(bootstrapJs).size).toBeLessThan(40000);
-		expect(fs.statSync(bootstrapNpm).size).toBeLessThan(400);
-		expect(fs.statSync(bootstrapCss).size).toBeLessThan(190000);
-		expect(fs.statSync(bootstrapCssTheme).size).toBeLessThan(24000);
+		expect(fs.statSync(bootstrapJs).size).toBe(36691);
+		expect(fs.statSync(bootstrapNpm).size).toBe(369);
+		expect(fs.statSync(bootstrapCss).size).toBe(118513);
+		expect(fs.statSync(bootstrapCssTheme).size).toBe(23323);
 	});
 });

@@ -36,8 +36,7 @@ xdescribe("JS mechanics - ", function(){
 
 		expect(test('-e', compileLoaderJs)).toBe(true);
 
-		var file = fs.statSync(compileLoaderJs);
-		expect(file.size).toBeGreaterThan(103000);
+		expect(fs.statSync(compileLoaderJs).size).toBe(109285);
 	});
 
 	it('(02) should create compile loader - minificated', function(){
@@ -54,8 +53,7 @@ xdescribe("JS mechanics - ", function(){
 
 		expect(test('-e', compileLoaderJs)).toBe(true);
 
-		var file = fs.statSync(compileLoaderJs);
-		expect(file.size).toBeLessThan(50000);
+		expect(fs.statSync(compileLoaderJs).size).toBe(50008);
 	});
 
 	it('(03) should jshint validate the code', function(){

@@ -7,8 +7,8 @@ var args = process.argv.slice(2).join(' ');
 require('shelljs/global');
 
 //fail on firt failure
-var failFast = require('jasmine-fail-fast');
-jasmine.getEnv().addReporter(failFast.init());
+//var failFast = require('jasmine-fail-fast');
+//jasmine.getEnv().addReporter(failFast.init());
 
 var testFolder     = 'spec/fixture/01_boot',
 		rootFwk        = '../../../../',

@@ -38,8 +38,7 @@ describe('check basic commands for build', function(){
 			expect(test('-e', buildFolder)).toBe(true);
 			expect(test('-e', wwwIndex)).toBe(true);
 
-			var ind = cat(wwwIndex);
-			expect(ind.indexOf('"oneRequest": false')).toBeGreaterThan(0);
+			expect(cat(wwwIndex)).toContain('"oneRequest": false');
 		});
 
 		it('should fail because it is project', function(){
@@ -66,8 +65,7 @@ describe('check basic commands for build', function(){
 
 			expect(test('-e', buildFolder)).toBe(true);
 
-			var ind = cat(index);
-			expect(ind.indexOf('"oneRequest": false')).toBeGreaterThan(0);
+			expect(cat(index)).toContain('"oneRequest": false');
 		});
 
 		it('should create index and has oneRequest:1', function(){
@@ -79,8 +77,7 @@ describe('check basic commands for build', function(){
 
 			expect(test('-e', buildFolder)).toBe(true);
 
-			var ind = cat(index);
-			expect(ind.indexOf('oneRequest:1')).toBeGreaterThan(0);
+			expect(cat(index)).toContain('oneRequest:1');
 		});
 
 		it('should fail because it is from root', function(){
@@ -126,8 +123,7 @@ describe('check basic commands for build', function(){
 
 			expect(test('-e', buildFolder)).toBe(true);
 
-			var ind = cat(index);
-			expect(ind.indexOf('"oneRequest": false')).toBeGreaterThan(0);
+			expect(cat(index)).toContain('"oneRequest": false');
 
 			cd('../../');
 
@@ -146,8 +142,7 @@ describe('check basic commands for build', function(){
 
 			expect(test('-e', buildFolder)).toBe(true);
 
-			var ind = cat(index);
-			expect(ind.indexOf('oneRequest:1')).toBeGreaterThan(0);
+			expect(cat(index)).toContain('oneRequest:1');
 
 			cd('../../');
 
