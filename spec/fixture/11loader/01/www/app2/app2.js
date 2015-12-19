@@ -1,14 +1,14 @@
 /**
  * Created by Crystian on 2/22/2015.
  */
-var app = (function() {
+var app2 = (function() {
 
 	function init(){
-		loader.hide();
+		console.log('app2 init');
 	}
 
-	function gotoapp2(){
-		loader.xhr.requestApp('app2', function(){
+	function gotoapp(){
+		loader.xhr.requestApp('app', function(){
 			console.log('app loaded');
 		}, function(){
 			console.error('app does not loaded');
@@ -17,8 +17,7 @@ var app = (function() {
 
 	return {
 		init: init,
-		gotoapp2: gotoapp2
+		gotoapp: gotoapp
 	};
 }());
 
-document.addEventListener('loaderFinished', app.init);

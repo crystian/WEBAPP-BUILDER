@@ -77,7 +77,11 @@ exports.addSlash = function(dictionary){
 			r   = {};
 
 	_.forEach(arr, function(key){
-		r[key] = dictionary[key] + '/';
+		if(dictionary[key] && dictionary[key] !== ''){
+			r[key] = dictionary[key] + '/';
+		} else {
+			r[key] = '';
+		}
 	});
 
 	return r;

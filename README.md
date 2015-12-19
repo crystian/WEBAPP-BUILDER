@@ -1,4 +1,5 @@
 # APP FACTORY!
+cache para apps previamente cargadas
                       modificar orignal no preoducto cuando es tiene replaces.original
                       gutil.env.noMin  time
 coliciones de nombres de productos

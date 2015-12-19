@@ -39,22 +39,23 @@ loader.xhr = (function(){
 	}
 
 
-	function requestApp(appName, loadAppSuccess, loadAppFail){
-		return _requestOneOrAllInOne(appName, loadAppSuccess, loadAppFail);
+	function requestApp(appConfig, loadAppSuccess, loadAppFail){
+		appConfig = typeof(appConfig) === 'string' ? {appName: appConfig} : appConfig;
+		return _requestOneOrAllInOne(appConfig, loadAppSuccess, loadAppFail);
 	}
 
-	function _requestOneOrAllInOne(appName, loadAppSuccess, loadAppFail){
+	function _requestOneOrAllInOne(appConfig, loadAppSuccess, loadAppFail){
 		//debugger
 		if(loader.cfg.oneRequest){
 			console.info('oneRequest!');
-			requestAllInOne(appName + '.json', {appName: appName}).then(loadAppSuccess, loadAppFail);
+			requestAllInOne(appConfig.appName + '.json', appConfig).then(loadAppSuccess, loadAppFail);
 			return;
 		}
-
 		console.info('multiple request!');
-		var path = '../' + loader.cfg.folders.template + loader.cfg.folders.www + appName + '/';
+		//var path = '../' + loader.cfg.folders.template + loader.cfg.folders.www + appName + '/';
+		var path = '../' + appConfig.appName + '/';
 
-		return requestJson(path + 'www.json').then(function(data){
+		return requestJson(path + 'www.json', appConfig).then(function(data){
 
 			var i    = 0,
 					l    = data.length,
@@ -63,10 +64,11 @@ loader.xhr = (function(){
 			for(; i < l; i++){
 				var file = data[i];
 
-				urls.push('../'+ loader.cfg.folders.template + loader.cfg.folders.www + file);
+				//urls.push('../'+ loader.cfg.folders.template + loader.cfg.folders.www + file);
+				urls.push('../'+ file);
 			}
 
-			return requestMultipleSync(urls, {appName: appName}).then(loadAppSuccess);
+			return requestMultipleSync(urls, appConfig).then(loadAppSuccess);
 		});
 	}
 
@@ -224,7 +226,7 @@ loader.xhr = (function(){
 			app.id = options.appName;
 			app.classList.add('height100');
 
-			loader.utils.setNewResourceById(app, 'mainContainer');
+			loader.utils.setNewResourceById(app, 'mainContainer', options.clear);
 		} else {
 			el.getElementById(options.appName).innerHTML = data;
 		}
