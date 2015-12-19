@@ -8,19 +8,19 @@
 	'use strict';
 
 	//libs
-	var _      = require('lodash'),
-			globby = require('globby'),
-			fs     = require('fs-extra'),
-			path   = require('path'),
-			merge2 = require('merge2'),
-			rename = require('gulp-rename'),
-			gutil  = require('gulp-util');
+	var _        = require('lodash'),
+			globby   = require('globby'),
+			fs       = require('fs-extra'),
+			path     = require('path'),
+			merge2   = require('merge2'),
+			rename   = require('gulp-rename'),
+			LZString = require('../../../vendors/lz-string/libs/lz-string'),
+			gutil    = require('gulp-util');
 	//	fs = require('fs-extra'),
 	//	StreamQueue = require('streamqueue'),
 	//	concat = require('gulp-concat'),
 	//	shared = require('./shared'),
 	// 	sprite = require('gulp-sprite-generator'),
-	//	LZString = require('../../vendors/lz-string/libs/lz-string'),
 	//	imagemin = require('gulp-imagemin'),
 	//	pngquant = require('imagemin-pngquant'),
 	//	cache = require('gulp-cache'),
@@ -164,7 +164,7 @@
 				fileNameWOMin = utils.removePreExtensionFilename(file.path, config.minExtension),
 				fileNameMin   = file.base + '/' + fileName + '.' + config.minExtension + '.' + typeConfig.extensionFinal,
 				dest          = file.base + '/' + fileName + '.' + typeConfig.extensionFinal,
-				isMin = fileName.indexOf('.' + config.minExtension) !== -1,
+				isMin         = fileName.indexOf('.' + config.minExtension) !== -1,
 				genMinFile    = false,
 				stream;
 
@@ -234,7 +234,7 @@
 
 		//starting a new stream
 		stream = gulp.src(file.path)
-				.pipe(utils.debugeame())
+			.pipe(utils.debugeame())
 		;
 
 		if(config.replaces.original.length > 0 || config.replaces.originalMin.length > 0){
@@ -311,10 +311,41 @@
 
 		if(replaces.length > 0){
 			stream = aux.replace(stream, replaces)
-					.pipe(gulp.dest(path.dirname(file)));
+				.pipe(gulp.dest(path.dirname(file)));
 		}
 
 		return stream;
+	}
+
+	function makeJsons(){
+		var pth  = global.cfg.pathPrj + global.cfg.app.folders.www,
+				apps = require(pth + appsJson);
+
+		apps.forEach(function(app){
+			jsonify(app);
+		})
+	}
+
+	function jsonify(appName){
+
+		var temp = global.cfg.app.folders.build + global.cfg.app.folders.temp,
+				json = {};
+
+		json.v = global.cfg.app.version;
+		json.j = fs.readFileSync(temp + appName + '.js', {encoding: 'utf8'});
+		json.c = fs.readFileSync(temp + appName + '.css', {encoding: 'utf8'});
+		json.h = fs.readFileSync(temp + appName + '.html', {encoding: 'utf8'});
+
+		var files = JSON.stringify(json);
+
+		if(cfg.compress){
+			files = LZString.compressToUTF16(files);
+			console.logGreen(appName + ' compressed!');
+		}
+
+		fs.writeFileSync(global.cfg.app.folders.build + '/' + appName + '.json', files);
+
+		console.logGreen(appName + ' generated!');
 	}
 
 	function replaces(stream, replaces, file){
@@ -332,6 +363,7 @@
 	exports.getFilesByGroup = getFilesByGroup;
 	exports.doMagic = doMagic;
 	exports.modifyOriginal = modifyOriginal;
+	exports.makeJsons = makeJsons;
 	exports.replaces = replaces;
 	exports.defaults = defaults;
 
@@ -339,151 +371,126 @@
 
 /*
 
-exports.genAppCache = function() {
-	if(!global.cfg.release){return;}
+ exports.genAppCache = function() {
+ if(!global.cfg.release){return;}
 
-	var fileName = global.cfg.projectCode + global.cfg.AppCacheFileName;
+ var fileName = global.cfg.projectCode + global.cfg.AppCacheFileName;
 
-	var appFile = gulp.src([global.cfg.folders.build+ '/!**!/!*'])
-		.pipe(manifest({
-			hash: true,
-			preferOnline: false,
-			network: ['http://!*', 'https://!*', '*'],
-			filename: fileName,
-			exclude: fileName
-		}))
-		.pipe(gulp.dest(global.cfg.folders.build));
+ var appFile = gulp.src([global.cfg.folders.build+ '/!**!/!*'])
+ .pipe(manifest({
+ hash: true,
+ preferOnline: false,
+ network: ['http://!*', 'https://!*', '*'],
+ filename: fileName,
+ exclude: fileName
+ }))
+ .pipe(gulp.dest(global.cfg.folders.build));
 
-	var htmlFile = gulp.src(global.cfg.folders.build +'/'+ global.cfg.loader.filesDest.index)
-		.pipe(replace('<html>','<html manifest="'+ fileName +'">'))
-		.pipe(gulp.dest(global.cfg.folders.build));
+ var htmlFile = gulp.src(global.cfg.folders.build +'/'+ global.cfg.loader.filesDest.index)
+ .pipe(replace('<html>','<html manifest="'+ fileName +'">'))
+ .pipe(gulp.dest(global.cfg.folders.build));
 
-	return aux.merge(appFile, htmlFile);
-};
-*/
-
-/*
-exports.optimizeImages = function() {
-	return gulp.src(global.cfg.folders.build +'/img/!**!/!*')
-		.pipe(commons.debugeame())
-		.pipe(imagemin({
-			progressive: true,
-			svgoPlugins: [{removeViewBox: false}],
-			use: [pngquant()]
-		}))
-		.pipe(gulp.dest(global.cfg.folders.build + '/img'));
-};
-
-exports.clearCache = function (done) {
-	return cache.clearAll(done);
-};
-*/
+ return aux.merge(appFile, htmlFile);
+ };
+ */
 
 /*
-			//just for remove header a footer comments, it's ok here, not move
-			if(type === 'js'){
-				stream = stream.pipe(uglify({
-					output: {beautify: false},
-					compress: {
-						sequences: true, hoist_funs:false, dead_code: false,
-						drop_debugger: true, conditionals: false,
-						unused: false, if_return:false, side_effects:false},
-					mangle: false
-				}));
-			}
-*/
-/*
+ exports.optimizeImages = function() {
+ return gulp.src(global.cfg.folders.build +'/img/!**!/!*')
+ .pipe(commons.debugeame())
+ .pipe(imagemin({
+ progressive: true,
+ svgoPlugins: [{removeViewBox: false}],
+ use: [pngquant()]
+ }))
+ .pipe(gulp.dest(global.cfg.folders.build + '/img'));
+ };
 
-	['css','js','html'].map(function (v) {
-		streamsFinal = aux.merge(streamsFinal, _concat(streams, v, appName));
-	});
-*/
-/*
-
-function runJsonify(path, app, options){
-
-	var temp = global.cfg.folders.temp,
-		json = {};
-
-	json.v = global.cfg.version;
-	json.j = fs.readFileSync(temp +'/'+ app +'.js', {encoding: 'utf8'});
-	json.c = fs.readFileSync(temp +'/'+ app +'.css', {encoding: 'utf8'});
-	json.h = fs.readFileSync(temp +'/'+ app +'.html', {encoding: 'utf8'});
-
-	var b = JSON.stringify(json);
-
-	if(cfg.compress){
-		b = LZString.compressToUTF16(b);
-		console.logGreen(app +' compressed!');
-	}
-
-	fs.writeFileSync(global.cfg.folders.build +'/'+ app +'.json', b);
-
-	console.logGreen(app +' generated!');
-}
-
-*/
-/*
-function _concat(_streams, _type, _appName){
-
-	var s = _streams[_type].done();
-	s = s.pipe(concat(_appName+'.'+ _type, {newLine: ' '}))
-		.pipe(gulp.dest(global.cfg.folders.temp));
-
-	return s;
-}
-
-*/
+ exports.clearCache = function (done) {
+ return cache.clearAll(done);
+ };
+ */
 
 /*
-		if(!file.minificated && file.genSprite){
+ //just for remove header a footer comments, it's ok here, not move
+ if(type === 'js'){
+ stream = stream.pipe(uglify({
+ output: {beautify: false},
+ compress: {
+ sequences: true, hoist_funs:false, dead_code: false,
+ drop_debugger: true, conditionals: false,
+ unused: false, if_return:false, side_effects:false},
+ mangle: false
+ }));
+ }
+ */
+/*
 
-			var spriteOutput = stream
-				.pipe(sprite({
-					baseUrl:         './',
-					spriteSheetName: appName +'.png',
-					spriteSheetPath: 'img',
-					padding: 1,
-					algorithm: 'binary-tree',
-					//isRetina: false,
-					//engine: 'gm',
-					verbose: !!(gutil.env.debug),
-					groupBy: [
-						function(image) {
-							if (gutil.env.verbose) {
-								console.dir(image);
-							}
-							//getting number of sprite folder
-							var num = /(sprite)(.)(\/)/.exec(image.url),
-								group = 1;
+ ['css','js','html'].map(function (v) {
+ streamsFinal = aux.merge(streamsFinal, _concat(streams, v, appName));
+ });
+ */
+/*
+ function _concat(_streams, _type, _appName){
 
-							if(num !== null && num.length > 0){
-								group = num[2];
-							}
+ var s = _streams[_type].done();
+ s = s.pipe(concat(_appName+'.'+ _type, {newLine: ' '}))
+ .pipe(gulp.dest(global.cfg.folders.temp));
 
-							//group += '.'+utils.getExtensionFile(image.path);
-							return ''+group;
-						}
-					],
-					engineOpts: {
-						imagemagick: false
-					}
-				}));
+ return s;
+ }
 
-			spriteOutput.img
-				//.pipe(imageminOptipng({optimizationLevel: 3})())
-				//.pipe(imagemin({
-				//	progressive: true,
-				//	svgoPlugins: [{removeViewBox: false}],
-				//	use: [pngquant()]
-				//}))
+ */
 
-				//.pipe(gm(function(gmfile) {
-				//	gmfile.quality(85).setFormat('jpg');
-				//	return gmfile;
-				//}))
+/*
+ if(!file.minificated && file.genSprite){
 
-				.pipe(gulp.dest(global.cfg.folders.build +'/img'));
+ var spriteOutput = stream
+ .pipe(sprite({
+ baseUrl:         './',
+ spriteSheetName: appName +'.png',
+ spriteSheetPath: 'img',
+ padding: 1,
+ algorithm: 'binary-tree',
+ //isRetina: false,
+ //engine: 'gm',
+ verbose: !!(gutil.env.debug),
+ groupBy: [
+ function(image) {
+ if (gutil.env.verbose) {
+ console.dir(image);
+ }
+ //getting number of sprite folder
+ var num = /(sprite)(.)(\/)/.exec(image.url),
+ group = 1;
 
-			stream = spriteOutput.css.pipe(replace('assets/',''));
-		}*/
+ if(num !== null && num.length > 0){
+ group = num[2];
+ }
+
+ //group += '.'+utils.getExtensionFile(image.path);
+ return ''+group;
+ }
+ ],
+ engineOpts: {
+ imagemagick: false
+ }
+ }));
+
+ spriteOutput.img
+ //.pipe(imageminOptipng({optimizationLevel: 3})())
+ //.pipe(imagemin({
+ //	progressive: true,
+ //	svgoPlugins: [{removeViewBox: false}],
+ //	use: [pngquant()]
+ //}))
+
+ //.pipe(gm(function(gmfile) {
+ //	gmfile.quality(85).setFormat('jpg');
+ //	return gmfile;
+ //}))
+
+ .pipe(gulp.dest(global.cfg.folders.build +'/img'));
+
+ stream = spriteOutput.css.pipe(replace('assets/',''));
+ }*/

@@ -8,13 +8,13 @@ var utils = require('../../tasks/shared/utils'),
 var args = process.argv.slice(2).join(' ');
 require('shelljs/global');
 
-var testFolder  = 'spec/fixture/11loader',
+var testFolder  = 'spec/fixture/11build',
 		rootFwk     = '../../../..',
 		buildFolder = 'build',
 		wwwIndex    = 'www/index.html',
 		index       = buildFolder + '/index.html';
 
-fdescribe('check basic commands for build', function(){
+describe('check basic commands for build', function(){
 
 	describe('from project', function(){
 
@@ -45,6 +45,9 @@ fdescribe('check basic commands for build', function(){
 		it('should fail because it is project', function(){
 			cd('01');
 
+			rm('-rf', buildFolder);
+			rm('-rf', wwwIndex);
+
 			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
 			expect(exec('gulp serveLoader --testMode ' + args, {silent: 1}).code).toBe(1);
 
@@ -54,11 +57,24 @@ fdescribe('check basic commands for build', function(){
 
 	describe('from root', function(){
 
-		it('should create index and has oneRequest:1', function(){
+		it('should create index and has oneRequest:!1', function(){
 			rm('-rf', buildFolder);
 			expect(test('-e', buildFolder)).toBe(false);
 
 			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
+			rm('-rf', 'config.json');
+
+			expect(test('-e', buildFolder)).toBe(true);
+
+			var ind = cat(index);
+			expect(ind.indexOf('"oneRequest": false')).toBeGreaterThan(0);
+		});
+
+		it('should create index and has oneRequest:1', function(){
+			rm('-rf', buildFolder);
+			expect(test('-e', buildFolder)).toBe(false);
+
+			expect(exec('gulp buildLoaderDist --testMode ' + args, {silent: 1}).code).toBe(0);
 			rm('-rf', 'config.json');
 
 			expect(test('-e', buildFolder)).toBe(true);
@@ -99,7 +115,7 @@ fdescribe('check basic commands for build', function(){
 
 	describe("from template", function(){
 
-		it('buildLoader', function(){
+		it('should make index file', function(){
 
 			rm('-rf', buildFolder);
 			expect(test('-e', buildFolder)).toBe(false);
@@ -107,6 +123,26 @@ fdescribe('check basic commands for build', function(){
 			cd('templates/test');
 
 			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
+
+			expect(test('-e', buildFolder)).toBe(true);
+
+			var ind = cat(index);
+			expect(ind.indexOf('"oneRequest": false')).toBeGreaterThan(0);
+
+			cd('../../');
+
+			expect(test('-e', buildFolder)).toBe(false);
+
+		});
+
+		it('should make index file (dist)', function(){
+
+			rm('-rf', buildFolder);
+			expect(test('-e', buildFolder)).toBe(false);
+
+			cd('templates/test');
+
+			expect(exec('gulp buildLoaderDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 			expect(test('-e', buildFolder)).toBe(true);
 

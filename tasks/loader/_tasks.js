@@ -20,9 +20,19 @@
 	gulp.task('nothing', []);
 
 	gulp.task('buildLoader', function(cb){
+		//force not release, and copy the file on www
+		global.cfg.app.release = false;
+		global.cfg.loader.release = false;
+		runSequence(
+				'_buildLoader',
+				gutil.env.debug ? 'nothing' : '_removeTemp',
+			'_copyIndex',
+			cb);
+	});
+
+	gulp.task('buildLoaderDist', function(cb){
 		runSequence(
 			'_buildLoader',
-			'_copyIndex',
 			gutil.env.debug ? 'nothing' : '_removeTemp',
 			cb);
 	});

@@ -76,7 +76,7 @@ loader.xhr = (function(){
 		return request(url).then(function(data){
 
 			try {
-				data = JSON.parse(handleCompress(data));
+				data = JSON.parse(loader.utils.za(data));
 			} catch (e) {
 				return Promise.reject(e);
 			}

@@ -8,6 +8,7 @@
 	var runSequence = require('run-sequence'),
 			fs          = require('fs-extra'),
 			utils       = require('../shared/utils.js'),
+			gutil       = require('gulp-util'),
 			engine      = require('./engine/engine.js');
 
 	//Alias
@@ -18,22 +19,44 @@
 	gulp.task('removeBuild', ['_removeBuild']);
 	gulp.task('removeTemp', ['_removeTemp']);
 
-	gulp.task('buildFull', function(){
+	gulp.task('buildFull', function(cb){
 		utils.breakIfIsLoader();
 
 		return runSequence(
 			'buildLoader',
-			'buildProject'
-		);
+			'buildProject',
+			cb);
 	});
 
-	gulp.task('buildProject', ['makeWwwJson'], function(cb){
+	gulp.task('buildFullDist', function(cb){
 		utils.breakIfIsLoader();
-		cb();
+
+		return runSequence(
+			'buildLoaderDist',
+			'buildProjectDist',
+			'makeJsons',
+			gutil.env.debug ? 'nothing' : 'removeTemp',
+			cb);
+	});
+
+	gulp.task('buildProject', ['makeWwwJson'], function(){
+		utils.breakIfIsLoader();
+	});
+
+	gulp.task('buildProjectDist', function(cb){
+		global.cfg.isBuild = true;
+
+		return runSequence(
+			'buildProject',
+			cb);
 	});
 
 	gulp.task('makeWwwJson', ['makeCss', 'makeJs', 'makeHtml'], function(){
-		engine.makeWwwJson();
+		return engine.makeWwwJson();
+	});
+
+	gulp.task('makeJsons', [], function(){
+		return engine.makeJsons();
 	});
 
 	gulp.task('watch', function(){
@@ -55,18 +78,18 @@
 		return engine.html();
 	});
 
-	gulp.task('release', function(cb){
-		if(!global.cfg.loader.release || !global.cfg.app.release){
-			console.logRed('Release mode fail. Set your app and loader on release: true');
-			utils.exit(1);
-		}
-
-		//TODO continuar
-		runSequence(
-			'full:loader',
-			'test:loader',
-			cb);
-	});
+	//gulp.task('release', function(cb){
+	//	if(!global.cfg.loader.release || !global.cfg.app.release){
+	//		console.logRed('Release mode fail. Set your app and loader on release: true');
+	//		utils.exit(1);
+	//	}
+	//
+	//	//TODO continuar
+	//	runSequence(
+	//		'full:loader',
+	//		'test:loader',
+	//		cb);
+	//});
 
 
 	//require('./cordova.js');

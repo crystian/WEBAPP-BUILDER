@@ -1,0 +1,13 @@
+{
+	"app": {
+		"name": "index test 11-02",
+		"version": "0.0.1",
+		"release": true,
+		"folders":{
+			"project": ""
+		}
+	},
+	"loader":{
+		"release": true
+	}
+}

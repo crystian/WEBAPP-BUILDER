@@ -71,10 +71,10 @@ loader.utils = (function(){
 		tag.appendChild(resourceLoader);
 	}
 
-	function setNewResourceById(resourceLoader, id, clear){
+	function setNewResourceById(resourceLoader, id, _clear){
 		var el = document.getElementById(id),
 				i = 0, l = el.childNodes.length,
-				clear = (clear === undefined);
+				clear = (_clear === undefined);
 
 		if(clear && l > 0){
 			for(;i<l;i++){

@@ -3,6 +3,8 @@
  */
 
 (function(){
+	'use strict';
+
 
 	var core = require('./core'),
 			www  = require('./www'),
@@ -14,16 +16,28 @@
 		return core.getFilesByGroupAndApps(www.makeWwwJson, www.resolveFiles);
 	};
 
+	exports.makeJsons = function(){
+		return core.makeJsons();
+	};
+
 	exports.css = function(){
-		return core.getFilesByGroupAndAppsStream(null, css.runPreprocessors);
+		return dist(core.getFilesByGroupAndAppsStream(null, css.runPreprocessors));
 	};
 
 	exports.js = function(){
-		return core.getFilesByGroupAndAppsStream(null, js.runPreprocessors);
+		return dist(core.getFilesByGroupAndAppsStream(null, js.runPreprocessors));
 	};
 
 	exports.html = function(){
-		return core.getFilesByGroupAndAppsStream(null, html.runPreprocessors);
+		return dist(core.getFilesByGroupAndAppsStream(null, html.runPreprocessors));
 	};
+
+
+	function dist(stream){
+		if(global.cfg.isBuild){
+			stream = stream.pipe(gulp.dest(global.cfg.app.folders.build + global.cfg.app.folders.temp));
+		}
+		return stream;
+	}
 
 }());
