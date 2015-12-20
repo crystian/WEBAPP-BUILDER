@@ -32,23 +32,42 @@ console.logRed = function(m){
 	console.log(chalk.red.bold(m));
 };
 
-exports.breakIfIsLoader = function(){
+exports.breakIfIsLoader = function(_m){
+	var m = _m || '';
 	if(global.cfg.fromFwk){
-		console.logRed('APPFACTORY: it is loader, you need to run the command on project folder or template');
+		console.logRed('APPFACTORY: it is loader, you need to run the command on project folder or template'+ m);
 		exit(1);
 	}
 };
 
-exports.breakIfIsTemplate = function (){
+exports.breakIfAppNotIsRelease = function(_m){
+	var m = _m || '';
+	if(!global.cfg.app.release){
+		console.logRed('APPFACTORY: app should be release'+ m);
+		exit(1);
+	}
+};
+
+exports.breakIfLoaderNotIsRelease = function(_m){
+	var m = _m || '';
+	if(!global.cfg.loader.release){
+		console.logRed('APPFACTORY: app should be release'+ m);
+		exit(1);
+	}
+};
+
+exports.breakIfIsTemplate = function (_m){
+	var m = _m || '';
 	if(global.cfg.isTemplate){
-		console.logRed('APPFACTORY: it is a template');
+		console.logRed('APPFACTORY: it is a template'+ m);
 		exit(1);
 	}
 };
 
-exports.breakIfIsNotTemplate = function (){
+exports.breakIfIsNotTemplate = function (_m){
+	var m = _m || '';
 	if(!global.cfg.isTemplate){
-		console.logRed('APPFACTORY: it is not a template');
+		console.logRed('APPFACTORY: it is not a template'+ m);
 		exit(1);
 	}
 };

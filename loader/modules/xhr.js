@@ -51,9 +51,13 @@ loader.xhr = (function(){
 			requestAllInOne(appConfig.appName + '.json', appConfig).then(loadAppSuccess, loadAppFail);
 			return;
 		}
+		var templatePath = '';
+		if(loader.cfg.folders.template){
+			templatePath = loader.cfg.folders.template + loader.cfg.folders.www;
+		}
+
 		console.info('multiple request!');
-		//var path = '../' + loader.cfg.folders.template + loader.cfg.folders.www + appName + '/';
-		var path = '../' + appConfig.appName + '/';
+		var path = '../' + templatePath + appConfig.appName + '/';
 
 		return requestJson(path + 'www.json', appConfig).then(function(data){
 
@@ -64,8 +68,7 @@ loader.xhr = (function(){
 			for(; i < l; i++){
 				var file = data[i];
 
-				//urls.push('../'+ loader.cfg.folders.template + loader.cfg.folders.www + file);
-				urls.push('../'+ file);
+				urls.push('../'+ templatePath + file);
 			}
 
 			return requestMultipleSync(urls, appConfig).then(loadAppSuccess);

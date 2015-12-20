@@ -227,7 +227,7 @@ describe("preprocessors (css)", function(){
 		expect(test('-e', indexLess + ext)).toBe(true);
 		expect(test('-e', indexStyl + ext)).toBe(true);
 
-		expect(fs.statSync(indexSass + ext).size).toBe(237);
+		expect(fs.statSync(indexSass + ext).size).toBeMoreLess(237,5);
 	});
 
 	it('(13) generate min files with other extension', function(){
@@ -246,7 +246,7 @@ describe("preprocessors (css)", function(){
 		expect(test('-e', indexLess + ext)).toBe(true);
 		expect(test('-e', indexStyl + ext)).toBe(true);
 
-		expect(fs.statSync(indexSass + ext).size).toBe(237);
+		expect(fs.statSync(indexSass + ext).size).toBeMoreLess(237,5);
 	});
 
 	it('(14)should replace pre min', function(){
@@ -327,7 +327,7 @@ describe("preprocessors (css)", function(){
 
 		expect(cat(indexLess + ext)).toContain('border:50em');
 
-		expect(fs.statSync(indexLess + ext).size).toBe(240);
+		expect(fs.statSync(indexLess + ext).size).toBeMoreLess(240,5);
 	});
 
 	it('(17) should minify file', function(){
@@ -340,7 +340,7 @@ describe("preprocessors (css)", function(){
 
 		expect(cat(indexCss + ext)).toContain('border:0}');
 
-		expect(fs.statSync(indexCss + ext).size).toBe(237);
+		expect(fs.statSync(indexCss + ext).size).toBeMoreLess(237,5);
 	});
 
 	it('(18) should minify file because it is a release', function(){
@@ -353,7 +353,7 @@ describe("preprocessors (css)", function(){
 
 		expect(cat(indexSass + ext)).toContain('border:0}');
 
-		expect(fs.statSync(indexSass + ext).size).toBe(237);
+		expect(fs.statSync(indexSass + ext).size).toBeMoreLess(237,5);
 	});
 
 	it('(19) should not process overwrite files - min', function(){
@@ -370,7 +370,7 @@ describe("preprocessors (css)", function(){
 
 		expect(cat(indexScss + ext)).toContain('color:#FF0');
 
-		expect(fs.statSync(indexScss + ext).size).toBe(237);
+		expect(fs.statSync(indexScss + ext).size).toBeMoreLess(237,5);
 	});
 
 	it('(20) should not process overwrited files', function(){
@@ -442,16 +442,16 @@ describe("preprocessors (css)", function(){
 		expect(cat(indexLess + '.less')).toContain('@primaryColor: #00F;');
 		expect(cat(indexLess + '.css')).toContain('color:#00F');
 
-		expect(fs.statSync(indexScss + '.css').size).toBe(237);
+		expect(fs.statSync(indexScss + '.css').size).toBeMoreLess(237,5);
 
-		expect(fs.statSync(indexLess + '.css').size).toBe(237);
+		expect(fs.statSync(indexLess + '.css').size).toBeMoreLess(237,5);
 
 		//complex
 		expect(test('-e', indexCss + '.css')).toBe(true);
 		expect(test('-e', indexCss + '.b.css')).toBe(true);//original backup with other extension
 		expect(test('-e', indexCss + '.m.css')).toBe(true);//minificated with other extension
 
-		expect(fs.statSync(indexCss + '.m.css').size).toBe(238);
+		expect(fs.statSync(indexCss + '.m.css').size).toBeMoreLess(237,5);
 
 		expect(cat(indexCss + '.css')).toContain('color: yellow;');//replace: original
 		expect(cat(indexCss + '.m.css')).toContain('color:blue;');//replace: pre & post min

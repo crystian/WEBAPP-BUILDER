@@ -66,7 +66,7 @@ exports.boot = function(config){
 		//if it is template should use loader on raw mode
 		if(relativePathTo.indexOf('templates\\') === 0){
 			global.cfg.isTemplate = true;
-			global.cfg.pathPrjBuild = '../../'+ global.cfg.app.folders.build + '/';
+			global.cfg.pathPrjBuild = global.cfg.app.folders.build + '/';
 		}
 
 		global.cfg.loader.folders = utils.addSlash(global.cfg.loader.folders);

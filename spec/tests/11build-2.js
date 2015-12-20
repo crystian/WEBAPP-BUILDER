@@ -173,7 +173,7 @@ describe('app.json generation', function(){
 
 		expect(cat(index)).toContain('oneRequest:1');
 
-		expect(fs.statSync(buildFolder +'app.json').size).toBe(813);
+		expect(fs.statSync(buildFolder +'app.json').size).toBeMoreLess(813,10);
 	});
 
 

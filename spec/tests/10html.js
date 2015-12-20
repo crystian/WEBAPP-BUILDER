@@ -118,8 +118,8 @@ describe("preprocessors (html)", function(){
 		expect(test('-e', index + ext)).toBe(true);
 		expect(test('-e', indexJade + ext)).toBe(true);
 
-		expect(fs.statSync(index + ext).size).toBe(286);
-		expect(fs.statSync(indexJade + ext).size).toBe(364);
+		expect(fs.statSync(index + ext).size).toBeMoreLess(286,5);
+		expect(fs.statSync(indexJade + ext).size).toBeMoreLess(364,5);
 	});
 
 	it('(30) should not remove code for production (not release)', function(){
@@ -135,7 +135,7 @@ describe("preprocessors (html)", function(){
 
 		expect(cat(indexJadeHtml)).toContain(keyword);
 
-		expect(fs.statSync(indexJadeHtml).size).toBe(572);
+		expect(fs.statSync(indexJadeHtml).size).toBeMoreLess(572,6);
 	});
 
 	it('(31) should remove code for production (release)', function(){
@@ -151,7 +151,7 @@ describe("preprocessors (html)", function(){
 
 		expect(cat(indexJadeHtml)).not.toContain(keyword);
 
-		expect(fs.statSync(indexJadeHtml).size).toBe(363);
+		expect(fs.statSync(indexJadeHtml).size).toBeMoreLess(363,5);
 	})
 
 });

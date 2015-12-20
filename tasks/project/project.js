@@ -21,6 +21,7 @@
 
 	gulp.task('buildFull', function(cb){
 		utils.breakIfIsLoader();
+		utils.breakIfIsTemplate(', use buildFullDist');
 
 		return runSequence(
 			'buildLoader',

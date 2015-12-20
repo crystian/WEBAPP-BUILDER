@@ -167,9 +167,9 @@ describe("preprocessors (js)", function(){
 		expect(test('-e', indexTs + ext)).toBe(true);
 		expect(test('-e', indexJs + ext)).toBe(true);
 
-		expect(fs.statSync(indexCoffee + ext).size).toBe(74);
-		expect(fs.statSync(indexTs + ext).size).toBe(396);
-		expect(fs.statSync(indexJs + ext).size).toBe(65);
+		expect(fs.statSync(indexCoffee + ext).size).toBeMoreLess(74,4);
+		expect(fs.statSync(indexTs + ext).size).toBeMoreLess(396,5);
+		expect(fs.statSync(indexJs + ext).size).toBeMoreLess(65,4);
 	});
 
 	it('(13) generate min files with other extension', function(){
@@ -186,7 +186,7 @@ describe("preprocessors (js)", function(){
 		expect(test('-e', indexTs + ext)).toBe(true);
 		expect(test('-e', indexJs + ext)).toBe(true);
 
-		expect(fs.statSync(indexJs + ext).size).toBe(65);
+		expect(fs.statSync(indexJs + ext).size).toBeMoreLess(65,4);
 	});
 
 	it('(14) should replace pre min', function(){
@@ -265,7 +265,7 @@ describe("preprocessors (js)", function(){
 
 		expect(cat(indexJsMin)).toContain('var methodReplaced;');
 
-		expect(fs.statSync(indexJsMin).size).toBe(398);
+		expect(fs.statSync(indexJsMin).size).toBeMoreLess(398,5);
 	});
 
 	it('(17) should minify file', function(){
@@ -278,7 +278,7 @@ describe("preprocessors (js)", function(){
 
 		expect(cat(indexJsMin)).toContain('button.onclick=function');
 
-		expect(fs.statSync(indexJsMin).size).toBe(396);
+		expect(fs.statSync(indexJsMin).size).toBeMoreLess(396,5);
 	});
 
 	it('(18) should minify file because it is a release', function(){
@@ -291,7 +291,7 @@ describe("preprocessors (js)", function(){
 
 		expect(cat(indexJsMin)).toContain('button.onclick=function');
 
-		expect(fs.statSync(indexJsMin).size).toBe(396);
+		expect(fs.statSync(indexJsMin).size).toBeMoreLess(396,5);
 	});
 
 	it('(19) should not process overwrite files - min', function(){
@@ -362,7 +362,7 @@ describe("preprocessors (js)", function(){
 
 		expect(cat(indexTsJs)).toContain(keyword);
 
-		expect(fs.statSync(indexTsJs).size).toBe(687);
+		expect(fs.statSync(indexTsJs).size).toBeMoreLess(687,5);
 	});
 
 	it('(31) should remove code for production (release)', function(){
@@ -378,7 +378,7 @@ describe("preprocessors (js)", function(){
 
 		expect(cat(indexTsJs)).not.toContain(keyword);
 
-		expect(fs.statSync(indexTsJs).size).toBe(396);
+		expect(fs.statSync(indexTsJs).size).toBeMoreLess(396,5);
 	});
 
 	it('(90) complex case 1', function(){
@@ -405,9 +405,9 @@ describe("preprocessors (js)", function(){
 		expect(cat(indexCoffee + '.coffee')).toContain('MethodReplaced = (m)');
 		expect(cat(indexCoffee + '.js')).toContain('{Method2Replaced;');
 
-		expect(fs.statSync(indexTs + '2.js').size).toBe(404);
+		expect(fs.statSync(indexTs + '2.js').size).toBeMoreLess(404,5);
 
-		expect(fs.statSync(indexCoffee + '.js').size).toBe(90);
+		expect(fs.statSync(indexCoffee + '.js').size).toBeMoreLess(90,4);
 
 		//complex
 		expect(test('-e', indexJsPrePost + '.js')).toBe(true);
@@ -420,7 +420,7 @@ describe("preprocessors (js)", function(){
 		expect(test('-e', indexJs + '.mm.js')).toBe(true);//minificated with other extension
 		expect(cat(indexJs + '.mm.js')).toContain('public6Method');
 
-		expect(fs.statSync(indexJs + '.mm.js').size).toBe(100);
+		expect(fs.statSync(indexJs + '.mm.js').size).toBeMoreLess(100,5);
 
 		//second app:
 		expect(cat('www/app2/index.min.js')).toContain(keyNotOverw);

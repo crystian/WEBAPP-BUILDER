@@ -31,6 +31,7 @@
 	});
 
 	gulp.task('buildLoaderDist', function(cb){
+		utils.breakIfLoaderNotIsRelease();
 		runSequence(
 			'_buildLoader',
 			gutil.env.debug ? 'nothing' : '_removeTemp',

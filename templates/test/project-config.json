@@ -1,11 +1,12 @@
 {
+	"compress": false,
 	"app": {
 		"name": "template empty",
 		"version": "0.0.1",
 		"release": true,
 		"folders":{
 			"template": "templates/test",
-			"build": "templates/test/build"
+			"build": "build"
 		}
 	},
 	"loader":{

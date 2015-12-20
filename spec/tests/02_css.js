@@ -70,7 +70,7 @@ xdescribe("CSS generation - ", function(){
 
 		expect(exec('gulp _makeCss --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(fs.statSync(cssFile).size).toBe(225);
+		expect(fs.statSync(cssFile).size).toBeMoreLess(225,5);
 	});
 
 	it('(03) should do minificated', function(){
@@ -78,7 +78,7 @@ xdescribe("CSS generation - ", function(){
 
 		expect(exec('gulp _makeCss --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(fs.statSync(cssFile).size).toBe(181);
+		expect(fs.statSync(cssFile).size).toBeMoreLess(181,5);
 	});
 
 	it('(04) should do the autoprefixer - without change', function(){
@@ -104,7 +104,7 @@ xdescribe("CSS generation - ", function(){
 
 		expect(test('-e', compileLoaderCSS)).toBe(true);
 
-		expect(fs.statSync(compileLoaderCSS).size).toBe(3783);
+		expect(fs.statSync(compileLoaderCSS).size).toBeMoreLess(3783,10);
 	});
 
 	it('(06) should make the compile version - with minimize', function(){
@@ -121,7 +121,7 @@ xdescribe("CSS generation - ", function(){
 
 		expect(test('-e', compileLoaderCSS)).toBe(true);
 
-		expect(fs.statSync(compileLoaderCSS).size).toBe(2817);
+		expect(fs.statSync(compileLoaderCSS).size).toBeMoreLess(2817,5);
 	});
 
 
