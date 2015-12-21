@@ -15,8 +15,13 @@ var app = (function() {
 		})
 	}
 
+	function clickMe(){
+		alert('clickMe!');
+	}
+
 	return {
 		init: init,
+		clickMe: clickMe,
 		gotoapp2: gotoapp2
 	};
 }());

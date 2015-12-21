@@ -8,12 +8,7 @@
 	var webserver = require('gulp-webserver'),
 			path      = require('path'),
 			runSequence = require('run-sequence'),
-			utils     = require('./utils'),
-			gutil     = require('gulp-util');
-
-	//gulp.task('_serveNightmare', function(){
-	//	return makeServe(global.cfg.pathFwk +'/'+ global.cfg.loader.folders.build, '', global.cfg.ip, global.cfg.ports.nightmare);
-	//});
+			utils     = require('./utils');
 
 	gulp.task('serveLoader', function(){
 		utils.breakIfIsNotTemplate();

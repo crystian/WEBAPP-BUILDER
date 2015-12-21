@@ -90,29 +90,29 @@ xdescribe("Index template to index - ", function(){
 		expect(indexFileCompiledContent).toContain('if(true){return;}');
 	});
 
-	xit('(03) should non-minificate index.html', function(){
+	it('(03) should non-minificate index.html', function(){
 		cd('03');
 
 		rm('-rf', indexFile);
 		expect(test('-e', indexFile)).toBe(false);
 
-		expect(exec('gulp buildLoaderDist --testMode ' + args, {silent: 0}).code).toBe(0);
+		expect(exec('gulp buildLoaderDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		var build             = utils.readJsonFile(configJson).cfg.app.folders.build,
 				indexFileCompiled = build + index;
 
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
-		expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(156820, 100);
+		expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(67050, 100);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 
 		expect(indexFileCompiledContent).toContain('.testLoader');
 		expect(indexFileCompiledContent).toContain('_loaderCfg');
-		expect(indexFileCompiledContent).toContain('<!--comment for test, do not remove it-->');
+		expect(indexFileCompiledContent).not.toContain('<!--comment for test, do not remove it-->');
 		expect(indexFileCompiledContent.indexOf('<!--')).toBe(0);//header
-		//expect(indexFileCompiledContent).toContain('"oneRequest": true');
-		expect(indexFileCompiledContent).toContain('if(true){return;}');
+		expect(indexFileCompiledContent).toContain('oneRequest:1');
+		expect(indexFileCompiledContent).not.toContain('if(true){return;}');
 	});
 
 	it('(04) should minificate index-cordova.html', function(){

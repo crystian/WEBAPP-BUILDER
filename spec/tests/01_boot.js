@@ -30,7 +30,7 @@ xdescribe("Boot test for the build system of framework (fuaaa) - ", function(){
 	//BOOT
 	it('(01) should send the gulp', function(){
 		cd('01');
-		expect(exec('gulp nothing ' + args, {silent: 1}).code).toBe(1);
+		expect(exec('gulp nothing ' + args, {silent: 1}).code).toBe(2);
 	});
 
 	it("(02) should fill gitVersion field", function(){
@@ -49,7 +49,7 @@ xdescribe("Boot test for the build system of framework (fuaaa) - ", function(){
 
 	it("(04) should fail with incompatible parameters (compress-lz-string)", function(){
 		cd('04');
-		expect(exec('gulp nothing ' + args, {silent: 1}).code).toBe(1);
+		expect(exec('gulp nothing ' + args, {silent: 1}).code).toBe(2);
 	});
 
 
@@ -141,12 +141,12 @@ xdescribe("Boot test for the build system of framework (fuaaa) - ", function(){
 	it("(08) should has the platform component", function(){
 		cd('08');
 
-		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(1);
+		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(2);
 	});
 
 	it("(09) should has the es6-promise component", function(){
 		cd('09');
 
-		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(1);
+		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(2);
 	});
 });

@@ -1,3 +1,4 @@
 {
-	"app": {"name": "test 01-02 config"}
+	"app": {"name": "test 01-02 config"},
+	"setGitVersionOnPackage": true
 }

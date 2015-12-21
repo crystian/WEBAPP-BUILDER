@@ -22,8 +22,8 @@
 	gulp.task('buildLoader', function(cb){
 		utils.breakIfIsRoot();
 		//force not release, and copy the file on www
-		//global.cfg.app.release = false;
-		//global.cfg.loader.release = false;
+		global.cfg.app.release = false;
+		global.cfg.loader.release = false;
 		runSequence(
 			'_buildLoader',
 			gutil.env.debug ? 'nothing' : '_removeTemp',

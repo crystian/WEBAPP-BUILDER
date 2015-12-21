@@ -17,7 +17,7 @@ if(gutil.env.time){
 exports.boot = function(config){
 	if(!config.gulp){
 		console.logRed('REMEMBER you need to send your gulp module with a config object!');
-		utils.exit(1);
+		utils.exit(2);
 	}
 
 	/**
@@ -85,21 +85,21 @@ exports.boot = function(config){
 
 	if(global.cfg.app.release && gutil.env.noMin){
 		console.logRed('APPFACTORY: app.release and argument "noMin" is not compatible');
-		utils.exit(1);
+		utils.exit(2);
 	}
 
 	if(global.cfg.compress && !global.cfg.loader.bower['lz-string']){
 		console.logRed('LOADER: Compress option is active, but library lz-string not present');
-		utils.exit(1);
+		utils.exit(2);
 	}
 	if(!global.cfg.loader.bower['es6-promise'] || !global.cfg.loader.bower['platform']){
 		console.logRed('LOADER: It must use platform and es6-promise, don\'t remove them.');
-		utils.exit(1);
+		utils.exit(2);
 	}
 	//
 
 	//save gitVersion on package.json
-	if(!gutil.env.testMode){
+	if(!gutil.env.testMode && global.cfg.setGitVersionOnPackage){
 		git.long(function(str){
 			global.cfg.pkg.gitVersion = str;
 			fs.writeFileSync(packageJson, JSON.stringify(global.cfg.pkg, null, '\t'), {encoding: 'utf8'});

@@ -16,7 +16,7 @@ var testFolder  = 'spec/fixture/11build',
 		cssFile       = 'www/app2/app2.css',
 		wwwJson       = 'www/app2/www.json';
 
-describe('app.json generation', function(){
+xdescribe('app.json generation', function(){
 
 	beforeEach(function(){
 		cd(testFolder);

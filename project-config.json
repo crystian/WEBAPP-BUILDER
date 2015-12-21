@@ -10,6 +10,8 @@
 		"xapi": 9002
 	},
 
+	"setGitVersionOnPackage": false,
+
 	"autoprefixer": ["ie 10","android 4","chrome 42","ff 27","ios 7","opera 19","safari 7"],
 
 	"xprojectCode": "empty",

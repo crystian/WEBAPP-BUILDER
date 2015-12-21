@@ -125,6 +125,7 @@
 			jsonCloned.test = {
 				server: {
 					path: global.cfg.pathFwk,
+					pathPrj: global.cfg.pathPrj + global.cfg.app.folders.www,
 					pathDist: global.cfg.pathPrj + global.cfg.app.folders.dist,
 					folder: global.cfg.loader.folders.www,
 					folderDist: '/',

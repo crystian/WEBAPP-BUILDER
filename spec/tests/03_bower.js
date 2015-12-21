@@ -26,7 +26,7 @@ xdescribe("Bower dependencies and more - ", function(){
 	//BOOT
 	it('(01) should stop because with compres lz-string is needed', function(){
 		cd('01');
-		expect(exec('gulp generatorBower --testMode ' + args, {silent: 1}).code).toBe(1);
+		expect(exec('gulp generatorBower --testMode ' + args, {silent: 1}).code).toBe(2);
 	});
 
 	it('(02) should be fastclick == null', function(){
