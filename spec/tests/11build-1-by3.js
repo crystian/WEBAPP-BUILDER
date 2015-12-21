@@ -108,7 +108,7 @@
 		process.stdout.write = t;
 	}
 
-	fdescribe('check basic commands for build', function(){
+	describe('check basic commands for build', function(){
 		describe('from root, it', function(){
 			it('should fail because it is not project', function(){
 				expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(2);

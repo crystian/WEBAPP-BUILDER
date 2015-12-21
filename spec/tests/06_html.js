@@ -17,7 +17,7 @@ var testFolder       = 'spec/fixture/06_html',
 		indexFile        = rootFwk + pathLoader + index,
 		indexFileCordova = rootFwk + pathLoader + indexCordova;
 
-xdescribe("Index template to index - ", function(){
+describe("Index template to index - ", function(){
 
 	beforeEach(function(){
 		cd(testFolder);
@@ -65,7 +65,7 @@ xdescribe("Index template to index - ", function(){
 		expect(indexFileCompiledContent).not.toContain('if(true){return;}');
 	});
 
-	it('(02) should minificate index.html', function(){
+	it('(02) should non-minificate index.html', function(){
 		cd('02');
 		var wwwIndex = 'www/index.html';
 
@@ -90,7 +90,7 @@ xdescribe("Index template to index - ", function(){
 		expect(indexFileCompiledContent).toContain('if(true){return;}');
 	});
 
-	it('(03) should non-minificate index.html', function(){
+	it('(03) should minificate index.html', function(){
 		cd('03');
 
 		rm('-rf', indexFile);

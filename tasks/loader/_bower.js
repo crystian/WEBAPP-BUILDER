@@ -33,18 +33,27 @@
 		for(; i < len; i++){
 			var s = global.cfg.varLibsToMin[i];
 
-			gulp.src(global.cfg.pathFwk + s.dev)
-				.pipe(utils.debugeame())
-				.pipe(gif(s.type === 'js', uglify(), minifycss()))
-				.pipe(rename(s.name))
-				.pipe(gulp.dest(global.cfg.pathFwk + s.pa))
-				.on('finish', function(a, b, c){
-					console.logGreen('Minification of ' + global.cfg.varLibsToMin[global.cfg.varLibsToMinI].name + '...');
-					global.cfg.varLibsToMinI++;
-					if(global.cfg.varLibsToMinI === len){
-						cb();
-					}
-				});
+			var fileName = global.cfg.pathFwk + s.pa +'/'+ s.name;
+
+			if(!utils.fileExist(fileName)){
+				gulp.src(global.cfg.pathFwk + s.dev)
+					.pipe(utils.debugeame())
+					.pipe(gif(s.type === 'js', uglify(), minifycss()))
+					.pipe(rename(s.name))
+					.pipe(gulp.dest(global.cfg.pathFwk + s.pa))
+					.on('finish', function(a, b, c){
+						console.logGreen('Minification of ' + global.cfg.varLibsToMin[global.cfg.varLibsToMinI].name + '...');
+						global.cfg.varLibsToMinI++;
+						if(global.cfg.varLibsToMinI === len){
+							cb();
+						}
+					});
+			} else {
+				global.cfg.varLibsToMinI++;
+				if(global.cfg.varLibsToMinI === len){
+					cb();
+				}
+			}
 		}
 	});
 

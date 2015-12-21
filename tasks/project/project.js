@@ -82,26 +82,7 @@
 		return engine.html();
 	});
 
-	//gulp.task('release', function(cb){
-	//	if(!global.cfg.loader.release || !global.cfg.app.release){
-	//		console.logRed('Release mode fail. Set your app and loader on release: true');
-	//		utils.exit(1);
-	//	}
-	//
-	//	//TODO continuar
-	//	runSequence(
-	//		'full:loader',
-	//		'test:loader',
-	//		cb);
-	//});
-
-
 	//require('./cordova.js');
-
-	////building
-	//gulp.task('build:fast', ['runMagic'], function (){
-	//	return magic.runJsonify(global.cfg.folders.www +'/apps.json');
-	//});
 	//
 	//gulp.task('optimizeImages', function (){
 	//	return magic.optimizeImages();

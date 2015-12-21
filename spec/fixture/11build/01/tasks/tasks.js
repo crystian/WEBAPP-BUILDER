@@ -25,6 +25,7 @@ gulp.task('dist', function (cb) {
 
 gulp.task('copyImgs', function (){
 	return gulp.src([
-		global.cfg.app.folders.www +'/app/assets/img/**/*'
+		global.cfg.app.folders.www +'/app/assets/img/**/*',
+		global.cfg.app.folders.www +'/app2/assets/img/**/*'
 	]).pipe(gulp.dest(global.cfg.app.folders.dist +'/img'));
 });

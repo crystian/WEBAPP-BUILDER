@@ -10,7 +10,7 @@
 			"*.scss"
 		],
 		"replaces":{
-			"preMin": [
+			"postMin": [
 				["../templates/test/www/app/assets/", ""]
 			]
 		}

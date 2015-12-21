@@ -261,7 +261,7 @@
 			stream = typeConfig.removeCode(stream);
 		}
 
-		if(genMinFile || global.cfg.app.release){
+		if(genMinFile || global.cfg.isDist){
 			stream = replaces(stream, config.replaces.preMin, fileNameExt);
 
 			if(!gutil.env.noMin){//for debug
