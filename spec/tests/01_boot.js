@@ -52,8 +52,17 @@ xdescribe("Boot test for the build system of framework (fuaaa) - ", function(){
 		expect(exec('gulp nothing ' + args, {silent: 1}).code).toBe(2);
 	});
 
-
 	//CONFIG
+	it("(03) should made release", function(){
+		cd('03');
+
+		expect(exec('gulp _makeConfig --testMode --release ' + args, {silent: 1}).code).toBe(0);
+
+		var readJsonFile = utils.readJsonFile(configJson);
+		expect(readJsonFile.release).toBe(true);
+		expect(readJsonFile.cfg.loader.release).toBe(true);
+	});
+
 	it("(05) should be create the config.js file on loader folder", function(){
 		cd('05');
 		var pathConfig = rootFwk + configjs;

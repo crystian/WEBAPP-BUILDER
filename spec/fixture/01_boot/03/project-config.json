@@ -1,0 +1,10 @@
+{
+	"app": {
+		"name": "test 01-02 config",
+		"release": false
+	},
+	"loader": {
+		"release": false
+	},
+	"setGitVersionOnPackage": true
+}

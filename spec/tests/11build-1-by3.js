@@ -108,7 +108,7 @@
 		process.stdout.write = t;
 	}
 
-	describe('check basic commands for build', function(){
+	fdescribe('check basic commands for build', function(){
 		describe('from root, it', function(){
 			it('should fail because it is not project', function(){
 				expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(2);
@@ -319,7 +319,7 @@
 					//index.html on loader
 					expect(html).not.toBe('<head></head><body></body>');
 					expect(html).toContain('<!--comment for test, do not remove it-->');
-					expect(html).not.toContain('oneRequest');
+					expect(html).not.toContain('oneRequest:!1');
 					end();
 				}, function(err){
 					console.error(err);
@@ -589,8 +589,8 @@
 				).then(function(html){
 					//index.html on loader
 					expect(html).not.toBe('<head></head><body></body>');
-					expect(html).toContain('<!--comment for test, do not remove it-->');
-					expect(html).toContain('"oneRequest": false');
+					expect(html).not.toContain('<!--comment for test, do not remove it-->');
+					expect(html).toContain('oneRequest:!1');
 					end();
 				}, function(err){
 					console.error(err);

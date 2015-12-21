@@ -69,6 +69,13 @@ exports.boot = function(config){
 			global.cfg.pathPrjBuild = global.cfg.app.folders.build + '/';
 		}
 
+		if(gutil.env.release){
+			console.logWarn('*** RELEASE MODE ***');
+
+			global.cfg.loader.release = true;
+			global.cfg.app.release = true;
+		}
+
 		global.cfg.loader.folders = utils.addSlash(global.cfg.loader.folders);
 		global.cfg.app.folders = utils.addSlash(global.cfg.app.folders);
 
@@ -77,11 +84,6 @@ exports.boot = function(config){
 		utils.exit(1);
 	}
 
-	//TODO uncomment
-	//if(global.cfg.app.release && gutil.env.debug){
-	//	console.logRed('APPFACTORY: app.release and argument "debug" is not compatible');
-	//	utils.exit(1);
-	//}
 
 	if(global.cfg.app.release && gutil.env.noMin){
 		console.logRed('APPFACTORY: app.release and argument "noMin" is not compatible');

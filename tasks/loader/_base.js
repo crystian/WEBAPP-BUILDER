@@ -67,9 +67,6 @@
 			text: global.cfg.loader.text
 		};
 
-		//json.name = global.cfg.app.name;
-		//json.release = global.cfg.release;
-		//json.version = global.cfg.version;
 		//json.compress = global.cfg.compress;
 		//json.isCordovaDevice = global.cfg.isCordovaDevice;
 		//json.compatibilityMatrix = global.cfg.compatibilityMatrix;
@@ -77,31 +74,19 @@
 		//json.mixpanel = global.cfg.mixpanel;
 		//json.analytics = global.cfg.analytics;
 		//json.consoleError = global.cfg.consoleError;
-		//json.firstApp = global.cfg.firstApp;
 		//json.fastclick = !!(global.cfg.loader.bower.fastclick);
-		//json.appRoot = '../../templates/'+ global.cfg.projectCode;
-		//json.projectCode = global.cfg.projectCode;
-		//json.www = global.cfg.folders.www;
 		//json.showDeviceInfo = global.cfg.showDeviceInfo;
 		//json.showSkeletor = global.cfg.showSkeletor;
 		//json.contentEditable = global.cfg.contentEditable;
 
 		json.oneRequest = false;//flagOneRequest
-		//json.phantom = false;//flagPhantom
 
-		//json.loader = {
-		//version: global.cfg.loader.version,
-		//release: global.cfg.loader.release,
-		////build: false, ??
-		//text: {
 		//incompatibleByFeatures: global.cfg.loader.text.incompatibleByFeatures,
 		//incompatibleByDiag: global.cfg.loader.text.incompatibleByDiag,
 		//semiIncompatible: global.cfg.loader.text.semiIncompatible,
 		//faqLink: global.cfg.loader.text.faqLink,
 		//errorRequestFile: global.cfg.loader.text.errorRequestFile,
 		//errorTimeoutServer: global.cfg.loader.text.errorTimeoutServer
-		//}
-		//};
 
 		var compatibilityTpl =
 					'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n' +
@@ -121,6 +106,7 @@
 		if(gutil.env.testMode){
 			var jsonCloned = _.clone(json);
 
+			//TODO improve with server and test
 			//just for share data between unit tests
 			jsonCloned.test = {
 				server: {

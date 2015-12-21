@@ -34,7 +34,7 @@
 
 
 	function dist(stream){
-		if(global.cfg.isBuild){
+		if(global.cfg.isDist){
 			stream = stream.pipe(gulp.dest(global.cfg.app.folders.build + global.cfg.app.folders.temp));
 		}
 		return stream;

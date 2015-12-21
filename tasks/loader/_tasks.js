@@ -21,9 +21,7 @@
 
 	gulp.task('buildLoader', function(cb){
 		utils.breakIfIsRoot();
-		//force not release, and copy the file on www
-		global.cfg.app.release = false;
-		global.cfg.loader.release = false;
+
 		runSequence(
 			'_buildLoader',
 			gutil.env.debug ? 'nothing' : '_removeTemp',
@@ -33,7 +31,8 @@
 
 	gulp.task('buildLoaderDist', function(cb){
 		utils.breakIfIsRoot();
-		//utils.breakIfLoaderNotIsRelease();
+		global.cfg.isDist = true;
+
 		runSequence(
 			'_buildLoader',
 			'_copyIndexDist',
@@ -44,6 +43,7 @@
 	gulp.task('_copyIndex', function(cb){
 
 		if(!global.cfg.isTemplate && !global.cfg.fromFwk){
+
 			//if not template, copy index on www folder
 			var indexOri  = global.cfg.pathPrj + global.cfg.app.folders.build + global.cfg.loader.filesDest.index,
 					indexDest = global.cfg.pathPrj + global.cfg.app.folders.www + global.cfg.loader.filesDest.index;

@@ -46,9 +46,8 @@
 
 	gulp.task('buildProjectDist', function(cb){
 		utils.breakIfIsRoot();
-		utils.breakIfAppNotIsRelease();
 
-		global.cfg.isBuild = true;
+		global.cfg.isDist = true;
 
 		return runSequence(
 			'makeWwwJson',
