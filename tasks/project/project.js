@@ -20,9 +20,6 @@
 	gulp.task('removeTemp', ['_removeTemp']);
 
 	gulp.task('buildFull', function(cb){
-		utils.breakIfIsLoader();
-		utils.breakIfIsTemplate(', use buildFullDist');
-
 		return runSequence(
 			'buildLoader',
 			'buildProject',
@@ -30,25 +27,32 @@
 	});
 
 	gulp.task('buildFullDist', function(cb){
-		utils.breakIfIsLoader();
-
 		return runSequence(
 			'buildLoaderDist',
 			'buildProjectDist',
-			'makeJsons',
 			gutil.env.debug ? 'nothing' : 'removeTemp',
 			cb);
 	});
 
-	gulp.task('buildProject', ['makeWwwJson'], function(){
-		utils.breakIfIsLoader();
+	gulp.task('buildProject', function(cb){
+		utils.breakIfIsRoot();
+
+		//global.cfg.app.release = false;
+
+		runSequence(
+			'makeWwwJson',
+			cb);
 	});
 
 	gulp.task('buildProjectDist', function(cb){
+		utils.breakIfIsRoot();
+		utils.breakIfAppNotIsRelease();
+
 		global.cfg.isBuild = true;
 
 		return runSequence(
-			'buildProject',
+			'makeWwwJson',
+			'makeAppsJson',
 			cb);
 	});
 
@@ -56,8 +60,8 @@
 		return engine.makeWwwJson();
 	});
 
-	gulp.task('makeJsons', [], function(){
-		return engine.makeJsons();
+	gulp.task('makeAppsJson', [], function(){
+		return engine.makeAppsJson();
 	});
 
 	gulp.task('watch', function(){

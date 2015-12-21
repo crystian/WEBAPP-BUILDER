@@ -7,7 +7,12 @@ var app = (function() {
 		loader.hide();
 	}
 
+	function clickMe(){
+		alert('clickMe!');
+	}
+
 	return {
+		clickMe: clickMe,
 		init: init
 	};
 }());

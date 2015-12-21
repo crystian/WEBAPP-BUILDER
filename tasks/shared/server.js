@@ -18,18 +18,17 @@
 	gulp.task('serveLoader', function(){
 		utils.breakIfIsNotTemplate();
 
-		return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.serve);
+		return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.server);
 	});
 
-	gulp.task('serveBuild', function(){
-		utils.breakIfIsLoader();
+	gulp.task('serveDist', function(){
+		utils.breakIfIsRoot();
 
-		var pathPrj = global.cfg.isTemplate ? '../../' : global.cfg.pathPrj;
-		return makeServe(pathPrj + global.cfg.app.folders.build, '/', global.cfg.ip, global.cfg.ports.build);
+		return makeServe(global.cfg.pathPrj + global.cfg.app.folders.dist, '/', global.cfg.ip, global.cfg.ports.dist);
 	});
 
 	gulp.task('serveProject', function(){
-		utils.breakIfIsLoader();
+		utils.breakIfIsRoot();
 		utils.breakIfIsTemplate();
 
 		return makeServe(global.cfg.pathPrj + global.cfg.app.folders.www, '/', global.cfg.ip, global.cfg.ports.project);

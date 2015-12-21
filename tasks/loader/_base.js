@@ -120,6 +120,19 @@
 
 		if(gutil.env.testMode){
 			var jsonCloned = _.clone(json);
+
+			//just for share data between unit tests
+			jsonCloned.test = {
+				server: {
+					path: global.cfg.pathFwk,
+					pathDist: global.cfg.pathPrj + global.cfg.app.folders.dist,
+					folder: global.cfg.loader.folders.www,
+					folderDist: '/',
+					ip: global.cfg.ip,
+					ports: global.cfg.ports
+				}
+			};
+
 			jsonCloned.cfg = global.cfg;
 
 			fs.writeFile('./config.json',

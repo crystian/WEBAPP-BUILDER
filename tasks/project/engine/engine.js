@@ -16,8 +16,8 @@
 		return core.getFilesByGroupAndApps(www.makeWwwJson, www.resolveFiles);
 	};
 
-	exports.makeJsons = function(){
-		return core.makeJsons();
+	exports.makeAppsJson = function(){
+		return core.makeAppsJson();
 	};
 
 	exports.css = function(){

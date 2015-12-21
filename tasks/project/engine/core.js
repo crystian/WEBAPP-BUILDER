@@ -316,7 +316,7 @@
 		return stream;
 	}
 
-	function makeJsons(){
+	function makeAppsJson(){
 		var pth  = global.cfg.pathPrj + global.cfg.app.folders.www,
 				apps = require(pth + appsJson);
 
@@ -342,8 +342,8 @@
 			files = LZString.compressToUTF16(files);
 			console.logGreen(appName + ' compressed!');
 		}
-
-		fs.writeFileSync(global.cfg.app.folders.build + '/' + appName + '.json', files);
+		fs.mkdirsSync(global.cfg.app.folders.dist);
+		fs.writeFileSync(global.cfg.app.folders.dist + '/' + appName + '.json', files);
 
 		console.logGreen(appName + ' generated!');
 	}
@@ -363,7 +363,7 @@
 	exports.getFilesByGroup = getFilesByGroup;
 	exports.doMagic = doMagic;
 	exports.modifyOriginal = modifyOriginal;
-	exports.makeJsons = makeJsons;
+	exports.makeAppsJson = makeAppsJson;
 	exports.replaces = replaces;
 	exports.defaults = defaults;
 

@@ -59,7 +59,7 @@ xdescribe("Index template to index - ", function(){
 
 		expect(indexFileCompiledContent).toContain('.testLoader');
 		expect(indexFileCompiledContent).toContain('_loaderCfg');
-		expect(indexFileCompiledContent).not.toContain('<!--comment for test, don\'t remove it-->');
+		expect(indexFileCompiledContent).not.toContain('<!--comment for test, do not remove it-->');
 		expect(indexFileCompiledContent.indexOf('<!--')).toBe(0);//header
 		expect(indexFileCompiledContent).toContain('oneRequest:1');
 		expect(indexFileCompiledContent).not.toContain('if(true){return;}');
@@ -84,7 +84,7 @@ xdescribe("Index template to index - ", function(){
 
 		expect(indexFileCompiledContent).toContain('.testLoader');
 		expect(indexFileCompiledContent).toContain('_loaderCfg');
-		expect(indexFileCompiledContent).toContain('<!--comment for test, don\'t remove it-->');
+		expect(indexFileCompiledContent).toContain('<!--comment for test, do not remove it-->');
 		expect(indexFileCompiledContent.indexOf('<!--')).toBe(0);//header
 		expect(indexFileCompiledContent).toContain('"oneRequest": false');
 		expect(indexFileCompiledContent).toContain('if(true){return;}');
@@ -109,7 +109,7 @@ xdescribe("Index template to index - ", function(){
 
 		expect(indexFileCompiledContent).toContain('.testLoader');
 		expect(indexFileCompiledContent).toContain('_loaderCfg');
-		expect(indexFileCompiledContent).toContain('<!--comment for test, don\'t remove it-->');
+		expect(indexFileCompiledContent).toContain('<!--comment for test, do not remove it-->');
 		expect(indexFileCompiledContent.indexOf('<!--')).toBe(0);//header
 		//expect(indexFileCompiledContent).toContain('"oneRequest": true');
 		expect(indexFileCompiledContent).toContain('if(true){return;}');

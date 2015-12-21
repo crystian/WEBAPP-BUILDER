@@ -3,9 +3,9 @@
 	"ip": "127.0.0.1",
 	"compress": false,
 	"ports": {
-		"serve": 9000,
+		"server": 9000,
 		"project": 9001,
-		"build": 9002,
+		"dist": 9002,
 		"xnightmare": 9003,
 		"xapi": 9002
 	},
@@ -39,6 +39,7 @@
 		"folders": {
 			"www": "www",
 			"build": "build",
+			"dist": "dist",
 			"temp": ".tmp",
 			"xcordova": "CORDOVA",
 			"xcordovaWWW": "CORDOVA/www",

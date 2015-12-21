@@ -20,21 +20,24 @@
 	gulp.task('nothing', []);
 
 	gulp.task('buildLoader', function(cb){
+		utils.breakIfIsRoot();
 		//force not release, and copy the file on www
-		global.cfg.app.release = false;
-		global.cfg.loader.release = false;
+		//global.cfg.app.release = false;
+		//global.cfg.loader.release = false;
 		runSequence(
-				'_buildLoader',
-				gutil.env.debug ? 'nothing' : '_removeTemp',
+			'_buildLoader',
+			gutil.env.debug ? 'nothing' : '_removeTemp',
 			'_copyIndex',
 			cb);
 	});
 
 	gulp.task('buildLoaderDist', function(cb){
-		utils.breakIfLoaderNotIsRelease();
+		utils.breakIfIsRoot();
+		//utils.breakIfLoaderNotIsRelease();
 		runSequence(
 			'_buildLoader',
-			gutil.env.debug ? 'nothing' : '_removeTemp',
+			'_copyIndexDist',
+			gutil.env.debug ? 'nothing' : '_removeBuild',
 			cb);
 	});
 
@@ -55,6 +58,20 @@
 		} else {
 			cb();
 		}
+
+	});
+
+	gulp.task('_copyIndexDist', function(cb){
+		var indexOri  = global.cfg.pathPrj + global.cfg.app.folders.build + global.cfg.loader.filesDest.index,
+				indexDest = global.cfg.pathPrj + global.cfg.app.folders.dist + global.cfg.loader.filesDest.index;
+
+		if(!utils.fileExist(indexOri)){
+			console.logRed('APPFACTORY: what?, there are some problem generating index.html');
+			utils.exit(1);
+		}
+
+		fs.copySync(indexOri, indexDest);
+		cb();
 
 	});
 

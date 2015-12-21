@@ -1,165 +1,430 @@
 /**
  * Created by Crystian on 02/12/2015.
  */
+(function(){
+	'use strict';
 
-var utils = require('../../tasks/shared/utils'),
-		fs    = require('fs');
+	var utils     = require('../../tasks/shared/utils'),
+			Nightmare = require('nightmare'),
+			Promise   = require('q').Promise,
+			gutil     = require('gulp-util'),
+			fs        = require('fs');
 
-var args = process.argv.slice(2).join(' ');
-require('shelljs/global');
+	var args = process.argv.slice(2).join(' ');
+	require('shelljs/global');
 
-var testFolder  = 'spec/fixture/11build',
-		rootFwk     = '../../../..',
-		buildFolder = 'build',
-		wwwIndex    = 'www/index.html',
-		index       = buildFolder + '/index.html';
+	var testFolder          = 'spec/fixture/11build',
+			templateFolder      = 'templates/test',
+			rootFwk             = '../../../../',
+			rootFwkFromTemplate = '../../',
+			buildFolder         = 'build/',
+			tempFolder          = 'temp/',
+			distFolder          = 'dist/',
+			distAppJson         = distFolder + 'app.json',
+			wwwIndex            = 'www/index.html',
+			index               = buildFolder + 'index.html',
+			indexDist           = distFolder + 'index.html',
+			loaderCss           = rootFwkFromTemplate + 'loader/css/loader.css',
+			configJs            = rootFwkFromTemplate + 'loader/config.js',
+			indexHtml           = rootFwkFromTemplate + 'loader/index.html',
+			appCss              = 'www/app/app.css',
+			wwwJson             = 'www/app/www.json',
+			configJson          = 'config.json',
+			t;
 
-describe('check basic commands for build', function(){
+	var projectConfig = {
+		"compress": false,
+		"app": {
+			"name": "template empty",
+			"version": "0.0.1",
+			"release": true,
+			"folders": {
+				"template": "templates/test",
+				"temp": "temp",
+				"build": "build"
+			}
+		},
+		"loader": {
+			"release": true
+		}
+	};
 
-	describe('from project', function(){
+	var nightmare = Nightmare({
+		timeout: 500,
+		show: false,
+		width: 1024,
+		height: 768
+	});
 
-		beforeEach(function(){
-			cd(testFolder);
+	function saveConfig(_projectConfig, _dest){
+		var dest = _dest || '';
+		JSON.stringify(_projectConfig, null, '\t').to(dest + 'project-config.json');
+	}
+
+	function removeTempFiles(){
+		rm('-rf', buildFolder);
+		rm('-rf', distFolder);
+		rm('-rf', loaderCss);
+		rm('-rf', configJs);
+		rm('-rf', indexHtml);
+		rm('-rf', configJson);
+		rm('-rf', appCss);
+		rm('-rf', wwwJson);
+
+		expect(test('-e', buildFolder)).toBe(false);
+		expect(test('-e', distFolder)).toBe(false);
+		expect(test('-e', loaderCss)).toBe(false);
+		expect(test('-e', configJs)).toBe(false);
+		expect(test('-e', indexHtml)).toBe(false);
+		expect(test('-e', configJson)).toBe(false);
+		expect(test('-e', appCss)).toBe(false);
+		expect(test('-e', wwwJson)).toBe(false);
+	}
+
+	function removeStdout(){
+		t = process.stdout.write;
+		process.stdout.write = function(chunk){
+			if(chunk.indexOf('Error') !== -1){
+				t.apply(this, arguments);
+			}
+		};
+		return t;
+	}
+
+	function restoreStdout(){
+		process.stdout.write = t;
+	}
+
+	fdescribe('check basic commands for build', function(){
+		describe('from root, it', function(){
+			it('should fail because it is not project', function(){
+				expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(2);
+			});
+
+			it('should fail because it is not project', function(){
+				expect(exec('gulp buildProject --testMode ' + args, {silent: 1}).code).toBe(2);
+			});
+
+			it('should fail because it is not project', function(){
+				expect(exec('gulp buildFull --testMode ' + args, {silent: 1}).code).toBe(2);
+			});
+
+			it('should fail because it is not project', function(){
+				expect(exec('gulp buildLoaderDist --testMode ' + args, {silent: 1}).code).toBe(2);
+			});
+
+			it('should fail because it is not project', function(){
+				expect(exec('gulp buildProjectDist --testMode ' + args, {silent: 1}).code).toBe(2);
+			});
+
+			it('should fail because it is not project', function(){
+				expect(exec('gulp buildFullDist --testMode ' + args, {silent: 1}).code).toBe(2);
+			});
+
+			it('should fail because it is root', function(){
+				expect(exec('gulp serve --testMode ' + args, {silent: 1}).code).toBe(2);
+			});
+
+			it('should fail because it is root', function(){
+				expect(exec('gulp serveLoader --testMode ' + args, {silent: 1}).code).toBe(2);
+			});
+
+			it('should fail because it is not project', function(){
+				expect(exec('gulp serveDist --testMode ' + args, {silent: 1}).code).toBe(2);
+			});
+
 		});
-		afterEach(function(){
-			cd(rootFwk);
+
+		describe("from template, it", function(){
+
+			beforeEach(function(){
+				cd(templateFolder);
+			});
+			afterEach(function(){
+				cd(rootFwkFromTemplate);
+			});
+
+			it('should build loader files', function(){
+				saveConfig(projectConfig);
+				removeTempFiles();
+
+				expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
+
+				expect(test('-e', buildFolder)).toBe(true);
+				expect(test('-e', loaderCss)).toBe(true);
+				expect(test('-e', configJs)).toBe(true);
+				expect(test('-e', indexHtml)).toBe(true);
+				expect(test('-e', configJson)).toBe(true);
+				expect(test('-e', appCss)).toBe(false);
+				expect(test('-e', wwwJson)).toBe(false);
+
+			});
+
+			it('should build project files', function(){
+				saveConfig(projectConfig);
+				removeTempFiles();
+
+				expect(exec('gulp buildProject --testMode ' + args, {silent: 1}).code).toBe(0);
+
+				expect(test('-e', buildFolder)).toBe(false);
+				expect(test('-e', loaderCss)).toBe(false);
+				expect(test('-e', configJs)).toBe(false);
+				expect(test('-e', indexHtml)).toBe(false);
+				expect(test('-e', configJson)).toBe(false);
+				expect(test('-e', appCss)).toBe(true);
+				expect(test('-e', wwwJson)).toBe(true);
+
+			});
+
+			it('should build project and loader files', function(){
+				saveConfig(projectConfig);
+				removeTempFiles();
+
+				expect(exec('gulp buildFull --testMode ' + args, {silent: 1}).code).toBe(0);
+
+				expect(test('-e', buildFolder)).toBe(true);
+				expect(test('-e', loaderCss)).toBe(true);
+				expect(test('-e', configJs)).toBe(true);
+				expect(test('-e', indexHtml)).toBe(true);
+				expect(test('-e', configJson)).toBe(true);
+				expect(test('-e', appCss)).toBe(true);
+				expect(test('-e', wwwJson)).toBe(true);
+
+			});
+
+			it('should make dist files (without debug parameter)', function(){
+				saveConfig(projectConfig);
+				removeTempFiles();
+
+				expect(exec('gulp buildLoaderDist --testMode', {silent: 1}).code).toBe(0);
+
+				expect(test('-e', buildFolder)).toBe(false);
+				expect(test('-e', distFolder)).toBe(true);
+				expect(test('-e', loaderCss)).toBe(true);
+				expect(test('-e', configJs)).toBe(true);
+				expect(test('-e', indexHtml)).toBe(true);
+				expect(test('-e', configJson)).toBe(true);
+				expect(test('-e', appCss)).toBe(false);
+				expect(test('-e', wwwJson)).toBe(false);
+				expect(test('-e', indexDist)).toBe(true);
+
+				expect(cat(indexDist)).toContain('oneRequest:1');
+				expect(fs.statSync(indexDist).size).toBeMoreLess(67078, 100);
+
+			});
+
+			it('should make dist files (debug)', function(){
+				saveConfig(projectConfig);
+				removeTempFiles();
+
+				//just for debug test
+				expect(exec('gulp buildLoaderDist --testMode --debug', {silent: 1}).code).toBe(0);
+				expect(test('-e', buildFolder)).toBe(true);
+				expect(test('-e', buildFolder + tempFolder)).toBe(true);
+				expect(test('-e', distFolder)).toBe(true);
+			});
+
+			it('should make project files on dist', function(){
+				saveConfig(projectConfig);
+				removeTempFiles();
+
+				expect(exec('gulp buildProjectDist --testMode --debug', {silent: 1}).code).toBe(0);
+
+				expect(test('-e', buildFolder)).toBe(true);
+				expect(test('-e', buildFolder + tempFolder)).toBe(true);
+				expect(test('-e', buildFolder + tempFolder + '/app.css')).toBe(true);
+				expect(test('-e', buildFolder + tempFolder + 'app.html')).toBe(true);
+				expect(test('-e', buildFolder + tempFolder + 'app.js')).toBe(true);
+				expect(test('-e', distFolder)).toBe(true);
+				expect(test('-e', distAppJson)).toBe(true);
+				expect(test('-e', loaderCss)).toBe(false);
+				expect(test('-e', configJs)).toBe(false);
+				expect(test('-e', indexHtml)).toBe(false);
+				expect(test('-e', configJson)).toBe(false);
+				expect(test('-e', appCss)).toBe(true);
+				expect(test('-e', wwwJson)).toBe(true);
+
+				expect(fs.statSync(distAppJson).size).toBeMoreLess(689, 10);
+
+			});
+
+			it('should make project and loader files on dist', function(){
+				saveConfig(projectConfig);
+				removeTempFiles();
+
+				expect(exec('gulp buildFullDist --testMode --debug', {silent: 1}).code).toBe(0);
+
+				expect(test('-e', buildFolder)).toBe(true);
+				expect(test('-e', buildFolder + tempFolder)).toBe(true);
+				expect(test('-e', buildFolder + tempFolder + 'app.css')).toBe(true);
+				expect(test('-e', buildFolder + tempFolder + 'app.html')).toBe(true);
+				expect(test('-e', buildFolder + tempFolder + 'app.js')).toBe(true);
+				expect(test('-e', distFolder)).toBe(true);
+				expect(test('-e', distAppJson)).toBe(true);
+				expect(test('-e', loaderCss)).toBe(true);
+				expect(test('-e', configJs)).toBe(true);
+				expect(test('-e', indexHtml)).toBe(true);
+				expect(test('-e', configJson)).toBe(true);
+				expect(test('-e', appCss)).toBe(true);
+				expect(test('-e', wwwJson)).toBe(true);
+
+				expect(fs.statSync(distAppJson).size).toBeMoreLess(689, 10);
+
+			});
+
+			it('should start the server on loader folder', function(done){
+				saveConfig(projectConfig);
+				removeTempFiles();
+
+				//DON'T REMOVE --testMode!
+				expect(exec('gulp buildFull --testMode ' + args, {silent: 1}).code).toBe(0);
+
+				//I didn't found another way to do this test, it is "serveLoader" task
+				var configJsonFile = utils.readJsonFile(configJson),
+						test           = configJsonFile.test.server;
+
+				global.gulp = require('gulp');
+
+				//temporal remove output
+				removeStdout();
+
+				var server      = require('../../tasks/shared/server.js'),
+						streamServe = server.makeServe(test.path, test.folder, test.ip, test.ports.server);
+
+				Promise.resolve(nightmare
+					.goto('http://' + test.ip + ':' + test.ports.server + '/loader')
+					.on('page', function(type, message){
+						expect(type).toBe('alert');
+						expect(message).toBe('clickMe!');
+					})
+					.wait('#clickme')
+					.click('#clickme')
+					.evaluate(function(){
+						return document.getElementsByTagName('html')[0].innerHTML;
+					})
+				).then(function(html){
+					//index.html on loader
+					expect(html).not.toBe('<head></head><body></body>');
+					expect(html).toContain('<!--comment for test, do not remove it-->');
+					expect(html).not.toContain('oneRequest');
+					end();
+				}, function(err){
+					console.error(err);
+					end();
+				});
+
+				function end(){
+					//output returned
+					restoreStdout();
+
+					//kill the web server
+					streamServe.emit('kill');
+
+					global.gulp = null;
+					//finish it
+					done();
+				}
+			});
+
+			it('should start the server on dist folder', function(done){
+				saveConfig(projectConfig);
+				removeTempFiles();
+
+				//DON'T REMOVE --testMode!
+				expect(exec('gulp buildFullDist --testMode ' + args, {silent: 1}).code).toBe(0);
+
+				//I didn't found another way to do this test, it is "serveLoader" task
+				var configJsonFile = utils.readJsonFile(configJson),
+						test           = configJsonFile.test.server;
+
+				global.gulp = require('gulp');
+
+				//temporal remove output
+				removeStdout();
+
+				var server      = require('../../tasks/shared/server.js'),
+						streamServe = server.makeServe(test.pathDist, test.folderDist, test.ip, test.ports.dist);
+
+
+				Promise.resolve(nightmare
+					.goto('http://' + test.ip + ':' + test.ports.dist)
+					.on('page', function(type, message){
+						expect(type).toBe('alert');
+						expect(message).toBe('clickMe!');
+					})
+					.wait('#clickme')
+					.click('#clickme')
+					.evaluate(function(){
+						return document.getElementsByTagName('html')[0].innerHTML;
+					})
+					//.end()
+				).then(function(html){
+					//index.html on loader
+					expect(html).not.toBe('<head></head><body></body>');
+					expect(html).not.toContain('<!--comment for test, do not remove it-->');
+					expect(html).toContain('oneRequest:1');
+					end();
+				}, function(err){
+					console.error(err);
+					end();
+				});
+
+				function end(){
+					//output returned
+					restoreStdout();
+
+					//kill the web server
+					streamServe.emit('kill');
+
+					global.gulp = null;
+					//finish it
+					done();
+				}
+			});
+
 		});
 
-		it('should create build folder and index.html', function(){
-			cd('01');
+		xdescribe('from project', function(){
 
-			rm('-rf', buildFolder);
-			rm('-rf', wwwIndex);
-			expect(test('-e', buildFolder)).toBe(false);
-			expect(test('-e', wwwIndex)).toBe(false);
+			beforeEach(function(){
+				cd(testFolder);
+			});
+			afterEach(function(){
+				cd(rootFwk);
+			});
 
-			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
+			it('should create build folder and index.html', function(){
+				cd('01');
 
-			expect(test('-e', buildFolder)).toBe(true);
-			expect(test('-e', wwwIndex)).toBe(true);
+				rm('-rf', buildFolder);
+				rm('-rf', wwwIndex);
+				expect(test('-e', buildFolder)).toBe(false);
+				expect(test('-e', wwwIndex)).toBe(false);
 
-			expect(cat(wwwIndex)).toContain('"oneRequest": false');
-		});
+				expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		it('should fail because it is project', function(){
-			cd('01');
+				expect(test('-e', buildFolder)).toBe(true);
+				expect(test('-e', wwwIndex)).toBe(true);
 
-			rm('-rf', buildFolder);
-			rm('-rf', wwwIndex);
+				expect(cat(wwwIndex)).toContain('"oneRequest": false');
+			});
 
-			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
-			expect(exec('gulp serveLoader --testMode ' + args, {silent: 1}).code).toBe(1);
+			it('should fail because it is project', function(){
+				cd('01');
+
+				rm('-rf', buildFolder);
+				rm('-rf', wwwIndex);
+
+				expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
+				expect(exec('gulp serveLoader --testMode ' + args, {silent: 1}).code).toBe(1);
+
+			});
 
 		});
 
 	});
 
-	describe('from root', function(){
+}());
 
-		it('should create index and has oneRequest:!1', function(){
-			rm('-rf', buildFolder);
-			expect(test('-e', buildFolder)).toBe(false);
 
-			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
-			rm('-rf', 'config.json');
 
-			expect(test('-e', buildFolder)).toBe(true);
-
-			expect(cat(index)).toContain('"oneRequest": false');
-		});
-
-		it('should create index and has oneRequest:1', function(){
-			rm('-rf', buildFolder);
-			expect(test('-e', buildFolder)).toBe(false);
-
-			expect(exec('gulp buildLoaderDist --testMode ' + args, {silent: 1}).code).toBe(0);
-			rm('-rf', 'config.json');
-
-			expect(test('-e', buildFolder)).toBe(true);
-
-			expect(cat(index)).toContain('oneRequest:1');
-		});
-
-		it('should fail because it is from root', function(){
-			rm('-rf', buildFolder);
-			expect(test('-e', buildFolder)).toBe(false);
-
-			expect(exec('gulp buildProject --testMode ' + args, {silent: 1}).code).toBe(1);
-		});
-
-		it('should fail because it is root', function(){
-			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
-			expect(exec('gulp serveLoader --testMode ' + args, {silent: 1}).code).toBe(1);
-
-			rm('-rf', buildFolder);
-			rm('-rf', 'config.json');
-		});
-
-		it('should fail because it is not project', function(){
-
-			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
-			expect(exec('gulp serveProject --testMode ' + args, {silent: 1}).code).toBe(1);
-
-		});
-
-		it('should fail because it is not project', function(){
-
-			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
-			expect(exec('gulp serveBuild --testMode ' + args, {silent: 1}).code).toBe(1);
-
-		});
-	});
-
-	describe("from template", function(){
-
-		it('should make index file', function(){
-
-			rm('-rf', buildFolder);
-			expect(test('-e', buildFolder)).toBe(false);
-
-			cd('templates/test');
-
-			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
-
-			expect(test('-e', buildFolder)).toBe(true);
-
-			expect(cat(index)).toContain('"oneRequest": false');
-
-			cd('../../');
-
-			expect(test('-e', buildFolder)).toBe(false);
-
-		});
-
-		it('should make index file (dist)', function(){
-
-			rm('-rf', buildFolder);
-			expect(test('-e', buildFolder)).toBe(false);
-
-			cd('templates/test');
-
-			expect(exec('gulp buildLoaderDist --testMode ' + args, {silent: 1}).code).toBe(0);
-
-			expect(test('-e', buildFolder)).toBe(true);
-
-			expect(cat(index)).toContain('oneRequest:1');
-
-			cd('../../');
-
-			expect(test('-e', buildFolder)).toBe(false);
-
-		});
-
-		it('should fail because it is template', function(){
-
-			cd('templates/test');
-
-			expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(0);
-			expect(exec('gulp serveProject --testMode ' + args, {silent: 1}).code).toBe(1);
-
-			cd('../../');
-		});
-
-	});
-
-});
