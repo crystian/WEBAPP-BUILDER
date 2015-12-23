@@ -10,38 +10,28 @@ tener en cuenta que si usas el patron glob para una app con dos grupos, si uno d
 
 ## TL;DR Version:
 
-Este framework te permite ahorrar incontable cantidad de horas en la automatizacion y bootstrap de una nueva web app.
+Este framework te permite ahorrar incontable cantidad de horas en la automatizacion y bootstrap de una nueva web app/SPA.
 
 ### Features:
 
 * **Todo el codigo de la app termina en un unico archivo por app!**, yes just a request!
-* UsaTodo ocupa menos 50k (con todas las libs), mientras baja el archivo y siguientes queda mostrandose un lindo loading
+* Genera un **loader** que ocupa menos 50k (con todas las libs base)
+* Mientras baja las apps muestra un bonito loading (7 opciones, pure CSS)
+* LIBS precargadas en el loader: platform (requerida); opcionales: fastClick, jquery, lz-string
+* El archivo final por cada app puede estar comprimido (by lz-string)
+* Preprocessors (included):
+  * CSS: Sass, Less, Stylus;
+  * JS: TypeScript, CoffeScript;
+  * HTML: Jade
+* Deteccion de browser y compatibilidad (seteable via browser y version)
+* Generacion de sprites automaticamente.
+* Preparado para [cordova](http://).
+* Minificado de librerias que no lo esten.
+* Agregado automatico de cada archivo nuevo en el projecto (script/link), tanto en modo **dev** como **dist**.
+* Modo **release** para minificar y ocultar info.
+* Otros modulos: Analytics, deteccion de languages, appcache, muchos mas.
 
-* El archivo final por cada app puede estar comprimido (con lz-string)
-* Deteccion de browser (platform) y compatibiliades
-* Generacion de sprites automaticamente
-* Preparado y listo para cordova
-* Autominificado de librerias que no lo contengan
-* Posibilidad de contener varios projectos y dentro de cada uno multiples apps (SPA)
-* Sin agregar cada archivo nuevo en los htmls (script/link)
-* Posibilidad de hacer y seleccionar distintos loading (CSS)
-* LIBS precargadas: platform (requerida), fastClick, jquery, lz-string (opcionales)
-* Modo release y absolutamente minificado para ocultar info y otros
-
-* Sistema de filtrado de compatibilidades
-
-* Preparado como proyecto independiente (opcional) y actualizable
-
-* Otros modulos: Analytics, loading screens, deteccion de languages, appcache, otros.
-
-* Archivo de configuracion de includes
-* Configuracion independiente y hererable
-* Sistema de deploy con proyecto template
-* Test de UserAgent y compatibilidades
-* Mecanismo de update de versiones
-
-
-Este framework es totalmente "opinated" (o mas aun: "dictatorial"), el motivo es simple, si lo haces como el framework te propone vas a poder de disfrutar de sus features sin perder tiempo en cosas mas "triviales".
+Este framework es totalmente "opinated", el motivo es simple, si lo haces como el framework te propone vas a poder de disfrutar de sus features sin perder tiempo en cosas mas "triviales", solo te vas a dedicar a codear tu webapp/SPA!
 
 --
 
