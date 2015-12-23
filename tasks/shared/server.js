@@ -10,7 +10,7 @@
 			runSequence = require('run-sequence'),
 			utils     = require('./utils');
 
-	gulp.task('serveLoader', ['buildFull'], function(){
+	gulp.task('serveLoader', ['buildLoader'], function(){
 		utils.breakIfIsNotTemplate();
 
 		return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.server);
@@ -22,7 +22,7 @@
 		return makeServe(global.cfg.pathPrj + global.cfg.app.folders.dist, '/', global.cfg.ip, global.cfg.ports.dist);
 	});
 
-	gulp.task('serveProject', ['buildFull'], function(){
+	gulp.task('serveProject', function(){
 		utils.breakIfIsRoot();
 		utils.breakIfIsTemplate();
 
@@ -40,7 +40,6 @@
 	});
 
 	function makeServe(folder, _path, ip, port){
-		//_path = (_path) ? _path : '';
 		console.logGreen('Remember, this is the url: http://' + ip + ':' + port + '/' + _path);
 		console.log('Serving: ', path.resolve(folder));
 

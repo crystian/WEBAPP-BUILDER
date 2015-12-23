@@ -1,16 +1,10 @@
-cache para apps previamente cargadas
-modificar orignal no preoducto cuando es tiene replaces.original
-gutil.env.noMin  time
-coliciones de nombres de productos
-tener en cuenta que si usas el patron glob para una app con dos grupos, si uno de ellos crea un backup, el otro lo puede estar leyendo, debes ignorarlo con "!"
----
 # WEBAPP BUILDER!
 
 [Español](http://), [English](http://)
 
 ## TL;DR Version:
 
-Este framework te permite ahorrar incontable cantidad de horas en la automatizacion y bootstrap de una nueva web app/SPA.
+Este framework te permite ahorrar incontable cantidad de horas en la automatizacion y bootstrap de una nueva [web app](https://en.wikipedia.org/wiki/Web_application)/SPA (Single Page Application).
 
 ### Features:
 
@@ -20,32 +14,31 @@ Este framework te permite ahorrar incontable cantidad de horas en la automatizac
 * LIBS precargadas en el loader: platform (requerida); opcionales: fastClick, jquery, lz-string
 * El archivo final por cada app puede estar comprimido (by lz-string)
 * Preprocessors (included):
-  * CSS: Sass, Less, Stylus;
-  * JS: TypeScript, CoffeScript;
-  * HTML: Jade
+  * CSS: [Sass](http://sass-lang.com/), [Less](http://lesscss.org/), [Stylus](http://stylus-lang.com/);
+  * JS: [TypeScript](http://www.typescriptlang.org/), [CoffeeScript](http://coffeescript.org/);
+  * HTML: [Jade](http://jade-lang.com/)
 * Deteccion de browser y compatibilidad (seteable via browser y version)
 * Generacion de sprites automaticamente.
-* Preparado para [cordova](http://).
+* Preparado para [cordova](http://cordova.apache.org/).
 * Minificado de librerias que no lo esten.
 * Agregado automatico de cada archivo nuevo en el projecto (script/link), tanto en modo **dev** como **dist**.
 * Modo **release** para minificar y ocultar info.
 * Otros modulos: Analytics, deteccion de languages, appcache, muchos mas.
 
-Este framework es totalmente "opinated", el motivo es simple, si lo haces como el framework te propone vas a poder de disfrutar de sus features sin perder tiempo en cosas mas "triviales", solo te vas a dedicar a codear tu webapp/SPA!
+Este framework es totalmente "opinated", el motivo es simple, si lo haces como el framework te propone vas a poder de disfrutar de sus features sin perder tiempo en cosas mas "triviales", solo te vas a dedicar a codear tu web app/SPA!
+
+**NOTA:** A diferencia de [Yeoman](http://yeoman.io/) (y sus generators), este framework es un "patron", en vez de una solucion para la automatizacion, con lo cual te fuerza a trabajar respetando ciertas reglas (muy simples) y te provee soluciones de automatizacion como de bootstrap y boilerplate (loader, compatiblidad, compresion, etc). Orientado a projectos nuevos sobre todo.
 
 --
 
 ## Extended Version:
 
-Este proyecto pretender ahorrar tiempo de desarrollo, es una especie de seed boilerplate o wrapper, especialmente hecho para el bootstrap de una nueva app, dejando todo lo basico y constante listo.
+_Continuando con el TL;DR ..._
 
-Cuenta con numerosos temas tipicos solucionados y deliciosos features, esto ahorraria facil 3 semanas de trabajo full time e incluso mas.
+Este framework cuenta con numerosos temas tipicos solucionados y deliciosos features, esto ahorraria facil 4 semanas de trabajo full time e incluso mas.
 
-Intente que sea lo mas simple posible, espero que asi sea para vos crystian del futuro y otros coleguillas de mucha confiaza (si llegaron a este codigo, seguro les tengo mucha confianza)
-
-Este proyecto es una extraccion de otro mas grande que luego de un tiempo me di cuenta que seria ideal separar las aguas y dejar el loader y temas de automatizacion listo para otros proyectos y no solo para el que fue creado (languagesgym/subtitulame).
-
-Tiempo estimado de desarrollo de todo esto, con multiples pruebas y demas: 4 meses en tiempo no full time.
+### _init():_
+Este proyecto fue una extraccion de otro mas grande que luego de un tiempo me di cuenta que seria ideal separar las aguas y dejar el loader y temas de automatizacion listo para otros proyectos y no solo para el que fue creado. De ese momento a hoy paso mas de 1 año y fueron tres versiones, donde los saltos de las mejoras son cuantiosos entre cada version y me anime a hacerlos porque vi que realmente me servia a pesar del tiempo que llevara, espero que te sea tan util como a mi.
 
 ---
 
@@ -368,3 +361,12 @@ Recuperando files y codigo de projecto languages gym para reutilizar en este
 ---
 
 by Crystian, done by love for you <3!
+
+
+
+
+cache para apps previamente cargadas
+modificar orignal no preoducto cuando es tiene replaces.original
+gutil.env.noMin  time
+coliciones de nombres de productos
+tener en cuenta que si usas el patron glob para una app con dos grupos, si uno de ellos crea un backup, el otro lo puede estar leyendo, debes ignorarlo con "!"
