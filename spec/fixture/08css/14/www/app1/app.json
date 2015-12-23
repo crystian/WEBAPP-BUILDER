@@ -1,7 +1,8 @@
 [
 	{
 		"files": [
-			"index*.*"
+			"*.*",
+			"!*.css"
 		],
 		"replaces":{
 			"preMin": [

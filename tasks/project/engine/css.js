@@ -25,16 +25,22 @@
 			extensionFinal: extensionFinal,
 			validPreproExtension: core.defaults.validCssPreproExtensions,
 			processFile: preprocessFile,
+			removeCode: function(stream){
+				return stream;
+			},
 			linter: function(stream, config){
-				return stream
+				stream = stream
 					.pipe(replace(' 0px', ' 0'))
 					.pipe(csslint('csslintrc.json'))
 					.pipe(csslint.reporter(cssLintCustomReporter))
 					.pipe(gif(config.linterForce, csslint.reporter('fail')));
+
+				return stream;
 			},
 			minifyFile: function(stream){
-				return stream
+				stream = stream
 					.pipe(minifycss());
+				return stream;
 			}
 		});
 	}
@@ -60,7 +66,8 @@
 			stream = stream.pipe(autoprefixer({browsers: global.cfg.autoprefixer}));
 		}
 
-		return stream.pipe(rename(fileName + '.' + extensionFinal));
+		stream = stream.pipe(rename(fileName + '.' + extensionFinal));
+		return stream;
 	}
 
 	function cssLintCustomReporter(file){

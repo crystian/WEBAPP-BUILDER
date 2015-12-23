@@ -195,7 +195,7 @@ describe("preprocessors (js)", function(){
 
 		rm('-rf', indexTs + ext);
 
-		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp buildFullDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		expect(cat(indexTs + ext)).toContain('methodReplaced');
 	});
@@ -217,7 +217,7 @@ describe("preprocessors (js)", function(){
 
 		rm('-rf', indexTs + ext);
 
-		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp buildFullDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		expect(cat(indexTs + ext)).toContain('MethodReplaced');
 	});
@@ -281,13 +281,13 @@ describe("preprocessors (js)", function(){
 		expect(fs.statSync(indexJsMin).size).toBeMoreLess(396,5);
 	});
 
-	it('(18) should minify file because it is a release', function(){
+	it('(18) should minify file because it is a dist', function(){
 		cd('18');
 		var indexJsMin = indexTs + '.js';
 
 		rm('-rf', indexJsMin);
 
-		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp buildFullDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		expect(cat(indexJsMin)).toContain('button.onclick=function');
 
@@ -374,7 +374,7 @@ describe("preprocessors (js)", function(){
 
 		expect(cat(indexTs + '.ts')).toContain(keyword);
 
-		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp buildProjectDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		expect(cat(indexTsJs)).not.toContain(keyword);
 
@@ -391,7 +391,7 @@ describe("preprocessors (js)", function(){
 
 		cp('-f', 'www/app1/ori/*', 'www/app1');
 
-		expect(exec('gulp js --testMode ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp buildProjectDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		//first app:
 		expect(cat(indexTs + '.original.ts')).toContain('var greeter = new publicMethod.Greeter("world");'); //should not change it

@@ -3,5 +3,8 @@
 		"name": "index test 08-18",
 		"firstApp": "app1",
 		"release": true
+	},
+	"loader": {
+		"release": true
 	}
 }

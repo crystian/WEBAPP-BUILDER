@@ -255,7 +255,7 @@ describe("preprocessors (css)", function(){
 
 		rm('-rf', indexLess + ext);
 
-		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp buildProjectDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		expect(cat(indexLess + ext)).toContain('#00F');
 	});
@@ -277,7 +277,7 @@ describe("preprocessors (css)", function(){
 
 		rm('-rf', indexLess + ext);
 
-		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp buildProjectDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		expect(cat(indexLess + ext)).toContain('border:50em');
 	});
@@ -343,7 +343,20 @@ describe("preprocessors (css)", function(){
 		expect(fs.statSync(indexCss + ext).size).toBeMoreLess(237,5);
 	});
 
-	it('(18) should minify file because it is a release', function(){
+	it('(18) should minify file because it is dist', function(){
+		cd('18');
+		var ext = '.css';
+
+		rm('-rf', indexSass + ext);
+
+		expect(exec('gulp buildProjectDist --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexSass + ext)).toContain('border:0}');
+
+		expect(fs.statSync(indexSass + ext).size).toBeMoreLess(237,5);
+	});
+
+	it('(18) should no minify file because it is not dist (release)', function(){
 		cd('18');
 		var ext = '.css';
 
@@ -351,9 +364,9 @@ describe("preprocessors (css)", function(){
 
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(cat(indexSass + ext)).toContain('border:0}');
+		expect(cat(indexSass + ext)).toContain('border: 0px');
 
-		expect(fs.statSync(indexSass + ext).size).toBeMoreLess(237,5);
+		expect(fs.statSync(indexSass + ext).size).toBeMoreLess(315,5);
 	});
 
 	it('(19) should not process overwrite files - min', function(){
@@ -385,7 +398,7 @@ describe("preprocessors (css)", function(){
 		expect(cat(indexLess + ext)).toContain(keyNotOverw);
 		expect(cat(indexStyl + ext)).toContain(keyNotOverw);
 
-		expect(cat(indexScss + ext)).toContain('color:#FF0');
+		expect(cat(indexScss + ext)).toContain('color: #FF0');
 	});
 
 	it('(21) should not process minificated file', function(){
@@ -431,7 +444,7 @@ describe("preprocessors (css)", function(){
 
 		cp('-f', 'www/app1/ori/*', 'www/app1');
 
-		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp buildFullDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		//first app:
 		expect(cat(indexScss + '.original.scss')).toContain('$primaryColor: #FF0'); //should not change it

@@ -3,3 +3,4 @@
 /www/app1/*.sass
 /www/app1/*.scss
 /www/app1/*.styl
+/dist

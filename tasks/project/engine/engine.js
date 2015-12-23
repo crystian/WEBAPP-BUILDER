@@ -21,23 +21,15 @@
 	};
 
 	exports.css = function(){
-		return dist(core.getFilesByGroupAndAppsStream(null, css.runPreprocessors));
+		return core.getFilesByGroupAndAppsStream(null, css.runPreprocessors, 'css');
 	};
 
 	exports.js = function(){
-		return dist(core.getFilesByGroupAndAppsStream(null, js.runPreprocessors));
+		return core.getFilesByGroupAndAppsStream(null, js.runPreprocessors, 'js');
 	};
 
 	exports.html = function(){
-		return dist(core.getFilesByGroupAndAppsStream(null, html.runPreprocessors));
+		return core.getFilesByGroupAndAppsStream(null, html.runPreprocessors, 'html');
 	};
-
-
-	function dist(stream){
-		if(global.cfg.isDist){
-			stream = stream.pipe(gulp.dest(global.cfg.app.folders.build + global.cfg.app.folders.temp));
-		}
-		return stream;
-	}
 
 }());

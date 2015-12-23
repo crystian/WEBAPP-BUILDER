@@ -6,7 +6,6 @@
 	'use strict';
 
 	var utils      = require('../../shared/utils'),
-			gif        = require('gulp-if'),
 			htmlmin    = require('gulp-htmlmin'),
 			jade       = require('gulp-jade'),
 			strip      = require('gulp-strip-comments'),
@@ -24,7 +23,6 @@
 			removeCode: function(stream){
 				return stream.pipe(removeCode({production: global.cfg.app.release}));
 			},
-			//linter: function(stream, config){}, //may in the future I'll enable it
 			minifyFile: function(stream){
 				var htmlminOptions = {
 					collapseWhitespace: true,

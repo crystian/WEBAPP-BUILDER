@@ -1,12 +1,51 @@
-# APP FACTORY!
 cache para apps previamente cargadas
-                      modificar orignal no preoducto cuando es tiene replaces.original
-                      gutil.env.noMin  time
+modificar orignal no preoducto cuando es tiene replaces.original
+gutil.env.noMin  time
 coliciones de nombres de productos
 tener en cuenta que si usas el patron glob para una app con dos grupos, si uno de ellos crea un backup, el otro lo puede estar leyendo, debes ignorarlo con "!"
 ---
+# WEBAPP BUILDER!
 
-## Que es este coso?
+[Español](http://), [English](http://)
+
+## TL;DR Version:
+
+Este framework te permite ahorrar incontable cantidad de horas en la automatizacion y bootstrap de una nueva web app.
+
+### Features:
+
+* **Todo el codigo de la app termina en un unico archivo por app!**, yes just a request!
+* UsaTodo ocupa menos 50k (con todas las libs), mientras baja el archivo y siguientes queda mostrandose un lindo loading
+
+* El archivo final por cada app puede estar comprimido (con lz-string)
+* Deteccion de browser (platform) y compatibiliades
+* Generacion de sprites automaticamente
+* Preparado y listo para cordova
+* Autominificado de librerias que no lo contengan
+* Posibilidad de contener varios projectos y dentro de cada uno multiples apps (SPA)
+* Sin agregar cada archivo nuevo en los htmls (script/link)
+* Posibilidad de hacer y seleccionar distintos loading (CSS)
+* LIBS precargadas: platform (requerida), fastClick, jquery, lz-string (opcionales)
+* Modo release y absolutamente minificado para ocultar info y otros
+
+* Sistema de filtrado de compatibilidades
+
+* Preparado como proyecto independiente (opcional) y actualizable
+
+* Otros modulos: Analytics, loading screens, deteccion de languages, appcache, otros.
+
+* Archivo de configuracion de includes
+* Configuracion independiente y hererable
+* Sistema de deploy con proyecto template
+* Test de UserAgent y compatibilidades
+* Mecanismo de update de versiones
+
+
+Este framework es totalmente "opinated" (o mas aun: "dictatorial"), el motivo es simple, si lo haces como el framework te propone vas a poder de disfrutar de sus features sin perder tiempo en cosas mas "triviales".
+
+--
+
+## Extended Version:
 
 Este proyecto pretender ahorrar tiempo de desarrollo, es una especie de seed boilerplate o wrapper, especialmente hecho para el bootstrap de una nueva app, dejando todo lo basico y constante listo.
 
@@ -50,25 +89,6 @@ Tiempo estimado de desarrollo de todo esto, con multiples pruebas y demas: 4 mes
 
 ## Features:
 
-* **Todo el producto termina en un unico archivo por app!**
-* LIBS precargadas: platform (requerida), fastClick, jquery, lz-string (opcionales)
-* Todo ocupa menos 50k (con todas las libs), mientras baja el archivo y siguientes queda mostrandose un lindo loading
-* Posibilidad de contener varios projectos y dentro de cada uno multiples apps (SPA)
-* Posibilidad de hacer y seleccionar distintos loading (CSS)
-* Multiples request o solo uno, y este comprimido con lz-string
-* Generacion de sprites automaticamente
-* Archivo de configuracion de includes
-* Modo release y absolutamente minificado para ocultar info y otros
-* Configuracion independiente y hererable
-* Sistema de deploy con proyecto template
-* Deteccion de browser (platform)
-* Sistema de filtrado de compatibilidades
-* Preparado y listo para cordova
-* Autominificado de librerias que no lo contengan
-* Test de UserAgent y compatibilidades
-* Preparado como proyecto independiente y actualizable
-* Mecanismo de update de versiones
-* Otros modulos: Analytics, loading screens, deteccion de languages, appcache, otros.
 
 ---
 

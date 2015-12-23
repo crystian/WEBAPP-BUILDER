@@ -31,6 +31,7 @@
 			indexHtml           = rootFwkFromTemplate + 'loader/index.html',
 			indexHtmlPrj        = rootFwk + 'loader/index.html',
 			appCss              = 'www/app/app.css',
+			appCssAlt              = 'www/app/appStyle.css',
 			wwwJson             = 'www/app/www.json',
 			configJson          = 'config.json',
 			t;
@@ -108,7 +109,7 @@
 		process.stdout.write = t;
 	}
 
-	describe('check basic commands for build', function(){
+	fdescribe('check basic commands for build', function(){
 		describe('from root, it', function(){
 			it('should fail because it is not project', function(){
 				expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(2);
@@ -439,7 +440,7 @@
 				expect(test('-e', indexHtmlPrj)).toBe(false);
 				expect(test('-e', configJson)).toBe(false);
 				expect(test('-e', wwwIndex)).toBe(false);
-				expect(test('-e', appCss)).toBe(true);
+				expect(test('-e', appCssAlt)).toBe(true);
 				expect(test('-e', wwwJson)).toBe(true);
 
 			});
@@ -458,7 +459,7 @@
 				expect(test('-e', indexHtmlPrj)).toBe(true);
 				expect(test('-e', wwwIndex)).toBe(true);
 				expect(test('-e', configJson)).toBe(true);
-				expect(test('-e', appCss)).toBe(true);
+				expect(test('-e', appCssAlt)).toBe(true);
 				expect(test('-e', wwwJson)).toBe(true);
 
 			});
@@ -505,6 +506,7 @@
 
 				saveConfig(projectConfig);
 				removeGenFiles();
+				rm('-rf', appCssAlt);
 
 				expect(exec('gulp buildProjectDist --testMode --debug', {silent: 1}).code).toBe(0);
 
@@ -519,11 +521,11 @@
 				expect(test('-e', configJsPrj)).toBe(false);
 				expect(test('-e', indexHtmlPrj)).toBe(false);
 				expect(test('-e', configJson)).toBe(false);
-				expect(test('-e', appCss)).toBe(true);
+				expect(test('-e', appCssAlt)).toBe(true);
 				expect(test('-e', wwwJson)).toBe(true);
 				expect(test('-e', indexDist)).toBe(false);
 
-				expect(fs.statSync(distAppJson).size).toBeMoreLess(933, 50);
+				expect(fs.statSync(distAppJson).size).toBeMoreLess(926, 50);
 
 			});
 
@@ -546,11 +548,11 @@
 				expect(test('-e', configJsPrj)).toBe(true);
 				expect(test('-e', indexHtmlPrj)).toBe(true);
 				expect(test('-e', configJson)).toBe(true);
-				expect(test('-e', appCss)).toBe(true);
+				expect(test('-e', appCssAlt)).toBe(true);
 				expect(test('-e', wwwJson)).toBe(true);
 				expect(test('-e', indexDist)).toBe(true);
 
-				expect(fs.statSync(distAppJson).size).toBeMoreLess(933, 50);
+				expect(fs.statSync(distAppJson).size).toBeMoreLess(1225, 50);
 
 			});
 

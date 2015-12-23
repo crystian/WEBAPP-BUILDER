@@ -147,7 +147,7 @@ describe("preprocessors (html)", function(){
 
 		expect(cat(indexJade + '.jade')).toContain(keyword);
 
-		expect(exec('gulp html --testMode ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp buildProjectDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		expect(cat(indexJadeHtml)).not.toContain(keyword);
 

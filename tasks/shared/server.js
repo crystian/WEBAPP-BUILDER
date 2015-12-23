@@ -16,7 +16,7 @@
 		return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.server);
 	});
 
-	gulp.task('serveDist', ['dist'], function(){
+	gulp.task('serveDist', function(){
 		utils.breakIfIsRoot();
 
 		return makeServe(global.cfg.pathPrj + global.cfg.app.folders.dist, '/', global.cfg.ip, global.cfg.ports.dist);

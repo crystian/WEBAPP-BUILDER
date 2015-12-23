@@ -40,6 +40,7 @@
 		//global.cfg.app.release = false;
 
 		runSequence(
+			'removeTemp',
 			'makeWwwJson',
 			cb);
 	});
@@ -50,6 +51,7 @@
 		global.cfg.isDist = true;
 
 		return runSequence(
+			'removeTemp',
 			'makeWwwJson',
 			'makeAppsJson',
 			cb);

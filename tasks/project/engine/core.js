@@ -8,13 +8,14 @@
 	'use strict';
 
 	//libs
-	var _        = require('lodash'),
-			globby   = require('globby'),
-			fs       = require('fs-extra'),
-			path     = require('path'),
-			merge2   = require('merge2'),
-			rename   = require('gulp-rename'),
-			gutil    = require('gulp-util');
+	var _      = require('lodash'),
+			globby = require('globby'),
+			fs     = require('fs-extra'),
+			path   = require('path'),
+			merge2 = require('merge2'),
+			rename = require('gulp-rename'),
+			gutil  = require('gulp-util'),
+			concat = require('gulp-concat');
 	//	fs = require('fs-extra'),
 	//	StreamQueue = require('streamqueue'),
 	//	concat = require('gulp-concat'),
@@ -70,19 +71,44 @@
 		validExtensions: ['html', 'js', 'css']
 	};
 
-	function getFilesByGroupAndAppsStream(byApp, byFile){
+	function getFilesByGroupAndAppsStream(byApp, byFile, type){
 		var mainStream = merge2(gulp.src('noop')),//because if have not one, might give an error
 				apps       = getFilesByGroupAndApps(byApp, byFile);
 
 		apps.forEach(function(app){
+			var appStream = merge2(gulp.src('noop'));
+
 			app.files.forEach(function(file){
 				if(file){
-					mainStream.add(file);
+					appStream.add(file);
 				}
 			});
+
+			appStream = genDistFile(appStream, app.name, type);
+			mainStream.add(appStream);
 		});
 
 		return mainStream;
+	}
+
+	function genDistFile(stream, appName, type){
+		if(global.cfg.isDist){
+			var newLine = '\n';
+			switch (type){
+				case 'css':
+				case 'html':
+					newLine = '';
+					break;
+				case 'js':
+					newLine = ';';
+					break;
+			}
+
+			stream = stream
+					.pipe(concat(appName + '.' + type, {newLine: newLine}))
+					.pipe(gulp.dest(global.cfg.app.folders.build + global.cfg.app.folders.temp));
+		}
+		return stream;
 	}
 
 	/**
@@ -281,7 +307,8 @@
 		}
 
 		//just for min files
-		return stream.pipe(gulp.dest(file.base));
+		stream = stream.pipe(gulp.dest(file.base));
+		return stream;
 	}
 
 	function modifyOriginal(stream, file, config){
@@ -320,20 +347,31 @@
 		var pth  = global.cfg.pathPrj + global.cfg.app.folders.www,
 				apps = require(pth + appsJson);
 
-		apps.forEach(function(app){
-			jsonify(app);
+		apps.forEach(function(appName){
+			jsonify(appName);
 		})
 	}
 
 	function jsonify(appName){
 
-		var temp = global.cfg.app.folders.build + global.cfg.app.folders.temp,
-				json = {};
+		var temp     = global.cfg.app.folders.build + global.cfg.app.folders.temp,
+				json     = {},
+				jsFile   = temp + appName + '.js',
+				cssFile  = temp + appName + '.css',
+				htmlFile = temp + appName + '.html';
 
 		json.v = global.cfg.app.version;
-		json.j = fs.readFileSync(temp + appName + '.js', {encoding: 'utf8'});
-		json.c = fs.readFileSync(temp + appName + '.css', {encoding: 'utf8'});
-		json.h = fs.readFileSync(temp + appName + '.html', {encoding: 'utf8'});
+
+		if(utils.fileExist(jsFile)){
+			json.j = fs.readFileSync(jsFile, {encoding: 'utf8'});
+		}
+		if(utils.fileExist(cssFile)){
+			json.c = fs.readFileSync(cssFile, {encoding: 'utf8'});
+		}
+
+		if(utils.fileExist(htmlFile)){
+			json.h = fs.readFileSync(htmlFile, {encoding: 'utf8'});
+		}
 
 		var files = JSON.stringify(json);
 
