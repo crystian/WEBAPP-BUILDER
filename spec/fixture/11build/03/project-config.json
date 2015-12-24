@@ -1,0 +1,14 @@
+{
+	"compress": false,
+	"app": {
+		"name": "index test 11-03",
+		"version": "0.0.1",
+		"release": true,
+		"folders": {
+			"temp": "temp"
+		}
+	},
+	"loader": {
+		"release": true
+	}
+}

@@ -1,0 +1,18 @@
+[
+	{
+		"files": [
+			"*.*",
+			"!*.scss"
+		]
+	},
+	{
+		"files": [
+			"*.scss"
+		],
+		"replaces":{
+			"postMin": [
+				["assets/", ""]
+			]
+		}
+	}
+]

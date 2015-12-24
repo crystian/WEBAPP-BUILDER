@@ -20,10 +20,6 @@
 	//	StreamQueue = require('streamqueue'),
 	//	concat = require('gulp-concat'),
 	//	shared = require('./shared'),
-	// 	sprite = require('gulp-sprite-generator'),
-	//	imagemin = require('gulp-imagemin'),
-	//	pngquant = require('imagemin-pngquant'),
-	//	cache = require('gulp-cache'),
 	//	manifest = require('gulp-manifest'),
 
 	//engine libs
@@ -429,23 +425,6 @@
  .pipe(gulp.dest(global.cfg.folders.build));
 
  return aux.merge(appFile, htmlFile);
- };
- */
-
-/*
- exports.optimizeImages = function() {
- return gulp.src(global.cfg.folders.build +'/img/!**!/!*')
- .pipe(commons.debugeame())
- .pipe(imagemin({
- progressive: true,
- svgoPlugins: [{removeViewBox: false}],
- use: [pngquant()]
- }))
- .pipe(gulp.dest(global.cfg.folders.build + '/img'));
- };
-
- exports.clearCache = function (done) {
- return cache.clearAll(done);
  };
  */
 

@@ -3,7 +3,7 @@
  */
 
 var utils = require('../../tasks/shared/utils'),
-		fs    = require('fs');
+		fs    = require('fs-extra');
 
 var args = process.argv.slice(2).join(' ');
 require('shelljs/global');
@@ -61,7 +61,7 @@ xdescribe("Index template to index - ", function(){
 		expect(indexFileCompiledContent).toContain('_loaderCfg');
 		expect(indexFileCompiledContent).not.toContain('<!--comment for test, do not remove it-->');
 		expect(indexFileCompiledContent.indexOf('<!--')).toBe(0);//header
-		expect(indexFileCompiledContent).toContain('oneRequest:1');
+		expect(indexFileCompiledContent).toContain('isDist:!0');
 		expect(indexFileCompiledContent).not.toContain('if(true){return;}');
 	});
 
@@ -86,7 +86,7 @@ xdescribe("Index template to index - ", function(){
 		expect(indexFileCompiledContent).toContain('_loaderCfg');
 		expect(indexFileCompiledContent).toContain('<!--comment for test, do not remove it-->');
 		expect(indexFileCompiledContent.indexOf('<!--')).toBe(0);//header
-		expect(indexFileCompiledContent).toContain('"oneRequest": false');
+		expect(indexFileCompiledContent).toContain('"isDist": false');
 		expect(indexFileCompiledContent).toContain('if(true){return;}');
 	});
 
@@ -111,7 +111,7 @@ xdescribe("Index template to index - ", function(){
 		expect(indexFileCompiledContent).toContain('_loaderCfg');
 		expect(indexFileCompiledContent).not.toContain('<!--comment for test, do not remove it-->');
 		expect(indexFileCompiledContent.indexOf('<!--')).toBe(0);//header
-		expect(indexFileCompiledContent).toContain('oneRequest:1');
+		expect(indexFileCompiledContent).toContain('isDist:!0');
 		expect(indexFileCompiledContent).not.toContain('if(true){return;}');
 	});
 

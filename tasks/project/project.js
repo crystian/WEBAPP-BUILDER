@@ -9,6 +9,7 @@
 			fs          = require('fs-extra'),
 			utils       = require('../shared/utils.js'),
 			gutil       = require('gulp-util'),
+			del         = require('del'),
 			engine      = require('./engine/engine.js');
 
 	//Alias
@@ -28,10 +29,10 @@
 	gulp.task('hookPostDistProject', []);
 
 
-	gulp.task('full', function (cb) {
+	gulp.task('full', function(cb){
 		runSequence(
-				'buildFull',
-				cb);
+			'buildFull',
+			cb);
 	});
 
 	gulp.task('buildFull', function(cb){
@@ -67,6 +68,7 @@
 		global.cfg.isDist = true;
 
 		return runSequence(
+			'removeDist',
 			'hookPreDistProject',
 			'removeTemp',
 			'makeWwwJson',
@@ -102,11 +104,12 @@
 		return engine.html();
 	});
 
+	gulp.task('removeDist', function(){
+		return del([global.cfg.app.folders.dist], {force: true});
+	});
+
+
 	//require('./cordova.js');
-	//
-	//gulp.task('optimizeImages', function (){
-	//	return magic.optimizeImages();
-	//});
 	//
 	//gulp.task('clearCache', function (done) {
 	//	return magic.clearCache(done);

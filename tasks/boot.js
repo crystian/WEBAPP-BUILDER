@@ -6,7 +6,7 @@ var utils      = require('./shared/utils.js'),
 		requireDir = require('require-dir'),
 		_          = require('lodash'),
 		git        = require('git-rev'),
-		fs         = require('fs'),
+		fs         = require('fs-extra'),
 		path       = require('path'),
 		gutil      = require('gulp-util');
 

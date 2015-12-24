@@ -79,7 +79,7 @@
 		//json.showSkeletor = global.cfg.showSkeletor;
 		//json.contentEditable = global.cfg.contentEditable;
 
-		json.oneRequest = false;//flagOneRequest
+		json.isDist = !!global.cfg.isDist;
 
 		//incompatibleByFeatures: global.cfg.loader.text.incompatibleByFeatures,
 		//incompatibleByDiag: global.cfg.loader.text.incompatibleByDiag,

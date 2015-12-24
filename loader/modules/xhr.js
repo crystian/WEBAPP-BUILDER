@@ -46,8 +46,8 @@ loader.xhr = (function(){
 
 	function _requestOneOrAllInOne(appConfig, loadAppSuccess, loadAppFail){
 		//debugger
-		if(loader.cfg.oneRequest){
-			console.info('oneRequest!');
+		if(loader.cfg.isDist){
+			console.info('isDist!');
 			requestAllInOne(appConfig.appName + '.json', appConfig).then(loadAppSuccess, loadAppFail);
 			return;
 		}

@@ -42,10 +42,6 @@
 			})))
 			.pipe(gif(global.cfg.loader.release, footer(global.cfg.loader.text.footer.join('\n'))))
 
-			.pipe(gif(global.cfg.isDist, gif(global.cfg.loader.release,
-				replace('oneRequest:!1', 'oneRequest:1') ,replace('"oneRequest": false', '"oneRequest": true'))
-			))
-
 			.pipe(gulp.dest(global.cfg.pathPrjBuild));
 
 		if(global.cfg.app.cordova){

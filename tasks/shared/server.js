@@ -10,19 +10,19 @@
 			runSequence = require('run-sequence'),
 			utils     = require('./utils');
 
-	gulp.task('serveLoader', ['buildLoader'], function(){
+	gulp.task('serveLoader', ['buildFull'], function(){
 		utils.breakIfIsNotTemplate();
 
 		return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.server);
 	});
 
-	gulp.task('serveDist', function(){
+	gulp.task('serveDist', ['buildFullDist'], function(){
 		utils.breakIfIsRoot();
 
 		return makeServe(global.cfg.pathPrj + global.cfg.app.folders.dist, '/', global.cfg.ip, global.cfg.ports.dist);
 	});
 
-	gulp.task('serveProject', function(){
+	gulp.task('serveProject', ['buildFull'], function(){
 		utils.breakIfIsRoot();
 		utils.breakIfIsTemplate();
 
