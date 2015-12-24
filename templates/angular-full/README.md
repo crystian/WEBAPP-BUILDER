@@ -1,3 +1,3 @@
-# APP FACTORY - Template angular, by Crystian
+# WEBAPP - BUILDER - Template angular, by Crystian
 
 See ../README.md

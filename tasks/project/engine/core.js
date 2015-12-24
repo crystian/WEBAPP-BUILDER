@@ -16,11 +16,6 @@
 			rename = require('gulp-rename'),
 			gutil  = require('gulp-util'),
 			concat = require('gulp-concat');
-	//	fs = require('fs-extra'),
-	//	StreamQueue = require('streamqueue'),
-	//	concat = require('gulp-concat'),
-	//	shared = require('./shared'),
-	//	manifest = require('gulp-manifest'),
 
 	//engine libs
 	var utils = require('../../shared/utils'),
@@ -168,7 +163,7 @@
 
 	function configValidator(files, config){
 		if(files.length === 0){
-			console.logRed('APPFACTORY: Files not found');
+			console.logRed('APPFACTORY: Files not found, check your app.json');
 			utils.exit(1);
 		}
 
@@ -218,9 +213,18 @@
 				}
 			}
 
+			if(!stream){
+				var fileNameToBeOrigin = file.path;
+
+				if(global.cfg.app.release || config.forceUseMin){
+					fileNameToBeOrigin = fileNameMin;
+				}
+
+				stream = gulp.src(fileNameToBeOrigin);
+			}
+
 			return stream;
 		}
-
 		//overwrite
 		var forceOverwrite = (global.cfg.app.release && config.overwriteOnRelease);
 

@@ -1,15 +1,15 @@
 [
 	{
 		"files": [
-			"../../vendors/bower_components/angular/angular.js",
-			"../../vendors/bower_components/angular-animate/angular-animate.js",
-			"../../vendors/bower_components/angular-route/angular-route.js",
-			"../../vendors/bower_components/angular-aria/angular-aria.js",
-			"../../vendors/bower_components/angular-material/angular-material.js",
-			"../../vendors/bower_components/angular-toastr/dist/angular-toastr.js",
-			"../../vendors/bower_components/angular-toastr/dist/angular-toastr.tpls.js",
-			"../../vendors/bower_components/angular-material/angular-material.css",
-			"../../vendors/bower_components/angular-toastr/dist/angular-toastr.css"
+			"../vendors/bower_components/angular/angular.js",
+			"../vendors/bower_components/angular-animate/angular-animate.js",
+			"../vendors/bower_components/angular-route/angular-route.js",
+			"../vendors/bower_components/angular-aria/angular-aria.js",
+			"../vendors/bower_components/angular-material/angular-material.js",
+			"../vendors/bower_components/angular-toastr/dist/angular-toastr.js",
+			"../vendors/bower_components/angular-toastr/dist/angular-toastr.tpls.js",
+			"../vendors/bower_components/angular-material/angular-material.css",
+			"../vendors/bower_components/angular-toastr/dist/angular-toastr.css"
 		],
 		"minificated": true
 	},

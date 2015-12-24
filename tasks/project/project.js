@@ -56,9 +56,10 @@
 	//dist
 	gulp.task('buildFullDist', function(cb){
 		return runSequence(
+			'removeDist',
 			'buildLoaderDist',
 			'buildProjectDist',
-			gutil.env.debug ? 'nothing' : 'removeTemp',
+			gutil.env.debug ? 'nothing' : 'removeBuild',
 			cb);
 	});
 
@@ -68,9 +69,8 @@
 		global.cfg.isDist = true;
 
 		return runSequence(
-			'removeDist',
 			'hookPreDistProject',
-			'removeTemp',
+			//gutil.env.debug ? 'nothing' : 'removeTemp',
 			'makeWwwJson',
 			'makeAppsJson',
 			'hookPostDistProject',

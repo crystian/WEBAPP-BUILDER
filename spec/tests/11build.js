@@ -222,7 +222,7 @@
 				expect(test('-e', wwwJson)).toBe(false);
 				expect(test('-e', indexDist)).toBe(true);
 
-				expect(cat(indexDist)).toContain('isDist:1');
+				expect(cat(indexDist)).toContain('isDist:!0');
 				expect(fs.statSync(indexDist).size).toBeMoreLess(67078, 100);
 
 			});
@@ -376,7 +376,7 @@
 					//index.html on loader
 					expect(html).not.toBe('<head></head><body></body>');
 					expect(html).not.toContain('<!--comment for test, do not remove it-->');
-					expect(html).toContain('isDist:1');
+					expect(html).toContain('isDist:!0');
 					end();
 				}, function(err){
 					console.error(err);
@@ -483,7 +483,7 @@
 				expect(test('-e', wwwJson)).toBe(false);
 				expect(test('-e', indexDist)).toBe(true);
 
-				expect(cat(indexDist)).toContain('isDist:1');
+				expect(cat(indexDist)).toContain('isDist:!0');
 				expect(fs.statSync(indexDist).size).toBeMoreLess(67078, 100);
 
 			});
@@ -650,7 +650,7 @@
 					//index.html on loader
 					expect(html).not.toBe('<head></head><body></body>');
 					expect(html).not.toContain('<!--comment for test, do not remove it-->');
-					expect(html).toContain('isDist:1');
+					expect(html).toContain('isDist:!0');
 					end();
 				}, function(err){
 					console.error(err);

@@ -11,7 +11,7 @@
 		],
 		"replaces":{
 			"preMin": [
-				["../templates/empty/www/app/assets/img/", "assets/img/"]
+				["../templates/empty/www/app/assets/", ""]
 			]
 		}
 	}

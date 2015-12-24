@@ -2,7 +2,10 @@
 	"app": {
 		"name": "template angular full",
 		"version": "0.0.1",
-		"release": false
+		"release": false,
+		"folders":{
+			"template": "templates/angular-full"
+		}
 	},
 	"loader": {
 		"contentSecurity": "",

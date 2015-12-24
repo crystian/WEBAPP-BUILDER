@@ -1,3 +1,3 @@
-# APP FACTORY - Template empty, by Crystian
+# WEBAPP - BUILDER - Template empty, by Crystian
 
 See ../README.md

@@ -1,0 +1,10 @@
+{
+	"app": {
+		"name": "index test 11-06",
+		"version": "0.0.2",
+		"release": false
+	},
+	"loader":{
+		"release": false
+	}
+}

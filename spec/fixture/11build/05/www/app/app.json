@@ -1,0 +1,17 @@
+[
+	{
+		"files": [
+			"../vendors/bower_components/angular/angular.js",
+			"../vendors/bower_components/angular-animate/angular-animate.js",
+			"../vendors/bower_components/angular-route/angular-route.js"
+		],
+		"minificated": true,
+		"forceUseMin": false
+	},
+	{
+		"files": [
+			"**/*.*"
+		]
+	}
+]
+

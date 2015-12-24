@@ -23,6 +23,6 @@ gulp.task('optimizeImages', function(){
 
 gulp.task('copyImgs', function(){
 	return gulp.src([
-		global.cfg.app.folders.www + '/app*/**/*'
+		global.cfg.app.folders.www + '/app/assets/img/*.*'
 	]).pipe(gulp.dest(global.cfg.app.folders.dist + '/img'));
 });

@@ -1,7 +1,7 @@
 {
 	"app": {
 		"name": "template empty",
-		"version": "0.0.1",
+		"version": "0.0.2",
 		"release": false,
 		"folders":{
 			"template": "templates/empty"

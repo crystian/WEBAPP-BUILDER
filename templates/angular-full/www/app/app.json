@@ -1,14 +1,14 @@
 [
 	{
 		"files": [
-			"../../vendors/bower_components/components-font-awesome/css/font-awesome.css"
+			"../vendors/bower_components/components-font-awesome/css/font-awesome.css"
 		],
 		"minificated": true,
 		"replaces": {
 			"original": [
 				[
 					"../fonts/",
-					"../templates/angular-full/vendors/bower_components/components-font-awesome/fonts/"
+					"../templates/angular-full/www/vendors/bower_components/components-font-awesome/fonts/"
 				]
 			],
 			"originalMin": [
@@ -21,14 +21,14 @@
 	},
 	{
 		"files": [
-			"../../vendors/theme/bootstrap.css"
+			"../vendors/theme/bootstrap.css"
 		],
 		"minificated": true,
 		"replaces": {
 			"original": [
 				[
 					"../fonts/",
-					"../templates/angular-full/vendors/bower_components/bootstrap/dist/fonts/"
+					"../templates/angular-full/www/vendors/bower_components/bootstrap/dist/fonts/"
 				]
 			],
 			"originalMin": [
@@ -54,10 +54,10 @@
 	},
 	{
 		"files": [
-			"../../vendors/bower_components/swiper/dist/css/swiper.css",
-			"../../vendors/bower_components/jquery/dist/jquery.js",
-			"../../vendors/bower_components/bootstrap/dist/js/bootstrap.js",
-			"../../vendors/bower_components/swiper/dist/js/swiper.js"
+			"../vendors/bower_components/swiper/dist/css/swiper.css",
+			"../vendors/bower_components/jquery/dist/jquery.js",
+			"../vendors/bower_components/bootstrap/dist/js/bootstrap.js",
+			"../vendors/bower_components/swiper/dist/js/swiper.js"
 		],
 		"minificated": true
 	},

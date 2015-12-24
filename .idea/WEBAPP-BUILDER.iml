@@ -17,8 +17,9 @@
       <excludeFolder url="file://$MODULE_DIR$/template-ng/build" />
       <excludeFolder url="file://$MODULE_DIR$/template-ng/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/templates/angular-empty/vendors" />
-      <excludeFolder url="file://$MODULE_DIR$/templates/angular-material/vendors" />
+      <excludeFolder url="file://$MODULE_DIR$/templates/angular-material/www/vendors" />
       <excludeFolder url="file://$MODULE_DIR$/templates/empty/build" />
+      <excludeFolder url="file://$MODULE_DIR$/templates/empty/dist" />
       <excludeFolder url="file://$MODULE_DIR$/templates/empty/vendors" />
       <excludeFolder url="file://$MODULE_DIR$/templates/test/build" />
       <excludeFolder url="file://$MODULE_DIR$/templates/test/dist" />
