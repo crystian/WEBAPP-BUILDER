@@ -44,6 +44,7 @@ Este proyecto fue una extraccion de otro mas grande que luego de un tiempo me di
 
 ## Tasks:
 
+TODO REVIEW
 ### From Root (loader):
 
 * `gulp config` Genera archivo config.js con toda la configuracion del loader & project
@@ -68,10 +69,6 @@ Este proyecto fue una extraccion de otro mas grande que luego de un tiempo me di
 * `gulp loader` genera el loader y lo deja en la carpeta `build`
 * `gulp serve:api` server de api (a modo de ejemplo para templates/angular-full)
 * `gulp a` run an android
-
-
-## Features:
-
 
 ---
 

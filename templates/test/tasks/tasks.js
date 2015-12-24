@@ -8,15 +8,14 @@ var runSequence = require('run-sequence'),
 //alias
 gulp.task('default',['build']);
 
-gulp.task('build', function (cb) {
-	runSequence(
-		'buildProject',
-		cb);
-});
+//gulp.task('hookPostBuildProject', function (cb) {
+//	runSequence(
+//		'copyImgs',
+//		cb);
+//});
 
-gulp.task('dist', function (cb) {
+gulp.task('hookPostDistProject', function (cb) {
 	runSequence(
-		'buildFullDist',
 		'copyImgs',
 //		'optimizeImages',
 //		(gutil.env.debug) ? 'nothing' : 'genAppCache',

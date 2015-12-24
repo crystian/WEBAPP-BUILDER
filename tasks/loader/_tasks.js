@@ -17,15 +17,22 @@
 	gulp.task('csswLoader', ['_watchCss']);
 	//gulp.task('loaderTest',		['_test']);
 
+	gulp.task('hookPreBuildLoader', []);
+	gulp.task('hookPostBuildLoader', []);
+	gulp.task('hookPreDistLoader', []);
+	gulp.task('hookPostDistLoader', []);
+
 	gulp.task('nothing', []);
 
 	gulp.task('buildLoader', function(cb){
 		utils.breakIfIsRoot();
 
 		runSequence(
+			'hookPreBuildLoader',
 			'_buildLoader',
 			gutil.env.debug ? 'nothing' : '_removeTemp',
 			'_copyIndex',
+			'hookPostBuildLoader',
 			cb);
 	});
 
@@ -34,9 +41,11 @@
 		global.cfg.isDist = true;
 
 		runSequence(
+			'hookPreDistLoader',
 			'_buildLoader',
 			'_copyIndexDist',
 			gutil.env.debug ? 'nothing' : '_removeBuild',
+			'hookPostDistLoader',
 			cb);
 	});
 

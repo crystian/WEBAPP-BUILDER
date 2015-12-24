@@ -306,16 +306,16 @@
 						streamServe = server.makeServe(test.path, test.folder, test.ip, test.ports.server);
 
 				Promise.resolve(nightmare
-					.goto('http://' + test.ip + ':' + test.ports.server + '/loader')
-					.on('page', function(type, message){
-						expect(type).toBe('alert');
-						expect(message).toBe('clickMe!');
-					})
-					.wait('#clickme')
-					.click('#clickme')
-					.evaluate(function(){
-						return document.getElementsByTagName('html')[0].innerHTML;
-					})
+						.goto('http://' + test.ip + ':' + test.ports.server + '/loader')
+						.on('page', function(type, message){
+							expect(type).toBe('alert');
+							expect(message).toBe('clickMe!');
+						})
+						.wait('#clickme')
+						.click('#clickme')
+						.evaluate(function(){
+							return document.getElementsByTagName('html')[0].innerHTML;
+						})
 				).then(function(html){
 					//index.html on loader
 					expect(html).not.toBe('<head></head><body></body>');
@@ -361,17 +361,17 @@
 
 
 				Promise.resolve(nightmare
-					.goto('http://' + test.ip + ':' + test.ports.dist)
-					.on('page', function(type, message){
-						expect(type).toBe('alert');
-						expect(message).toBe('clickMe!');
-					})
-					.wait('#clickme')
-					.click('#clickme')
-					.evaluate(function(){
-						return document.getElementsByTagName('html')[0].innerHTML;
-					})
-					//.end()
+						.goto('http://' + test.ip + ':' + test.ports.dist)
+						.on('page', function(type, message){
+							expect(type).toBe('alert');
+							expect(message).toBe('clickMe!');
+						})
+						.wait('#clickme')
+						.click('#clickme')
+						.evaluate(function(){
+							return document.getElementsByTagName('html')[0].innerHTML;
+						})
+						//.end()
 				).then(function(html){
 					//index.html on loader
 					expect(html).not.toBe('<head></head><body></body>');
@@ -578,16 +578,16 @@
 						streamServe = server.makeServe(test.pathPrj, test.folderDist, test.ip, test.ports.project);
 
 				Promise.resolve(nightmare
-					.goto('http://' + test.ip + ':' + test.ports.project)
-					.on('page', function(type, message){
-						expect(type).toBe('alert');
-						expect(message).toBe('clickMe!');
-					})
-					.wait('#clickme')
-					.click('#clickme')
-					.evaluate(function(){
-						return document.getElementsByTagName('html')[0].innerHTML;
-					})
+						.goto('http://' + test.ip + ':' + test.ports.project)
+						.on('page', function(type, message){
+							expect(type).toBe('alert');
+							expect(message).toBe('clickMe!');
+						})
+						.wait('#clickme')
+						.click('#clickme')
+						.evaluate(function(){
+							return document.getElementsByTagName('html')[0].innerHTML;
+						})
 				).then(function(html){
 					//index.html on loader
 					expect(html).not.toBe('<head></head><body></body>');
@@ -635,17 +635,17 @@
 
 
 				Promise.resolve(nightmare
-					.goto('http://' + test.ip + ':' + test.ports.dist)
-					.on('page', function(type, message){
-						expect(type).toBe('alert');
-						expect(message).toBe('clickMe!');
-					})
-					.wait('#clickme')
-					.click('#clickme')
-					.evaluate(function(){
-						return document.getElementsByTagName('html')[0].innerHTML;
-					})
-					//.end()
+						.goto('http://' + test.ip + ':' + test.ports.dist)
+						.on('page', function(type, message){
+							expect(type).toBe('alert');
+							expect(message).toBe('clickMe!');
+						})
+						.wait('#clickme')
+						.click('#clickme')
+						.evaluate(function(){
+							return document.getElementsByTagName('html')[0].innerHTML;
+						})
+						//.end()
 				).then(function(html){
 					//index.html on loader
 					expect(html).not.toBe('<head></head><body></body>');

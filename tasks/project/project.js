@@ -16,8 +16,23 @@
 	gulp.task('js', ['makeJs']);
 	gulp.task('html', ['makeHtml']);
 	gulp.task('on', ['watch']);
+	gulp.task('build', ['buildProject']);
+	gulp.task('dist', ['buildFullDist']);
 	gulp.task('removeBuild', ['_removeBuild']);
 	gulp.task('removeTemp', ['_removeTemp']);
+
+	//hooks
+	gulp.task('hookPreBuildProject', []);
+	gulp.task('hookPostBuildProject', []);
+	gulp.task('hookPreDistProject', []);
+	gulp.task('hookPostDistProject', []);
+
+
+	gulp.task('full', function (cb) {
+		runSequence(
+				'buildFull',
+				cb);
+	});
 
 	gulp.task('buildFull', function(cb){
 		return runSequence(
@@ -26,22 +41,23 @@
 			cb);
 	});
 
+	gulp.task('buildProject', function(cb){
+		utils.breakIfIsRoot();
+
+		runSequence(
+			'hookPreBuildProject',
+			gutil.env.debug ? 'nothing' : 'removeTemp',
+			'makeWwwJson',
+			'hookPostBuildProject',
+			cb);
+	});
+
+	//dist
 	gulp.task('buildFullDist', function(cb){
 		return runSequence(
 			'buildLoaderDist',
 			'buildProjectDist',
 			gutil.env.debug ? 'nothing' : 'removeTemp',
-			cb);
-	});
-
-	gulp.task('buildProject', function(cb){
-		utils.breakIfIsRoot();
-
-		//global.cfg.app.release = false;
-
-		runSequence(
-			'removeTemp',
-			'makeWwwJson',
 			cb);
 	});
 
@@ -51,9 +67,11 @@
 		global.cfg.isDist = true;
 
 		return runSequence(
+			'hookPreDistProject',
 			'removeTemp',
 			'makeWwwJson',
 			'makeAppsJson',
+			'hookPostDistProject',
 			cb);
 	});
 

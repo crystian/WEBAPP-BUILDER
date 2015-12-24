@@ -462,23 +462,6 @@
  }));
  }
  */
-/*
-
- ['css','js','html'].map(function (v) {
- streamsFinal = aux.merge(streamsFinal, _concat(streams, v, appName));
- });
- */
-/*
- function _concat(_streams, _type, _appName){
-
- var s = _streams[_type].done();
- s = s.pipe(concat(_appName+'.'+ _type, {newLine: ' '}))
- .pipe(gulp.dest(global.cfg.folders.temp));
-
- return s;
- }
-
- */
 
 /*
  if(!file.minificated && file.genSprite){

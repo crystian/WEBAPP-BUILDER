@@ -1,6 +1,7 @@
 /.idea/workspace.xml
 /project-config-local.json
 /build
+/dist
 /node_modules
 /www/**/*.css
 /www/app/www.json
