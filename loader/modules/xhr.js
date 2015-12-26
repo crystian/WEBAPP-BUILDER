@@ -84,7 +84,6 @@ loader.xhr = (function(){
 				return Promise.reject(e);
 			}
 
-			//console.dir(data);
 			if(data.h){
 				_setHtml(data.h, options);
 			}
@@ -142,7 +141,6 @@ loader.xhr = (function(){
 
 	function requestMultimpleSyncUnique(url, options){
 		return new Promise(function(resolve, reject){
-			//console.group('requestMultipleSync: ' + url);
 
 			var type = loader.utils.getExtensionFile(url),
 					fn;
@@ -164,10 +162,7 @@ loader.xhr = (function(){
 					reject('Error key not found on requestMultiple array');
 			}
 
-			//console.log('type:', type);
 			fn(url).then(function(){
-				//console.log('resolved');
-				//console.groupEnd();
 				resolve();
 			}, function(m){
 				reject(m);
@@ -222,7 +217,7 @@ loader.xhr = (function(){
 		options = options || {appName: 'app'};
 		options.replace = options.replace || false;
 
-		if((options && options.replace === false) || !el.getElementById(options.appName)){
+		if((options && options.replace === false) || !el.querySelector('#' + options.appName)){
 
 			var app = document.createElement('div');
 			app.innerHTML = data;
@@ -231,7 +226,7 @@ loader.xhr = (function(){
 
 			loader.utils.setNewResourceById(app, 'mainContainer', options.clear);
 		} else {
-			el.getElementById(options.appName).innerHTML = data;
+			el.querySelector('#' + options.appName).innerHTML = data;
 		}
 	}
 

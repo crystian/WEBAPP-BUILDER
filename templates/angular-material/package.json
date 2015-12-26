@@ -5,6 +5,5 @@
 	"private": true,
 	"dependencies": {
 		"gulp-angular-templatecache": "^1.8.0"
-	},
-	"gitVersion": "1c2d4f72db119ed2428b09e0206947ea8be6efb6"
+	}
 }

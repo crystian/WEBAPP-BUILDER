@@ -1,8 +1,11 @@
 [
 	{
 		"files": [
-			"index*.css"
+			"index*.css",
+			"!*.min.css",
+			"!*.original.css"
 		],
+		"minificated": true,
 		"replaces": {
 			"original": [
 				[
@@ -18,8 +21,8 @@
 			],
 			"originalDist": [
 				[
-					"#00F",
-					"#0FF"
+					"red",
+					"#F00"
 				]
 			]
 		}

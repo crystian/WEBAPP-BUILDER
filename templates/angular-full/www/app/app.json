@@ -16,6 +16,12 @@
 					"../fonts/",
 					"fonts/"
 				]
+			],
+			"originalDist": [
+				[
+					"../templates/angular-full/www/vendors/bower_components/components-font-awesome/",
+					""
+				]
 			]
 		}
 	},
@@ -36,6 +42,12 @@
 					"../fonts/",
 					"fonts/"
 				]
+			],
+			"originalDist": [
+				[
+					"../templates/angular-full/www/vendors/bower_components/bootstrap/dist/",
+					""
+				]
 			]
 		}
 	},
@@ -46,8 +58,8 @@
 		"replaces": {
 			"preMin": [
 				[
-					"../../../www/app/assets/img/",
-					"assets/img/"
+					"../templates/angular-full/www/app/assets",
+					""
 				]
 			]
 		}

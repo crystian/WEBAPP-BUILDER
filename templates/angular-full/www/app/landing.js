@@ -24,7 +24,7 @@ var landing = (function() {
 
 	function loadApp(){
         loader.show();
-        loader.xhr.requestApp('app2', function () {
+        loader.xhr.requestApp({appName: 'app2'}, function () {
             //load second app
             appInit();
 

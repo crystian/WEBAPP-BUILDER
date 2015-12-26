@@ -1,4 +1,5 @@
 /build
+/dist
 /.idea/workspace.xml
 /project-config-local.json
 /node_modules

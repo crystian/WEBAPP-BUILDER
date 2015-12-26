@@ -45,6 +45,7 @@
 			'replaces': {
 				'original': [], 					//modificate orginal version
 				'originalMin': [], 					//modificate min orginal version
+				'originalDist': [],				//only for orignals
 				'prePreprocess': [],
 				'postPreprocess': [],
 				'preMin': [									//pre minificatedd
@@ -221,6 +222,11 @@
 				}
 
 				stream = gulp.src(fileNameToBeOrigin);
+			}
+
+
+			if(config.replaces.originalDist.length > 0){
+				stream = aux.replace(stream, config.replaces.originalDist);
 			}
 
 			return stream;

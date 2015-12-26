@@ -18,7 +18,7 @@
 			distAppJson = distFolder + 'app.json',
 			distIndex   = distFolder + 'index.html';
 
-	fdescribe('check some complex cases', function(){
+	describe('check some complex cases', function(){
 
 		beforeEach(function(){
 			cd(testFolder);

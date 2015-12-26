@@ -400,7 +400,7 @@ describe("make www.json files - ", function(){
 		'body{color:yellow;}'.to(indexCss2);
 		'body{color:#FF0;}'.to(indexCss2Min);
 
-		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp buildProjectDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		expect(test('-e', indexCss2)).toBe(true);
 		expect(test('-e', indexCss2Ori)).toBe(true);
@@ -416,6 +416,38 @@ describe("make www.json files - ", function(){
 		expect(json1.length).toBe(2);
 		expect(json1[0]).toBe('app1/index.css');
 		expect(json1[1]).toBe('app1/index.min.css');
+
+		//file not affected by originalDist
+		expect(cat('dist/app1.json')).not.toContain('body{color:#0FF;}');
+	});
+
+	it('(31) should replace and create original files', function(){
+		cd('31');
+
+		var indexCss2 = appPath +'/index.css',
+				indexCss2Ori = appPath +'/index.original.css',
+				indexCss2Min = appPath +'/index.min.css',
+				indexCss2MinOri = appPath +'/index.min.original.css';
+
+		rm('-rf', appPath + '/*.css');
+		rm('-rf', w1);
+
+		'body{color:yellow;}'.to(indexCss2);
+		'body{color:#FF0;}'.to(indexCss2Min);
+
+		expect(exec('gulp buildProjectDist --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(test('-e', indexCss2)).toBe(true);
+		expect(test('-e', indexCss2Ori)).toBe(true);
+		expect(test('-e', indexCss2Min)).toBe(true);
+		expect(test('-e', indexCss2MinOri)).toBe(true);
+
+		expect(cat(indexCss2)).toContain('body{color:red;}');
+		expect(cat(indexCss2Ori)).toContain('body{color:yellow;}');
+		expect(cat(indexCss2Min)).toContain('body{color:#00F;}');
+		expect(cat(indexCss2MinOri)).toContain('body{color:#FF0;}');
+
+		expect(cat('dist/app1.json')).toContain('body{color:#F00;}');
 	});
 
 	it('(90) complex case 1', function(){
