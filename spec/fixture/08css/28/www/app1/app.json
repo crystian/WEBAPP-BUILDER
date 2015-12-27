@@ -5,7 +5,7 @@
 		],
 		"replaces":{
 			"prePreprocess": [
-				["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
+				["/(border.*\\:)[ ]?(\\w*)/gi", "$1 50em"]
 			]
 		}
 	}

@@ -78,7 +78,7 @@ describe("Index template to index - ", function(){
 
 		expect(test('-e', wwwIndex)).toBe(true);
 
-		expect(fs.statSync(wwwIndex).size).toBeMoreLess(156821,50);
+		expect(fs.statSync(wwwIndex).size).toBeMoreLess(156660,10000);
 
 		var indexFileCompiledContent = cat(wwwIndex);
 
@@ -148,7 +148,7 @@ describe("Index template to index - ", function(){
 
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
-		expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(156819,50);
+		expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(156660,10000);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 

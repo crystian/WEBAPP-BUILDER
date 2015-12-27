@@ -5,7 +5,7 @@
 		],
 		"replaces":{
 			"preMin": [
-				["(public)(.*d)","$2Replaced"]
+				["/(public)(.*d)/gi","$2Replaced"]
 			]
 		}
 	}

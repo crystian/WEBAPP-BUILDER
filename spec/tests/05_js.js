@@ -36,7 +36,7 @@ describe("JS mechanics - ", function(){
 
 		expect(test('-e', compileLoaderJs)).toBe(true);
 
-		expect(fs.statSync(compileLoaderJs).size).toBeMoreLess(109277, 50);
+		expect(fs.statSync(compileLoaderJs).size).toBeMoreLess(109124, 1000);
 	});
 
 	it('(02) should create compile loader - minificated', function(){

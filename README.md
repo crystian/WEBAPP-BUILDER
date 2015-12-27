@@ -1,15 +1,16 @@
 # WEBAPP BUILDER!
 
+TODO
 [Español](http://), [English](http://)
 
 ## TL;DR Version:
 
-Este framework te permite ahorrar incontable cantidad de horas en la automatizacion y bootstrap de una nueva [web app](https://en.wikipedia.org/wiki/Web_application)/SPA (Single Page Application).
+Este framework te permite ahorrar incontable cantidad de horas en la automatizacion y bootstrap y temas tipicos de una nueva [web app](https://en.wikipedia.org/wiki/Web_application)/SPA (Single Page Application).
 
 ### Features:
 
-* **Todo el codigo de la app termina en un unico archivo por app!**, yes just a request!
-* Genera un **loader** que ocupa menos 50k (con todas las libs base)
+* **Todo el codigo de la app termina en un unico archivo _solido_ por app!**, yes just a request!
+* Genera un **loader** (solido) que ocupa menos 50k (con todas las libs base, para luego traerse cada app)
 * Mientras baja las apps muestra un bonito loading (7 opciones, pure CSS)
 * LIBS precargadas en el loader: platform (requerida); opcionales: fastClick, jquery, lz-string
 * El archivo final por cada app puede estar comprimido (by lz-string)
@@ -23,11 +24,15 @@ Este framework te permite ahorrar incontable cantidad de horas en la automatizac
 * Minificado de librerias que no lo esten.
 * Agregado automatico de cada archivo nuevo en el projecto (script/link), tanto en modo **dev** como **dist**.
 * Modo **release** para minificar y ocultar info.
-* Otros modulos: Analytics, deteccion de languages, appcache, muchos mas.
+* Otros: Analytics, deteccion de languages, appcache, y mucho, mucho mas.
 
-Este framework es totalmente "opinated", el motivo es simple, si lo haces como el framework te propone vas a poder de disfrutar de sus features sin perder tiempo en cosas mas "triviales", solo te vas a dedicar a codear tu web app/SPA!
+Este framework es totalmente "opinated" (dictatorial?), si lo haces como el framework te propone vas a poder de disfrutar de sus features sin perder tiempo en cosas mas "triviales", solo te vas a dedicar a codear tu web app/SPA!
 
-**NOTA:** A diferencia de [Yeoman](http://yeoman.io/) (y sus generators), este framework es un "patron", en vez de una solucion para la automatizacion, con lo cual te fuerza a trabajar respetando ciertas reglas (muy simples) y te provee soluciones de automatizacion como de bootstrap y boilerplate (loader, compatiblidad, compresion, etc). Orientado a projectos nuevos sobre todo.
+
+**NOTAS:**
+* El concepto o abstraccion detras de este framework es distinto al que proponen varios (para que se entienda rapido), lo mas cercano puede ser [Yeoman](http://yeoman.io/) (y sus generators), el cual te arma el Scafolding (andamios) con toda la automatizacion abierta para que quites o agregues a gusto. Este framework es mas proximo a un "patron" en ves de una solucion para la automatizacion, con lo cual te fuerza a trabajar respetando ciertas reglas (muy simples) y gracias a esto te provee soluciones de automatizacion como tambien de bootstrap/boilerplate (loader, compatiblidad, compresion, y un largo etc).
+* **Para ansiosos:** Como logra todo esto que promete?: Gracias a archivos _metadata_ (muy simples), que configuran al resto de los archivos, tanto individuales como grupales.
+* Orientado a projectos nuevos sobre todo, pero tambien se pueden adaptar.
 
 --
 
@@ -35,9 +40,9 @@ Este framework es totalmente "opinated", el motivo es simple, si lo haces como e
 
 _Continuando con el TL;DR ..._
 
-Este framework cuenta con numerosos temas tipicos solucionados y deliciosos features, esto ahorraria facil 4 semanas de trabajo full time e incluso mas.
+Este framework cuenta con numerosos temas tipicos solucionados y deliciosos features, esto ahorraria facil 4 semanas de trabajo full time e incluso mas (from the scratch)
 
-### _init():_
+### _aboutIt():_
 Este proyecto fue una extraccion de otro mas grande que luego de un tiempo me di cuenta que seria ideal separar las aguas y dejar el loader y temas de automatizacion listo para otros proyectos y no solo para el que fue creado. De ese momento a hoy paso mas de 1 año y fueron tres versiones, donde los saltos de las mejoras son cuantiosos entre cada version y me anime a hacerlos porque vi que realmente me servia a pesar del tiempo que llevara, espero que te sea tan util como a mi.
 
 ---
@@ -76,13 +81,24 @@ TODO REVIEW
 
 ### Conceptos:
 
-**APPFACTORY:** El projecto principal (Wrapper), este mismo donde esta includo este readme, es el que hace toda la magia!
+**WEBAPP-BUILDER (aka: BUILDER):** Este mismo proyecto (del readme), donde esta toda la magia.
 
-**PROJECT:** Es la carpeta creada con el instalador, APPFACTORY puede manejar mas de un projecto, pero solo de a uno.
+**PROJECT:** Es la carpeta creada con el _instalador_ (o de manera manual), el BUILDER maneja mas de un proyecto.
 
-**APPs:** Son Single Page Application (SPA), y se puede contener mas de una por projecto, solo es necesario indicar cual es la app inicial.
+**APPs:** Son SPAs, con los cuales se generan archivos solidos. Puede contener mas de una por proyecto.
 
 ----
+
+
+
+
+
+CONTINUAR:
+
+ debe ser una carpeta la cual no tiene que tener modifiaciones.
+
+ , solo es necesario indicar cual es la app inicial.
+
 
 La idea es de un wrapper, el projecto nuevo deberia estar en su carpeta dentro **APPFACTORY**.
 
@@ -367,3 +383,4 @@ modificar orignal no preoducto cuando es tiene replaces.original
 gutil.env.noMin  time
 coliciones de nombres de productos
 tener en cuenta que si usas el patron glob para una app con dos grupos, si uno de ellos crea un backup, el otro lo puede estar leyendo, debes ignorarlo con "!"
+expresiones regulares con /

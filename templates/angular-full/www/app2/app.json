@@ -54,7 +54,7 @@
 		"replaces": {
 			"preMin": [
 				[
-					"loader.cfg.appRoot +'/www/app2/data/local.json'",
+					"'../'+ loader.cfg.folders.template +'www/app2/data/local.json'",
 					"'data/local.json'"
 				]
 			]
@@ -64,8 +64,7 @@
 		"files": [
 			"templates.js"
 		],
-		"active": false,
-		"ignoreOnRelease": true
+		"ignoreOnBuild": true
 	},
 	{
 		"files": [

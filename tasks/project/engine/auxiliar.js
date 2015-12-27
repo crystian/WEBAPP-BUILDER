@@ -25,9 +25,16 @@
 				utils.exit(-1);
 				return;
 			}
-
 			//console.log('key: "'+ replacePair[0] +'" value: "'+ replacePair[1] +'"');
-			stream = stream.pipe(replace(new RegExp(replacePair[0], 'gi'), replacePair[1]));
+
+			var search = replacePair[0]; //string by default
+
+			if(search[0]==='/'){ //regular expresion
+				var parts = search.match(/\/(.*)\/(.*)?/);
+				search = new RegExp(parts[1], parts[2] || '');
+			}
+
+			stream = stream.pipe(replace(search, replacePair[1]));
 		}
 
 		return stream;

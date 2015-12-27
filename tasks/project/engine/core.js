@@ -32,6 +32,8 @@
 			'files': [],								//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
 			'overwrite': true,					//specially for libs, just make it once
 			'ignoreOnRelease': false,		//ignore on dev time, request by request
+			'ignoreOnBuild': false,		//ignore on
+			'ignoreOnDist': false,		//ignore on
 			'overwriteOnRelease': false,//
 			'minificated': false,				//if it is a lib for don't re do the minifcation (over overwrite!) and it has two versions, ensure use minExtension
 			'autoPrefixer': true,				//auto prefix when source is active
@@ -140,9 +142,14 @@
 		groups.forEach(function(group){
 			var config = _.merge({}, defaults.group, group);
 
-			if(aux.isNotActive(config) || (global.cfg.app.release && group.ignoreOnRelease)){
+			if(aux.isNotActive(config) ||
+				(global.cfg.app.release && group.ignoreOnRelease) ||
+				(global.cfg.isDist && group.ignoreOnDist) ||
+				(!global.cfg.isDist && group.ignoreOnBuild)
+			){
 				return;
 			}
+
 			var files = globby.sync(config.files, {cwd: _path});
 
 			configValidator(files, config);

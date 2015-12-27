@@ -14,7 +14,7 @@ app.factory('DataServices', ['$http', '$q',
 		};
 
 		function getLocal(){
-			var localRequest = '../'+ loader.cfg.folders.template +'/www/app2/data/local.json';
+			var localRequest = '../'+ loader.cfg.folders.template +'www/app2/data/local.json';
 			return $http.get(localRequest).
 				then(function(response, status, headers, config) {
 					return response.data.dataFromJson;
@@ -22,7 +22,7 @@ app.factory('DataServices', ['$http', '$q',
 		}
 
 		function getRemote(){
-			var remoteRequest = 'http://127.0.0.1:9002/echo/pepe';
+			var remoteRequest = 'http://127.0.0.1:9005/echo/pepe';
 			return $http.get(remoteRequest).
 				then(function(response, status, headers, config) {
 					return JSON.stringify(response.data);

@@ -13,7 +13,7 @@ var app = {};
 		app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 			$routeProvider
 				.when('/page/:n', {
-					templateUrl: '../'+ loader.cfg.folders.template +'/www/app2/page/page.tpl.html',
+					templateUrl: '../'+ loader.cfg.folders.template +'www/app2/page/page.tpl.html',
 					controller: 'PageCtrl',
 					controllerAs: 'page'
 				})

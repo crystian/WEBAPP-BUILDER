@@ -6,7 +6,7 @@
 		"generateMin": true,
 		"replaces":{
 			"postMin": [
-				["(border:)(\\w*)", "$150em"]
+				["/(border:)(\\w*)/gi", "$150em"]
 			]
 		}
 	}

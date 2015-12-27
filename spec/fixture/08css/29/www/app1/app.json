@@ -5,7 +5,7 @@
 		],
 		"replaces":{
 			"postPreprocess": [
-				["(display.*\\:)[ ]?(\\w*)", "$1 other-value"]
+				["/(display.*\\:)[ ]?(\\w*)/gi", "$1 other-value"]
 			]
 		}
 	}

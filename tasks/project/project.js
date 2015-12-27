@@ -46,8 +46,8 @@
 		utils.breakIfIsRoot();
 
 		runSequence(
-			'hookPreBuildProject',
 			gutil.env.debug ? 'nothing' : 'removeTemp',
+			'hookPreBuildProject',
 			'makeWwwJson',
 			'hookPostBuildProject',
 			cb);
@@ -69,8 +69,8 @@
 		global.cfg.isDist = true;
 
 		return runSequence(
-			'hookPreDistProject',
 			//gutil.env.debug ? 'nothing' : 'removeTemp',
+			'hookPreDistProject',
 			'makeWwwJson',
 			'makeAppsJson',
 			'hookPostDistProject',

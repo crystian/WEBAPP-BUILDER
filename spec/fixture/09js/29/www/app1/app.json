@@ -5,7 +5,7 @@
 		],
 		"replaces":{
 			"prePreprocess": [
-				["var Greeter", "var OtherGreeter"]
+				["var greeter", "var OtherGreeter"]
 			]
 		}
 	}
