@@ -16,6 +16,7 @@
 			autoprefixer = require('gulp-autoprefixer'),
 			rename       = require('gulp-rename'),
 			gutil        = require('gulp-util'),
+			sprite       = require('gulp-sprite-generator'),
 			core         = require('./core');
 
 	var extensionFinal = 'css';
@@ -24,7 +25,7 @@
 		return core.doMagic(file, config, appName, pth, {
 			extensionFinal: extensionFinal,
 			validPreproExtension: core.defaults.validCssPreproExtensions,
-			processFile: preprocessFile,
+			preprocessFile: preprocessFile,
 			removeCode: function(stream){
 				return stream;
 			},
@@ -41,8 +42,49 @@
 				stream = stream
 					.pipe(minifycss());
 				return stream;
-			}
+			},
+			postLinter: postLinter
 		});
+	}
+
+	function postLinter(stream, config, appName){
+		if(config.genSprite){
+			var spriteOutput = stream
+				.pipe(sprite({
+					baseUrl:         '../../../',
+					spriteSheetName: appName + '.png',
+					spriteSheetPath: '../../',
+					padding: 1,
+					algorithm: 'binary-tree',
+					//isRetina: false,
+					//engine: 'gm',
+					verbose: !!gutil.env.debug,
+					groupBy: [
+						function(image) {
+							//if (gutil.env.debug) {
+							//	console.dir(image);
+							//}
+
+							//getting number of sprite folder
+							var num = /(sprite)(.)(\/)/.exec(image.url),
+									group = 1;
+
+							if(num !== null && num.length > 0){
+								group = num[2];
+							}
+
+							return ''+group;
+						}
+					],
+					engineOpts: {
+						imagemagick: false
+					}
+				}));
+
+			spriteOutput.img.pipe(gulp.dest(global.cfg.app.folders.dist +'/img/sp'));
+			stream = spriteOutput.css;
+		}
+		return stream;
 	}
 
 	function preprocessFile(stream, config, fileName, type){
@@ -65,51 +107,6 @@
 		if(config.autoPrefixer){
 			stream = stream.pipe(autoprefixer({browsers: global.cfg.autoprefixer}));
 		}
-
-		if(false && config.genSprite){
-
-			stream = stream
-				.pipe(sprite({
-					baseUrl:         './',
-					spriteSheetName: 'aaaaa.png',
-					spriteSheetPath: 'img',
-					padding: 1,
-					algorithm: 'binary-tree',
-					//isRetina: false,
-					//engine: 'gm',
-					verbose: !!(gutil.env.debug),
-					groupBy: [
-						function(image) {
-							if (gutil.env.verbose) {
-								console.dir(image);
-							}
-							//getting number of sprite folder
-							var num = /(sprite)(.)(\/)/.exec(image.url),
-									group = 1;
-
-							if(num !== null && num.length > 0){
-								group = num[2];
-							}
-
-							//group += '.'+utils.getExtensionFile(image.path);
-							return ''+group;
-						}
-					],
-					engineOpts: {
-						imagemagick: false
-					}
-				}))
-				.pipe(gulp.dest(global.cfg.folders.build +'/img'));
-
-			//stream = spriteOutput.css.pipe(replace('assets/',''));
-		}
-
-
-
-
-
-
-
 
 		stream = stream.pipe(rename(fileName + '.' + extensionFinal));
 		return stream;

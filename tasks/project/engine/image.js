@@ -6,7 +6,6 @@
 	'use strict';
 
 	var utils           = require('../../shared/utils'),
-			sprite          = require('gulp-sprite-generator'),
 			imagemin        = require('gulp-imagemin'),
 			pngquant        = require('imagemin-pngquant'),
 			gm              = require('gulp-gm'),

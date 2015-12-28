@@ -40,7 +40,7 @@
 			'linter': false,						//if you want to lint, will not apply for libraries
 			'linterForce': false,				//if fail, return an error, otherwise continue without break the process
 			'backupExtension': 'original',//if it has replaces it will make a backup with this postfix
-			'genSprite': true,				//generate sprite
+			'genSprite': false,				//generate sprite
 			'generateMin': false,				//it should be create a minificate version
 			'forceUseMin': false,// for generateMin and minificated for dev time on release = false
 			'minExtension': 'min',			//prefix for file name minificated
@@ -171,11 +171,6 @@
 
 	function configValidator(files, config){
 
-		if(config.ignoreOnBuild && config.ignoreOnDist){
-			console.logRed('APPFACTORY: ignoreOnBuild and ignoreOnDist can not be true both at same time');
-			utils.exit(2);
-		}
-
 		if(files.length === 0){
 			console.logRed('APPFACTORY: Files not found, check your app.json');
 			utils.exit(2);
@@ -294,13 +289,17 @@
 		if(typeConfig.validPreproExtension.indexOf(type) !== -1){
 			stream = replaces(stream, config.replaces.prePreprocess, fileNameExt);
 
-			stream = typeConfig.processFile(stream, config, fileName, type);
+			stream = typeConfig.preprocessFile(stream, config, fileName, type);
 
 			stream = replaces(stream, config.replaces.postPreprocess, fileNameExt);
 		}
 
 		if(config.linter){
 			stream = typeConfig.linter(stream, config);
+		}
+
+		if(typeConfig.postLinter){
+			stream = typeConfig.postLinter(stream, config, appName);
 		}
 
 		if(typeConfig.removeCode){

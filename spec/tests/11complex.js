@@ -184,6 +184,7 @@
 			expect(cat(buildFolder + tempFolder + 'app.css')).not.toContain('#fromAppScss');
 			expect(cat(buildDist + 'app.json')).not.toContain('#fromAppScss');
 		});
+
 	});
 
 }());

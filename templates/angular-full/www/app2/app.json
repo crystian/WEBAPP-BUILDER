@@ -16,13 +16,14 @@
 	},
 	{
 		"files": [
-			"app.scss"
+			"*.scss"
 		],
+		"genSprite": true,
 		"replaces": {
-			"preMin": [
+			"prePreprocess": [
 				[
-					"../assets/img/",
-					"assets/img/"
+					"../templates/angular-full/www/app2/",
+					""
 				]
 			]
 		}

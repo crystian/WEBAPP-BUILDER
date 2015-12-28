@@ -1,0 +1,30 @@
+.kitten3 {
+	background-image: url(../templates/angular-full/www/app2/assets/img/other/kitten3.png); /* @meta {"sprite": {"skip": true}} */
+	background-size: 300px 122px;
+	width: 300px;
+	height: 122px;
+	margin: 0 auto;
+	background-repeat: no-repeat;
+}
+.kitten4 {
+	background-image: url(../templates/angular-full/www/app2/assets/img/sprite2/kitten4.png);
+}
+.kitten5 {
+	background-image: url(../templates/angular-full/www/app2/assets/img/sprite2/kitten5.png);
+}
+
+//RETINA:
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {
+
+	.kitten3 {background-image: url(../templates/angular-full/www/app2/assets/img/other/kitten3@2x.png); /* @meta {"sprite": {"skip": true}} */}
+	.kitten4 {background-image: url(../templates/angular-full/www/app2/assets/img/sprite2/kitten4@2x.png);}
+	.kitten5 {background-image: url(../templates/angular-full/www/app2/assets/img/sprite2/kitten5@2x.png);}
+
+}
+

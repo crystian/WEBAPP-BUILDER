@@ -25,6 +25,7 @@
 				utils.exit(-1);
 				return;
 			}
+
 			//console.log('key: "'+ replacePair[0] +'" value: "'+ replacePair[1] +'"');
 
 			var search = replacePair[0]; //string by default

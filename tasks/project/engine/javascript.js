@@ -22,7 +22,7 @@
 		return core.doMagic(file, config, appName, pth, {
 			extensionFinal: extensionFinal,
 			validPreproExtension: core.defaults.validJsPreproExtensions,
-			processFile: preprocessFile,
+			preprocessFile: preprocessFile,
 			removeCode: function(stream){
 				return stream.pipe(removeCode({production: global.cfg.app.release}));
 			},
