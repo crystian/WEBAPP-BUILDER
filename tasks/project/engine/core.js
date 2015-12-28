@@ -40,7 +40,7 @@
 			'linter': false,						//if you want to lint, will not apply for libraries
 			'linterForce': false,				//if fail, return an error, otherwise continue without break the process
 			'backupExtension': 'original',//if it has replaces it will make a backup with this postfix
-			//'genSprite': true,				//generate sprite
+			'genSprite': true,				//generate sprite
 			'generateMin': false,				//it should be create a minificate version
 			'forceUseMin': false,// for generateMin and minificated for dev time on release = false
 			'minExtension': 'min',			//prefix for file name minificated
@@ -459,55 +459,3 @@
  }
  */
 
-/*
- if(!file.minificated && file.genSprite){
-
- var spriteOutput = stream
- .pipe(sprite({
- baseUrl:         './',
- spriteSheetName: appName +'.png',
- spriteSheetPath: 'img',
- padding: 1,
- algorithm: 'binary-tree',
- //isRetina: false,
- //engine: 'gm',
- verbose: !!(gutil.env.debug),
- groupBy: [
- function(image) {
- if (gutil.env.verbose) {
- console.dir(image);
- }
- //getting number of sprite folder
- var num = /(sprite)(.)(\/)/.exec(image.url),
- group = 1;
-
- if(num !== null && num.length > 0){
- group = num[2];
- }
-
- //group += '.'+utils.getExtensionFile(image.path);
- return ''+group;
- }
- ],
- engineOpts: {
- imagemagick: false
- }
- }));
-
- spriteOutput.img
- //.pipe(imageminOptipng({optimizationLevel: 3})())
- //.pipe(imagemin({
- //	progressive: true,
- //	svgoPlugins: [{removeViewBox: false}],
- //	use: [pngquant()]
- //}))
-
- //.pipe(gm(function(gmfile) {
- //	gmfile.quality(85).setFormat('jpg');
- //	return gmfile;
- //}))
-
- .pipe(gulp.dest(global.cfg.folders.build +'/img'));
-
- stream = spriteOutput.css.pipe(replace('assets/',''));
- }*/

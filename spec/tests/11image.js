@@ -37,7 +37,7 @@
 			expect(test('-e', funnyDog)).toBe(true);
 			expect(test('-e', kitten)).toBe(true);
 
-			expect(fs.statSync(funnyDog).size).toBeMoreLess(13296, 100);
+			expect(fs.statSync(funnyDog).size).toBeMoreLess(8210, 500);
 			expect(fs.statSync(kitten).size).toBeMoreLess(34018, 100);
 
 		});

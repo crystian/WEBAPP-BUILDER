@@ -1,7 +1,7 @@
 /**
  * Created by Crystian on 15/11/2015.
  */
-	//TODO sprites
+
 (function(){
 	'use strict';
 
@@ -65,6 +65,51 @@
 		if(config.autoPrefixer){
 			stream = stream.pipe(autoprefixer({browsers: global.cfg.autoprefixer}));
 		}
+
+		if(false && config.genSprite){
+
+			stream = stream
+				.pipe(sprite({
+					baseUrl:         './',
+					spriteSheetName: 'aaaaa.png',
+					spriteSheetPath: 'img',
+					padding: 1,
+					algorithm: 'binary-tree',
+					//isRetina: false,
+					//engine: 'gm',
+					verbose: !!(gutil.env.debug),
+					groupBy: [
+						function(image) {
+							if (gutil.env.verbose) {
+								console.dir(image);
+							}
+							//getting number of sprite folder
+							var num = /(sprite)(.)(\/)/.exec(image.url),
+									group = 1;
+
+							if(num !== null && num.length > 0){
+								group = num[2];
+							}
+
+							//group += '.'+utils.getExtensionFile(image.path);
+							return ''+group;
+						}
+					],
+					engineOpts: {
+						imagemagick: false
+					}
+				}))
+				.pipe(gulp.dest(global.cfg.folders.build +'/img'));
+
+			//stream = spriteOutput.css.pipe(replace('assets/',''));
+		}
+
+
+
+
+
+
+
 
 		stream = stream.pipe(rename(fileName + '.' + extensionFinal));
 		return stream;

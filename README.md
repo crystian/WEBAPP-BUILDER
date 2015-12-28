@@ -5,7 +5,7 @@ TODO
 
 ## TL;DR Version:
 
-Este framework te permite ahorrar incontable cantidad de horas en la automatizacion y bootstrap y temas tipicos de una nueva [web app](https://en.wikipedia.org/wiki/Web_application)/SPA (Single Page Application).
+Este framework te permite ahorrar incontable cantidad de horas en la automatizacion, bootstrap y temas tipicos de una nueva [web app](https://en.wikipedia.org/wiki/Web_application)/SPA (Single Page Application), esto es para aquellos que quieren/necesitan agilidad y velocidad de desarrollo, este es el objetivo de este framework. #needForSpeed! #agile
 
 ### Features:
 
@@ -39,6 +39,8 @@ Este framework es totalmente "opinated" (dictatorial?), si lo haces como el fram
 ## Extended Version:
 
 _Continuando con el TL;DR ..._
+
+**_El framework para los amigos!_**
 
 Este framework cuenta con numerosos temas tipicos solucionados y deliciosos features, esto ahorraria facil 4 semanas de trabajo full time e incluso mas (from the scratch)
 

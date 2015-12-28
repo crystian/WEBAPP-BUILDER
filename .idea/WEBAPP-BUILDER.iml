@@ -14,9 +14,17 @@
       <excludeFolder url="file://$MODULE_DIR$/LOADER/vendors" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/spec/fixture" />
       <excludeFolder url="file://$MODULE_DIR$/template-ng/build" />
       <excludeFolder url="file://$MODULE_DIR$/template-ng/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/templates/angular-empty/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/templates/angular-empty/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/templates/angular-empty/vendors" />
+      <excludeFolder url="file://$MODULE_DIR$/templates/angular-empty/www/vendors" />
+      <excludeFolder url="file://$MODULE_DIR$/templates/angular-full/build" />
+      <excludeFolder url="file://$MODULE_DIR$/templates/angular-full/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/templates/angular-full/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/templates/angular-full/www/vendors/bower_components" />
       <excludeFolder url="file://$MODULE_DIR$/templates/angular-material/www/vendors" />
       <excludeFolder url="file://$MODULE_DIR$/templates/empty/build" />
       <excludeFolder url="file://$MODULE_DIR$/templates/empty/dist" />
