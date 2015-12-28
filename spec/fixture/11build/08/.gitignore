@@ -1,0 +1,7 @@
+/dist
+/build
+/.idea/workspace.xml
+/project-config-local.json
+/www/**/*.css
+/www/app/www.json
+/www/index.html

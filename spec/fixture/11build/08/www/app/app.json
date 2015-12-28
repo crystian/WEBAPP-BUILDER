@@ -1,0 +1,16 @@
+[
+	{
+		"files": [
+			"app.scss"
+		],
+		"ignoreOnDist": true
+	},
+	{
+		"files": [
+			"**/*.*",
+			"!app.css",
+			"!app.scss"
+		]
+	}
+]
+

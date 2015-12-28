@@ -1,0 +1,15 @@
+[
+	{
+		"files": [
+			"app.scss"
+		],
+		"ignoreOnBuild": true
+	},
+	{
+		"files": [
+			"**/*.*",
+			"!app.scss"
+		]
+	}
+]
+

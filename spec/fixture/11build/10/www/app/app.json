@@ -1,0 +1,16 @@
+[
+	{
+		"files": [
+			"app.scss"
+		],
+		"ignoreOnRelease": true
+	},
+	{
+		"files": [
+			"**/*.*",
+			"!app.css",
+			"!app.scss"
+		]
+	}
+]
+

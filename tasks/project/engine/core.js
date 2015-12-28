@@ -170,14 +170,20 @@
 	}
 
 	function configValidator(files, config){
+
+		if(config.ignoreOnBuild && config.ignoreOnDist){
+			console.logRed('APPFACTORY: ignoreOnBuild and ignoreOnDist can not be true both at same time');
+			utils.exit(2);
+		}
+
 		if(files.length === 0){
 			console.logRed('APPFACTORY: Files not found, check your app.json');
-			utils.exit(1);
+			utils.exit(2);
 		}
 
 		if(config.minificated && config.generateMin){
 			console.logRed('APPFACTORY Config: generateMin and minificated option are not compatibles (on "' + files + '")');
-			utils.exit(1);
+			utils.exit(2);
 		}
 	}
 
@@ -238,6 +244,7 @@
 
 			return stream;
 		}
+
 		//overwrite
 		var forceOverwrite = (global.cfg.app.release && config.overwriteOnRelease);
 
