@@ -43,17 +43,3 @@
 
 
 }());
-
-
-//----------
-
-//exports.makePath = function(path){
-//	var r = path;
-//	//if fail, it is a string
-//	try {
-//		//eval, yes, with pleasure! :)
-//		r = eval('global.cfg.'+path);
-//	} catch (e) {
-//	}
-//	return r;
-//};

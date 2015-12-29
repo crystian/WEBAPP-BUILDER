@@ -23,6 +23,7 @@
 			extensionFinal: extensionFinal,
 			validPreproExtension: core.defaults.validJsPreproExtensions,
 			preprocessFile: preprocessFile,
+			processMin: cleanCode,
 			removeCode: function(stream){
 				return stream.pipe(removeCode({production: global.cfg.app.release}));
 			},
@@ -46,6 +47,19 @@
 					);
 			}
 		});
+	}
+
+	//just for remove comments and clear the code, I didn't found another way to do this
+	function cleanCode(stream){
+		return stream.pipe(uglify({
+			output: {beautify: false},
+			compress: {
+				sequences: true, hoist_funs: false, dead_code: false,
+				drop_debugger: true, conditionals: false,
+				unused: false, if_return: false, side_effects: false
+			},
+			mangle: false
+		}));
 	}
 
 	function preprocessFile(stream, config, fileName, type){

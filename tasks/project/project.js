@@ -119,3 +119,28 @@
 	//	return magic.genAppCache();
 	//});
 }());
+
+/*
+
+ exports.genAppCache = function() {
+ if(!global.cfg.release){return;}
+
+ var fileName = global.cfg.projectCode + global.cfg.AppCacheFileName;
+
+ var appFile = gulp.src([global.cfg.folders.build+ '/!**!/!*'])
+ .pipe(manifest({
+ hash: true,
+ preferOnline: false,
+ network: ['http://!*', 'https://!*', '*'],
+ filename: fileName,
+ exclude: fileName
+ }))
+ .pipe(gulp.dest(global.cfg.folders.build));
+
+ var htmlFile = gulp.src(global.cfg.folders.build +'/'+ global.cfg.loader.filesDest.index)
+ .pipe(replace('<html>','<html manifest="'+ fileName +'">'))
+ .pipe(gulp.dest(global.cfg.folders.build));
+
+ return aux.merge(appFile, htmlFile);
+ };
+ */
