@@ -462,17 +462,3 @@
  };
  */
 
-/*
- //just for remove header a footer comments, it's ok here, not move
- if(type === 'js'){
- stream = stream.pipe(uglify({
- output: {beautify: false},
- compress: {
- sequences: true, hoist_funs:false, dead_code: false,
- drop_debugger: true, conditionals: false,
- unused: false, if_return:false, side_effects:false},
- mangle: false
- }));
- }
- */
-

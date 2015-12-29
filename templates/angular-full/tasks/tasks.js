@@ -2,13 +2,11 @@
  * Created by Crystian on 4/6/2015.
  */
 
-var spawn         = require('child_process').spawn,
-		runSequence   = require('run-sequence'),
-		image         = require('../../../tasks/project/engine/image'),
-		utils         = require('../../../tasks/shared/utils'),
-		htmlmin       = require('gulp-htmlmin'),
-		strip         = require('gulp-strip-comments'),
-		templateCache = require('gulp-angular-templatecache'),
+var spawn       = require('child_process').spawn,
+		runSequence = require('run-sequence'),
+		image       = require('../../../tasks/project/engine/image'),
+		utils       = require('../../../tasks/shared/utils'),
+		customs     = require('../../../tasks/shared/customs'),
 		node;
 
 //alias
@@ -63,21 +61,7 @@ gulp.task('copyFonts', function(){
 });
 
 gulp.task('ngTemplateApp2', function(){
-
-	var htmlminOptions = {
-		collapseWhitespace: true,
-		removeComments: true,
-		removeRedundantAttributes: true
-	};
-
-	return gulp.src([global.cfg.app.folders.www + '/**/*.tpl.html'])
-		.pipe(utils.debugeame())
-		.pipe(strip({safe: false, block: false}))
-		.pipe(htmlmin(htmlminOptions))
-		.pipe(templateCache({
-			standalone: true,
-			root: '../'+ global.cfg.app.folders.template + global.cfg.app.folders.www
-		}))
+	return customs.ngTemplate(gulp.src([global.cfg.app.folders.www + '/**/*.tpl.html']))
 		.pipe(gulp.dest(global.cfg.app.folders.www + 'app2'));
 });
 
