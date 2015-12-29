@@ -20,7 +20,11 @@
 		],
 		"genSprite": true,
 		"replaces": {
-			"prePreprocess": [
+			"prePreprocessDist": [
+				[
+					"../templates/angular-full/www/app2/assets/img/other",
+					"img/app2"
+				],
 				[
 					"../templates/angular-full/www/app2/",
 					""

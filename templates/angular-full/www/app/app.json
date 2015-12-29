@@ -58,8 +58,8 @@
 		"replaces": {
 			"preMin": [
 				[
-					"../templates/angular-full/www/app/assets",
-					""
+					"../templates/angular-full/www/app/assets/img",
+					"img/app"
 				]
 			]
 		}

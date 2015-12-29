@@ -24,7 +24,8 @@ gulp.task('hookPostDistProject', function(cb){
 	runSequence(
 		'copyFonts',
 		'copyData',
-		'copyImgs',
+		'copyImgsApp',
+		'copyImgsApp2',
 		'optimizeImages',
 		//		(gutil.env.debug) ? 'nothing' : 'genAppCache',
 		cb);
@@ -35,12 +36,16 @@ gulp.task('optimizeImages', function(){
 	return image.optimizeImages(global.cfg.app.folders.dist + 'img/**/*', global.cfg.app.folders.dist + 'img')
 });
 
-gulp.task('copyImgs', function(){
+gulp.task('copyImgsApp', function(){
 	return gulp.src([
-		global.cfg.app.folders.www + '/app/assets/img/**/*',
-		global.cfg.app.folders.www + '/app2/assets/img/**/*',
-		'!'+ global.cfg.app.folders.www + '/app2/assets/img/sprite*/**/*'
-	]).pipe(gulp.dest(global.cfg.app.folders.dist + '/img'));
+		global.cfg.app.folders.www + '/app/assets/img/*'
+	]).pipe(gulp.dest(global.cfg.app.folders.dist + '/img/app'));
+});
+
+gulp.task('copyImgsApp2', function(){
+	return gulp.src([
+		global.cfg.app.folders.www + '/app2/assets/img/other/*'
+	]).pipe(gulp.dest(global.cfg.app.folders.dist + '/img/app2'));
 });
 
 gulp.task('copyData', function(){

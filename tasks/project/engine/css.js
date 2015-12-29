@@ -49,31 +49,32 @@
 
 	function postLinter(stream, config, appName){
 		if(config.genSprite){
+			var imgFolder = 'img';
 			var spriteOutput = stream
 				.pipe(sprite({
-					baseUrl:         '../../../',
+					baseUrl: './',
 					spriteSheetName: appName + '.png',
-					spriteSheetPath: '../../',
+					spriteSheetPath: imgFolder,
 					padding: 1,
 					algorithm: 'binary-tree',
 					//isRetina: false,
 					//engine: 'gm',
 					verbose: !!gutil.env.debug,
 					groupBy: [
-						function(image) {
+						function(image){
 							//if (gutil.env.debug) {
 							//	console.dir(image);
 							//}
 
 							//getting number of sprite folder
-							var num = /(sprite)(.)(\/)/.exec(image.url),
+							var num   = /(sprite)(.)(\/)/.exec(image.url),
 									group = 1;
 
 							if(num !== null && num.length > 0){
 								group = num[2];
 							}
 
-							return ''+group;
+							return '' + group;
 						}
 					],
 					engineOpts: {
@@ -81,7 +82,7 @@
 					}
 				}));
 
-			spriteOutput.img.pipe(gulp.dest(global.cfg.app.folders.dist +'/img/sp'));
+			spriteOutput.img.pipe(gulp.dest(global.cfg.app.folders.dist + '/' + imgFolder));
 			stream = spriteOutput.css;
 		}
 		return stream;

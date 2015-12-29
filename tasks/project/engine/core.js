@@ -50,6 +50,8 @@
 				'originalDist': [],				//only for orignals
 				'prePreprocess': [],
 				'postPreprocess': [],
+				'prePreprocessDist': [],
+				'postPreprocessDist': [],
 				'preMin': [									//pre minificatedd
 					//["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
 				],
@@ -287,11 +289,20 @@
 		}
 
 		if(typeConfig.validPreproExtension.indexOf(type) !== -1){
+
 			stream = replaces(stream, config.replaces.prePreprocess, fileNameExt);
+
+			if(global.cfg.isDist){
+				stream = replaces(stream, config.replaces.prePreprocessDist, fileNameExt);
+			}
 
 			stream = typeConfig.preprocessFile(stream, config, fileName, type);
 
 			stream = replaces(stream, config.replaces.postPreprocess, fileNameExt);
+
+			if(global.cfg.isDist){
+				stream = replaces(stream, config.replaces.postPreprocessDist, fileNameExt);
+			}
 		}
 
 		if(config.linter){
