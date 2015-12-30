@@ -1,7 +1,5 @@
 {
 	"app": {
-		"name": "template angular full",
-		"version": "0.0.1",
 		"release": false,
 		"folders":{
 			"template": "templates/angular-full"

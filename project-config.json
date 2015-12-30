@@ -20,7 +20,6 @@
 	"xshowDeviceInfo": false,
 	"xshowSkeletor": false,
 	"xcontentEditable": false,
-	"xAppCacheFileName": ".cache",
 
 	"xplatform": {
 		"android": {
@@ -30,13 +29,12 @@
 	},
 
 	"app": {
-		"name": "app name",
-		"version": "0.0.0",
 		"release": true,
 		"firstApp": "app",
 		"site": "http://",
 		"cordova": false,
 		"isCordovaDevice": false,
+		"appCacheFileName": ".cache",
 
 		"folders": {
 			"www": "www",

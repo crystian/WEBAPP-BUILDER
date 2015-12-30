@@ -5,7 +5,6 @@
 (function(){
 	'use strict';
 
-
 	var core = require('./core'),
 			www  = require('./www'),
 			js   = require('./javascript'),
@@ -30,6 +29,10 @@
 
 	exports.html = function(){
 		return core.getFilesByGroupAndAppsStream(null, html.runPreprocessors, 'html');
+	};
+
+	exports.genAppCache = function(){
+		return core.genAppCache();
 	};
 
 }());

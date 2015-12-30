@@ -10,5 +10,3 @@ require('../../tasks/boot.js').boot({
 	gulp: gulp,
 	dirname: __dirname
 });
-
-requireDir('tasks', {recurse: true});

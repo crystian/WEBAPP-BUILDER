@@ -84,7 +84,7 @@ xdescribe("Boot test for the build system of framework (fuaaa) - ", function(){
 		expect(test('-e', configJson)).toBe(true);
 	});
 
-	it("(05) should has the attribute name from FWK config", function(){
+	it("(05) should put the default name and version", function(){
 		cd('05');
 		expect(test('-e', rootFwk + configjs)).toBe(true);
 
@@ -99,7 +99,9 @@ xdescribe("Boot test for the build system of framework (fuaaa) - ", function(){
 
 		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(utils.readJsonFile(configJson).name).toBe('app name');
+		var jsonFile = utils.readJsonFile(configJson);
+		expect(jsonFile.name).toBe('WEBAPP-BUILDER-APP');
+		expect(jsonFile.version).toBe('0.0.0');
 
 		if(hasLocal){
 			mv(pathConfigLocal + '.removed', pathConfigLocal);
@@ -121,7 +123,10 @@ xdescribe("Boot test for the build system of framework (fuaaa) - ", function(){
 
 		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(utils.readJsonFile(configJson).name).toBe('from fwk local');
+		var jsonFile = utils.readJsonFile(configJson);
+		expect(jsonFile.name).toBe('from fwk local');
+		expect(jsonFile.version).toBe('0.0.0');
+		expect(jsonFile.cfg.ip).toBe('127.0.0.1');
 
 		if(!hasLocal){
 			rm(pathConfigLocal);
@@ -134,7 +139,10 @@ xdescribe("Boot test for the build system of framework (fuaaa) - ", function(){
 
 		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(utils.readJsonFile(configJson).name).toBe('test 01-06 config');
+		var jsonFile = utils.readJsonFile(configJson);
+		expect(jsonFile.name).toBe('test 01-06');
+		expect(jsonFile.version).toBe('1.0.1');
+		expect(jsonFile.cfg.ip).toBe('test 01-06 config');
 	});
 
 	it("(07) should has the attribute name from APP config LOCAL", function(){
@@ -144,7 +152,10 @@ xdescribe("Boot test for the build system of framework (fuaaa) - ", function(){
 
 		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(utils.readJsonFile(configJson).name).toBe('test 01-07 config local');
+		var jsonFile = utils.readJsonFile(configJson);
+		expect(jsonFile.name).toBe('test 01-07');
+		expect(jsonFile.version).toBe('1.1.1');
+		expect(jsonFile.cfg.ip).toBe('test 01-07 config local');
 	});
 
 	it("(08) should has the platform component", function(){
