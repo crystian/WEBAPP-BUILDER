@@ -2,12 +2,8 @@
  * Created by Crystian on 4/6/2015.
  */
 
-var spawn       = require('child_process').spawn,
-		runSequence = require('run-sequence'),
-		image       = require('../../../../../tasks/project/engine/image'),
-		utils       = require('../../../../../tasks/shared/utils'),
-		customs     = require('../../../../../tasks/shared/customs'),
-		node;
+var runSequence = require('run-sequence'),
+		customs     = require('../../../../../tasks/shared/customs');
 
 //alias
 gulp.task('default', ['build']);
