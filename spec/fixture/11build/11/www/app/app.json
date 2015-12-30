@@ -1,0 +1,39 @@
+[
+	{
+		"files": [
+			"msgBold/msgBoldDirective.scss"
+		]
+	},
+	{
+		"files": [
+			"app.js"
+		],
+		"replaces": {
+			"preMin": [
+				[
+					"angular.module('templates',[]);//flagTemplates",
+					""
+				]
+			]
+		}
+	},
+	{
+		"files": [
+			"main/mainCtrl.js",
+			"msgBold/msgBoldDirective.js",
+			"page/page.js"
+		]
+	},
+	{
+		"files": [
+			"templates.js"
+		],
+		"ignoreOnBuild": true
+	},
+	{
+		"files": [
+			"boot.js",
+			"app.html"
+		]
+	}
+]

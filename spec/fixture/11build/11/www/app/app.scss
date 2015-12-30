@@ -1,0 +1,40 @@
+html, body, #mainContainer {
+	position: relative;
+	height: 100%;
+}
+body {
+	background: #eee;
+	//font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+}
+
+.normalPicture{
+	background-size: 133px 100px;
+	width: 133px;
+	height: 100px;
+	margin: 0 auto;
+	background-repeat: no-repeat;
+}
+
+.kitten1 {
+	background-image: url(../templates/angular-full/www/app2/assets/img/sprite1/kitten1.png);
+}
+.kitten2 {
+	background-image: url(../templates/angular-full/www/app2/assets/img/sprite1/kitten2.png);
+}
+//RETINA:
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {
+
+	.kitten1 {background-image: url(../templates/angular-full/www/app2/assets/img/sprite1/kitten1@2x.png);}
+	.kitten2 {background-image: url(../templates/angular-full/www/app2/assets/img/sprite1/kitten2@2x.png);}
+
+}
+

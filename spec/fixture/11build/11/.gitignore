@@ -1,0 +1,6 @@
+/build
+/dist
+/www/**/*.css
+/www/app/templates.js
+www.json
+/config.json
