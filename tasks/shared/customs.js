@@ -1,5 +1,7 @@
 /**
  * Created by Crystian on 29/12/2015.
+ *
+ * just for some framework
  */
 
 (function(){

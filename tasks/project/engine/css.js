@@ -16,8 +16,8 @@
 			autoprefixer = require('gulp-autoprefixer'),
 			rename       = require('gulp-rename'),
 			gutil        = require('gulp-util'),
-			sprite       = require('gulp-sprite-generator'),
-			core         = require('./core');
+			core         = require('./core'),
+			image        = require('./image');
 
 	var extensionFinal = 'css';
 
@@ -49,41 +49,7 @@
 
 	function postLinter(stream, config, appName){
 		if(config.genSprite){
-			var imgFolder = 'img';
-			var spriteOutput = stream
-				.pipe(sprite({
-					baseUrl: './',
-					spriteSheetName: appName + '.png',
-					spriteSheetPath: imgFolder,
-					padding: 1,
-					algorithm: 'binary-tree',
-					//isRetina: false,
-					//engine: 'gm',
-					verbose: !!gutil.env.debug,
-					groupBy: [
-						function(image){
-							//if (gutil.env.debug) {
-							//	console.dir(image);
-							//}
-
-							//getting number of sprite folder
-							var num   = /(sprite)(.)(\/)/.exec(image.url),
-									group = 1;
-
-							if(num !== null && num.length > 0){
-								group = num[2];
-							}
-
-							return '' + group;
-						}
-					],
-					engineOpts: {
-						imagemagick: false
-					}
-				}));
-
-			spriteOutput.img.pipe(gulp.dest(global.cfg.app.folders.dist + '/' + imgFolder));
-			stream = spriteOutput.css;
+			stream = image.genSprite(stream, appName);
 		}
 		return stream;
 	}

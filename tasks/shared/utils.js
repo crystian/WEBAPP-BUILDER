@@ -35,7 +35,7 @@ console.logRed = function(m){
 exports.breakIfIsRoot = function(_m){
 	var m = _m || '';
 	if(global.cfg.fromFwk){
-		console.logRed('APPFACTORY: it is loader, you need to run the command on project folder or template'+ m);
+		console.logRed('APPFACTORY: it is loader, you need to run the command on project folder or template' + m);
 		exit(2);
 	}
 };
@@ -43,7 +43,7 @@ exports.breakIfIsRoot = function(_m){
 exports.breakIfAppNotIsRelease = function(_m){
 	var m = _m || '';
 	if(!global.cfg.app.release){
-		console.logRed('APPFACTORY: app should be release'+ m);
+		console.logRed('APPFACTORY: app should be release' + m);
 		exit(2);
 	}
 };
@@ -51,23 +51,23 @@ exports.breakIfAppNotIsRelease = function(_m){
 exports.breakIfLoaderNotIsRelease = function(_m){
 	var m = _m || '';
 	if(!global.cfg.loader.release){
-		console.logRed('APPFACTORY: app should be release'+ m);
+		console.logRed('APPFACTORY: app should be release' + m);
 		exit(2);
 	}
 };
 
-exports.breakIfIsTemplate = function (_m){
+exports.breakIfIsTemplate = function(_m){
 	var m = _m || '';
 	if(global.cfg.isTemplate){
-		console.logRed('APPFACTORY: it is a template'+ m);
+		console.logRed('APPFACTORY: it is a template' + m);
 		exit(2);
 	}
 };
 
-exports.breakIfIsNotTemplate = function (_m){
+exports.breakIfIsNotTemplate = function(_m){
 	var m = _m || '';
 	if(!global.cfg.isTemplate){
-		console.logRed('APPFACTORY: it is not a template'+ m);
+		console.logRed('APPFACTORY: it is not a template' + m);
 		exit(2);
 	}
 };
@@ -151,7 +151,7 @@ exports.removePreExtensionFilename = function(s, preExtension){
 	}
 
 	var extFound = arr.indexOf(preExtension);
-	if(extFound!==-1){
+	if(extFound !== -1){
 		arr.splice(extFound, 1);
 	}
 
@@ -165,19 +165,19 @@ exports.removePreExtensionFilename = function(s, preExtension){
  * @param {Boolean} allowOverlapping    Optional. Default: false;
  * @author Vitim.us http://stackoverflow.com/questions/4009756/how-to-count-string-occurrence-in-string/7924240#7924240
  */
-exports.occurrences = function(string, subString, allowOverlapping) {
+exports.occurrences = function(string, subString, allowOverlapping){
 
 	string += "";
 	subString += "";
-	if (subString.length <= 0) return (string.length + 1);
+	if(subString.length <= 0) return (string.length + 1);
 
-	var n = 0,
-			pos = 0,
+	var n    = 0,
+			pos  = 0,
 			step = allowOverlapping ? 1 : subString.length;
 
-	while (true) {
+	while(true){
 		pos = string.indexOf(subString, pos);
-		if (pos >= 0) {
+		if(pos >= 0){
 			++n;
 			pos += step;
 		} else break;

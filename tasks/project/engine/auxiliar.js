@@ -4,9 +4,8 @@
 
 (function(){
 	'use strict';
-	var
-		utils = require('../../shared/utils'),
-		replace = require('gulp-replace');
+	var utils   = require('../../shared/utils'),
+			replace = require('gulp-replace');
 
 	exports.isNotActive = function(file){
 		//eval, yes, with pleasure! :)
@@ -30,7 +29,7 @@
 
 			var search = replacePair[0]; //string by default
 
-			if(search[0]==='/'){ //regular expresion
+			if(search[0] === '/'){ //regular expresion
 				var parts = search.match(/\/(.*)\/(.*)?/);
 				search = new RegExp(parts[1], parts[2] || '');
 			}

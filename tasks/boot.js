@@ -54,7 +54,7 @@ exports.boot = function(config){
 
 		//reconfigure folders:
 		var relativePathFrom = path.relative(config.dirname, __dirname + '/..') + '/',
-				relativePathTo = path.relative(__dirname + '/..', config.dirname) + '/';
+				relativePathTo   = path.relative(__dirname + '/..', config.dirname) + '/';
 
 		if(relativePathFrom === '/'){
 			relativePathFrom = '';

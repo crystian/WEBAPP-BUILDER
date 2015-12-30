@@ -4,6 +4,7 @@
  * This is the engine, it do a lot of magic, intentionally all in the same file.
  * Don't touch or you will dead! ... some day
  */
+
 (function(){
 	'use strict';
 
@@ -101,8 +102,8 @@
 			}
 
 			stream = stream
-					.pipe(concat(appName + '.' + type, {newLine: newLine}))
-					.pipe(gulp.dest(global.cfg.app.folders.build + global.cfg.app.folders.temp));
+				.pipe(concat(appName + '.' + type, {newLine: newLine}))
+				.pipe(gulp.dest(global.cfg.app.folders.build + global.cfg.app.folders.temp));
 		}
 		return stream;
 	}

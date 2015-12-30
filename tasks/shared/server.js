@@ -5,10 +5,10 @@
 (function(){
 	'use strict';
 
-	var webserver = require('gulp-webserver'),
-			path      = require('path'),
+	var webserver   = require('gulp-webserver'),
+			path        = require('path'),
 			runSequence = require('run-sequence'),
-			utils     = require('./utils');
+			utils       = require('./utils');
 
 	gulp.task('serveLoader', ['buildFull'], function(){
 		utils.breakIfIsNotTemplate();

@@ -33,7 +33,7 @@
 		for(; i < len; i++){
 			var s = global.cfg.varLibsToMin[i];
 
-			var fileName = global.cfg.pathFwk + s.pa +'/'+ s.name;
+			var fileName = global.cfg.pathFwk + s.pa + '/' + s.name;
 
 			if(!utils.fileExist(fileName)){
 				gulp.src(global.cfg.pathFwk + s.dev)

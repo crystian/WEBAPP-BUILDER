@@ -7,10 +7,11 @@
 
 	var runSequence = require('run-sequence'),
 			fs          = require('fs-extra'),
-			utils       = require('../shared/utils.js'),
+			utils       = require('../shared/utils'),
 			gutil       = require('gulp-util'),
 			del         = require('del'),
-			engine      = require('./engine/engine.js');
+			engine      = require('./engine/engine'),
+			image       = require('./engine/image');
 
 	//Alias
 	gulp.task('css', ['makeCss']);
@@ -108,18 +109,17 @@
 		return del([global.cfg.app.folders.dist], {force: true});
 	});
 
+	gulp.task('clearCache', function(done){
+		return image.optimizeImagesClearCache(done);
+	});
 
-	//require('./cordova.js');
-	//
-	//gulp.task('clearCache', function (done) {
-	//	return magic.clearCache(done);
-	//});
-	//
-	//gulp.task('genAppCache', function (){
-	//	return magic.genAppCache();
-	//});
 }());
 
+//
+//require('./cordova.js');
+//gulp.task('genAppCache', function (){
+//	return magic.genAppCache();
+//});
 /*
 
  exports.genAppCache = function() {
