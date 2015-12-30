@@ -6,6 +6,12 @@
 		"replaces":{
 			"prePreprocess": [
 				["/(public)(.*d)/gi","$2Replaced"]
+			],
+			"prePreprocessDist": [
+				["50em", "14px"]
+			],
+			"postPreprocessDist": [
+				["50em", "14px"]
 			]
 		}
 	}

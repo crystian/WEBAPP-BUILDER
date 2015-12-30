@@ -302,6 +302,7 @@ describe("preprocessors (css)", function(){
 		expect(exec('gulp css --testMode ' + args, {silent: 1}).code).toBe(0);
 
 		expect(cat(indexLess + ext)).toContain('border: 50em;');
+		expect(cat(indexLess + ext)).not.toContain('border: 14px;');
 	});
 
 	it('(29) should replace post prepro', function(){
@@ -315,6 +316,30 @@ describe("preprocessors (css)", function(){
 		expect(cat(indexLessCss)).toContain('other-value');
 
 		expect(utils.occurrences(cat(indexLessCss), 'other-value')).toBe(4);
+	});
+
+	it('(30) should replace pre prepro dist', function(){
+		cd('30');
+		var ext = '.css';
+
+		rm('-rf', indexLess + ext);
+
+		expect(exec('gulp buildProjectDist --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexLess + ext)).not.toContain('border: 50em;');
+		expect(cat(indexLess + ext)).toContain('border:14px');
+	});
+
+	it('(31) should replace post prepro dist', function(){
+		cd('31');
+		var ext = '.css';
+
+		rm('-rf', indexLess + ext);
+
+		expect(exec('gulp buildProjectDist --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		expect(cat(indexLess + ext)).not.toContain('border: 50em;');
+		expect(cat(indexLess + ext)).toContain('border:100%');
 	});
 
 	it('(16) should replace post min', function(){

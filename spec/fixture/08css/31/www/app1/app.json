@@ -11,7 +11,7 @@
 				["50em", "14px"]
 			],
 			"postPreprocessDist": [
-				["50em", "14px"]
+				["14px", "100%"]
 			]
 		}
 	}

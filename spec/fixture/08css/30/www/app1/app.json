@@ -9,9 +9,6 @@
 			],
 			"prePreprocessDist": [
 				["50em", "14px"]
-			],
-			"postPreprocessDist": [
-				["50em", "14px"]
 			]
 		}
 	}

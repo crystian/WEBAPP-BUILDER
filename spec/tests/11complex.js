@@ -57,7 +57,7 @@
 
 			expect(test('-e', distFolder)).toBe(true);
 			expect(fs.statSync(distIndex).size).toBeMoreLess(67043, 1000);
-			expect(fs.statSync(distAppJson).size).toBeMoreLess(184018, 1000);
+			expect(fs.statSync(distAppJson).size).toBeMoreLess(182823, 10000);
 		});
 
 		it('should include "minificated" files because use forceUseMin (over release:false)', function(){
@@ -71,7 +71,7 @@
 
 			expect(test('-e', distFolder)).toBe(true);
 			expect(fs.statSync(distIndex).size).toBeMoreLess(156826, 1000);
-			expect(fs.statSync(distAppJson).size).toBeMoreLess(184018, 1000);
+			expect(fs.statSync(distAppJson).size).toBeMoreLess(184018, 10000);
 		});
 
 		it('should not create scss on build process', function(){
