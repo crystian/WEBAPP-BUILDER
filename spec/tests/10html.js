@@ -31,7 +31,7 @@ function createFileTest(){
 	testContent.to(index + '.html');
 }
 
-describe("preprocessors (html)", function(){
+describe("10html: preprocessors (html)", function(){
 
 	beforeEach(function(){
 		cd(testFolder);

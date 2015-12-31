@@ -19,12 +19,5 @@
 			"**/*.css",
 			"**/*.html"
 		]
-	},
-	{
-		"files": [
-			"templates.js"
-		],
-		"active": false,
-		"ignoreOnRelease": true
 	}
 ]

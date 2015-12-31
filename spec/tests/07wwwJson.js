@@ -17,10 +17,9 @@ var testFolder = 'spec/fixture/07wwwJson',
 		indexSass  = 'www/app1/indexSass',
 		indexScss  = 'www/app1/indexScss',
 		indexLess  = 'www/app1/indexLess',
-		indexStyl  = 'www/app1/indexStyl'
-	;
+		indexStyl  = 'www/app1/indexStyl';
 
-describe("make www.json files - ", function(){
+describe("07wwJson: make www.json files", function(){
 
 	beforeEach(function(){
 		cd(testFolder);

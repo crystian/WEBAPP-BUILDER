@@ -109,7 +109,7 @@
 		process.stdout.write = t;
 	}
 
-	describe('check basic commands for build', function(){
+	describe('11build: check basic commands for build', function(){
 		describe('from root, it', function(){
 			it('should fail because it is not project', function(){
 				expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(2);
@@ -149,7 +149,7 @@
 
 		});
 
-		describe("from template, it", function(){
+		describe("11build: from template, it", function(){
 
 			beforeEach(function(){
 				cd(templateFolder);
@@ -398,7 +398,7 @@
 
 		});
 
-		describe("from project, it", function(){
+		describe("11build: from project, it", function(){
 
 			beforeEach(function(){
 				cd(testFolder);
@@ -484,7 +484,7 @@
 				expect(test('-e', indexDist)).toBe(true);
 
 				expect(cat(indexDist)).toContain('isDist:!0');
-				expect(fs.statSync(indexDist).size).toBeMoreLess(67078, 100);
+				expect(fs.statSync(indexDist).size).toBeMoreLess(66819, 1000);
 
 			});
 

@@ -17,7 +17,7 @@ var testFolder       = 'spec/fixture/06_html',
 		indexFile        = rootFwk + pathLoader + index,
 		indexFileCordova = rootFwk + pathLoader + indexCordova;
 
-xdescribe("Index template to index - ", function(){
+xdescribe("06_html: Index template to index - ", function(){
 
 	beforeEach(function(){
 		cd(testFolder);
@@ -53,7 +53,7 @@ xdescribe("Index template to index - ", function(){
 
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
-		expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(67040,50);
+		expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(66819,1000);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 
@@ -103,7 +103,7 @@ xdescribe("Index template to index - ", function(){
 
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
-		expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(67050, 100);
+		expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(66819, 1000);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 
@@ -128,7 +128,7 @@ xdescribe("Index template to index - ", function(){
 
 		expect(test('-e', indexFileCompiled)).toBe(true);
 
-		expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(67040,50);
+		expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(66818,1000);
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 

@@ -23,7 +23,7 @@
 			wwwJson     = 'www/app/www.json';
 
 
-	describe('check some complex cases', function(){
+	describe('11complex: check some complex cases', function(){
 
 		beforeEach(function(){
 			cd(testFolder);

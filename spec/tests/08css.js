@@ -27,7 +27,7 @@ function createCssTest(){
 	cssTestContent.to(indexCss + '.css');
 }
 
-describe("preprocessors (css)", function(){
+describe("08css: preprocessors (css)", function(){
 
 	beforeEach(function(){
 		cd(testFolder);

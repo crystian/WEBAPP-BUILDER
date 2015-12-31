@@ -1,7 +1,12 @@
 {
 	"app": {
-		"name": "template angular material",
-		"version": "0.0.1",
+		"release": false,
+		"folders":{
+			"template": "templates/angular-material"
+		}
+	},
+	"loader": {
+		"contentSecurity": "",
 		"release": false
 	}
 }

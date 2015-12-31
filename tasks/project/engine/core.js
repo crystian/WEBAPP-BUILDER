@@ -177,12 +177,12 @@
 	function configValidator(files, config){
 
 		if(files.length === 0){
-			console.logRed('APPFACTORY: Files not found, check your app.json');
+			console.logRed(global.builderName +': Files not found, check your app.json');
 			utils.exit(2);
 		}
 
 		if(config.minificated && config.generateMin){
-			console.logRed('APPFACTORY Config: generateMin and minificated option are not compatibles (on "' + files + '")');
+			console.logRed(global.builderName +': Config: generateMin and minificated option are not compatibles (on "' + files + '")');
 			utils.exit(2);
 		}
 	}

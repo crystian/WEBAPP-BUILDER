@@ -2,13 +2,21 @@
  * Created by Crystian on 01/11/2015.
  */
 
-var utils = require('../../tasks/shared/utils');
-var args = process.argv.slice(2).join(' ');
+var utils = require('../../tasks/shared/utils'),
+		args = process.argv.slice(2).join(' ');
 require('shelljs/global');
 
+//detail report
+if(process.argv.indexOf('--detail')!==-1){
+	var SpecReporter = require('jasmine-spec-reporter');
+	jasmine.getEnv().addReporter(new SpecReporter());   // add jasmine-spec-reporter
+}
+
 //fail on firt failure
-//var failFast = require('jasmine-fail-fast');
-//jasmine.getEnv().addReporter(failFast.init());
+if(process.argv.indexOf('--breakOnFail')!==-1){
+	var failFast = require('jasmine-fail-fast');
+	jasmine.getEnv().addReporter(failFast.init());
+}
 
 var testFolder     = 'spec/fixture/01_boot',
 		rootFwk        = '../../../../',
@@ -18,7 +26,7 @@ var testFolder     = 'spec/fixture/01_boot',
 		configjs       = 'loader/config.js',
 		configJson     = 'config.json';
 
-xdescribe("Boot test for the build system of framework (fuaaa) - ", function(){
+xdescribe("01_boot: Boot test for the build system of framework (fuaaa)", function(){
 
 	beforeEach(function(){
 		cd(testFolder);

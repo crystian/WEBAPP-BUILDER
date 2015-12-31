@@ -41,7 +41,7 @@
 			appCssTemp2  = buildFolder + '.tmp/app2.css',
 			appJson2     = distFolder + 'app2.json';
 
-	describe('check optimizer', function(){
+	describe('11image: check optimizer', function(){
 
 		beforeEach(function(){
 			cd(testFolder);

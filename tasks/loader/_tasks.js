@@ -58,7 +58,7 @@
 					indexDest = global.cfg.pathPrj + global.cfg.app.folders.www + global.cfg.loader.filesDest.index;
 
 			if(!utils.fileExist(indexOri)){
-				console.logRed('APPFACTORY: what?, there are some problem generating index.html');
+				console.logRed(global.builderName +': what?, there are some problem generating index.html');
 				utils.exit(1);
 			}
 
@@ -75,7 +75,7 @@
 				indexDest = global.cfg.pathPrj + global.cfg.app.folders.dist + global.cfg.loader.filesDest.index;
 
 		if(!utils.fileExist(indexOri)){
-			console.logRed('APPFACTORY: what?, there are some problem generating index.html');
+			console.logRed(global.builderName +': what?, there are some problem generating index.html');
 			utils.exit(1);
 		}
 

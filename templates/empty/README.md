@@ -1,3 +1,3 @@
-# WEBAPP - BUILDER - Template empty, by Crystian
+# WEBAPP - BUILDER - Template empty
 
 See ../README.md

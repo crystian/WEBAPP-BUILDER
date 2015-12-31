@@ -13,7 +13,7 @@ var testFolder          = 'spec/fixture/05_js',
 		configJson          = 'config.json',
 		compileLoaderJsName = '-compiledloader.js';
 
-xdescribe("JS mechanics - ", function(){
+xdescribe("05_js: JS mechanics", function(){
 
 	beforeEach(function(){
 		cd(testFolder);
@@ -53,7 +53,7 @@ xdescribe("JS mechanics - ", function(){
 
 		expect(test('-e', compileLoaderJs)).toBe(true);
 
-		expect(fs.statSync(compileLoaderJs).size).toBeMoreLess(50110,100);
+		expect(fs.statSync(compileLoaderJs).size).toBeMoreLess(50110,1000);
 	});
 
 	it('(03) should jshint validate the code', function(){

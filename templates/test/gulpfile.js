@@ -8,7 +8,7 @@
 var gulp = require('gulp'),
 		requireDir = require('require-dir');
 
-require('../../tasks/boot.js').boot({
+require('../../tasks/boot').boot({
 	gulp: gulp,
 	dirname: __dirname
 });

@@ -17,7 +17,7 @@
 			buildFolder = 'dist',
 			templateJs = 'www/app/templates.js';
 
-	describe('check customs actions', function(){
+	describe('11customs: check customs actions', function(){
 
 		beforeEach(function(){
 			cd(testFolder);

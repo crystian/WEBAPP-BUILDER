@@ -3,13 +3,13 @@
     <properties>
       <option name="frameworkName" value="node_modules" />
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/node_modules/jasmine-core/lib/jasmine-core/jasmine.js" />
         <item url="file://$PROJECT_DIR$/node_modules/jasmine-core/lib/jasmine-core.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/jasmine-core/lib/jasmine-core/jasmine.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/node_modules/jasmine-core/lib/jasmine-core/jasmine.js" />
       <root url="file://$PROJECT_DIR$/node_modules/jasmine-core/lib/jasmine-core.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/jasmine-core/lib/jasmine-core/jasmine.js" />
     </CLASSES>
     <SOURCES />
   </library>

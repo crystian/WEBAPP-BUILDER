@@ -2,7 +2,7 @@
 	"name": "WEBAPP-BUILDER-template-angular-full",
 	"version": "0.0.2",
 	"author": "Crystian (Cristian Bietti) @crystian",
-	"repository": "https://github.com/crystian/APPFACTORY.git",
+	"repository": "https://github.com/crystian/WEBAPP-BUILDER.git",
 	"private": true,
 	"dependencies": {
 		"restify": "^3.0.3"

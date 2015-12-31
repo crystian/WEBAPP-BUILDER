@@ -3,7 +3,6 @@
 
 # TEAM
 
-	Crystian -- WebUI, design and more -- @crystian
     <name> -- <role> -- <twitter>
 
 # THANKS

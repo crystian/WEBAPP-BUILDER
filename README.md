@@ -230,7 +230,7 @@ Es necesario que todo este en el path, para ayudarte en esto creen un bat (windo
 ### Recipe:
 
 1. Clonar repo APPFACTORY:
-	`git clone https://github.com/crystian/APPFACTORY.git`
+	`git clone https://github.com/crystian/WEBAPP-BUILDER.git`
 	
 2. Ingresar en APPFACTORY e instalar dependencias de building para node: `npm i`
 	- Note: (en windows da un error que no puede instalar "weak/python", no te preocupes)
