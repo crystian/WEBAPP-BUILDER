@@ -20,7 +20,7 @@ var testFolder = 'spec/fixture/07wwwJson',
 		indexStyl  = 'www/app1/indexStyl'
 	;
 
-xdescribe("make www.json files - ", function(){
+describe("make www.json files - ", function(){
 
 	beforeEach(function(){
 		cd(testFolder);
@@ -202,7 +202,7 @@ xdescribe("make www.json files - ", function(){
 	it('(16) should fail for incompatible opions', function(){
 		cd('16');
 
-		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(1);
+		expect(exec('gulp makeWwwJson --testMode ' + args, {silent: 1}).code).toBe(2);
 	});
 
 	it('(17) should fail because there is not a minificate version with option "minificated"', function(){

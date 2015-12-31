@@ -9,6 +9,10 @@
 				[
 					"../fonts/",
 					"../templates/angular-full/www/vendors/bower_components/components-font-awesome/fonts/"
+				],
+				[
+					"?v=4.4.0",
+					""
 				]
 			],
 			"originalMin": [

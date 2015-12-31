@@ -75,6 +75,7 @@
 			'makeWwwJson',
 			'makeAppsJson',
 			'hookPostDistProject',
+			'genAppCache',
 			cb);
 	});
 

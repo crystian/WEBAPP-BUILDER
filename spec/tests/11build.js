@@ -223,7 +223,7 @@
 				expect(test('-e', indexDist)).toBe(true);
 
 				expect(cat(indexDist)).toContain('isDist:!0');
-				expect(fs.statSync(indexDist).size).toBeMoreLess(67078, 100);
+				expect(fs.statSync(indexDist).size).toBeMoreLess(67220, 1000);
 
 			});
 

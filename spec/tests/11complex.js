@@ -13,13 +13,13 @@
 	var testFolder  = 'spec/fixture/11build',
 			rootFwk     = '../../../../',
 			buildFolder = 'build/',
-			buildDist = 'dist/',
+			buildDist   = 'dist/',
 			tempFolder  = '.tmp/',
 			distFolder  = 'dist/',
 			distAppJson = distFolder + 'app.json',
 			distIndex   = distFolder + 'index.html',
 			appCss      = 'www/app/app.css',
-			otherCss      = 'www/app/other.css',
+			otherCss    = 'www/app/other.css',
 			wwwJson     = 'www/app/www.json';
 
 
@@ -110,9 +110,9 @@
 
 		it('should not include css on dist process (with css created)', function(){
 			cd('08');
-			var cssFile = '#fromAppScss {\n'+
-			'	background-color: red;\n'+
-			'}';
+			var cssFile = '#fromAppScss {\n' +
+				'	background-color: red;\n' +
+				'}';
 
 			rm('-rf', buildFolder);
 			rm('-rf', distFolder);
@@ -159,8 +159,8 @@
 
 		it('should not include css because is release and it was set ignoreOnRelease = true', function(){
 			cd('10');
-			var cssFile = '#fromAppScss {\n'+
-				'	background-color: red;\n'+
+			var cssFile = '#fromAppScss {\n' +
+				'	background-color: red;\n' +
 				'}';
 
 			rm('-rf', buildFolder);
@@ -185,7 +185,39 @@
 			expect(cat(buildDist + 'app.json')).not.toContain('#fromAppScss');
 		});
 
+		it('should generate manifest cache', function(){
+			cd('10');
+
+			rm('-rf', distFolder);
+
+			expect(exec('gulp buildProjectDist --testMode --debug', {silent: 1}).code).toBe(0);
+
+			var manifestFile = 'dist/test 11-10.cache';
+			expect(test('-e', manifestFile)).toBe(true);
+			expect(cat(manifestFile)).toContain('app.json');
+
+		});
+
+		it('should generate manifest cache with values', function(){
+			cd('13');
+
+			rm('-rf', distFolder);
+
+			expect(exec('gulp buildProjectDist --testMode --debug', {silent: 1}).code).toBe(0);
+
+			var manifestFile = 'dist/othername.cache';
+			expect(test('-e', manifestFile)).toBe(true);
+			expect(cat(manifestFile)).toContain('prefer-online');
+			expect(cat(manifestFile)).toContain('test1');
+			expect(cat(manifestFile)).toContain('test2');
+			expect(cat(manifestFile)).toContain('app.json');
+			expect(cat(manifestFile)).not.toContain('app.1.png');
+			expect(cat(manifestFile)).not.toContain('hash');
+
+		});
 	});
+
+
 
 }());
 

@@ -6,16 +6,13 @@
 		"server": 9000,
 		"project": 9001,
 		"dist": 9002,
-		"xnightmare": 9003,
-		"xapi": 9002
+		"xnightmare": 9003
 	},
 
 	"setGitVersionOnPackage": false,
 
 	"autoprefixer": ["ie 10","android 4","chrome 42","ff 27","ios 7","opera 19","safari 7"],
 
-	"xprojectCode": "empty",
-	"xforceLibFull": false,
 	"xdebugZoneActive": false,
 	"xshowDeviceInfo": false,
 	"xshowSkeletor": false,
@@ -34,7 +31,19 @@
 		"site": "http://",
 		"cordova": false,
 		"isCordovaDevice": false,
-		"appCacheFileName": ".cache",
+
+		"appCache":{
+			"use": false,
+			"filename": "",
+			"ext": ".cache",
+			"files": ["dist/**/*"],
+			"options": {
+				"hash": true,
+				"preferOnline": false,
+				"network": ["http://!*", "https://!*", "*"]
+			}
+
+		},
 
 		"folders": {
 			"www": "www",
@@ -42,9 +51,7 @@
 			"dist": "dist",
 			"temp": ".tmp",
 			"xcordova": "CORDOVA",
-			"xcordovaWWW": "CORDOVA/www",
-			"xbower": "vendors/bower_components",
-			"xapi": "www/api"
+			"xcordovaWWW": "CORDOVA/www"
 		},
 
 		"compatibilityMatrix": {
@@ -91,8 +98,8 @@
 
 
 	"loader": {
-		"name": "App Factory",
-		"version": "0.1.0",
+		"name": "WEBAPP BUILDER",
+		"version": "1.0.0",
 		"release": true,
 		"loading": 1,
 

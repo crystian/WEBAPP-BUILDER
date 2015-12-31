@@ -12,7 +12,7 @@ Este framework te permite ahorrar incontable cantidad de horas en la automatizac
 * **Todo el codigo de la app termina en un unico archivo _solido_ por app!**, yes just a request!
 * Genera un **loader** (solido) que ocupa menos 50k (con todas las libs base, para luego traerse cada app)
 * Mientras baja las apps muestra un bonito loading (7 opciones, pure CSS)
-* LIBS precargadas en el loader: platform (requerida); opcionales: fastClick, jquery, lz-string
+* LIBS precargadas en el loader: platform, es6-promise (requeridas); opcionales: fastClick, jquery, lz-string
 * El archivo final por cada app puede estar comprimido (by lz-string)
 * Preprocessors (included):
   * CSS: [Sass](http://sass-lang.com/), [Less](http://lesscss.org/), [Stylus](http://stylus-lang.com/);

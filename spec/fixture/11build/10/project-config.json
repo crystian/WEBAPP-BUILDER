@@ -2,7 +2,10 @@
 	"app": {
 		"name": "index test 11-10",
 		"version": "0.0.2",
-		"release": true
+		"release": true,
+		"appCache":{
+			"use": true
+		}
 	},
 	"loader":{
 		"release": true

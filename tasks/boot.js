@@ -48,7 +48,7 @@ exports.boot = function(config){
 		global.cfg.app.name = global.cfg.pkg.name || global.cfg.app.name || 'WEBAPP-BUILDER-APP';
 		global.cfg.app.version = global.cfg.pkg.version || global.cfg.app.version || '0.0.0';
 
-		console.logWarn('BUILDING: ' + global.cfg.app.name + ' ' + global.cfg.app.version +' ...');
+		console.logGreen('BUILDING: ' + global.cfg.app.name + ' ' + global.cfg.app.version +' ...');
 
 		global.cfg.fromFwk = false;
 		global.cfg.isTemplate = false;

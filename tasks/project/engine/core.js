@@ -9,14 +9,16 @@
 	'use strict';
 
 	//libs
-	var _      = require('lodash'),
-			globby = require('globby'),
-			fs     = require('fs-extra'),
-			path   = require('path'),
-			merge2 = require('merge2'),
-			rename = require('gulp-rename'),
-			gutil  = require('gulp-util'),
-			concat = require('gulp-concat');
+	var _        = require('lodash'),
+			globby   = require('globby'),
+			fs       = require('fs-extra'),
+			path     = require('path'),
+			merge2   = require('merge2'),
+			rename   = require('gulp-rename'),
+			gutil    = require('gulp-util'),
+			manifest = require('gulp-manifest'),
+			replace  = require('gulp-replace'),
+			concat   = require('gulp-concat');
 
 	//engine libs
 	var utils = require('../../shared/utils'),
@@ -430,12 +432,41 @@
 		return stream;
 	}
 
+	function genAppCache(){
+		if(!global.cfg.app.release || (global.cfg.app.release && !global.cfg.app.appCache.use)){
+			return;
+		}
+
+		var fileName = (global.cfg.app.appCache.filename === '' ? global.cfg.app.name : global.cfg.app.appCache.filename) + global.cfg.app.appCache.ext;
+
+		var options = {
+			hash: true,
+			preferOnline: false,
+			network: ['http://!*', 'https://!*', '*'],
+			filename: fileName,
+			exclude: fileName
+		};
+
+		_.extend(options, global.cfg.app.appCache.options);
+
+
+		//don't worrie, it is independent
+		gulp.src(global.cfg.app.appCache.files)
+			.pipe(manifest(options))
+			.pipe(gulp.dest(global.cfg.app.folders.dist));
+
+		return gulp.src(global.cfg.app.folders.dist + '/' + global.cfg.loader.filesDest.index)
+			.pipe(replace('<html>', '<html manifest="' + fileName + '">'))
+			.pipe(gulp.dest(global.cfg.app.folders.dist));
+	}
+
 	exports.getFilesByGroupAndAppsStream = getFilesByGroupAndAppsStream;
 	exports.getFilesByGroupAndApps = getFilesByGroupAndApps;
 	exports.getFilesByGroup = getFilesByGroup;
 	exports.doMagic = doMagic;
 	exports.modifyOriginal = modifyOriginal;
 	exports.makeAppsJson = makeAppsJson;
+	exports.genAppCache = genAppCache;
 	exports.replaces = replaces;
 	exports.defaults = defaults;
 
