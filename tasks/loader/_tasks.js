@@ -6,7 +6,7 @@
 	'use strict';
 
 	var gutil       = require('gulp-util'),
-			runSequence = require('run-sequence'),
+			runSequence = require('run-sequence').use(gulp),
 			fs          = require('fs-extra'),
 			utils       = require('../shared/utils.js');
 

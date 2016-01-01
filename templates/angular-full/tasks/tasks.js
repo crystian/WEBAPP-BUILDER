@@ -25,7 +25,6 @@ gulp.task('hookPostDistProject', function(cb){
 		'copyImgsApp',
 		'copyImgsApp2',
 		'optimizeImages',
-		//		(gutil.env.debug) ? 'nothing' : 'genAppCache',
 		cb);
 });
 

@@ -7,7 +7,7 @@
 
 	var webserver   = require('gulp-webserver'),
 			path        = require('path'),
-			runSequence = require('run-sequence'),
+			runSequence = require('run-sequence').use(gulp),
 			utils       = require('./utils');
 
 	gulp.task('serveLoader', ['buildFull'], function(){

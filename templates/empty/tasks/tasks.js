@@ -13,7 +13,6 @@ gulp.task('hookPostDistProject', function(cb){
 	runSequence(
 			'copyImgs',
 			'optimizeImages',
-			//		(gutil.env.debug) ? 'nothing' : 'genAppCache',
 			cb);
 });
 

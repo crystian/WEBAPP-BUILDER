@@ -5,7 +5,7 @@
 (function(){
 	'use strict';
 
-	var runSequence = require('run-sequence'),
+	var runSequence = require('run-sequence').use(gulp),
 			fs          = require('fs-extra'),
 			utils       = require('../shared/utils'),
 			gutil       = require('gulp-util'),
@@ -70,7 +70,6 @@
 		global.cfg.isDist = true;
 
 		return runSequence(
-			//gutil.env.debug ? 'nothing' : 'removeTemp',
 			'hookPreDistProject',
 			'makeWwwJson',
 			'makeAppsJson',
