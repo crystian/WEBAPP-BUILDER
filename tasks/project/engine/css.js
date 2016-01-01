@@ -48,7 +48,7 @@
 	}
 
 	function postLinter(stream, config, appName){
-		if(config.genSprite){
+		if(global.cfg.isDist && config.genSprite){
 			stream = image.genSprite(stream, appName);
 		}
 		return stream;

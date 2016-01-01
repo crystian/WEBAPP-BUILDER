@@ -1,0 +1,12 @@
+/build
+/dist
+/.idea/workspace.xml
+/project-config-local.json
+/node_modules
+/www/**/*.css
+/www/app2/templates.js
+www.json
+/config.json
+/cordova/www
+/cordova/platforms/android/assets/www
+/www/index.html

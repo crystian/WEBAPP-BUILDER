@@ -1,5 +1,7 @@
 /**
  * Created by Crystian on 4/13/2015.
+ *
+ * this is a facace for common tasks for project
  */
 
 (function(){
@@ -60,6 +62,7 @@
 			'removeDist',
 			'buildLoaderDist',
 			'buildProjectDist',
+			global.cfg.app.cordova ? 'copyCordovaWww' : 'nothing',
 			gutil.env.debug ? 'nothing' : 'removeBuild',
 			cb);
 	});

@@ -19,13 +19,18 @@
 			removeRedundantAttributes: true
 		};
 
+		var rootFolderTpl = '../';
+		if(global.cfg.app.folders.template){
+			rootFolderTpl += global.cfg.app.folders.template + global.cfg.app.folders.www;
+		}
+
 		return stream
 			.pipe(utils.debugeame())
 			.pipe(strip({safe: false, block: false}))
 			.pipe(htmlmin(htmlminOptions))
 			.pipe(templateCache({
 				standalone: true,
-				root: '../' + global.cfg.app.folders.template + global.cfg.app.folders.www
+				root: rootFolderTpl
 			}));
 	}
 

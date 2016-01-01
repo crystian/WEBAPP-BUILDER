@@ -1,0 +1,5274 @@
+<!-- REMEMBER, this file is generated, don't change it, because you can lost it -->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="msapplication-tap-highlight" content="no">
+	<!--Build change it-->
+	<title id="pageTitle">Title</title>
+	<meta id="pageDescription" name="description" content="Description">
+	<meta id="pageKeyword" name="keyword" content="keywords">
+	<meta id="pageAuthor" name="author" content="autors">
+	<meta id="contentSecurity" http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+	<meta id="viewport" name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<!-- TODO rellenar -->
+	<!-- https://www.npmjs.com/package/favicons/ -->
+	<!-- https://github.com/audreyr/favicon-cheat-sheet -->
+
+
+
+<style>html {
+  background-color: white; }
+
+.fullscreen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0; }
+
+.noscript {
+  z-index: 1000;
+  position: absolute;
+  margin: 15px;
+  background-color: white;
+  color: #000000; }
+  .noscript a {
+    color: black; }
+
+.wrapCenter {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  margin: auto;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0; }
+
+.fadeout {
+  -webkit-animation: fadeout 1s linear;
+          animation: fadeout 1s linear;
+  visibility: hidden; }
+
+.fadein {
+  -webkit-animation: fadein 1s linear;
+          animation: fadein 1s linear; }
+
+.fadeout50 {
+  -webkit-animation: fadeout50 1s linear;
+          animation: fadeout50 1s linear;
+  visibility: hidden; }
+
+.fadein50 {
+  -webkit-animation: fadein50 1s linear;
+          animation: fadein50 1s linear; }
+
+@-webkit-keyframes fadeout {
+  0% {
+    opacity: 1;
+    visibility: visible; }
+  99% {
+    opacity: 0; }
+  100% {
+    opacity: 0;
+    visibility: hidden; } }
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+    visibility: visible; }
+  99% {
+    opacity: 0; }
+  100% {
+    opacity: 0;
+    visibility: hidden; } }
+
+@-webkit-keyframes fadein {
+  0% {
+    opacity: 0;
+    visibility: visible; }
+  100% {
+    opacity: 1; } }
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    visibility: visible; }
+  100% {
+    opacity: 1; } }
+
+@-webkit-keyframes fadeout50 {
+  0% {
+    opacity: 0.5;
+    visibility: visible; }
+  99% {
+    opacity: 0; }
+  100% {
+    opacity: 0;
+    visibility: hidden; } }
+
+@keyframes fadeout50 {
+  0% {
+    opacity: 0.5;
+    visibility: visible; }
+  99% {
+    opacity: 0; }
+  100% {
+    opacity: 0;
+    visibility: hidden; } }
+
+@-webkit-keyframes fadein50 {
+  0% {
+    opacity: 0;
+    visibility: visible; }
+  100% {
+    opacity: 0.5; } }
+
+@keyframes fadein50 {
+  0% {
+    opacity: 0;
+    visibility: visible; }
+  100% {
+    opacity: 0.5; } }
+
+.testLoader {
+  background-color: #007aff;
+  color: #ffffff; }
+
+@media screen and (orientation: portrait) {
+  body {
+    background-color: inherit; } }
+
+@media screen and (orientation: landscape) {
+  body {
+    background-color: inherit; } }
+ #loadingScreen {
+  background-color: #000000;
+  z-index: 10;
+  opacity: 1;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0); }
+  #loadingScreen .wrapCenter {
+    width: 75px;
+    height: 75px; }
+  #loadingScreen .spinner {
+    background-color: #aec785;
+    z-index: 1001;
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0); }
+  #loadingScreen .loadingAnimation.on {
+    -webkit-animation: rotateplane 1s infinite ease-in-out;
+            animation: rotateplane 1s infinite ease-in-out; }
+
+@-webkit-keyframes rotateplane {
+  0% {
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+  50% {
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+  100% {
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); } }
+
+@keyframes rotateplane {
+  0% {
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+  50% {
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+  100% {
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); } }
+</style>
+
+</head>
+<body>
+
+<!--scripts no habilitado-->
+<!--Build change it-->
+<noscript>
+	<div class="noscript" id="noscript"><br>Is it a Joke? This site is an app built in javascript, you will activate this or will use another browser<br>Check this page: http://browsehappy.com <br></div>
+</noscript>
+<!--end noscript-->
+
+<!--just a loader screen:-->
+<div id="loadingScreen" class="fullscreen">
+	<!--capa 3d flotando-->
+<div class="wrapCenter">
+	<div class="spinner loadingAnimation on"></div>
+</div>
+<!--comment for test, do not remove it-->
+</div>
+<!--end loader screen-->
+
+
+<!--all app here!:-->
+<div id="mainContainer"></div>
+
+
+<!--Anclas para reemplazar:-->
+<p id="debugZone"></p>
+
+
+
+<script>/* Remember, this file is autogenerate, don't change it */
+
+//jshint maxlen:false
+var _loaderCfg = {
+	"release": false,
+	"firstApp": "app",
+	"site": "http://",
+	"cordova": true,
+	"isCordovaDevice": false,
+	"appCache": {
+		"use": false,
+		"filename": "",
+		"ext": ".cache",
+		"files": [
+			"dist/**/*"
+		],
+		"options": {
+			"hash": true,
+			"preferOnline": false,
+			"network": [
+				"http://!*",
+				"https://!*",
+				"*"
+			]
+		}
+	},
+	"folders": {
+		"www": "www/",
+		"build": "build/",
+		"dist": "dist/",
+		"temp": ".tmp/",
+		"cordova": "cordova/",
+		"cordovaWWW": "cordova/www/"
+	},
+	"compatibilityMatrix": {
+		"ie": [
+			9.9,
+			10.9
+		],
+		"firefox": [
+			23.9,
+			25.9
+		],
+		"android": [
+			3.9,
+			3.9
+		],
+		"chrome": [
+			17.9,
+			18.9
+		],
+		"chromeMobile": [
+			3.9,
+			3.9
+		],
+		"safari": [
+			6,
+			6
+		],
+		"ios": [
+			6,
+			6
+		]
+	},
+	"analytics": {
+		"installed": false,
+		"xactive": false,
+		"xlinkid": false,
+		"xdisplayFeatures": false,
+		"xid": "UA-00000000-0",
+		"xappName": "appName",
+		"xappId": "com.appName.appId",
+		"xappInstaller": "com.appName.installer"
+	},
+	"mixpanel": {
+		"installed": false,
+		"xactive": false,
+		"xtoken": "YOUR TOKEN"
+	},
+	"consoleError": [
+		"Error unknown",
+		"Error about connection stablished",
+		"Error 404",
+		"Error connection lost, try again",
+		"Command unknown",
+		"undefined",
+		"Null pointer exception",
+		"Error jquery plugin",
+		"Error ferrasca the boilerplate",
+		"Error map not found",
+		"Error in obliteration rast"
+	],
+	"name": "test 11-14",
+	"version": "0.0.2",
+	"loader": {
+		"version": "1.0.0",
+		"text": {
+			"title": "Title",
+			"description": "Description",
+			"keyword": "keywords",
+			"author": "autors",
+			"noscript": "<br/>Is it a Joke? This site is an app built in javascript, you will activate this or will use another browser<br/>Check this page: http://browsehappy.com <br/>",
+			"incompatibleByFeatures": "Browser incompatible (there are not features), for your secutiry we recommend update it, check this page: http://browsehappy.com",
+			"incompatibleByDiag": "Browser incompatible, for your secutiry we recommend update it, or use another one, check this page: http://browsehappy.com",
+			"semiIncompatible": "Browser not recognice, the app can works but it can have issues, we recomend update or use another one, check this page: http://browsehappy.com",
+			"faqLink": "<a href=\"http://\">http://</a>",
+			"errorRequestFile": "Error reading files from server, please try again later",
+			"errorTimeoutServer": "Timeout for your connection, check it please",
+			"header": [
+				"<!--",
+				"<%=name%>",
+				"<%=site%>",
+				"<%=date%> (<%=version%>)",
+				"",
+				"Power by Javascript community!, Magic by Crystian",
+				"Copyright (c) 2015, @Crystian (Cristian Bietti)",
+				"-->",
+				"",
+				""
+			],
+			"footer": [
+				"",
+				"",
+				"<!--'... Your future is whatever you make it. So make it a good one!' - Doc Brown to Marty McFly, BTTF (1990)-->"
+			]
+		}
+	},
+	"isDist": false
+};
+
+//primer chequeo, si no es compatible con esto, se cancela el loader!
+_loaderCfg.compatibilityFirst = function () {
+	//jshint maxcomplexity:false, quotmark:false
+	'use strict';
+	var arr = [];
+
+	return !!(window.document.querySelector &&
+	window.console &&window.document.addEventListener &&
+	(window.document.getElementsByTagName('body')[0]).classList &&
+	window.localStorage &&
+	window.navigator &&
+	window.XMLHttpRequest &&
+	window.applicationCache &&
+	window.document.createEvent &&
+	arr.map &&
+	arr.every);
+	};
+;/**
+* Created by Crystian on 10/27/2014.
+*/
+
+//This is the first test for compatibility, next tests are on diag.js
+(function(){
+	'use strict';
+
+	//yes on _loaderCfg, after this test, will be removed
+	if(!_loaderCfg.compatibilityFirst()){
+		alert(_loaderCfg.loader.text.incompatibleByFeatures);
+		var body = document.getElementsByTagName('body')[0];
+		body.innerHTML = _loaderCfg.loader.text.incompatibleByFeatures+'<br>'+_loaderCfg.loader.text.faqLink;
+		console.error(_loaderCfg.loader.text.incompatibleByFeatures);
+	}
+
+}());;/*!
+ * Platform.js v1.3.0 <http://mths.be/platform>
+ * Copyright 2010-2014 John-David Dalton <http://allyoucanleet.com/>
+ * Available under MIT license <http://mths.be/mit>
+ */
+;(function() {
+  'use strict';
+
+  /** Used to determine if values are of the language type `Object` */
+  var objectTypes = {
+    'function': true,
+    'object': true
+  };
+
+  /** Used as a reference to the global object */
+  var root = (objectTypes[typeof window] && window) || this;
+
+  /** Backup possible global object */
+  var oldRoot = root;
+
+  /** Detect free variable `exports` */
+  var freeExports = objectTypes[typeof exports] && exports;
+
+  /** Detect free variable `module` */
+  var freeModule = objectTypes[typeof module] && module && !module.nodeType && module;
+
+  /** Detect free variable `global` from Node.js or Browserified code and use it as `root` */
+  var freeGlobal = freeExports && freeModule && typeof global == 'object' && global;
+  if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal || freeGlobal.self === freeGlobal)) {
+    root = freeGlobal;
+  }
+
+  /**
+   * Used as the maximum length of an array-like object.
+   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+   * for more details.
+   */
+  var maxSafeInteger = Math.pow(2, 53) - 1;
+
+  /** Opera regexp */
+  var reOpera = /\bOpera/;
+
+  /** Possible global object */
+  var thisBinding = this;
+
+  /** Used for native method references */
+  var objectProto = Object.prototype;
+
+  /** Used to check for own properties of an object */
+  var hasOwnProperty = objectProto.hasOwnProperty;
+
+  /** Used to resolve the internal `[[Class]]` of values */
+  var toString = objectProto.toString;
+
+  /*--------------------------------------------------------------------------*/
+
+  /**
+   * Capitalizes a string value.
+   *
+   * @private
+   * @param {string} string The string to capitalize.
+   * @returns {string} The capitalized string.
+   */
+  function capitalize(string) {
+    string = String(string);
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  /**
+   * A utility function to clean up the OS name.
+   *
+   * @private
+   * @param {string} os The OS name to clean up.
+   * @param {string} [pattern] A `RegExp` pattern matching the OS name.
+   * @param {string} [label] A label for the OS.
+   */
+  function cleanupOS(os, pattern, label) {
+    // platform tokens defined at
+    // http://msdn.microsoft.com/en-us/library/ms537503(VS.85).aspx
+    // http://web.archive.org/web/20081122053950/http://msdn.microsoft.com/en-us/library/ms537503(VS.85).aspx
+    var data = {
+      '6.4':  '10',
+      '6.3':  '8.1',
+      '6.2':  '8',
+      '6.1':  'Server 2008 R2 / 7',
+      '6.0':  'Server 2008 / Vista',
+      '5.2':  'Server 2003 / XP 64-bit',
+      '5.1':  'XP',
+      '5.01': '2000 SP1',
+      '5.0':  '2000',
+      '4.0':  'NT',
+      '4.90': 'ME'
+    };
+    // detect Windows version from platform tokens
+    if (pattern && label && /^Win/i.test(os) &&
+        (data = data[0/*Opera 9.25 fix*/, /[\d.]+$/.exec(os)])) {
+      os = 'Windows ' + data;
+    }
+    // correct character case and cleanup
+    os = String(os);
+
+    if (pattern && label) {
+      os = os.replace(RegExp(pattern, 'i'), label);
+    }
+
+    os = format(
+      os.replace(/ ce$/i, ' CE')
+        .replace(/\bhpw/i, 'web')
+        .replace(/\bMacintosh\b/, 'Mac OS')
+        .replace(/_PowerPC\b/i, ' OS')
+        .replace(/\b(OS X) [^ \d]+/i, '$1')
+        .replace(/\bMac (OS X)\b/, '$1')
+        .replace(/\/(\d)/, ' $1')
+        .replace(/_/g, '.')
+        .replace(/(?: BePC|[ .]*fc[ \d.]+)$/i, '')
+        .replace(/\bx86\.64\b/gi, 'x86_64')
+        .replace(/\b(Windows Phone) OS\b/, '$1')
+        .split(' on ')[0]
+    );
+
+    return os;
+  }
+
+  /**
+   * An iteration utility for arrays and objects.
+   *
+   * @private
+   * @param {Array|Object} object The object to iterate over.
+   * @param {Function} callback The function called per iteration.
+   */
+  function each(object, callback) {
+    var index = -1,
+        length = object ? object.length : 0;
+
+    if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
+      while (++index < length) {
+        callback(object[index], index, object);
+      }
+    } else {
+      forOwn(object, callback);
+    }
+  }
+
+  /**
+   * Trim and conditionally capitalize string values.
+   *
+   * @private
+   * @param {string} string The string to format.
+   * @returns {string} The formatted string.
+   */
+  function format(string) {
+    string = trim(string);
+    return /^(?:webOS|i(?:OS|P))/.test(string)
+      ? string
+      : capitalize(string);
+  }
+
+  /**
+   * Iterates over an object's own properties, executing the `callback` for each.
+   *
+   * @private
+   * @param {Object} object The object to iterate over.
+   * @param {Function} callback The function executed per own property.
+   */
+  function forOwn(object, callback) {
+    for (var key in object) {
+      if (hasOwnProperty.call(object, key)) {
+        callback(object[key], key, object);
+      }
+    }
+  }
+
+  /**
+   * Gets the internal `[[Class]]` of a value.
+   *
+   * @private
+   * @param {*} value The value.
+   * @returns {string} The `[[Class]]`.
+   */
+  function getClassOf(value) {
+    return value == null
+      ? capitalize(value)
+      : toString.call(value).slice(8, -1);
+  }
+
+  /**
+   * Host objects can return type values that are different from their actual
+   * data type. The objects we are concerned with usually return non-primitive
+   * types of "object", "function", or "unknown".
+   *
+   * @private
+   * @param {*} object The owner of the property.
+   * @param {string} property The property to check.
+   * @returns {boolean} Returns `true` if the property value is a non-primitive, else `false`.
+   */
+  function isHostType(object, property) {
+    var type = object != null ? typeof object[property] : 'number';
+    return !/^(?:boolean|number|string|undefined)$/.test(type) &&
+      (type == 'object' ? !!object[property] : true);
+  }
+
+  /**
+   * Prepares a string for use in a `RegExp` by making hyphens and spaces optional.
+   *
+   * @private
+   * @param {string} string The string to qualify.
+   * @returns {string} The qualified string.
+   */
+  function qualify(string) {
+    return String(string).replace(/([ -])(?!$)/g, '$1?');
+  }
+
+  /**
+   * A bare-bones `Array#reduce` like utility function.
+   *
+   * @private
+   * @param {Array} array The array to iterate over.
+   * @param {Function} callback The function called per iteration.
+   * @returns {*} The accumulated result.
+   */
+  function reduce(array, callback) {
+    var accumulator = null;
+    each(array, function(value, index) {
+      accumulator = callback(accumulator, value, index, array);
+    });
+    return accumulator;
+  }
+
+  /**
+   * Removes leading and trailing whitespace from a string.
+   *
+   * @private
+   * @param {string} string The string to trim.
+   * @returns {string} The trimmed string.
+   */
+  function trim(string) {
+    return String(string).replace(/^ +| +$/g, '');
+  }
+
+  /*--------------------------------------------------------------------------*/
+
+  /**
+   * Creates a new platform object.
+   *
+   * @memberOf platform
+   * @param {Object|string} [ua=navigator.userAgent] The user agent string or
+   *  context object.
+   * @returns {Object} A platform object.
+   */
+  function parse(ua) {
+
+    /** The environment context object */
+    var context = root;
+
+    /** Used to flag when a custom context is provided */
+    var isCustomContext = ua && typeof ua == 'object' && getClassOf(ua) != 'String';
+
+    // juggle arguments
+    if (isCustomContext) {
+      context = ua;
+      ua = null;
+    }
+
+    /** Browser navigator object */
+    var nav = context.navigator || {};
+
+    /** Browser user agent string */
+    var userAgent = nav.userAgent || '';
+
+    ua || (ua = userAgent);
+
+    /** Used to flag when `thisBinding` is the [ModuleScope] */
+    var isModuleScope = isCustomContext || thisBinding == oldRoot;
+
+    /** Used to detect if browser is like Chrome */
+    var likeChrome = isCustomContext
+      ? !!nav.likeChrome
+      : /\bChrome\b/.test(ua) && !/internal|\n/i.test(toString.toString());
+
+    /** Internal `[[Class]]` value shortcuts */
+    var objectClass = 'Object',
+        airRuntimeClass = isCustomContext ? objectClass : 'ScriptBridgingProxyObject',
+        enviroClass = isCustomContext ? objectClass : 'Environment',
+        javaClass = (isCustomContext && context.java) ? 'JavaPackage' : getClassOf(context.java),
+        phantomClass = isCustomContext ? objectClass : 'RuntimeObject';
+
+    /** Detect Java environment */
+    var java = /\bJava/.test(javaClass) && context.java;
+
+    /** Detect Rhino */
+    var rhino = java && getClassOf(context.environment) == enviroClass;
+
+    /** A character to represent alpha */
+    var alpha = java ? 'a' : '\u03b1';
+
+    /** A character to represent beta */
+    var beta = java ? 'b' : '\u03b2';
+
+    /** Browser document object */
+    var doc = context.document || {};
+
+    /**
+     * Detect Opera browser (Presto-based)
+     * http://www.howtocreate.co.uk/operaStuff/operaObject.html
+     * http://dev.opera.com/articles/view/opera-mini-web-content-authoring-guidelines/#operamini
+     */
+    var opera = context.operamini || context.opera;
+
+    /** Opera `[[Class]]` */
+    var operaClass = reOpera.test(operaClass = (isCustomContext && opera) ? opera['[[Class]]'] : getClassOf(opera))
+      ? operaClass
+      : (opera = null);
+
+    /*------------------------------------------------------------------------*/
+
+    /** Temporary variable used over the script's lifetime */
+    var data;
+
+    /** The CPU architecture */
+    var arch = ua;
+
+    /** Platform description array */
+    var description = [];
+
+    /** Platform alpha/beta indicator */
+    var prerelease = null;
+
+    /** A flag to indicate that environment features should be used to resolve the platform */
+    var useFeatures = ua == userAgent;
+
+    /** The browser/environment version */
+    var version = useFeatures && opera && typeof opera.version == 'function' && opera.version();
+
+    /** A flag to indicate if the OS ends with "/ Version" */
+    var isSpecialCasedOS;
+
+    /* Detectable layout engines (order is important) */
+    var layout = getLayout([
+      'Trident',
+      { 'label': 'WebKit', 'pattern': 'AppleWebKit' },
+      'iCab',
+      'Presto',
+      'NetFront',
+      'Tasman',
+      'KHTML',
+      'Gecko'
+    ]);
+
+    /* Detectable browser names (order is important) */
+    var name = getName([
+      'Adobe AIR',
+      'Arora',
+      'Avant Browser',
+      'Breach',
+      'Camino',
+      'Epiphany',
+      'Fennec',
+      'Flock',
+      'Galeon',
+      'GreenBrowser',
+      'iCab',
+      'Iceweasel',
+      { 'label': 'SRWare Iron', 'pattern': 'Iron' },
+      'K-Meleon',
+      'Konqueror',
+      'Lunascape',
+      'Maxthon',
+      'Midori',
+      'Nook Browser',
+      'PhantomJS',
+      'Raven',
+      'Rekonq',
+      'RockMelt',
+      'SeaMonkey',
+      { 'label': 'Silk', 'pattern': '(?:Cloud9|Silk-Accelerated)' },
+      'Sleipnir',
+      'SlimBrowser',
+      'Sunrise',
+      'Swiftfox',
+      'WebPositive',
+      'Opera Mini',
+      { 'label': 'Opera Mini', 'pattern': 'OPiOS' },
+      'Opera',
+      { 'label': 'Opera', 'pattern': 'OPR' },
+      'Chrome',
+      { 'label': 'Chrome Mobile', 'pattern': '(?:CriOS|CrMo)' },
+      { 'label': 'Firefox', 'pattern': '(?:Firefox|Minefield)' },
+      { 'label': 'IE', 'pattern': 'IEMobile' },
+      { 'label': 'IE', 'pattern': 'MSIE' },
+      'Safari'
+    ]);
+
+    /* Detectable products (order is important) */
+    var product = getProduct([
+      { 'label': 'BlackBerry', 'pattern': 'BB10' },
+      'BlackBerry',
+      { 'label': 'Galaxy S', 'pattern': 'GT-I9000' },
+      { 'label': 'Galaxy S2', 'pattern': 'GT-I9100' },
+      { 'label': 'Galaxy S3', 'pattern': 'GT-I9300' },
+      { 'label': 'Galaxy S4', 'pattern': 'GT-I9500' },
+      'Google TV',
+      'Lumia',
+      'iPad',
+      'iPod',
+      'iPhone',
+      'Kindle',
+      { 'label': 'Kindle Fire', 'pattern': '(?:Cloud9|Silk-Accelerated)' },
+      'Nook',
+      'PlayBook',
+      'PlayStation 4',
+      'PlayStation 3',
+      'PlayStation Vita',
+      'TouchPad',
+      'Transformer',
+      { 'label': 'Wii U', 'pattern': 'WiiU' },
+      'Wii',
+      'Xbox One',
+      { 'label': 'Xbox 360', 'pattern': 'Xbox' },
+      'Xoom'
+    ]);
+
+    /* Detectable manufacturers */
+    var manufacturer = getManufacturer({
+      'Apple': { 'iPad': 1, 'iPhone': 1, 'iPod': 1 },
+      'Amazon': { 'Kindle': 1, 'Kindle Fire': 1 },
+      'Asus': { 'Transformer': 1 },
+      'Barnes & Noble': { 'Nook': 1 },
+      'BlackBerry': { 'PlayBook': 1 },
+      'Google': { 'Google TV': 1 },
+      'HP': { 'TouchPad': 1 },
+      'HTC': {},
+      'LG': {},
+      'Microsoft': { 'Xbox': 1, 'Xbox One': 1 },
+      'Motorola': { 'Xoom': 1 },
+      'Nintendo': { 'Wii U': 1,  'Wii': 1 },
+      'Nokia': { 'Lumia': 1 },
+      'Samsung': { 'Galaxy S': 1, 'Galaxy S2': 1, 'Galaxy S3': 1, 'Galaxy S4': 1 },
+      'Sony': { 'PlayStation 4': 1, 'PlayStation 3': 1, 'PlayStation Vita': 1 }
+    });
+
+    /* Detectable OSes (order is important) */
+    var os = getOS([
+      'Windows Phone ',
+      'Android',
+      'CentOS',
+      'Debian',
+      'Fedora',
+      'FreeBSD',
+      'Gentoo',
+      'Haiku',
+      'Kubuntu',
+      'Linux Mint',
+      'Red Hat',
+      'SuSE',
+      'Ubuntu',
+      'Xubuntu',
+      'Cygwin',
+      'Symbian OS',
+      'hpwOS',
+      'webOS ',
+      'webOS',
+      'Tablet OS',
+      'Linux',
+      'Mac OS X',
+      'Macintosh',
+      'Mac',
+      'Windows 98;',
+      'Windows '
+    ]);
+
+    /*------------------------------------------------------------------------*/
+
+    /**
+     * Picks the layout engine from an array of guesses.
+     *
+     * @private
+     * @param {Array} guesses An array of guesses.
+     * @returns {null|string} The detected layout engine.
+     */
+    function getLayout(guesses) {
+      return reduce(guesses, function(result, guess) {
+        return result || RegExp('\\b' + (
+          guess.pattern || qualify(guess)
+        ) + '\\b', 'i').exec(ua) && (guess.label || guess);
+      });
+    }
+
+    /**
+     * Picks the manufacturer from an array of guesses.
+     *
+     * @private
+     * @param {Array} guesses An object of guesses.
+     * @returns {null|string} The detected manufacturer.
+     */
+    function getManufacturer(guesses) {
+      return reduce(guesses, function(result, value, key) {
+        // lookup the manufacturer by product or scan the UA for the manufacturer
+        return result || (
+          value[product] ||
+          value[0/*Opera 9.25 fix*/, /^[a-z]+(?: +[a-z]+\b)*/i.exec(product)] ||
+          RegExp('\\b' + qualify(key) + '(?:\\b|\\w*\\d)', 'i').exec(ua)
+        ) && key;
+      });
+    }
+
+    /**
+     * Picks the browser name from an array of guesses.
+     *
+     * @private
+     * @param {Array} guesses An array of guesses.
+     * @returns {null|string} The detected browser name.
+     */
+    function getName(guesses) {
+      return reduce(guesses, function(result, guess) {
+        return result || RegExp('\\b' + (
+          guess.pattern || qualify(guess)
+        ) + '\\b', 'i').exec(ua) && (guess.label || guess);
+      });
+    }
+
+    /**
+     * Picks the OS name from an array of guesses.
+     *
+     * @private
+     * @param {Array} guesses An array of guesses.
+     * @returns {null|string} The detected OS name.
+     */
+    function getOS(guesses) {
+      return reduce(guesses, function(result, guess) {
+        var pattern = guess.pattern || qualify(guess);
+        if (!result && (result =
+              RegExp('\\b' + pattern + '(?:/[\\d.]+|[ \\w.]*)', 'i').exec(ua)
+            )) {
+          result = cleanupOS(result, pattern, guess.label || guess);
+        }
+        return result;
+      });
+    }
+
+    /**
+     * Picks the product name from an array of guesses.
+     *
+     * @private
+     * @param {Array} guesses An array of guesses.
+     * @returns {null|string} The detected product name.
+     */
+    function getProduct(guesses) {
+      return reduce(guesses, function(result, guess) {
+        var pattern = guess.pattern || qualify(guess);
+        if (!result && (result =
+              RegExp('\\b' + pattern + ' *\\d+[.\\w_]*', 'i').exec(ua) ||
+              RegExp('\\b' + pattern + '(?:; *(?:[a-z]+[_-])?[a-z]+\\d+|[^ ();-]*)', 'i').exec(ua)
+            )) {
+          // split by forward slash and append product version if needed
+          if ((result = String((guess.label && !RegExp(pattern, 'i').test(guess.label)) ? guess.label : result).split('/'))[1] && !/[\d.]+/.test(result[0])) {
+            result[0] += ' ' + result[1];
+          }
+          // correct character case and cleanup
+          guess = guess.label || guess;
+          result = format(result[0]
+            .replace(RegExp(pattern, 'i'), guess)
+            .replace(RegExp('; *(?:' + guess + '[_-])?', 'i'), ' ')
+            .replace(RegExp('(' + guess + ')[-_.]?(\\w)', 'i'), '$1 $2'));
+        }
+        return result;
+      });
+    }
+
+    /**
+     * Resolves the version using an array of UA patterns.
+     *
+     * @private
+     * @param {Array} patterns An array of UA patterns.
+     * @returns {null|string} The detected version.
+     */
+    function getVersion(patterns) {
+      return reduce(patterns, function(result, pattern) {
+        return result || (RegExp(pattern +
+          '(?:-[\\d.]+/|(?: for [\\w-]+)?[ /-])([\\d.]+[^ ();/_-]*)', 'i').exec(ua) || 0)[1] || null;
+      });
+    }
+
+    /**
+     * Returns `platform.description` when the platform object is coerced to a string.
+     *
+     * @name toString
+     * @memberOf platform
+     * @returns {string} Returns `platform.description` if available, else an empty string.
+     */
+    function toStringPlatform() {
+      return this.description || '';
+    }
+
+    /*------------------------------------------------------------------------*/
+
+    // convert layout to an array so we can add extra details
+    layout && (layout = [layout]);
+
+    // detect product names that contain their manufacturer's name
+    if (manufacturer && !product) {
+      product = getProduct([manufacturer]);
+    }
+    // clean up Google TV
+    if ((data = /\bGoogle TV\b/.exec(product))) {
+      product = data[0];
+    }
+    // detect simulators
+    if (/\bSimulator\b/i.test(ua)) {
+      product = (product ? product + ' ' : '') + 'Simulator';
+    }
+    // detect Opera Mini 8+ running in Turbo/Uncompressed mode on iOS
+    if (name == 'Opera Mini' && /\bOPiOS\b/.test(ua)) {
+      description.push('running in Turbo/Uncompressed mode');
+    }
+    // detect iOS
+    if (/^iP/.test(product)) {
+      name || (name = 'Safari');
+      os = 'iOS' + ((data = / OS ([\d_]+)/i.exec(ua))
+        ? ' ' + data[1].replace(/_/g, '.')
+        : '');
+    }
+    // detect Kubuntu
+    else if (name == 'Konqueror' && !/buntu/i.test(os)) {
+      os = 'Kubuntu';
+    }
+    // detect Android browsers
+    else if (manufacturer && manufacturer != 'Google' &&
+        ((/Chrome/.test(name) && !/\bMobile Safari\b/i.test(ua)) || /\bVita\b/.test(product))) {
+      name = 'Android Browser';
+      os = /\bAndroid\b/.test(os) ? os : 'Android';
+    }
+    // detect false positives for Firefox/Safari
+    else if (!name || (data = !/\bMinefield\b|\(Android;/i.test(ua) && /\b(?:Firefox|Safari)\b/.exec(name))) {
+      // escape the `/` for Firefox 1
+      if (name && !product && /[\/,]|^[^(]+?\)/.test(ua.slice(ua.indexOf(data + '/') + 8))) {
+        // clear name of false positives
+        name = null;
+      }
+      // reassign a generic name
+      if ((data = product || manufacturer || os) &&
+          (product || manufacturer || /\b(?:Android|Symbian OS|Tablet OS|webOS)\b/.test(os))) {
+        name = /[a-z]+(?: Hat)?/i.exec(/\bAndroid\b/.test(os) ? os : data) + ' Browser';
+      }
+    }
+    // detect Firefox OS
+    if ((data = /\((Mobile|Tablet).*?Firefox\b/i.exec(ua)) && data[1]) {
+      os = 'Firefox OS';
+      if (!product) {
+        product = data[1];
+      }
+    }
+    // detect non-Opera versions (order is important)
+    if (!version) {
+      version = getVersion([
+        '(?:Cloud9|CriOS|CrMo|IEMobile|Iron|Opera ?Mini|OPiOS|OPR|Raven|Silk(?!/[\\d.]+$))',
+        'Version',
+        qualify(name),
+        '(?:Firefox|Minefield|NetFront)'
+      ]);
+    }
+    // detect stubborn layout engines
+    if (layout == 'iCab' && parseFloat(version) > 3) {
+      layout = ['WebKit'];
+    } else if (
+        layout != 'Trident' &&
+        (data =
+          /\bOpera\b/.test(name) && (/\bOPR\b/.test(ua) ? 'Blink' : 'Presto') ||
+          /\b(?:Midori|Nook|Safari)\b/i.test(ua) && 'WebKit' ||
+          !layout && /\bMSIE\b/i.test(ua) && (os == 'Mac OS' ? 'Tasman' : 'Trident')
+        )
+    ) {
+      layout = [data];
+    }
+    // detect NetFront on PlayStation
+    else if (/\bPlayStation\b(?! Vita\b)/i.test(name) && layout == 'WebKit') {
+      layout = ['NetFront'];
+    }
+    // detect Windows Phone 7 desktop mode
+    if (name == 'IE' && (data = (/; *(?:XBLWP|ZuneWP)(\d+)/i.exec(ua) || 0)[1])) {
+      name += ' Mobile';
+      os = 'Windows Phone ' + (/\+$/.test(data) ? data : data + '.x');
+      description.unshift('desktop mode');
+    }
+    // detect Windows Phone 8+ desktop mode
+    else if (/\bWPDesktop\b/i.test(ua)) {
+      name = 'IE Mobile';
+      os = 'Windows Phone 8+';
+      description.unshift('desktop mode');
+      version || (version = (/\brv:([\d.]+)/.exec(ua) || 0)[1]);
+    }
+    // detect IE 11 and above
+    else if (name != 'IE' && layout == 'Trident' && (data = /\brv:([\d.]+)/.exec(ua))) {
+      if (!/\bWPDesktop\b/i.test(ua)) {
+        if (name) {
+          description.push('identifying as ' + name + (version ? ' ' + version : ''));
+        }
+        name = 'IE';
+      }
+      version = data[1];
+    }
+    // detect IE Tech Preview
+    else if ((name == 'Chrome' || name != 'IE') && (data = /\bEdge\/([\d.]+)/.exec(ua))) {
+      name = 'IE';
+      version = data[1];
+      layout = ['Trident'];
+      description.unshift('platform preview');
+    }
+    // leverage environment features
+    if (useFeatures) {
+      // detect server-side environments
+      // Rhino has a global function while others have a global object
+      if (isHostType(context, 'global')) {
+        if (java) {
+          data = java.lang.System;
+          arch = data.getProperty('os.arch');
+          os = os || data.getProperty('os.name') + ' ' + data.getProperty('os.version');
+        }
+        if (isModuleScope && isHostType(context, 'system') && (data = [context.system])[0]) {
+          os || (os = data[0].os || null);
+          try {
+            data[1] = context.require('ringo/engine').version;
+            version = data[1].join('.');
+            name = 'RingoJS';
+          } catch(e) {
+            if (data[0].global.system == context.system) {
+              name = 'Narwhal';
+            }
+          }
+        }
+        else if (typeof context.process == 'object' && (data = context.process)) {
+          name = 'Node.js';
+          arch = data.arch;
+          os = data.platform;
+          version = /[\d.]+/.exec(data.version)[0];
+        }
+        else if (rhino) {
+          name = 'Rhino';
+        }
+      }
+      // detect Adobe AIR
+      else if (getClassOf((data = context.runtime)) == airRuntimeClass) {
+        name = 'Adobe AIR';
+        os = data.flash.system.Capabilities.os;
+      }
+      // detect PhantomJS
+      else if (getClassOf((data = context.phantom)) == phantomClass) {
+        name = 'PhantomJS';
+        version = (data = data.version || null) && (data.major + '.' + data.minor + '.' + data.patch);
+      }
+      // detect IE compatibility modes
+      else if (typeof doc.documentMode == 'number' && (data = /\bTrident\/(\d+)/i.exec(ua))) {
+        // we're in compatibility mode when the Trident version + 4 doesn't
+        // equal the document mode
+        version = [version, doc.documentMode];
+        if ((data = +data[1] + 4) != version[1]) {
+          description.push('IE ' + version[1] + ' mode');
+          layout && (layout[1] = '');
+          version[1] = data;
+        }
+        version = name == 'IE' ? String(version[1].toFixed(1)) : version[0];
+      }
+      os = os && format(os);
+    }
+    // detect prerelease phases
+    if (version && (data =
+          /(?:[ab]|dp|pre|[ab]\d+pre)(?:\d+\+?)?$/i.exec(version) ||
+          /(?:alpha|beta)(?: ?\d)?/i.exec(ua + ';' + (useFeatures && nav.appMinorVersion)) ||
+          /\bMinefield\b/i.test(ua) && 'a'
+        )) {
+      prerelease = /b/i.test(data) ? 'beta' : 'alpha';
+      version = version.replace(RegExp(data + '\\+?$'), '') +
+        (prerelease == 'beta' ? beta : alpha) + (/\d+\+?/.exec(data) || '');
+    }
+    // detect Firefox Mobile
+    if (name == 'Fennec' || name == 'Firefox' && /\b(?:Android|Firefox OS)\b/.test(os)) {
+      name = 'Firefox Mobile';
+    }
+    // obscure Maxthon's unreliable version
+    else if (name == 'Maxthon' && version) {
+      version = version.replace(/\.[\d.]+/, '.x');
+    }
+    // detect Silk desktop/accelerated modes
+    else if (name == 'Silk') {
+      if (!/\bMobi/i.test(ua)) {
+        os = 'Android';
+        description.unshift('desktop mode');
+      }
+      if (/Accelerated *= *true/i.test(ua)) {
+        description.unshift('accelerated');
+      }
+    }
+    // detect Xbox 360 and Xbox One
+    else if (/\bXbox\b/i.test(product)) {
+      os = null;
+      if (product == 'Xbox 360' && /\bIEMobile\b/.test(ua)) {
+        description.unshift('mobile mode');
+      }
+    }
+    // add mobile postfix
+    else if ((/^(?:Chrome|IE|Opera)$/.test(name) || name && !product && !/Browser|Mobi/.test(name)) &&
+        (os == 'Windows CE' || /Mobi/i.test(ua))) {
+      name += ' Mobile';
+    }
+    // detect IE platform preview
+    else if (name == 'IE' && useFeatures && context.external === null) {
+      description.unshift('platform preview');
+    }
+    // detect BlackBerry OS version
+    // http://docs.blackberry.com/en/developers/deliverables/18169/HTTP_headers_sent_by_BB_Browser_1234911_11.jsp
+    else if ((/\bBlackBerry\b/.test(product) || /\bBB10\b/.test(ua)) && (data =
+          (RegExp(product.replace(/ +/g, ' *') + '/([.\\d]+)', 'i').exec(ua) || 0)[1] ||
+          version
+        )) {
+      data = [data, /BB10/.test(ua)];
+      os = (data[1] ? (product = null, manufacturer = 'BlackBerry') : 'Device Software') + ' ' + data[0];
+      version = null;
+    }
+    // detect Opera identifying/masking itself as another browser
+    // http://www.opera.com/support/kb/view/843/
+    else if (this != forOwn && (
+          product != 'Wii' && (
+            (useFeatures && opera) ||
+            (/Opera/.test(name) && /\b(?:MSIE|Firefox)\b/i.test(ua)) ||
+            (name == 'Firefox' && /\bOS X (?:\d+\.){2,}/.test(os)) ||
+            (name == 'IE' && (
+              (os && !/^Win/.test(os) && version > 5.5) ||
+              /\bWindows XP\b/.test(os) && version > 8 ||
+              version == 8 && !/\bTrident\b/.test(ua)
+            ))
+          )
+        ) && !reOpera.test((data = parse.call(forOwn, ua.replace(reOpera, '') + ';'))) && data.name) {
+
+      // when "indentifying", the UA contains both Opera and the other browser's name
+      data = 'ing as ' + data.name + ((data = data.version) ? ' ' + data : '');
+      if (reOpera.test(name)) {
+        if (/\bIE\b/.test(data) && os == 'Mac OS') {
+          os = null;
+        }
+        data = 'identify' + data;
+      }
+      // when "masking", the UA contains only the other browser's name
+      else {
+        data = 'mask' + data;
+        if (operaClass) {
+          name = format(operaClass.replace(/([a-z])([A-Z])/g, '$1 $2'));
+        } else {
+          name = 'Opera';
+        }
+        if (/\bIE\b/.test(data)) {
+          os = null;
+        }
+        if (!useFeatures) {
+          version = null;
+        }
+      }
+      layout = ['Presto'];
+      description.push(data);
+    }
+    // detect WebKit Nightly and approximate Chrome/Safari versions
+    if ((data = (/\bAppleWebKit\/([\d.]+\+?)/i.exec(ua) || 0)[1])) {
+      // correct build for numeric comparison
+      // (e.g. "532.5" becomes "532.05")
+      data = [parseFloat(data.replace(/\.(\d)$/, '.0$1')), data];
+      // nightly builds are postfixed with a `+`
+      if (name == 'Safari' && data[1].slice(-1) == '+') {
+        name = 'WebKit Nightly';
+        prerelease = 'alpha';
+        version = data[1].slice(0, -1);
+      }
+      // clear incorrect browser versions
+      else if (version == data[1] ||
+          version == (data[2] = (/\bSafari\/([\d.]+\+?)/i.exec(ua) || 0)[1])) {
+        version = null;
+      }
+      // use the full Chrome version when available
+      data[1] = (/\bChrome\/([\d.]+)/i.exec(ua) || 0)[1];
+      // detect Blink layout engine
+      if (data[0] == 537.36 && data[2] == 537.36 && parseFloat(data[1]) >= 28 && name != 'IE') {
+        layout = ['Blink'];
+      }
+      // detect JavaScriptCore
+      // http://stackoverflow.com/questions/6768474/how-can-i-detect-which-javascript-engine-v8-or-jsc-is-used-at-runtime-in-androi
+      if (!useFeatures || (!likeChrome && !data[1])) {
+        layout && (layout[1] = 'like Safari');
+        data = (data = data[0], data < 400 ? 1 : data < 500 ? 2 : data < 526 ? 3 : data < 533 ? 4 : data < 534 ? '4+' : data < 535 ? 5 : data < 537 ? 6 : data < 538 ? 7 : data < 601 ? 8 : '8');
+      } else {
+        layout && (layout[1] = 'like Chrome');
+        data = data[1] || (data = data[0], data < 530 ? 1 : data < 532 ? 2 : data < 532.05 ? 3 : data < 533 ? 4 : data < 534.03 ? 5 : data < 534.07 ? 6 : data < 534.10 ? 7 : data < 534.13 ? 8 : data < 534.16 ? 9 : data < 534.24 ? 10 : data < 534.30 ? 11 : data < 535.01 ? 12 : data < 535.02 ? '13+' : data < 535.07 ? 15 : data < 535.11 ? 16 : data < 535.19 ? 17 : data < 536.05 ? 18 : data < 536.10 ? 19 : data < 537.01 ? 20 : data < 537.11 ? '21+' : data < 537.13 ? 23 : data < 537.18 ? 24 : data < 537.24 ? 25 : data < 537.36 ? 26 : layout != 'Blink' ? '27' : '28');
+      }
+      // add the postfix of ".x" or "+" for approximate versions
+      layout && (layout[1] += ' ' + (data += typeof data == 'number' ? '.x' : /[.+]/.test(data) ? '' : '+'));
+      // obscure version for some Safari 1-2 releases
+      if (name == 'Safari' && (!version || parseInt(version) > 45)) {
+        version = data;
+      }
+    }
+    // detect Opera desktop modes
+    if (name == 'Opera' &&  (data = /\bzbov|zvav$/.exec(os))) {
+      name += ' ';
+      description.unshift('desktop mode');
+      if (data == 'zvav') {
+        name += 'Mini';
+        version = null;
+      } else {
+        name += 'Mobile';
+      }
+      os = os.replace(RegExp(' *' + data + '$'), '');
+    }
+    // detect Chrome desktop mode
+    else if (name == 'Safari' && /\bChrome\b/.exec(layout && layout[1])) {
+      description.unshift('desktop mode');
+      name = 'Chrome Mobile';
+      version = null;
+
+      if (/\bOS X\b/.test(os)) {
+        manufacturer = 'Apple';
+        os = 'iOS 4.3+';
+      } else {
+        os = null;
+      }
+    }
+    // strip incorrect OS versions
+    if (version && version.indexOf((data = /[\d.]+$/.exec(os))) == 0 &&
+        ua.indexOf('/' + data + '-') > -1) {
+      os = trim(os.replace(data, ''));
+    }
+    // add layout engine
+    if (layout && !/\b(?:Avant|Nook)\b/.test(name) && (
+        /Browser|Lunascape|Maxthon/.test(name) ||
+        /^(?:Adobe|Arora|Breach|Midori|Opera|Phantom|Rekonq|Rock|Sleipnir|Web)/.test(name) && layout[1])) {
+      // don't add layout details to description if they are falsey
+      (data = layout[layout.length - 1]) && description.push(data);
+    }
+    // combine contextual information
+    if (description.length) {
+      description = ['(' + description.join('; ') + ')'];
+    }
+    // append manufacturer
+    if (manufacturer && product && product.indexOf(manufacturer) < 0) {
+      description.push('on ' + manufacturer);
+    }
+    // append product
+    if (product) {
+      description.push((/^on /.test(description[description.length -1]) ? '' : 'on ') + product);
+    }
+    // parse OS into an object
+    if (os) {
+      data = / ([\d.+]+)$/.exec(os);
+      isSpecialCasedOS = data && os.charAt(os.length - data[0].length - 1) == '/';
+      os = {
+        'architecture': 32,
+        'family': (data && !isSpecialCasedOS) ? os.replace(data[0], '') : os,
+        'version': data ? data[1] : null,
+        'toString': function() {
+          var version = this.version;
+          return this.family + ((version && !isSpecialCasedOS) ? ' ' + version : '') + (this.architecture == 64 ? ' 64-bit' : '');
+        }
+      };
+    }
+    // add browser/OS architecture
+    if ((data = /\b(?:AMD|IA|Win|WOW|x86_|x)64\b/i.exec(arch)) && !/\bi686\b/i.test(arch)) {
+      if (os) {
+        os.architecture = 64;
+        os.family = os.family.replace(RegExp(' *' + data), '');
+      }
+      if (
+          name && (/\bWOW64\b/i.test(ua) ||
+          (useFeatures && /\w(?:86|32)$/.test(nav.cpuClass || nav.platform) && !/\bWin64; x64\b/i.test(ua)))
+      ) {
+        description.unshift('32-bit');
+      }
+    }
+
+    ua || (ua = null);
+
+    /*------------------------------------------------------------------------*/
+
+    /**
+     * The platform object.
+     *
+     * @name platform
+     * @type Object
+     */
+    var platform = {};
+
+    /**
+     * The platform description.
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.description = ua;
+
+    /**
+     * The name of the browser's layout engine.
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.layout = layout && layout[0];
+
+    /**
+     * The name of the product's manufacturer.
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.manufacturer = manufacturer;
+
+    /**
+     * The name of the browser/environment.
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.name = name;
+
+    /**
+     * The alpha/beta release indicator.
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.prerelease = prerelease;
+
+    /**
+     * The name of the product hosting the browser.
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.product = product;
+
+    /**
+     * The browser's user agent string.
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.ua = ua;
+
+    /**
+     * The browser/environment version.
+     *
+     * @memberOf platform
+     * @type string|null
+     */
+    platform.version = name && version;
+
+    /**
+     * The name of the operating system.
+     *
+     * @memberOf platform
+     * @type Object
+     */
+    platform.os = os || {
+
+      /**
+       * The CPU architecture the OS is built for.
+       *
+       * @memberOf platform.os
+       * @type number|null
+       */
+      'architecture': null,
+
+      /**
+       * The family of the OS.
+       *
+       * Common values include:
+       * "Windows", "Windows Server 2008 R2 / 7", "Windows Server 2008 / Vista",
+       * "Windows XP", "OS X", "Ubuntu", "Debian", "Fedora", "Red Hat", "SuSE",
+       * "Android", "iOS" and "Windows Phone"
+       *
+       * @memberOf platform.os
+       * @type string|null
+       */
+      'family': null,
+
+      /**
+       * The version of the OS.
+       *
+       * @memberOf platform.os
+       * @type string|null
+       */
+      'version': null,
+
+      /**
+       * Returns the OS string.
+       *
+       * @memberOf platform.os
+       * @returns {string} The OS string.
+       */
+      'toString': function() { return 'null'; }
+    };
+
+    platform.parse = parse;
+    platform.toString = toStringPlatform;
+
+    if (platform.version) {
+      description.unshift(version);
+    }
+    if (platform.name) {
+      description.unshift(name);
+    }
+    if (os && name && !(os == String(os).split(' ')[0] && (os == name.split(' ')[0] || product))) {
+      description.push(product ? '(' + os + ')' : 'on ' + os);
+    }
+    if (description.length) {
+      platform.description = description.join(' ');
+    }
+    return platform;
+  }
+
+  /*--------------------------------------------------------------------------*/
+
+  // export platform
+  // some AMD build optimizers, like r.js, check for condition patterns like the following:
+  if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
+    // define as an anonymous module so, through path mapping, it can be aliased
+    define(function() {
+      return parse();
+    });
+  }
+  // check for `exports` after `define` in case a build optimizer adds an `exports` object
+  else if (freeExports && freeModule) {
+    // in Narwhal, Node.js, Rhino -require, or RingoJS
+    forOwn(parse(), function(value, key) {
+      freeExports[key] = value;
+    });
+  }
+  // in a browser or Rhino
+  else {
+    root.platform = parse();
+  }
+}.call(this));
+;// Copyright (c) 2013 Pieroxy <pieroxy@pieroxy.net>
+// This work is free. You can redistribute it and/or modify it
+// under the terms of the WTFPL, Version 2
+// For more information see LICENSE.txt or http://www.wtfpl.net/
+//
+// For more information, the home page:
+// http://pieroxy.net/blog/pages/lz-string/testing.html
+//
+// LZ-based compression algorithm, version 1.4.4
+var LZString = (function() {
+
+// private property
+var f = String.fromCharCode;
+var keyStrBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+var keyStrUriSafe = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
+var baseReverseDic = {};
+
+function getBaseValue(alphabet, character) {
+  if (!baseReverseDic[alphabet]) {
+    baseReverseDic[alphabet] = {};
+    for (var i=0 ; i<alphabet.length ; i++) {
+      baseReverseDic[alphabet][alphabet.charAt(i)] = i;
+    }
+  }
+  return baseReverseDic[alphabet][character];
+}
+
+var LZString = {
+  compressToBase64 : function (input) {
+    if (input == null) return "";
+    var res = LZString._compress(input, 6, function(a){return keyStrBase64.charAt(a);});
+    switch (res.length % 4) { // To produce valid Base64
+    default: // When could this happen ?
+    case 0 : return res;
+    case 1 : return res+"===";
+    case 2 : return res+"==";
+    case 3 : return res+"=";
+    }
+  },
+
+  decompressFromBase64 : function (input) {
+    if (input == null) return "";
+    if (input == "") return null;
+    return LZString._decompress(input.length, 32, function(index) { return getBaseValue(keyStrBase64, input.charAt(index)); });
+  },
+
+  compressToUTF16 : function (input) {
+    if (input == null) return "";
+    return LZString._compress(input, 15, function(a){return f(a+32);}) + " ";
+  },
+
+  decompressFromUTF16: function (compressed) {
+    if (compressed == null) return "";
+    if (compressed == "") return null;
+    return LZString._decompress(compressed.length, 16384, function(index) { return compressed.charCodeAt(index) - 32; });
+  },
+
+  //compress into uint8array (UCS-2 big endian format)
+  compressToUint8Array: function (uncompressed) {
+    var compressed = LZString.compress(uncompressed);
+    var buf=new Uint8Array(compressed.length*2); // 2 bytes per character
+
+    for (var i=0, TotalLen=compressed.length; i<TotalLen; i++) {
+      var current_value = compressed.charCodeAt(i);
+      buf[i*2] = current_value >>> 8;
+      buf[i*2+1] = current_value % 256;
+    }
+    return buf;
+  },
+
+  //decompress from uint8array (UCS-2 big endian format)
+  decompressFromUint8Array:function (compressed) {
+    if (compressed===null || compressed===undefined){
+        return LZString.decompress(compressed);
+    } else {
+        var buf=new Array(compressed.length/2); // 2 bytes per character
+        for (var i=0, TotalLen=buf.length; i<TotalLen; i++) {
+          buf[i]=compressed[i*2]*256+compressed[i*2+1];
+        }
+
+        var result = [];
+        buf.forEach(function (c) {
+          result.push(f(c));
+        });
+        return LZString.decompress(result.join(''));
+
+    }
+
+  },
+
+
+  //compress into a string that is already URI encoded
+  compressToEncodedURIComponent: function (input) {
+    if (input == null) return "";
+    return LZString._compress(input, 6, function(a){return keyStrUriSafe.charAt(a);});
+  },
+
+  //decompress from an output of compressToEncodedURIComponent
+  decompressFromEncodedURIComponent:function (input) {
+    if (input == null) return "";
+    if (input == "") return null;
+    input = input.replace(/ /g, "+");
+    return LZString._decompress(input.length, 32, function(index) { return getBaseValue(keyStrUriSafe, input.charAt(index)); });
+  },
+
+  compress: function (uncompressed) {
+    return LZString._compress(uncompressed, 16, function(a){return f(a);});
+  },
+  _compress: function (uncompressed, bitsPerChar, getCharFromInt) {
+    if (uncompressed == null) return "";
+    var i, value,
+        context_dictionary= {},
+        context_dictionaryToCreate= {},
+        context_c="",
+        context_wc="",
+        context_w="",
+        context_enlargeIn= 2, // Compensate for the first entry which should not count
+        context_dictSize= 3,
+        context_numBits= 2,
+        context_data=[],
+        context_data_val=0,
+        context_data_position=0,
+        ii;
+
+    for (ii = 0; ii < uncompressed.length; ii += 1) {
+      context_c = uncompressed.charAt(ii);
+      if (!Object.prototype.hasOwnProperty.call(context_dictionary,context_c)) {
+        context_dictionary[context_c] = context_dictSize++;
+        context_dictionaryToCreate[context_c] = true;
+      }
+
+      context_wc = context_w + context_c;
+      if (Object.prototype.hasOwnProperty.call(context_dictionary,context_wc)) {
+        context_w = context_wc;
+      } else {
+        if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate,context_w)) {
+          if (context_w.charCodeAt(0)<256) {
+            for (i=0 ; i<context_numBits ; i++) {
+              context_data_val = (context_data_val << 1);
+              if (context_data_position == bitsPerChar-1) {
+                context_data_position = 0;
+                context_data.push(getCharFromInt(context_data_val));
+                context_data_val = 0;
+              } else {
+                context_data_position++;
+              }
+            }
+            value = context_w.charCodeAt(0);
+            for (i=0 ; i<8 ; i++) {
+              context_data_val = (context_data_val << 1) | (value&1);
+              if (context_data_position == bitsPerChar-1) {
+                context_data_position = 0;
+                context_data.push(getCharFromInt(context_data_val));
+                context_data_val = 0;
+              } else {
+                context_data_position++;
+              }
+              value = value >> 1;
+            }
+          } else {
+            value = 1;
+            for (i=0 ; i<context_numBits ; i++) {
+              context_data_val = (context_data_val << 1) | value;
+              if (context_data_position ==bitsPerChar-1) {
+                context_data_position = 0;
+                context_data.push(getCharFromInt(context_data_val));
+                context_data_val = 0;
+              } else {
+                context_data_position++;
+              }
+              value = 0;
+            }
+            value = context_w.charCodeAt(0);
+            for (i=0 ; i<16 ; i++) {
+              context_data_val = (context_data_val << 1) | (value&1);
+              if (context_data_position == bitsPerChar-1) {
+                context_data_position = 0;
+                context_data.push(getCharFromInt(context_data_val));
+                context_data_val = 0;
+              } else {
+                context_data_position++;
+              }
+              value = value >> 1;
+            }
+          }
+          context_enlargeIn--;
+          if (context_enlargeIn == 0) {
+            context_enlargeIn = Math.pow(2, context_numBits);
+            context_numBits++;
+          }
+          delete context_dictionaryToCreate[context_w];
+        } else {
+          value = context_dictionary[context_w];
+          for (i=0 ; i<context_numBits ; i++) {
+            context_data_val = (context_data_val << 1) | (value&1);
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+            value = value >> 1;
+          }
+
+
+        }
+        context_enlargeIn--;
+        if (context_enlargeIn == 0) {
+          context_enlargeIn = Math.pow(2, context_numBits);
+          context_numBits++;
+        }
+        // Add wc to the dictionary.
+        context_dictionary[context_wc] = context_dictSize++;
+        context_w = String(context_c);
+      }
+    }
+
+    // Output the code for w.
+    if (context_w !== "") {
+      if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate,context_w)) {
+        if (context_w.charCodeAt(0)<256) {
+          for (i=0 ; i<context_numBits ; i++) {
+            context_data_val = (context_data_val << 1);
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+          }
+          value = context_w.charCodeAt(0);
+          for (i=0 ; i<8 ; i++) {
+            context_data_val = (context_data_val << 1) | (value&1);
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+            value = value >> 1;
+          }
+        } else {
+          value = 1;
+          for (i=0 ; i<context_numBits ; i++) {
+            context_data_val = (context_data_val << 1) | value;
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+            value = 0;
+          }
+          value = context_w.charCodeAt(0);
+          for (i=0 ; i<16 ; i++) {
+            context_data_val = (context_data_val << 1) | (value&1);
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+            value = value >> 1;
+          }
+        }
+        context_enlargeIn--;
+        if (context_enlargeIn == 0) {
+          context_enlargeIn = Math.pow(2, context_numBits);
+          context_numBits++;
+        }
+        delete context_dictionaryToCreate[context_w];
+      } else {
+        value = context_dictionary[context_w];
+        for (i=0 ; i<context_numBits ; i++) {
+          context_data_val = (context_data_val << 1) | (value&1);
+          if (context_data_position == bitsPerChar-1) {
+            context_data_position = 0;
+            context_data.push(getCharFromInt(context_data_val));
+            context_data_val = 0;
+          } else {
+            context_data_position++;
+          }
+          value = value >> 1;
+        }
+
+
+      }
+      context_enlargeIn--;
+      if (context_enlargeIn == 0) {
+        context_enlargeIn = Math.pow(2, context_numBits);
+        context_numBits++;
+      }
+    }
+
+    // Mark the end of the stream
+    value = 2;
+    for (i=0 ; i<context_numBits ; i++) {
+      context_data_val = (context_data_val << 1) | (value&1);
+      if (context_data_position == bitsPerChar-1) {
+        context_data_position = 0;
+        context_data.push(getCharFromInt(context_data_val));
+        context_data_val = 0;
+      } else {
+        context_data_position++;
+      }
+      value = value >> 1;
+    }
+
+    // Flush the last char
+    while (true) {
+      context_data_val = (context_data_val << 1);
+      if (context_data_position == bitsPerChar-1) {
+        context_data.push(getCharFromInt(context_data_val));
+        break;
+      }
+      else context_data_position++;
+    }
+    return context_data.join('');
+  },
+
+  decompress: function (compressed) {
+    if (compressed == null) return "";
+    if (compressed == "") return null;
+    return LZString._decompress(compressed.length, 32768, function(index) { return compressed.charCodeAt(index); });
+  },
+
+  _decompress: function (length, resetValue, getNextValue) {
+    var dictionary = [],
+        next,
+        enlargeIn = 4,
+        dictSize = 4,
+        numBits = 3,
+        entry = "",
+        result = [],
+        i,
+        w,
+        bits, resb, maxpower, power,
+        c,
+        data = {val:getNextValue(0), position:resetValue, index:1};
+
+    for (i = 0; i < 3; i += 1) {
+      dictionary[i] = i;
+    }
+
+    bits = 0;
+    maxpower = Math.pow(2,2);
+    power=1;
+    while (power!=maxpower) {
+      resb = data.val & data.position;
+      data.position >>= 1;
+      if (data.position == 0) {
+        data.position = resetValue;
+        data.val = getNextValue(data.index++);
+      }
+      bits |= (resb>0 ? 1 : 0) * power;
+      power <<= 1;
+    }
+
+    switch (next = bits) {
+      case 0:
+          bits = 0;
+          maxpower = Math.pow(2,8);
+          power=1;
+          while (power!=maxpower) {
+            resb = data.val & data.position;
+            data.position >>= 1;
+            if (data.position == 0) {
+              data.position = resetValue;
+              data.val = getNextValue(data.index++);
+            }
+            bits |= (resb>0 ? 1 : 0) * power;
+            power <<= 1;
+          }
+        c = f(bits);
+        break;
+      case 1:
+          bits = 0;
+          maxpower = Math.pow(2,16);
+          power=1;
+          while (power!=maxpower) {
+            resb = data.val & data.position;
+            data.position >>= 1;
+            if (data.position == 0) {
+              data.position = resetValue;
+              data.val = getNextValue(data.index++);
+            }
+            bits |= (resb>0 ? 1 : 0) * power;
+            power <<= 1;
+          }
+        c = f(bits);
+        break;
+      case 2:
+        return "";
+    }
+    dictionary[3] = c;
+    w = c;
+    result.push(c);
+    while (true) {
+      if (data.index > length) {
+        return "";
+      }
+
+      bits = 0;
+      maxpower = Math.pow(2,numBits);
+      power=1;
+      while (power!=maxpower) {
+        resb = data.val & data.position;
+        data.position >>= 1;
+        if (data.position == 0) {
+          data.position = resetValue;
+          data.val = getNextValue(data.index++);
+        }
+        bits |= (resb>0 ? 1 : 0) * power;
+        power <<= 1;
+      }
+
+      switch (c = bits) {
+        case 0:
+          bits = 0;
+          maxpower = Math.pow(2,8);
+          power=1;
+          while (power!=maxpower) {
+            resb = data.val & data.position;
+            data.position >>= 1;
+            if (data.position == 0) {
+              data.position = resetValue;
+              data.val = getNextValue(data.index++);
+            }
+            bits |= (resb>0 ? 1 : 0) * power;
+            power <<= 1;
+          }
+
+          dictionary[dictSize++] = f(bits);
+          c = dictSize-1;
+          enlargeIn--;
+          break;
+        case 1:
+          bits = 0;
+          maxpower = Math.pow(2,16);
+          power=1;
+          while (power!=maxpower) {
+            resb = data.val & data.position;
+            data.position >>= 1;
+            if (data.position == 0) {
+              data.position = resetValue;
+              data.val = getNextValue(data.index++);
+            }
+            bits |= (resb>0 ? 1 : 0) * power;
+            power <<= 1;
+          }
+          dictionary[dictSize++] = f(bits);
+          c = dictSize-1;
+          enlargeIn--;
+          break;
+        case 2:
+          return result.join('');
+      }
+
+      if (enlargeIn == 0) {
+        enlargeIn = Math.pow(2, numBits);
+        numBits++;
+      }
+
+      if (dictionary[c]) {
+        entry = dictionary[c];
+      } else {
+        if (c === dictSize) {
+          entry = w + w.charAt(0);
+        } else {
+          return null;
+        }
+      }
+      result.push(entry);
+
+      // Add w+entry[0] to the dictionary.
+      dictionary[dictSize++] = w + entry.charAt(0);
+      enlargeIn--;
+
+      w = entry;
+
+      if (enlargeIn == 0) {
+        enlargeIn = Math.pow(2, numBits);
+        numBits++;
+      }
+
+    }
+  }
+};
+  return LZString;
+})();
+
+if (typeof define === 'function' && define.amd) {
+  define(function () { return LZString; });
+} else if( typeof module !== 'undefined' && module != null ) {
+  module.exports = LZString
+}
+;/*!
+ * @overview es6-promise - a tiny implementation of Promises/A+.
+ * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
+ * @license   Licensed under MIT license
+ *            See https://raw.githubusercontent.com/jakearchibald/es6-promise/master/LICENSE
+ * @version   3.0.2
+ */
+
+(function() {
+    "use strict";
+    function lib$es6$promise$utils$$objectOrFunction(x) {
+      return typeof x === 'function' || (typeof x === 'object' && x !== null);
+    }
+
+    function lib$es6$promise$utils$$isFunction(x) {
+      return typeof x === 'function';
+    }
+
+    function lib$es6$promise$utils$$isMaybeThenable(x) {
+      return typeof x === 'object' && x !== null;
+    }
+
+    var lib$es6$promise$utils$$_isArray;
+    if (!Array.isArray) {
+      lib$es6$promise$utils$$_isArray = function (x) {
+        return Object.prototype.toString.call(x) === '[object Array]';
+      };
+    } else {
+      lib$es6$promise$utils$$_isArray = Array.isArray;
+    }
+
+    var lib$es6$promise$utils$$isArray = lib$es6$promise$utils$$_isArray;
+    var lib$es6$promise$asap$$len = 0;
+    var lib$es6$promise$asap$$toString = {}.toString;
+    var lib$es6$promise$asap$$vertxNext;
+    var lib$es6$promise$asap$$customSchedulerFn;
+
+    var lib$es6$promise$asap$$asap = function asap(callback, arg) {
+      lib$es6$promise$asap$$queue[lib$es6$promise$asap$$len] = callback;
+      lib$es6$promise$asap$$queue[lib$es6$promise$asap$$len + 1] = arg;
+      lib$es6$promise$asap$$len += 2;
+      if (lib$es6$promise$asap$$len === 2) {
+        // If len is 2, that means that we need to schedule an async flush.
+        // If additional callbacks are queued before the queue is flushed, they
+        // will be processed by this flush that we are scheduling.
+        if (lib$es6$promise$asap$$customSchedulerFn) {
+          lib$es6$promise$asap$$customSchedulerFn(lib$es6$promise$asap$$flush);
+        } else {
+          lib$es6$promise$asap$$scheduleFlush();
+        }
+      }
+    }
+
+    function lib$es6$promise$asap$$setScheduler(scheduleFn) {
+      lib$es6$promise$asap$$customSchedulerFn = scheduleFn;
+    }
+
+    function lib$es6$promise$asap$$setAsap(asapFn) {
+      lib$es6$promise$asap$$asap = asapFn;
+    }
+
+    var lib$es6$promise$asap$$browserWindow = (typeof window !== 'undefined') ? window : undefined;
+    var lib$es6$promise$asap$$browserGlobal = lib$es6$promise$asap$$browserWindow || {};
+    var lib$es6$promise$asap$$BrowserMutationObserver = lib$es6$promise$asap$$browserGlobal.MutationObserver || lib$es6$promise$asap$$browserGlobal.WebKitMutationObserver;
+    var lib$es6$promise$asap$$isNode = typeof process !== 'undefined' && {}.toString.call(process) === '[object process]';
+
+    // test for web worker but not in IE10
+    var lib$es6$promise$asap$$isWorker = typeof Uint8ClampedArray !== 'undefined' &&
+      typeof importScripts !== 'undefined' &&
+      typeof MessageChannel !== 'undefined';
+
+    // node
+    function lib$es6$promise$asap$$useNextTick() {
+      // node version 0.10.x displays a deprecation warning when nextTick is used recursively
+      // see https://github.com/cujojs/when/issues/410 for details
+      return function() {
+        process.nextTick(lib$es6$promise$asap$$flush);
+      };
+    }
+
+    // vertx
+    function lib$es6$promise$asap$$useVertxTimer() {
+      return function() {
+        lib$es6$promise$asap$$vertxNext(lib$es6$promise$asap$$flush);
+      };
+    }
+
+    function lib$es6$promise$asap$$useMutationObserver() {
+      var iterations = 0;
+      var observer = new lib$es6$promise$asap$$BrowserMutationObserver(lib$es6$promise$asap$$flush);
+      var node = document.createTextNode('');
+      observer.observe(node, { characterData: true });
+
+      return function() {
+        node.data = (iterations = ++iterations % 2);
+      };
+    }
+
+    // web worker
+    function lib$es6$promise$asap$$useMessageChannel() {
+      var channel = new MessageChannel();
+      channel.port1.onmessage = lib$es6$promise$asap$$flush;
+      return function () {
+        channel.port2.postMessage(0);
+      };
+    }
+
+    function lib$es6$promise$asap$$useSetTimeout() {
+      return function() {
+        setTimeout(lib$es6$promise$asap$$flush, 1);
+      };
+    }
+
+    var lib$es6$promise$asap$$queue = new Array(1000);
+    function lib$es6$promise$asap$$flush() {
+      for (var i = 0; i < lib$es6$promise$asap$$len; i+=2) {
+        var callback = lib$es6$promise$asap$$queue[i];
+        var arg = lib$es6$promise$asap$$queue[i+1];
+
+        callback(arg);
+
+        lib$es6$promise$asap$$queue[i] = undefined;
+        lib$es6$promise$asap$$queue[i+1] = undefined;
+      }
+
+      lib$es6$promise$asap$$len = 0;
+    }
+
+    function lib$es6$promise$asap$$attemptVertx() {
+      try {
+        var r = require;
+        var vertx = r('vertx');
+        lib$es6$promise$asap$$vertxNext = vertx.runOnLoop || vertx.runOnContext;
+        return lib$es6$promise$asap$$useVertxTimer();
+      } catch(e) {
+        return lib$es6$promise$asap$$useSetTimeout();
+      }
+    }
+
+    var lib$es6$promise$asap$$scheduleFlush;
+    // Decide what async method to use to triggering processing of queued callbacks:
+    if (lib$es6$promise$asap$$isNode) {
+      lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useNextTick();
+    } else if (lib$es6$promise$asap$$BrowserMutationObserver) {
+      lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useMutationObserver();
+    } else if (lib$es6$promise$asap$$isWorker) {
+      lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useMessageChannel();
+    } else if (lib$es6$promise$asap$$browserWindow === undefined && typeof require === 'function') {
+      lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$attemptVertx();
+    } else {
+      lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useSetTimeout();
+    }
+
+    function lib$es6$promise$$internal$$noop() {}
+
+    var lib$es6$promise$$internal$$PENDING   = void 0;
+    var lib$es6$promise$$internal$$FULFILLED = 1;
+    var lib$es6$promise$$internal$$REJECTED  = 2;
+
+    var lib$es6$promise$$internal$$GET_THEN_ERROR = new lib$es6$promise$$internal$$ErrorObject();
+
+    function lib$es6$promise$$internal$$selfFulfillment() {
+      return new TypeError("You cannot resolve a promise with itself");
+    }
+
+    function lib$es6$promise$$internal$$cannotReturnOwn() {
+      return new TypeError('A promises callback cannot return that same promise.');
+    }
+
+    function lib$es6$promise$$internal$$getThen(promise) {
+      try {
+        return promise.then;
+      } catch(error) {
+        lib$es6$promise$$internal$$GET_THEN_ERROR.error = error;
+        return lib$es6$promise$$internal$$GET_THEN_ERROR;
+      }
+    }
+
+    function lib$es6$promise$$internal$$tryThen(then, value, fulfillmentHandler, rejectionHandler) {
+      try {
+        then.call(value, fulfillmentHandler, rejectionHandler);
+      } catch(e) {
+        return e;
+      }
+    }
+
+    function lib$es6$promise$$internal$$handleForeignThenable(promise, thenable, then) {
+       lib$es6$promise$asap$$asap(function(promise) {
+        var sealed = false;
+        var error = lib$es6$promise$$internal$$tryThen(then, thenable, function(value) {
+          if (sealed) { return; }
+          sealed = true;
+          if (thenable !== value) {
+            lib$es6$promise$$internal$$resolve(promise, value);
+          } else {
+            lib$es6$promise$$internal$$fulfill(promise, value);
+          }
+        }, function(reason) {
+          if (sealed) { return; }
+          sealed = true;
+
+          lib$es6$promise$$internal$$reject(promise, reason);
+        }, 'Settle: ' + (promise._label || ' unknown promise'));
+
+        if (!sealed && error) {
+          sealed = true;
+          lib$es6$promise$$internal$$reject(promise, error);
+        }
+      }, promise);
+    }
+
+    function lib$es6$promise$$internal$$handleOwnThenable(promise, thenable) {
+      if (thenable._state === lib$es6$promise$$internal$$FULFILLED) {
+        lib$es6$promise$$internal$$fulfill(promise, thenable._result);
+      } else if (thenable._state === lib$es6$promise$$internal$$REJECTED) {
+        lib$es6$promise$$internal$$reject(promise, thenable._result);
+      } else {
+        lib$es6$promise$$internal$$subscribe(thenable, undefined, function(value) {
+          lib$es6$promise$$internal$$resolve(promise, value);
+        }, function(reason) {
+          lib$es6$promise$$internal$$reject(promise, reason);
+        });
+      }
+    }
+
+    function lib$es6$promise$$internal$$handleMaybeThenable(promise, maybeThenable) {
+      if (maybeThenable.constructor === promise.constructor) {
+        lib$es6$promise$$internal$$handleOwnThenable(promise, maybeThenable);
+      } else {
+        var then = lib$es6$promise$$internal$$getThen(maybeThenable);
+
+        if (then === lib$es6$promise$$internal$$GET_THEN_ERROR) {
+          lib$es6$promise$$internal$$reject(promise, lib$es6$promise$$internal$$GET_THEN_ERROR.error);
+        } else if (then === undefined) {
+          lib$es6$promise$$internal$$fulfill(promise, maybeThenable);
+        } else if (lib$es6$promise$utils$$isFunction(then)) {
+          lib$es6$promise$$internal$$handleForeignThenable(promise, maybeThenable, then);
+        } else {
+          lib$es6$promise$$internal$$fulfill(promise, maybeThenable);
+        }
+      }
+    }
+
+    function lib$es6$promise$$internal$$resolve(promise, value) {
+      if (promise === value) {
+        lib$es6$promise$$internal$$reject(promise, lib$es6$promise$$internal$$selfFulfillment());
+      } else if (lib$es6$promise$utils$$objectOrFunction(value)) {
+        lib$es6$promise$$internal$$handleMaybeThenable(promise, value);
+      } else {
+        lib$es6$promise$$internal$$fulfill(promise, value);
+      }
+    }
+
+    function lib$es6$promise$$internal$$publishRejection(promise) {
+      if (promise._onerror) {
+        promise._onerror(promise._result);
+      }
+
+      lib$es6$promise$$internal$$publish(promise);
+    }
+
+    function lib$es6$promise$$internal$$fulfill(promise, value) {
+      if (promise._state !== lib$es6$promise$$internal$$PENDING) { return; }
+
+      promise._result = value;
+      promise._state = lib$es6$promise$$internal$$FULFILLED;
+
+      if (promise._subscribers.length !== 0) {
+        lib$es6$promise$asap$$asap(lib$es6$promise$$internal$$publish, promise);
+      }
+    }
+
+    function lib$es6$promise$$internal$$reject(promise, reason) {
+      if (promise._state !== lib$es6$promise$$internal$$PENDING) { return; }
+      promise._state = lib$es6$promise$$internal$$REJECTED;
+      promise._result = reason;
+
+      lib$es6$promise$asap$$asap(lib$es6$promise$$internal$$publishRejection, promise);
+    }
+
+    function lib$es6$promise$$internal$$subscribe(parent, child, onFulfillment, onRejection) {
+      var subscribers = parent._subscribers;
+      var length = subscribers.length;
+
+      parent._onerror = null;
+
+      subscribers[length] = child;
+      subscribers[length + lib$es6$promise$$internal$$FULFILLED] = onFulfillment;
+      subscribers[length + lib$es6$promise$$internal$$REJECTED]  = onRejection;
+
+      if (length === 0 && parent._state) {
+        lib$es6$promise$asap$$asap(lib$es6$promise$$internal$$publish, parent);
+      }
+    }
+
+    function lib$es6$promise$$internal$$publish(promise) {
+      var subscribers = promise._subscribers;
+      var settled = promise._state;
+
+      if (subscribers.length === 0) { return; }
+
+      var child, callback, detail = promise._result;
+
+      for (var i = 0; i < subscribers.length; i += 3) {
+        child = subscribers[i];
+        callback = subscribers[i + settled];
+
+        if (child) {
+          lib$es6$promise$$internal$$invokeCallback(settled, child, callback, detail);
+        } else {
+          callback(detail);
+        }
+      }
+
+      promise._subscribers.length = 0;
+    }
+
+    function lib$es6$promise$$internal$$ErrorObject() {
+      this.error = null;
+    }
+
+    var lib$es6$promise$$internal$$TRY_CATCH_ERROR = new lib$es6$promise$$internal$$ErrorObject();
+
+    function lib$es6$promise$$internal$$tryCatch(callback, detail) {
+      try {
+        return callback(detail);
+      } catch(e) {
+        lib$es6$promise$$internal$$TRY_CATCH_ERROR.error = e;
+        return lib$es6$promise$$internal$$TRY_CATCH_ERROR;
+      }
+    }
+
+    function lib$es6$promise$$internal$$invokeCallback(settled, promise, callback, detail) {
+      var hasCallback = lib$es6$promise$utils$$isFunction(callback),
+          value, error, succeeded, failed;
+
+      if (hasCallback) {
+        value = lib$es6$promise$$internal$$tryCatch(callback, detail);
+
+        if (value === lib$es6$promise$$internal$$TRY_CATCH_ERROR) {
+          failed = true;
+          error = value.error;
+          value = null;
+        } else {
+          succeeded = true;
+        }
+
+        if (promise === value) {
+          lib$es6$promise$$internal$$reject(promise, lib$es6$promise$$internal$$cannotReturnOwn());
+          return;
+        }
+
+      } else {
+        value = detail;
+        succeeded = true;
+      }
+
+      if (promise._state !== lib$es6$promise$$internal$$PENDING) {
+        // noop
+      } else if (hasCallback && succeeded) {
+        lib$es6$promise$$internal$$resolve(promise, value);
+      } else if (failed) {
+        lib$es6$promise$$internal$$reject(promise, error);
+      } else if (settled === lib$es6$promise$$internal$$FULFILLED) {
+        lib$es6$promise$$internal$$fulfill(promise, value);
+      } else if (settled === lib$es6$promise$$internal$$REJECTED) {
+        lib$es6$promise$$internal$$reject(promise, value);
+      }
+    }
+
+    function lib$es6$promise$$internal$$initializePromise(promise, resolver) {
+      try {
+        resolver(function resolvePromise(value){
+          lib$es6$promise$$internal$$resolve(promise, value);
+        }, function rejectPromise(reason) {
+          lib$es6$promise$$internal$$reject(promise, reason);
+        });
+      } catch(e) {
+        lib$es6$promise$$internal$$reject(promise, e);
+      }
+    }
+
+    function lib$es6$promise$enumerator$$Enumerator(Constructor, input) {
+      var enumerator = this;
+
+      enumerator._instanceConstructor = Constructor;
+      enumerator.promise = new Constructor(lib$es6$promise$$internal$$noop);
+
+      if (enumerator._validateInput(input)) {
+        enumerator._input     = input;
+        enumerator.length     = input.length;
+        enumerator._remaining = input.length;
+
+        enumerator._init();
+
+        if (enumerator.length === 0) {
+          lib$es6$promise$$internal$$fulfill(enumerator.promise, enumerator._result);
+        } else {
+          enumerator.length = enumerator.length || 0;
+          enumerator._enumerate();
+          if (enumerator._remaining === 0) {
+            lib$es6$promise$$internal$$fulfill(enumerator.promise, enumerator._result);
+          }
+        }
+      } else {
+        lib$es6$promise$$internal$$reject(enumerator.promise, enumerator._validationError());
+      }
+    }
+
+    lib$es6$promise$enumerator$$Enumerator.prototype._validateInput = function(input) {
+      return lib$es6$promise$utils$$isArray(input);
+    };
+
+    lib$es6$promise$enumerator$$Enumerator.prototype._validationError = function() {
+      return new Error('Array Methods must be provided an Array');
+    };
+
+    lib$es6$promise$enumerator$$Enumerator.prototype._init = function() {
+      this._result = new Array(this.length);
+    };
+
+    var lib$es6$promise$enumerator$$default = lib$es6$promise$enumerator$$Enumerator;
+
+    lib$es6$promise$enumerator$$Enumerator.prototype._enumerate = function() {
+      var enumerator = this;
+
+      var length  = enumerator.length;
+      var promise = enumerator.promise;
+      var input   = enumerator._input;
+
+      for (var i = 0; promise._state === lib$es6$promise$$internal$$PENDING && i < length; i++) {
+        enumerator._eachEntry(input[i], i);
+      }
+    };
+
+    lib$es6$promise$enumerator$$Enumerator.prototype._eachEntry = function(entry, i) {
+      var enumerator = this;
+      var c = enumerator._instanceConstructor;
+
+      if (lib$es6$promise$utils$$isMaybeThenable(entry)) {
+        if (entry.constructor === c && entry._state !== lib$es6$promise$$internal$$PENDING) {
+          entry._onerror = null;
+          enumerator._settledAt(entry._state, i, entry._result);
+        } else {
+          enumerator._willSettleAt(c.resolve(entry), i);
+        }
+      } else {
+        enumerator._remaining--;
+        enumerator._result[i] = entry;
+      }
+    };
+
+    lib$es6$promise$enumerator$$Enumerator.prototype._settledAt = function(state, i, value) {
+      var enumerator = this;
+      var promise = enumerator.promise;
+
+      if (promise._state === lib$es6$promise$$internal$$PENDING) {
+        enumerator._remaining--;
+
+        if (state === lib$es6$promise$$internal$$REJECTED) {
+          lib$es6$promise$$internal$$reject(promise, value);
+        } else {
+          enumerator._result[i] = value;
+        }
+      }
+
+      if (enumerator._remaining === 0) {
+        lib$es6$promise$$internal$$fulfill(promise, enumerator._result);
+      }
+    };
+
+    lib$es6$promise$enumerator$$Enumerator.prototype._willSettleAt = function(promise, i) {
+      var enumerator = this;
+
+      lib$es6$promise$$internal$$subscribe(promise, undefined, function(value) {
+        enumerator._settledAt(lib$es6$promise$$internal$$FULFILLED, i, value);
+      }, function(reason) {
+        enumerator._settledAt(lib$es6$promise$$internal$$REJECTED, i, reason);
+      });
+    };
+    function lib$es6$promise$promise$all$$all(entries) {
+      return new lib$es6$promise$enumerator$$default(this, entries).promise;
+    }
+    var lib$es6$promise$promise$all$$default = lib$es6$promise$promise$all$$all;
+    function lib$es6$promise$promise$race$$race(entries) {
+      /*jshint validthis:true */
+      var Constructor = this;
+
+      var promise = new Constructor(lib$es6$promise$$internal$$noop);
+
+      if (!lib$es6$promise$utils$$isArray(entries)) {
+        lib$es6$promise$$internal$$reject(promise, new TypeError('You must pass an array to race.'));
+        return promise;
+      }
+
+      var length = entries.length;
+
+      function onFulfillment(value) {
+        lib$es6$promise$$internal$$resolve(promise, value);
+      }
+
+      function onRejection(reason) {
+        lib$es6$promise$$internal$$reject(promise, reason);
+      }
+
+      for (var i = 0; promise._state === lib$es6$promise$$internal$$PENDING && i < length; i++) {
+        lib$es6$promise$$internal$$subscribe(Constructor.resolve(entries[i]), undefined, onFulfillment, onRejection);
+      }
+
+      return promise;
+    }
+    var lib$es6$promise$promise$race$$default = lib$es6$promise$promise$race$$race;
+    function lib$es6$promise$promise$resolve$$resolve(object) {
+      /*jshint validthis:true */
+      var Constructor = this;
+
+      if (object && typeof object === 'object' && object.constructor === Constructor) {
+        return object;
+      }
+
+      var promise = new Constructor(lib$es6$promise$$internal$$noop);
+      lib$es6$promise$$internal$$resolve(promise, object);
+      return promise;
+    }
+    var lib$es6$promise$promise$resolve$$default = lib$es6$promise$promise$resolve$$resolve;
+    function lib$es6$promise$promise$reject$$reject(reason) {
+      /*jshint validthis:true */
+      var Constructor = this;
+      var promise = new Constructor(lib$es6$promise$$internal$$noop);
+      lib$es6$promise$$internal$$reject(promise, reason);
+      return promise;
+    }
+    var lib$es6$promise$promise$reject$$default = lib$es6$promise$promise$reject$$reject;
+
+    var lib$es6$promise$promise$$counter = 0;
+
+    function lib$es6$promise$promise$$needsResolver() {
+      throw new TypeError('You must pass a resolver function as the first argument to the promise constructor');
+    }
+
+    function lib$es6$promise$promise$$needsNew() {
+      throw new TypeError("Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function.");
+    }
+
+    var lib$es6$promise$promise$$default = lib$es6$promise$promise$$Promise;
+    /**
+      Promise objects represent the eventual result of an asynchronous operation. The
+      primary way of interacting with a promise is through its `then` method, which
+      registers callbacks to receive either a promise's eventual value or the reason
+      why the promise cannot be fulfilled.
+
+      Terminology
+      -----------
+
+      - `promise` is an object or function with a `then` method whose behavior conforms to this specification.
+      - `thenable` is an object or function that defines a `then` method.
+      - `value` is any legal JavaScript value (including undefined, a thenable, or a promise).
+      - `exception` is a value that is thrown using the throw statement.
+      - `reason` is a value that indicates why a promise was rejected.
+      - `settled` the final resting state of a promise, fulfilled or rejected.
+
+      A promise can be in one of three states: pending, fulfilled, or rejected.
+
+      Promises that are fulfilled have a fulfillment value and are in the fulfilled
+      state.  Promises that are rejected have a rejection reason and are in the
+      rejected state.  A fulfillment value is never a thenable.
+
+      Promises can also be said to *resolve* a value.  If this value is also a
+      promise, then the original promise's settled state will match the value's
+      settled state.  So a promise that *resolves* a promise that rejects will
+      itself reject, and a promise that *resolves* a promise that fulfills will
+      itself fulfill.
+
+
+      Basic Usage:
+      ------------
+
+      ```js
+      var promise = new Promise(function(resolve, reject) {
+        // on success
+        resolve(value);
+
+        // on failure
+        reject(reason);
+      });
+
+      promise.then(function(value) {
+        // on fulfillment
+      }, function(reason) {
+        // on rejection
+      });
+      ```
+
+      Advanced Usage:
+      ---------------
+
+      Promises shine when abstracting away asynchronous interactions such as
+      `XMLHttpRequest`s.
+
+      ```js
+      function getJSON(url) {
+        return new Promise(function(resolve, reject){
+          var xhr = new XMLHttpRequest();
+
+          xhr.open('GET', url);
+          xhr.onreadystatechange = handler;
+          xhr.responseType = 'json';
+          xhr.setRequestHeader('Accept', 'application/json');
+          xhr.send();
+
+          function handler() {
+            if (this.readyState === this.DONE) {
+              if (this.status === 200) {
+                resolve(this.response);
+              } else {
+                reject(new Error('getJSON: `' + url + '` failed with status: [' + this.status + ']'));
+              }
+            }
+          };
+        });
+      }
+
+      getJSON('/posts.json').then(function(json) {
+        // on fulfillment
+      }, function(reason) {
+        // on rejection
+      });
+      ```
+
+      Unlike callbacks, promises are great composable primitives.
+
+      ```js
+      Promise.all([
+        getJSON('/posts'),
+        getJSON('/comments')
+      ]).then(function(values){
+        values[0] // => postsJSON
+        values[1] // => commentsJSON
+
+        return values;
+      });
+      ```
+
+      @class Promise
+      @param {function} resolver
+      Useful for tooling.
+      @constructor
+    */
+    function lib$es6$promise$promise$$Promise(resolver) {
+      this._id = lib$es6$promise$promise$$counter++;
+      this._state = undefined;
+      this._result = undefined;
+      this._subscribers = [];
+
+      if (lib$es6$promise$$internal$$noop !== resolver) {
+        if (!lib$es6$promise$utils$$isFunction(resolver)) {
+          lib$es6$promise$promise$$needsResolver();
+        }
+
+        if (!(this instanceof lib$es6$promise$promise$$Promise)) {
+          lib$es6$promise$promise$$needsNew();
+        }
+
+        lib$es6$promise$$internal$$initializePromise(this, resolver);
+      }
+    }
+
+    lib$es6$promise$promise$$Promise.all = lib$es6$promise$promise$all$$default;
+    lib$es6$promise$promise$$Promise.race = lib$es6$promise$promise$race$$default;
+    lib$es6$promise$promise$$Promise.resolve = lib$es6$promise$promise$resolve$$default;
+    lib$es6$promise$promise$$Promise.reject = lib$es6$promise$promise$reject$$default;
+    lib$es6$promise$promise$$Promise._setScheduler = lib$es6$promise$asap$$setScheduler;
+    lib$es6$promise$promise$$Promise._setAsap = lib$es6$promise$asap$$setAsap;
+    lib$es6$promise$promise$$Promise._asap = lib$es6$promise$asap$$asap;
+
+    lib$es6$promise$promise$$Promise.prototype = {
+      constructor: lib$es6$promise$promise$$Promise,
+
+    /**
+      The primary way of interacting with a promise is through its `then` method,
+      which registers callbacks to receive either a promise's eventual value or the
+      reason why the promise cannot be fulfilled.
+
+      ```js
+      findUser().then(function(user){
+        // user is available
+      }, function(reason){
+        // user is unavailable, and you are given the reason why
+      });
+      ```
+
+      Chaining
+      --------
+
+      The return value of `then` is itself a promise.  This second, 'downstream'
+      promise is resolved with the return value of the first promise's fulfillment
+      or rejection handler, or rejected if the handler throws an exception.
+
+      ```js
+      findUser().then(function (user) {
+        return user.name;
+      }, function (reason) {
+        return 'default name';
+      }).then(function (userName) {
+        // If `findUser` fulfilled, `userName` will be the user's name, otherwise it
+        // will be `'default name'`
+      });
+
+      findUser().then(function (user) {
+        throw new Error('Found user, but still unhappy');
+      }, function (reason) {
+        throw new Error('`findUser` rejected and we're unhappy');
+      }).then(function (value) {
+        // never reached
+      }, function (reason) {
+        // if `findUser` fulfilled, `reason` will be 'Found user, but still unhappy'.
+        // If `findUser` rejected, `reason` will be '`findUser` rejected and we're unhappy'.
+      });
+      ```
+      If the downstream promise does not specify a rejection handler, rejection reasons will be propagated further downstream.
+
+      ```js
+      findUser().then(function (user) {
+        throw new PedagogicalException('Upstream error');
+      }).then(function (value) {
+        // never reached
+      }).then(function (value) {
+        // never reached
+      }, function (reason) {
+        // The `PedgagocialException` is propagated all the way down to here
+      });
+      ```
+
+      Assimilation
+      ------------
+
+      Sometimes the value you want to propagate to a downstream promise can only be
+      retrieved asynchronously. This can be achieved by returning a promise in the
+      fulfillment or rejection handler. The downstream promise will then be pending
+      until the returned promise is settled. This is called *assimilation*.
+
+      ```js
+      findUser().then(function (user) {
+        return findCommentsByAuthor(user);
+      }).then(function (comments) {
+        // The user's comments are now available
+      });
+      ```
+
+      If the assimliated promise rejects, then the downstream promise will also reject.
+
+      ```js
+      findUser().then(function (user) {
+        return findCommentsByAuthor(user);
+      }).then(function (comments) {
+        // If `findCommentsByAuthor` fulfills, we'll have the value here
+      }, function (reason) {
+        // If `findCommentsByAuthor` rejects, we'll have the reason here
+      });
+      ```
+
+      Simple Example
+      --------------
+
+      Synchronous Example
+
+      ```javascript
+      var result;
+
+      try {
+        result = findResult();
+        // success
+      } catch(reason) {
+        // failure
+      }
+      ```
+
+      Errback Example
+
+      ```js
+      findResult(function(result, err){
+        if (err) {
+          // failure
+        } else {
+          // success
+        }
+      });
+      ```
+
+      Promise Example;
+
+      ```javascript
+      findResult().then(function(result){
+        // success
+      }, function(reason){
+        // failure
+      });
+      ```
+
+      Advanced Example
+      --------------
+
+      Synchronous Example
+
+      ```javascript
+      var author, books;
+
+      try {
+        author = findAuthor();
+        books  = findBooksByAuthor(author);
+        // success
+      } catch(reason) {
+        // failure
+      }
+      ```
+
+      Errback Example
+
+      ```js
+
+      function foundBooks(books) {
+
+      }
+
+      function failure(reason) {
+
+      }
+
+      findAuthor(function(author, err){
+        if (err) {
+          failure(err);
+          // failure
+        } else {
+          try {
+            findBoooksByAuthor(author, function(books, err) {
+              if (err) {
+                failure(err);
+              } else {
+                try {
+                  foundBooks(books);
+                } catch(reason) {
+                  failure(reason);
+                }
+              }
+            });
+          } catch(error) {
+            failure(err);
+          }
+          // success
+        }
+      });
+      ```
+
+      Promise Example;
+
+      ```javascript
+      findAuthor().
+        then(findBooksByAuthor).
+        then(function(books){
+          // found books
+      }).catch(function(reason){
+        // something went wrong
+      });
+      ```
+
+      @method then
+      @param {Function} onFulfilled
+      @param {Function} onRejected
+      Useful for tooling.
+      @return {Promise}
+    */
+      then: function(onFulfillment, onRejection) {
+        var parent = this;
+        var state = parent._state;
+
+        if (state === lib$es6$promise$$internal$$FULFILLED && !onFulfillment || state === lib$es6$promise$$internal$$REJECTED && !onRejection) {
+          return this;
+        }
+
+        var child = new this.constructor(lib$es6$promise$$internal$$noop);
+        var result = parent._result;
+
+        if (state) {
+          var callback = arguments[state - 1];
+          lib$es6$promise$asap$$asap(function(){
+            lib$es6$promise$$internal$$invokeCallback(state, child, callback, result);
+          });
+        } else {
+          lib$es6$promise$$internal$$subscribe(parent, child, onFulfillment, onRejection);
+        }
+
+        return child;
+      },
+
+    /**
+      `catch` is simply sugar for `then(undefined, onRejection)` which makes it the same
+      as the catch block of a try/catch statement.
+
+      ```js
+      function findAuthor(){
+        throw new Error('couldn't find that author');
+      }
+
+      // synchronous
+      try {
+        findAuthor();
+      } catch(reason) {
+        // something went wrong
+      }
+
+      // async with promises
+      findAuthor().catch(function(reason){
+        // something went wrong
+      });
+      ```
+
+      @method catch
+      @param {Function} onRejection
+      Useful for tooling.
+      @return {Promise}
+    */
+      'catch': function(onRejection) {
+        return this.then(null, onRejection);
+      }
+    };
+    function lib$es6$promise$polyfill$$polyfill() {
+      var local;
+
+      if (typeof global !== 'undefined') {
+          local = global;
+      } else if (typeof self !== 'undefined') {
+          local = self;
+      } else {
+          try {
+              local = Function('return this')();
+          } catch (e) {
+              throw new Error('polyfill failed because global object is unavailable in this environment');
+          }
+      }
+
+      var P = local.Promise;
+
+      if (P && Object.prototype.toString.call(P.resolve()) === '[object Promise]' && !P.cast) {
+        return;
+      }
+
+      local.Promise = lib$es6$promise$promise$$default;
+    }
+    var lib$es6$promise$polyfill$$default = lib$es6$promise$polyfill$$polyfill;
+
+    var lib$es6$promise$umd$$ES6Promise = {
+      'Promise': lib$es6$promise$promise$$default,
+      'polyfill': lib$es6$promise$polyfill$$default
+    };
+
+    /* global define:true module:true window: true */
+    if (typeof define === 'function' && define['amd']) {
+      define(function() { return lib$es6$promise$umd$$ES6Promise; });
+    } else if (typeof module !== 'undefined' && module['exports']) {
+      module['exports'] = lib$es6$promise$umd$$ES6Promise;
+    } else if (typeof this !== 'undefined') {
+      this['ES6Promise'] = lib$es6$promise$umd$$ES6Promise;
+    }
+
+    lib$es6$promise$polyfill$$default();
+}).call(this);
+
+;;(function () {
+	'use strict';
+
+	/**
+	 * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
+	 *
+	 * @codingstandard ftlabs-jsv2
+	 * @copyright The Financial Times Limited [All Rights Reserved]
+	 * @license MIT License (see LICENSE.txt)
+	 */
+
+	/*jslint browser:true, node:true*/
+	/*global define, Event, Node*/
+
+
+	/**
+	 * Instantiate fast-clicking listeners on the specified layer.
+	 *
+	 * @constructor
+	 * @param {Element} layer The layer to listen on
+	 * @param {Object} [options={}] The options to override the defaults
+	 */
+	function FastClick(layer, options) {
+		var oldOnClick;
+
+		options = options || {};
+
+		/**
+		 * Whether a click is currently being tracked.
+		 *
+		 * @type boolean
+		 */
+		this.trackingClick = false;
+
+
+		/**
+		 * Timestamp for when click tracking started.
+		 *
+		 * @type number
+		 */
+		this.trackingClickStart = 0;
+
+
+		/**
+		 * The element being tracked for a click.
+		 *
+		 * @type EventTarget
+		 */
+		this.targetElement = null;
+
+
+		/**
+		 * X-coordinate of touch start event.
+		 *
+		 * @type number
+		 */
+		this.touchStartX = 0;
+
+
+		/**
+		 * Y-coordinate of touch start event.
+		 *
+		 * @type number
+		 */
+		this.touchStartY = 0;
+
+
+		/**
+		 * ID of the last touch, retrieved from Touch.identifier.
+		 *
+		 * @type number
+		 */
+		this.lastTouchIdentifier = 0;
+
+
+		/**
+		 * Touchmove boundary, beyond which a click will be cancelled.
+		 *
+		 * @type number
+		 */
+		this.touchBoundary = options.touchBoundary || 10;
+
+
+		/**
+		 * The FastClick layer.
+		 *
+		 * @type Element
+		 */
+		this.layer = layer;
+
+		/**
+		 * The minimum time between tap(touchstart and touchend) events
+		 *
+		 * @type number
+		 */
+		this.tapDelay = options.tapDelay || 200;
+
+		/**
+		 * The maximum time for a tap
+		 *
+		 * @type number
+		 */
+		this.tapTimeout = options.tapTimeout || 700;
+
+		if (FastClick.notNeeded(layer)) {
+			return;
+		}
+
+		// Some old versions of Android don't have Function.prototype.bind
+		function bind(method, context) {
+			return function() { return method.apply(context, arguments); };
+		}
+
+
+		var methods = ['onMouse', 'onClick', 'onTouchStart', 'onTouchMove', 'onTouchEnd', 'onTouchCancel'];
+		var context = this;
+		for (var i = 0, l = methods.length; i < l; i++) {
+			context[methods[i]] = bind(context[methods[i]], context);
+		}
+
+		// Set up event handlers as required
+		if (deviceIsAndroid) {
+			layer.addEventListener('mouseover', this.onMouse, true);
+			layer.addEventListener('mousedown', this.onMouse, true);
+			layer.addEventListener('mouseup', this.onMouse, true);
+		}
+
+		layer.addEventListener('click', this.onClick, true);
+		layer.addEventListener('touchstart', this.onTouchStart, false);
+		layer.addEventListener('touchmove', this.onTouchMove, false);
+		layer.addEventListener('touchend', this.onTouchEnd, false);
+		layer.addEventListener('touchcancel', this.onTouchCancel, false);
+
+		// Hack is required for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
+		// which is how FastClick normally stops click events bubbling to callbacks registered on the FastClick
+		// layer when they are cancelled.
+		if (!Event.prototype.stopImmediatePropagation) {
+			layer.removeEventListener = function(type, callback, capture) {
+				var rmv = Node.prototype.removeEventListener;
+				if (type === 'click') {
+					rmv.call(layer, type, callback.hijacked || callback, capture);
+				} else {
+					rmv.call(layer, type, callback, capture);
+				}
+			};
+
+			layer.addEventListener = function(type, callback, capture) {
+				var adv = Node.prototype.addEventListener;
+				if (type === 'click') {
+					adv.call(layer, type, callback.hijacked || (callback.hijacked = function(event) {
+						if (!event.propagationStopped) {
+							callback(event);
+						}
+					}), capture);
+				} else {
+					adv.call(layer, type, callback, capture);
+				}
+			};
+		}
+
+		// If a handler is already declared in the element's onclick attribute, it will be fired before
+		// FastClick's onClick handler. Fix this by pulling out the user-defined handler function and
+		// adding it as listener.
+		if (typeof layer.onclick === 'function') {
+
+			// Android browser on at least 3.2 requires a new reference to the function in layer.onclick
+			// - the old one won't work if passed to addEventListener directly.
+			oldOnClick = layer.onclick;
+			layer.addEventListener('click', function(event) {
+				oldOnClick(event);
+			}, false);
+			layer.onclick = null;
+		}
+	}
+
+	/**
+	* Windows Phone 8.1 fakes user agent string to look like Android and iPhone.
+	*
+	* @type boolean
+	*/
+	var deviceIsWindowsPhone = navigator.userAgent.indexOf("Windows Phone") >= 0;
+
+	/**
+	 * Android requires exceptions.
+	 *
+	 * @type boolean
+	 */
+	var deviceIsAndroid = navigator.userAgent.indexOf('Android') > 0 && !deviceIsWindowsPhone;
+
+
+	/**
+	 * iOS requires exceptions.
+	 *
+	 * @type boolean
+	 */
+	var deviceIsIOS = /iP(ad|hone|od)/.test(navigator.userAgent) && !deviceIsWindowsPhone;
+
+
+	/**
+	 * iOS 4 requires an exception for select elements.
+	 *
+	 * @type boolean
+	 */
+	var deviceIsIOS4 = deviceIsIOS && (/OS 4_\d(_\d)?/).test(navigator.userAgent);
+
+
+	/**
+	 * iOS 6.0-7.* requires the target element to be manually derived
+	 *
+	 * @type boolean
+	 */
+	var deviceIsIOSWithBadTarget = deviceIsIOS && (/OS [6-7]_\d/).test(navigator.userAgent);
+
+	/**
+	 * BlackBerry requires exceptions.
+	 *
+	 * @type boolean
+	 */
+	var deviceIsBlackBerry10 = navigator.userAgent.indexOf('BB10') > 0;
+
+	/**
+	 * Determine whether a given element requires a native click.
+	 *
+	 * @param {EventTarget|Element} target Target DOM element
+	 * @returns {boolean} Returns true if the element needs a native click
+	 */
+	FastClick.prototype.needsClick = function(target) {
+		switch (target.nodeName.toLowerCase()) {
+
+		// Don't send a synthetic click to disabled inputs (issue #62)
+		case 'button':
+		case 'select':
+		case 'textarea':
+			if (target.disabled) {
+				return true;
+			}
+
+			break;
+		case 'input':
+
+			// File inputs need real clicks on iOS 6 due to a browser bug (issue #68)
+			if ((deviceIsIOS && target.type === 'file') || target.disabled) {
+				return true;
+			}
+
+			break;
+		case 'label':
+		case 'iframe': // iOS8 homescreen apps can prevent events bubbling into frames
+		case 'video':
+			return true;
+		}
+
+		return (/\bneedsclick\b/).test(target.className);
+	};
+
+
+	/**
+	 * Determine whether a given element requires a call to focus to simulate click into element.
+	 *
+	 * @param {EventTarget|Element} target Target DOM element
+	 * @returns {boolean} Returns true if the element requires a call to focus to simulate native click.
+	 */
+	FastClick.prototype.needsFocus = function(target) {
+		switch (target.nodeName.toLowerCase()) {
+		case 'textarea':
+			return true;
+		case 'select':
+			return !deviceIsAndroid;
+		case 'input':
+			switch (target.type) {
+			case 'button':
+			case 'checkbox':
+			case 'file':
+			case 'image':
+			case 'radio':
+			case 'submit':
+				return false;
+			}
+
+			// No point in attempting to focus disabled inputs
+			return !target.disabled && !target.readOnly;
+		default:
+			return (/\bneedsfocus\b/).test(target.className);
+		}
+	};
+
+
+	/**
+	 * Send a click event to the specified element.
+	 *
+	 * @param {EventTarget|Element} targetElement
+	 * @param {Event} event
+	 */
+	FastClick.prototype.sendClick = function(targetElement, event) {
+		var clickEvent, touch;
+
+		// On some Android devices activeElement needs to be blurred otherwise the synthetic click will have no effect (#24)
+		if (document.activeElement && document.activeElement !== targetElement) {
+			document.activeElement.blur();
+		}
+
+		touch = event.changedTouches[0];
+
+		// Synthesise a click event, with an extra attribute so it can be tracked
+		clickEvent = document.createEvent('MouseEvents');
+		clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
+		clickEvent.forwardedTouchEvent = true;
+		targetElement.dispatchEvent(clickEvent);
+	};
+
+	FastClick.prototype.determineEventType = function(targetElement) {
+
+		//Issue #159: Android Chrome Select Box does not open with a synthetic click event
+		if (deviceIsAndroid && targetElement.tagName.toLowerCase() === 'select') {
+			return 'mousedown';
+		}
+
+		return 'click';
+	};
+
+
+	/**
+	 * @param {EventTarget|Element} targetElement
+	 */
+	FastClick.prototype.focus = function(targetElement) {
+		var length;
+
+		// Issue #160: on iOS 7, some input elements (e.g. date datetime month) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just check the type instead. Filed as Apple bug #15122724.
+		if (deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time' && targetElement.type !== 'month') {
+			length = targetElement.value.length;
+			targetElement.setSelectionRange(length, length);
+		} else {
+			targetElement.focus();
+		}
+	};
+
+
+	/**
+	 * Check whether the given target element is a child of a scrollable layer and if so, set a flag on it.
+	 *
+	 * @param {EventTarget|Element} targetElement
+	 */
+	FastClick.prototype.updateScrollParent = function(targetElement) {
+		var scrollParent, parentElement;
+
+		scrollParent = targetElement.fastClickScrollParent;
+
+		// Attempt to discover whether the target element is contained within a scrollable layer. Re-check if the
+		// target element was moved to another parent.
+		if (!scrollParent || !scrollParent.contains(targetElement)) {
+			parentElement = targetElement;
+			do {
+				if (parentElement.scrollHeight > parentElement.offsetHeight) {
+					scrollParent = parentElement;
+					targetElement.fastClickScrollParent = parentElement;
+					break;
+				}
+
+				parentElement = parentElement.parentElement;
+			} while (parentElement);
+		}
+
+		// Always update the scroll top tracker if possible.
+		if (scrollParent) {
+			scrollParent.fastClickLastScrollTop = scrollParent.scrollTop;
+		}
+	};
+
+
+	/**
+	 * @param {EventTarget} targetElement
+	 * @returns {Element|EventTarget}
+	 */
+	FastClick.prototype.getTargetElementFromEventTarget = function(eventTarget) {
+
+		// On some older browsers (notably Safari on iOS 4.1 - see issue #56) the event target may be a text node.
+		if (eventTarget.nodeType === Node.TEXT_NODE) {
+			return eventTarget.parentNode;
+		}
+
+		return eventTarget;
+	};
+
+
+	/**
+	 * On touch start, record the position and scroll offset.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onTouchStart = function(event) {
+		var targetElement, touch, selection;
+
+		// Ignore multiple touches, otherwise pinch-to-zoom is prevented if both fingers are on the FastClick element (issue #111).
+		if (event.targetTouches.length > 1) {
+			return true;
+		}
+
+		targetElement = this.getTargetElementFromEventTarget(event.target);
+		touch = event.targetTouches[0];
+
+		if (deviceIsIOS) {
+
+			// Only trusted events will deselect text on iOS (issue #49)
+			selection = window.getSelection();
+			if (selection.rangeCount && !selection.isCollapsed) {
+				return true;
+			}
+
+			if (!deviceIsIOS4) {
+
+				// Weird things happen on iOS when an alert or confirm dialog is opened from a click event callback (issue #23):
+				// when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
+				// with the same identifier as the touch event that previously triggered the click that triggered the alert.
+				// Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
+				// immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
+				// Issue 120: touch.identifier is 0 when Chrome dev tools 'Emulate touch events' is set with an iOS device UA string,
+				// which causes all touch events to be ignored. As this block only applies to iOS, and iOS identifiers are always long,
+				// random integers, it's safe to to continue if the identifier is 0 here.
+				if (touch.identifier && touch.identifier === this.lastTouchIdentifier) {
+					event.preventDefault();
+					return false;
+				}
+
+				this.lastTouchIdentifier = touch.identifier;
+
+				// If the target element is a child of a scrollable layer (using -webkit-overflow-scrolling: touch) and:
+				// 1) the user does a fling scroll on the scrollable layer
+				// 2) the user stops the fling scroll with another tap
+				// then the event.target of the last 'touchend' event will be the element that was under the user's finger
+				// when the fling scroll was started, causing FastClick to send a click event to that layer - unless a check
+				// is made to ensure that a parent layer was not scrolled before sending a synthetic click (issue #42).
+				this.updateScrollParent(targetElement);
+			}
+		}
+
+		this.trackingClick = true;
+		this.trackingClickStart = event.timeStamp;
+		this.targetElement = targetElement;
+
+		this.touchStartX = touch.pageX;
+		this.touchStartY = touch.pageY;
+
+		// Prevent phantom clicks on fast double-tap (issue #36)
+		if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
+			event.preventDefault();
+		}
+
+		return true;
+	};
+
+
+	/**
+	 * Based on a touchmove event object, check whether the touch has moved past a boundary since it started.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.touchHasMoved = function(event) {
+		var touch = event.changedTouches[0], boundary = this.touchBoundary;
+
+		if (Math.abs(touch.pageX - this.touchStartX) > boundary || Math.abs(touch.pageY - this.touchStartY) > boundary) {
+			return true;
+		}
+
+		return false;
+	};
+
+
+	/**
+	 * Update the last position.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onTouchMove = function(event) {
+		if (!this.trackingClick) {
+			return true;
+		}
+
+		// If the touch has moved, cancel the click tracking
+		if (this.targetElement !== this.getTargetElementFromEventTarget(event.target) || this.touchHasMoved(event)) {
+			this.trackingClick = false;
+			this.targetElement = null;
+		}
+
+		return true;
+	};
+
+
+	/**
+	 * Attempt to find the labelled control for the given label element.
+	 *
+	 * @param {EventTarget|HTMLLabelElement} labelElement
+	 * @returns {Element|null}
+	 */
+	FastClick.prototype.findControl = function(labelElement) {
+
+		// Fast path for newer browsers supporting the HTML5 control attribute
+		if (labelElement.control !== undefined) {
+			return labelElement.control;
+		}
+
+		// All browsers under test that support touch events also support the HTML5 htmlFor attribute
+		if (labelElement.htmlFor) {
+			return document.getElementById(labelElement.htmlFor);
+		}
+
+		// If no for attribute exists, attempt to retrieve the first labellable descendant element
+		// the list of which is defined here: http://www.w3.org/TR/html5/forms.html#category-label
+		return labelElement.querySelector('button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea');
+	};
+
+
+	/**
+	 * On touch end, determine whether to send a click event at once.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onTouchEnd = function(event) {
+		var forElement, trackingClickStart, targetTagName, scrollParent, touch, targetElement = this.targetElement;
+
+		if (!this.trackingClick) {
+			return true;
+		}
+
+		// Prevent phantom clicks on fast double-tap (issue #36)
+		if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
+			this.cancelNextClick = true;
+			return true;
+		}
+
+		if ((event.timeStamp - this.trackingClickStart) > this.tapTimeout) {
+			return true;
+		}
+
+		// Reset to prevent wrong click cancel on input (issue #156).
+		this.cancelNextClick = false;
+
+		this.lastClickTime = event.timeStamp;
+
+		trackingClickStart = this.trackingClickStart;
+		this.trackingClick = false;
+		this.trackingClickStart = 0;
+
+		// On some iOS devices, the targetElement supplied with the event is invalid if the layer
+		// is performing a transition or scroll, and has to be re-detected manually. Note that
+		// for this to function correctly, it must be called *after* the event target is checked!
+		// See issue #57; also filed as rdar://13048589 .
+		if (deviceIsIOSWithBadTarget) {
+			touch = event.changedTouches[0];
+
+			// In certain cases arguments of elementFromPoint can be negative, so prevent setting targetElement to null
+			targetElement = document.elementFromPoint(touch.pageX - window.pageXOffset, touch.pageY - window.pageYOffset) || targetElement;
+			targetElement.fastClickScrollParent = this.targetElement.fastClickScrollParent;
+		}
+
+		targetTagName = targetElement.tagName.toLowerCase();
+		if (targetTagName === 'label') {
+			forElement = this.findControl(targetElement);
+			if (forElement) {
+				this.focus(targetElement);
+				if (deviceIsAndroid) {
+					return false;
+				}
+
+				targetElement = forElement;
+			}
+		} else if (this.needsFocus(targetElement)) {
+
+			// Case 1: If the touch started a while ago (best guess is 100ms based on tests for issue #36) then focus will be triggered anyway. Return early and unset the target element reference so that the subsequent click will be allowed through.
+			// Case 2: Without this exception for input elements tapped when the document is contained in an iframe, then any inputted text won't be visible even though the value attribute is updated as the user types (issue #37).
+			if ((event.timeStamp - trackingClickStart) > 100 || (deviceIsIOS && window.top !== window && targetTagName === 'input')) {
+				this.targetElement = null;
+				return false;
+			}
+
+			this.focus(targetElement);
+			this.sendClick(targetElement, event);
+
+			// Select elements need the event to go through on iOS 4, otherwise the selector menu won't open.
+			// Also this breaks opening selects when VoiceOver is active on iOS6, iOS7 (and possibly others)
+			if (!deviceIsIOS || targetTagName !== 'select') {
+				this.targetElement = null;
+				event.preventDefault();
+			}
+
+			return false;
+		}
+
+		if (deviceIsIOS && !deviceIsIOS4) {
+
+			// Don't send a synthetic click event if the target element is contained within a parent layer that was scrolled
+			// and this tap is being used to stop the scrolling (usually initiated by a fling - issue #42).
+			scrollParent = targetElement.fastClickScrollParent;
+			if (scrollParent && scrollParent.fastClickLastScrollTop !== scrollParent.scrollTop) {
+				return true;
+			}
+		}
+
+		// Prevent the actual click from going though - unless the target node is marked as requiring
+		// real clicks or if it is in the whitelist in which case only non-programmatic clicks are permitted.
+		if (!this.needsClick(targetElement)) {
+			event.preventDefault();
+			this.sendClick(targetElement, event);
+		}
+
+		return false;
+	};
+
+
+	/**
+	 * On touch cancel, stop tracking the click.
+	 *
+	 * @returns {void}
+	 */
+	FastClick.prototype.onTouchCancel = function() {
+		this.trackingClick = false;
+		this.targetElement = null;
+	};
+
+
+	/**
+	 * Determine mouse events which should be permitted.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onMouse = function(event) {
+
+		// If a target element was never set (because a touch event was never fired) allow the event
+		if (!this.targetElement) {
+			return true;
+		}
+
+		if (event.forwardedTouchEvent) {
+			return true;
+		}
+
+		// Programmatically generated events targeting a specific element should be permitted
+		if (!event.cancelable) {
+			return true;
+		}
+
+		// Derive and check the target element to see whether the mouse event needs to be permitted;
+		// unless explicitly enabled, prevent non-touch click events from triggering actions,
+		// to prevent ghost/doubleclicks.
+		if (!this.needsClick(this.targetElement) || this.cancelNextClick) {
+
+			// Prevent any user-added listeners declared on FastClick element from being fired.
+			if (event.stopImmediatePropagation) {
+				event.stopImmediatePropagation();
+			} else {
+
+				// Part of the hack for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
+				event.propagationStopped = true;
+			}
+
+			// Cancel the event
+			event.stopPropagation();
+			event.preventDefault();
+
+			return false;
+		}
+
+		// If the mouse event is permitted, return true for the action to go through.
+		return true;
+	};
+
+
+	/**
+	 * On actual clicks, determine whether this is a touch-generated click, a click action occurring
+	 * naturally after a delay after a touch (which needs to be cancelled to avoid duplication), or
+	 * an actual click which should be permitted.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onClick = function(event) {
+		var permitted;
+
+		// It's possible for another FastClick-like library delivered with third-party code to fire a click event before FastClick does (issue #44). In that case, set the click-tracking flag back to false and return early. This will cause onTouchEnd to return early.
+		if (this.trackingClick) {
+			this.targetElement = null;
+			this.trackingClick = false;
+			return true;
+		}
+
+		// Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
+		if (event.target.type === 'submit' && event.detail === 0) {
+			return true;
+		}
+
+		permitted = this.onMouse(event);
+
+		// Only unset targetElement if the click is not permitted. This will ensure that the check for !targetElement in onMouse fails and the browser's click doesn't go through.
+		if (!permitted) {
+			this.targetElement = null;
+		}
+
+		// If clicks are permitted, return true for the action to go through.
+		return permitted;
+	};
+
+
+	/**
+	 * Remove all FastClick's event listeners.
+	 *
+	 * @returns {void}
+	 */
+	FastClick.prototype.destroy = function() {
+		var layer = this.layer;
+
+		if (deviceIsAndroid) {
+			layer.removeEventListener('mouseover', this.onMouse, true);
+			layer.removeEventListener('mousedown', this.onMouse, true);
+			layer.removeEventListener('mouseup', this.onMouse, true);
+		}
+
+		layer.removeEventListener('click', this.onClick, true);
+		layer.removeEventListener('touchstart', this.onTouchStart, false);
+		layer.removeEventListener('touchmove', this.onTouchMove, false);
+		layer.removeEventListener('touchend', this.onTouchEnd, false);
+		layer.removeEventListener('touchcancel', this.onTouchCancel, false);
+	};
+
+
+	/**
+	 * Check whether FastClick is needed.
+	 *
+	 * @param {Element} layer The layer to listen on
+	 */
+	FastClick.notNeeded = function(layer) {
+		var metaViewport;
+		var chromeVersion;
+		var blackberryVersion;
+		var firefoxVersion;
+
+		// Devices that don't support touch don't need FastClick
+		if (typeof window.ontouchstart === 'undefined') {
+			return true;
+		}
+
+		// Chrome version - zero for other browsers
+		chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
+
+		if (chromeVersion) {
+
+			if (deviceIsAndroid) {
+				metaViewport = document.querySelector('meta[name=viewport]');
+
+				if (metaViewport) {
+					// Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
+					if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
+						return true;
+					}
+					// Chrome 32 and above with width=device-width or less don't need FastClick
+					if (chromeVersion > 31 && document.documentElement.scrollWidth <= window.outerWidth) {
+						return true;
+					}
+				}
+
+			// Chrome desktop doesn't need FastClick (issue #15)
+			} else {
+				return true;
+			}
+		}
+
+		if (deviceIsBlackBerry10) {
+			blackberryVersion = navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/);
+
+			// BlackBerry 10.3+ does not require Fastclick library.
+			// https://github.com/ftlabs/fastclick/issues/251
+			if (blackberryVersion[1] >= 10 && blackberryVersion[2] >= 3) {
+				metaViewport = document.querySelector('meta[name=viewport]');
+
+				if (metaViewport) {
+					// user-scalable=no eliminates click delay.
+					if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
+						return true;
+					}
+					// width=device-width (or less than device-width) eliminates click delay.
+					if (document.documentElement.scrollWidth <= window.outerWidth) {
+						return true;
+					}
+				}
+			}
+		}
+
+		// IE10 with -ms-touch-action: none or manipulation, which disables double-tap-to-zoom (issue #97)
+		if (layer.style.msTouchAction === 'none' || layer.style.touchAction === 'manipulation') {
+			return true;
+		}
+
+		// Firefox version - zero for other browsers
+		firefoxVersion = +(/Firefox\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
+
+		if (firefoxVersion >= 27) {
+			// Firefox 27+ does not have tap delay if the content is not zoomable - https://bugzilla.mozilla.org/show_bug.cgi?id=922896
+
+			metaViewport = document.querySelector('meta[name=viewport]');
+			if (metaViewport && (metaViewport.content.indexOf('user-scalable=no') !== -1 || document.documentElement.scrollWidth <= window.outerWidth)) {
+				return true;
+			}
+		}
+
+		// IE11: prefixed -ms-touch-action is no longer supported and it's recomended to use non-prefixed version
+		// http://msdn.microsoft.com/en-us/library/windows/apps/Hh767313.aspx
+		if (layer.style.touchAction === 'none' || layer.style.touchAction === 'manipulation') {
+			return true;
+		}
+
+		return false;
+	};
+
+
+	/**
+	 * Factory method for creating a FastClick object
+	 *
+	 * @param {Element} layer The layer to listen on
+	 * @param {Object} [options={}] The options to override the defaults
+	 */
+	FastClick.attach = function(layer, options) {
+		return new FastClick(layer, options);
+	};
+
+
+	if (typeof define === 'function' && typeof define.amd === 'object' && define.amd) {
+
+		// AMD. Register as an anonymous module.
+		define(function() {
+			return FastClick;
+		});
+	} else if (typeof module !== 'undefined' && module.exports) {
+		module.exports = FastClick.attach;
+		module.exports.FastClick = FastClick;
+	} else {
+		window.FastClick = FastClick;
+	}
+}());
+;/**
+ * Created by Crystian on 2/20/2015.
+ */
+
+
+//shortcuts:
+var byId = function (id) {
+	'use strict';
+	return document.getElementById(id);
+};
+
+//jshint unused:false
+var byClass = function(_class){
+	'use strict';
+	return document.getElementsByClassName(_class)[0];
+};
+
+/* insert html in id sent */
+//jshint unused:false
+var h = function(id, v){
+	'use strict';
+	var el = byId(id);
+	if( el ){
+		el.innerHTML = v;
+	}
+};
+var hp = function(id, v){
+	'use strict';
+	var el = byId(id);
+	if( el ){
+		el.placeholder = v;
+	}
+};
+//jshint unused:false
+var t = function(id, v){
+	'use strict';
+	var el = byId(id);
+	if( el ){
+		el.innerText = v;
+	}
+};
+
+//show message in debug zone
+//jshint unused:false
+var d = function(m){
+	'use strict';
+	loader.debugAdd(m);
+};
+
+;/**
+* Created by crystian on 28/02/14.
+*/
+
+//jshint unused:false
+var loader = (function(){
+	'use strict';
+
+	var cfg, diag, platform, utils, settings, events, doc, loadingScreen, applicationCache, location, ga, mx, xhr;
+
+	//just for ofuscation
+	function setters() {
+		cfg = loader.cfg;
+		diag = loader.diag;
+		platform = loader.platform;
+		utils = loader.utils;
+		xhr = loader.xhr;
+		settings = loader.settings;
+		events = loader.events;
+		loadingScreen = loader.loadingScreen;
+		applicationCache = window.applicationCache;
+		location = window.location;
+		ga = loader.ga;
+		mx = loader.mx;
+		doc = window.document;
+	}
+
+	//all history start here:
+	function init(finishFn){
+		loader.finish = finishFn;
+
+		_replaceVariables();
+		setters();
+		_handleAppCache();
+
+		if (!cfg.release) {
+			console.warn('****    DEBUG MODE!: NOT RELEASE    ****');
+		}
+		console.info('App version: ' + cfg.version +' ('+cfg.loader.version+')');
+		console.info('Loader init');
+
+		//if it is a device, load cordova plugins and more!
+		if(cfg.isCordovaDevice){
+			console.info('Cordova device');
+			cfg.isDevice = 1;
+
+			//carga asincrona, cuando llegue y se parsee dispara un deviceReady y lo mando a cordovaReady
+			doc.addEventListener('deviceready', _loadAsync, false);
+
+			utils.getJsFile('cordova.js');
+
+		} else {
+			if (platform.os.toString().match(/(iPhone|iPod|iPad|iOS|Android|BlackBerry)/)) {
+				console.info('Device (without cordova)');
+
+				cfg.isDevice = 1;
+			} else {
+				console.info('Web browser');
+				cfg.isDesktop = 1;
+			}
+
+			_loadAsync();
+		}
+	}
+
+	//by http://www.html5rocks.com/es/tutorials/appcache/beginner/
+	function _handleAppCache() {
+		// Check if a new cache is available on page load.
+		//TODO improve it!, mostrar un cartel al usuario diciendole la proxima vez se actualizaran los datos
+		applicationCache.addEventListener('updateready', function(e) {
+			if (applicationCache.status === applicationCache.UPDATEREADY) {
+				// Browser downloaded a new app cache.
+				// Swap it in and reload the page to get the new hotness.
+				applicationCache.swapCache();
+//				if (confirm('A new version of this site is available. Load it?')) {
+				location.reload();
+//				}
+			}
+		}, false);
+	}
+
+	//pisando variables and removing references
+	function _replaceVariables() {
+		loader.cfg = window._loaderCfg;
+		window._loaderCfg = null;
+		//delete window._loaderCfg;
+
+		//sirve para validaciones, no lo puedo controlar, setea esa variable, luego la elimino
+		loader.platform = window.platform;
+		window.platform = null;
+		delete window.platform;
+	}
+
+	//no recuerdo porque, pero mejor dejarlo al timeout
+	function _loadAsync() {
+		setTimeout(_load, 100);
+	}
+
+	function setPolyfills() {
+		if (!window.Promise) {
+			console.warn('Promise polyfill installed');
+			ES6Promise.polyfill();
+		}
+	}
+
+	function _load() {
+		_handleDebugMode();
+		cfg.compatibility = diag.executeDiag();
+		_handleCompatibility();
+
+		//break! chauchau a dios, sos inmerecedor!
+		if(cfg.compatibility === 0){return;}
+
+		diag.registerDetectOrientation();
+		cfg.isTouchDevice = diag.isTouchDevice();
+		cfg.isMobile = diag.isMobile();
+		cfg.isTablet = !cfg.isMobile;
+
+		events.init();
+		settings.init();
+		ga.init();
+		mx.init();
+
+		setPolyfills();
+
+		_debugToolsLoad();
+
+		if(cfg.fastclick && cfg.isTouchDevice){
+			FastClick.attach(doc.body);
+		}
+
+		console.log('load appName '+ cfg.firstApp);
+		xhr.requestApp(cfg.firstApp, _loadAppSuccess, _loadAppFail);
+	}
+
+	function _loadAppSuccess(){
+		console.warn('_loadAppSuccess');
+		loader.finish();
+	}
+	function _loadAppFail(err){
+		utils.showPanicError(err);
+	}
+
+	function _handleDebugMode() {
+		cfg.debugZone = byId('debugZone');
+
+		debug('Version: ' + cfg.version+ '<br>Loader version: ' + cfg.loader.version);
+
+		if( cfg.showDeviceInfo ){
+			debugAdd(diag.getInfo());
+		}
+
+		//prefiero hacerlo asi por seguridad, esto lo remueve gulp en modo release
+		//removeIf(production)
+		if(true){return;}
+		//endRemoveIf(production)
+
+		//jshint quotmark:false, maxstatements:30
+		console.log("                         __..--.._");
+		console.log("  .....              .--~  .....  `.");
+		console.log(".\":    \"`-..  .    .' ..-'\"    :\". `");
+		console.log("` `._ ` _.'`\"(     `-\"'`._ ' _.' '");
+		console.log("     ~~~      `.          ~~~");
+		console.log("              .'");
+		console.log("             /");
+		console.log("            (");
+		console.log("             ^---'");
+		console.log("     -=[ I SEE YOU! / TE VEO! ]=-");
+		console.log("");
+
+		//these errors are lies, just a joke
+		console.warn(cfg.consoleError[utils.getRandomInt(cfg.consoleError.length-1)]);
+
+		//delete window.console; //error al testear con nightmare
+		window.console={};
+		window.console.log=function(){return;};
+		window.console.debug=function(){return;};
+		window.console.error=function(){return;};
+		window.console.warn=function(){return;};
+		window.console.info=function(){return;};
+
+
+		////dejo de funcionar con ultimas versiones de chrome, ROMPE IE!!
+		//var _z = console;
+		//Object.defineProperty( window, 'console', {
+		//	get : function(){
+		//		if( _z._commandLineAPI ){
+		//			throw cfg.consoleError[
+		//				utils.getRandomInt(cfg.consoleError.length-1)];
+		//		}
+		//		return _z;
+		//	},
+		//	set : function(val){
+		//		_z = val;
+		//	}
+		//});
+
+	}
+
+	function _handleCompatibility() {
+		if (cfg.compatibility !== 2) {
+			if (cfg.compatibility === 0) {
+				alert(cfg.loader.text.incompatibleByDiag);
+				utils.showPanicError(cfg.loader.text.incompatibleByDiag +'<br>' +
+											cfg.loader.text.faqLink);
+			} else /* 1 */ {
+				_showError(cfg.loader.text.semiIncompatible);
+			}
+		}
+	}
+
+
+	function _debugToolsLoad() {
+
+		if (cfg.contentEditable) {
+			doc.body.contentEditable = 'true';
+			doc.designMode = 'on';
+		}
+
+		if(cfg.showSkeletor){
+			utils.showSkeletor();
+		}
+	}
+
+
+	function hide() {
+		loadingScreen.off(); //via css 500ms
+	}
+
+	function show() {
+		loadingScreen.on(); //via css 500ms
+	}
+
+	function _showError(m){
+		console.error(m);
+		alert(m);
+	}
+
+	function debug(m) {
+		if (cfg.release || !cfg.debugZoneActive) {
+			return;
+		}
+		cfg.debugZone.innerHTML = m;
+	}
+
+	function debugAdd(m) {
+		if (cfg.release || !cfg.debugZoneActive) {
+			return;
+		}
+		debug(cfg.debugZone.innerHTML + '<br>---<br>' + m);
+	}
+
+	return {
+		debug: debug,
+		debugAdd: debugAdd,
+		show: show,
+		hide: hide,
+		init: init
+	};
+}());
+;/**
+* Created by Crystian on 2/11/2015.
+*/
+
+//injected automatically on the app:
+_loaderCfg.isDevice		= 0; // setter by loader
+_loaderCfg.isDesktop	= 0; // setter by loader
+_loaderCfg.compatibility= 0; // 0 = no compatible, 1 = con problems, 2 = compatible
+_loaderCfg.orientation	= 0; // 0=portrait, 1=landscape //detected by diag
+_loaderCfg.isLandscape	= 0; //detected by diag
+_loaderCfg.isPortraid	= 0; //detected by diag
+_loaderCfg.isTouchDevice= 0; //detected by diag, be careful, can not be real
+_loaderCfg.isMobile		= 0; // setter by diag, need it a review
+_loaderCfg.isTablet		= 0; // setter by diag, need it a review
+_loaderCfg.lang			= ''; //by lang and settings
+_loaderCfg.offline		= 0; //detected by diag.offline
+_loaderCfg.online		= 1; //detected by diag.offline
+_loaderCfg.connectionType= 2; //0=without connection, 1=bad connection and 2 good connection //just for cordova apps
+
+;/**
+ * Created by Crystian on 3/3/14.
+ */
+
+	//jshint maxstatements:false
+loader.utils = (function(){
+	'use strict';
+
+	var _cache = [];
+
+	//return 0 === equals, 1 === a > b, -1 === a < b
+	function compareSemVer(a, b){
+		if(a === b){
+			return 0;
+		}
+
+		var aComponents = a.split('.');
+		var bComponents = b.split('.');
+
+		var len = Math.min(aComponents.length, bComponents.length);
+
+		// loop while the components are equal
+		for(var i = 0; i < len; i++){
+			// A bigger than B
+			if(parseInt(aComponents[i], 10) > parseInt(bComponents[i], 10)){
+				return 1;
+			}
+
+			// B bigger than A
+			if(parseInt(aComponents[i], 10) < parseInt(bComponents[i], 10)){
+				return -1;
+			}
+		}
+
+		// If one's a prefix of the other, the longer one is greater.
+		if(aComponents.length > bComponents.length){
+			return 1;
+		}
+
+		if(aComponents.length < bComponents.length){
+			return -1;
+		}
+
+		// Otherwise they are the same.
+		return 0;
+	}
+
+	function getExtensionFile(s){
+		var arr = s.split('.');
+		if(arr.length === 0){
+			return s;
+		}
+		return arr[arr.length - 1];
+	}
+
+	function setExtensionFilename(s, extension){
+		var arr = s.split('.');
+		if(arr.length <= 1){
+			console.logRed('Extension not found!');
+			return s;
+		}
+
+		arr.pop();
+		arr.push(extension);
+
+		return arr.join('.');
+	}
+
+	function setNewResourceByTag(resourceLoader, tagWhere){
+		var tag = document.getElementsByTagName(tagWhere)[0];
+		tag.appendChild(resourceLoader);
+	}
+
+	function setNewResourceById(resourceLoader, id, _clear){
+		var el = document.getElementById(id),
+				i = 0, l = el.childNodes.length,
+				clear = (_clear === undefined);
+
+		if(clear && l > 0){
+			for(;i<l;i++){
+				el.removeChild(el.childNodes[i]);
+			}
+		}
+
+		el.appendChild(resourceLoader);
+	}
+
+	//	//via: http://stackoverflow.com/questions/8917921/cross-browser-javascript-not-jquery-scroll-to-top-animation
+	//	function scrollTo(element, to, duration) {
+	//		var start = element.scrollTop,
+	//			change = to - start,
+	//			currentTime = 0,
+	//			increment = 20;
+	//
+	//		var animateScroll = function(){
+	//			currentTime += increment;
+	//			element.scrollTop = Math.easeInOutQuad(currentTime, start, change, duration);
+	//			if(currentTime < duration) {
+	//				setTimeout(animateScroll, increment);
+	//			}
+	//		};
+	//		animateScroll();
+	//	}
+	//
+	//	//t = current time
+	//	//b = start value
+	//	//c = change in value
+	//	//d = duration
+	//	Math.easeInOutQuad = function (t, b, c, d) {
+	//		t /= d/2;
+	//		if (t < 1){ return c/2*t*t + b;}
+	//		t--;
+	//		return -c/2 * (t*(t-2) - 1) + b;
+	//	};
+	//	////
+
+	function showSkeletor(){
+		toggleSkeletor(false);
+	}
+
+	function hideSkeletor(){
+		toggleSkeletor(true);
+	}
+
+	function toggleSkeletor(v){
+		//removeIf(production)
+		var el        = document.getElementsByTagName('body')[0],
+				className = 'skeletor',
+				byValue   = false;
+
+		byValue = (v === true || v === false) ? v : el.classList.contains(className);
+
+		if(byValue){
+			el.classList.remove(className);
+		} else {
+			el.classList.add(className);
+		}
+		//endRemoveIf(production)
+	}
+
+	function showPanicError(m){
+		if(window.console){
+			window.console.error(m);
+		}
+		var body = document.getElementsByTagName('body')[0];
+		body.innerHTML = m;
+		loader.hide();
+	}
+
+	function getRandomInt(max){
+		return Math.round(getRandomRange(0, max));
+	}
+
+	function getRandom(max){
+		return getRandomRange(0, max);
+	}
+
+	function getRandomRange(min, max){
+		return Math.random() * (max - min) + min;
+	}
+
+	function handleCompress(data){
+		//anchor for compress, DON't touch it!
+		if(!loader.cfg.compress){return data;}//flagCompress
+		console.log('Resource compressed');
+		return LZString.decompressFromUTF16(data);
+	}
+
+	//two arguments are set, one is a get, just for encapsular y no ver las variables
+	function cache(key, value){
+		if(value !== undefined){
+			_cache[key] = value;
+		} else {
+			return _cache[key];
+		}
+	}
+
+	return {
+		cx: cache,
+		za: handleCompress,
+		showSkeletor: showSkeletor,
+		compareSemVer: compareSemVer,
+		getExtensionFile: getExtensionFile,
+		setExtensionFilename: setExtensionFilename,
+		hideSkeletor: hideSkeletor,
+		toggleSkeletor: toggleSkeletor,
+		//		scrollTo: scrollTo,
+		getRandom: getRandom,
+		getRandomInt: getRandomInt,
+		getRandomRange: getRandomRange,
+
+		showPanicError: showPanicError,
+		setNewResourceByTag: setNewResourceByTag,
+		setNewResourceById: setNewResourceById
+	};
+
+})();;/**
+ * Created by Crystian on 18/12/2015.
+ */
+
+loader.xhr = (function(){
+
+	function request(url){
+		return new Promise(function(resolve, reject){
+			console.log('request: ' + url);
+			var xhr = new XMLHttpRequest();
+
+			function errorDetected(er){
+				reject(er);
+			}
+
+			xhr.onreadystatechange = function(){
+				if(this.readyState === 4 &&
+					this.status === 200 &&
+					this.responseText !== null){
+
+					resolve(this.responseText);
+				} else if(this.readyState === 4){
+					errorDetected(loader.cfg.loader.text.errorRequestFile);
+				}
+			};
+
+			xhr.ontimeout = function(){
+				errorDetected(loader.cfg.loader.text.errorTimeoutServer);
+			};
+			xhr.open('GET', url, true);
+			// 10000 is to much?
+			xhr.timeout = 10000;//yes here, porque ie11 pincha :S
+			xhr.send();
+		});
+	}
+
+	function requestJson(url){
+		return request(url).then(JSON.parse);
+	}
+
+
+	function requestApp(appConfig, loadAppSuccess, loadAppFail){
+		appConfig = typeof(appConfig) === 'string' ? {appName: appConfig} : appConfig;
+		return _requestOneOrAllInOne(appConfig, loadAppSuccess, loadAppFail);
+	}
+
+	function _requestOneOrAllInOne(appConfig, loadAppSuccess, loadAppFail){
+		//debugger
+		if(loader.cfg.isDist){
+			console.info('isDist!');
+			requestAllInOne(appConfig.appName + '.json', appConfig).then(loadAppSuccess, loadAppFail);
+			return;
+		}
+		var templatePath = '';
+		if(loader.cfg.folders.template){
+			templatePath = loader.cfg.folders.template + loader.cfg.folders.www;
+		}
+
+		console.info('multiple request!');
+		var path = '../' + templatePath + appConfig.appName + '/';
+
+		return requestJson(path + 'www.json', appConfig).then(function(data){
+
+			var i    = 0,
+					l    = data.length,
+					urls = [];
+
+			for(; i < l; i++){
+				var file = data[i];
+
+				urls.push('../'+ templatePath + file);
+			}
+
+			return requestMultipleSync(urls, appConfig).then(loadAppSuccess);
+		});
+	}
+
+	function requestAllInOne(url, options){
+		return request(url).then(function(data){
+
+			try {
+				data = JSON.parse(loader.utils.za(data));
+			} catch (e) {
+				return Promise.reject(e);
+			}
+
+			if(data.h){
+				_setHtml(data.h, options);
+			}
+			if(data.c){
+				_setCss(data.c);
+			}
+			if(data.j){
+				_setJs(data.j);
+			}
+			//if (data.d) {
+			//
+			//}
+			return Promise.resolve();
+		});
+	}
+
+	//be careful, HTML option pisa old version
+	function requestMultipleAsync(requestsArray, options){
+
+		return Promise.all(requestsArray.map(function(url){
+			var q = {};
+
+			var type = loader.utils.getExtensionFile(url);
+
+			switch (type){
+				case 'html':
+					q = requestAndSetHtml(url, options);
+					break;
+				case 'css':
+					q = requestAndSetCss(url);
+					break;
+				case 'js':
+					q = requestAndSetJs(url);
+					break;
+				default:
+					return Promise.reject('Error key not found on requestMultiple array');
+			}
+
+			return q;
+		}));
+	}
+
+	function requestMultipleSync(requestsArray, options){
+		if(requestsArray.length === 0){
+			return Promise.resolve();
+		}
+
+		var url = requestsArray.shift();
+		return requestMultimpleSyncUnique(url, options)
+			.then(function(){
+				return requestMultipleSync(requestsArray, options);
+			});
+
+	}
+
+	function requestMultimpleSyncUnique(url, options){
+		return new Promise(function(resolve, reject){
+
+			var type = loader.utils.getExtensionFile(url),
+					fn;
+
+			switch (type){
+				case 'html':
+					fn = function(data){
+						return requestAndSetHtml(data, options);
+					};
+					break;
+				case 'css':
+					fn = requestAndSetCss;
+					break;
+				case 'js':
+					fn = requestAndSetJs;
+					break;
+
+				default:
+					reject('Error key not found on requestMultiple array');
+			}
+
+			fn(url).then(function(){
+				resolve();
+			}, function(m){
+				reject(m);
+			});
+		});
+	}
+
+	//potential issue about security, review it
+	function getJsFile(file){
+		var resourceLoader = document.createElement('script');
+		resourceLoader.type = 'text/javascript';
+		resourceLoader.async = true;
+		resourceLoader.src = file;
+
+		loader.utils.setNewResourceByTag(resourceLoader, 'head');
+	}
+
+	function requestAndSetJs(url){
+		return request(url).then(_setJs);
+	}
+
+	function _setJs(content){
+		var resourceLoader = document.createElement('script');
+		resourceLoader.type = 'text\/javascript';
+		resourceLoader.async = false;
+		resourceLoader.innerHTML = content;
+		loader.utils.setNewResourceByTag(resourceLoader, 'head');
+	}
+
+	function requestAndSetCss(url){
+		return request(url).then(_setCss);
+	}
+
+	function _setCss(content){
+		var resourceLoader = document.createElement('style');
+		resourceLoader.type = 'text/css';
+		if(!loader.cfg.phantom){
+			resourceLoader.innerHTML = content;
+		}
+		loader.utils.setNewResourceByTag(resourceLoader, 'head');
+	}
+
+	function requestAndSetHtml(url, options){
+		return request(url).then(function(data){
+			_setHtml(data, options);
+		});
+	}
+
+	function _setHtml(data, options){
+		var el = document.getElementById('mainContainer');
+
+		options = options || {appName: 'app'};
+		options.replace = options.replace || false;
+
+		if((options && options.replace === false) || !el.querySelector('#' + options.appName)){
+
+			var app = document.createElement('div');
+			app.innerHTML = data;
+			app.id = options.appName;
+			app.classList.add('height100');
+
+			loader.utils.setNewResourceById(app, 'mainContainer', options.clear);
+		} else {
+			el.querySelector('#' + options.appName).innerHTML = data;
+		}
+	}
+
+	return {
+		request: request,
+		requestJson: requestJson,
+		requestApp: requestApp,
+		requestMultipleSync: requestMultipleSync,
+		requestMultipleAsync: requestMultipleAsync,
+		//requestAllInOne: requestAllInOne,
+		requestAndSetJs: requestAndSetJs,
+		requestAndSetHtml: requestAndSetHtml,
+		requestAndSetCss: requestAndSetCss,
+		getJsFile: getJsFile
+	};
+}());;/**
+* Created by Crystian on 3/2/14.
+*/
+
+loader.diag = (function (window) {
+	'use strict';
+
+	function executeDiag() {
+		var compatibility = defineCompatibility();
+		loader.debugAdd('Compatibility: ' + compatibility);
+
+		if (compatibility === 0) {
+			return compatibility;
+		}
+
+		loader.diag.lang.init();
+		loader.diag.cordovaConnection.init();
+
+		return compatibility;
+	}
+
+	//complex second validation of compatibility, regarding platform
+	function defineCompatibility() {
+		//jshint maxcomplexity:false
+
+		//just for get major and minor
+		var platform = loader.platform,
+			version = platform.version ? platform.version : '0.0',
+			platformName = platform.name ? platform.name.toLowerCase() : '',//ie viene sin name ...
+			decimal;
+
+		//patches para normalizar nombres:
+		if ( platformName === 'ie' ){
+			loader.polyfills.customEventsForIE();
+		} else if( platformName.indexOf('android') >= 0 ){
+			platformName = 'android';
+		} else if( platformName.indexOf('chrome mobile') >= 0 ) {
+			platformName = 'chromeMobile';
+		} else if( platformName.indexOf('chrome') >= 0 ) {
+			platformName = 'chrome';
+		} else if( platform.os.family.toLowerCase().indexOf('ios') >= 0 ) {
+			platformName = 'ios';
+		}
+
+		//normalize versions
+		version = version.split('.');
+		decimal = version.splice(1, version.length);
+		version = version[0] + '.' + decimal.join('');
+		version = parseFloat(version);
+
+		console.info('Browser version: '+ platformName + ' ' + version);
+
+		var matrixBrowser = loader.cfg.compatibilityMatrix[platformName];
+
+		var compatibility = 0;
+
+
+	/*
+	el primer elemento es incompatible 100%, menores e igual de
+	el segundo es browser viejo, compatible, menores e igual de
+	el tercero es compatible con ese y superiores, mayores e igual de
+
+	OTROS:
+	'operamini':[7	,7	,7],
+	'bb':		[6	,7	,10],
+	'ieMobile': [9	,9	,10]
+
+	TODO revisar opera, anda raro en la virtual con xp,
+	por otro lado los parametros que toma son de compatibles,
+	y por ende usa a chrome :S
+	'opera':	[16	,17	,18]
+	*/
+
+		if (matrixBrowser === undefined) {
+			//si no encuentra la version del browser, entra en modo 1
+			compatibility = 1;
+		} else if ((version <= matrixBrowser[0])) {
+			compatibility = 0;
+		} else if (version <= matrixBrowser[1]) {
+			compatibility = 1;
+		} else if (version > matrixBrowser[1]) {
+			compatibility = 2;
+		}
+
+		return compatibility;
+	}
+
+	function registerDetectOrientation(){
+		var mql = window.matchMedia('(orientation: portrait)');
+
+		_setOrientation(mql.matches);
+
+		mql.addListener(function(m) {
+			_setOrientation(m.matches);
+		});
+	}
+
+	function _setOrientation(portrait){
+		if(portrait) {
+			loader.cfg.isLandscape = loader.cfg.orientation = 0;
+			loader.cfg.isPortraid = 1;
+		} else {
+			loader.cfg.orientation = loader.cfg.isLandscape = 1;
+			loader.cfg.isPortraid = 0;
+		}
+	}
+
+	//http://ctrlq.org/code/19616-detect-touch-screen-javascript
+	function isTouchDevice() {
+		console.warn('isTouchDevice may does not work properly');
+		/*globals DocumentTouch*/
+		return true === ('ontouchstart' in window || window.DocumentTouch && document instanceof DocumentTouch);
+	}
+
+	function isMobile() {
+		//TODO hacer por tamanio y densidad de pixeles
+		var r = false,
+			ua = window.navigator.userAgent;
+
+		if (!(/iPad.+Mobile/i.test(ua)) && (/Mobile/i.test(ua))) {
+			r = true;
+		}
+		return r;
+	}
+
+	function getInfo() {
+		var result = '';
+		if (loader.cfg.isCordovaDevice) {
+			result = deviceInfoHtml();
+			result += '<br />';
+		}
+		result += clientInfoHtml();
+
+		return result;
+	}
+
+	//based on UA (https://github.com/bestiejs/platform.js)
+	function clientInfoHtml() {
+		var platform = loader.platform;
+
+		return '<b>User Agent based:</b><br />' +
+			'Platform name: ' + platform.name + '<br />' +
+			'Platform version: ' + platform.version + '<br />' +
+			'Platform layout: ' + platform.layout + '<br />' +
+			'Platform OS: ' + platform.os + '<br />' +
+			'Platform desc: ' + platform.description + '<br />' +
+			'Platform product: ' + platform.product + '<br />' +
+			'Platform manufacturer: ' + platform.manufacturer + '<br />' +
+			'USER AGENT: ' +window.navigator.userAgent;
+	}
+
+	//based on cordova "device" object
+	function deviceInfoHtml() {
+		return '<b>Cordova device based:</b><br />' +
+			'Device Model: ' + device.model + '<br />' +
+			'Device Name: ' + device.name + '<br />' +
+			'Device Cordova: ' + device.cordova + '<br />' +
+			'Device Platform: ' + device.platform + '<br />' +
+			'Device UUID: ' + device.uuid + '<br />' +
+			'Device Version: ' + device.version;
+	}
+
+	function setStatusConnection(v){
+		loader.cfg.online = v;
+		loader.cfg.offline = !v;
+	}
+
+	return {
+		registerDetectOrientation: registerDetectOrientation,
+		setStatusConnection: setStatusConnection,
+		getInfo: getInfo,
+		isTouchDevice: isTouchDevice,
+		isMobile: isMobile,
+		executeDiag: executeDiag
+	};
+}(window));
+;/**
+* Created by Crystian on 3/3/14.
+*/
+
+//jshint unused:false
+loader.polyfills = (function(){
+	'use strict';
+
+
+	//nivelacion de eventos para ie
+	function customEventsForIE() {
+		(function () {
+			function CustomEvent(event, params) {
+				params = params || { bubbles: false, cancelable: false, detail: undefined };
+				var evt = document.createEvent('CustomEvent');
+				evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+				return evt;
+			}
+
+			if (!window.CustomEvent) {
+				//CustomEvent.prototype = window.CustomEvent.prototype;
+				window.CustomEvent = CustomEvent;
+			}
+		})();
+	}
+
+
+	return {
+		customEventsForIE: customEventsForIE
+	};
+
+}());;/**
+* Created by Crystian on 3/2/14.
+*/
+
+loader.settings = (function (){
+	'use strict';
+
+	var VERSION = 'v';
+
+
+	//jshint maxcomplexity:9
+	function init(){
+		var version = get('version');
+		if ( !version ) {
+			//FIRST TIME!
+			console.info('First time to here!');
+
+			//set defaults values
+			set(VERSION, loader.cfg.version);    //nomenclature version
+			//others settings ...
+
+		} else {
+			if( loader.utils.compareSemVer(loader.cfg.version, version) === 1 ){
+				console.warn('New version by revision, migrate data...');
+
+				//after all
+				set(VERSION, loader.cfg.version);
+
+				//trigger an event for others updates
+				document.dispatchEvent(loader.events.newVersionDetected);
+			}
+
+			//more than once time here.
+			//try to get data
+		}
+	}
+
+	function set(item, value){
+		localStorage.setItem(item, value);
+	}
+
+	function get(item) {
+		return localStorage.getItem(item);
+	}
+
+	function remove(item) {
+		return localStorage.removeItem(item);
+	}
+
+	function removeAlldata() {
+		localStorage.clear();
+	}
+
+	return {
+		VERSION: VERSION,
+		init: init,
+		remove: remove,
+		removeAlldata: removeAlldata,
+		vars: {},
+		set: set,
+		get: get
+	};
+}());;/**
+* Created by Crystian on 4/19/2014.
+*/
+
+loader.diag.lang = (function () {
+	'use strict';
+	var callback = '';
+
+	/* detect language and change it, if can't detected use a browser setup */
+	function init(_callback){
+		callback = _callback;
+
+		if (loader.cfg.isCordovaDevice){ //second: via device
+			console.log('via cordova lang');
+
+			navigator.globalization.getLocaleName(
+				function (language) {
+					var lang = language.value.replace('_', '-');
+					setLang( lang, 'cordova device' );
+				},
+				function () {
+					console.warn('Fail with cordova device, fallback with browser');
+					//en caso de error usa el detector de browser
+					setLang( getBrowserLang(), 'browser' );
+				}
+			);
+
+		} else { //third: via browser (UA)
+
+			setLang( getBrowserLang(), 'browser' );
+		}
+	}
+
+	/*	detect via browser	 */
+	function getBrowserLang(){
+		//jshint maxcomplexity:false
+
+		var lang;
+
+		//just for android, came one string with languages in this format XX-xx
+		if ( navigator.userAgent ) {
+			lang = navigator.userAgent.match(/android.*\W(\w\w)-(\w\w)\W/i);
+			if (lang) {
+				lang = lang[1];
+			}
+		}
+
+		if ( !lang ) {
+			if ( navigator.languages && navigator.languages instanceof Array) {
+				lang = navigator.languages[0];
+			} else if ( navigator.language ) {
+				lang = navigator.language;
+			} else if ( navigator.browserLanguage ) {
+				lang = navigator.browserLanguage;
+			} else if ( navigator.systemLanguage ) {
+				lang = navigator.systemLanguage;
+			} else if ( navigator.userLanguage ) {
+				lang = navigator.userLanguage;
+			}
+		}
+
+		return lang;
+	}
+
+	function setLang( _lang, m ) {
+		console.info('Language detected: "'+ _lang +'" via '+ m);
+		loader.cfg.lang = _lang;
+	}
+
+	return {
+		init: init
+	};
+
+}());
+;/**
+* Created by Crystian on 3/3/14.
+*/
+
+loader.events = (function(){
+	'use strict';
+
+	//jshint validthis:true
+	function init() {
+		//no customEvent porque no es soportado por android browser
+		this.loaderFinished.initEvent('loaderFinished', false, false);
+		this.newVersionDetected.initEvent('newVersionDetected', false, false);
+		this.appOnline.initEvent('appOnline', false, false);
+		this.appOffline.initEvent('appOffline', false, false);
+	}
+
+	return {
+		loaderFinished: document.createEvent('Events'),
+		newVersionDetected: document.createEvent('Events'),
+		appOnline: document.createEvent('Events'),
+		appOffline: document.createEvent('Events'),
+		init: init
+	};
+}());
+;/**
+* Created by Crystian on 10/19/2014.
+*/
+
+
+	//extend array functionality with search by field and key
+Object.defineProperty(Array.prototype, 'code', {
+	value: function (key) {
+		'use strict';
+
+		var a = this.find('code', key);
+		if(a.length === 1){a = a[0];}
+		return a;
+	}
+});
+
+
+Object.defineProperty(Array.prototype, 'find', {
+	value: function (field, key){
+		'use strict';
+
+		var r = [];
+
+		for (var i in this) {
+			if(this[i].hasOwnProperty(field)) {
+//					console.log(i + ' ' + this[i]);
+				if(key === this[i][field]){
+//					console.log('found!');
+					r.push(this[i]);
+				}
+			}
+		}
+
+		return r;
+	}
+});
+
+
+Object.defineProperty(Array.prototype, 'shuffle', {
+	value: function () {
+		'use strict';
+
+		var currentIndex = this.length,
+			temporaryValue,
+			randomIndex;
+
+		// While there remain elements to shuffle...
+		while (0 !== currentIndex) {
+
+			// Pick a remaining element...
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
+
+			// And swap it with the current element.
+			temporaryValue = this[currentIndex];
+			this[currentIndex] = this[randomIndex];
+			this[randomIndex] = temporaryValue;
+		}
+
+		return this;
+	}
+});
+;/**
+* Created by Crystian on 3/2/14.
+*/
+
+loader.loadingScreen = (function(el, animationElements){
+	'use strict';
+
+	var t = false,
+		duration = 1000;
+
+	function on(callback) {
+		toggle(true, callback);
+	}
+
+	function off(callback) {
+		toggle(false, callback);
+	}
+
+	function toggle(togg, callback) {
+		togg = togg === undefined ? t : togg;
+		callback = callback ? callback : function(){};
+		if (togg){
+			t = false;
+			el.classList.remove('fadeout');
+			el.classList.add('fadein');
+			if (animationElements) {
+				animationOn();
+
+			}
+			setTimeout(function () {
+				callback();
+			}, duration);//be careful esto tambien esta en el class
+		} else {
+			t = true;
+			el.classList.remove('fadein');
+			el.classList.add('fadeout');
+			setTimeout(function () {
+				if (animationElements) {
+					animationOff();
+				}
+				callback();
+			}, duration);//be careful esto tambien esta en el class
+		}
+	}
+
+	function animationOn(){
+		animationSwitch(true);
+	}
+	function animationOff(){
+		animationSwitch(false);
+	}
+	function animationSwitch(v){
+		if(animationElements.length===0){return;}
+		var i = 0,
+			l = animationElements.length;
+
+		for (; i < l; i++) {
+			var el = animationElements[i];
+			if(v){
+				el.classList.add('on');
+			} else {
+				el.classList.remove('on');
+			}
+		}
+	}
+
+
+	return {on : on, off: off, toggle: toggle};
+
+}(byId('loadingScreen'), document.getElementsByClassName('loadingAnimation')));
+;loader.diag.cordovaConnection = (function () {
+	'use strict';
+
+	function init() {
+		document.addEventListener('online', function(){
+			console.debug('loader.diag.cordovaConnection.online');
+			setStatus(true);
+			document.dispatchEvent(loader.events.appOnline);
+		}, false);
+
+		document.addEventListener('offline', function(){
+			console.debug('loader.diag.cordovaConnection.offline');
+			setStatus(false);
+			document.dispatchEvent(loader.events.appOffline);
+		}, false);
+
+		//not needed
+		//document.addEventListener('pause', function, false);
+	}
+
+	function setStatus(v){
+		loader.diag.setStatusConnection(v);
+	}
+
+	function getType(state) {
+		var states = {};
+		states[Connection.UNKNOWN] = 'Unknown connection';
+		states[Connection.ETHERNET] = 'Ethernet connection';
+		states[Connection.WIFI] = 'WiFi connection';
+		states[Connection.CELL_2G] = 'Cell 2G connection';
+		states[Connection.CELL_3G] = 'Cell 3G connection';
+		states[Connection.CELL_4G] = 'Cell 4G connection';
+		states[Connection.CELL] = 'Cell generic connection';
+		states[Connection.NONE] = 'No network connection';
+
+		return states[state];
+	}
+
+
+	/**
+	 * determina si la conexion es valida
+	 * 0 = desconectado
+	 * 1 = conetactado pero mala conexion
+	 * 2 = buena conexion
+	 *
+	 * NOTA: Solo valido para cordova apps
+	 * @returns {*}
+	 */
+	function checkConnection(){
+		//jshint maxcomplexity:false
+		var v;
+
+		switch (navigator.connection.type){
+		case 'unknown':
+		case 'none':
+			v = 0;
+			break;
+		case '2g':
+		case '3g':
+		case 'cellular':
+			v = 1;
+			break;
+		case 'ethernet':
+		case 'wifi':
+		case '4g':
+			v = 2;
+			break;
+		}
+		return v;
+	}
+
+	return {
+		checkConnection: checkConnection,
+		getType: getType,
+		init: init
+	};
+
+}());
+;//analytics
+loader.ga = (function (){
+	'use strict';
+
+	function init(){
+		if(!loader.cfg.analytics.installed){
+			console.debug('Without analytics');
+			window.ga = function () {};
+			return;
+		}
+		console.debug('ga.load');
+
+		//jshint sub:true, asi:true, expr:true
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create',{trackingId: loader.cfg.analytics.id, cookieDomain: 'auto'});
+
+		if (loader.cfg.analytics.linkid) {
+			ga('require', 'linkid');
+		}
+		if (loader.cfg.analytics.displayFeatures) {
+			ga('require', 'displayfeatures');
+		}
+
+		ga('set',{
+			'appVersion': loader.cfg.version,
+			'appName': loader.cfg.analytics.appName,
+			'appId': loader.cfg.analytics.appId,
+			'appInstallerId': loader.cfg.gaAppInstaller
+		});
+
+		window['ga-disable-'+ loader.cfg.analytics.id] = !loader.cfg.analytics.active;
+
+		//jshint camelcase:false
+//		window.ga_debug = {trace: true};
+
+		//EVENT: Category, Action, Label, Value
+		//PAGE: Location, Page, Title
+	}
+
+	function landing() {
+		console.debug('ga.landing');
+
+		ga('send','pageview',{'sessionControl': 'start'});
+		//ga('send', 'event', 'FlagsLang', 'Selected', 'flagName');
+	}
+
+
+	return {
+		init: init,
+		landing: landing
+	};
+}());;/**
+ * Created by Crystian on 3/5/2015.
+ */
+
+loader.mx = (function (){
+	'use strict';
+
+	function init(){
+		if(!loader.cfg.mixpanel.installed){
+			console.debug('Without mixpanel');
+			window.mixpanel = function () {};
+			return;
+		}
+		console.debug('mixpanel.load');
+
+		//jshint sub:true, asi:true, expr:true, quotmark:false, eqeqeq:false, maxlen:false, curly:false
+		(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+			for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+
+		var token = loader.cfg.mixpanel.active ? loader.cfg.mixpanel.token : "YOUR TOKEN";
+		mixpanel.init(token);
+	}
+
+	return {
+		init: init
+	};
+}());
+;(function(){
+	'use strict';
+
+	document.addEventListener('DOMContentLoaded',function(){
+		loader.init(function () {
+			console.info('Event loaderFinished triggered');
+
+			//all right, next step, should be load landing page with this event
+			document.dispatchEvent(loader.events.loaderFinished);
+		});
+	});
+
+}());</script>
+
+</body>
+</html>

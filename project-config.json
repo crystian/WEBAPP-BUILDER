@@ -30,6 +30,7 @@
 		"firstApp": "app",
 		"site": "http://",
 		"cordova": false,
+		"cordovaInstalled": false,
 		"isCordovaDevice": false,
 
 		"appCache":{
@@ -50,8 +51,8 @@
 			"build": "build",
 			"dist": "dist",
 			"temp": ".tmp",
-			"xcordova": "CORDOVA",
-			"xcordovaWWW": "CORDOVA/www"
+			"cordova": "cordova",
+			"cordovaWWW": "cordova/www"
 		},
 
 		"compatibilityMatrix": {

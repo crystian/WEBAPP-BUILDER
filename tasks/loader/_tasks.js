@@ -44,7 +44,7 @@
 			'hookPreDistLoader',
 			'_buildLoader',
 			'_copyIndexDist',
-			gutil.env.debug ? 'nothing' : '_removeBuild',
+			//(gutil.env.debug || global.cfg.app.cordova) ? 'nothing' : '_removeBuild',
 			'hookPostDistLoader',
 			cb);
 	});
