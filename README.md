@@ -49,6 +49,44 @@ Este proyecto fue una extraccion de otro mas grande que luego de un tiempo me di
 
 ---
 
+
+
+
+
+
+## PENDIENTES
+
+* Documentacion
+* Cordova
+* Installler
+* Mas tests
+
+
+# No leer lo de abajo, estoy refactorizando la doc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--
+
 ## Tasks:
 
 TODO REVIEW
