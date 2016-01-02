@@ -19,7 +19,7 @@ var testFolder = 'spec/fixture/07wwwJson',
 		indexLess  = 'www/app1/indexLess',
 		indexStyl  = 'www/app1/indexStyl';
 
-describe("07wwJson: make www.json files", function(){
+describe("07wwwJson: make www.json files", function(){
 
 	beforeEach(function(){
 		cd(testFolder);

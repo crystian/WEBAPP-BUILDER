@@ -13,7 +13,7 @@
 	gulp.task('serveLoader', ['buildFull'], function(){
 		utils.breakIfIsNotTemplate();
 
-		return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.server);
+		return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.template);
 	});
 
 	gulp.task('serveDist', ['buildFullDist'], function(){

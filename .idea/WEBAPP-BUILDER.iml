@@ -14,6 +14,8 @@
       <excludeFolder url="file://$MODULE_DIR$/LOADER/vendors" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/spec/fixture" />
+      <excludeFolder url="file://$MODULE_DIR$/spec/fixture/11build/15/cordova/platforms" />
       <excludeFolder url="file://$MODULE_DIR$/spec/fixture/11build/16/cordova/platforms" />
       <excludeFolder url="file://$MODULE_DIR$/template-ng/build" />
       <excludeFolder url="file://$MODULE_DIR$/template-ng/node_modules" />

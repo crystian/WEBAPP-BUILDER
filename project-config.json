@@ -3,9 +3,9 @@
 	"ip": "127.0.0.1",
 	"compress": false,
 	"ports": {
-		"server": 9000,
-		"project": 9001,
-		"dist": 9002,
+		"project": 9000,
+		"dist": 9001,
+		"template": 9002,
 		"xnightmare": 9003
 	},
 

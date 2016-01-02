@@ -41,12 +41,6 @@
 					"../vendors/bower_components/bootstrap/dist/fonts/"
 				]
 			],
-			"originalMin": [
-				[
-					"a../fonts/",
-					"fonts/"
-				]
-			],
 			"originalDist": [
 				[
 					"../vendors/bower_components/bootstrap/dist/",

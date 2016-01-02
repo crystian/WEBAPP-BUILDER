@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Jasmine" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="P:/1-WORKSPACE/NodeJs/node" path-to-js-file="node_modules/jasmine/bin/jasmine.js" application-parameters="--debug --detail --breakOnFail" working-dir="$PROJECT_DIR$">
+  <configuration default="false" name="Jasmine" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="P:/1-WORKSPACE/NodeJs/node" path-to-js-file="node_modules/jasmine/bin/jasmine.js" application-parameters="--debug --detail " working-dir="$PROJECT_DIR$">
     <method />
   </configuration>
 </component>

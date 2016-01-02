@@ -19,7 +19,7 @@
 			testFile    = cordovaWww + 'testfile.js',
 			indexFile   = cordovaWww + 'index.html';
 
-	fdescribe('11cordova: check some complex cases', function(){
+	describe('11cordova: check some complex cases', function(){
 
 		beforeEach(function(){
 			cd(testFolder);
@@ -63,6 +63,7 @@
 			expect(test('-e', buildFolder)).toBe(false);
 			expect(test('-e', distFolder)).toBe(false);
 
+			expect(exec('gulp buildFullDist --testMode ' + args, {silent: 1}).code).toBe(0);
 			expect(exec('gulp copyCordovaWww --testMode ' + args, {silent: 1}).code).toBe(0);
 
 			expect(test('-e', distFolder)).toBe(true);

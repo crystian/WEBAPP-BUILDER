@@ -303,10 +303,10 @@
 				removeStdout();
 
 				var server      = require('../../tasks/shared/server.js'),
-						streamServe = server.makeServe(test.path, test.folder, test.ip, test.ports.server);
+						streamServe = server.makeServe(test.path, test.folder, test.ip, test.ports.template);
 
 				Promise.resolve(nightmare
-						.goto('http://' + test.ip + ':' + test.ports.server + '/loader')
+						.goto('http://' + test.ip + ':' + test.ports.template + '/loader')
 						.on('page', function(type, message){
 							expect(type).toBe('alert');
 							expect(message).toBe('clickMe!');
