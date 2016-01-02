@@ -40,7 +40,7 @@ var loader = (function(){
 		console.info('Loader init');
 
 		//if it is a device, load cordova plugins and more!
-		if(cfg.isCordovaDevice){
+		if(cfg.cordova.isDevice){
 			console.info('Cordova device');
 			cfg.isDevice = 1;
 

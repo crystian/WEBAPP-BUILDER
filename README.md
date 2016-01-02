@@ -2,20 +2,17 @@
 
 **_El framework para los amigos!_**
 
-TODO
-[Español](http://), [English](http://)
+TODO: [Español](http://), [English](http://)
 
 ## TL;DR Version:
 
-Este framework te permite ahorrar incontable cantidad de horas en la automatizacion, bootstrap y temas tipicos de una nueva [web app](https://en.wikipedia.org/wiki/Web_application)/SPA (Single Page Application), esto es para aquellos que quieren/necesitan agilidad y velocidad de desarrollo, este es el objetivo de este framework. #needForSpeed! #agile
+Este framework te permite ahorrar incontable cantidad de horas en la automatizacion, bootstrap/boilerplate y temas tipicos de una nueva [Web app](https://en.wikipedia.org/wiki/Web_application)/SPA (Single Page Application), esto es para aquellos que quieren/necesitan agilidad y velocidad de desarrollo, este es el objetivo de este framework. #needForSpeed! #agile
 
 ### Features:
 
 * **Todo el codigo de la app termina en un unico archivo _solido_ por app!**, yes just a request!
-* Genera un **loader** (solido) que ocupa menos 50k (con todas las libs base, para luego traerse cada app)
+* Genera un **loader** (solido) "standalone" que ocupa menos 50k (con todas las libs base, para luego traerse cada app)
 * Mientras baja las apps muestra un bonito loading (7 opciones, pure CSS)
-* LIBS precargadas en el loader: platform, es6-promise (requeridas); opcionales: fastClick, jquery, lz-string
-* El archivo final por cada app puede estar comprimido (by lz-string)
 * Preprocessors (included):
   * CSS: [Sass](http://sass-lang.com/), [Less](http://lesscss.org/), [Stylus](http://stylus-lang.com/);
   * JS: [TypeScript](http://www.typescriptlang.org/), [CoffeeScript](http://coffeescript.org/);
@@ -24,16 +21,18 @@ Este framework te permite ahorrar incontable cantidad de horas en la automatizac
 * Generacion de sprites automaticamente.
 * Preparado para [cordova](http://cordova.apache.org/).
 * Minificado de librerias que no lo esten.
+* LIBS precargadas en el loader: platform, es6-promise; Opcionales: fastClick, jquery, lz-string
+* El archivo final por cada app puede estar comprimido (by lz-string)
 * Agregado automatico de cada archivo nuevo en el projecto (script/link), tanto en modo **dev** como **dist**.
 * Modo **release** para minificar y ocultar info.
-* Otros: Analytics, deteccion de languages, appcache, y mucho, mucho mas.
+* Otros: Analytics, languages, appcache, y mucho, mucho mas.
 
-Este framework es totalmente "opinated" (dictatorial?), si lo haces como el framework te propone vas a poder de disfrutar de sus features sin perder tiempo en cosas mas "triviales", solo te vas a dedicar a codear tu web app/SPA!
+Este framework es totalmente "opinionated" (dictatorial?), si lo haces como el framework te propone vas a poder de disfrutar de sus features sin perder tiempo en cosas mas "triviales", solo te vas a dedicar a codear tu web app/SPA!
 
 
 **NOTAS:**
-* El concepto o abstraccion detras de este framework es distinto al que proponen varios (para que se entienda rapido), lo mas cercano puede ser [Yeoman](http://yeoman.io/) (y sus generators), el cual te arma el Scafolding (andamios) con toda la automatizacion abierta para que quites o agregues a gusto. Este framework es mas proximo a un "patron" en ves de una solucion para la automatizacion, con lo cual te fuerza a trabajar respetando ciertas reglas (muy simples) y gracias a esto te provee soluciones de automatizacion como tambien de bootstrap/boilerplate (loader, compatiblidad, compresion, y un largo etc).
-* **Para ansiosos:** Como logra todo esto que promete?: Gracias a archivos _metadata_ (muy simples), que configuran al resto de los archivos, tanto individuales como grupales.
+* El concepto o abstraccion detras de este framework es distinto al que proponen varios (para que se entienda rapido), lo mas cercano puede ser [Yeoman](http://yeoman.io/) (y sus generators), el cual te arma el Scafolding (andamios) con toda la automatizacion abierta para que quites o agregues a gusto. Este framework es mas proximo a un "patron" en vez de una solucion para la automatizacion. Con lo cual te fuerza a trabajar respetando ciertas reglas (muy simples) y gracias a esto te provee soluciones de automatizacion como tambien de bootstrap/boilerplate (loader, compatiblidad, compresion, y un largo etc).
+* **Para ansiosos:** Como logra todo esto que promete?: Gracias a archivos _metadata_ (simples), que configuran al resto de los archivos, tanto individuales como grupales.
 * Orientado a projectos nuevos sobre todo, pero tambien se pueden adaptar.
 
 --
@@ -49,71 +48,22 @@ Este proyecto fue una extraccion de otro mas grande que luego de un tiempo me di
 
 ---
 
-
-
-
-
-
-## PENDIENTES
-
-* Documentacion
-* Cordova
-* Installler
-* Mas tests
-
-
-# No leer lo de abajo, estoy refactorizando la doc
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---
-
 ## Tasks:
 
-TODO REVIEW
-### From Root (loader):
+_Desde el proyecto, una vez conectado gulpfile.js_
 
-* `gulp config` Genera archivo config.js con toda la configuracion del loader & project
-* `gulp build:loader` Tarea por defecto. Build rapido, sin base/bower, solo build del loader
-* `gulp full:loader` Bower y build completo
-* `gulp serve:loader` Server directo del directorio de desarrollo (www), usando a 'template-empty' como app (cambiar desde project-active.json)
-* `gulp css:loader`
-* `gulp test` Test via nightmare, principalmente user-agents, validacion de compatibilidad, etc
-* `gulp release` Es un full pero con tests, recomendado antes de una release de la app producto.
+* `gulp default` no esta seteado (seteale a tu criterio)
+* `gulp full` (alias de buildFull) todo el proceso de building, incluyendo: loader y proyecto.
+* `gulp css` fuerza la generacion de css
+* `gulp js` fuerza la generacion de js
+* `gulp html` fuerza la generacion de html
+* `gulp watch` watcher del proyecto
+* `gulp clearCache` de imagenes para la generacion de sprites
+* `gulp serve` server en modo dev directo del proyecto
+* `gulp serveDist` server del la carpeta "dist"
+* `gulp runAndroid` si cordova esta configurado
 
-### From App:
-
-* `gulp full` todo el proceso de building, incluyendo sin cache
-* `gulp default` procesa todo el proyecto, pero no el loader ni preprocessors, usa cache
-* `gulp css` force para generar el css, especial para un watcher
-* `gulp cssw` watcher para css 
-* `gulp clearCache` de imagenes
-* `gulp genAppCache` genera el manifest de cache
-* `gulp optimizeImages` todas las imagenes de la carpeta `build`
-* `gulp serve` server en modo dev directo al proyecto
-* `gulp serve:build` server del dir build
-* `gulp loader` genera el loader y lo deja en la carpeta `build`
-* `gulp serve:api` server de api (a modo de ejemplo para templates/angular-full)
-* `gulp a` run an android
+Ver mas en: `Project.js`
 
 ---
 
@@ -121,267 +71,146 @@ TODO REVIEW
 
 ### Conceptos:
 
-**WEBAPP-BUILDER (aka: BUILDER):** Este mismo proyecto (del readme), donde esta toda la magia.
+**DEV/DIST:** Modo dev es mientras trabajas y desarrollas la app, en modo "dist" es la version minificada y con todo listo para ser publicada, restando informacion, comentarios, etc
 
-**PROJECT:** Es la carpeta creada con el _instalador_ (o de manera manual), el BUILDER maneja mas de un proyecto.
+**WEBAPP-BUILDER (aka: BUILDER):** Este mismo proyecto (del readme), donde esta toda la magia, cuyo resultado es un "index.html", el contenido de esta carpeta no debe modificarse.
+
+**LOADER:** Es un proyecto interno que termina generando un "index.html" configurado segun proyecto, con validaciones y demas.
+
+**PROJECT:** Es la carpeta creada con el _instalador_ (o de manera manual), el BUILDER genera el index y lo termina copiando en el proyecto.
 
 **APPs:** Son SPAs, con los cuales se generan archivos solidos. Puede contener mas de una por proyecto.
 
-----
+**METADATA:** Archivos `json` con informacion adicional sobre los archivos del proyecto y demas. **Tiene varios atributos ya cargados por defecto, solo deberias agregar en tu metadata lo que queres distinto de lo default.**
 
+**TEMPLATES:** Eso mismo, con el cual el _instalador_ hace una copia para los nuevos proyectos.
 
+--
 
+### Configuracion / Metadata
 
+Toda la magia depende de estos archivos de "configuracion", que le dicen a la app tanto en modo _dev_ como en _dist_, donde y como son los archivos a incluir, esto es la columna vertebral de este sistema.
 
-CONTINUAR:
+Ejemplo:
 
- debe ser una carpeta la cual no tiene que tener modifiaciones.
+* PROJECT/gulpfile.js: Este archivo "conecta" proyecto y builder
+* PROJECT/project-config.json: Configuracion a nivel proyecto
+* PROJECT/www/apps.json: Nombres de las apps/folders (["APP1", "APP2"])
+* PROJECT/www/APP1/app.json: Configuracion de APP1 y sus archivos
+* PROJECT/www/APP2/app.json: Configuracion de APP2 y sus archivos
 
- , solo es necesario indicar cual es la app inicial.
+#### `gulpfile.js`
 
+Bien siemple, conecta con el builder, solo es necesario enviarle una instancia de gulp, y el directorio actual, de esta manera:
+```javascript
+var gulp = require('gulp');
 
-La idea es de un wrapper, el projecto nuevo deberia estar en su carpeta dentro **APPFACTORY**.
-
-Hay un template que es la base de las apps y tambien sirve para testear el funcionamiento del loader.
-
-Luego de bajar el repo e instalar los modulos hacer la instalacion con `node installer` (copia template a nueva carpeta y algunos ajustes menores), ver _Recipe_ 
-
-La instalacion creara tres archivos de configuracion: `project-config.json`, `project-config-local.json` en la carpeta nueva y `project-config-local.json` en el root. La idea es sobreescribir las variables al principal config (`./project-config.json`) y mantener una herencia. Las variables de configuracion tendran prioridad en este orden:   
-`project-config.json` <- `project-config-local.json` <- `PROJECT/project-config.json` <- `PROJECT/project-config-local.json`   
-(OjO, mantener estructura), para el "config" ver esa seccion.
-
-La instalacion tambien creara un archivo `project-active.json`, la unica funcion que tiene es determinar que projecto es el activo (folder), esto es util para configuraciones con mas de un projecto en el mismo APPFACTORY, por default ya setea el creado con el installer.
-
-La animacion del loader es css puro (con una linea de html), para agregar otras animaciones, hacerlo en la carpeta loading, agregar el siguiente numero y crear loading.html y scss, luego en el config poner el numero de template a utilizar y finalmente subir al repo de APPFACTORY.
-
-**NOTES:**
-
-* Al momento de crear el repositorio, crearlo en la carpeta del projecto nuevo (projectCode) que creo el installer, tambien el installer modifico el gitignore, se puede subir como no al repositorio de APPFACTORY. Esto permite tener los dos projectos anidados y en distintos repos.
-
-### Config:
-
-Toda la configuracion disponible esta en `./project-config.json`, y como comente antes, funciona como herencia. Los archivos `-local` son solo locales y estan ingnorados en el repo (utiles para configuraciones de la workstation).
-Recordar que solo hay que modificar el que esta dentro del proyecto y no el de APPFACTORY
-
-**Ejemplo:**
-./project-config.json: loader.release=true y en PROJECT/project-config.json: loader.release=false, el valor que va a llegar en cfg de gulp sera "false"
-
-#### Variables importantes a mencionar:
-
-* "name": nombre de la app que se usara y mostrara en los logs
-* "version": mantener con nomenclatura semver (http://semver.org/), ya que se contempla mecanismo de update segun version
-* "ip": ip local en la que se levantaran los servers (con 0.0.0.0 se publica en todas y se puede acceder desde la LAN)
-* "release": eso mismo, minifica todo y hace completamente todas las tareas, sin usar caches
-* "compress": Comprimir la data
-* "firstApp": Primera app que va a lanzar, es requerido, tiene que saber por donde empieza
-* "cordova": Cordova instalado, creara un archivo: index-cordova.html
-* "isCordovaDevice": Uso interno, si es del archivo index-cordova.html sera true, si no, siempre false.
-* "debugZoneActive": Muestra en pantalla una zona de debug, usando loader.debugAdd o loader.debug
-* "folders": {}: configuracion de folders a usar, soporta expresiones
-* "compatibilityFirst": Sera el retorno de una funcion, es lo primero que hace para saber si sera compatible, testea que existan los objetos que espera usar, se avisa al usuario (incompatibleByFeatures)
-* "compatibilityMatrix": nombre del browser y array de compatibilidades,
-	* primer valor: menores a este seran absolutamente incompatibles, se avisa al usuario (incompatibleByDiag)
-	* segundo valor: desde el primero hasta este seran semi-compatibles, con funcionalidades reducidas y demas, se avisa al usuario (semiIncompatible), mayores a este son compatibles.
-	* Si no encuentra el browser, lo deja en estado semi-compatible y avisa al usuario (semiIncompatible).
-	* **NOTE:** Avisa al usario con un simple "alert".
-* "autoprefixer": deberia haber correlaccion con compatibilityMatrix, son los prefijos automaticos para los css generados de sass
-* "analytics.installed": instala analytics haciendo primeros request de API
-* "analytics.active": activacion de analytics, puede estar instalado pero no activo.
-* "analytics.*": datos para analytics
-* "mixpanel": Igual a analitics
-* "consoleError": mensajes dummy para enganiar a usuarios malicioso
-* "loader.release": buildeara en modo release SOLO EL LOADER
-* "loader.loading": Animacion template que utilizara la landing (numerico, ver instrucciones de uso)
-* "loader.viewport": configuracion del meta de html
-* "loader.text": todos los textos de la app (no soporta i18n por ahora)
-* "loader.bower": componentes a usar (solo para loader), si no se quiere alguno de los por defalt, en el config del proyecto setearle null. Tambien soporta la generacion de los minificados si es que la libreria no lo provee, usar "generate-js": true
-
-**NOTES:**
-
-1) El archivo **config.js** se genera automaticamente, **no deberia subirse al VCS**  
-2) Si se modifican los archivos de configuracion (`project-config*.json`), es necesario hacer un `gulp full:loader` o `gulp config` (para generar el config.js)
-
-
-### Injections:
-
-Toda la magia depende de estos archivos de "configuracion", que le dicen a la app tanto en modo dev como en release, donde y como estan los archivos a incluir, esto es la columna vertebral de este sistema.
-
-* PROJECT/apps.json: Contiene un array con el nombre de las SPAs (folder) dentro de "apps" (e.g. APP1)
-* PROJECT/APP1/app.json: Contiene un array con informacion de cada uno de los archivos a incluir al levantar esa app (en este caso: APP1)
- 
-#### Formato:
-
-``` javascript
-file: {
-	'file': 'file.css',		//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
-	'active': 'true',		//it will eval this field
-	'path': 'www',			//it can be a statement, and it will be evaluated
-	//'min': 'file.min.css',//file name final for minificated file, just use it if you want another name, by default is 'min.'+ext
-	'linter': true,			//if you want to lint, will not apply for libraries
-	'autoPrefix': true,		//auto prefix when source is active
-	'overwrite': true,		//specially for libs, just make it once
-	'minificated': false,	//if it is a lib for don't re do the minifcation
-	'makeMin': false,		//it should be create a minificate version
-	'genSprite': true,		//generate sprite
-	'ignore': false,		//ignore on dev time, request by request
-	'replaces': {
-			'original': {	//modificate orginal version, combine con minificate 
-				'normal': [],
-				'min': []
-			},
-		'pre': [			//pre minificatedd
-			//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
-		],
-		'post': [			//post minificatedd
-			//['/(\'build\'.*\\:[ ]?)(\\w*)/', '$1true']
-		]
-	}
-}
+require('../../tasks/boot').boot({
+	gulp: gulp,
+	dirname: __dirname
+});
 ```
+**Nota:** Podes agregar mas tasks de gulp ahi mismo.
 
-En modo dev hace request secuencial de cada recurso y la tarea doMagic (gulp), hace exactamente eso y convierte todo en un "simple" json, con todo lo necesario.
+#### `project-config.json` (y `project-config-local.json`)
 
----
+El archivo principal de configuracion del _builder_ es `project-config.json` el cual tiene toda la posible configuracion, los proyectos usan este archivo y pueden redefinirlo (extend) simplemente con un `project-config.json` en la raiz de cada proyecto.
+En algunos casos puede ser necesario redefinirlo y que no se quiera subir al repo (credenciales, etc), para esto crear un archivo llamado: `project-config-local.json` tanto en el proyecto como en el _builder_
 
-## Installation
+El orden del `extend` es: `BUILDER/project-config.json` <- `BUILDER/project-config-local.json` <- `PROJECT/project-config.json` <- `PROJECT/project-config-local.json`
 
-### Requisitos
+[Ver definicion de `project-config.json`](docs/project-config-es.md)
+
+#### `apps.json`
+
+Dentro de la carpeta `www` debe existir un `apps.json` con un array de strings con cada nombre de `app` (folder) a procesar (ejemplo: ["app1", "app2", "app3"])
+
+#### `app.json`
+
+Dentro de la carpeta que contiene a la app debe existir un `app.json` con un array de objetos de configuracion de grupos de archivos.
+
+[Ver definicion de `app.json`](docs/app-es.md)
+
+
+**NOTES:**
+
+* El proceso genera el archivo `www.json` (uno por app), **no deberia subirse al VCS del proyecto**
+* Si se modifican los archivos de configuracion (`project-config*.json`), es necesario hacer un `gulp full`
+* En modo "dev" hace request secuencial de cada archivo del proyecto, en modo "dist", es solo un archivo por app (con css, js y html dentro).
+
+--
+
+### Prerequisitos:
 
 * Node/npm
 * Gulp (via npm)
 * Bower (via npm)
 * [Git](http://git-scm.com/downloads)
-* [Graphics Magick](http://www.graphicsmagick.org/download.html)
+* [Graphics Magick](http://www.graphicsmagick.org/download.html) (para generacion de sprites)
 
 **Opcionales:**
 
-* Cordova (via npm)
 * [Android SDK](https://developer.android.com/sdk/index.html#Other) (para cordova)
 * [Java](https://www.java.com/en/download/manual.jsp) (para cordova)
 * [Ant](http://ant.apache.org/bindownload.cgi) (para cordova)
 * [Maven](https://maven.apache.org/) (para cordova)
 
 **NOTE**:
+Es necesario que todo este en tu path.
 
-Es necesario que todo este en el path, para ayudarte en esto creen un bat (windows 7+) que lo hace, fijate: config-path.bat !ojo que pisa el path que tenias!
+### Instalacion
 
-### Recipe:
-
-1. Clonar repo APPFACTORY:
-	`git clone https://github.com/crystian/WEBAPP-BUILDER.git`
-	
-2. Ingresar en APPFACTORY e instalar dependencias de building para node: `npm i`
+* Clonar: https://github.com/crystian/WEBAPP-BUILDER.git (`git clone http..`)
+* Instalar dependencias: `npm install` desde `WEBAPP-BUILDER` (tomate 5', son varias)
 	- Note: (en windows da un error que no puede instalar "weak/python", no te preocupes)
-
-3. Build de loader: `gulp full:loader`
-
-4. Instalar con `node installer`
-	- Si selecionas cordova tenes que tenerlo instalado en el path previamente.
+* Crear nuevo proyecto con `node createProject`
 	- Con este hermoso wizard instalas lo que necesitas para el proyecto y lo deposita en el Project Code que hayas puesto (crea la carpeta con ese nombre)
-	
-5. TEMPLATE o PROJECT
-	- Ingresar a template/project
-	- Instalar dependencias de node y bower: `npm i` y `bower i`
-	- Buildear `gulp full` (si no instalas GM, comentar en magic.js: "engine: 'gm',")
-
-6. Desde APPFACTORY, levantar server `gulp serve:loader` y comprobar: [http://127.0.0.1:9000/loader](http://127.0.0.1:9000/loader)
-	-Deberia verse template (si hiciste el paso 5 en template)
-	
-7. Desde PROJECT comprobar servers con: `gulp serve` [http://127.0.0.1:9000/loader](http://127.0.0.1:9000/loader) y gulp `serve:build` [http://127.0.0.1:9001](http://127.0.0.1:9001)
-
-#### MAC:
-
-We need instal a script, ios-deploy: `sudo npm i -g ios-deploy`<br>
-If you have some trouble about permissions, you can try set all permissions on cordova folder `sudo chmod -R a+rwx cordova/`<br>
-For android create enviroment variable ANDROID_HOME point to android sdk folder, ex in mac:<br>
-`sudo nano ~/.bash_profile`<br>
-and add this line:<br>
-`export ANDROID_HOME=/Users/crystian/Documents/eclipse/ADT/sdk` (with your path of course)
+* Una vez copiado el template, ingresar a ese folder y ejecutar: `npm i` y luego `bower i`
+* Levantar el server en dev con: `gulp serve`, y chequear con el browser sobre la url que devuelve el comando.
 
 
----
-
-## Guideline
-
-### Folders/files
-
-#### APPFACTORY
-
-* `project-*` relate a project
-* `installer.js` is the executable for install a new Project
-* `config-path.bat` just for win, configure all paths, the easy way
-* `/loader` all loader modules
-	* `/loading` there are severals loadings animations, the number is correlated with param on config
-	* `config.js` auto generated (do not modify), see 'config' section.
-	* `index.html` auto generated too (do not modify), do not save it on your repo
-	* `index.tpl.html` template for 'index.html'
-* `/vendors` just for bower source
-* `/tasks` all gulp tasks
-	* *.* all tasks only for **LOADER**
-	* `/project` task shared with loader and project, almost tasks for projects would be here
-* `/template` is a complete project as sample
-	* `/tasks/tasks.js` tasks just for project (punctually, note generic, for generic you will use `/tasks/project`)
-	* `/vendors/`
-		* `/bower_components` auto generated with bower
-		* `/theme` libs of third part, it would be save on your repo
-		
-
-#### Sprites
+### Sprites
 
 Los sprites se generan automaticamente siguiendo este patron:
+
 * CSS rule: Debe ser un background, aplicado con background-image, recomiendo aplicar a un div con el tamanio justo, ya que deberia soportar distintas densidades de pixeles, ejemplo:
 
 	* Normal:
 	``` css
 		.kitten1 { background-image: url(../template/www/app/assets/img/sprite1/kitten1.png); }
 	```
-	
+
 	* Retina:
 	``` css
 		@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
 			.kitten1 {
-				background-image: url(../template/www/app/assets/img/sprite1/kitten1@2x.png); 
+				background-image: url(../template/www/app/assets/img/sprite1/kitten1@2x.png);
 			}
 		}
 	```
-		
+
 * Imagenes PNG en: PROJECTO/APP/assets/img/sprite*
-
-
-### gulp tasks
-* nomenclature: action:what
-
----
-
-
-### TOOLS & TIPS:
-
-I use [Webstorm IDE](http://www.jetbrains.com/webstorm), and we recommend it, because I **love** it! <3
-
-* [JShint options](http://www.jshint.com/docs/options)
-* [DOM analytics and more](http://mir.aculo.us/dom-monster)
-* [RWD on the browser](http://lab.maltewassermann.com/viewport-resizer) or firefox
-* [Markdown cheatsheet](http://assemble.io/docs/Cheatsheet-Markdown.html)
-* [Android sign](https://github.com/crystian/androidSign)
+TODO REVIEW: Replace?
 
 ---
 
 ## Pendientes:
-* mejorar tiempos de gulp (ver doMagic con js sin uglify solo para remover comments)
-* unificate gulpfiles.js
-* test with Electron, check i18n
 * cordova: replace de datos antes de build (versiones)
-* folder dist con las versiones entregadas con release
 * nightmare, revisar cada perfil
-* weinre?
-* test 
+* test sobre loader
 * ci
 * pasar este doc a ingles
-* i18n revisar
-
+cache para apps previamente cargadas
+chequeo de mas de una vez el mismo file
+loading pluygins
 ---
 
 ## CHANGELOG:
+
+03/01/16 v0.9.0
+Rehecho completamente el sistema de automatizacion
+TESTS! casi 200!
+Ahora soportar globs y muchas mejoras mas.
 
 15/10/13 v0.1.0
 Todo actualizado
@@ -411,17 +240,28 @@ Terminado, primera version
 01/02/15
 Recuperando files y codigo de projecto languages gym para reutilizar en este
 
----
+--
 
 by Crystian, done by love for you <3!
 
 
+---
 
-
-cache para apps previamente cargadas
-modificar orignal no preoducto cuando es tiene replaces.original
 gutil.env.noMin  time
 coliciones de nombres de productos
 tener en cuenta que si usas el patron glob para una app con dos grupos, si uno de ellos crea un backup, el otro lo puede estar leyendo, debes ignorarlo con "!"
-expresiones regulares con /
-chequeo de mas de una vez el mismo file
+hooks
+
+
+
+TODO REVIEW:
+* "debugZoneActive": Muestra en pantalla una zona de debug, usando loader.debugAdd o loader.debug
+#### MAC:
+We need instal a script, ios-deploy: `sudo npm i -g ios-deploy`<br>
+If you have some trouble about permissions, you can try set all permissions on cordova folder `sudo chmod -R a+rwx cordova/`<br>
+For android create enviroment variable ANDROID_HOME point to android sdk folder, ex in mac:<br>
+`sudo nano ~/.bash_profile`<br>
+and add this line:<br>
+`export ANDROID_HOME=/Users/crystian/Documents/eclipse/ADT/sdk` (with your path of course)
+
+

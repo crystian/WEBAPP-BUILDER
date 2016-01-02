@@ -10,11 +10,16 @@ var utils = require('../../shared/utils.js'),
 
 
 gulp.task('runAndroid', ['buildFullDist'], function(cb){
+	if(!global.cfg.cordova.active){
+		console.logRed('This project is not a cordova one, remember set var cordova.active on true, and it will create "' + global.cfg.cordova.files.index + '" file');
+		utils.exit(2);
+	}
+
 	var cordovaLocal = '';
-	if(!global.cfg.cordovaInstalled){
+	if(!global.cfg.cordova.global){
 		cordovaLocal = 'node ../../../../../node_modules/cordova/bin/'
 	}
-	exec(cordovaLocal + 'cordova run android', {cwd: global.cfg.app.folders.cordova},
+	exec(cordovaLocal + 'cordova run android', {cwd: global.cfg.cordova.folder},
 		function(error, stdout, stderr){
 
 			if(error || (stderr && stderr !== '')){
@@ -35,22 +40,22 @@ gulp.task('runAndroid', ['buildFullDist'], function(cb){
 });
 
 gulp.task('copyCordovaWww', ['removeCordovaWww'], function(){
-	if(!global.cfg.app.cordova){
-		console.logRed('This project is not a cordova one, remember set var app.cordova on true, and it will create "' + global.cfg.loader.filesDest.indexCordova + '" file');
+	if(!global.cfg.cordova.active){
+		console.logRed('This project is not a cordova one, remember set var cordova.active on true, and it will create "' + global.cfg.cordova.files.index + '" file');
 		utils.exit(2);
 	}
 
-	fs.copySync(global.cfg.app.folders.dist, global.cfg.app.folders.cordovaWWW);
+	fs.copySync(global.cfg.app.folders.dist, global.cfg.cordova.www);
 
 	fs.copySync(
-		global.cfg.app.folders.build + global.cfg.loader.filesDest.indexCordova,
-		global.cfg.app.folders.cordovaWWW + global.cfg.loader.filesDest.index);
+		global.cfg.app.folders.build + global.cfg.cordova.files.index,
+		global.cfg.cordova.www + global.cfg.loader.files.index);
 });
 
 gulp.task('removeCordovaWww', function(){
 	var r;
-	if(global.cfg.app.cordova){
-		r = del(global.cfg.app.folders.cordovaWWW);
+	if(global.cfg.cordova.active){
+		r = del(global.cfg.cordova.www);
 	}
 	return r
 });

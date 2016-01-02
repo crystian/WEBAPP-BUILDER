@@ -37,9 +37,9 @@
 			expect(exec('gulp buildProjectDist --testMode '+ args, {silent: 1}).code).toBe(0);
 
 			expect(test('-e', templateJs)).toBe(true);
-			expect(cat(templateJs)).toContain('www/app/page/page.tpl.html');
+			expect(cat(templateJs)).toContain('app/page/page.tpl.html');
 			expect(cat(templateJs)).toContain('angular.module("templates", []).run(["$templateCache",');
-			expect(fs.statSync(templateJs).size).toBeMoreLess(431, 5);
+			expect(fs.statSync(templateJs).size).toBeMoreLess(405, 10);
 		});
 
 	});

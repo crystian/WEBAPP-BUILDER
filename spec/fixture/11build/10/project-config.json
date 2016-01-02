@@ -1,13 +1,13 @@
 {
+	"appCache": {
+		"active": true
+	},
 	"app": {
 		"name": "index test 11-10",
 		"version": "0.0.2",
-		"release": true,
-		"appCache":{
-			"use": true
-		}
+		"release": true
 	},
-	"loader":{
+	"loader": {
 		"release": true
 	}
 }

@@ -26,7 +26,7 @@
 			removeOptionalTags: false
 		};
 
-		var stream = gulp.src(global.cfg.pathFwk + global.cfg.loader.folders.www + global.cfg.loader.filesDest.index)
+		var stream = gulp.src(global.cfg.pathFwk + global.cfg.loader.folders.www + global.cfg.loader.files.index)
 			.pipe(utils.debugeame())
 			.pipe(htmlreplace())
 			.pipe(injector.injectContent(global.cfg.pathPrjBuild + global.cfg.app.folders.temp + '-compiledLoader.css', 'loaderCss', 'style'))
@@ -44,16 +44,16 @@
 
 			.pipe(gulp.dest(global.cfg.pathPrjBuild));
 
-		if(global.cfg.app.cordova){
+		if(global.cfg.cordova.active){
 			/*
 			 This is ok, because it make another file equals to index but one change,
 			 I prefer it than run again all process to make other file
 			 */
-			stream = stream.pipe(rename(global.cfg.loader.filesDest.indexCordova))
+			stream = stream.pipe(rename(global.cfg.cordova.files.index))
 				.pipe(utils.debugeame())
 				.pipe(gif(global.cfg.loader.release,
-					replace(',isCordovaDevice:!1,', ',isCordovaDevice:1,'),
-					replace('"isCordovaDevice": false,', '"isCordovaDevice": true,')
+					replace(',cordova:{isDevice:!1,', ',cordova:{isDevice:1,'),
+					replace('"isDevice": false,', '"isDevice": true,')
 				))
 				.pipe(gulp.dest(global.cfg.pathPrjBuild));
 		}

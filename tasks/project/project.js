@@ -21,6 +21,7 @@
 	gulp.task('html', ['makeHtml']);
 	gulp.task('on', ['watch']);
 	gulp.task('build', ['buildProject']);
+	gulp.task('full', ['buildFull']);
 	gulp.task('dist', ['buildFullDist']);
 	gulp.task('removeBuild', ['_removeBuild']);
 	gulp.task('removeTemp', ['_removeTemp']);
@@ -31,12 +32,6 @@
 	gulp.task('hookPreDistProject', []);
 	gulp.task('hookPostDistProject', []);
 
-
-	gulp.task('full', function(cb){
-		runSequence(
-			'buildFull',
-			cb);
-	});
 
 	gulp.task('buildFull', function(cb){
 		return runSequence(
@@ -62,8 +57,8 @@
 			'removeDist',
 			'buildLoaderDist',
 			'buildProjectDist',
-			global.cfg.app.cordova ? 'copyCordovaWww' : 'nothing',
-			gutil.env.debug ? 'nothing' : 'removeBuild',
+			global.cfg.cordova.active ? 'copyCordovaWww' : 'nothing',
+			//gutil.env.debug ? 'nothing' : 'removeBuild',
 			cb);
 	});
 

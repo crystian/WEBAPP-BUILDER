@@ -24,7 +24,7 @@
 		global.cfg.varCss = utils.normalizePathFwk(global.cfg.varCss);
 		global.cfg.varJs = utils.normalizePathFwk(global.cfg.varJs);
 
-		return gulp.src(global.cfg.pathFwk + global.cfg.loader.folders.www + global.cfg.loader.filesDest.index)
+		return gulp.src(global.cfg.pathFwk + global.cfg.loader.folders.www + global.cfg.loader.files.index)
 			.pipe(utils.debugeame())
 			.pipe(injector.injectContent(loadingHtml, 'loadingHtml'))
 			.pipe(inject(gulp.src(loadingCSS, {read: false}), {name: 'loadingCss', relative: true, removeTags: true}))
@@ -38,7 +38,7 @@
 	gulp.task('_makeIndex', function(){
 		return gulp.src(global.cfg.pathFwk + global.cfg.loader.folders.www + 'index.tpl.html')
 			.pipe(utils.debugeame())
-			.pipe(rename(global.cfg.loader.filesDest.index))
+			.pipe(rename(global.cfg.loader.files.index))
 			.pipe(cheerio({
 				run: function($){
 					var cfg = global.cfg;
@@ -67,8 +67,15 @@
 			text: global.cfg.loader.text
 		};
 
+		json.cordova = {
+			isDevice: global.cfg.cordova.isDevice,
+			active: global.cfg.cordova.active
+		};
+
+		json.appCache = global.cfg.appCache;
+
 		//json.compress = global.cfg.compress;
-		//json.isCordovaDevice = global.cfg.isCordovaDevice;
+		//json.isCordovaDevice = global.cfg.cordova.isDevice;
 		//json.compatibilityMatrix = global.cfg.compatibilityMatrix;
 		//json.debugZoneActive = global.cfg.debugZoneActive;
 		//json.mixpanel = global.cfg.mixpanel;
@@ -80,13 +87,6 @@
 		//json.contentEditable = global.cfg.contentEditable;
 
 		json.isDist = !!global.cfg.isDist;
-
-		//incompatibleByFeatures: global.cfg.loader.text.incompatibleByFeatures,
-		//incompatibleByDiag: global.cfg.loader.text.incompatibleByDiag,
-		//semiIncompatible: global.cfg.loader.text.semiIncompatible,
-		//faqLink: global.cfg.loader.text.faqLink,
-		//errorRequestFile: global.cfg.loader.text.errorRequestFile,
-		//errorTimeoutServer: global.cfg.loader.text.errorTimeoutServer
 
 		var compatibilityTpl =
 					'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n' +

@@ -44,7 +44,7 @@
 			'hookPreDistLoader',
 			'_buildLoader',
 			'_copyIndexDist',
-			//(gutil.env.debug || global.cfg.app.cordova) ? 'nothing' : '_removeBuild',
+			//(gutil.env.debug || global.cfg.cordova.active) ? 'nothing' : '_removeBuild',
 			'hookPostDistLoader',
 			cb);
 	});
@@ -54,8 +54,8 @@
 		if(!global.cfg.isTemplate && !global.cfg.fromFwk){
 
 			//if not template, copy index on www folder
-			var indexOri  = global.cfg.pathPrj + global.cfg.app.folders.build + global.cfg.loader.filesDest.index,
-					indexDest = global.cfg.pathPrj + global.cfg.app.folders.www + global.cfg.loader.filesDest.index;
+			var indexOri  = global.cfg.pathPrj + global.cfg.app.folders.build + global.cfg.loader.files.index,
+					indexDest = global.cfg.pathPrj + global.cfg.app.folders.www + global.cfg.loader.files.index;
 
 			if(!utils.fileExist(indexOri)){
 				console.logRed(global.builderName +': what?, there are some problem generating index.html');
@@ -71,8 +71,8 @@
 	});
 
 	gulp.task('_copyIndexDist', function(cb){
-		var indexOri  = global.cfg.pathPrj + global.cfg.app.folders.build + global.cfg.loader.filesDest.index,
-				indexDest = global.cfg.pathPrj + global.cfg.app.folders.dist + global.cfg.loader.filesDest.index;
+		var indexOri  = global.cfg.pathPrj + global.cfg.app.folders.build + global.cfg.loader.files.index,
+				indexDest = global.cfg.pathPrj + global.cfg.app.folders.dist + global.cfg.loader.files.index;
 
 		if(!utils.fileExist(indexOri)){
 			console.logRed(global.builderName +': what?, there are some problem generating index.html');

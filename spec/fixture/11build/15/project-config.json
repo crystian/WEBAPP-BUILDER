@@ -1,7 +1,9 @@
 {
+	"cordova": {
+		"active": true
+	},
 	"app": {
 		"name": "index test 11-15",
-		"cordova": true,
 		"version": "0.0.2",
 		"release": false
 	},

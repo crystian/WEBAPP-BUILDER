@@ -98,7 +98,7 @@
 	function removeStdout(){
 		t = process.stdout.write;
 		process.stdout.write = function(chunk){
-			if(chunk.indexOf('Error') !== -1){
+			if(chunk && chunk.indexOf && chunk.indexOf('Error') !== -1){
 				t.apply(this, arguments);
 			}
 		};
@@ -212,7 +212,7 @@
 
 				expect(exec('gulp buildLoaderDist --testMode', {silent: 1}).code).toBe(0);
 
-				expect(test('-e', buildFolder)).toBe(false);
+				expect(test('-e', buildFolder)).toBe(true);
 				expect(test('-e', distFolder)).toBe(true);
 				expect(test('-e', loaderCss)).toBe(true);
 				expect(test('-e', configJs)).toBe(true);
@@ -472,7 +472,7 @@
 
 				expect(exec('gulp buildLoaderDist --testMode', {silent: 1}).code).toBe(0);
 
-				expect(test('-e', buildFolder)).toBe(false);
+				expect(test('-e', buildFolder)).toBe(true);
 				expect(test('-e', distFolder)).toBe(true);
 				expect(test('-e', loaderCssPrj)).toBe(true);
 				expect(test('-e', configJsPrj)).toBe(true);

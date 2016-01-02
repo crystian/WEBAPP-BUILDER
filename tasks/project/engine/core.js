@@ -32,37 +32,35 @@
 
 	var defaults = {
 		group: {
-			'files': [],								//extension define the flow, can be tipicals and file for preprocessor, automaticaly determine with one will be use
-			'overwrite': true,					//specially for libs, just make it once
-			'ignoreOnRelease': false,		//ignore on dev time, request by request
-			'ignoreOnBuild': false,		//ignore on
-			'ignoreOnDist': false,		//ignore on
-			'overwriteOnRelease': false,//
-			'minificated': false,				//if it is a lib for don't re do the minifcation (over overwrite!) and it has two versions, ensure use minExtension
-			'autoPrefixer': true,				//auto prefix when source is active
-			'linter': false,						//if you want to lint, will not apply for libraries
-			'linterForce': false,				//if fail, return an error, otherwise continue without break the process
-			'backupExtension': 'original',//if it has replaces it will make a backup with this postfix
-			'genSprite': false,				//generate sprite
-			'generateMin': false,				//it should be create a minificate version
-			'forceUseMin': false,// for generateMin and minificated for dev time on release = false
-			'minExtension': 'min',			//prefix for file name minificated
+			'files': [],
+			'active': 'true',
+			'minificated': false,
+			'minExtension': 'min',
+			'generateMin': false,
+			'forceUseMin': false,
+			'overwrite': true,
+			'backupExtension': 'original',
+			'overwriteOnRelease': false,
+			'linter': false,
+			'linterForce': false,
+			'autoPrefixer': true,
+			'genSprite': false,
+			'ignoreOnRelease': false,
+			'ignoreOnBuild': false,
+			'ignoreOnDist': false,
 			'replaces': {
-				'original': [], 					//modificate orginal version
-				'originalMin': [], 					//modificate min orginal version
-				'originalDist': [],				//only for orignals
+				'original': [
+					//["/(border:)(\\w*)/gi", "$150em"]
+				],
+				'originalMin': [],
+				'originalDist': [],
 				'prePreprocess': [],
 				'postPreprocess': [],
 				'prePreprocessDist': [],
 				'postPreprocessDist': [],
-				'preMin': [									//pre minificatedd
-					//["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
-				],
-				'postMin': [									//post minificatedd
-					//["(border.*\\:)[ ]?(\\w*)", "$1 50em"]
-				]
-			},
-			'active': 'true'						//it will eval this field, for temporal use
+				'preMin': [],
+				'postMin': []
+			}
 		},
 		validCssPreproExtensions: ['sass', 'scss', 'less', 'styl'],
 		validJsPreproExtensions: ['coffee', 'ts'],
@@ -433,11 +431,11 @@
 	}
 
 	function genAppCache(){
-		if(!global.cfg.app.release || (global.cfg.app.release && !global.cfg.app.appCache.use)){
+		if(!global.cfg.app.release || (global.cfg.app.release && !global.cfg.appCache.active)){
 			return;
 		}
 
-		var fileName = (global.cfg.app.appCache.filename === '' ? global.cfg.app.name : global.cfg.app.appCache.filename) + global.cfg.app.appCache.ext;
+		var fileName = (global.cfg.appCache.filename === '' ? global.cfg.app.name : global.cfg.appCache.filename) + global.cfg.appCache.ext;
 
 		var options = {
 			hash: true,
@@ -447,15 +445,15 @@
 			exclude: fileName
 		};
 
-		_.extend(options, global.cfg.app.appCache.options);
+		_.extend(options, global.cfg.appCache.options);
 
 
 		//don't worrie, it is independent
-		gulp.src(global.cfg.app.appCache.files)
+		gulp.src(global.cfg.appCache.files)
 			.pipe(manifest(options))
 			.pipe(gulp.dest(global.cfg.app.folders.dist));
 
-		return gulp.src(global.cfg.app.folders.dist + '/' + global.cfg.loader.filesDest.index)
+		return gulp.src(global.cfg.app.folders.dist + '/' + global.cfg.loader.files.index)
 			.pipe(replace('<html>', '<html manifest="' + fileName + '">'))
 			.pipe(gulp.dest(global.cfg.app.folders.dist));
 	}

@@ -1,7 +1,9 @@
 {
+	"cordova": {
+		"active": true
+	},
 	"app": {
-		"name": "index test 06-04",
-		"cordova": true
+		"name": "index test 06-04"
 	},
 	"loader": {
 		"release": true

@@ -18,41 +18,29 @@
 	"xshowSkeletor": false,
 	"xcontentEditable": false,
 
-	"xplatform": {
-		"android": {
-			"keypass": "provisoryKey1",
-			"storepass": "provisoryKey1"
+	"appCache":{
+		"active": false,
+		"filename": "",
+		"ext": ".cache",
+		"files": ["dist/**/*"],
+		"options": {
+			"hash": true,
+			"preferOnline": false,
+			"network": ["http://!*", "https://!*", "*"]
 		}
+
 	},
 
 	"app": {
 		"release": true,
 		"firstApp": "app",
 		"site": "http://",
-		"cordova": false,
-		"cordovaInstalled": false,
-		"isCordovaDevice": false,
-
-		"appCache":{
-			"use": false,
-			"filename": "",
-			"ext": ".cache",
-			"files": ["dist/**/*"],
-			"options": {
-				"hash": true,
-				"preferOnline": false,
-				"network": ["http://!*", "https://!*", "*"]
-			}
-
-		},
 
 		"folders": {
 			"www": "www",
 			"build": "build",
 			"dist": "dist",
-			"temp": ".tmp",
-			"cordova": "cordova",
-			"cordovaWWW": "cordova/www"
+			"temp": ".tmp"
 		},
 
 		"compatibilityMatrix": {
@@ -97,6 +85,22 @@
 		]
 	},
 
+	"cordova":{
+		"active": false,
+		"global": false,
+		"folder": "cordova/",
+		"www": "cordova/www/",
+		"isDevice": false,
+		"files": {
+			"index": "index-cordova.html"
+		},
+		"xplatform": {
+			"android": {
+				"keypass": "provisoryKey1",
+				"storepass": "provisoryKey1"
+			}
+		}
+	},
 
 	"loader": {
 		"name": "WEBAPP BUILDER",
@@ -106,9 +110,8 @@
 
 		"compatibilityFirst": "\n\treturn !!(window.document.querySelector &&\n\twindow.console &&window.document.addEventListener &&\n\t(window.document.getElementsByTagName('body')[0]).classList &&\n\twindow.localStorage &&\n\twindow.navigator &&\n\twindow.XMLHttpRequest &&\n\twindow.applicationCache &&\n\twindow.document.createEvent &&\n\tarr.map &&\n\tarr.every);\n\t",
 
-		"filesDest": {
-			"index": "index.html",
-			"indexCordova": "index-cordova.html"
+		"files": {
+			"index": "index.html"
 		},
 
 		"folders": {

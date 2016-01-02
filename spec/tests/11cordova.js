@@ -68,8 +68,9 @@
 
 			expect(test('-e', distFolder)).toBe(true);
 			expect(test('-e', indexFile)).toBe(true);
-			expect(cat(indexFile)).toContain('"cordova": true');
-			expect(cat(indexFile)).toContain('"isCordovaDevice": true');
+			expect(cat(indexFile)).toContain('"active": true'); //cordova
+			expect(cat(indexFile)).toContain('"active": false'); //appCache
+			expect(cat(indexFile)).toContain('"isDevice": true');
 		});
 
 

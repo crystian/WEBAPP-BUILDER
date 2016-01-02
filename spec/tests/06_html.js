@@ -132,7 +132,7 @@ xdescribe("06_html: Index template to index - ", function(){
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 
-		expect(indexFileCompiledContent).toContain('isCordovaDevice:1');
+		expect(indexFileCompiledContent).toContain('cordova:{isDevice:1');
 	});
 
 	it('(05) should non-minificate index-cordova.html', function(){
@@ -152,7 +152,7 @@ xdescribe("06_html: Index template to index - ", function(){
 
 		var indexFileCompiledContent = cat(indexFileCompiled);
 
-		expect(indexFileCompiledContent).toContain('"isCordovaDevice": true');
+		expect(indexFileCompiledContent).toContain('"isDevice": true');
 	});
 
 

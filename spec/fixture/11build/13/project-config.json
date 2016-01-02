@@ -1,19 +1,19 @@
 {
+	"appCache":{
+		"active": true,
+		"filename": "othername",
+		"ext": ".cache",
+		"files": ["dist/app.json"],
+		"options": {
+			"hash": false,
+			"preferOnline": true,
+			"network": ["http://!*test1", "https://!*test2", "*"]
+		}
+	},
 	"app": {
 		"name": "index test 11-13",
 		"version": "0.0.2",
-		"release": true,
-		"appCache":{
-			"use": true,
-			"filename": "othername",
-			"ext": ".cache",
-			"files": ["dist/app.json"],
-			"options": {
-				"hash": false,
-				"preferOnline": true,
-				"network": ["http://!*test1", "https://!*test2", "*"]
-			}
-		}
+		"release": true
 	},
 	"loader": {
 		"release": true
