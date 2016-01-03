@@ -71,7 +71,7 @@
 		//endbody script
 
 		return streamqueue({objectMode: true}, loaderScripts1Stream, libsMinStream, loaderScripts2Stream)
-			.pipe(utils.debugeame())
+			.pipe(utils.debugme())
 			.pipe(concat('-compiledLoader.js', {newLine: ';'}))
 			.pipe(gulp.dest(global.cfg.pathPrjBuild + global.cfg.app.folders.temp));
 	});

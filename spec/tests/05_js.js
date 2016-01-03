@@ -13,7 +13,7 @@ var testFolder          = 'spec/fixture/05_js',
 		configJson          = 'config.json',
 		compileLoaderJsName = '-compiledloader.js';
 
-xdescribe("05_js: JS mechanics", function(){
+describe("05_js: JS mechanics", function(){
 
 	beforeEach(function(){
 		cd(testFolder);

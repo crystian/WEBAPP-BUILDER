@@ -280,7 +280,7 @@
 
 		//starting a new stream
 		stream = gulp.src(file.path)
-			.pipe(utils.debugeame())
+			.pipe(utils.debugme())
 		;
 
 		if(config.replaces.original.length > 0 || config.replaces.originalMin.length > 0){

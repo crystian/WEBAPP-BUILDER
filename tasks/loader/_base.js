@@ -25,7 +25,7 @@
 		global.cfg.varJs = utils.normalizePathFwk(global.cfg.varJs);
 
 		return gulp.src(global.cfg.pathFwk + global.cfg.loader.folders.www + global.cfg.loader.files.index)
-			.pipe(utils.debugeame())
+			.pipe(utils.debugme())
 			.pipe(injector.injectContent(loadingHtml, 'loadingHtml'))
 			.pipe(inject(gulp.src(loadingCSS, {read: false}), {name: 'loadingCss', relative: true, removeTags: true}))
 			.pipe(inject(gulp.src(global.cfg.varCss, {read: false}), {name: 'bower', relative: true, removeTags: true}))
@@ -37,7 +37,7 @@
 	// make a new index on loader folder
 	gulp.task('_makeIndex', function(){
 		return gulp.src(global.cfg.pathFwk + global.cfg.loader.folders.www + 'index.tpl.html')
-			.pipe(utils.debugeame())
+			.pipe(utils.debugme())
 			.pipe(rename(global.cfg.loader.files.index))
 			.pipe(cheerio({
 				run: function($){

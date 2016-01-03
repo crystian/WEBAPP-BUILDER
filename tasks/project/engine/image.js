@@ -22,7 +22,7 @@
 		}, _config);
 
 		return gulp.src(ori)
-			.pipe(utils.debugeame())
+			.pipe(utils.debugme())
 			.pipe(gm(function(gmfile){ //JPG
 				gmfile.quality(config.jpgLevel);
 				return gmfile;

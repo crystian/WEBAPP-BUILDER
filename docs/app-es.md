@@ -1,19 +1,20 @@
 # app.json
 
-_Configuracion por cada webapp_
+_Configuracion por cada app_
 
-App.json contiene un array de este objeto llamado "grupo", soporta [GLOB pattern](https://github.com/isaacs/node-glob), con lo cual podemos sumar archivos con comodines, e incluso excluir.
+App.json contiene un array de este objeto llamado "grupo", soporta [GLOB pattern](https://github.com/isaacs/node-glob), con lo cual podemos sumar archivos usando comodines, e incluso excluir.
+
+**IMPORTANTE:** Tener en cuenta que si usas el patron glob para una app con dos grupos, si uno de ellos crea un backup/min, el otro lo puede estar leyendo, **debes ignorarlo con "!myfile.backup.js"**
 
 Tener en cuenta que estos son los valores default (confirmar con core.js), con lo cual, solo agrega a tus app.json atributos distintos de los defaults.
-
 
 ```javascript
 	{
 		'files': [],
-		/* agregar paths, la extension de cada archivo determina su flujo, ya que en funcion del tipo utiliza los preprocessors. */
+		/* Agregar paths, la extension de cada archivo determina su flujo, ya que en funcion del tipo utiliza los preprocessors. */
 
 		'active': 'true'
-		/* para desactivar temporalmente este "grupo", se puede enviar expresiones, sera evaluado */
+		/* para desactivar temporalmente este "grupo", se puede enviar expresiones */
 
 		'minificated': false,
 		/* Si ya existe el archivo minificado (tipico en librerias) setear en true para evitar que vuelva minificar (ignorando el overwrite), asegurarse de usar minExtension correcto */
@@ -37,7 +38,7 @@ Tener en cuenta que estos son los valores default (confirmar con core.js), con l
 		/* escribe si no existe o si es release */
 
 		'linter': false,
-		/* usar linter y generar reporte (no aplica a minificated === true) */
+		/* usar linter y generar reporte (no aplica grupos con minificated === true) */
 
 		'linterForce': false,
 		/* en caso de que el linter encuentre algun error, frena la ejecucion devolviendo el error */
@@ -54,26 +55,26 @@ Tener en cuenta que estos son los valores default (confirmar con core.js), con l
 		/* eso mismo */
 
 		'replaces': {
-			/* En varios momentos se puede usar el reemplazo de texto; Soporta regexp para esto comenzar slash ("/"); Al utilizar enviar un array con dos elementos (key y value), dentro de un array, como el ejemplo: */
+			/* En varios momentos se puede usar el reemplazo de texto; Soporta regexp para esto comenzar slash ("/"); Para utilizar enviar un array con dos elementos (key y value), dentro de otro array, como el ejemplo: */
 			'original': [
 				["/(border:)(\\w*)/gi", "$150em"]
 			],
-			/* modifica a los archivos originales */
+			/* modifica a los archivos originales (genera backup) */
 
 			'originalMin': [],
-			/* modifica a los archivos originales en sus versiones "min" */
+			/* modifica a los archivos originales en sus versiones "min" (genera backup) */
 
 			'originalDist': [],
 			/* NO modifica los originales, solo lo hace en memoria al momento de hacer la version dist */
 
 			'prePreprocess': [],
-			/* antes de ejecutar cualquier preprocessor */
+			/* antes de ejecutar el preprocessor */
 
 			'postPreprocess': [],
-			/* despues de ejecutar cualquier preprocessor */
+			/* despues de ejecutar el preprocessor */
 
 			'prePreprocessDist': [],
-			/* antes de ejecutar cualquier preprocessor pero para dist, esto es sobre cargado y lo hace en memoria, el replace "prePreprocess" lo ejecuta antes de este. */
+			/* antes de ejecutar cualquier preprocessor pero para dist, **esto es sobre-cargado** o sea lo hace en memoria y antes del replace "prePreprocess". */
 
 			'postPreprocessDist': [],
 			/* misma explicacion que el anterior, pero esta vez para despues de */

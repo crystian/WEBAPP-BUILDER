@@ -1,6 +1,6 @@
 # project-config
 
-_Configuracion a nivel proyecto_
+_Configuracion a nivel proyecto, en la raiz del mismo._
 
 
 ### package.json
@@ -8,14 +8,13 @@ _Configuracion a nivel proyecto_
 * version: Se mostrara en la consola de la app y te servira para tracking. Mantener con nomenclatura [semver] (http://semver.org/), ya que se contempla mecanismo de update segun version.
 
 ### project-config.json
-_En la raiz de tu proyecto._
 
 **Notas:**
-* No modificar `project-config.json` del _builder_
+* **No modificar `project-config.json` del _builder_**
 * Indicar la primera app, si el nombre es distinto a "app", indicarlo con "firstApp"
 
 
-Este es la configuracion por defecto de todos los proyectos, de quere cambiar algun valor hacerlo en el `project-config.json` de tu proyecto.
+Este es la configuracion por defecto de todos los proyectos, de querer cambiar algun valor hacerlo en el `project-config.json` de tu proyecto.
 
 ```javascript
 {
@@ -99,7 +98,7 @@ Este es la configuracion por defecto de todos los proyectos, de quere cambiar al
 		"www": "cordova/www/",
 
 		"isDevice": false,
-		/* NO CAMBIAR */
+		/* NO CAMBIAR, ni setear, lo hara automaticamente */
 
 		"files": {
 			"index": "index-cordova.html"
@@ -121,7 +120,7 @@ Este es la configuracion por defecto de todos los proyectos, de quere cambiar al
 		"loading": 1,
 		/* 7 opciones */
 
-		"compatibilityFirst": "",
+		"compatibilityFirst": "...",
 		/* primer chequeo de compatibilidad, metodos nativos */
 
 		"files": {
@@ -131,10 +130,10 @@ Este es la configuracion por defecto de todos los proyectos, de quere cambiar al
 		"folders": {...},
 		/* configuracion de folders */
 
-		"viewport": "",
+		"viewport": "...",
 		/* settings del elemento meta: viewport */
 
-		"contentSecurity": "",
+		"contentSecurity": "...",
 		/* settings del elemento meta: content-security */
 
 		"bower": {

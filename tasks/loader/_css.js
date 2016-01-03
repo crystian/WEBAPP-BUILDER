@@ -27,7 +27,7 @@
 		return StreamQueue(
 			{objectMode: true},
 			gulp.src(cssLoader)
-				.pipe(utils.debugeame())
+				.pipe(utils.debugme())
 				.pipe(strip({safe: false, block: false})) //remove comments
 		)
 			.pipe(concat('-compiledLoader.css', {newLine: ' '}))
@@ -41,7 +41,7 @@
 		var sassOptions = {errLogToConsole: true, indentedSyntax: false};
 
 		return gulp.src(src)
-			.pipe(utils.debugeame())
+			.pipe(utils.debugme())
 			.pipe(sass(sassOptions))
 			.pipe(autoprefixer({browsers: global.cfg.autoprefixer}))
 			.pipe(replace(' 0px', ' 0'))

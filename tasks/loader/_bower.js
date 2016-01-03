@@ -37,7 +37,7 @@
 
 			if(!utils.fileExist(fileName)){
 				gulp.src(global.cfg.pathFwk + s.dev)
-					.pipe(utils.debugeame())
+					.pipe(utils.debugme())
 					.pipe(gif(s.type === 'js', uglify(), minifycss()))
 					.pipe(rename(s.name))
 					.pipe(gulp.dest(global.cfg.pathFwk + s.pa))

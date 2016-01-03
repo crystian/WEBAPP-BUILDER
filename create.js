@@ -8,6 +8,13 @@ Remember, you need permission to execute this file (in *nix ambient)
 
 */
 
+
+adb devices -l
+node node_modules\cordova\bin\cordova create spec/fixture/11build/15/cordova com.app myapp
+cd spec/fixture/11build/15/cordova
+node ..\..\..\..\..\node_modules\cordova\bin\cordova run android
+	..\node_modules\cordova\bin\cordova plugin add cordova-plugin-globalization
+
 var fs = require('fs-extra'),
 	inquirer = require('inquirer'),
 	exec = require('child_process').exec,

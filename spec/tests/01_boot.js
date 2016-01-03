@@ -26,7 +26,7 @@ var testFolder     = 'spec/fixture/01_boot',
 		configjs       = 'loader/config.js',
 		configJson     = 'config.json';
 
-xdescribe("01_boot: Boot test for the build system of framework (fuaaa)", function(){
+describe("01_boot: Boot test for the build system of framework (fuaaa)", function(){
 
 	beforeEach(function(){
 		cd(testFolder);

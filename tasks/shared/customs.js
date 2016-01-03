@@ -25,7 +25,7 @@
 		}
 
 		return stream
-			.pipe(utils.debugeame())
+			.pipe(utils.debugme())
 			.pipe(strip({safe: false, block: false}))
 			.pipe(htmlmin(htmlminOptions))
 			.pipe(templateCache({

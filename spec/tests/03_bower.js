@@ -14,7 +14,7 @@ var testFolder = 'spec/fixture/03_bower',
 		bowerJson  = '/bower.json',
 		configJson = 'config.json';
 
-xdescribe("03_bower Bower dependencies and more", function(){
+describe("03_bower Bower dependencies and more", function(){
 
 	beforeEach(function(){
 		cd(testFolder);

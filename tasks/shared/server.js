@@ -44,7 +44,7 @@
 		console.log('Serving: ', path.resolve(folder));
 
 		return gulp.src(folder)
-			.pipe(utils.debugeame())
+			.pipe(utils.debugme())
 			.pipe(webserver({
 				host: ip,
 				port: port,

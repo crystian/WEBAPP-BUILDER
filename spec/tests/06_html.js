@@ -17,7 +17,7 @@ var testFolder       = 'spec/fixture/06_html',
 		indexFile        = rootFwk + pathLoader + index,
 		indexFileCordova = rootFwk + pathLoader + indexCordova;
 
-xdescribe("06_html: Index template to index - ", function(){
+describe("06_html: Index template to index - ", function(){
 
 	beforeEach(function(){
 		cd(testFolder);

@@ -34,7 +34,7 @@ function removeCssTest(){
 	rm(pathCssTest + '.*');
 }
 
-xdescribe("02_css: CSS generation", function(){
+describe("02_css: CSS generation", function(){
 
 	beforeEach(function(){
 		createCssTest();

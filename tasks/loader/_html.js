@@ -27,7 +27,7 @@
 		};
 
 		var stream = gulp.src(global.cfg.pathFwk + global.cfg.loader.folders.www + global.cfg.loader.files.index)
-			.pipe(utils.debugeame())
+			.pipe(utils.debugme())
 			.pipe(htmlreplace())
 			.pipe(injector.injectContent(global.cfg.pathPrjBuild + global.cfg.app.folders.temp + '-compiledLoader.css', 'loaderCss', 'style'))
 			.pipe(injector.injectContent(global.cfg.pathPrjBuild + global.cfg.app.folders.temp + '-compiledLoader.js', 'loaderJs', 'script'))
@@ -50,7 +50,7 @@
 			 I prefer it than run again all process to make other file
 			 */
 			stream = stream.pipe(rename(global.cfg.cordova.files.index))
-				.pipe(utils.debugeame())
+				.pipe(utils.debugme())
 				.pipe(gif(global.cfg.loader.release,
 					replace(',cordova:{isDevice:!1,', ',cordova:{isDevice:1,'),
 					replace('"isDevice": false,', '"isDevice": true,')

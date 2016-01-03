@@ -185,8 +185,7 @@ exports.occurrences = function(string, subString, allowOverlapping){
 	return n;
 };
 
-//TODO change name
-exports.debugeame = function(){
+exports.debugme = function(){
 	return through.obj()
 		.pipe(gif(!!(gutil.env.debug), filelog()))
 		//.pipe(gif(!!(gutil.env.debug), debug({verbose: true})))
