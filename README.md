@@ -52,6 +52,30 @@ Este proyecto fue una extraccion de otro mas grande que luego de un tiempo me di
 
 ---
 
+## Tabla de contenido
+
+* [TL;DR](#tldr-version)
+	* Features
+* Tasks
+	* Gulp tasks
+	* Hooks
+	* Otras tasks & auxliares
+* Intrucciones de uso
+	* Conceptos
+	* Configuracion / Metadata
+		gulpfile.js
+		project-config.json (detalle)
+		apps.json
+		app.json (detalle)
+	* Sprites
+* Instalacion
+	* Prerequisitos
+	* Instalacion
+* [Pendientes](#pendientes)
+
+
+---
+
 ## Tasks:
 
 _Desde el proyecto, una vez conectado gulpfile.js_
@@ -263,7 +287,7 @@ Agregar esta linea:
 
 ## Pendientes:
 
-* installer
+* create
 * doc sobre el loader
 * pasar este doc a ingles
 * revisar codigo, sacar espaniol
@@ -277,4 +301,6 @@ Agregar esta linea:
 
 ---
 
-by Crystian, echo con amor para vos <3!
+Ante alguna necesidad o bug por favor levantar el issue en: [issues](issues), parece complejo pero no lo es. Sinceramente espero que te sirva y gracias.
+
+By Crystian, echo con amor para vos <3!
