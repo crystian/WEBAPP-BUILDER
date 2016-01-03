@@ -285,22 +285,6 @@ Agregar esta linea:
 
 ---
 
-## Pendientes:
-
-* create
-* doc sobre el loader
-* pasar este doc a ingles
-* revisar codigo, sacar espaniol
-* chequeo de mas de una vez el mismo file en diferentes grupos
-* cordova: replace de datos antes de build (versiones)
-* nightmare: revisar cada perfil
-* test sobre loader
-* ci
-* cache para builder
-* loadings adicionales, pluggeables
-
----
-
 Ante alguna necesidad o bug por favor levantar el issue en: [issues](https://github.com/crystian/WEBAPP-BUILDER/issues), parece complejo pero no lo es. Sinceramente espero que te sirva y gracias.
 
 By Crystian, echo con amor para vos <3!
