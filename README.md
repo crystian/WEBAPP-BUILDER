@@ -301,6 +301,6 @@ Agregar esta linea:
 
 ---
 
-Ante alguna necesidad o bug por favor levantar el issue en: [issues](issues), parece complejo pero no lo es. Sinceramente espero que te sirva y gracias.
+Ante alguna necesidad o bug por favor levantar el issue en: [issues](/issues), parece complejo pero no lo es. Sinceramente espero que te sirva y gracias.
 
 By Crystian, echo con amor para vos <3!
