@@ -55,22 +55,22 @@ Este proyecto fue una extraccion de otro mas grande que luego de un tiempo me di
 ## Tabla de contenido
 
 * [TL;DR](#tldr-version)
-	* Features
-* Tasks
-	* Gulp tasks
-	* Hooks
-	* Otras tasks & auxliares
-* Intrucciones de uso
-	* Conceptos
-	* Configuracion / Metadata
-		gulpfile.js
-		project-config.json (detalle)
-		apps.json
-		app.json (detalle)
-	* Sprites
-* Instalacion
-	* Prerequisitos
-	* Instalacion
+	* [Features](#features)
+* [Tasks](#tasks)
+	* [Gulp tasks](#gulp-tasks)
+	* [Hooks](#hooks)
+	* [Otras tasks & auxliares](#otras-tasks--auxiliares)
+* [Intrucciones de uso](#instrucciones-de-uso)
+	* [Conceptos](#conceptos)
+	* [Configuracion / Metadata](#configuracion--metadata)
+		* [gulpfile.js](#gulpfilejs)
+		* [project-config.json](#project-configjson-y-project-config-localjson) ([detalle](docs/project-config-es.md))
+		* [apps.json](#appsjson)
+		* [app.json](#appjson) ([detalle](docs/app-es.md))
+	* [Sprites](#sprites)
+* [Instalacion](#instalacion)
+	* [Prerequisitos](#prerequisitos)
+	* [Instalacion](#instalacion-1)
 * [Pendientes](#pendientes)
 
 
