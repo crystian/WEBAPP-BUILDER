@@ -29,9 +29,9 @@ Este framework te permite ahorrar incontable cantidad de horas en la automatizac
 * Modo **release** para minificar y ocultar info.
 * Otros: Analytics, languages, appcache, y mucho, mucho mas.
 
-Este framework es totalmente "opinionated" (dictatorial?), si lo haces como el framework te propone vas a poder de disfrutar de sus features sin perder tiempo en cosas mas "triviales", solo te vas a dedicar a codear tu web app/SPA!
-
 ![](docs/img/jake.gif)
+
+Este framework es totalmente "opinionated" (dictatorial?), si lo haces como el framework te propone vas a poder de disfrutar de sus features sin perder tiempo en cosas mas "triviales", solo te vas a dedicar a codear tu web app/SPA!
 
 **NOTAS:**
 
@@ -125,7 +125,7 @@ gulp.task('hookPostDistProject', function(cb){
 
 **WEBAPP-BUILDER (aka: BUILDER):** Este mismo proyecto (del readme), donde esta toda la magia, cuyo resultado es un "index.html", **el contenido de esta carpeta no debe modificarse.**
 
-**LOADER:** Es un proyecto interno que termina generando el "index.html" configurado segun proyecto, con validaciones y demas ([mas info del loader](http://))
+**LOADER:** Es un proyecto interno que termina generando el "index.html" configurado segun proyecto, con validaciones y demas ([mas info del loader](docs/loader-es.md))
 
 **PROJECT:** Es la carpeta creada con el _instalador_ (o de manera manual), el BUILDER genera el index y lo termina copiando en el proyecto.
 
@@ -212,7 +212,7 @@ Los sprites se generan automaticamente siguiendo este patron:
 		}
 	```
 
-* Imagenes PNG en: PROJECTO/APP/assets/img/sprite*
+* Imagenes PNG en: PROJECTO/APP/assets/img/sprite*  
 TODO REVIEW: Replace?
 
 ---
@@ -240,18 +240,18 @@ Es necesario que todo este en tu path.
 ##### MAC:
 
 ###### Ios:
-Necesitas instalar un script "ios-deploy": `sudo npm i -g ios-deploy`
+Necesitas instalar un script "ios-deploy": `sudo npm i -g ios-deploy`  
 Si tenes problemas con permisos, podes probar con `sudo chmod -R a+rwx cordova/`
 
 ###### Android:
-Crear variable de ambiente: ANDROID_HOME apuntando al sdk, ejemplo
+Crear variable de ambiente: ANDROID_HOME apuntando al sdk, ejemplo  
 `sudo nano ~/.bash_profile`
-Agregar esta linea:
+Agregar esta linea:  
 `export ANDROID_HOME=/Users/crystian/Documents/eclipse/ADT/sdk` (con tu path claramente)
 
 ### Instalacion
 
-* Clonar: https://github.com/crystian/WEBAPP-BUILDER.git (`git clone http..`)
+* Clonar: `git clone https://github.com/crystian/WEBAPP-BUILDER.git`
 * Instalar dependencias: `npm install` desde `WEBAPP-BUILDER` (tomate 5', son varias)
 	- En windows da un error que no puede instalar "weak/python", no te preocupes.
 * Crear nuevo proyecto con `node create`
@@ -277,4 +277,4 @@ Agregar esta linea:
 
 ---
 
-by Crystian, done by love for you <3!
+by Crystian, echo con amor para vos <3!
