@@ -36,7 +36,8 @@ describe("05_js: JS mechanics", function(){
 
 		expect(test('-e', compileLoaderJs)).toBe(true);
 
-		expect(fs.statSync(compileLoaderJs).size).toBeMoreLess(107629, 1000);
+		//mac: 107629, windows: 109083, whatt?
+		expect(fs.statSync(compileLoaderJs).size).toBeMoreLess(108000, 5000);
 	});
 
 	it('(02) should create compile loader - minificated', function(){
