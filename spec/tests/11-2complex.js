@@ -32,7 +32,7 @@
 			cd(rootFwk);
 		});
 
-		fit('(04) should include "minificated" files without minify', function(){
+		it('(04) should include "minificated" files without minify', function(){
 			cd('04');
 			rm('-rf', buildFolder);
 			rm('-rf', distFolder);
@@ -42,7 +42,7 @@
 			expect(exec('gulp dist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 			expect(test('-e', distFolder)).toBe(true);
-			expect(fs.statSync(distIndex).size).toBeMoreLess(156826, 1000);
+			expect(fs.statSync(distIndex).size).toBeMoreLess(154986, 1000);
 			expect(fs.statSync(distAppJson).size).toBeMoreLess(1287503, 10000);
 		});
 
@@ -60,7 +60,7 @@
 			expect(fs.statSync(distAppJson).size).toBeMoreLess(182823, 10000);
 		});
 
-		fit('(06) should include "minificated" files because use forceUseMin (over release:false)', function(){
+		it('(06) should include "minificated" files because use forceUseMin (over release:false)', function(){
 			cd('06');
 			rm('-rf', buildFolder);
 			rm('-rf', distFolder);
@@ -70,7 +70,7 @@
 			expect(exec('gulp dist --testMode ' + args, {silent: 1}).code).toBe(0);
 
 			expect(test('-e', distFolder)).toBe(true);
-			expect(fs.statSync(distIndex).size).toBeMoreLess(156826, 1000);
+			expect(fs.statSync(distIndex).size).toBeMoreLess(154986, 1000);
 			expect(fs.statSync(distAppJson).size).toBeMoreLess(184018, 10000);
 		});
 

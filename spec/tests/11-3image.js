@@ -50,7 +50,7 @@
 			cd(rootFwk);
 		});
 
-		fit('(03) should optimize images', function(){
+		it('(03) should optimize images', function(){
 			cd('03');
 
 			rm('-rf', distFolder);

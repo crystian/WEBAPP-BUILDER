@@ -22,7 +22,7 @@ describe("05_js: JS mechanics", function(){
 		cd(rootFwk);
 	});
 
-	fit('(01) should create compile loader', function(){
+	it('(01) should create compile loader', function(){
 		cd('01');
 
 		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
@@ -36,10 +36,10 @@ describe("05_js: JS mechanics", function(){
 
 		expect(test('-e', compileLoaderJs)).toBe(true);
 
-		expect(fs.statSync(compileLoaderJs).size).toBeMoreLess(109124, 1000);
+		expect(fs.statSync(compileLoaderJs).size).toBeMoreLess(107629, 1000);
 	});
 
-	fit('(02) should create compile loader - minificated', function(){
+	it('(02) should create compile loader - minificated', function(){
 		cd('02');
 
 		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);

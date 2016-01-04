@@ -331,7 +331,7 @@
 			stream = replaces(stream, config.replaces.postMin, fileNameExt);
 
 			if(genMinFile){
-				stream = stream.pipe(rename(fileNameMin));
+				stream = stream.pipe(rename(utils.getFileNameWithExtension(fileNameMin)));
 			}
 		}
 

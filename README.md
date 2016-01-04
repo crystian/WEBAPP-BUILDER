@@ -254,6 +254,7 @@ TODO REVIEW: Replace?
 * Bower (via npm)
 * [Git](http://git-scm.com/downloads)
 * [Graphics Magick](http://www.graphicsmagick.org/download.html) (para generacion de sprites)
+  En Mac: `brew install graphicsmagick` puede alcanzar.
 
 **Opcionales:**
 

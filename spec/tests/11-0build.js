@@ -227,7 +227,7 @@
 
 			});
 
-			fit('should make dist files (debug)', function(){
+			it('should make dist files (debug)', function(){
 				saveConfig(projectConfigTemplate);
 				removeGenFiles();
 
@@ -238,7 +238,7 @@
 				expect(test('-e', distFolder)).toBe(true);
 			});
 
-			fit('should make project files on dist', function(){
+			it('should make project files on dist', function(){
 				saveConfig(projectConfigTemplate);
 				removeGenFiles();
 
@@ -262,7 +262,7 @@
 
 			});
 
-			fit('should make project and loader files on dist', function(){
+			it('should make project and loader files on dist', function(){
 				saveConfig(projectConfigTemplate);
 				removeGenFiles();
 
@@ -286,7 +286,7 @@
 
 			});
 
-			fit('should start the server on loader folder', function(done){
+			it('should start the server on loader folder', function(done){
 				saveConfig(projectConfigTemplate);
 				removeGenFiles();
 
@@ -340,7 +340,7 @@
 				}
 			});
 
-			fit('should start the server on dist folder', function(done){
+			it('should start the server on dist folder', function(done){
 				saveConfig(projectConfigTemplate);
 				removeGenFiles();
 
@@ -488,7 +488,7 @@
 
 			});
 
-			fit('(01) should make dist files (debug)', function(){
+			it('(01) should make dist files (debug)', function(){
 				cd('01');
 
 				saveConfig(projectConfig);
@@ -501,7 +501,7 @@
 				expect(test('-e', distFolder)).toBe(true);
 			});
 
-			fit('(01) should make project files on dist', function(){
+			it('(01) should make project files on dist', function(){
 				cd('01');
 
 				saveConfig(projectConfig);
