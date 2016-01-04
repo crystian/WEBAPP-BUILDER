@@ -7,7 +7,7 @@ var utils = require('../../tasks/shared/utils'),
 require('shelljs/global');
 
 //detail report
-if(process.argv.indexOf('--detail')!==-1){
+if(process.argv.indexOf('--detail')===-1){
 	var SpecReporter = require('jasmine-spec-reporter');
 	jasmine.getEnv().addReporter(new SpecReporter());   // add jasmine-spec-reporter
 }
