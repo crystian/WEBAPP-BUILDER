@@ -22,7 +22,7 @@
 			cd(rootFwk);
 		});
 
-		it('should use pre and post build hook on loader', function(){
+		it('(02) should use pre and post build hook on loader', function(){
 			cd('02');
 			var testFolder2 = 'test';
 			rm('-rf', testFolder2);
@@ -42,7 +42,7 @@
 		});
 
 
-		it('should use pre and post dist hook on loader', function(){
+		it('(02) should use pre and post dist hook on loader', function(){
 			cd('02');
 			var testFolder2 = 'test';
 			rm('-rf', testFolder2);

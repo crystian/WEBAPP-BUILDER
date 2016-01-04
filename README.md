@@ -3,7 +3,7 @@
 ### **_El framework para los amigos!_**
 
 [![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master)](https://travis-ci.org/crystian/WEBAPP-BUILDER)
-[![Build status](https://ci.appveyor.com/api/projects/status/xvavxoao77weo3ki/branch/master?svg=true)](https://ci.appveyor.com/project/crystian/webapp-builder/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true)](https://ci.appveyor.com/project/crystian/webapp-builder/branch/master)
 
 
 [Español](http://), [English](http://)

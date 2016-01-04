@@ -26,7 +26,7 @@
 			cd(rootFwk);
 		});
 
-		it('should do ngTemplate', function(){
+		it('(11) should do ngTemplate', function(){
 			cd('11');
 
 			rm('-rf', distFolder);

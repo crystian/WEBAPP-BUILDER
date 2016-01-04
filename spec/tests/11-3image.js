@@ -50,7 +50,7 @@
 			cd(rootFwk);
 		});
 
-		it('should optimize images', function(){
+		xit('(03) should optimize images', function(){
 			cd('03');
 
 			rm('-rf', distFolder);
@@ -82,7 +82,7 @@
 		 * generacion de sprite 1 y 2 apps: peso, existencia, css (rutas) ignores,	 solo carpeta sprite
 		 */
 
-		it('should create a sprite 1 app: release false', function(){
+		it('(12) should create a sprite 1 app: release false', function(){
 			cd('12');
 
 			rm('-rf', distFolder);
@@ -127,7 +127,7 @@
 			expect(cat(appJson)).toContain(app22Png);
 		});
 
-		it('should create a sprite 1 app: release true', function(){
+		it('(13) should create a sprite 1 app: release true', function(){
 			cd('13');
 
 			rm('-rf', distFolder);
@@ -172,7 +172,7 @@
 			expect(cat(appJson)).toContain(app22Png);
 		});
 
-		it('should create a sprite 2 apps: release false', function(){
+		it('(14) should create a sprite 2 apps: release false', function(){
 			cd('14');
 
 			rm('-rf', distFolder);

@@ -28,7 +28,7 @@
 			cd(rootFwk);
 		});
 
-		it('should clear www folder', function(){
+		it('(15) should clear www folder', function(){
 			cd('15');
 			rm('-rf', buildFolder);
 			rm('-rf', distFolder);
@@ -44,7 +44,7 @@
 			expect(test('-e', testFile)).toBe(false);
 		});
 
-		it('should not clear www folder, because it is not a cordova project', function(){
+		it('(16) should not clear www folder, because it is not a cordova project', function(){
 			cd('16');
 			rm('-rf', buildFolder);
 			rm('-rf', distFolder);
@@ -56,7 +56,7 @@
 			expect(test('-e', testFile)).toBe(true);
 		});
 
-		it('should copy on cordova folder', function(){
+		xit('(15) should copy on cordova folder', function(){
 			cd('15');
 			rm('-rf', buildFolder);
 			rm('-rf', distFolder);
@@ -74,7 +74,7 @@
 		});
 
 
-		it('should fail because it is not a cordova project', function(){
+		it('(16) should fail because it is not a cordova project', function(){
 			cd('16');
 
 			expect(exec('gulp copyCordovaWww --testMode ' + args, {silent: 1}).code).toBe(2);

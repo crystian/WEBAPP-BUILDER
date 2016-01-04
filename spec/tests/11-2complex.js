@@ -32,7 +32,7 @@
 			cd(rootFwk);
 		});
 
-		it('should include "minificated" files without minify', function(){
+		xit('(04) should include "minificated" files without minify', function(){
 			cd('04');
 			rm('-rf', buildFolder);
 			rm('-rf', distFolder);
@@ -46,7 +46,7 @@
 			expect(fs.statSync(distAppJson).size).toBeMoreLess(1287503, 10000);
 		});
 
-		it('should include "minificated" files', function(){
+		it('(05) should include "minificated" files', function(){
 			cd('05');
 			rm('-rf', buildFolder);
 			rm('-rf', distFolder);
@@ -60,7 +60,7 @@
 			expect(fs.statSync(distAppJson).size).toBeMoreLess(182823, 10000);
 		});
 
-		it('should include "minificated" files because use forceUseMin (over release:false)', function(){
+		xit('(06) should include "minificated" files because use forceUseMin (over release:false)', function(){
 			cd('06');
 			rm('-rf', buildFolder);
 			rm('-rf', distFolder);
@@ -74,7 +74,7 @@
 			expect(fs.statSync(distAppJson).size).toBeMoreLess(184018, 10000);
 		});
 
-		it('should not create scss on build process', function(){
+		it('(07) should not create scss on build process', function(){
 			cd('07');
 
 			rm('-rf', buildFolder);
@@ -91,7 +91,7 @@
 			expect(test('-e', otherCss)).toBe(true);
 		});
 
-		it('should not create scss on dist process (without css file)', function(){
+		it('(08) should not create scss on dist process (without css file)', function(){
 			cd('08');
 
 			rm('-rf', buildFolder);
@@ -108,7 +108,7 @@
 			expect(test('-e', otherCss)).toBe(true);
 		});
 
-		it('should not include css on dist process (with css created)', function(){
+		it('(08) should not include css on dist process (with css created)', function(){
 			cd('08');
 			var cssFile = '#fromAppScss {\n' +
 				'	background-color: red;\n' +
@@ -136,7 +136,7 @@
 			expect(cat(buildDist + 'app.json')).not.toContain('#fromAppScss');
 		});
 
-		it('should include on process because not is release', function(){
+		it('(10) should include on process because not is release', function(){
 			cd('10');
 
 			rm('-rf', buildFolder);
@@ -157,7 +157,7 @@
 			expect(test('-e', otherCss)).toBe(true);
 		});
 
-		it('should not include css because is release and it was set ignoreOnRelease = true', function(){
+		it('(10) should not include css because is release and it was set ignoreOnRelease = true', function(){
 			cd('10');
 			var cssFile = '#fromAppScss {\n' +
 				'	background-color: red;\n' +
@@ -185,7 +185,7 @@
 			expect(cat(buildDist + 'app.json')).not.toContain('#fromAppScss');
 		});
 
-		it('should generate manifest cache', function(){
+		it('(10) should generate manifest cache', function(){
 			cd('10');
 
 			rm('-rf', distFolder);
@@ -198,7 +198,7 @@
 
 		});
 
-		it('should generate manifest cache with values', function(){
+		it('(13) should generate manifest cache with values', function(){
 			cd('13');
 
 			rm('-rf', distFolder);

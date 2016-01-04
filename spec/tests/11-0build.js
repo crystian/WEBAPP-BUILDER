@@ -227,7 +227,7 @@
 
 			});
 
-			it('should make dist files (debug)', function(){
+			xit('should make dist files (debug)', function(){
 				saveConfig(projectConfigTemplate);
 				removeGenFiles();
 
@@ -340,7 +340,7 @@
 				}
 			});
 
-			it('should start the server on dist folder', function(done){
+			xit('should start the server on dist folder', function(done){
 				saveConfig(projectConfigTemplate);
 				removeGenFiles();
 
@@ -407,7 +407,7 @@
 				cd(rootFwk);
 			});
 
-			it('should build loader files', function(){
+			it('(01) should build loader files', function(){
 				cd('01');
 
 				saveConfig(projectConfig);
@@ -426,7 +426,7 @@
 
 			});
 
-			it('should build project files', function(){
+			it('(01) should build project files', function(){
 				cd('01');
 
 				saveConfig(projectConfig);
@@ -445,7 +445,7 @@
 
 			});
 
-			it('should build project and loader files', function(){
+			it('(01) should build project and loader files', function(){
 				cd('01');
 
 				saveConfig(projectConfig);
@@ -464,7 +464,7 @@
 
 			});
 
-			it('should make dist files (without debug parameter)', function(){
+			it('(01) should make dist files (without debug parameter)', function(){
 				cd('01');
 
 				saveConfig(projectConfig);
@@ -488,7 +488,7 @@
 
 			});
 
-			it('should make dist files (debug)', function(){
+			xit('(01) should make dist files (debug)', function(){
 				cd('01');
 
 				saveConfig(projectConfig);
@@ -501,7 +501,7 @@
 				expect(test('-e', distFolder)).toBe(true);
 			});
 
-			xit('should make project files on dist', function(){
+			xit('(01) should make project files on dist', function(){
 				cd('01');
 
 				saveConfig(projectConfig);
@@ -529,7 +529,7 @@
 
 			});
 
-			it('should make project and loader files on dist', function(){
+			it('(01) should make project and loader files on dist', function(){
 				cd('01');
 
 				saveConfig(projectConfig);
@@ -556,7 +556,7 @@
 
 			});
 
-			it('should start the server on loader folder', function(done){
+			it('(01) should start the server on loader folder', function(done){
 				cd('01');
 
 				saveConfig(projectConfig);
@@ -612,7 +612,7 @@
 				}
 			});
 
-			it('should start the server on dist folder', function(done){
+			it('(01) should start the server on dist folder', function(done){
 				cd('01');
 
 				saveConfig(projectConfig);
