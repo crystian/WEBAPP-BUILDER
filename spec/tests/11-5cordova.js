@@ -63,7 +63,7 @@
 			expect(test('-e', buildFolder)).toBe(false);
 			expect(test('-e', distFolder)).toBe(false);
 
-			expect(exec('gulp buildFullDist --testMode ' + args, {silent: 0}).code).toBe(0);
+			expect(exec('gulp buildFullDist --testMode ' + args, {silent: 1}).code).toBe(0);
 			expect(exec('gulp copyCordovaWww --testMode ' + args, {silent: 1}).code).toBe(0);
 
 			expect(test('-e', distFolder)).toBe(true);
