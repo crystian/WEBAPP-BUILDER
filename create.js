@@ -1,26 +1,25 @@
 /**
  * Created by Crystian on 2/18/2015.
+ *
+ * it is a wizard for create a new app based on a template
+ *
+ * Remember, you need permission to execute this file (in *nix ambient)
+ * > chmod u+x create.js
  */
 
-/*
-Remember, you need permission to execute this file (in *nix ambient)
-# chmod u+x installer.js
+//
+//adb devices -l
+//node node_modules\cordova\bin\cordova create spec/fixture/11build/15/cordova com.app myapp
+//cd spec/fixture/11build/15/cordova
+//node ..\..\..\..\..\node_modules\cordova\bin\cordova run android
+//	..\node_modules\cordova\bin\cordova plugin add cordova-plugin-globalization
 
-*/
-
-
-adb devices -l
-node node_modules\cordova\bin\cordova create spec/fixture/11build/15/cordova com.app myapp
-cd spec/fixture/11build/15/cordova
-node ..\..\..\..\..\node_modules\cordova\bin\cordova run android
-	..\node_modules\cordova\bin\cordova plugin add cordova-plugin-globalization
-
-var fs = require('fs-extra'),
-	inquirer = require('inquirer'),
-	exec = require('child_process').exec,
-	cfg = require('./project-config.json'),
-	chalk = require('chalk'),
-	del = require('del');
+var fs       = require('fs-extra'),
+		inquirer = require('inquirer'),
+		exec     = require('child_process').exec,
+		cfg      = require('./project-config.json'),
+		chalk    = require('chalk'),
+		del      = require('del');
 
 require('./tasks/commons');
 
@@ -43,7 +42,7 @@ var install = [{
 questions = questions.concat(install);
 
 var projectCode = [{
-	when: function(r) {return r.install;},
+	when: function(r){return r.install;},
 	type: 'input',
 	name: 'projectCode',
 	message: 'Project Code (without spaces and simbols):',
@@ -52,7 +51,7 @@ var projectCode = [{
 questions = questions.concat(projectCode);
 
 var copyTemplate = [{
-	when: function(r) {return r.projectCode;},
+	when: function(r){return r.projectCode;},
 	type: 'list',
 	name: 'copyTemplate',
 	message: 'Which template do you want to use?',
@@ -66,19 +65,19 @@ var copyTemplate = [{
 questions = questions.concat(copyTemplate);
 
 var cordova = [{
-	when: function(r) {return r.copyTemplate;},
+	when: function(r){return r.copyTemplate;},
 	type: 'confirm',
 	name: 'cordova',
 	message: 'Install cordova?',
 	default: true
-},{
-	when: function(r) {return r.cordova;},
+}, {
+	when: function(r){return r.cordova;},
 	type: 'input',
 	name: 'main',
 	message: 'Name:',
 	default: 'HelloWorld'
-},{
-	when: function(r) {return r.main;},
+}, {
+	when: function(r){return r.main;},
 	type: 'input',
 	name: 'domain',
 	message: 'Package:',
@@ -87,7 +86,7 @@ var cordova = [{
 questions = questions.concat(cordova);
 
 var cordovaPlatform = [{
-	when: function(r) {return r.cordova;},
+	when: function(r){return r.cordova;},
 	type: "checkbox",
 	message: "Platform to install:",
 	name: "platforms",
@@ -102,16 +101,16 @@ var cordovaPlatform = [{
 questions = questions.concat(cordovaPlatform);
 
 var cordovaPlugins = [{
-	when: function(r) {return r.cordova;},
+	when: function(r){return r.cordova;},
 	type: "checkbox",
 	message: "Plugins to install:",
 	name: "plugins",
 	choices: [
-		{name:"device",value: "cordova-plugin-device",checked: true},
-		{name: "network-information", value: "cordova-plugin-network-information",checked: true},
-		{name: "globalization", value: "cordova-plugin-globalization",checked: true},
-		{name: "splashscreen", value: "cordova-plugin-splashscreen",checked: true},
-		{name: "whitelist", value: "cordova-plugin-whitelist",checked: true},
+		{name: "device", value: "cordova-plugin-device", checked: true},
+		{name: "network-information", value: "cordova-plugin-network-information", checked: true},
+		{name: "globalization", value: "cordova-plugin-globalization", checked: true},
+		{name: "splashscreen", value: "cordova-plugin-splashscreen", checked: true},
+		{name: "whitelist", value: "cordova-plugin-whitelist", checked: true},
 		{name: "dialogs", value: "cordova-plugin-dialogs"},
 		{name: "battery-status", value: "cordova-plugin-battery-status"},
 		{name: "device-motion", value: "cordova-plugin-device-motion"},
@@ -131,104 +130,104 @@ var cordovaPlugins = [{
 }];
 questions = questions.concat(cordovaPlugins);
 
-inquirer.prompt(questions, function( answers ) {
+inquirer.prompt(questions, function(answers){
 	//console.dir(answers);
 
-	var projectNameFile = 'project-active.json',
-		projectConfigFile = 'project-config.json',
-		projectConfigLocalFile = 'project-config-local.json';
+	var projectNameFile        = 'project-active.json',
+			projectConfigFile      = 'project-config.json',
+			projectConfigLocalFile = 'project-config-local.json';
 
-	if (answers.install){
+	if(answers.install){
 
 		if(answers.copyTemplate){
 			fs.copySync(answers.copyTemplate, answers.projectCode);
 
 			if(answers.copyTemplate === 'templates/angular-full'){
-				var gulp = require('gulp'),
-					debug = require('gulp-debug'),
-					replace = require('gulp-replace');
+				var gulp    = require('gulp'),
+						debug   = require('gulp-debug'),
+						replace = require('gulp-replace');
 
 				gulp.src([
-					answers.projectCode +'/vendors/theme/style.css',
-					answers.projectCode +'/www/app/app.json',
-					answers.projectCode +'/www/app/app.scss',
-					answers.projectCode +'/www/landing/app.json',
-					answers.projectCode +'/www/landing/landing.scss'
-				], {base: './'})
-				.pipe(debug({verbose: true}))
-				.pipe(replace('/'+ answers.copyTemplate +'/','/'+ answers.projectCode +'/'))
-				.pipe(gulp.dest('.'));
+						answers.projectCode + '/vendors/theme/style.css',
+						answers.projectCode + '/www/app/app.json',
+						answers.projectCode + '/www/app/app.scss',
+						answers.projectCode + '/www/landing/app.json',
+						answers.projectCode + '/www/landing/landing.scss'
+					], {base: './'})
+					.pipe(debug({verbose: true}))
+					.pipe(replace('/' + answers.copyTemplate + '/', '/' + answers.projectCode + '/'))
+					.pipe(gulp.dest('.'));
 
 				del([
-					answers.projectCode +'/node_modules',
-					answers.projectCode +'/vendors/bower_components'
+					answers.projectCode + '/node_modules',
+					answers.projectCode + '/vendors/bower_components'
 				]);
 			}
 
 		}
 
 		fs.outputJSONSync(projectNameFile, {projectCode: answers.projectCode}, {encoding: 'utf8'});
-		fs.outputJSONSync(answers.projectCode +'/'+ projectConfigLocalFile,{}, {encoding: 'utf8'});
+		fs.outputJSONSync(answers.projectCode + '/' + projectConfigLocalFile, {}, {encoding: 'utf8'});
 
-		var op = require('./'+ answers.copyTemplate +'/'+ projectConfigFile);
+		var op = require('./' + answers.copyTemplate + '/' + projectConfigFile);
 		op.cordova = answers.cordova;
 
 		fs.outputJSONSync(projectConfigLocalFile, {}, {encoding: 'utf8'});
-		fs.outputJSONSync(answers.projectCode +'/'+ projectConfigFile, op, {encoding: 'utf8'});
+		fs.outputJSONSync(answers.projectCode + '/' + projectConfigFile, op, {encoding: 'utf8'});
 
-		if (answers.cordova){
+		if(answers.cordova){
 			console.log(chalk.black.bgYellow('Cordova project is generating...'));
 
-			exec('cordova create '+ cfg.folders.cordova +' '+ answers.domain +' '+ answers.main, {cwd: answers.projectCode +'/'},
-				function (error, stdout, stderr) {
+			exec('cordova create ' + cfg.folders.cordova + ' ' + answers.domain + ' ' + answers.main, {cwd: answers.projectCode + '/'},
+				function(error, stdout, stderr){
 
-				if (error !== null) {
-					console.logRed(stdout);
-					console.logRed('stderr: ' + stderr);
-					console.logRed('exec error: ' + error);
-					console.logRed('Is Cordova installed?');
-				} else {
-					console.logGreen(stdout);
+					if(error !== null){
+						console.logRed(stdout);
+						console.logRed('stderr: ' + stderr);
+						console.logRed('exec error: ' + error);
+						console.logRed('Is Cordova installed?');
+					} else {
+						console.logGreen(stdout);
 
-					var packageJson = answers.projectCode +'/package.json';
-					var pkg = require('./'+ packageJson);
-					pkg.domain = answers.domain;
-					pkg.mainClass = answers.main;
-					fs.outputJSONSync(packageJson, pkg);
+						var packageJson = answers.projectCode + '/package.json';
+						var pkg = require('./' + packageJson);
+						pkg.domain = answers.domain;
+						pkg.mainClass = answers.main;
+						fs.outputJSONSync(packageJson, pkg);
 
-					installCordovaPl('platform', answers.platforms, answers.projectCode, function () {
-						if(answers.platforms.length>0){
-							installCordovaPl('plugin', answers.plugins, answers.projectCode, finalCordova);
-						}
-					});
-				}
-			});
+						installCordovaPl('platform', answers.platforms, answers.projectCode, function(){
+							if(answers.platforms.length > 0){
+								installCordovaPl('plugin', answers.plugins, answers.projectCode, finalCordova);
+							}
+						});
+					}
+				});
 
 		}
 
 		updateGitignore(answers.projectCode);
 
 		console.logRed('');
-		console.logRed('REMEMBER: The project/folder: "'+ answers.projectCode +'", will not be include on git, it needs their own repo, and don\'t upload it to webapp-builder repo, and READ THE README motherfuckerr!');
+		console.logRed('REMEMBER: The project/folder: "' + answers.projectCode + '", will not be include on git, it needs their own repo, and don\'t upload it to webapp-builder repo, and READ THE README motherfuckerr!');
 		console.logRed('');
 
 	}
 });
 
-function updateGitignore(code) {
+function updateGitignore(code){
 	var fileName = '.gitignore';
 	var content = fs.readFileSync(fileName);
-	content += '\n/'+ code;
+	content += '\n/' + code;
 	fs.writeFileSync(fileName, content, {encoding: 'utf8'});
 }
 
 
 function installCordovaPl(text, pl, projectCode, cb){/* plugins and platforms */
-	if (pl.length>0){
-		exec('cordova '+ text +' add '+ pl.join(' '), {cwd: projectCode +'/'+cfg.folders.cordova},
-			function (error, stdout, stderr) {
+	if(pl.length > 0){
+		exec('cordova ' + text + ' add ' + pl.join(' '), {cwd: projectCode + '/' + cfg.folders.cordova},
+			function(error, stdout, stderr){
 
-				if (error !== null) {
+				if(error !== null){
 					console.logRed(stdout);
 					console.logRed('stderr: ' + stderr);
 					console.logRed('exec error: ' + error);

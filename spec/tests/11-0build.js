@@ -109,7 +109,7 @@
 		process.stdout.write = t;
 	}
 
-	describe('11build: check basic commands for build', function(){
+	describe('11-0build: check basic commands for build', function(){
 		describe('from root, it', function(){
 			it('should fail because it is not project', function(){
 				expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(2);
@@ -227,7 +227,7 @@
 
 			});
 
-			xit('should make dist files (debug)', function(){
+			fit('should make dist files (debug)', function(){
 				saveConfig(projectConfigTemplate);
 				removeGenFiles();
 
@@ -238,7 +238,7 @@
 				expect(test('-e', distFolder)).toBe(true);
 			});
 
-			xit('should make project files on dist', function(){
+			fit('should make project files on dist', function(){
 				saveConfig(projectConfigTemplate);
 				removeGenFiles();
 
@@ -262,7 +262,7 @@
 
 			});
 
-			xit('should make project and loader files on dist', function(){
+			fit('should make project and loader files on dist', function(){
 				saveConfig(projectConfigTemplate);
 				removeGenFiles();
 
@@ -286,7 +286,7 @@
 
 			});
 
-			it('should start the server on loader folder', function(done){
+			fit('should start the server on loader folder', function(done){
 				saveConfig(projectConfigTemplate);
 				removeGenFiles();
 
@@ -340,7 +340,7 @@
 				}
 			});
 
-			xit('should start the server on dist folder', function(done){
+			fit('should start the server on dist folder', function(done){
 				saveConfig(projectConfigTemplate);
 				removeGenFiles();
 
@@ -488,7 +488,7 @@
 
 			});
 
-			xit('(01) should make dist files (debug)', function(){
+			fit('(01) should make dist files (debug)', function(){
 				cd('01');
 
 				saveConfig(projectConfig);
@@ -501,7 +501,7 @@
 				expect(test('-e', distFolder)).toBe(true);
 			});
 
-			xit('(01) should make project files on dist', function(){
+			fit('(01) should make project files on dist', function(){
 				cd('01');
 
 				saveConfig(projectConfig);

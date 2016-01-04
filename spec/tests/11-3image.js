@@ -41,7 +41,7 @@
 			appCssTemp2  = buildFolder + '.tmp/app2.css',
 			appJson2     = distFolder + 'app2.json';
 
-	describe('11image: check optimizer', function(){
+	describe('11-3image: check optimizer', function(){
 
 		beforeEach(function(){
 			cd(testFolder);
@@ -50,7 +50,7 @@
 			cd(rootFwk);
 		});
 
-		xit('(03) should optimize images', function(){
+		fit('(03) should optimize images', function(){
 			cd('03');
 
 			rm('-rf', distFolder);

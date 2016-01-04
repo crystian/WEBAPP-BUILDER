@@ -19,7 +19,7 @@
 			testFile    = cordovaWww + 'testfile.js',
 			indexFile   = cordovaWww + 'index.html';
 
-	describe('11cordova: check some complex cases', function(){
+	describe('11-5cordova: check some complex cases', function(){
 
 		beforeEach(function(){
 			cd(testFolder);
@@ -56,7 +56,7 @@
 			expect(test('-e', testFile)).toBe(true);
 		});
 
-		xit('(15) should copy on cordova folder', function(){
+		fit('(15) should copy on cordova folder', function(){
 			cd('15');
 			rm('-rf', buildFolder);
 			rm('-rf', distFolder);

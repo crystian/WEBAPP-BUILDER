@@ -23,7 +23,7 @@
 			wwwJson     = 'www/app/www.json';
 
 
-	describe('11complex: check some complex cases', function(){
+	describe('11-2complex: check some complex cases', function(){
 
 		beforeEach(function(){
 			cd(testFolder);
@@ -32,7 +32,7 @@
 			cd(rootFwk);
 		});
 
-		xit('(04) should include "minificated" files without minify', function(){
+		fit('(04) should include "minificated" files without minify', function(){
 			cd('04');
 			rm('-rf', buildFolder);
 			rm('-rf', distFolder);
@@ -60,7 +60,7 @@
 			expect(fs.statSync(distAppJson).size).toBeMoreLess(182823, 10000);
 		});
 
-		xit('(06) should include "minificated" files because use forceUseMin (over release:false)', function(){
+		fit('(06) should include "minificated" files because use forceUseMin (over release:false)', function(){
 			cd('06');
 			rm('-rf', buildFolder);
 			rm('-rf', distFolder);

@@ -13,7 +13,7 @@
 	var testFolder          = 'spec/fixture/11build',
 			rootFwk             = '../../../../';
 
-	describe('11hooks: check hooks for build', function(){
+	describe('11-1hooks: check hooks for build', function(){
 
 		beforeEach(function(){
 			cd(testFolder);

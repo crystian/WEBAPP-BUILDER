@@ -106,7 +106,7 @@ describe("10html: preprocessors (html)", function(){
 		expect(cat(indexHtml)).toContain('<!DOCTYPE html>');
 	});
 
-	xit('(12) generate min files', function(){
+	fit('(12) generate min files', function(){
 		cd('12');
 		var ext = '.min.html';
 
