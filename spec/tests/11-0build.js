@@ -556,7 +556,7 @@
 
 			});
 
-			it('(01) should start the server on loader folder', function(done){
+			fit('(01) should start the server on loader folder', function(done){
 				cd('01');
 
 				saveConfig(projectConfig);
