@@ -211,7 +211,7 @@ describe("08css: preprocessors (css)", function(){
 		expect(indexStylContent).not.toContain(keyNotOverwNot2);
 	});
 
-	fit('(12) generate min files', function(){
+	xit('(12) generate min files', function(){
 		cd('12');
 		var ext = '.min.css';
 
@@ -230,7 +230,7 @@ describe("08css: preprocessors (css)", function(){
 		expect(fs.statSync(indexSass + ext).size).toBeMoreLess(237,5);
 	});
 
-	fit('(13) generate min files with other extension', function(){
+	xit('(13) generate min files with other extension', function(){
 		cd('13');
 		var ext = '.other.css';
 
@@ -342,7 +342,7 @@ describe("08css: preprocessors (css)", function(){
 		expect(cat(indexLess + ext)).toContain('border:100%');
 	});
 
-	fit('(16) should replace post min', function(){
+	xit('(16) should replace post min', function(){
 		cd('16');
 		var ext = '.min.css';
 
@@ -355,7 +355,7 @@ describe("08css: preprocessors (css)", function(){
 		expect(fs.statSync(indexLess + ext).size).toBeMoreLess(240,5);
 	});
 
-	fit('(17) should minify file', function(){
+	xit('(17) should minify file', function(){
 		cd('17');
 		var ext = '.min.css';
 
@@ -394,7 +394,7 @@ describe("08css: preprocessors (css)", function(){
 		expect(fs.statSync(indexSass + ext).size).toBeMoreLess(315,5);
 	});
 
-	fit('(19) should not process overwrite files - min', function(){
+	xit('(19) should not process overwrite files - min', function(){
 		cd('19');
 		var ext = '.min.css';
 
@@ -459,7 +459,7 @@ describe("08css: preprocessors (css)", function(){
 
 	});
 
-	fit('(90) complex case 1', function(){
+	xit('(90) complex case 1', function(){
 		cd('90');
 
 		rm('-rf', indexSass + '*');
