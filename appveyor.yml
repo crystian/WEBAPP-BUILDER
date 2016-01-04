@@ -4,6 +4,9 @@ cache:
 - C:\Program Files (x86)\nodejs\node_modules\npm\node_modules
 - C:\Users\appveyor\AppData\Roaming\npm
 - C:\Users\appveyor\AppData\Roaming\npm-cache
+branches:
+  only:
+  - master
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm install
