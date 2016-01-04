@@ -3,9 +3,6 @@ node_js:
   - "stable"
 before_install
 - sudo apt-get install graphicsmagick
-branches:
-  only:
-    - master
 cache:
   directories:
   - $HOME/.npm
