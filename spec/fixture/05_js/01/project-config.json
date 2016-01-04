@@ -1,5 +1,10 @@
 {
-	"app": {"name": "index test 05-01"},
+	"app": {
+		"name": "index test 05-01",
+		"folders": {
+			"temp": "temp"
+		}
+	},
 	"compress": false,
 	"loader": {
 		"release": false,
