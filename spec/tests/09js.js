@@ -153,7 +153,7 @@ describe("09js: preprocessors (js)", function(){
 		expect(cat(indexTs + ext)).toContain(keyword);
 	});
 
-	it('(12) generate min files', function(){
+	fit('(12) generate min files', function(){
 		cd('12');
 		var ext = '.min.js';
 
@@ -172,7 +172,7 @@ describe("09js: preprocessors (js)", function(){
 		expect(fs.statSync(indexJs + ext).size).toBeMoreLess(65,4);
 	});
 
-	it('(13) generate min files with other extension', function(){
+	fit('(13) generate min files with other extension', function(){
 		cd('13');
 		var ext = '.other.js';
 
@@ -255,7 +255,7 @@ describe("09js: preprocessors (js)", function(){
 		expect(cat(indexTsJs)).toContain('var OtherGreeter');
 	});
 
-	it('(16) should replace post min', function(){
+	fit('(16) should replace post min', function(){
 		cd('16');
 		var indexJsMin = indexTs + '.min.js';
 
@@ -268,7 +268,7 @@ describe("09js: preprocessors (js)", function(){
 		expect(fs.statSync(indexJsMin).size).toBeMoreLess(398,5);
 	});
 
-	it('(17) should minify file', function(){
+	fit('(17) should minify file', function(){
 		cd('17');
 		var indexJsMin = indexTs + '.min.js';
 
@@ -381,7 +381,7 @@ describe("09js: preprocessors (js)", function(){
 		expect(fs.statSync(indexTsJs).size).toBeMoreLess(396,5);
 	});
 
-	it('(90) complex case 1', function(){
+	fit('(90) complex case 1', function(){
 		cd('90');
 		var indexJsPrePost = indexJs + 'PrePostPreprocess';
 

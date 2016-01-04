@@ -238,7 +238,7 @@
 				expect(test('-e', distFolder)).toBe(true);
 			});
 
-			it('should make project files on dist', function(){
+			fit('should make project files on dist', function(){
 				saveConfig(projectConfigTemplate);
 				removeGenFiles();
 
@@ -262,7 +262,7 @@
 
 			});
 
-			it('should make project and loader files on dist', function(){
+			xit('should make project and loader files on dist', function(){
 				saveConfig(projectConfigTemplate);
 				removeGenFiles();
 
