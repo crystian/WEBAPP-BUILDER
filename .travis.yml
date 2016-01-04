@@ -1,5 +1,7 @@
-before_install
-  - sudo apt-get install graphicsmagick
+addons:
+  apt:
+    packages:
+    - graphicsmagick
 language: node_js
 node_js:
   - "stable"
