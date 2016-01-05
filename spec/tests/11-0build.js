@@ -289,7 +289,7 @@
 			});
 
 			if(!isCI){
-				fit('should start the server on loader folder (can fail by timeout)', function(done){
+				it('should start the server on loader folder (can fail by timeout)', function(done){
 					saveConfig(projectConfigTemplate);
 					removeGenFiles();
 
@@ -346,7 +346,7 @@
 			}
 
 			if(!isCI){
-				fit('should start the server on dist folder (can fail by timeout)', function(done){
+				it('should start the server on dist folder (can fail by timeout)', function(done){
 					saveConfig(projectConfigTemplate);
 					removeGenFiles();
 
@@ -565,7 +565,7 @@
 			});
 
 			if(!isCI){
-				fit('(01) should start the server on loader folder (can fail by timeout)', function(done){
+				it('(01) should start the server on loader folder (can fail by timeout)', function(done){
 					cd('01');
 
 					saveConfig(projectConfig);
@@ -625,7 +625,7 @@
 			}
 
 			if(!isCI){
-				fit('(01) should start the server on dist folder (can fail by timeout)', function(done){
+				it('(01) should start the server on dist folder (can fail by timeout)', function(done){
 					cd('01');
 
 					saveConfig(projectConfig);

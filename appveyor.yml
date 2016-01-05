@@ -16,5 +16,5 @@ install:
 test_script:
   - node --version
   - npm --version
-  - npm test
+  - npm run test-ci
 build: off
