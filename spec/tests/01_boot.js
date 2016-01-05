@@ -6,11 +6,11 @@ var utils = require('../../tasks/shared/utils'),
 		args = process.argv.slice(2).join(' ');
 require('shelljs/global');
 
-//detail report
-//if(process.argv.indexOf('--detail')!==-1){
+//detail report by default, you can use "dots"
+if(process.argv.indexOf('--dots')===-1){
 	var SpecReporter = require('jasmine-spec-reporter');
 	jasmine.getEnv().addReporter(new SpecReporter());   // add jasmine-spec-reporter
-//}
+}
 
 //fail on firt failure
 if(process.argv.indexOf('--breakOnFail')!==-1){

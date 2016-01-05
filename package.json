@@ -74,7 +74,7 @@
     "time-require": "^0.1.2"
   },
   "scripts": {
-    "test": "node_modules/.bin/jasmine"
-  },
-  "gitVersion": "52b409058c948a16b5f8e3f8f10ea62d5b39ebed"
+    "test": "./node_modules/.bin/jasmine",
+    "test-ci": "./node_modules/.bin/jasmine --ci"
+  }
 }

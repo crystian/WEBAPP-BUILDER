@@ -5,6 +5,7 @@ addons:
 language: node_js
 node_js:
   - "stable"
+script: npm run test-ci
 branches:
   only:
     - master
