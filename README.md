@@ -1,10 +1,11 @@
 # WEBAPP BUILDER!
 
 ### **_Un framework para los amigos!_**
+![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master&style=flat-square)
+![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true&style=flat-square)
 
-[![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master)](https://travis-ci.org/crystian/WEBAPP-BUILDER)
-[![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true)](https://ci.appveyor.com/project/crystian/webapp-builder/branch/master)
-
+[![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/crystian/WEBAPP-BUILDER/master/LICENSE)
+![](https://david-dm.org/crystian/WEBAPP-BUILDER.svg)
 
 [Español](http://), [English](http://)
 
