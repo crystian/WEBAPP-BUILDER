@@ -3,7 +3,7 @@
 /.idea/workspace.xml
 /project-config-local.json
 /node_modules
-/www/**/*.css
+/www/ap**/*.css
 /www/app2/templates.js
 www.json
 /config.json
