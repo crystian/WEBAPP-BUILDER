@@ -2,9 +2,9 @@
 
 ### **_Un framework para los amigos!_**
 
-![License](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)
-![npm](https://img.shields.io/npm/v/npm.svg)
-![node](https://img.shields.io/node/v/gh-badges.svg)
+[![License](https://img.shields.io/github/license/crystian/WEBAPP-BUILDER.svg?style=flat-square)](https://raw.githubusercontent.com/crystian/WEBAPP-BUILDER/master/LICENSE)
+![npm](https://img.shields.io/npm/v/npm.svg??style=flat-square)
+![node](https://img.shields.io/node/v/gh-badges.svg??style=flat-square)
 
 ![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master&style=flat-square)
 ![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true&style=flat-square)
