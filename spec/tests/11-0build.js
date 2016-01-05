@@ -577,7 +577,8 @@
 				var server      = require('../../tasks/shared/server.js'),
 						streamServe = server.makeServe(test.pathPrj, test.folderDist, test.ip, test.ports.project);
 
-				Promise.resolve(nightmare
+				setTimeout(function(){
+					Promise.resolve(nightmare
 						.goto('http://' + test.ip + ':' + test.ports.project)
 						.on('page', function(type, message){
 							expect(type).toBe('alert');
@@ -588,16 +589,17 @@
 						.evaluate(function(){
 							return document.getElementsByTagName('html')[0].innerHTML;
 						})
-				).then(function(html){
-					//index.html on loader
-					expect(html).not.toBe('<head></head><body></body>');
-					expect(html).not.toContain('<!--comment for test, do not remove it-->');
-					expect(html).toContain('isDist:!1');
-					end();
-				}, function(err){
-					console.error(err);
-					end();
-				});
+					).then(function(html){
+						//index.html on loader
+						expect(html).not.toBe('<head></head><body></body>');
+						expect(html).not.toContain('<!--comment for test, do not remove it-->');
+						expect(html).toContain('isDist:!1');
+						end();
+					}, function(err){
+						console.error(err);
+						end();
+					});
+				},5000);
 
 				function end(){
 					//output returned
