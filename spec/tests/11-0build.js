@@ -31,7 +31,7 @@
 			indexHtml           = rootFwkFromTemplate + 'loader/index.html',
 			indexHtmlPrj        = rootFwk + 'loader/index.html',
 			appCss              = 'www/app/app.css',
-			appCssAlt              = 'www/app/appStyle.css',
+			appCssAlt           = 'www/app/appStyle.css',
 			wwwJson             = 'www/app/www.json',
 			configJson          = 'config.json',
 			t;
@@ -306,16 +306,16 @@
 						streamServe = server.makeServe(test.path, test.folder, test.ip, test.ports.template);
 
 				Promise.resolve(nightmare
-						.goto('http://' + test.ip + ':' + test.ports.template + '/loader')
-						.on('page', function(type, message){
-							expect(type).toBe('alert');
-							expect(message).toBe('clickMe!');
-						})
-						.wait('#clickme')
-						.click('#clickme')
-						.evaluate(function(){
-							return document.getElementsByTagName('html')[0].innerHTML;
-						})
+					.goto('http://' + test.ip + ':' + test.ports.template + '/loader')
+					.on('page', function(type, message){
+						expect(type).toBe('alert');
+						expect(message).toBe('clickMe!');
+					})
+					.wait('#clickme')
+					.click('#clickme')
+					.evaluate(function(){
+						return document.getElementsByTagName('html')[0].innerHTML;
+					})
 				).then(function(html){
 					//index.html on loader
 					expect(html).not.toBe('<head></head><body></body>');
@@ -361,17 +361,17 @@
 
 
 				Promise.resolve(nightmare
-						.goto('http://' + test.ip + ':' + test.ports.dist)
-						.on('page', function(type, message){
-							expect(type).toBe('alert');
-							expect(message).toBe('clickMe!');
-						})
-						.wait('#clickme')
-						.click('#clickme')
-						.evaluate(function(){
-							return document.getElementsByTagName('html')[0].innerHTML;
-						})
-						//.end()
+					.goto('http://' + test.ip + ':' + test.ports.dist)
+					.on('page', function(type, message){
+						expect(type).toBe('alert');
+						expect(message).toBe('clickMe!');
+					})
+					.wait('#clickme')
+					.click('#clickme')
+					.evaluate(function(){
+						return document.getElementsByTagName('html')[0].innerHTML;
+					})
+					//.end()
 				).then(function(html){
 					//index.html on loader
 					expect(html).not.toBe('<head></head><body></body>');
@@ -556,7 +556,7 @@
 
 			});
 
-			fit('(01) should start the server on loader folder', function(done){
+			fit('(01) should start the server on loader folder (can fail by timeout)', function(done){
 				cd('01');
 
 				saveConfig(projectConfig);
@@ -599,7 +599,7 @@
 						console.error(err);
 						end();
 					});
-				},5000);
+				}, 5000);
 
 				function end(){
 					//output returned
@@ -614,7 +614,7 @@
 				}
 			});
 
-			it('(01) should start the server on dist folder', function(done){
+			fit('(01) should start the server on dist folder (can fail by timeout)', function(done){
 				cd('01');
 
 				saveConfig(projectConfig);
@@ -635,8 +635,8 @@
 				var server      = require('../../tasks/shared/server.js'),
 						streamServe = server.makeServe(test.pathDist, test.folderDist, test.ip, test.ports.dist);
 
-
-				Promise.resolve(nightmare
+				setTimeout(function(){
+					Promise.resolve(nightmare
 						.goto('http://' + test.ip + ':' + test.ports.dist)
 						.on('page', function(type, message){
 							expect(type).toBe('alert');
@@ -648,16 +648,17 @@
 							return document.getElementsByTagName('html')[0].innerHTML;
 						})
 						//.end()
-				).then(function(html){
-					//index.html on loader
-					expect(html).not.toBe('<head></head><body></body>');
-					expect(html).not.toContain('<!--comment for test, do not remove it-->');
-					expect(html).toContain('isDist:!0');
-					end();
-				}, function(err){
-					console.error(err);
-					end();
-				});
+					).then(function(html){
+						//index.html on loader
+						expect(html).not.toBe('<head></head><body></body>');
+						expect(html).not.toContain('<!--comment for test, do not remove it-->');
+						expect(html).toContain('isDist:!0');
+						end();
+					}, function(err){
+						console.error(err);
+						end();
+					});
+				}, 5000);
 
 				function end(){
 					//output returned
