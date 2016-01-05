@@ -2,8 +2,18 @@
 
 ### **_Un framework para los amigos!_**
 
-[![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master)](https://travis-ci.org/crystian/WEBAPP-BUILDER)
-[![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true)](https://ci.appveyor.com/project/crystian/webapp-builder/branch/master)
+![License](http://img.shields.io/npm/l/rump-images.svg?style=flat-square)
+![npm](https://img.shields.io/npm/v/npm.svg)
+![node](https://img.shields.io/node/v/gh-badges.svg)
+
+![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master&style=flat-square)
+![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true&style=flat-square)
+
+
+
+
+
+![](https://img.shields.io/github/tag/strongloop/express.svg)
 
 
 [Español](http://), [English](http://)
