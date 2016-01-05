@@ -4,6 +4,7 @@ cache:
 - C:\Program Files (x86)\nodejs\node_modules\npm\node_modules
 - C:\Users\appveyor\AppData\Roaming\npm
 - C:\Users\appveyor\AppData\Roaming\npm-cache
+version: '{build}'
 branches:
   only:
   - master
