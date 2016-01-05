@@ -11,7 +11,7 @@ require('shelljs/global');
 var testFolder          = 'spec/fixture/05_js',
 		rootFwk             = '../../../..',
 		configJson          = 'config.json',
-		compileLoaderJsName = '-compiledloader.js';
+		compileLoaderJsName = '-compiledLoader.js';
 
 describe("05_js: JS mechanics", function(){
 
@@ -22,7 +22,7 @@ describe("05_js: JS mechanics", function(){
 		cd(rootFwk);
 	});
 
-	fit('(01) should create compile loader', function(){
+	it('(01) should create compile loader', function(){
 		cd('01');
 
 		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
@@ -40,7 +40,7 @@ describe("05_js: JS mechanics", function(){
 		expect(fs.statSync(compileLoaderJs).size).toBeMoreLess(108000, 5000);
 	});
 
-	fit('(02) should create compile loader - minificated', function(){
+	it('(02) should create compile loader - minificated', function(){
 		cd('02');
 
 		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
