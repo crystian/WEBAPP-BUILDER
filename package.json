@@ -73,6 +73,7 @@
     "through2": "^2.0.0",
     "time-require": "^0.1.2"
   },
+  "engine": "node 5.2.0",
   "scripts": {
     "test": "./node_modules/.bin/jasmine",
     "test-ci": "./node_modules/.bin/jasmine --ci"
