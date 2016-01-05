@@ -2,7 +2,7 @@
 
 ### **_Un framework para los amigos!_**
 
-![License](http://img.shields.io/npm/l/rump-images.svg?style=flat-square)
+![License](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)
 ![npm](https://img.shields.io/npm/v/npm.svg)
 ![node](https://img.shields.io/node/v/gh-badges.svg)
 
