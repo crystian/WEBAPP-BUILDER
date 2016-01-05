@@ -11,7 +11,7 @@ require('shelljs/global');
 var testFolder          = 'spec/fixture/05_js',
 		rootFwk             = '../../../..',
 		configJson          = 'config.json',
-		compileLoaderJsName = '-compiledloader.js';
+		compileLoaderJsName = '-compiledLoader.js';
 
 describe("05_js: JS mechanics", function(){
 
