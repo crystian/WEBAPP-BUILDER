@@ -13,7 +13,7 @@
 			gutil        = require('gulp-util'),
 			strip        = require('gulp-strip-comments'),
 			gif          = require('gulp-if'),
-			minifycss    = require('gulp-minify-css'),
+			cssnano      = require('gulp-cssnano'),
 			concat       = require('gulp-concat'),
 			StreamQueue  = require('streamqueue'),
 			sass         = require('gulp-sass');
@@ -28,7 +28,7 @@
 			{objectMode: true},
 			gulp.src(cssLoader)
 				.pipe(utils.debugme())
-				.pipe(strip({safe: false, block: false})) //remove comments
+				.pipe(strip.text({safe: false, block: false})) //remove comments
 		)
 			.pipe(concat('-compiledLoader.css', {newLine: ' '}))
 			.pipe(gulp.dest(global.cfg.pathPrjBuild + global.cfg.app.folders.temp));
@@ -48,7 +48,7 @@
 			.pipe(csslint(global.cfg.pathFwk + 'csslintrc.json'))
 			.pipe(csslint.reporter(customReporter))
 			.pipe(csslint.failReporter())
-			.pipe(gif(global.cfg.loader.release, minifycss()))
+			.pipe(gif(global.cfg.loader.release, cssnano()))
 			.pipe(gulp.dest(dest))
 			;
 	});

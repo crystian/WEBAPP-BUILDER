@@ -9,7 +9,7 @@
 			sass         = require('gulp-sass'),
 			less         = require('gulp-less'),
 			stylus       = require('gulp-stylus'),
-			minifycss    = require('gulp-minify-css'),
+			cssnano      = require('gulp-cssnano'),
 			gif          = require('gulp-if'),
 			csslint      = require('gulp-csslint'),
 			replace      = require('gulp-replace'),
@@ -40,7 +40,7 @@
 			},
 			minifyFile: function(stream){
 				stream = stream
-					.pipe(minifycss());
+					.pipe(cssnano());
 				return stream;
 			},
 			postLinter: postLinter

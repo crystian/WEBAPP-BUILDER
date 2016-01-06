@@ -5,14 +5,14 @@
 (function(){
 	'use strict';
 
-	var utils     = require('../shared/utils.js'),
-			bower     = require('gulp-bower'),
-			fs        = require('fs-extra'),
-			gif       = require('gulp-if'),
-			minifycss = require('gulp-minify-css'),
-			uglify    = require('gulp-uglify'),
-			rename    = require('gulp-rename'),
-			gutil     = require('gulp-util');
+	var utils   = require('../shared/utils.js'),
+			bower   = require('gulp-bower'),
+			fs      = require('fs-extra'),
+			gif     = require('gulp-if'),
+			cssnano = require('gulp-cssnano'),
+			uglify  = require('gulp-uglify'),
+			rename  = require('gulp-rename'),
+			gutil   = require('gulp-util');
 
 	/*
 	 necesitaba hacer el minificado despues de la bajada, me complico la vida...,
@@ -38,7 +38,7 @@
 			if(!utils.fileExist(fileName)){
 				gulp.src(global.cfg.pathFwk + s.dev)
 					.pipe(utils.debugme())
-					.pipe(gif(s.type === 'js', uglify(), minifycss()))
+					.pipe(gif(s.type === 'js', uglify(), cssnano()))
 					.pipe(rename(s.name))
 					.pipe(gulp.dest(global.cfg.pathFwk + s.pa))
 					.on('finish', function(a, b, c){

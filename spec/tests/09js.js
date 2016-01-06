@@ -200,7 +200,7 @@ describe("09js: preprocessors (js)", function(){
 		expect(cat(indexTs + ext)).toContain('methodReplaced');
 	});
 
-	it('(26)should not replace pre min', function(){
+	it('(26) should not replace pre min', function(){
 		cd('26');
 		var ext = '.js';
 

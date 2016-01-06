@@ -1,7 +1,7 @@
 # WEBAPP BUILDER!
 
 ### **_Un framework para los amigos!_**
-![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master&style=flat-square)
+LINUX: ![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master&style=flat-square), WINDOWS:
 ![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true&style=flat-square)
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/crystian/WEBAPP-BUILDER/master/LICENSE)
@@ -96,7 +96,7 @@ _Desde el proyecto, una vez conectado gulpfile.js_
 * `gulp clearCache` de imagenes para la generacion de sprites
 * `gulp serve` server en modo _dev_ directo del proyecto
 * `gulp serveDist` server del la carpeta _dist_
-* `gulp runAndroid` ejecuta la app en el telefono android (si cordova y el sdk de android esta configurado)
+* `gulp runAndroid` ejecuta la app en el telefono android (si es "cordova", el sdk de android esta configurado en el path, y si el device esta en modo "dev")
 
 Ver mas en: `Project.js`
 
@@ -238,8 +238,7 @@ Los sprites se generan automaticamente siguiendo este patron:
 			.kitten1 {
 				background-image: url(../template/www/app/assets/img/sprite1/kitten1@2x.png);
 			}
-		}
-	```
+		} ```
 
 * Imagenes PNG en: PROJECTO/APP/assets/img/sprite*  
 TODO REVIEW: Replace?
@@ -274,7 +273,8 @@ Necesitas instalar un script "ios-deploy": `sudo npm i -g ios-deploy`
 Si tenes problemas con permisos, podes probar con `sudo chmod -R a+rwx cordova/`
 
 ###### Android:
-Crear variable de ambiente: ANDROID_HOME apuntando al sdk, ejemplo  
+Crear variable de ambiente: ANDROID_HOME apuntando al sdk.
+**Ejemplo:**
 `sudo nano ~/.bash_profile`
 Agregar esta linea:  
 `export ANDROID_HOME=/Users/crystian/Documents/eclipse/ADT/sdk` (con tu path claramente)
@@ -285,7 +285,7 @@ Agregar esta linea:
 * Instalar dependencias: `npm install` desde `WEBAPP-BUILDER` (tomate 5', son varias)
 	- En windows da un error que no puede instalar "weak/python", no te preocupes.
 * Crear nuevo proyecto con `node create`
-	- Con este hermoso wizard instalas lo que necesitas para el proyecto y lo deposita en el Project Code que hayas puesto (crea la carpeta con ese nombre en paralelo al builder)
+	- Con este hermoso wizard instalas lo que necesitas para el proyecto y lo deposita en el "Project name" que hayas puesto (crea la carpeta con ese nombre en paralelo al builder)
 * Una vez creado, ingresar al nuevo proyecto: `npm i` y luego `bower i`
 * Levanta el server en dev con: `gulp serve`, y chequear con el browser sobre la url que devuelve el comando en la consola.
 
@@ -293,4 +293,4 @@ Agregar esta linea:
 
 Ante alguna necesidad o bug por favor levantar el issue en: [issues](https://github.com/crystian/WEBAPP-BUILDER/issues), parece complejo pero no lo es. Sinceramente espero que te sirva y gracias.
 
-By Crystian, echo con amor para vos <3!
+MIT © [Crystian](https://github.com/crystian), echo con amor para vos <3!

@@ -30,7 +30,7 @@
 					removeRedundantAttributes: true
 				};
 				return stream
-					.pipe(strip({safe: false, block: false}))
+					.pipe(strip.html({safe: false, block: false}))
 					.pipe(htmlmin(htmlminOptions));
 			}
 		});

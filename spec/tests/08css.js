@@ -249,7 +249,7 @@ describe("08css: preprocessors (css)", function(){
 		expect(fs.statSync(indexSass + ext).size).toBeMoreLess(237,5);
 	});
 
-	it('(14)should replace pre min', function(){
+	it('(14) should replace pre min', function(){
 		cd('14');
 		var ext = '.css';
 
@@ -257,10 +257,10 @@ describe("08css: preprocessors (css)", function(){
 
 		expect(exec('gulp buildProjectDist --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		expect(cat(indexLess + ext)).toContain('#00F');
+		expect(cat(indexLess + ext).toLowerCase()).toContain('#00f');
 	});
 
-	it('(26)should not replace pre min', function(){
+	it('(26) should not replace pre min', function(){
 		cd('26');
 		var ext = '.css';
 
@@ -406,7 +406,7 @@ describe("08css: preprocessors (css)", function(){
 		expect(cat(indexLess + ext)).toContain(keyNotOverw);
 		expect(cat(indexStyl + ext)).toContain(keyNotOverw);
 
-		expect(cat(indexScss + ext)).toContain('color:#FF0');
+		expect(cat(indexScss + ext).toLowerCase()).toContain('color:#ff0');
 
 		expect(fs.statSync(indexScss + ext).size).toBeMoreLess(237,5);
 	});
@@ -474,11 +474,11 @@ describe("08css: preprocessors (css)", function(){
 		//first app:
 		expect(cat(indexScss + '.original.scss')).toContain('$primaryColor: #FF0'); //should not change it
 		expect(cat(indexScss + '.scss')).toContain('$primaryColor: #00F;');
-		expect(cat(indexScss + '.css')).toContain('color:#00F');
+		expect(cat(indexScss + '.css').toLowerCase()).toContain('color:#00f');
 
 		expect(cat(indexLess + '.original.less')).toContain('@primaryColor: #FF0');
 		expect(cat(indexLess + '.less')).toContain('@primaryColor: #00F;');
-		expect(cat(indexLess + '.css')).toContain('color:#00F');
+		expect(cat(indexLess + '.css').toLowerCase()).toContain('color:#00f');
 
 		expect(fs.statSync(indexScss + '.css').size).toBeMoreLess(237,5);
 
@@ -493,7 +493,7 @@ describe("08css: preprocessors (css)", function(){
 
 		expect(cat(indexCss + '.css')).toContain('color: yellow;');//replace: original
 		expect(cat(indexCss + '.m.css')).toContain('color:blue;');//replace: pre & post min
-		expect(cat(indexCss + '.b.css')).toContain('color: #FF0;');//original value
+		expect(cat(indexCss + '.b.css').toLowerCase()).toContain('color: #ff0;');//original value
 
 		//second app:
 		expect(test('-e', 'www/app2/indexSass.css')).toBe(false);//should not exist

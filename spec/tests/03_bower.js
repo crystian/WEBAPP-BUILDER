@@ -124,7 +124,7 @@ describe("03_bower Bower dependencies and more", function(){
 		//check size of minification
 		expect(fs.statSync(bootstrapJs).size).toBeMoreLess(36691,50);
 		expect(fs.statSync(bootstrapNpm).size).toBeMoreLess(369,5);
-		expect(fs.statSync(bootstrapCss).size).toBeMoreLess(118513,100);
-		expect(fs.statSync(bootstrapCssTheme).size).toBeMoreLess(23323,50);
+		expect(fs.statSync(bootstrapCss).size).toBeMoreLess(117771,5000);
+		expect(fs.statSync(bootstrapCssTheme).size).toBeMoreLess(20010,1000);
 	});
 });
