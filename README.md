@@ -1,8 +1,8 @@
 # WEBAPP BUILDER!
 
 ### **_Un framework para los amigos!_**
-LINUX: ![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master&style=flat-square), WINDOWS:
-![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true&style=flat-square)
+**LINUX:** [![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master&style=flat-square)](https://travis-ci.org/crystian/WEBAPP-BUILDER)
+**WINDOWS:** [![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true&style=flat-square)](https://ci.appveyor.com/project/crystian/webapp-builder)
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/crystian/WEBAPP-BUILDER/master/LICENSE)
 ![](https://david-dm.org/crystian/WEBAPP-BUILDER.svg)
@@ -93,7 +93,6 @@ _Desde el proyecto, una vez conectado gulpfile.js_
 * `gulp js` applicacion de preprocessors
 * `gulp html` applicacion de preprocessors
 * `gulp watch` watcher del proyecto
-* `gulp clearCache` de imagenes para la generacion de sprites
 * `gulp serve` server en modo _dev_ directo del proyecto
 * `gulp serveDist` server del la carpeta _dist_
 * `gulp runAndroid` ejecuta la app en el telefono android (si es "cordova", el sdk de android esta configurado en el path, y si el device esta en modo "dev")

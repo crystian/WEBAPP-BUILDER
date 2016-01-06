@@ -198,7 +198,7 @@ process.on('uncaughtException', function(err){
 	if(gutil.env.debug){
 		console.logRed(err.stack);
 	}
-	this.exit(1); // exit with error
+	exit(1); // exit with error
 });
 
 exports.exit = exit = function(n){

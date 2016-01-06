@@ -111,8 +111,4 @@
 		return del([global.cfg.app.folders.dist], {force: true});
 	});
 
-	gulp.task('clearCache', function(done){
-		return image.optimizeImagesClearCache(done);
-	});
-
 }());
