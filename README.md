@@ -171,41 +171,41 @@ Esquema del builder con sus files mas importantes, y proyectos de ejemplo de com
 
 ```
 PROJECTS/
-  ├─ WEBAPP-BUILDER/						= repo clonado, no modificar!
-  │  ├─ loader/									= todo lo que sera parte del archivo index.html final
+  ├─ WEBAPP-BUILDER/                = repo clonado, no modificar!
+  │  ├─ loader/                   = todo lo que sera parte del archivo index.html final
   │  ├─ ...
-  │  ├─ tasks/									= tasks de gulp para el project como para el loader
+  │  ├─ tasks/                    = tasks de gulp para el project como para el loader
   │  │  ├─ ...
-  │  │  ├─ project/							= solo tasks para el project
-  │  │  ├─ shared/ (entre el project y el loader)
-  │  │  └─ boot.js (file principal de inicializacion de gulp, todos los projects deben incluirlo)
-  │  └─ gulpfile.js (propio del loader)
-  ├─ other_project/ (not based on webapp-builder, solo para demostrar que se puede convivir)
-  ├─ PROJECT1/ (basado en webapp-builder)
-  │  ├─ build/ (autogenerado)
-  │  ├─ dist/ (autogenerado)
-  │  ├─ www/ (tus apps deben estar dentro, se puede cambiar el 'www', ver project-config)
-  │  │  ├─ app1/ (nombre de la app)
+  │  │  ├─ project/             = solo tasks para el project
+  │  │  ├─ shared/              = entre el project y el loader
+  │  │  └─ boot.js              = file principal de inicializacion de gulp, todos los projects deben incluirlo
+  │  └─ gulpfile.js               = propio del loader
+  ├─ other_project/                 = not based on webapp-builder, solo para demostrar que se puede convivir
+  ├─ PROJECT1/                      = basado en webapp-builder
+  │  ├─ build/                    = autogenerado
+  │  ├─ dist/                     = autogenerado
+  │  ├─ www/                      = tus apps deben estar dentro, se puede cambiar el 'www', ver project-config
+  │  │  ├─ app1/                = nombre de la app
   │  │  │  ├─ ...
-  │  │  │  ├─ app.json (metadata de los archivos de la app actual: app1)
-  │  │  │  └─ www.json (autogenerado)
-  │  │  ├─ app2/ (nombre de la app)
+  │  │  │  ├─ app.json        = metadata de los archivos de la app actual: app1
+  │  │  │  └─ www.json        = autogenerado
+  │  │  ├─ app2/                = nombre de la app
   │  │  │  ├─ ...
-  │  │  │  ├─ app.json (metadata de los archivos de la app actual: app2)
-  │  │  │  └─ www.json (autogenerado)
-  │  │  └─ apps.json (array de strings con nombres de cada app/folder)
-  │  ├─ gulpfile.js (este debe conectar con el "tasks/boot" del builder)
-  │  ├─ package.json (info y definicion del project)
-  │  ├─ project-config.json (configuracion del builder sobre el project, debe estar en tu VCS)
-  │  └─ project-config-local.json (configuracion local, NO DEBE subirse a tu VCS)
-  └─ PROJECT2/ (basado en webapp-builder)
+  │  │  │  ├─ app.json        = metadata de los archivos de la app actual: app2
+  │  │  │  └─ www.json        = autogenerado
+  │  │  └─ apps.json            = array de strings con nombres de cada app/folder
+  │  ├─ gulpfile.js               = este debe conectar con el "tasks/boot" del builder
+  │  ├─ package.json              = info y definicion del project
+  │  ├─ project-config.json       = configuracion del builder sobre el project, debe estar en tu VCS
+  │  └─ project-config-local.json = configuracion local, NO DEBE subirse a tu VCS
+  └─ PROJECT2/                      = basado en webapp-builder
      ├─ ...
-     ├─ www/ (tus apps deben estar dentro, se puede cambiar el 'www', ver project-config)
-     │  ├─ otherApp/ (nombre de la app)
+     ├─ www/                        = tus apps deben estar dentro, se puede cambiar el 'www', ver project-config
+     │  ├─ otherApp/              = nombre de la app
      │  │  ├─ ...
-     │  │  ├─ app.json (metadata de los archivos de la app actual: otherApp)
-     │  │  └─ www.json (autogenerado)
-     │  └─ apps.json (en este caso, solo '["otherApp"]')
+     │  │  ├─ app.json          = metadata de los archivos de la app actual: otherApp
+     │  │  └─ www.json          = autogenerado
+     │  └─ apps.json              = en este caso, solo '["otherApp"]'
      └─ ...
 
 ```
