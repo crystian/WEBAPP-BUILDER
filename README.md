@@ -170,7 +170,7 @@ El proyecto debe tener esta estructura
 
 ```
 PROJECTS
-  +-- WEBAPP-BUILDER
+  ¬╚╔╩═+-- WEBAPP-BUILDER
 
 ```
 
