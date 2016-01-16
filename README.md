@@ -1,8 +1,8 @@
 # WEBAPP BUILDER!
 
 ### **_Un framework para los amigos!_**
-LINUX: ![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master&style=flat-square), WINDOWS:
-![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true&style=flat-square)
+[![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master&style=flat-square)](https://travis-ci.org/crystian/WEBAPP-BUILDER)
+[![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true&style=flat-square)](https://ci.appveyor.com/project/crystian/webapp-builder)
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/crystian/WEBAPP-BUILDER/master/LICENSE)
 ![](https://david-dm.org/crystian/WEBAPP-BUILDER.svg)
@@ -40,7 +40,7 @@ Este framework es totalmente "opinionated" (dictatorial?), si lo haces como el f
 
 **NOTAS:**
 
-* El concepto o abstraccion detras de este framework es distinto al que proponen varios (para que se entienda rapido), lo mas cercano puede ser [Yeoman](http://yeoman.io/) (y sus generators), el cual te arma el Scafolding (andamios) con toda la automatizacion abierta para que quites o agregues a gusto. Este framework es mas proximo a un "patron" en vez de una solucion para la automatizacion. Con lo cual te fuerza a trabajar respetando ciertas reglas (muy simples) y gracias a esto te provee soluciones de automatizacion como tambien de bootstrap/boilerplate (loader, compatibilidad, compresion, y un largo etc).
+* El concepto o abstraccion detras de este framework es distinto al que proponen varios (para que se entienda rapido), lo mas cercano puede ser [Yeoman](http://yeoman.io/) (y sus generators), el cual te arma el Scafolding (andamios) con toda la automatizacion abierta para que quites o agregues a gusto. Este framework es mas proximo a un "patron" en vez de una solucion para la automatizacion. Con lo cual te fuerza a trabajar respetando ciertas reglas (muy simples) y gracias a esto te provee soluciones de automatizacion como tambien de bootstrap/boilerplate (loader, compatibilidad, compresion, y un largo etc), dicho de manera coloquial, el framework necesita de un esqueleto y vos lo rellenas.
 * **Para ansiosos:** Como logra todo esto que promete?: Gracias a archivos _metadata_ (simples), que configuran al resto de los archivos, tanto individuales como grupales.
 * Orientado a proyectos nuevos sobre todo, pero tambien se pueden adaptar.
 
@@ -93,7 +93,6 @@ _Desde el proyecto, una vez conectado gulpfile.js_
 * `gulp js` applicacion de preprocessors
 * `gulp html` applicacion de preprocessors
 * `gulp watch` watcher del proyecto
-* `gulp clearCache` de imagenes para la generacion de sprites
 * `gulp serve` server en modo _dev_ directo del proyecto
 * `gulp serveDist` server del la carpeta _dist_
 * `gulp runAndroid` ejecuta la app en el telefono android (si es "cordova", el sdk de android esta configurado en el path, y si el device esta en modo "dev")
@@ -165,7 +164,17 @@ gulp.task('hookPostDistProject', function(cb){
 **TEMPLATES:** Eso mismo, con el cual el _create.js_ hace una copia para los nuevos proyectos.
 
 --
+### Estructura de file system
 
+El proyecto debe tener esta estructura
+
+```
+PROJECTS
+  +-- WEBAPP-BUILDER
+
+```
+
+--
 ### Configuracion / Metadata
 
 Toda la magia depende de estos archivos de "configuracion", que le dicen a la app tanto en modo _dev_ como en _dist_, donde y como son los archivos a incluir, esto es la columna vertebral de este sistema.
