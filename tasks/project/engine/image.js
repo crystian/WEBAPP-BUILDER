@@ -11,8 +11,7 @@
 			gm       = require('gulp-gm'),
 			_        = require('lodash'),
 			gutil    = require('gulp-util'),
-			sprite   = require('gulp-sprite-generator'),
-			cache    = require('gulp-cache');
+			sprite   = require('gulp-sprite-generator');
 
 	function optimizeImages(ori, dest, _config){
 		var config = _.extend({
@@ -33,10 +32,6 @@
 				use: [pngquant()]
 			}))
 			.pipe(gulp.dest(dest))
-	}
-
-	function optimizeImagesClearCache(done){
-		return cache.clearAll(done);
 	}
 
 	function genSprite(stream, appName){
@@ -80,6 +75,5 @@
 	}
 
 	exports.optimizeImages = optimizeImages;
-	exports.optimizeImagesClearCache = optimizeImagesClearCache;
 	exports.genSprite = genSprite;
 }());
