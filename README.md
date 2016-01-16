@@ -166,13 +166,35 @@ gulp.task('hookPostDistProject', function(cb){
 --
 ### Estructura de _file system_
 
-El proyecto debe tener esta estructura
+Esquema del builder con sus files mas importantes, y proyectos de ejemplo de como deberia ser la estructura.
 
 ```
 PROJECTS/
-  ├── WEBAPP-BUILDER
-  ├── other_project (not based on webapp-builder)
-  └── PROJECT1
+  ├─ WEBAPP-BUILDER/ (repo clonado, no modificar!)
+  │  ├─ loader/ (todo lo que sera parte del archivo index.html final)
+  │  ├─ ...
+  │  ├─ tasks/ (tasks de gulp para el project como para el loader)
+  │  │  ├─ ...
+  │  │  ├─ project/ (solo tasks para el project)
+  │  │  ├─ shared/ (entre el project y el loader)
+  │  │  └─ boot.js (file principal de inicializacion de gulp, todos los projects deben incluirlo)
+  │  └─ gulpfile.js (propio del loader)
+  ├─ other_project/ (not based on webapp-builder, solo para demostrar que se puede convivir)
+  ├─ PROJECT1/ (basado en webapp-builder)
+  │  ├─ build/ (autogenerado)
+  │  ├─ dist/ (autogenerado)
+  │  ├─ www/ (tus apps deben estar dentro, se puede cambiar el 'www', ver project-config)
+  │  │  ├─ app1/
+  │  │  │  ├─ ...
+  │  │  │  ├─ app.json
+  │  │  │  └─ www.json
+  │  │  ├─ app2/
+  │  │  └─ apps.json
+  │  ├─ gulpfile.js
+  │  ├─ package.json
+  │  ├─ project-config.json
+  │  └─ project-config-local.json
+  └─ PROJECT2/ (based on webapp-builder)
 
   ¬│┐└┴┬├─┼
 
