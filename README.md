@@ -164,13 +164,18 @@ gulp.task('hookPostDistProject', function(cb){
 **TEMPLATES:** Eso mismo, con el cual el _create.js_ hace una copia para los nuevos proyectos.
 
 --
-### Estructura de file system
+### Estructura de _file system_
 
 El proyecto debe tener esta estructura
 
 ```
-PROJECTS
-  ¬╚╔╩═+-- WEBAPP-BUILDER
+PROJECTS/
+  ├── WEBAPP-BUILDER
+  ├── other_project (not based on webapp-builder)
+  └── PROJECT1
+
+  ¬│┐└┴┬├─┼
+
 
 ```
 
