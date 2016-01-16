@@ -68,11 +68,12 @@ Este proyecto fue una extraccion de otro mas grande que luego de un tiempo me di
 * [Intrucciones de uso](#instrucciones-de-uso)
 	* [Conceptos](#conceptos)
 	* [Estructura de _file system_](#estructura-de-file-system)
-	* [Configuracion / Metadata](#configuracion--metadata)
+	* [Configuracion del proyecto](#configuracion-del-proyecto)
 		* [gulpfile.js](#gulpfilejs)
 		* [project-config.json](#project-configjson-y-project-config-localjson) ([detalle](docs/project-config-es.md))
 		* [apps.json](#appsjson)
 		* [app.json](#appjson) ([detalle](docs/app-es.md))
+* [Otros](#otros)
 	* [Sprites](#sprites)
 * [Instalacion](#instalacion)
 	* [Prerequisitos](#prerequisitos)
@@ -160,14 +161,15 @@ gulp.task('hookPostDistProject', function(cb){
 
 **APPs:** Son Web apps/SPAs, con las cuales se generan archivos solidos. El project puede contener mas de una.
 
-**METADATA:** Archivos `json` con informacion adicional sobre los archivos del proyecto y demas. **Tiene varios atributos ya cargados por defecto, solo deberias agregar en tu metadata lo que queres distinto de lo default.**
+**METADATA:**
+Toda la magia depende de estos archivos de "configuracion" (JSONs), que le dicen a la app tanto en modo _dev_ como en _dist_, donde y como son los archivos a incluir, esto es la columna vertebral de este sistema. **Tienen varios atributos ya cargados por defecto, solo deberias agregar en tu metadata lo que queres distinto de lo default.**
 
 **TEMPLATES:** Eso mismo, desde el _create.js_ hace una copia para los nuevos proyectos.
 
 --
 ### Estructura de _file system_
 
-Esquema del builder con sus files mas importantes, y proyectos de ejemplo de como deberia ser la estructura.
+Esquema del builder con sus files mas importantes, y proyectos de ejemplo de como deberia ser la estructura. Luego vemos con mas profunidad cada opcion.
 
 ```
 PROJECTS/
@@ -180,48 +182,37 @@ PROJECTS/
   │  │  ├─ shared/                = entre el project y el loader
   │  │  └─ boot.js                = file principal de inicializacion de gulp, todos los projects deben incluirlo
   │  └─ gulpfile.js               = propio del loader
-  ├─ other_project/               = not based on webapp-builder, solo para demostrar que se puede convivir
-  ├─ PROJECT1/                    = basado en webapp-builder
+  ├─ other_project/               = project no basado en el builder, solo para demostrar que se puede convivir con otros
+  ├─ PROJECT1/                    = basado en builder
   │  ├─ build/                    = autogenerado
   │  ├─ dist/                     = autogenerado
-  │  ├─ www/                      = tus apps deben estar dentro, se puede cambiar el 'www', ver project-config
-  │  │  ├─ app1/                  = nombre de la app
+  │  ├─ www/                      = tus apps deben estar dentro, se puede cambiar el 'www': Ver folders/www en project-config
+  │  │  ├─ myApp/                 = nombre de la app
   │  │  │  ├─ ...
-  │  │  │  ├─ app.json            = metadata de los archivos de la app actual: app1
-  │  │  │  └─ www.json            = autogenerado
-  │  │  ├─ app2/                  = nombre de la app
-  │  │  │  ├─ ...
-  │  │  │  ├─ app.json            = metadata de los archivos de la app actual: app2
+  │  │  │  ├─ app.json            = metadata de los archivos de la app actual: myApp
   │  │  │  └─ www.json            = autogenerado
   │  │  └─ apps.json              = array de strings con nombres de cada app/folder
   │  ├─ gulpfile.js               = este debe conectar con el "tasks/boot" del builder
   │  ├─ package.json              = info y definicion del project
   │  ├─ project-config.json       = configuracion del builder sobre el project, debe estar en tu VCS
   │  └─ project-config-local.json = configuracion local, NO DEBE subirse a tu VCS
-  └─ PROJECT2/                    = basado en webapp-builder
+  └─ PROJECT2/                    = otro ejemplo, basado en webapp-builder.
      ├─ ...
-     ├─ www/                      = tus apps deben estar dentro, se puede cambiar el 'www', ver project-config
-     │  ├─ otherApp/              = nombre de la app
+     ├─ www/
+     │  ├─ otherApp/
      │  │  ├─ ...
-     │  │  ├─ app.json            = metadata de los archivos de la app actual: otherApp
-     │  │  └─ www.json            = autogenerado
+     │  │  └─ app.json            = metadata de los archivos de la app actual: otherApp
+     │  ├─ app2/                  = nombre de la app
+     │  │  ├─ ...
+     │  │  └─ app.json            = metadata de los archivos de la app actual: app2
      │  └─ apps.json              = en este caso, solo '["otherApp"]'
      └─ ...
 
 ```
-
 --
-### Configuracion / Metadata
+### Configuracion del proyecto:
 
-Toda la magia depende de estos archivos de "configuracion", que le dicen a la app tanto en modo _dev_ como en _dist_, donde y como son los archivos a incluir, esto es la columna vertebral de este sistema.
-
-Ejemplo:
-
-* PROJECT/gulpfile.js: Este archivo "conecta" tu proyecto con el builder
-* PROJECT/project-config.json: Configuracion a nivel proyecto
-* PROJECT/www/apps.json: Nombres de las apps (folders)
-* PROJECT/www/APP1/app.json: Configuracion de los archivos de APP1
-* PROJECT/www/APP2/app.json: Configuracion de los archivos de APP2 ...
+Estos son los archivos de configuracion (metadata) que deben de existir en el project.
 
 #### `gulpfile.js`
 
@@ -264,7 +255,8 @@ Dentro de la carpeta que contiene a la app debe existir un `app.json` con un arr
 * Si se modifican los archivos de configuracion (`project-config*.json`), es necesario hacer un `gulp full`
 * En modo _dev_ hace request secuencial de cada archivo del proyecto, en modo _dist_, es solo un archivo por app (con css, js y html dentro).
 
---
+---
+## Otros:
 
 ### Sprites
 
@@ -283,9 +275,10 @@ Los sprites se generan automaticamente siguiendo este patron:
 			.kitten1 {
 				background-image: url(../template/www/app/assets/img/sprite1/kitten1@2x.png);
 			}
-		} ```
+		}
+	```
 
-* Imagenes PNG en: PROJECTO/APP/assets/img/sprite*  
+* Las imagenes deben ser PNG y estar ubicadas en: PROJECTO/APP/assets/img/sprite*
 TODO REVIEW: Replace?
 
 ---
@@ -294,12 +287,14 @@ TODO REVIEW: Replace?
 
 ### Prerequisitos:
 
-* Node/npm
+* [Node/npm](https://nodejs.org)
 * Gulp (via npm)
 * Bower (via npm)
 * [Git](http://git-scm.com/downloads)
 * [Graphics Magick](http://www.graphicsmagick.org/download.html) (para generacion de sprites)
-  En Mac: `brew install graphicsmagick` puede alcanzar.
+
+**NOTE:**
+En Mac: `brew install graphicsmagick` puede alcanzar.
 
 **Opcionales:**
 
@@ -336,6 +331,6 @@ Agregar esta linea:
 
 ---
 
-Ante alguna necesidad o bug por favor levantar el issue en: [issues](https://github.com/crystian/WEBAPP-BUILDER/issues), parece complejo pero no lo es. Sinceramente espero que te sirva y gracias.
+Ante alguna necesidad o bug por favor levantar el issue en: [issues](https://github.com/crystian/WEBAPP-BUILDER/issues), todo esto parece complejo pero no lo es, como lo venis haciendo puede ser mas complejo. Sinceramente espero que te sirva y gracias.
 
 MIT © [Crystian](https://github.com/crystian), echo con amor para vos <3!
