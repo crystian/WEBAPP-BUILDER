@@ -67,6 +67,7 @@ Este proyecto fue una extraccion de otro mas grande que luego de un tiempo me di
 	* [Otras tasks & auxliares](#otras-tasks--auxiliares)
 * [Intrucciones de uso](#instrucciones-de-uso)
 	* [Conceptos](#conceptos)
+	* [Estructura de _file system_](#estructura-de-file-system)
 	* [Configuracion / Metadata](#configuracion--metadata)
 		* [gulpfile.js](#gulpfilejs)
 		* [project-config.json](#project-configjson-y-project-config-localjson) ([detalle](docs/project-config-es.md))
@@ -151,7 +152,7 @@ gulp.task('hookPostDistProject', function(cb){
 
 **DEV/DIST:** Modo _dev_ es mientras trabajas y desarrollas la app, en modo _dist_ es la version minificada y con todo listo para ser publicada, restando informacion, comentarios, etc
 
-**WEBAPP-BUILDER (aka: BUILDER):** Este mismo proyecto (del readme), donde esta toda la magia, cuyo resultado es un "index.html", **el contenido de esta carpeta no debe modificarse.**
+**WEBAPP-BUILDER (aka: BUILDER):** Este mismo proyecto (del readme) donde esta toda la magia, cuyo resultado entre otras cosas es un "index.html", **el contenido de esta carpeta no debe modificarse.**
 
 **LOADER:** Es un proyecto interno que termina generando el "index.html" configurado segun proyecto, con validaciones y demas ([mas info del loader](docs/loader-es.md))
 
@@ -161,7 +162,7 @@ gulp.task('hookPostDistProject', function(cb){
 
 **METADATA:** Archivos `json` con informacion adicional sobre los archivos del proyecto y demas. **Tiene varios atributos ya cargados por defecto, solo deberias agregar en tu metadata lo que queres distinto de lo default.**
 
-**TEMPLATES:** Eso mismo, con el cual el _create.js_ hace una copia para los nuevos proyectos.
+**TEMPLATES:** Eso mismo, desde el _create.js_ hace una copia para los nuevos proyectos.
 
 --
 ### Estructura de _file system_
@@ -184,20 +185,28 @@ PROJECTS/
   │  ├─ build/ (autogenerado)
   │  ├─ dist/ (autogenerado)
   │  ├─ www/ (tus apps deben estar dentro, se puede cambiar el 'www', ver project-config)
-  │  │  ├─ app1/
+  │  │  ├─ app1/ (nombre de la app)
   │  │  │  ├─ ...
-  │  │  │  ├─ app.json
-  │  │  │  └─ www.json
-  │  │  ├─ app2/
-  │  │  └─ apps.json
-  │  ├─ gulpfile.js
-  │  ├─ package.json
-  │  ├─ project-config.json
-  │  └─ project-config-local.json
-  └─ PROJECT2/ (based on webapp-builder)
-
-  ¬│┐└┴┬├─┼
-
+  │  │  │  ├─ app.json (metadata de los archivos de la app actual: app1)
+  │  │  │  └─ www.json (autogenerado)
+  │  │  ├─ app2/ (nombre de la app)
+  │  │  │  ├─ ...
+  │  │  │  ├─ app.json (metadata de los archivos de la app actual: app2)
+  │  │  │  └─ www.json (autogenerado)
+  │  │  └─ apps.json (array de strings con nombres de cada app/folder)
+  │  ├─ gulpfile.js (este debe conectar con el "tasks/boot" del builder)
+  │  ├─ package.json (info y definicion del project)
+  │  ├─ project-config.json (configuracion del builder sobre el project, debe estar en tu VCS)
+  │  └─ project-config-local.json (configuracion local, NO DEBE subirse a tu VCS)
+  └─ PROJECT2/ (basado en webapp-builder)
+     ├─ ...
+     ├─ www/ (tus apps deben estar dentro, se puede cambiar el 'www', ver project-config)
+     │  ├─ otherApp/ (nombre de la app)
+     │  │  ├─ ...
+     │  │  ├─ app.json (metadata de los archivos de la app actual: otherApp)
+     │  │  └─ www.json (autogenerado)
+     │  └─ apps.json (en este caso, solo '["otherApp"]')
+     └─ ...
 
 ```
 
