@@ -13,7 +13,7 @@
 
 ## TL;DR Version:
 
-Este framework te permite ahorrar incontable cantidad de horas en la automatizacion, bootstrap/boilerplate y temas tipicos de una nueva [Web app](https://en.wikipedia.org/wiki/Web_application)/SPA (Single Page Application), esto es para aquellos que quieren/necesitan agilidad y velocidad de desarrollo, este es el objetivo de este framework. #needForSpeed! #agile
+Este framework te permite ahorrar incontable cantidad de horas en la automatizacion, bootstrap/boilerplate y temas tipicos de una nueva [Web app](https://en.wikipedia.org/wiki/Web_application)/SPA (Single Page Application), esto es para aquellos que quieren/necesitan agilidad y velocidad de desarrollo, este es el objetivo de este framework. #agile #needForSpeed
 
 ### Features:
 
@@ -40,7 +40,7 @@ Este framework es totalmente "opinionated" (dictatorial?), si lo haces como el f
 
 **NOTAS:**
 
-* El concepto o abstraccion detras de este framework es distinto al que proponen varios (para que se entienda rapido), lo mas cercano puede ser [Yeoman](http://yeoman.io/) (y sus generators), el cual te arma el Scafolding (andamios) con toda la automatizacion abierta para que quites o agregues a gusto. Este framework es mas proximo a un "patron" en vez de una solucion para la automatizacion. Con lo cual te fuerza a trabajar respetando ciertas reglas (muy simples) y gracias a esto te provee soluciones de automatizacion como tambien de bootstrap/boilerplate (loader, compatibilidad, compresion, y un largo etc), dicho de manera coloquial, el framework necesita de un esqueleto y vos lo rellenas.
+* El concepto o abstraccion detras de este framework es distinto al que proponen varios (para que se entienda rapido), lo mas cercano puede ser [Yeoman](http://yeoman.io/) (y sus generators), el cual te arma el Scafolding (andamios) con toda la automatizacion abierta para que quites o agregues a gusto. Este framework es mas proximo a un "patron" en vez de una solucion para la automatizacion. Con lo cual te fuerza a trabajar respetando ciertas reglas (muy simples) y gracias a esto te provee soluciones de automatizacion como tambien de bootstrap/boilerplate (loader, compatibilidad, compresion, y un largo etc), dicho de manera coloquial, el framework usa un esqueleto base para que luego sea rellenado con los files del project.
 * **Para ansiosos:** Como logra todo esto que promete?: Gracias a archivos _metadata_ (simples), que configuran al resto de los archivos, tanto individuales como grupales.
 * Orientado a proyectos nuevos sobre todo, pero tambien se pueden adaptar.
 
@@ -150,7 +150,7 @@ gulp.task('hookPostDistProject', function(cb){
 
 ### Conceptos:
 
-**DEV/DIST:** Modo _dev_ es mientras trabajas y desarrollas la app, en modo _dist_ es la version minificada y con todo listo para ser publicada, restando informacion, comentarios, etc
+**DEV/DIST:** Modo _dev_ es mientras trabajas y desarrollas la app, en modo _dist_ es la version minificada y con todo listo para ser publicada, restando informacion, logs, comentarios, etc
 
 **WEBAPP-BUILDER (aka: BUILDER):** Este mismo proyecto (del readme) donde esta toda la magia, cuyo resultado entre otras cosas es un "index.html", **el contenido de esta carpeta no debe modificarse.**
 
@@ -158,7 +158,7 @@ gulp.task('hookPostDistProject', function(cb){
 
 **PROJECT:** Es la carpeta creada con el _instalador_ (o de manera manual), el BUILDER genera el index y lo termina copiando en el proyecto.
 
-**APPs:** Son SPAs, con los cuales se generan archivos solidos. Puede contener mas de una por proyecto.
+**APPs:** Son Web apps/SPAs, con las cuales se generan archivos solidos. El project puede contener mas de una.
 
 **METADATA:** Archivos `json` con informacion adicional sobre los archivos del proyecto y demas. **Tiene varios atributos ya cargados por defecto, solo deberias agregar en tu metadata lo que queres distinto de lo default.**
 
@@ -171,12 +171,12 @@ Esquema del builder con sus files mas importantes, y proyectos de ejemplo de com
 
 ```
 PROJECTS/
-  ├─ WEBAPP-BUILDER/ (repo clonado, no modificar!)
-  │  ├─ loader/ (todo lo que sera parte del archivo index.html final)
+  ├─ WEBAPP-BUILDER/						= repo clonado, no modificar!
+  │  ├─ loader/									= todo lo que sera parte del archivo index.html final
   │  ├─ ...
-  │  ├─ tasks/ (tasks de gulp para el project como para el loader)
+  │  ├─ tasks/									= tasks de gulp para el project como para el loader
   │  │  ├─ ...
-  │  │  ├─ project/ (solo tasks para el project)
+  │  │  ├─ project/							= solo tasks para el project
   │  │  ├─ shared/ (entre el project y el loader)
   │  │  └─ boot.js (file principal de inicializacion de gulp, todos los projects deben incluirlo)
   │  └─ gulpfile.js (propio del loader)
