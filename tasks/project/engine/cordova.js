@@ -15,11 +15,7 @@ gulp.task('runAndroid', ['buildFullDist'], function(cb){
 		utils.exit(2);
 	}
 
-	var cordovaLocal = '';
-	if(!global.cfg.cordova.global){
-		cordovaLocal = 'node ../../../../../node_modules/cordova/bin/'
-	}
-	exec(cordovaLocal + 'cordova run android', {cwd: global.cfg.cordova.folder},
+	exec('cordova run android', {cwd: global.cfg.cordova.folder},
 		function(error, stdout, stderr){
 
 			if(error || (stderr && stderr !== '')){

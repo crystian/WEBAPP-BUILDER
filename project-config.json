@@ -87,7 +87,6 @@
 
 	"cordova":{
 		"active": false,
-		"global": false,
 		"folder": "cordova/",
 		"www": "cordova/www/",
 		"isDevice": false,

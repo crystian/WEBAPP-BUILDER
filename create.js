@@ -7,19 +7,15 @@
  * > chmod u+x create.js
  */
 
-//
-//adb devices -l
-//node node_modules\cordova\bin\cordova create spec/fixture/11build/15/cordova com.app myapp
-//cd spec/fixture/11build/15/cordova
-//node ..\..\..\..\..\node_modules\cordova\bin\cordova run android
-//	..\node_modules\cordova\bin\cordova plugin add cordova-plugin-globalization
-
-//var fs       = require('fs-extra'),
-//		inquirer = require('inquirer'),
-//		exec     = require('child_process').exec,
-//		cfg      = require('./project-config.json'),
-//		chalk    = require('chalk'),
-//		del      = require('del');
+var fs          = require('fs-extra'),
+		inquirer    = require('inquirer'),
+		exec        = require('child_process').exec,
+		replaceGulp = require('gulp-replace'),
+		gulp        = require('gulp'),
+		debug       = require('gulp-debug'),
+		cfg         = require('./project-config.json'),
+		chalk       = require('chalk'),
+		del         = require('del');
 
 require('./tasks/shared/utils');
 
@@ -32,12 +28,14 @@ console.logGreen('  ╚═══════════════════
 console.logGreen('                                                                                                     ');
 console.log('');
 
-//questions tutorial: http://enzolutions.com/articles/2014/09/08/how-to-create-an-interactive-command-in-node-js/
+/*
+ questions tutorial: http://enzolutions.com/articles/2014/09/08/how-to-create-an-interactive-command-in-node-js/
+ */
 var create = [{
 	type: 'confirm',
 	name: 'create',
-	message: 'Create it? (remember, this OVERWRITE your files)',
-	default: false
+	message: 'Create it? (this action OVERWRITE your files)',
+	default: true
 }];
 questions = questions.concat(create);
 
@@ -64,8 +62,16 @@ var copyTemplate = [{
 }];
 questions = questions.concat(copyTemplate);
 
-var cordova = [{
+var installDep = [{
 	when: function(r){return r.copyTemplate;},
+	type: 'confirm',
+	name: 'installDep',
+	message: 'Install dependencies? (npm & bower)',
+	default: false
+}];
+questions = questions.concat(installDep);
+
+var cordova = [{
 	type: 'confirm',
 	name: 'cordova',
 	message: 'Do you want to make an app (cordova) for stores (play and apple)?',
@@ -131,115 +137,160 @@ var cordovaPlugins = [{
 questions = questions.concat(cordovaPlugins);
 
 inquirer.prompt(questions, function(answers){
-	//console.dir(answers);
 
 	var projectConfigFile      = 'project-config.json',
 			projectConfigLocalFile = 'project-config-local.json';
 
 	if(answers.create){
-		console.log('aaaa');
 		if(answers.copyTemplate){
-			fs.copySync(answers.copyTemplate, '../'+ answers.projectCode);
 
-			if(answers.copyTemplate === 'templates/angular-full'){
-//				var gulp    = require('gulp'),
-//						debug   = require('gulp-debug'),
-//						replace = require('gulp-replace');
-//
-//				gulp.src([
-//						answers.projectCode + '/vendors/theme/style.css',
-//						answers.projectCode + '/www/app/app.json',
-//						answers.projectCode + '/www/app/app.scss',
-//						answers.projectCode + '/www/landing/app.json',
-//						answers.projectCode + '/www/landing/landing.scss'
-//					], {base: './'})
-//					.pipe(debug({verbose: true}))
-//					.pipe(replace('/' + answers.copyTemplate + '/', '/' + answers.projectCode + '/'))
-//					.pipe(gulp.dest('.'));
-//
-//				del([
-//					answers.projectCode + '/node_modules',
-//					answers.projectCode + '/vendors/bower_components'
-//				]);
+			del([
+				answers.copyTemplate + '/build',
+				answers.copyTemplate + '/dist',
+				answers.copyTemplate + '/node_modules',
+				answers.copyTemplate + '/www/vendors/bower_components'
+			]);
+
+			fs.copySync(answers.copyTemplate, '../' + answers.projectCode);
+
+			switch (answers.copyTemplate){
+				case 'templates/angular-full':
+					replace([
+						'../' + answers.projectCode + '/www/app/app.json',
+						'../' + answers.projectCode + '/www/app/landing.scss',
+						'../' + answers.projectCode + '/www/vendors/theme/style.css',
+						'../' + answers.projectCode + '/www/app2/app.json',
+						'../' + answers.projectCode + '/www/app2/app.js',
+						'../' + answers.projectCode + '/www/app2/app.scss',
+						'../' + answers.projectCode + '/www/app2/other.scss',
+						'../' + answers.projectCode + '/www/app2/msgBold/msgBoldDirective.js',
+						'../' + answers.projectCode + '/www/app2/data/dataServices.js'
+					], '../' + answers.copyTemplate + '/www/', '../');
+
+					replace([
+						'../' + answers.projectCode + '/gulpfile.js',
+						'../' + answers.projectCode + '/tasks/tasks.js'
+					], '../../t', '../WEBAPP-BUILDER/t');
+
+					replace([
+						'../' + answers.projectCode + '/project-config.json'
+					], '"template": "templates/angular-full"', '');
+
+					break;
+
+				default:
+					console.logRed('WHATT?? there isn\'t this template');
+					process.exit(1);
+			}
+
+			fs.outputJSONSync('../' + answers.projectCode + '/' + projectConfigLocalFile, {}, {encoding: 'utf8'});
+
+			if(answers.installDep){
+				console.logGreen('Installing dependencies, wait please...');
+				npmInstall(answers, function(){
+					npmBower(answers);
+				});
+			}
+
+			if(answers.cordova){
+				console.log(chalk.black.bgYellow('Cordova project is generating...'));
+
+				exec('cordova create ' + cfg.cordova.folder + ' ' + answers.domain + ' ' + answers.main, {cwd: '../'+ answers.projectCode},
+					function(error, stdout, stderr){
+
+						if(error !== null){
+							console.logRed(stdout);
+							console.logRed('stderr: ' + stderr);
+							console.logRed('exec error: ' + error);
+							console.logRed('Is Cordova installed?');
+							process.exit(1);
+						} else {
+							console.logGreen(stdout);
+
+							var packageJson = '../' + answers.projectCode + '/package.json';
+							var pkg = require(packageJson);
+							pkg.domain = answers.domain;
+							pkg.mainClass = answers.main;
+							fs.outputJSONSync(packageJson, pkg);
+
+							var configFile = '../' + answers.projectCode + '/'+ projectConfigFile;
+							var cfgFile = require(configFile);
+							cfgFile.cordova = {active: true};
+							fs.outputJSONSync(configFile, cfgFile);
+
+							installCordovaPl('platform', answers.platforms, '../'+ answers.projectCode, function(){
+								if(answers.platforms.length > 0){
+									installCordovaPl('plugin', answers.plugins, '../'+ answers.projectCode, finalCordova);
+								}
+							});
+						}
+					});
 			}
 		}
-//
-//		fs.outputJSONSync(projectNameFile, {projectCode: answers.projectCode}, {encoding: 'utf8'});
-//		fs.outputJSONSync(answers.projectCode + '/' + projectConfigLocalFile, {}, {encoding: 'utf8'});
-//
-//		var op = require('./' + answers.copyTemplate + '/' + projectConfigFile);
-//		op.cordova = answers.cordova;
-//
-//		fs.outputJSONSync(projectConfigLocalFile, {}, {encoding: 'utf8'});
-//		fs.outputJSONSync(answers.projectCode + '/' + projectConfigFile, op, {encoding: 'utf8'});
-//
-//		if(answers.cordova){
-//			console.log(chalk.black.bgYellow('Cordova project is generating...'));
-//
-//			exec('cordova create ' + cfg.folders.cordova + ' ' + answers.domain + ' ' + answers.main, {cwd: answers.projectCode + '/'},
-//				function(error, stdout, stderr){
-//
-//					if(error !== null){
-//						console.logRed(stdout);
-//						console.logRed('stderr: ' + stderr);
-//						console.logRed('exec error: ' + error);
-//						console.logRed('Is Cordova installed?');
-//					} else {
-//						console.logGreen(stdout);
-//
-//						var packageJson = answers.projectCode + '/package.json';
-//						var pkg = require('./' + packageJson);
-//						pkg.domain = answers.domain;
-//						pkg.mainClass = answers.main;
-//						fs.outputJSONSync(packageJson, pkg);
-//
-//						installCordovaPl('platform', answers.platforms, answers.projectCode, function(){
-//							if(answers.platforms.length > 0){
-//								installCordovaPl('plugin', answers.plugins, answers.projectCode, finalCordova);
-//							}
-//						});
-//					}
-//				});
-//
-		}
-//
-//		updateGitignore(answers.projectCode);
-//
-//		console.logRed('');
-//		console.logRed('REMEMBER: The project/folder: "' + answers.projectCode + '", will not be include on git, it needs their own repo, and don\'t upload it to webapp-builder repo, and READ THE README motherfuckerr!');
-//		console.logRed('');
-//
-//	}
+	}
 });
 
-//function updateGitignore(code){
-//	var fileName = '.gitignore';
-//	var content = fs.readFileSync(fileName);
-//	content += '\n/' + code;
-//	fs.writeFileSync(fileName, content, {encoding: 'utf8'});
-//}
-//
-//
-//function installCordovaPl(text, pl, projectCode, cb){/* plugins and platforms */
-//	if(pl.length > 0){
-//		exec('cordova ' + text + ' add ' + pl.join(' '), {cwd: projectCode + '/' + cfg.folders.cordova},
-//			function(error, stdout, stderr){
-//
-//				if(error !== null){
-//					console.logRed(stdout);
-//					console.logRed('stderr: ' + stderr);
-//					console.logRed('exec error: ' + error);
-//				} else {
-//					console.logGreen(stdout);
-//				}
-//				cb(projectCode);
-//			});
-//	} else {
-//		cb();
-//	}
-//}
-//
-//function finalCordova(projectCode){
-//	var www = projectCode + '/' + cfg.folders.cordova + '/www';
-//	fs.emptyDirSync(www);
-//}
+function replace(files, key, value){
+	gulp.src(files, {base: './'})
+		.pipe(debug({verbose: true}))
+		.pipe(replaceGulp(key, value))
+		.pipe(gulp.dest('.'));
+}
+
+function npmInstall(answers, cb){
+	exec('npm install', {cwd: '../' + answers.projectCode},
+		function(error, stdout, stderr){
+
+			if(error !== null){
+				console.logRed(stdout);
+				console.logRed('stderr: ' + stderr);
+				console.logRed('exec error: ' + error);
+				process.exit(1);
+			} else {
+				console.log(stdout);
+				cb();
+			}
+		});
+}
+
+function npmBower(answers){
+	exec('bower install', {cwd: '../' + answers.projectCode},
+		function(error, stdout, stderr){
+
+			if(error !== null){
+				console.logRed(stdout);
+				console.logRed('stderr: ' + stderr);
+				console.logRed('exec error: ' + error);
+				process.exit(1);
+			} else {
+				console.log(stdout);
+
+			}
+		});
+}
+
+/* plugins and platforms */
+function installCordovaPl(text, pl, projectCode, cb){
+	if(pl.length > 0){
+		exec('cordova ' + text + ' add ' + pl.join(' '), {cwd: projectCode + '/' + cfg.cordova.folder},
+			function(error, stdout, stderr){
+
+				if(error !== null){
+					console.logRed(stdout);
+					console.logRed('stderr: ' + stderr);
+					console.logRed('exec error: ' + error);
+					process.exit(1);
+				} else {
+					console.log(stdout);
+				}
+				cb(projectCode);
+			});
+	} else {
+		cb();
+	}
+}
+
+function finalCordova(projectCode){
+	var www = projectCode + '/' + cfg.cordova.folder + '/www';
+	fs.emptyDirSync(www);
+}

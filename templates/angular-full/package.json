@@ -1,10 +1,13 @@
 {
-	"name": "WEBAPP-BUILDER-template-angular-full",
-	"version": "0.0.2",
-	"author": "Crystian (Cristian Bietti) @crystian",
-	"repository": "https://github.com/crystian/WEBAPP-BUILDER.git",
-	"private": true,
-	"dependencies": {
-		"restify": "^3.0.3"
-	}
+  "name": "WEBAPP-BUILDER-template-angular-full",
+  "version": "0.0.2",
+  "author": "Crystian (Cristian Bietti) @crystian",
+  "repository": "https://github.com/crystian/WEBAPP-BUILDER.git",
+  "private": true,
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "require-dir": "^0.3.0",
+    "restify": "^3.0.3",
+    "run-sequence": "^1.1.5"
+  }
 }

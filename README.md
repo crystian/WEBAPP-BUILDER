@@ -78,8 +78,6 @@ Este proyecto fue una extraccion de otro mas grande que luego de un tiempo me di
 * [Instalacion](#instalacion)
 	* [Prerequisitos](#prerequisitos)
 	* [Instalacion](#instalacion-1)
-* [Pendientes](#pendientes)
-
 
 ---
 
@@ -288,8 +286,9 @@ TODO REVIEW: Replace?
 ### Prerequisitos:
 
 * [Node/npm](https://nodejs.org)
-* Gulp (via npm)
-* Bower (via npm)
+* Gulp (via npm, global)
+* Bower (via npm, global)
+* Cordova (via npm, global, solo si usas este feature)
 * [Git](http://git-scm.com/downloads)
 * [Graphics Magick](http://www.graphicsmagick.org/download.html) (para generacion de sprites)
 
