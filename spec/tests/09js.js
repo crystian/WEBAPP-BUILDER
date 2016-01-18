@@ -381,7 +381,7 @@ describe("09js: preprocessors (js)", function(){
 		expect(fs.statSync(indexTsJs).size).toBeMoreLess(396,5);
 	});
 
-	it('(90) complex case 1', function(){
+	xit('(90) complex case 1', function(){
 		cd('90');
 		var indexJsPrePost = indexJs + 'PrePostPreprocess';
 
