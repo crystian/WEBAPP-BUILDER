@@ -67,15 +67,16 @@ var installDep = [{
 	type: 'confirm',
 	name: 'installDep',
 	message: 'Install dependencies? (npm & bower)',
-	default: false
+	default: true
 }];
 questions = questions.concat(installDep);
 
 var cordova = [{
+	when: function(r){return r.projectCode;},
 	type: 'confirm',
 	name: 'cordova',
-	message: 'Do you want to make an app (cordova) for stores (play and apple)?',
-	default: true
+	message: 'Do you want to make an cordova app?',
+	default: false
 }, {
 	when: function(r){return r.cordova;},
 	type: 'input',
@@ -175,6 +176,23 @@ inquirer.prompt(questions, function(answers){
 					replace([
 						'../' + answers.projectCode + '/project-config.json'
 					], '"template": "templates/angular-full"', '');
+
+					break;
+
+				case 'templates/empty':
+					replace([
+						'../' + answers.projectCode + '/www/app/app.json',
+						'../' + answers.projectCode + '/www/app/app.scss'
+					], '../' + answers.copyTemplate + '/www/', '../');
+
+					replace([
+						'../' + answers.projectCode + '/gulpfile.js',
+						'../' + answers.projectCode + '/tasks/tasks.js'
+					], '../../t', '../WEBAPP-BUILDER/t');
+
+					replace([
+						'../' + answers.projectCode + '/project-config.json'
+					], '"template": "templates/empty"', '');
 
 					break;
 

@@ -4,5 +4,9 @@
 	"author": "Crystian (Cristian Bietti) @crystian",
 	"repository": "https://github.com/crystian/WEBAPP-BUILDER.git",
 	"private": true,
-	"dependencies": {}
+	"dependencies": {
+		"gulp": "^3.9.0",
+		"require-dir": "^0.3.0",
+		"run-sequence": "^1.1.5"
+	}
 }
