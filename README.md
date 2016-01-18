@@ -60,7 +60,8 @@ Este proyecto fue una extracción de otro más grande que luego de un tiempo me 
 ## Tabla de contenido
 
 * [TL;DR](#tldr-versión)
-	* [Features](#Versión-extendida)
+	* [Features](#features)
+	* [Versión extendida](#versión-extendida)
 * [Tasks](#tareas)
 	* [Gulp tasks](#gulp-tasks)
 	* [Hooks](#ganchos)
@@ -332,7 +333,7 @@ Agregar esta linea:
 	- Hasta el momento los templates son estos:
 		- angular-empty: La más simple de las aplicaciones angular
 		- angular-full: Un project con dos apps, te puede servir para ver cómo se utiliza el framework
-		- angular-material: Project simple con (angular material]( https://material.angularjs.org/latest/) instalado.
+		- angular-material: Project simple con [angular material](https://material.angularjs.org/latest/) instalado.
 		- empty: Eso mismo, el scaffolding básico para el framework.
 * Una vez creado, ingresar al nuevo proyecto: `npm i` y luego `bower i` (si no lo seleccionaste en el wizard)
 * Levanta el server en dev con: `gulp serve`, y chequear con el browser sobre la url que devuelve el comando en la consola.
