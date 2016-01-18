@@ -1,11 +1,11 @@
 # project-config
 
-_Configuracion a nivel proyecto, en la raiz del mismo._
+_Configuración a nivel proyecto, en la raíz del mismo._
 
 
 ### package.json
-* name: Nombre del proyecto, debe seguir las reglas de package.json tipico (solo caracteres validos, sin espacios, etc)
-* version: Se mostrara en la consola de la app y te servira para tracking. Mantener con nomenclatura [semver] (http://semver.org/), ya que se contempla mecanismo de update segun version.
+* name: Nombre del proyecto, debe seguir las reglas de package.json típico (solo caracteres válidos, sin espacios, etc.)
+* version: Se mostrara en la consola de la app y te servirá para tracking. Mantener con nomenclatura [semver] (http://semver.org/), ya que se contempla mecanismo de update según versión.
 
 ### project-config.json
 
@@ -14,7 +14,7 @@ _Configuracion a nivel proyecto, en la raiz del mismo._
 * Indicar la primera app, si el nombre es distinto a "app", indicarlo con "firstApp"
 
 
-Este es la configuracion por defecto de todos los proyectos, de querer cambiar algun valor hacerlo en el `project-config.json` de tu proyecto.
+Este es la configuración por defecto de todos los projects, de querer cambiar algún valor hacerlo en el `project-config.json` de tu project.
 
 ```javascript
 {
@@ -22,7 +22,7 @@ Este es la configuracion por defecto de todos los proyectos, de querer cambiar a
 	 /* ip donde se publicaran los servidores, con 0.0.0.0 se publica en todas y se puede acceder desde la LAN */
 
 	"compress": false,
-	/* si se encuentra la libreria lz-string, podes comprimir las apps. */
+	/* si se encuentra la librería lz-string, podes comprimir las apps. */
 
 	"ports": {
 	/* puertos de los servers */
@@ -35,32 +35,32 @@ Este es la configuracion por defecto de todos los proyectos, de querer cambiar a
 	/* actualiza el package.json con el hash del ultimo commit */
 
 	"autoprefixer": ["ie 10","android 4","chrome 42","ff 27","ios 7","opera 19","safari 7"],
-	/* genera los prefijos css (--webkit, --ms, etc) automaticamente segun versiones configuradas aqui. */
+	/* genera los prefijos css (--webkit, --ms, etc) automáticamente según versiones configuradas aquí. */
 
 	"appCache":{
 		"active": false,
 		"filename": "",
-		/* nombre particular, si no, le pondra automaticamente el del proyecto */
+		/* nombre particular, si no, le pondrá automáticamente el del proyecto */
 		"ext": ".cache",
 		"files": ["dist/**/*"],
-		/* seleccion de archivos a incluir */
+		/* selección de archivos a incluir */
 		"options": {
 			"hash": true,
 			"preferOnline": false,
 			"network": ["http://!*", "https://!*", "*"]
 		}
 	},
-	/* genera un manifest.cache automaticamente con todos los archivos del proyecto */
+	/* genera un manifest.cache automáticamente con todos los archivos del proyecto */
 
 	"app": {
 		"release": true,
-		/* esto mismo a nivel app, minificando y otras tareas mas */
+		/* esto mismo a nivel app, minificando y otras tareas más */
 
 		"firstApp": "app",
-		/* primera app que va a lanzar, es requerido, tiene que saber por donde empieza el flujo */
+		/* primera app que va a lanzar, es requerido, tiene que saber por dónde empieza el flujo */
 
 		"site": "http://",
-		/* el site se pondra automaticamente en el footer */
+		/* el site se pondrá automáticamente en el footer */
 
 		"folders": {
 			"www": "www",
@@ -68,7 +68,7 @@ Este es la configuracion por defecto de todos los proyectos, de querer cambiar a
 			"dist": "dist",
 			"temp": ".tmp"
 		},
-		/* configuracion de folders, si necesitas cambiarle el nombre, directamente desde aqui */
+		/* configuración de folders, si necesitas cambiarle el nombre, directamente desde aquí */
 
 		"compatibilityMatrix": {
 			"ie": [9.9,10.9],
@@ -79,7 +79,7 @@ Este es la configuracion por defecto de todos los proyectos, de querer cambiar a
 			"safari": [6.0,6.0],
 			"ios": [6,6]
 		},
-		/* seteo de minimo y recomendado por cada browser, menos del minimo da error (panic) y recomienda updatear o usar otro (ver "text"), deberia haber correlaccion con autoprefixer */
+		/* seteo de mínimo y recomendado por cada browser, menos del mínimo da error (panic) y recomienda updatear o usar otro (ver "text"), debería haber correlación con autoprefixer */
 
 		"consoleError": [
 			"Error unknown",
@@ -90,15 +90,11 @@ Este es la configuracion por defecto de todos los proyectos, de querer cambiar a
 
 	"cordova":{
 		"active": false,
-		/* si es del tipo cordova el proyecto, active deberia ser true */
-		"global": false,
-		/* false = usa el cordova build-in, true = usa el instalado en global via npm  */
-
+		/* si es del tipo cordova el proyecto, active debería ser true */
 		"folder": "cordova/",
 		"www": "cordova/www/",
-
 		"isDevice": false,
-		/* NO CAMBIAR, ni setear, lo hara automaticamente */
+		/* NO CAMBIAR, ni setear, lo hará automáticamente */
 
 		"files": {
 			"index": "index-cordova.html"
@@ -109,9 +105,9 @@ Este es la configuracion por defecto de todos los proyectos, de querer cambiar a
 				"storepass": "provisoryKey1"
 			}
 		}
-		/* parametros segun plataforma */
+		/* parámetros según plataforma */
 	},
-	/* utilizacion de cordova para generar proyecto hibrido */
+	/* utilización de cordova para generar proyecto hibrido */
 
 	"loader": {
 		"name": "WEBAPP BUILDER",
@@ -121,20 +117,20 @@ Este es la configuracion por defecto de todos los proyectos, de querer cambiar a
 		/* 7 opciones */
 
 		"compatibilityFirst": "...",
-		/* primer chequeo de compatibilidad, metodos nativos */
+		/* primer chequeo de compatibilidad, métodos nativos */
 
 		"files": {
 			"index": "index.html"
 		},
 
 		"folders": {...},
-		/* configuracion de folders */
+		/* configuración de folders */
 
 		"viewport": "...",
-		/* settings del elemento meta: viewport */
+		/* configuración del elemento meta: viewport */
 
 		"contentSecurity": "...",
-		/* settings del elemento meta: content-security */
+		/* configuración del elemento meta: content-security */
 
 		"bower": {
 			"platform": {
@@ -145,10 +141,11 @@ Este es la configuracion por defecto de todos los proyectos, de querer cambiar a
 			},
 			...
 		},
-		/* componentes a usar (solo para _loader_), si no se quiere alguno de los por default, en el config del proyecto setearle null. Tambien soporta la generacion de los minificados si es que la libreria no lo provee, usar "generate-js": true */
+		/* componentes a usar (solo para _loader_), si no se quiere alguno de los por default, en el config del proyecto setearle null. También soporta la generación de los minificados si es que la librería no lo provee, usar "generate-js": true */
 
 		"text": {...}
 		/* todos los textos del loader (no soporta i18n) */
 	}
 }
 ```
+

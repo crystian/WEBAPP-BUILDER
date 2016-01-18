@@ -46,7 +46,7 @@ Este framework es totalmente "opinionated", si lo haces como el framework te pro
 
 ---
 
-## Extended Version:
+## Versión extendida:
 
 _Continuando con el TL;DR, en lenguaje coloquial y ordenado por relevancia, como te gusta a vos ..._
 
@@ -59,25 +59,25 @@ Este proyecto fue una extracción de otro más grande que luego de un tiempo me 
 
 ## Tabla de contenido
 
-* [TL;DR](#tldr-version)
-	* [Features](#features)
-* [Tareas](#tareas)
+* [TL;DR](#tldr-versión)
+	* [Features](#Versión-extendida)
+* [Tasks](#tareas)
 	* [Gulp tasks](#gulp-tasks)
-	* [Hooks](#hooks)
-	* [Otras tareas & auxliares](#otras-tasks--auxiliares)
+	* [Hooks](#ganchos)
+	* [Otras tasks & auxliares](#otras-tasks--auxiliares)
 * [Instrucciones de uso](#instrucciones-de-uso)
 	* [Conceptos](#conceptos)
-	* [Estructura de _file system_](#estructura-de-file-system)
-	* [Configuración del proyecto](#configuracion-del-proyecto)
+	* [Estructura de _archivos_](#estructura-de-archivos)
+	* [Configuración del proyecto](#configuración-del-proyecto)
 		* [gulpfile.js](#gulpfilejs)
-		* [project-config.json](#project-configjson-y-project-config-localjson) ([detalle](docs/project-config-es.md))
+		* [project-config.json](#project-configjson) ([detalle](docs/project-config-es.md))
 		* [apps.json](#appsjson)
 		* [app.json](#appjson) ([detalle](docs/app-es.md))
 * [Otros](#otros)
 	* [Sprites](#sprites)
-* [Instalación](#instalacion)
+* [Instalación](#instalación)
 	* [Prerrequisitos](#prerrequisitos)
-	* [Instalación](#instalacion-1)
+	* [Instalación](#instalación-1)
 
 ---
 
@@ -157,7 +157,7 @@ gulp.task('hookPostDistProject', function(cb){
 
 **APPs:** Son Web apps/SPAs (aka: apps), con las cuales se generan archivos _sólidos_.
 
-**PROJECT:** Es tu proyecto; Es el contenedor de las apps; El _builder_ genera el index y luego lo termina copiando en el project. El framework cuenta con un [wizard](todo) para la creación de projects (a partir de templates) o podes crearlo de manera manual.
+**PROJECT:** Es tu proyecto; Es el contenedor de las apps; El _builder_ genera el index y luego lo termina copiando en el project. El framework cuenta con un [wizard](#instalación-1) para la creación de projects (a partir de templates) o podes crearlo de manera manual.
 
 **GULPFILE.js & BOOT.js:** Para conectar el project con el builder se debe hacer desde el `gulpfile.js` del project y debe hacer un _require_ de `tasks/boot.js` del builder, puede ser relativo o absoluto. Toda la automatización está resuelta con gulp.
 
@@ -172,7 +172,8 @@ Toda la magia depende de estos archivos de "configuración" (JSONs), que le dice
 
 --
 
-### Estructura de _file system_
+### Estructura de _archivos_
+aka: File System
 
 Esquema del builder con sus files más importantes, y projects de ejemplo de como debería ser la estructura. Luego veremos con mas profundidad cada opción.
 
@@ -338,7 +339,7 @@ Agregar esta linea:
 
 ---
 
-Ante alguna necesidad o bug por favor levantar el [issue](https://github.com/crystian/WEBAPP-BUILDER/issues), todo esto parece complejo pero no lo es, como lo venis haciendo puede ser mas complejo. Sinceramente espero que te sirva tanto como a mi, gracias.
+Ante alguna necesidad o bug por favor levantar el [issue](https://github.com/crystian/WEBAPP-BUILDER/issues), todo esto parece complejo pero no lo es, como lo venís haciendo puede ser más complejo. Sinceramente espero que te sirva tanto como a mí, gracias.
 
 ---
 
