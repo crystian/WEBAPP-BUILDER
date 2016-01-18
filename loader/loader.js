@@ -154,9 +154,7 @@ var loader = (function(){
 
 		//I prefer do it to this way because it can be an issue about security, this will remove by gulp task on release mode
 		//removeIf(production)
-		if(true){
-			return;
-		}
+		if(true){return;}
 		//endRemoveIf(production)
 
 		//jshint quotmark:false, maxstatements:30
