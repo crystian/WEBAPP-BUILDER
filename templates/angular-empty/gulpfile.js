@@ -3,8 +3,7 @@
  */
 
 //REMEMBER!: All public TASKS ARE ON tasks.js
-var gulp = require('gulp'),
-		requireDir = require('require-dir');
+var gulp = require('gulp');
 
 require('../../tasks/boot').boot({
 	gulp: gulp,

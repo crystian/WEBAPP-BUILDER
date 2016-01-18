@@ -35,7 +35,7 @@ var create = [{
 	type: 'confirm',
 	name: 'create',
 	message: 'Create it? (this action OVERWRITE your files)',
-	default: true
+	default: false
 }];
 questions = questions.concat(create);
 
@@ -54,10 +54,10 @@ var copyTemplate = [{
 	name: 'copyTemplate',
 	message: 'Which template do you want to use?',
 	choices: [
-		{value: 'templates/empty', name: 'Empty', default: true},
-		{value: 'templates/angular-full', name: 'Angular full'},
+		{value: 'templates/empty', name: 'Empty'},
 		{value: 'templates/angular-empty', name: 'Angular empty'},
-		{value: 'templates/angular-materials', name: 'Angular material empty'}
+		{value: 'templates/angular-full', name: 'Angular full'},
+		{value: 'templates/angular-material', name: 'Angular material empty'}
 	]
 }];
 questions = questions.concat(copyTemplate);
@@ -75,7 +75,7 @@ var cordova = [{
 	when: function(r){return r.projectCode;},
 	type: 'confirm',
 	name: 'cordova',
-	message: 'Do you want to make an cordova app?',
+	message: 'Do you want to make a cordova app?',
 	default: false
 }, {
 	when: function(r){return r.cordova;},
@@ -155,6 +155,10 @@ inquirer.prompt(questions, function(answers){
 			fs.copySync(answers.copyTemplate, '../' + answers.projectCode);
 
 			switch (answers.copyTemplate){
+				case 'templates/angular-empty':
+				case 'templates/angular-material':
+					break;
+
 				case 'templates/angular-full':
 					replace([
 						'../' + answers.projectCode + '/www/app/app.json',
@@ -168,15 +172,6 @@ inquirer.prompt(questions, function(answers){
 						'../' + answers.projectCode + '/www/app2/data/dataServices.js'
 					], '../' + answers.copyTemplate + '/www/', '../');
 
-					replace([
-						'../' + answers.projectCode + '/gulpfile.js',
-						'../' + answers.projectCode + '/tasks/tasks.js'
-					], '../../t', '../WEBAPP-BUILDER/t');
-
-					replace([
-						'../' + answers.projectCode + '/project-config.json'
-					], '"template": "templates/angular-full"', '');
-
 					break;
 
 				case 'templates/empty':
@@ -185,21 +180,23 @@ inquirer.prompt(questions, function(answers){
 						'../' + answers.projectCode + '/www/app/app.scss'
 					], '../' + answers.copyTemplate + '/www/', '../');
 
-					replace([
-						'../' + answers.projectCode + '/gulpfile.js',
-						'../' + answers.projectCode + '/tasks/tasks.js'
-					], '../../t', '../WEBAPP-BUILDER/t');
-
-					replace([
-						'../' + answers.projectCode + '/project-config.json'
-					], '"template": "templates/empty"', '');
-
 					break;
 
 				default:
 					console.logRed('WHATT?? there isn\'t this template');
 					process.exit(1);
 			}
+
+			//replaces paths for all templates
+			replace([
+				'../' + answers.projectCode + '/gulpfile.js',
+				'../' + answers.projectCode + '/tasks/tasks.js'
+			], '../../t', '../WEBAPP-BUILDER/t');
+
+			replace([
+				'../' + answers.projectCode + '/project-config.json'
+			], '"template": "' + answers.copyTemplate + '"', '');
+
 
 			fs.outputJSONSync('../' + answers.projectCode + '/' + projectConfigLocalFile, {}, {encoding: 'utf8'});
 
@@ -213,7 +210,7 @@ inquirer.prompt(questions, function(answers){
 			if(answers.cordova){
 				console.log(chalk.black.bgYellow('Cordova project is generating...'));
 
-				exec('cordova create ' + cfg.cordova.folder + ' ' + answers.domain + ' ' + answers.main, {cwd: '../'+ answers.projectCode},
+				exec('cordova create ' + cfg.cordova.folder + ' ' + answers.domain + ' ' + answers.main, {cwd: '../' + answers.projectCode},
 					function(error, stdout, stderr){
 
 						if(error !== null){
@@ -231,14 +228,14 @@ inquirer.prompt(questions, function(answers){
 							pkg.mainClass = answers.main;
 							fs.outputJSONSync(packageJson, pkg);
 
-							var configFile = '../' + answers.projectCode + '/'+ projectConfigFile;
+							var configFile = '../' + answers.projectCode + '/' + projectConfigFile;
 							var cfgFile = require(configFile);
 							cfgFile.cordova = {active: true};
 							fs.outputJSONSync(configFile, cfgFile);
 
-							installCordovaPl('platform', answers.platforms, '../'+ answers.projectCode, function(){
+							installCordovaPl('platform', answers.platforms, '../' + answers.projectCode, function(){
 								if(answers.platforms.length > 0){
-									installCordovaPl('plugin', answers.plugins, '../'+ answers.projectCode, finalCordova);
+									installCordovaPl('plugin', answers.plugins, '../' + answers.projectCode, finalCordova);
 								}
 							});
 						}
@@ -250,7 +247,7 @@ inquirer.prompt(questions, function(answers){
 
 function replace(files, key, value){
 	gulp.src(files, {base: './'})
-		.pipe(debug({verbose: true}))
+		//.pipe(debug({verbose: true}))
 		.pipe(replaceGulp(key, value))
 		.pipe(gulp.dest('.'));
 }

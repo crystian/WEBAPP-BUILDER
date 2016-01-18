@@ -3,5 +3,8 @@
 	"version": "0.0.2",
 	"author": "Crystian (Cristian Bietti) @crystian",
 	"repository": "https://github.com/crystian/WEBAPP-BUILDER.git",
-	"private": true
+	"private": true,
+	"dependencies": {
+		"gulp": "^3.9.0"
+	}
 }

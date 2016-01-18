@@ -154,7 +154,7 @@ gulp.task('hookPostDistProject', function(cb){
 
 **LOADER:** Es un proyecto interno que termina generando el "index.html" configurado según proyecto, con validaciones y demás ([más info del loader](docs/loader-es.md))
 
-**SOLIDOS:** Archivo único (json), con todo el código de la app, html, css y javascript.
+**SOLIDOS:** Archivo único (json), con todo el código de la app: html, css y javascript.
 
 **APPs:** Son Web apps/SPAs (aka: apps), con las cuales se generan archivos _sólidos_.
 
@@ -167,7 +167,7 @@ gulp.task('hookPostDistProject', function(cb){
 **METADATA:**
 Toda la magia depende de estos archivos de "configuración" (JSONs), que le dicen a la app tanto en modo _dev_ como en _dist_, donde y como son los archivos a incluir, esto es la columna vertebral de este sistema. **Tienen varios atributos ya cargados por defecto, solo deberías agregar en tu metadata lo que queres distinto de lo default.**
 
-#### Diagrama:
+#### Estructura conceptual:
 
 ![](https://docs.google.com/drawings/d/10MpC23l3Y4yr_FxCz9srtr1IGD0e5Dl5_-Yh21GIW0g/pub?w=559&h=431)
 
