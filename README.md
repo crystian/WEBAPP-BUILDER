@@ -18,7 +18,7 @@ Este framework te permite ahorrar incontable cantidad de horas en la automatizac
 ### Features:
 
 * **Todo el código de cada Aplicación (aka: app) termina en un único archivo _solido_ por app!**, yes just a request!
-* Genera un **loader** (solido) "stand-alone" que ocupa menos 50k con todas las librerías (aka: Libs) base, para luego traerse cada app.
+* Genera un **loader** (sólido) "stand-alone" que ocupa menos 50k con todas las librerías (aka: Libs) base, para luego traerse cada app.
 * Mientras baja las apps muestra un bonito loading (7 opciones: pure CSS)
 * Preprocessors (incluidos):
  * CSS: [Sass](http://sass-lang.com/), [Less](http://lesscss.org/), [Stylus](http://stylus-lang.com/);
@@ -344,4 +344,4 @@ Ante alguna necesidad o bug por favor levantar el [issue](https://github.com/cry
 
 ---
 
-MIT © 2016 [Crystian](https://github.com/crystian), echo con amor para vos <3!
+MIT © 2016 [Crystian](https://github.com/crystian), hecho con amor para vos <3!
