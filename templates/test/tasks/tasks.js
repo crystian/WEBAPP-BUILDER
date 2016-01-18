@@ -3,8 +3,7 @@
  */
 
 var runSequence = require('run-sequence'),
-		image       = require('../../../tasks/project/engine/image'),
-		gutil       = require('gulp-util');
+		image       = require('../../../tasks/project/engine/image');
 
 //alias
 gulp.task('default', ['build']);

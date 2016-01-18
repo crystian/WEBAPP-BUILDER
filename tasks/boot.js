@@ -49,7 +49,7 @@ exports.boot = function(config){
 		global.cfg.app.name = global.cfg.pkg.name || global.cfg.app.name || 'WEBAPP-BUILDER-APP';
 		global.cfg.app.version = global.cfg.pkg.version || global.cfg.app.version || '0.0.0';
 
-		console.logGreen('BUILDING: ' + global.cfg.app.name + ' ' + global.cfg.app.version +' ...');
+		console.logGreen('BUILDING: ' + global.cfg.app.name + ' ' + global.cfg.app.version + ' ...');
 
 		global.cfg.fromFwk = false;
 		global.cfg.isTemplate = false;
@@ -93,7 +93,7 @@ exports.boot = function(config){
 
 
 	if(global.cfg.app.release && gutil.env.noMin){
-		console.logRed(global.builderName +': app.release and argument "noMin" is not compatible');
+		console.logRed(global.builderName + ': app.release and argument "noMin" is not compatible');
 		utils.exit(2);
 	}
 

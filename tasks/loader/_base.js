@@ -74,22 +74,10 @@
 
 		json.appCache = global.cfg.appCache;
 
-		//json.compress = global.cfg.compress;
-		//json.isCordovaDevice = global.cfg.cordova.isDevice;
-		//json.compatibilityMatrix = global.cfg.compatibilityMatrix;
-		//json.debugZoneActive = global.cfg.debugZoneActive;
-		//json.mixpanel = global.cfg.mixpanel;
-		//json.analytics = global.cfg.analytics;
-		//json.consoleError = global.cfg.consoleError;
-		//json.fastclick = !!(global.cfg.loader.bower.fastclick);
-		//json.showDeviceInfo = global.cfg.showDeviceInfo;
-		//json.showSkeletor = global.cfg.showSkeletor;
-		//json.contentEditable = global.cfg.contentEditable;
-
 		json.isDist = !!global.cfg.isDist;
 
 		var compatibilityTpl =
-					'\n\n//primer chequeo, si no es compatible con esto, se cancela el loader!\n' +
+					'\n\n//first check, if the browser is not compatible with it, it will cancel the loader!\n' +
 					'_loaderCfg.compatibilityFirst = function () {\n' +
 					'	//jshint maxcomplexity:false, quotmark:false\n' +
 					'	\'use strict\';\n' +

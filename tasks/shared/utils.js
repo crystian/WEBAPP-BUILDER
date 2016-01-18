@@ -35,7 +35,7 @@ console.logRed = function(m){
 exports.breakIfIsRoot = function(_m){
 	var m = _m || '';
 	if(global.cfg.fromFwk){
-		console.logRed(global.builderName +': it is loader, you need to run the command on project folder or template' + m);
+		console.logRed(global.builderName + ': it is loader, you need to run the command on project folder or template' + m);
 		exit(2);
 	}
 };
@@ -43,7 +43,7 @@ exports.breakIfIsRoot = function(_m){
 exports.breakIfAppNotIsRelease = function(_m){
 	var m = _m || '';
 	if(!global.cfg.app.release){
-		console.logRed(global.builderName +': app should be release' + m);
+		console.logRed(global.builderName + ': app should be release' + m);
 		exit(2);
 	}
 };
@@ -51,7 +51,7 @@ exports.breakIfAppNotIsRelease = function(_m){
 exports.breakIfLoaderNotIsRelease = function(_m){
 	var m = _m || '';
 	if(!global.cfg.loader.release){
-		console.logRed(global.builderName +': app should be release' + m);
+		console.logRed(global.builderName + ': app should be release' + m);
 		exit(2);
 	}
 };
@@ -59,7 +59,7 @@ exports.breakIfLoaderNotIsRelease = function(_m){
 exports.breakIfIsTemplate = function(_m){
 	var m = _m || '';
 	if(global.cfg.isTemplate){
-		console.logRed(global.builderName +': it is a template' + m);
+		console.logRed(global.builderName + ': it is a template' + m);
 		exit(2);
 	}
 };
@@ -67,7 +67,7 @@ exports.breakIfIsTemplate = function(_m){
 exports.breakIfIsNotTemplate = function(_m){
 	var m = _m || '';
 	if(!global.cfg.isTemplate){
-		console.logRed(global.builderName +': it is not a template' + m);
+		console.logRed(global.builderName + ': it is not a template' + m);
 		exit(2);
 	}
 };

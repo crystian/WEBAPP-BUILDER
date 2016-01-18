@@ -1,3 +1,3 @@
-# WEBAPP - BUILDER - Template angular
+# WEBAPP-BUILDER - Template angular
 
 See ../README.md

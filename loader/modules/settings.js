@@ -1,8 +1,8 @@
 /**
-* Created by Crystian on 3/2/14.
-*/
+ * Created by Crystian on 3/2/14.
+ */
 
-loader.settings = (function (){
+loader.settings = (function(){
 	'use strict';
 
 	var VERSION = 'v';
@@ -11,7 +11,7 @@ loader.settings = (function (){
 	//jshint maxcomplexity:9
 	function init(){
 		var version = get('version');
-		if ( !version ) {
+		if(!version){
 			//FIRST TIME!
 			console.info('First time to here!');
 
@@ -20,7 +20,7 @@ loader.settings = (function (){
 			//others settings ...
 
 		} else {
-			if( loader.utils.compareSemVer(loader.cfg.version, version) === 1 ){
+			if(loader.utils.compareSemVer(loader.cfg.version, version) === 1){
 				console.warn('New version by revision, migrate data...');
 
 				//after all
@@ -39,15 +39,15 @@ loader.settings = (function (){
 		localStorage.setItem(item, value);
 	}
 
-	function get(item) {
+	function get(item){
 		return localStorage.getItem(item);
 	}
 
-	function remove(item) {
+	function remove(item){
 		return localStorage.removeItem(item);
 	}
 
-	function removeAlldata() {
+	function removeAlldata(){
 		localStorage.clear();
 	}
 

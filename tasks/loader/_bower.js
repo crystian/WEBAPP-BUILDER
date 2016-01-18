@@ -15,9 +15,7 @@
 			gutil   = require('gulp-util');
 
 	/*
-	 necesitaba hacer el minificado despues de la bajada, me complico la vida...,
-	 esto fue lo mejor que me quedo, luego de varias horas ...
-	 problemas con syncronismo y argumentos
+	 I need to do the minify but I can't after hours of work, so I is the better way I found to do it
 	 */
 	gulp.task('_makeBower', ['_downloadBower'], function(cb){
 

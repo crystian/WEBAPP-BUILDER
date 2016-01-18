@@ -1,6 +1,6 @@
 /**
-* Created by crystian on 28/02/14.
-*/
+ * Created by crystian on 28/02/14.
+ */
 
 //jshint unused:false
 var loader = (function(){
@@ -9,7 +9,7 @@ var loader = (function(){
 	var cfg, diag, platform, utils, settings, events, doc, loadingScreen, applicationCache, location, ga, mx, xhr;
 
 	//just for ofuscation
-	function setters() {
+	function setters(){
 		cfg = loader.cfg;
 		diag = loader.diag;
 		platform = loader.platform;
@@ -33,10 +33,10 @@ var loader = (function(){
 		setters();
 		_handleAppCache();
 
-		if (!cfg.release) {
+		if(!cfg.release){
 			console.warn('****    DEBUG MODE!: NOT RELEASE    ****');
 		}
-		console.info('App version: ' + cfg.version +' ('+cfg.loader.version+')');
+		console.info('App version: ' + cfg.version + ' (' + cfg.loader.version + ')');
 		console.info('Loader init');
 
 		//if it is a device, load cordova plugins and more!
@@ -50,7 +50,7 @@ var loader = (function(){
 			xhr.getJsFile('cordova.js');
 
 		} else {
-			if (platform.os.toString().match(/(iPhone|iPod|iPad|iOS|Android|BlackBerry)/)) {
+			if(platform.os.toString().match(/(iPhone|iPod|iPad|iOS|Android|BlackBerry)/)){
 				console.info('Device (without cordova)');
 
 				cfg.isDevice = 1;
@@ -64,52 +64,53 @@ var loader = (function(){
 	}
 
 	//by http://www.html5rocks.com/es/tutorials/appcache/beginner/
-	function _handleAppCache() {
+	function _handleAppCache(){
 		// Check if a new cache is available on page load.
 		//TODO improve it!, mostrar un cartel al usuario diciendole la proxima vez se actualizaran los datos
-		applicationCache.addEventListener('updateready', function(e) {
-			if (applicationCache.status === applicationCache.UPDATEREADY) {
+		applicationCache.addEventListener('updateready', function(e){
+			if(applicationCache.status === applicationCache.UPDATEREADY){
 				// Browser downloaded a new app cache.
 				// Swap it in and reload the page to get the new hotness.
 				applicationCache.swapCache();
-//				if (confirm('A new version of this site is available. Load it?')) {
+				//				if (confirm('A new version of this site is available. Load it?')) {
 				location.reload();
-//				}
+				//				}
 			}
 		}, false);
 	}
 
-	//pisando variables and removing references
-	function _replaceVariables() {
+	//overwriting variables and removing references
+	function _replaceVariables(){
 		loader.cfg = window._loaderCfg;
 		window._loaderCfg = null;
 		//delete window._loaderCfg;
 
-		//sirve para validaciones, no lo puedo controlar, setea esa variable, luego la elimino
 		loader.platform = window.platform;
 		window.platform = null;
 		delete window.platform;
 	}
 
-	//no recuerdo porque, pero mejor dejarlo al timeout
-	function _loadAsync() {
+	//I don't remember why, but better don't touch it
+	function _loadAsync(){
 		setTimeout(_load, 100);
 	}
 
-	function setPolyfills() {
-		if (!window.Promise) {
+	function setPolyfills(){
+		if(!window.Promise){
 			console.warn('Promise polyfill installed');
 			ES6Promise.polyfill();
 		}
 	}
 
-	function _load() {
+	function _load(){
 		_handleDebugMode();
 		cfg.compatibility = diag.executeDiag();
 		_handleCompatibility();
 
-		//break! chauchau a dios, sos inmerecedor!
-		if(cfg.compatibility === 0){return;}
+		//break! bye bye, you are not worthy
+		if(cfg.compatibility === 0){
+			return;
+		}
 
 		diag.registerDetectOrientation();
 		cfg.isTouchDevice = diag.isTouchDevice();
@@ -129,7 +130,7 @@ var loader = (function(){
 			FastClick.attach(doc.body);
 		}
 
-		console.log('load appName '+ cfg.firstApp);
+		console.log('load appName ' + cfg.firstApp);
 		xhr.requestApp(cfg.firstApp, _loadAppSuccess, _loadAppFail);
 	}
 
@@ -137,22 +138,25 @@ var loader = (function(){
 		console.warn('_loadAppSuccess');
 		loader.finish();
 	}
+
 	function _loadAppFail(err){
 		utils.showPanicError(err);
 	}
 
-	function _handleDebugMode() {
+	function _handleDebugMode(){
 		cfg.debugZone = byId('debugZone');
 
-		debug('Version: ' + cfg.version+ '<br>Loader version: ' + cfg.loader.version);
+		debug('Version: ' + cfg.version + '<br>Loader version: ' + cfg.loader.version);
 
-		if( cfg.showDeviceInfo ){
+		if(cfg.showDeviceInfo){
 			debugAdd(diag.getInfo());
 		}
 
-		//prefiero hacerlo asi por seguridad, esto lo remueve gulp en modo release
+		//I prefer do it to this way because it can be an issue about security, this will remove by gulp task on release mode
 		//removeIf(production)
-		if(true){return;}
+		if(true){
+			return;
+		}
 		//endRemoveIf(production)
 
 		//jshint quotmark:false, maxstatements:30
@@ -169,40 +173,23 @@ var loader = (function(){
 		console.log("");
 
 		//these errors are lies, just a joke
-		console.warn(cfg.consoleError[utils.getRandomInt(cfg.consoleError.length-1)]);
+		console.warn(cfg.consoleError[utils.getRandomInt(cfg.consoleError.length - 1)]);
 
-		//delete window.console; //error al testear con nightmare
-		window.console={};
-		window.console.log=function(){return;};
-		window.console.debug=function(){return;};
-		window.console.error=function(){return;};
-		window.console.warn=function(){return;};
-		window.console.info=function(){return;};
-
-
-		////dejo de funcionar con ultimas versiones de chrome, ROMPE IE!!
-		//var _z = console;
-		//Object.defineProperty( window, 'console', {
-		//	get : function(){
-		//		if( _z._commandLineAPI ){
-		//			throw cfg.consoleError[
-		//				utils.getRandomInt(cfg.consoleError.length-1)];
-		//		}
-		//		return _z;
-		//	},
-		//	set : function(val){
-		//		_z = val;
-		//	}
-		//});
-
+		//delete window.console;
+		window.console = {};
+		window.console.log = function(){return;};
+		window.console.debug = function(){return;};
+		window.console.error = function(){return;};
+		window.console.warn = function(){return;};
+		window.console.info = function(){return;};
 	}
 
-	function _handleCompatibility() {
-		if (cfg.compatibility !== 2) {
-			if (cfg.compatibility === 0) {
+	function _handleCompatibility(){
+		if(cfg.compatibility !== 2){
+			if(cfg.compatibility === 0){
 				alert(cfg.loader.text.incompatibleByDiag);
-				utils.showPanicError(cfg.loader.text.incompatibleByDiag +'<br>' +
-											cfg.loader.text.faqLink);
+				utils.showPanicError(cfg.loader.text.incompatibleByDiag + '<br>' +
+					cfg.loader.text.faqLink);
 			} else /* 1 */ {
 				_showError(cfg.loader.text.semiIncompatible);
 			}
@@ -210,9 +197,9 @@ var loader = (function(){
 	}
 
 
-	function _debugToolsLoad() {
+	function _debugToolsLoad(){
 
-		if (cfg.contentEditable) {
+		if(cfg.contentEditable){
 			doc.body.contentEditable = 'true';
 			doc.designMode = 'on';
 		}
@@ -223,11 +210,11 @@ var loader = (function(){
 	}
 
 
-	function hide() {
+	function hide(){
 		loadingScreen.off(); //via css 500ms
 	}
 
-	function show() {
+	function show(){
 		loadingScreen.on(); //via css 500ms
 	}
 
@@ -236,15 +223,15 @@ var loader = (function(){
 		alert(m);
 	}
 
-	function debug(m) {
-		if (cfg.release || !cfg.debugZoneActive) {
+	function debug(m){
+		if(cfg.release || !cfg.debugZoneActive){
 			return;
 		}
 		cfg.debugZone.innerHTML = m;
 	}
 
-	function debugAdd(m) {
-		if (cfg.release || !cfg.debugZoneActive) {
+	function debugAdd(m){
+		if(cfg.release || !cfg.debugZoneActive){
 			return;
 		}
 		debug(cfg.debugZone.innerHTML + '<br>---<br>' + m);

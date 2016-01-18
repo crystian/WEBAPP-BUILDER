@@ -1,12 +1,12 @@
 /**
-* Created by Crystian on 3/3/14.
-*/
+ * Created by Crystian on 3/3/14.
+ */
 
 loader.events = (function(){
 	'use strict';
 
 	//jshint validthis:true
-	function init() {
+	function init(){
 		//no customEvent porque no es soportado por android browser
 		this.loaderFinished.initEvent('loaderFinished', false, false);
 		this.newVersionDetected.initEvent('newVersionDetected', false, false);

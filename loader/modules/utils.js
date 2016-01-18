@@ -72,12 +72,12 @@ loader.utils = (function(){
 	}
 
 	function setNewResourceById(resourceLoader, id, _clear){
-		var el = document.getElementById(id),
+		var el       = document.getElementById(id),
 				i = 0, l = el.childNodes.length,
-				clear = (_clear === undefined);
+				clear    = (_clear === undefined);
 
 		if(clear && l > 0){
-			for(;i<l;i++){
+			for(; i < l; i++){
 				el.removeChild(el.childNodes[i]);
 			}
 		}
@@ -161,12 +161,14 @@ loader.utils = (function(){
 
 	function handleCompress(data){
 		//anchor for compress, DON't touch it!
-		if(!loader.cfg.compress){return data;}//flagCompress
+		if(!loader.cfg.compress){
+			return data;
+		}//flagCompress
 		console.log('Resource compressed');
 		return LZString.decompressFromUTF16(data);
 	}
 
-	//two arguments are set, one is a get, just for encapsular y no ver las variables
+	//two arguments are set, one is a get, just for encapsulate and don't see the variables
 	function cache(key, value){
 		if(value !== undefined){
 			_cache[key] = value;

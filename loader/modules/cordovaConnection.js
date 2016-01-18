@@ -1,7 +1,7 @@
-loader.diag.cordovaConnection = (function () {
+loader.diag.cordovaConnection = (function(){
 	'use strict';
 
-	function init() {
+	function init(){
 		document.addEventListener('online', function(){
 			console.debug('loader.diag.cordovaConnection.online');
 			setStatus(true);
@@ -22,7 +22,7 @@ loader.diag.cordovaConnection = (function () {
 		loader.diag.setStatusConnection(v);
 	}
 
-	function getType(state) {
+	function getType(state){
 		var states = {};
 		states[Connection.UNKNOWN] = 'Unknown connection';
 		states[Connection.ETHERNET] = 'Ethernet connection';
@@ -51,20 +51,20 @@ loader.diag.cordovaConnection = (function () {
 		var v;
 
 		switch (navigator.connection.type){
-		case 'unknown':
-		case 'none':
-			v = 0;
-			break;
-		case '2g':
-		case '3g':
-		case 'cellular':
-			v = 1;
-			break;
-		case 'ethernet':
-		case 'wifi':
-		case '4g':
-			v = 2;
-			break;
+			case 'unknown':
+			case 'none':
+				v = 0;
+				break;
+			case '2g':
+			case '3g':
+			case 'cellular':
+				v = 1;
+				break;
+			case 'ethernet':
+			case 'wifi':
+			case '4g':
+				v = 2;
+				break;
 		}
 		return v;
 	}

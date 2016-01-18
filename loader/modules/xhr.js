@@ -29,7 +29,7 @@ loader.xhr = (function(){
 			};
 			xhr.open('GET', url, true);
 			// 10000 is to much?
-			xhr.timeout = 10000;//yes here, porque ie11 pincha :S
+			xhr.timeout = 10000;//yes here, because ie11 give an error :S
 			xhr.send();
 		});
 	}
@@ -68,7 +68,7 @@ loader.xhr = (function(){
 			for(; i < l; i++){
 				var file = data[i];
 
-				urls.push('../'+ templatePath + file);
+				urls.push('../' + templatePath + file);
 			}
 
 			return requestMultipleSync(urls, appConfig).then(loadAppSuccess);
@@ -100,7 +100,7 @@ loader.xhr = (function(){
 		});
 	}
 
-	//be careful, HTML option pisa old version
+	//be careful, HTML option overwrite old version
 	function requestMultipleAsync(requestsArray, options){
 
 		return Promise.all(requestsArray.map(function(url){
@@ -170,7 +170,6 @@ loader.xhr = (function(){
 		});
 	}
 
-	//potential issue about security, review it
 	function getJsFile(file){
 		var resourceLoader = document.createElement('script');
 		resourceLoader.type = 'text/javascript';

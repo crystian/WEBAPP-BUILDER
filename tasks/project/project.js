@@ -12,8 +12,7 @@
 			utils       = require('../shared/utils'),
 			gutil       = require('gulp-util'),
 			del         = require('del'),
-			engine      = require('./engine/engine'),
-			image       = require('./engine/image');
+			engine      = require('./engine/engine');
 
 	//Alias
 	gulp.task('css', ['makeCss']);
@@ -103,7 +102,7 @@
 		return engine.html();
 	});
 
-	gulp.task('genAppCache', function (){
+	gulp.task('genAppCache', function(){
 		return engine.genAppCache();
 	});
 

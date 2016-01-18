@@ -1,4 +1,13 @@
-03/01/16 v0.9.0  
+18/01/16 v0.10.0
+it was public on github! (01/01/06 00:02)
+redo create.js with templates
+englished!
+doc updated
+dependencies updated
+continuous integration added
+
+
+03/01/16 v0.9.0
 Rehecho completamente el sistema de automatizacion  
 TESTS! casi 200!  
 Ahora soportar globs y muchas mejoras mas.  

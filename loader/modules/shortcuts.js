@@ -4,7 +4,7 @@
 
 
 //shortcuts:
-var byId = function (id) {
+var byId = function(id){
 	'use strict';
 	return document.getElementById(id);
 };
@@ -20,14 +20,14 @@ var byClass = function(_class){
 var h = function(id, v){
 	'use strict';
 	var el = byId(id);
-	if( el ){
+	if(el){
 		el.innerHTML = v;
 	}
 };
 var hp = function(id, v){
 	'use strict';
 	var el = byId(id);
-	if( el ){
+	if(el){
 		el.placeholder = v;
 	}
 };
@@ -35,7 +35,7 @@ var hp = function(id, v){
 var t = function(id, v){
 	'use strict';
 	var el = byId(id);
-	if( el ){
+	if(el){
 		el.innerText = v;
 	}
 };

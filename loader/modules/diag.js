@@ -1,15 +1,15 @@
 /**
-* Created by Crystian on 3/2/14.
-*/
+ * Created by Crystian on 3/2/14.
+ */
 
-loader.diag = (function (window) {
+loader.diag = (function(window){
 	'use strict';
 
-	function executeDiag() {
+	function executeDiag(){
 		var compatibility = defineCompatibility();
 		loader.debugAdd('Compatibility: ' + compatibility);
 
-		if (compatibility === 0) {
+		if(compatibility === 0){
 			return compatibility;
 		}
 
@@ -20,25 +20,25 @@ loader.diag = (function (window) {
 	}
 
 	//complex second validation of compatibility, regarding platform
-	function defineCompatibility() {
+	function defineCompatibility(){
 		//jshint maxcomplexity:false
 
 		//just for get major and minor
-		var platform = loader.platform,
-			version = platform.version ? platform.version : '0.0',
-			platformName = platform.name ? platform.name.toLowerCase() : '',//ie viene sin name ...
-			decimal;
+		var platform     = loader.platform,
+				version      = platform.version ? platform.version : '0.0',
+				platformName = platform.name ? platform.name.toLowerCase() : '',//ie viene sin name ...
+				decimal;
 
-		//patches para normalizar nombres:
-		if ( platformName === 'ie' ){
+		//patches to normalize names:
+		if(platformName === 'ie'){
 			loader.polyfills.customEventsForIE();
-		} else if( platformName.indexOf('android') >= 0 ){
+		} else if(platformName.indexOf('android') >= 0){
 			platformName = 'android';
-		} else if( platformName.indexOf('chrome mobile') >= 0 ) {
+		} else if(platformName.indexOf('chrome mobile') >= 0){
 			platformName = 'chromeMobile';
-		} else if( platformName.indexOf('chrome') >= 0 ) {
+		} else if(platformName.indexOf('chrome') >= 0){
 			platformName = 'chrome';
-		} else if( platform.os.family.toLowerCase().indexOf('ios') >= 0 ) {
+		} else if(platform.os.family.toLowerCase().indexOf('ios') >= 0){
 			platformName = 'ios';
 		}
 
@@ -48,37 +48,27 @@ loader.diag = (function (window) {
 		version = version[0] + '.' + decimal.join('');
 		version = parseFloat(version);
 
-		console.info('Browser version: '+ platformName + ' ' + version);
+		console.info('Browser version: ' + platformName + ' ' + version);
 
 		var matrixBrowser = loader.cfg.compatibilityMatrix[platformName];
 
 		var compatibility = 0;
 
 
-	/*
-	el primer elemento es incompatible 100%, menores e igual de
-	el segundo es browser viejo, compatible, menores e igual de
-	el tercero es compatible con ese y superiores, mayores e igual de
+		/*
+		 less than first param, is incompatible
+		 less than second param, is semi incompatible
+		 greater than second param, is compatible
+		 */
 
-	OTROS:
-	'operamini':[7	,7	,7],
-	'bb':		[6	,7	,10],
-	'ieMobile': [9	,9	,10]
-
-	TODO revisar opera, anda raro en la virtual con xp,
-	por otro lado los parametros que toma son de compatibles,
-	y por ende usa a chrome :S
-	'opera':	[16	,17	,18]
-	*/
-
-		if (matrixBrowser === undefined) {
-			//si no encuentra la version del browser, entra en modo 1
+		if(matrixBrowser === undefined){
+			//if it can't detect the browser and version, is semi incompatible
 			compatibility = 1;
-		} else if ((version <= matrixBrowser[0])) {
+		} else if((version <= matrixBrowser[0])){
 			compatibility = 0;
-		} else if (version <= matrixBrowser[1]) {
+		} else if(version <= matrixBrowser[1]){
 			compatibility = 1;
-		} else if (version > matrixBrowser[1]) {
+		} else if(version > matrixBrowser[1]){
 			compatibility = 2;
 		}
 
@@ -90,13 +80,13 @@ loader.diag = (function (window) {
 
 		_setOrientation(mql.matches);
 
-		mql.addListener(function(m) {
+		mql.addListener(function(m){
 			_setOrientation(m.matches);
 		});
 	}
 
 	function _setOrientation(portrait){
-		if(portrait) {
+		if(portrait){
 			loader.cfg.isLandscape = loader.cfg.orientation = 0;
 			loader.cfg.isPortraid = 1;
 		} else {
@@ -106,26 +96,26 @@ loader.diag = (function (window) {
 	}
 
 	//http://ctrlq.org/code/19616-detect-touch-screen-javascript
-	function isTouchDevice() {
+	function isTouchDevice(){
 		console.warn('isTouchDevice may does not work properly');
 		/*globals DocumentTouch*/
 		return true === ('ontouchstart' in window || window.DocumentTouch && document instanceof DocumentTouch);
 	}
 
-	function isMobile() {
-		//TODO hacer por tamanio y densidad de pixeles
-		var r = false,
-			ua = window.navigator.userAgent;
+	function isMobile(){
+		//TODO do it for size and pixels density
+		var r  = false,
+				ua = window.navigator.userAgent;
 
-		if (!(/iPad.+Mobile/i.test(ua)) && (/Mobile/i.test(ua))) {
+		if(!(/iPad.+Mobile/i.test(ua)) && (/Mobile/i.test(ua))){
 			r = true;
 		}
 		return r;
 	}
 
-	function getInfo() {
+	function getInfo(){
 		var result = '';
-		if (loader.cfg.cordova.isDevice) {
+		if(loader.cfg.cordova.isDevice){
 			result = deviceInfoHtml();
 			result += '<br />';
 		}
@@ -135,7 +125,7 @@ loader.diag = (function (window) {
 	}
 
 	//based on UA (https://github.com/bestiejs/platform.js)
-	function clientInfoHtml() {
+	function clientInfoHtml(){
 		var platform = loader.platform;
 
 		return '<b>User Agent based:</b><br />' +
@@ -146,11 +136,11 @@ loader.diag = (function (window) {
 			'Platform desc: ' + platform.description + '<br />' +
 			'Platform product: ' + platform.product + '<br />' +
 			'Platform manufacturer: ' + platform.manufacturer + '<br />' +
-			'USER AGENT: ' +window.navigator.userAgent;
+			'USER AGENT: ' + window.navigator.userAgent;
 	}
 
 	//based on cordova "device" object
-	function deviceInfoHtml() {
+	function deviceInfoHtml(){
 		return '<b>Cordova device based:</b><br />' +
 			'Device Model: ' + device.model + '<br />' +
 			'Device Name: ' + device.name + '<br />' +

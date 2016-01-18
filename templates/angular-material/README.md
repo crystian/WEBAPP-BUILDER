@@ -1,3 +1,3 @@
-# WEBAPP - BUILDER - Template angular material
+# WEBAPP-BUILDER - Template angular material
 
 See ../README.md
