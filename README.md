@@ -46,6 +46,13 @@ Este framework es totalmente "opinionated", si lo haces como el framework te pro
 
 ---
 
+### Presentacion y ejemplo rapido from scratch
+Ejemplo rapido de como usar este framework desde la nada misma
+
+[![s](https://img.youtube.com/vi/gs1Q3m0--Xs/0.jpg)](https://www.youtube.com/watch?v=gs1Q3m0--Xs)
+
+---
+
 ## Versión extendida:
 
 _Continuando con el TL;DR, en lenguaje coloquial y ordenado por relevancia, como te gusta a vos ..._
