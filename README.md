@@ -44,54 +44,56 @@ This framework is "opinionated", if you use it as framework propose, you can enj
 * **For anxious:** How to fulfill these promises?: With metadata files (simples), That configure others files as individual and as groups.
 * It is for new projects, but existing project can adapt.
 
-### ... translating in progress ...
 ---
 
-### Presentacion y ejemplo rapido from scratch
-Ejemplo rapido de como usar este framework desde la nada misma
+### Presentation an samepl from scratch
+Fast sample about this framework from scratch
 
 [![video, click to play](http://img.youtube.com/vi/gs1Q3m0--Xs/0.jpg)](https://www.youtube.com/watch?v=gs1Q3m0--Xs)
-
+(in spanish)
 ---
 
-## Versión extendida:
+## Extended version:
 
-_Continuando con el TL;DR, en lenguaje coloquial y ordenado por relevancia, como te gusta a vos ..._
+_continuing with TL;DR and a simple language and ordered by relevance, as you like ..._
 
-Este framework cuenta con numerosos temas típicos solucionados y deliciosos features, esto ahorraría fácil 4 semanas de trabajo full time e incluso más (from scratch)
+This framework has several typical issues about webapps fixed and has delicious features, it can save various weeks or more.
 
 ### _aboutIt():_
-Este proyecto fue una extracción de otro más grande que luego de un tiempo me di cuenta que sería ideal separar las aguas y dejar el loader y temas de automatización listo para otros proyectos y no solo para el que fue creado. De ese momento a hoy paso más de 1 año y fueron tres versiones, donde los saltos de las mejoras son cuantiosos entre cada versión (De grunt a gulp por ejemplo) y me anime a hacerlos porque vi que realmente me servía a pesar del tiempo que me llevo, espero que te sea tan útil como a mí.
+This project was an extraction of other bigger, than after the use I recognize that I can separate on two projects, my app and the "framework", for reuse easy on another projects. Since this moment to today, passed more than one year, and were three versions, and each version the improvements were greater, for example from grunt to gulp. It is very useful for my, I would like it useful for you.
+
+Sorry for my poor english, I am working really hard to improve it.
 
 ---
 
-## Tabla de contenido
+## Table of content
 
-* [TL;DR](#tldr-versión)
+* [TL;DR](#tldr-version)
 	* [Features](#features)
-	* [Versión extendida](#versión-extendida)
-* [Tasks](#tareas)
+	* [Extended version](#extended-version)
+* [Tasks](#tasks)
 	* [Gulp tasks](#gulp-tasks)
-	* [Hooks](#ganchos)
-	* [Otras tasks & auxliares](#otras-tasks--auxiliares)
-* [Instrucciones de uso](#instrucciones-de-uso)
-	* [Conceptos](#conceptos)
-	* [Estructura de _archivos_](#estructura-de-archivos)
-	* [Configuración del proyecto](#configuración-del-proyecto)
+	* [Hooks](#hooks)
+	* [Other tasks & auxiliares](#other-tasks--auxiliares)
+* [Use instructions](#use-instructions)
+	* [Concepts](#concepts)
+	* [Structure of _file system_](#structure-of-file-system)
+	* [Project configuration](#project-configuration)
 		* [gulpfile.js](#gulpfilejs)
-		* [project-config.json](#project-configjson) ([detalle](docs/project-config-es.md))
+		* [project-config.json](#project-configjson) ([detail](docs/project-config-en.md))
 		* [apps.json](#appsjson)
-		* [app.json](#appjson) ([detalle](docs/app-es.md))
-* [Otros](#otros)
+		* [app.json](#appjson) ([detail](docs/app-en.md))
+* [Others](#others)
 	* [Sprites](#sprites)
-* [Instalación](#instalación)
-	* [Prerrequisitos](#prerrequisitos)
-	* [Instalación](#instalación-1)
+* [Instalation](#instalation)
+	* [Prerequisites](#prerequisites)
+	* [Instalation](#instalation-1)
 
 ---
 
-## Tareas:
-aka: Tasks
+## ... translating in progress ...
+
+## Tasks:
 
 #### Gulp tasks
 
@@ -114,8 +116,7 @@ Ver más en: `tasks/project/project.js`
 * `--time`: muestra tiempos de ejecución.
 * `--testMode`: guarda en el proyecto el archivo config.js, útil para debugear, lo usan los tests.
 
-#### Ganchos:
-aka:hooks
+#### Hooks:
 
 Si tenes que hacer tasks (altamente probable), podes utilizar estos hooks para poder "engancharte" en el flujo (aka: Stream) de [gulp](https://github.com/gulpjs/gulp).
 
@@ -154,9 +155,9 @@ gulp.task('hookPostDistProject', function(cb){
 
 ---
 
-## Instrucciones de uso
+## Use instructions
 
-### Conceptos:
+### Concepts:
 
 **WEBAPP-BUILDER:** (aka: builder) Este mismo proyecto donde está toda la magia, cuyo resultado entre otras cosas es un "index.html", **el contenido de este directorio no debe modificarse.**, solo se necesita un clon de este repositorio (aka: repo), servirá para N projects.
 
@@ -175,14 +176,13 @@ gulp.task('hookPostDistProject', function(cb){
 **METADATA:**
 Toda la magia depende de estos archivos de "configuración" (JSONs), que le dicen a la app tanto en modo _dev_ como en _dist_, donde y como son los archivos a incluir, esto es la columna vertebral de este sistema. **Tienen varios atributos ya cargados por defecto, solo deberías agregar en tu metadata lo que queres distinto de lo default.**
 
-#### Estructura conceptual:
+#### Conceptual structure:
 
 ![](https://docs.google.com/drawings/d/10MpC23l3Y4yr_FxCz9srtr1IGD0e5Dl5_-Yh21GIW0g/pub?w=559&h=431)
 
 --
 
-### Estructura de _archivos_
-aka: File System
+### Structure of file system
 
 Esquema del builder con sus files más importantes, y projects de ejemplo de como debería ser la estructura. Luego veremos con mas profundidad cada opción.
 
@@ -226,7 +226,7 @@ PROJECTS/
 ```
 --
 
-### Configuración del proyecto:
+### Project configuration:
 
 Estos son los archivos de configuración (metadata) que deben de existir en el project.
 
@@ -263,7 +263,7 @@ Dentro del directorio `www` debe existir un `apps.json` con un array de strings 
 
 Dentro del directorio que contiene a la app debe existir un `app.json` con un array de objetos de configuración de grupos de archivos.
 
-[Ver definición de `app.json`](docs/app-es.md)
+[Ver definición de `app.json`](docs/app-en.md)
 
 
 **NOTES:**
@@ -274,7 +274,7 @@ Dentro del directorio que contiene a la app debe existir un `app.json` con un ar
 
 ---
 
-## Otros:
+## Others:
 
 ### Sprites
 
@@ -300,9 +300,9 @@ Los sprites se generan automáticamente siguiendo este patrón:
 
 ---
 
-## Instalación
+## Instalation
 
-### Prerrequisitos:
+### Prerequisites:
 
 * [Node/npm](https://nodejs.org)
 * Gulp (vía npm, global)
@@ -331,7 +331,7 @@ Crear variable de ambiente: ANDROID_HOME apuntando al SDK.
 Agregar esta linea:  
 `export ANDROID_HOME=/Users/crystian/Documents/ADT/sdk` (con tu path claramente)
 
-### Instalación
+### Instalation
 
 * Clonar: `git clone https://github.com/crystian/WEBAPP-BUILDER.git`, recomiendo en un directorio único, ya que los proyectos por default se crearan en paralelo a este.
 * Instalar dependencias: `npm install` desde `WEBAPP-BUILDER` (tomate 5', son varias…)
@@ -352,4 +352,4 @@ Ante alguna necesidad o bug por favor levantar el [issue](https://github.com/cry
 
 ---
 
-MIT © 2016 [Crystian](https://github.com/crystian), hecho con amor para vos <3!
+MIT © 2016 [Crystian](https://github.com/crystian), done with love for you <3!
