@@ -7,7 +7,7 @@
 [![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/crystian/WEBAPP-BUILDER/master/LICENSE)
 ![](https://david-dm.org/crystian/WEBAPP-BUILDER.svg)
 
-[Español](http://), [English](http://)
+[Version en español](docs/readme-es.md)
 
 ### ... translating ...
 
