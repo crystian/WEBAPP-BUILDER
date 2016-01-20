@@ -28,11 +28,6 @@ gulp.task('hookPostDistProject', function(cb){
 		cb);
 });
 
-
-gulp.task('optimizeImages', function(){
-	return image.optimizeImages(global.cfg.app.folders.dist + 'img/**/*', global.cfg.app.folders.dist + 'img')
-});
-
 gulp.task('copyImgsApp', function(){
 	return gulp.src([
 		global.cfg.app.folders.www + '/app/assets/img/*'

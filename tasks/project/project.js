@@ -12,7 +12,8 @@
 			utils       = require('../shared/utils'),
 			gutil       = require('gulp-util'),
 			del         = require('del'),
-			engine      = require('./engine/engine');
+			engine      = require('./engine/engine'),
+			image      = require('./engine/image');
 
 	//Alias
 	gulp.task('css', ['makeCss']);
@@ -73,6 +74,10 @@
 			'hookPostDistProject',
 			'genAppCache',
 			cb);
+	});
+
+	gulp.task('optimizeImages', function(){
+		return image.optimizeImages(global.cfg.app.folders.dist + 'img/**/*', global.cfg.app.folders.dist + 'img')
 	});
 
 	gulp.task('makeWwwJson', ['makeCss', 'makeJs', 'makeHtml'], function(){

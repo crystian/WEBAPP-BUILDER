@@ -28,7 +28,7 @@ Este framework te permite ahorrar incontable cantidad de horas en la automatizac
 * Generación de sprites automáticamente.
 * Preparado para [cordova](http://cordova.apache.org/).
 * Minificado de librerías que no lo estén.
-* Libs precargadas en el loader: platform, es6-promise; Opcionales: fastClick, jquery, lz-string
+* Libs precargadas en el loader: [platform](https://github.com/bestiejs/platform.js/), [es6-promise](https://github.com/jakearchibald/es6-promise); Opcionales: [fastClick](https://github.com/ftlabs/fastclick), [jquery](https://jquery.com/), [lz-string](https://github.com/pieroxy/lz-string)
 * El archivo final por cada app puede estar comprimido (por lz-string)
 * Agregado automático de cada archivo nuevo en el proyecto (script/link), tanto en modo **dev** como **dist**.
 * Modo **release** para minificar y ocultar info.
