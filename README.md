@@ -1,5 +1,5 @@
 # WEBAPP BUILDER!
-### **_Un framework para los amigos!_**
+### **_A framework for friends!_**
 
 [![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master&style=flat-square)](https://travis-ci.org/crystian/WEBAPP-BUILDER)
 [![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true&style=flat-square)](https://ci.appveyor.com/project/crystian/webapp-builder)
@@ -9,41 +9,42 @@
 
 [Version en español](docs/readme-es.md)
 
-### ... translating ...
 
-## TL;DR Versión:
+## TL;DR Version:
 
-Este framework te permite ahorrar incontable cantidad de horas en la automatización, bootstrap/boilerplate y temas típicos de una nueva [Web app/SPA (Single Page Application)](https://en.wikipedia.org/wiki/Web_application), esto es para aquellos que quieren/necesitan agilidad y velocidad de desarrollo, este es el objetivo de este framework. #agile #needForSpeed
+This framework allow you save several hours on the automatization, bootstrap/boilerplate and tipically issues on a new [Web app/SPA (Single Page Application)](https://en.wikipedia.org/wiki/Web_application), this is for who need speed and agility on his devs, this is the objective of this framework. #agile #needForSpeed
+
 
 ### Features:
 
-* **Todo el código de cada Aplicación (aka: app) termina en un único archivo _solido_ por app!**, yes just a request!
-* Genera un **loader** (sólido) "stand-alone" que ocupa menos 50k con todas las librerías (aka: Libs) base, para luego traerse cada app.
-* Mientras baja las apps muestra un bonito loading (7 opciones: pure CSS)
-* Preprocessors (incluidos):
+* **All code of each app, will be an unique file (solid) by app**, yes just a request!
+* It generate a **loader** (solid) "stand-alone" whose size is less than 100k with all base libraries (aka: Libs).
+* While the app is loading, it shows a nice loading (7 options: pure CSS)
+* Preprocessors (included):
  * CSS: [Sass](http://sass-lang.com/), [Less](http://lesscss.org/), [Stylus](http://stylus-lang.com/);
  * JS: [TypeScript](http://www.typescriptlang.org/), [CoffeeScript](http://coffeescript.org/);
  * HTML: [Jade](http://jade-lang.com/)
-* Detección de browser y compatibilidad (configurable vía browser y versión)
-* Generación de sprites automáticamente.
-* Preparado para [cordova](http://cordova.apache.org/).
-* Minificado de librerías que no lo estén.
-* Libs precargadas en el loader: [platform](https://github.com/bestiejs/platform.js/), [es6-promise](https://github.com/jakearchibald/es6-promise); Opcionales: [fastClick](https://github.com/ftlabs/fastclick), [jquery](https://jquery.com/), [lz-string](https://github.com/pieroxy/lz-string)
-* El archivo final por cada app puede estar comprimido (por lz-string)
-* Agregado automático de cada archivo nuevo en el proyecto (script/link), tanto en modo **dev** como **dist**.
-* Modo **release** para minificar y ocultar info.
-* Otros: Analytics, lenguajes, appcache, y mucho, mucho más.
+* Detection of browser and compatibiltie (configuration via browser and version)
+* Sprites generated automatically.
+* Prepare for [cordova](http://cordova.apache.org/).
+* Minify of libraries are not.
+* Libs preloaded: [platform](https://github.com/bestiejs/platform.js/), [es6-promise](https://github.com/jakearchibald/es6-promise); Opcionales: [fastClick](https://github.com/ftlabs/fastclick), [jquery](https://jquery.com/), [lz-string](https://github.com/pieroxy/lz-string)
+* The final file can be compressed (por lz-string)
+* New files will add to the project automatically, like script/link, in **dev** and **dist** mode.
+* Mode **release** in order to minify and hide info.
+* Others: Analytics, lenguages, appcache, and much!
 
 ![](docs/img/jake.gif)
 
-Este framework es totalmente "opinionated", si lo haces como el framework te propone vas a poder disfrutar de sus features sin perder tiempo en cosas más "triviales", solo te vas a dedicar a codear tu web app/SPA!
+This framework is "opinionated", if you use it as framework propose, you can enjoy with it and its features without waste time on trivial stuff, you only need to care about your web app/SPA!
 
-**NOTAS:**
+**NOTES:**
 
-* El concepto o abstracción detrás de este framework es distinto al que proponen varios, lo más cercano puede ser [webpack](https://webpack.github.io/) pero en vez de componentes esto es mas a nivel app, por otro lado otro similar puede ser [Yeoman](http://yeoman.io/) (y sus generators) que te arma el Scaffolding (andamios) con toda la automatización abierta para que agregues o quites a gusto. Este framework es más próximo a un "patrón" en vez de una solución para la automatización. Con lo cual te fuerza a trabajar respetando ciertas reglas (muy simples) y gracias a esto te provee soluciones de automatización como también de bootstrap/boilerplate (loader, compatibilidad, compresión, y un largo etc.), dicho de manera coloquial, el framework usa un esqueleto base para que luego sea rellenado con los files del proyecto (aka: project).
-* **Para ansiosos:** Como logra todo esto que promete?: Gracias a archivos _metadata_ (simples), que configuran al resto de los archivos, tanto individuales como grupales.
-* Orientado a projects nuevos sobre todo, pero también projects viejos se pueden adaptar a este de manera simple.
+* The main concept of abstraction behind it is different from others, the nearest project is [webpack](https://webpack.github.io/) but it is for app rather than components, on the other hand [Yeoman](http://yeoman.io/) and its generators build to you an scaffolding with all automatization open for you, where you can change it (add or remove task, etc). This framework is like a "pattern" rather than a automatization solution, it means you need to work with some rules (very simples), and regarding this the framework can resolve typical tasks easily, also get others features like loader, compatibilites, compress, and a long etc. The framework give you a skeleton that you need to fill with files.
+* **For anxious:** How to fulfill these promises?: With metadata files (simples), That configure others files as individual and as groups.
+* It is for new projects, but existing project can adapt.
 
+### ... translating in progress ...
 ---
 
 ### Presentacion y ejemplo rapido from scratch

@@ -18,7 +18,7 @@ Este framework te permite ahorrar incontable cantidad de horas en la automatizac
 ### Features:
 
 * **Todo el código de cada Aplicación (aka: app) termina en un único archivo _solido_ por app!**, yes just a request!
-* Genera un **loader** (sólido) "stand-alone" que ocupa menos 50k con todas las librerías (aka: Libs) base, para luego traerse cada app.
+* Genera un **loader** (sólido) "stand-alone" que ocupa menos 100k con todas las librerías (aka: Libs) base, para luego traerse cada app.
 * Mientras baja las apps muestra un bonito loading (7 opciones: pure CSS)
 * Preprocessors (incluidos):
  * CSS: [Sass](http://sass-lang.com/), [Less](http://lesscss.org/), [Stylus](http://stylus-lang.com/);
@@ -42,7 +42,7 @@ Este framework es totalmente "opinionated", si lo haces como el framework te pro
 
 * El concepto o abstracción detrás de este framework es distinto al que proponen varios, lo más cercano puede ser [webpack](https://webpack.github.io/) pero en vez de componentes esto es mas a nivel app, por otro lado otro similar puede ser [Yeoman](http://yeoman.io/) (y sus generators) que te arma el Scaffolding (andamios) con toda la automatización abierta para que agregues o quites a gusto. Este framework es más próximo a un "patrón" en vez de una solución para la automatización. Con lo cual te fuerza a trabajar respetando ciertas reglas (muy simples) y gracias a esto te provee soluciones de automatización como también de bootstrap/boilerplate (loader, compatibilidad, compresión, y un largo etc.), dicho de manera coloquial, el framework usa un esqueleto base para que luego sea rellenado con los files del proyecto (aka: project).
 * **Para ansiosos:** Como logra todo esto que promete?: Gracias a archivos _metadata_ (simples), que configuran al resto de los archivos, tanto individuales como grupales.
-* Orientado a projects nuevos sobre todo, pero también projects viejos se pueden adaptar a este de manera simple.
+* Orientado a projects nuevos sobre todo, pero también projects existentes se pueden adaptar a este de manera simple.
 
 ---
 
