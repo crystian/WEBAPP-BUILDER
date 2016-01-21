@@ -40,7 +40,7 @@
 			},
 			minifyFile: function(stream){
 				stream = stream
-					.pipe(cssnano());
+					.pipe(cssnano({zindex:false, reduceIdents: false}));
 				return stream;
 			},
 			postLinter: postLinter

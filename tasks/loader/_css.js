@@ -48,7 +48,7 @@
 			.pipe(csslint(global.cfg.pathFwk + 'csslintrc.json'))
 			.pipe(csslint.reporter(customReporter))
 			.pipe(csslint.failReporter())
-			.pipe(gif(global.cfg.loader.release, cssnano()))
+			.pipe(gif(global.cfg.loader.release, cssnano({zindex: false, reduceIdents: false})))
 			.pipe(gulp.dest(dest))
 			;
 	});
