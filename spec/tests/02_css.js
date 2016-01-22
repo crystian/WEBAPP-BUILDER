@@ -121,7 +121,7 @@ describe("02_css: CSS generation", function(){
 
 		expect(test('-e', compileLoaderCSS)).toBe(true);
 
-		expect(fs.statSync(compileLoaderCSS).size).toBeMoreLess(2673,20);
+		expect(fs.statSync(compileLoaderCSS).size).toBeMoreLess(2824,40);
 	});
 
 
