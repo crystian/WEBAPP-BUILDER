@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Jasmine" type="js.build_tools.npm" factoryName="npm">
+    <package-json value="$PROJECT_DIR$/package.json" />
+    <command value="run-script" />
+    <scripts>
+      <script value="test" />
+    </scripts>
+    <arguments value="--testMode" />
+    <envs />
+    <method />
+  </configuration>
+</component>

@@ -177,4 +177,49 @@ describe("01_boot: Boot test for the build system of framework (fuaaa)", functio
 
 		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(2);
 	});
+
+	it("(10) contentEditable & release = false", function(){
+		cd('10');
+		var projectConfig = 'project-config.json';
+		rm('-rf', projectConfig);
+		expect(test('-e', projectConfig)).toBe(false);
+		'{"contentEditable":true,"app":{"release":false}}'.to(projectConfig);
+		expect(test('-e', projectConfig)).toBe(true);
+
+		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var jsonFile = utils.readJsonFile(configJson);
+		expect(jsonFile.release).toBe(false);
+		expect(jsonFile.contentEditable).toBe(true);
+	});
+
+	it("(11) contentEditable & release = true", function(){
+		cd('10');
+		var projectConfig = 'project-config.json';
+		rm('-rf', projectConfig);
+		expect(test('-e', projectConfig)).toBe(false);
+		'{"contentEditable":true,"app":{"release":true}}'.to(projectConfig);
+		expect(test('-e', projectConfig)).toBe(true);
+
+		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var jsonFile = utils.readJsonFile(configJson);
+		expect(jsonFile.release).toBe(true);
+		expect(jsonFile.contentEditable).toBeUndefined();
+	});
+
+	it("(11) contentEditable = false & release = false", function(){
+		cd('10');
+		var projectConfig = 'project-config.json';
+		rm('-rf', projectConfig);
+		expect(test('-e', projectConfig)).toBe(false);
+		'{"contentEditable":false,"app":{"release":false}}'.to(projectConfig);
+		expect(test('-e', projectConfig)).toBe(true);
+
+		expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(0);
+
+		var jsonFile = utils.readJsonFile(configJson);
+		expect(jsonFile.release).toBe(false);
+		expect(jsonFile.contentEditable).toBeUndefined();
+	});
 });

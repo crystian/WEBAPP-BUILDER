@@ -16,7 +16,7 @@
 	"xdebugZoneActive": false,
 	"xshowDeviceInfo": false,
 	"xshowSkeletor": false,
-	"xcontentEditable": false,
+	"contentEditable": false,
 
 	"appCache":{
 		"active": false,

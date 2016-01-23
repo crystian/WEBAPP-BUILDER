@@ -15,7 +15,6 @@ Estas variables las setea el loader en el bootstrap, en `loader.cfg.*`:
 * isPortraid: detected by diag
 * isTouchDevice: detected by diag, be careful, can not be real
 * isMobile: set by diag, need it a review
-* isTablet: set by diag, need it a review
 * lang: by lang and settings
 * offline: detected by diag.offline
 * online: detected by diag.offline

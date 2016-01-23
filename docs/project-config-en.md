@@ -39,6 +39,9 @@ Este es la configuración por defecto de todos los projects, de querer cambiar a
 	"autoprefixer": ["ie 10","android 4","chrome 42","ff 27","ios 7","opera 19","safari 7"],
 	/* genera los prefijos css (--webkit, --ms, etc) automáticamente según versiones configuradas aquí. */
 
+	"contentEditable": false,
+	/* con este flag podes hacer que el contenido textual sea editable, util para conocer dimenciones y demas */
+
 	"appCache":{
 		"active": false,
 		"filename": "",

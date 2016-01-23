@@ -44,7 +44,7 @@ var loader = (function(){
 			console.info('Cordova device');
 			cfg.isDevice = 1;
 
-			//carga asincrona, cuando llegue y se parsee dispara un deviceReady y lo mando a cordovaReady
+			//async loader, when it will be called by cordova
 			doc.addEventListener('deviceready', _loadAsync, false);
 
 			xhr.getJsFile('cordova.js');
@@ -63,23 +63,24 @@ var loader = (function(){
 		}
 	}
 
-	//by http://www.html5rocks.com/es/tutorials/appcache/beginner/
+	/*
+	if there is a new version, so reload it automatically
+
+	by http://www.html5rocks.com/es/tutorials/appcache/beginner/
+	*/
 	function _handleAppCache(){
 		// Check if a new cache is available on page load.
-		//TODO improve it!, mostrar un cartel al usuario diciendole la proxima vez se actualizaran los datos
 		applicationCache.addEventListener('updateready', function(e){
 			if(applicationCache.status === applicationCache.UPDATEREADY){
 				// Browser downloaded a new app cache.
 				// Swap it in and reload the page to get the new hotness.
 				applicationCache.swapCache();
-				//				if (confirm('A new version of this site is available. Load it?')) {
 				location.reload();
-				//				}
 			}
 		}, false);
 	}
 
-	//overwriting variables and removing references
+	//overwriting variables and removing references, just for cleaning globlal
 	function _replaceVariables(){
 		loader.cfg = window._loaderCfg;
 		window._loaderCfg = null;
@@ -115,7 +116,6 @@ var loader = (function(){
 		diag.registerDetectOrientation();
 		cfg.isTouchDevice = diag.isTouchDevice();
 		cfg.isMobile = diag.isMobile();
-		cfg.isTablet = !cfg.isMobile;
 
 		events.init();
 		settings.init();
