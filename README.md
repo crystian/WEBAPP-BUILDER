@@ -5,12 +5,12 @@
 ![](https://david-dm.org/crystian/WEBAPP-BUILDER.svg)
 
 ###### MASTER: 
-[![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master&style=flat-square)](https://travis-ci.org/crystian/WEBAPP-BUILDER)
-[![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true&style=flat-square)](https://ci.appveyor.com/project/crystian/webapp-builder)
+[![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master&style=flat-square)](https://travis-ci.org/crystian/WEBAPP-BUILDER?branch=master)
+[![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true&style=flat-square)](https://ci.appveyor.com/project/crystian/webapp-builder/branch/master)
 
 ###### DEV: 
-[![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=master&style=flat-square)](https://travis-ci.org/crystian/WEBAPP-BUILDER)
-[![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/master?svg=true&style=flat-square)](https://ci.appveyor.com/project/crystian/webapp-builder)
+[![Build Status](https://travis-ci.org/crystian/WEBAPP-BUILDER.svg?branch=dev&style=flat-square)](https://travis-ci.org/crystian/WEBAPP-BUILDER?branch=dev)
+[![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/dev?svg=true&style=flat-square)](https://ci.appveyor.com/project/crystian/webapp-builder/branch/dev)
 
 
 [Version en español](docs/readme-es.md)
