@@ -37,11 +37,11 @@ exports.boot = function(config){
         pathPrj                = config.dirname + '/';
 
     //merge between default and specify:
-    global.cfg = _.merge(
-      require(pathFwk + projectConfigFile), //shoud be exist!
-      utils.fileExist(pathFwk + projectConfigLocalFile) ? require(pathFwk + projectConfigLocalFile) : {},
+    global.cfg = _.defaultsDeep(
+      utils.fileExist(pathPrj + projectConfigLocalFile) ? require(pathPrj + projectConfigLocalFile) : {},
       utils.fileExist(pathPrj + projectConfigFile) ? require(pathPrj + projectConfigFile) : {},
-      utils.fileExist(pathPrj + projectConfigLocalFile) ? require(pathPrj + projectConfigLocalFile) : {}
+      utils.fileExist(pathFwk + projectConfigLocalFile) ? require(pathFwk + projectConfigLocalFile) : {},
+      require(pathFwk + projectConfigFile) //shoud be exist!
     );
 
     global.cfg.pkg = require(pathPrj + packageJson);

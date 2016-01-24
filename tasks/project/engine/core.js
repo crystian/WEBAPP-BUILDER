@@ -140,7 +140,7 @@ function getFilesByGroup(fnEachFile, appName, pth){
   }
 
   groups.forEach(function(group){
-    var config = _.merge({}, defaults.group, group);
+    var config = _.defaultsDeep(group, defaults.group);
 
     if(aux.isNotActive(config) ||
       (global.cfg.app.release && group.ignoreOnRelease) ||
