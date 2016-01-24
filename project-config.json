@@ -51,8 +51,8 @@
     },
     "compatibilityMatrix": {
       "ie": [
-        9.9,
-        10.9
+        10.9,
+        11.9
       ],
       "firefox": [
         23.9,
@@ -158,15 +158,6 @@
         ],
         "js-prod": [
           "lz-string/libs/lz-string.min.js"
-        ]
-      },
-      "es6-promise": {
-        "version": "3.0.2",
-        "js-dev": [
-          "es6-promise/promise.js"
-        ],
-        "js-prod": [
-          "es6-promise/promise.min.js"
         ]
       },
       "fastclick": {

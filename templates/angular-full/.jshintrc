@@ -74,7 +74,6 @@
 	"globals":{
 		"loader":true,
 		"_loaderCfg":true,
-		"polyfills":true,
 		"byId":true,
 		"byClass":true,
 		"h":true,

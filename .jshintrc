@@ -76,7 +76,6 @@
     "gulp": true,
     "loader": true,
     "_loaderCfg": true,
-    "polyfills": true,
     "byId": true,
     "byClass": true,
     "h": true,
@@ -91,7 +90,6 @@
     "FastClick": true,
     "Connection": true,
     "JSON": true,
-    "ES6Promise": true,
     "Promise": true
   }
 }

@@ -44,7 +44,6 @@ gulp.task('_buildJs', ['_makeBower', '_removeBuild'], function(){
     www + 'modules/utils.js',
     www + 'modules/xhr.js',
     www + 'modules/diag.js',
-    www + 'modules/polyfill-ie.js',
     www + 'modules/settings.js',
     www + 'modules/lang.js',
     www + 'modules/events.js',

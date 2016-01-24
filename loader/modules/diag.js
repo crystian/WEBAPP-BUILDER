@@ -31,7 +31,7 @@ loader.diag = (function(window){
 
     //patches to normalize names:
     if(platformName === 'ie'){
-      loader.polyfills.customEventsForIE();
+      //loader.polyfills.customEventsForIE(); //no more support
     } else if(platformName.indexOf('android') >= 0){
       platformName = 'android';
     } else if(platformName.indexOf('chrome mobile') >= 0){

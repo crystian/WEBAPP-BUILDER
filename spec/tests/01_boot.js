@@ -173,12 +173,6 @@ describe("01_boot: Boot test for the build system of framework (fuaaa)", functio
     expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(2);
   });
 
-  it("(09) should has the es6-promise component", function(){
-    cd('09');
-
-    expect(exec('gulp _makeConfig --testMode ' + args, {silent: 1}).code).toBe(2);
-  });
-
   it("(10) contentEditable & release = false", function(){
     cd('10');
     var projectConfig = 'project-config.json';

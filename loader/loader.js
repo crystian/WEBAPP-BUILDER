@@ -96,13 +96,6 @@ var loader = (function(){
     setTimeout(_load, 100);
   }
 
-  function setPolyfills(){
-    if(!window.Promise){
-      console.warn('Promise polyfill installed');
-      ES6Promise.polyfill();
-    }
-  }
-
   function _load(){
     _handleDebugMode();
     cfg.compatibility = diag.executeDiag();
@@ -121,8 +114,6 @@ var loader = (function(){
     settings.init();
     ga.init();
     mx.init();
-
-    setPolyfills();
 
     _debugToolsLoad();
 

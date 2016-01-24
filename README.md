@@ -34,7 +34,7 @@ This framework allow you save several hours on the automatization, bootstrap/boi
 * Sprites generated automatically.
 * Prepare for [cordova](http://cordova.apache.org/).
 * Minify of libraries are not.
-* Libs preloaded: [platform](https://github.com/bestiejs/platform.js/), [es6-promise](https://github.com/jakearchibald/es6-promise); Opcionales: [fastClick](https://github.com/ftlabs/fastclick), [jquery](https://jquery.com/), [lz-string](https://github.com/pieroxy/lz-string)
+* Libs preloaded: [platform](https://github.com/bestiejs/platform.js/); Opcionales: [fastClick](https://github.com/ftlabs/fastclick), [lz-string](https://github.com/pieroxy/lz-string)
 * The final file can be compressed (por lz-string)
 * New files will add to the project automatically, like script/link, in **dev** and **dist** mode.
 * Mode **release** in order to minify and hide info.
