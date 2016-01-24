@@ -11,7 +11,7 @@
       wwwJson = 'www.json';
 
   exports.resolveFiles = function(file, config, appName, pth){
-    var type = utils.getExtensionFile(file.path);
+    var type = utils.getExtensionFilename(file.path);
 
     if(core.defaults.validCssPreproExtensions.indexOf(type) !== -1){
       type = 'css';

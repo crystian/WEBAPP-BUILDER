@@ -106,7 +106,7 @@ exports.addSlash = function(dictionary){
   return r;
 };
 
-exports.getExtensionFile = function(s){
+exports.getExtensionFilename = function(s){
   return path.extname(s).replace('.', '');
 };
 

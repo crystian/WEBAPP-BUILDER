@@ -79,7 +79,12 @@ loader.xhr = (function(){
     return request(url).then(function(data){
 
       try {
-        data = JSON.parse(loader.utils.za(data));
+
+        //anchor for compress, DON't touch it!
+        if(!loader.cfg.compress){
+          data = JSON.parse(loader.utils.decompress(data));
+        }//flagCompress
+
       } catch (e) {
         return Promise.reject(e);
       }
@@ -106,7 +111,7 @@ loader.xhr = (function(){
     return Promise.all(requestsArray.map(function(url){
       var q = {};
 
-      var type = loader.utils.getExtensionFile(url);
+      var type = loader.utils.getExtensionFilename(url);
 
       switch (type){
         case 'html':
@@ -142,7 +147,7 @@ loader.xhr = (function(){
   function requestMultimpleSyncUnique(url, options){
     return new Promise(function(resolve, reject){
 
-      var type = loader.utils.getExtensionFile(url),
+      var type = loader.utils.getExtensionFilename(url),
           fn;
 
       switch (type){

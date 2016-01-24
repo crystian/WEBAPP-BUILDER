@@ -5,9 +5,26 @@ Esta API provee de varias herramientas, datos del cliente y temas tipicos resuel
 ## LOADER
 ### UTILS
 
+* `showSkeletor()` (ver [Skeletor](#skeletor))
+* `hideSkeletor()`
+* `toggleSkeletor(value)`: Toggle automatico o enviar valor booleano
+* `getExtensionFilename(filename)`: Desde una URL
+* `setExtensionFilename(filename, extension)`
+* `compress(data)`: retorna informacion comprimida (by [lz-string](https://github.com/pieroxy/lz-string))
+* `decompress(data)`: retorna informacion descomprimida (by [lz-string](https://github.com/pieroxy/lz-string))
+* `setNewResourceByTag(resource, tag)`: Setea nuevo contenido en un tag dado (elemento: 0)
+* `setNewResourceById(resource, id, clear)`: Setea nuevo contenido en un id del DOM, puede reemplazar o agregar 
+* `compareSemVer(ver1, ver2)`: Compara dos strings del tipo versionado ["semver"](http://semver.org), retorna el resultado: 0 = iguales, 1 = `ver1` es mayor, 2 = `ver2` es mayor
+* `showPanicError(message)`: remueve todo el DOM y deja solo el mensaje enviado.
+* `getRandom(max)`: Eso mismo, desde 0, `max` puede ser un `int` o `long` 
+* `getRandomInt(max)`: Igual al anterior, redondea a `int`
+* `getRandomRange(min, max)`
+ 
+--
+
 #### Skeletor
-Mostrar u ocultar marcas visuales para comprender mejor el layout.
-No es automatico, se debe generar el estilo manualmente.
+Mostrar u ocultar marcas visuales para comprender mejor el layout.  
+**No es automatico, se debe generar el estilo manualmente.**  
 El mecanismo agrega el class "skeletor" al body, con lo cual, se debe agregar rules como las siguientes:
 
 ```css
@@ -23,27 +40,7 @@ El mecanismo agrega el class "skeletor" al body, con lo cual, se debe agregar ru
 ```
 **NOTE:** En modo release, se elimina la funcionalidad.
 
-##### Methods
-* showSkeletor
-* hideSkeletor
-* toggleSkeletor
 ---
-
-         cx: cache,
-         za: handleCompress,
-         compareSemVer: compareSemVer,
-         getExtensionFile: getExtensionFile,
-         setExtensionFilename: setExtensionFilename,
-         //		scrollTo: scrollTo,
-         getRandom: getRandom,
-         getRandomInt: getRandomInt,
-         getRandomRange: getRandomRange,
-
-         showPanicError: showPanicError,
-         setNewResourceByTag: setNewResourceByTag,
-         setNewResourceById: setNewResourceById
-
-
 
 
 

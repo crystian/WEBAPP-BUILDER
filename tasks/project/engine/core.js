@@ -187,7 +187,7 @@
 
   function doMagic(file, config, appName, pth, typeConfig){
     var fileName      = utils.getFileName(file.path),
-        type          = utils.getExtensionFile(file.path),
+        type          = utils.getExtensionFilename(file.path),
         fileNameExt   = utils.getFileNameWithExtension(file.path),
         fileNameWOMin = utils.removePreExtensionFilename(file.path, config.minExtension),
         fileNameMin   = file.base + '/' + fileName + '.' + config.minExtension + '.' + typeConfig.extensionFinal,

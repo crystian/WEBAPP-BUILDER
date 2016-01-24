@@ -45,7 +45,7 @@ loader.utils = (function(){
     return 0;
   }
 
-  function getExtensionFile(s){
+  function getExtensionFilename(s){
     var arr = s.split('.');
     if(arr.length === 0){
       return s;
@@ -84,35 +84,6 @@ loader.utils = (function(){
 
     el.appendChild(resourceLoader);
   }
-
-  //	//via: http://stackoverflow.com/questions/8917921/cross-browser-javascript-not-jquery-scroll-to-top-animation
-  //	function scrollTo(element, to, duration) {
-  //		var start = element.scrollTop,
-  //			change = to - start,
-  //			currentTime = 0,
-  //			increment = 20;
-  //
-  //		var animateScroll = function(){
-  //			currentTime += increment;
-  //			element.scrollTop = Math.easeInOutQuad(currentTime, start, change, duration);
-  //			if(currentTime < duration) {
-  //				setTimeout(animateScroll, increment);
-  //			}
-  //		};
-  //		animateScroll();
-  //	}
-  //
-  //	//t = current time
-  //	//b = start value
-  //	//c = change in value
-  //	//d = duration
-  //	Math.easeInOutQuad = function (t, b, c, d) {
-  //		t /= d/2;
-  //		if (t < 1){ return c/2*t*t + b;}
-  //		t--;
-  //		return -c/2 * (t*(t-2) - 1) + b;
-  //	};
-  //	////
 
   function showSkeletor(){
     toggleSkeletor(false);
@@ -159,41 +130,31 @@ loader.utils = (function(){
     return Math.random() * (max - min) + min;
   }
 
-  function handleCompress(data){
-    //anchor for compress, DON't touch it!
-    if(!loader.cfg.compress){
-      return data;
-    }//flagCompress
+  function decompress(data){
     console.log('Resource compressed');
     return LZString.decompressFromUTF16(data);
   }
 
-  //two arguments are set, one is a get, just for encapsulate and don't see the variables
-  function cache(key, value){
-    if(value !== undefined){
-      _cache[key] = value;
-    } else {
-      return _cache[key];
-    }
+  function compress(data){
+    console.log('Resource compressed');
+    return LZString.decompressFromUTF16(data);
   }
 
   return {
-    cx: cache,
-    za: handleCompress,
     showSkeletor: showSkeletor,
-    compareSemVer: compareSemVer,
-    getExtensionFile: getExtensionFile,
-    setExtensionFilename: setExtensionFilename,
     hideSkeletor: hideSkeletor,
     toggleSkeletor: toggleSkeletor,
-    //		scrollTo: scrollTo,
-    getRandom: getRandom,
-    getRandomInt: getRandomInt,
-    getRandomRange: getRandomRange,
-
+    getExtensionFilename: getExtensionFilename,
+    setExtensionFilename: setExtensionFilename,
+    compress: compress,
+    decompress: decompress,
+    compareSemVer: compareSemVer,
     showPanicError: showPanicError,
     setNewResourceByTag: setNewResourceByTag,
-    setNewResourceById: setNewResourceById
+    setNewResourceById: setNewResourceById,
+    getRandom: getRandom,
+    getRandomInt: getRandomInt,
+    getRandomRange: getRandomRange
   };
 
 })();
