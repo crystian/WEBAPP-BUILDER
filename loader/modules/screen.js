@@ -3,72 +3,72 @@
  */
 
 loader.loadingScreen = (function(el, animationElements){
-	'use strict';
+  'use strict';
 
-	var t        = false,
-			duration = 1000;
+  var t        = false,
+      duration = 1000;
 
-	function on(callback){
-		toggle(true, callback);
-	}
+  function on(callback){
+    toggle(true, callback);
+  }
 
-	function off(callback){
-		toggle(false, callback);
-	}
+  function off(callback){
+    toggle(false, callback);
+  }
 
-	function toggle(togg, callback){
-		togg = togg === undefined ? t : togg;
-		callback = callback ? callback : function(){};
-		if(togg){
-			t = false;
-			el.classList.remove('fadeout');
-			el.classList.add('fadein');
-			if(animationElements){
-				animationOn();
+  function toggle(togg, callback){
+    togg = togg === undefined ? t : togg;
+    callback = callback ? callback : function(){};
+    if(togg){
+      t = false;
+      el.classList.remove('fadeout');
+      el.classList.add('fadein');
+      if(animationElements){
+        animationOn();
 
-			}
-			setTimeout(function(){
-				callback();
-			}, duration);//be careful, it is on the css too
-		} else {
-			t = true;
-			el.classList.remove('fadein');
-			el.classList.add('fadeout');
-			setTimeout(function(){
-				if(animationElements){
-					animationOff();
-				}
-				callback();
-			}, duration);//be careful, it is on the css too
-		}
-	}
+      }
+      setTimeout(function(){
+        callback();
+      }, duration);//be careful, it is on the css too
+    } else {
+      t = true;
+      el.classList.remove('fadein');
+      el.classList.add('fadeout');
+      setTimeout(function(){
+        if(animationElements){
+          animationOff();
+        }
+        callback();
+      }, duration);//be careful, it is on the css too
+    }
+  }
 
-	function animationOn(){
-		animationSwitch(true);
-	}
+  function animationOn(){
+    animationSwitch(true);
+  }
 
-	function animationOff(){
-		animationSwitch(false);
-	}
+  function animationOff(){
+    animationSwitch(false);
+  }
 
-	function animationSwitch(v){
-		if(animationElements.length === 0){
-			return;
-		}
-		var i = 0,
-				l = animationElements.length;
+  function animationSwitch(v){
+    if(animationElements.length === 0){
+      return;
+    }
+    var i = 0,
+        l = animationElements.length;
 
-		for(; i < l; i++){
-			var el = animationElements[i];
-			if(v){
-				el.classList.add('on');
-			} else {
-				el.classList.remove('on');
-			}
-		}
-	}
+    for(; i < l; i++){
+      var el = animationElements[i];
+      if(v){
+        el.classList.add('on');
+      } else {
+        el.classList.remove('on');
+      }
+    }
+  }
 
 
-	return {on: on, off: off, toggle: toggle};
+  return {on: on, off: off, toggle: toggle};
 
 }(byId('loadingScreen'), document.getElementsByClassName('loadingAnimation')));

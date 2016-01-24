@@ -1,90 +1,83 @@
 /**
  * Created by Crystian on 25/12/2015.
  */
-(function(){
-	'use strict';
 
-	var utils = require('../../tasks/shared/utils'),
-			fs    = require('fs-extra');
+var utils = require('../../tasks/shared/utils'),
+    fs    = require('fs-extra');
 
-	var args = process.argv.slice(2).join(' ');
-	require('shelljs/global');
+var args = process.argv.slice(2).join(' ');
 
-	var testFolder  = 'spec/fixture/11build',
-			rootFwk     = '../../../../',
-			buildFolder = 'build/',
-			distFolder  = 'dist/',
-			cordovaWww  = 'cordova/www/',
-			dummyFolder = cordovaWww + 'dummy',
-			testFile    = cordovaWww + 'testfile.js',
-			indexFile   = cordovaWww + 'index.html';
+require('shelljs/global');
 
-	describe('11-5cordova: check some complex cases', function(){
+var testFolder  = 'spec/fixture/11build',
+    rootFwk     = '../../../../',
+    buildFolder = 'build/',
+    distFolder  = 'dist/',
+    cordovaWww  = 'cordova/www/',
+    dummyFolder = cordovaWww + 'dummy',
+    testFile    = cordovaWww + 'testfile.js',
+    indexFile   = cordovaWww + 'index.html';
 
-		beforeEach(function(){
-			cd(testFolder);
-		});
-		afterEach(function(){
-			cd(rootFwk);
-		});
+describe('11-5cordova: check some complex cases', function(){
 
-		it('(15) should clear www folder', function(){
-			cd('15');
-			rm('-rf', buildFolder);
-			rm('-rf', distFolder);
-			expect(test('-e', buildFolder)).toBe(false);
-			expect(test('-e', distFolder)).toBe(false);
+  beforeEach(function(){
+    cd(testFolder);
+  });
+  afterEach(function(){
+    cd(rootFwk);
+  });
 
-			mkdir('-p', dummyFolder);
-			'file'.to(testFile);
+  it('(15) should clear www folder', function(){
+    cd('15');
+    rm('-rf', buildFolder);
+    rm('-rf', distFolder);
+    expect(test('-e', buildFolder)).toBe(false);
+    expect(test('-e', distFolder)).toBe(false);
 
-			expect(exec('gulp removeCordovaWww --testMode ' + args, {silent: 1}).code).toBe(0);
+    mkdir('-p', dummyFolder);
+    'file'.to(testFile);
 
-			expect(test('-e', dummyFolder)).toBe(false);
-			expect(test('-e', testFile)).toBe(false);
-		});
+    expect(exec('gulp removeCordovaWww --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		it('(16) should not clear www folder, because it is not a cordova project', function(){
-			cd('16');
-			rm('-rf', buildFolder);
-			rm('-rf', distFolder);
-			expect(test('-e', buildFolder)).toBe(false);
-			expect(test('-e', distFolder)).toBe(false);
+    expect(test('-e', dummyFolder)).toBe(false);
+    expect(test('-e', testFile)).toBe(false);
+  });
 
-			expect(exec('gulp removeCordovaWww --testMode ' + args, {silent: 1}).code).toBe(0);
+  it('(16) should not clear www folder, because it is not a cordova project', function(){
+    cd('16');
+    rm('-rf', buildFolder);
+    rm('-rf', distFolder);
+    expect(test('-e', buildFolder)).toBe(false);
+    expect(test('-e', distFolder)).toBe(false);
 
-			expect(test('-e', testFile)).toBe(true);
-		});
+    expect(exec('gulp removeCordovaWww --testMode ' + args, {silent: 1}).code).toBe(0);
 
-		it('(15) should copy on cordova folder', function(){
-			cd('15');
-			rm('-rf', buildFolder);
-			rm('-rf', distFolder);
-			expect(test('-e', buildFolder)).toBe(false);
-			expect(test('-e', distFolder)).toBe(false);
+    expect(test('-e', testFile)).toBe(true);
+  });
 
-			expect(exec('gulp buildFullDist --testMode ' + args, {silent: 1}).code).toBe(0);
-			expect(exec('gulp copyCordovaWww --testMode ' + args, {silent: 1}).code).toBe(0);
+  it('(15) should copy on cordova folder', function(){
+    cd('15');
+    rm('-rf', buildFolder);
+    rm('-rf', distFolder);
+    expect(test('-e', buildFolder)).toBe(false);
+    expect(test('-e', distFolder)).toBe(false);
 
-			expect(test('-e', distFolder)).toBe(true);
-			expect(test('-e', indexFile)).toBe(true);
-			expect(cat(indexFile)).toContain('"active": true'); //cordova
-			expect(cat(indexFile)).toContain('"active": false'); //appCache
-			expect(cat(indexFile)).toContain('"isDevice": true');
-		});
+    expect(exec('gulp buildFullDist --testMode ' + args, {silent: 1}).code).toBe(0);
+    expect(exec('gulp copyCordovaWww --testMode ' + args, {silent: 1}).code).toBe(0);
 
-
-		it('(16) should fail because it is not a cordova project', function(){
-			cd('16');
-
-			expect(exec('gulp copyCordovaWww --testMode ' + args, {silent: 1}).code).toBe(2);
-		});
+    expect(test('-e', distFolder)).toBe(true);
+    expect(test('-e', indexFile)).toBe(true);
+    expect(cat(indexFile)).toContain('"active": true'); //cordova
+    expect(cat(indexFile)).toContain('"active": false'); //appCache
+    expect(cat(indexFile)).toContain('"isDevice": true');
+  });
 
 
-	});
+  it('(16) should fail because it is not a cordova project', function(){
+    cd('16');
+
+    expect(exec('gulp copyCordovaWww --testMode ' + args, {silent: 1}).code).toBe(2);
+  });
 
 
-}());
-
-
-
+});

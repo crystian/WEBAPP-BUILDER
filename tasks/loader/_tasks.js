@@ -3,85 +3,85 @@
  */
 
 (function(){
-	'use strict';
+  'use strict';
 
-	var gutil       = require('gulp-util'),
-			runSequence = require('run-sequence').use(gulp),
-			fs          = require('fs-extra'),
-			utils       = require('../shared/utils.js');
+  var gutil       = require('gulp-util'),
+      runSequence = require('run-sequence').use(gulp),
+      fs          = require('fs-extra'),
+      utils       = require('../shared/utils.js');
 
-	//alias:
-	//main task: buildLoader
-	gulp.task('configLoader', ['_makeConfig']);
-	gulp.task('cssLoader', ['_makeCss']);
-	gulp.task('csswLoader', ['_watchCss']);
-	//gulp.task('loaderTest',		['_test']);
+  //alias:
+  //main task: buildLoader
+  gulp.task('configLoader', ['_makeConfig']);
+  gulp.task('cssLoader', ['_makeCss']);
+  gulp.task('csswLoader', ['_watchCss']);
+  //gulp.task('loaderTest',		['_test']);
 
-	gulp.task('hookPreBuildLoader', []);
-	gulp.task('hookPostBuildLoader', []);
-	gulp.task('hookPreDistLoader', []);
-	gulp.task('hookPostDistLoader', []);
+  gulp.task('hookPreBuildLoader', []);
+  gulp.task('hookPostBuildLoader', []);
+  gulp.task('hookPreDistLoader', []);
+  gulp.task('hookPostDistLoader', []);
 
-	gulp.task('nothing', []);
+  gulp.task('nothing', []);
 
-	gulp.task('buildLoader', function(cb){
-		utils.breakIfIsRoot();
+  gulp.task('buildLoader', function(cb){
+    utils.breakIfIsRoot();
 
-		runSequence(
-			'hookPreBuildLoader',
-			'_buildLoader',
-			gutil.env.debug ? 'nothing' : '_removeTemp',
-			'_copyIndex',
-			'hookPostBuildLoader',
-			cb);
-	});
+    runSequence(
+      'hookPreBuildLoader',
+      '_buildLoader',
+      gutil.env.debug ? 'nothing' : '_removeTemp',
+      '_copyIndex',
+      'hookPostBuildLoader',
+      cb);
+  });
 
-	gulp.task('buildLoaderDist', function(cb){
-		utils.breakIfIsRoot();
-		global.cfg.isDist = true;
+  gulp.task('buildLoaderDist', function(cb){
+    utils.breakIfIsRoot();
+    global.cfg.isDist = true;
 
-		runSequence(
-			'hookPreDistLoader',
-			'_buildLoader',
-			'_copyIndexDist',
-			//(gutil.env.debug || global.cfg.cordova.active) ? 'nothing' : '_removeBuild',
-			'hookPostDistLoader',
-			cb);
-	});
+    runSequence(
+      'hookPreDistLoader',
+      '_buildLoader',
+      '_copyIndexDist',
+      //(gutil.env.debug || global.cfg.cordova.active) ? 'nothing' : '_removeBuild',
+      'hookPostDistLoader',
+      cb);
+  });
 
-	gulp.task('_copyIndex', function(cb){
+  gulp.task('_copyIndex', function(cb){
 
-		if(!global.cfg.isTemplate && !global.cfg.fromFwk){
+    if(!global.cfg.isTemplate && !global.cfg.fromFwk){
 
-			//if not template, copy index on www folder
-			var indexOri  = global.cfg.pathPrj + global.cfg.app.folders.build + global.cfg.loader.files.index,
-					indexDest = global.cfg.pathPrj + global.cfg.app.folders.www + global.cfg.loader.files.index;
+      //if not template, copy index on www folder
+      var indexOri  = global.cfg.pathPrj + global.cfg.app.folders.build + global.cfg.loader.files.index,
+          indexDest = global.cfg.pathPrj + global.cfg.app.folders.www + global.cfg.loader.files.index;
 
-			if(!utils.fileExist(indexOri)){
-				console.logRed(global.builderName +': what?, there are some problem generating index.html');
-				utils.exit(1);
-			}
+      if(!utils.fileExist(indexOri)){
+        console.logRed(global.builderName + ': what?, there are some problem generating index.html');
+        utils.exit(1);
+      }
 
-			fs.copySync(indexOri, indexDest);
-			cb();
-		} else {
-			cb();
-		}
+      fs.copySync(indexOri, indexDest);
+      cb();
+    } else {
+      cb();
+    }
 
-	});
+  });
 
-	gulp.task('_copyIndexDist', function(cb){
-		var indexOri  = global.cfg.pathPrj + global.cfg.app.folders.build + global.cfg.loader.files.index,
-				indexDest = global.cfg.pathPrj + global.cfg.app.folders.dist + global.cfg.loader.files.index;
+  gulp.task('_copyIndexDist', function(cb){
+    var indexOri  = global.cfg.pathPrj + global.cfg.app.folders.build + global.cfg.loader.files.index,
+        indexDest = global.cfg.pathPrj + global.cfg.app.folders.dist + global.cfg.loader.files.index;
 
-		if(!utils.fileExist(indexOri)){
-			console.logRed(global.builderName +': what?, there are some problem generating index.html');
-			utils.exit(1);
-		}
+    if(!utils.fileExist(indexOri)){
+      console.logRed(global.builderName + ': what?, there are some problem generating index.html');
+      utils.exit(1);
+    }
 
-		fs.copySync(indexOri, indexDest);
-		cb();
+    fs.copySync(indexOri, indexDest);
+    cb();
 
-	});
+  });
 
 }());

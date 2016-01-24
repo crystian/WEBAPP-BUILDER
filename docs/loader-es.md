@@ -22,7 +22,6 @@ Estas variables las setea el loader en el bootstrap, en `loader.cfg.*`:
 * connectionType: 0=without connection, 1=bad connection and 2 good connection //just for cordova apps
 * release
 * cordova.isDevice: just for cordova
-* contentEditable
 
 
 
