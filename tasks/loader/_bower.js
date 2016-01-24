@@ -2,9 +2,6 @@
  * Created by Crystian on 3/27/2015.
  */
 
-(function(){
-  'use strict';
-
   var utils   = require('../shared/utils.js'),
       bower   = require('gulp-bower'),
       fs      = require('fs-extra'),
@@ -162,5 +159,3 @@
 
     return collection;
   }
-
-}());

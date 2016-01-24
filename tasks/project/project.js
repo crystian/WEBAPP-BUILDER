@@ -4,115 +4,110 @@
  * this is a facace for common tasks for project
  */
 
-(function(){
-  'use strict';
+var runSequence = require('run-sequence').use(gulp),
+    fs          = require('fs-extra'),
+    utils       = require('../shared/utils'),
+    gutil       = require('gulp-util'),
+    del         = require('del'),
+    engine      = require('./engine/engine'),
+    image       = require('./engine/image');
 
-  var runSequence = require('run-sequence').use(gulp),
-      fs          = require('fs-extra'),
-      utils       = require('../shared/utils'),
-      gutil       = require('gulp-util'),
-      del         = require('del'),
-      engine      = require('./engine/engine'),
-      image       = require('./engine/image');
+//Alias
+gulp.task('css', ['makeCss']);
+gulp.task('js', ['makeJs']);
+gulp.task('html', ['makeHtml']);
+gulp.task('on', ['watch']);
+gulp.task('build', ['buildProject']);
+gulp.task('full', ['buildFull']);
+gulp.task('dist', ['buildFullDist']);
+gulp.task('removeBuild', ['_removeBuild']);
+gulp.task('removeTemp', ['_removeTemp']);
 
-  //Alias
-  gulp.task('css', ['makeCss']);
-  gulp.task('js', ['makeJs']);
-  gulp.task('html', ['makeHtml']);
-  gulp.task('on', ['watch']);
-  gulp.task('build', ['buildProject']);
-  gulp.task('full', ['buildFull']);
-  gulp.task('dist', ['buildFullDist']);
-  gulp.task('removeBuild', ['_removeBuild']);
-  gulp.task('removeTemp', ['_removeTemp']);
-
-  //hooks
-  gulp.task('hookPreBuildProject', []);
-  gulp.task('hookPostBuildProject', []);
-  gulp.task('hookPreDistProject', []);
-  gulp.task('hookPostDistProject', []);
+//hooks
+gulp.task('hookPreBuildProject', []);
+gulp.task('hookPostBuildProject', []);
+gulp.task('hookPreDistProject', []);
+gulp.task('hookPostDistProject', []);
 
 
-  gulp.task('buildFull', function(cb){
-    return runSequence(
-      'buildLoader',
-      'buildProject',
-      cb);
-  });
+gulp.task('buildFull', function(cb){
+  return runSequence(
+    'buildLoader',
+    'buildProject',
+    cb);
+});
 
-  gulp.task('buildProject', function(cb){
-    utils.breakIfIsRoot();
+gulp.task('buildProject', function(cb){
+  utils.breakIfIsRoot();
 
-    runSequence(
-      gutil.env.debug ? 'nothing' : 'removeTemp',
-      'hookPreBuildProject',
-      'makeWwwJson',
-      'hookPostBuildProject',
-      cb);
-  });
+  runSequence(
+    gutil.env.debug ? 'nothing' : 'removeTemp',
+    'hookPreBuildProject',
+    'makeWwwJson',
+    'hookPostBuildProject',
+    cb);
+});
 
-  //dist
-  gulp.task('buildFullDist', function(cb){
-    return runSequence(
-      'removeDist',
-      'buildLoaderDist',
-      'buildProjectDist',
-      global.cfg.cordova.active ? 'copyCordovaWww' : 'nothing',
-      //gutil.env.debug ? 'nothing' : 'removeBuild',
-      cb);
-  });
+//dist
+gulp.task('buildFullDist', function(cb){
+  return runSequence(
+    'removeDist',
+    'buildLoaderDist',
+    'buildProjectDist',
+    global.cfg.cordova.active ? 'copyCordovaWww' : 'nothing',
+    //gutil.env.debug ? 'nothing' : 'removeBuild',
+    cb);
+});
 
-  gulp.task('buildProjectDist', function(cb){
-    utils.breakIfIsRoot();
+gulp.task('buildProjectDist', function(cb){
+  utils.breakIfIsRoot();
 
-    global.cfg.isDist = true;
+  global.cfg.isDist = true;
 
-    return runSequence(
-      'hookPreDistProject',
-      'makeWwwJson',
-      'makeAppsJson',
-      'hookPostDistProject',
-      'genAppCache',
-      cb);
-  });
+  return runSequence(
+    'hookPreDistProject',
+    'makeWwwJson',
+    'makeAppsJson',
+    'hookPostDistProject',
+    'genAppCache',
+    cb);
+});
 
-  gulp.task('optimizeImages', function(){
-    return image.optimizeImages(global.cfg.app.folders.dist + 'img/**/*', global.cfg.app.folders.dist + 'img')
-  });
+gulp.task('optimizeImages', function(){
+  return image.optimizeImages(global.cfg.app.folders.dist + 'img/**/*', global.cfg.app.folders.dist + 'img')
+});
 
-  gulp.task('makeWwwJson', ['makeCss', 'makeJs', 'makeHtml'], function(){
-    return engine.makeWwwJson();
-  });
+gulp.task('makeWwwJson', ['makeCss', 'makeJs', 'makeHtml'], function(){
+  return engine.makeWwwJson();
+});
 
-  gulp.task('makeAppsJson', [], function(){
-    return engine.makeAppsJson();
-  });
+gulp.task('makeAppsJson', [], function(){
+  return engine.makeAppsJson();
+});
 
-  gulp.task('watch', function(){
-    gulp.watch([global.cfg.pathPrj + '**/app?(s).json'], ['makeFiles']);
-    gulp.watch([global.cfg.pathPrj + '**/?(*.scss|*.sass|*.less|*.styl)'], ['makeCss']);
-    gulp.watch([global.cfg.pathPrj + '**/?(*.ts|*.coffee)'], ['makeJs']);
-    gulp.watch([global.cfg.pathPrj + '**/?(*.html)'], ['makeHtml']);
-  });
+gulp.task('watch', function(){
+  gulp.watch([global.cfg.pathPrj + '**/app?(s).json'], ['makeFiles']);
+  gulp.watch([global.cfg.pathPrj + '**/?(*.scss|*.sass|*.less|*.styl)'], ['makeCss']);
+  gulp.watch([global.cfg.pathPrj + '**/?(*.ts|*.coffee)'], ['makeJs']);
+  gulp.watch([global.cfg.pathPrj + '**/?(*.html)'], ['makeHtml']);
+});
 
-  gulp.task('makeCss', function(){
-    return engine.css();
-  });
+gulp.task('makeCss', function(){
+  return engine.css();
+});
 
-  gulp.task('makeJs', function(){
-    return engine.js();
-  });
+gulp.task('makeJs', function(){
+  return engine.js();
+});
 
-  gulp.task('makeHtml', function(){
-    return engine.html();
-  });
+gulp.task('makeHtml', function(){
+  return engine.html();
+});
 
-  gulp.task('genAppCache', function(){
-    return engine.genAppCache();
-  });
+gulp.task('genAppCache', function(){
+  return engine.genAppCache();
+});
 
-  gulp.task('removeDist', function(){
-    return del([global.cfg.app.folders.dist], {force: true});
-  });
-
-}());
+gulp.task('removeDist', function(){
+  return del([global.cfg.app.folders.dist], {force: true});
+});
