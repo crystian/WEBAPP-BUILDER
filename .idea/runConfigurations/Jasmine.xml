@@ -5,7 +5,6 @@
     <scripts>
       <script value="test" />
     </scripts>
-    <arguments value="--testMode" />
     <envs />
     <method />
   </configuration>

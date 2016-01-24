@@ -49,7 +49,7 @@ describe("01_boot: Boot test for the build system of framework (fuaaa)", functio
 		pkgJsonContent.to(pkgJson);
 		expect(test('-e', pkgJson)).toBe(true);
 
-		expect(exec('gulp nothing ' + args, {silent: 1}).code).toBe(0);
+		expect(exec('gulp nothing', {silent: 0}).code).toBe(0);
 
 		var pkg = utils.readJsonFile(pkgJson);
 		expect(pkg.gitVersion).toBeDefined();
