@@ -38,7 +38,7 @@ loader.settings = (function(){
   function set(item, value){
     var v = '';
     try{
-      v = JSON.stringify(value)
+      v = JSON.stringify(value);
     } catch(e){
       console.error('Error with stringify: ', item, value, e);
     }
