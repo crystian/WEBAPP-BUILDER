@@ -9,6 +9,7 @@ script: npm run test-ci
 branches:
   only:
     - master
+    - dev
 cache:
   directories:
   - $HOME/.npm

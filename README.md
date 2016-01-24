@@ -52,11 +52,13 @@ This framework is "opinionated", if you use it as framework propose, you can enj
 
 ---
 
-### Presentation an samepl from scratch
+### Presentation an sample from scratch
 Fast sample about this framework from scratch
 
 [![video, click to play](http://img.youtube.com/vi/gs1Q3m0--Xs/0.jpg)](https://www.youtube.com/watch?v=gs1Q3m0--Xs)
+
 (in spanish)
+
 ---
 
 ## Extended version:
@@ -153,7 +155,7 @@ gulp.task('hookPostDistProject', function(cb){
 });
 ```
 
-#### Otras tasks & auxiliares
+#### Other tasks & auxiliares
 
 * `'optimizeImages'`, gulp task para optimiza todas las imágenes que estén dentro de "dist/img"
 * `image.optimizeImages(ori, dest, _config)`, función para optimizar imágenes, indicar desde y hasta, ver config dentro de la función.
