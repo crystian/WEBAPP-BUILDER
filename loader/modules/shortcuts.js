@@ -24,6 +24,7 @@ var h = function(id, v){
     el.innerHTML = v;
   }
 };
+//jshint unused:false
 var hp = function(id, v){
   'use strict';
   var el = byId(id);

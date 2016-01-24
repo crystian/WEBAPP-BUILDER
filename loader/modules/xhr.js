@@ -29,7 +29,7 @@ loader.xhr = (function(){
       };
       xhr.open('GET', url, true);
       // 10000 is to much?
-      xhr.timeout = 10000;//yes here, because ie11 give an error :S
+      xhr.timeout = 10000;//yes here, because ie11 give an error :S  //TODO review
       xhr.send();
     });
   }
@@ -39,16 +39,16 @@ loader.xhr = (function(){
   }
 
 
-  function requestApp(appConfig, loadAppSuccess, loadAppFail){
+  function requestApp(appConfig, losuccessFn, failFn){
     appConfig = typeof(appConfig) === 'string' ? {appName: appConfig} : appConfig;
-    return _requestOneOrAllInOne(appConfig, loadAppSuccess, loadAppFail);
+    return _requestOneOrAllInOne(appConfig, losuccessFn, failFn);
   }
 
   function _requestOneOrAllInOne(appConfig, loadAppSuccess, loadAppFail){
     //debugger
     if(loader.cfg.isDist){
       console.info('isDist!');
-      requestAllInOne(appConfig.appName + '.json', appConfig).then(loadAppSuccess, loadAppFail);
+      _requestAllInOne(appConfig.appName + '.json', appConfig).then(loadAppSuccess, loadAppFail);
       return;
     }
     var templatePath = '';
@@ -75,7 +75,7 @@ loader.xhr = (function(){
     });
   }
 
-  function requestAllInOne(url, options){
+  function _requestAllInOne(url, options){
     return request(url).then(function(data){
 
       try {
@@ -137,14 +137,14 @@ loader.xhr = (function(){
     }
 
     var url = requestsArray.shift();
-    return requestMultimpleSyncUnique(url, options)
+    return _requestMultimpleSyncUnique(url, options)
       .then(function(){
         return requestMultipleSync(requestsArray, options);
       });
 
   }
 
-  function requestMultimpleSyncUnique(url, options){
+  function _requestMultimpleSyncUnique(url, options){
     return new Promise(function(resolve, reject){
 
       var type = loader.utils.getExtensionFilename(url),
@@ -240,7 +240,6 @@ loader.xhr = (function(){
     requestApp: requestApp,
     requestMultipleSync: requestMultipleSync,
     requestMultipleAsync: requestMultipleAsync,
-    //requestAllInOne: requestAllInOne,
     requestAndSetJs: requestAndSetJs,
     requestAndSetHtml: requestAndSetHtml,
     requestAndSetCss: requestAndSetCss,

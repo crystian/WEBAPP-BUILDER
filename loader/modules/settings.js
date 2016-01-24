@@ -36,11 +36,23 @@ loader.settings = (function(){
   }
 
   function set(item, value){
-    localStorage.setItem(item, value);
+    var v = '';
+    try{
+      v = JSON.stringify(value)
+    } catch(e){
+      console.error('Error with stringify: ', item, value, e);
+    }
+    localStorage.setItem(item, v);
   }
 
   function get(item){
-    return localStorage.getItem(item);
+    var v = {};
+    try{
+      v = JSON.parse(localStorage.getItem(item));
+    } catch(e){
+      console.error('Error with parse: ', item, e);
+    }
+    return v;
   }
 
   function remove(item){
@@ -56,7 +68,6 @@ loader.settings = (function(){
     init: init,
     remove: remove,
     removeAlldata: removeAlldata,
-    vars: {},
     set: set,
     get: get
   };

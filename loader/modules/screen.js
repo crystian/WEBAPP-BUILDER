@@ -9,14 +9,14 @@ loader.loadingScreen = (function(el, animationElements){
       duration = 1000;
 
   function on(callback){
-    toggle(true, callback);
+    toggle(callback, true);
   }
 
   function off(callback){
-    toggle(false, callback);
+    toggle(callback, false);
   }
 
-  function toggle(togg, callback){
+  function toggle(callback, togg){
     togg = togg === undefined ? t : togg;
     callback = callback ? callback : function(){};
     if(togg){
@@ -24,8 +24,7 @@ loader.loadingScreen = (function(el, animationElements){
       el.classList.remove('fadeout');
       el.classList.add('fadein');
       if(animationElements){
-        animationOn();
-
+        animationSwitch(true);
       }
       setTimeout(function(){
         callback();
@@ -36,19 +35,11 @@ loader.loadingScreen = (function(el, animationElements){
       el.classList.add('fadeout');
       setTimeout(function(){
         if(animationElements){
-          animationOff();
+          animationSwitch(false);
         }
         callback();
       }, duration);//be careful, it is on the css too
     }
-  }
-
-  function animationOn(){
-    animationSwitch(true);
-  }
-
-  function animationOff(){
-    animationSwitch(false);
   }
 
   function animationSwitch(v){
@@ -68,7 +59,10 @@ loader.loadingScreen = (function(el, animationElements){
     }
   }
 
-
-  return {on: on, off: off, toggle: toggle};
+  return {
+    on: on,
+    off: off,
+    toggle: toggle
+  };
 
 }(byId('loadingScreen'), document.getElementsByClassName('loadingAnimation')));

@@ -80,6 +80,12 @@
       json.contentEditable = true;
     }
 
+    if(!global.cfg.app.release){
+      json.debugZoneActive = global.cfg.debugZoneActive;
+      json.showDeviceInfo = global.cfg.showDeviceInfo;
+      json.showSkeletor = global.cfg.showSkeletor;
+    }
+
     var compatibilityTpl =
           '\n\n//first check, if the browser is not compatible with it, it will cancel the loader!\n' +
           '_loaderCfg.compatibilityFirst = function () {\n' +

@@ -18,9 +18,9 @@
     "opera 19",
     "safari 7"
   ],
-  "xdebugZoneActive": false,
-  "xshowDeviceInfo": false,
-  "xshowSkeletor": false,
+  "debugZoneActive": false,
+  "showDeviceInfo": false,
+  "showSkeletor": false,
   "contentEditable": false,
   "appCache": {
     "active": false,
