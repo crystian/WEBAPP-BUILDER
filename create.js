@@ -21,11 +21,12 @@ require('./tasks/shared/utils');
 
 var questions = [];
 
-console.logGreen('                                                                                                     ');
-console.logGreen('  ╔═══════════════════════════════════════════════════════════════════════════════════════════════╗  ');
-console.logGreen('  ║ * Welcome to "create wizard" of WEAPP-BUILDER!, please read the readme.md before create one * ║  ');
-console.logGreen('  ╚═══════════════════════════════════════════════════════════════════════════════════════════════╝  ');
-console.logGreen('                                                                                                     ');
+console.logGreen('                                                                               ');
+console.logGreen(' ╔═══════════════════════════════════════════════════════════════════════════╗ ');
+console.logGreen(' ║             * Welcome to "create wizard" of WEAPP-BUILDER! *              ║ ');
+console.logGreen(' ║             please consider the readme.md before create one.              ║ ');
+console.logGreen(' ╚═══════════════════════════════════════════════════════════════════════════╝ ');
+console.logGreen('                                                                               ');
 console.log('');
 
 /*
