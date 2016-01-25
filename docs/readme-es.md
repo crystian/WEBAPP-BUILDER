@@ -15,8 +15,6 @@
 
 [English version](../README.md)
 
-### ... translating ...
-
 ## TL;DR Versión:
 
 Este framework te permite ahorrar incontable cantidad de horas en la automatización, bootstrap/boilerplate y temas típicos de una nueva [Web app/SPA (Single Page Application)](https://en.wikipedia.org/wiki/Web_application), esto es para aquellos que quieren/necesitan agilidad y velocidad de desarrollo, este es el objetivo de este framework. #agile #needForSpeed
@@ -24,7 +22,7 @@ Este framework te permite ahorrar incontable cantidad de horas en la automatizac
 ### Features:
 
 * **Todo el código de cada Aplicación (aka: app) termina en un único archivo _solido_ por app!**, yes just a request!
-* Genera un **loader** (sólido) "stand-alone" que ocupa menos 100k con todas las librerías (aka: Libs) base, para luego traerse cada app.
+* Genera un **loader** (sólido) "stand-alone" que ocupa menos 50k con todas las librerías (aka: Libs) base, para luego traerse cada app.
 * Mientras baja las apps muestra un bonito loading (7 opciones: pure CSS)
 * Preprocessors (incluidos):
  * CSS: [Sass](http://sass-lang.com/), [Less](http://lesscss.org/), [Stylus](http://stylus-lang.com/);
@@ -63,7 +61,7 @@ Ejemplo rapido de como usar este framework desde la nada misma
 
 _Continuando con el TL;DR, en lenguaje coloquial y ordenado por relevancia, como te gusta a vos ..._
 
-Este framework cuenta con numerosos temas típicos solucionados y deliciosos features, esto ahorraría fácil 4 semanas de trabajo full time e incluso más (from scratch)
+Este framework cuenta con numerosos temas típicos solucionados y deliciosos features ([API del loader](loader-es.md)), esto ahorraría fácil 4 semanas de trabajo full time e incluso más (from scratch)
 
 ### _aboutIt():_
 Este proyecto fue una extracción de otro más grande que luego de un tiempo me di cuenta que sería ideal separar las aguas y dejar el loader y temas de automatización listo para otros proyectos y no solo para el que fue creado. De ese momento a hoy paso más de 1 año y fueron tres versiones, donde los saltos de las mejoras son cuantiosos entre cada versión (De grunt a gulp por ejemplo) y me anime a hacerlos porque vi que realmente me servía a pesar del tiempo que me llevo, espero que te sea tan útil como a mí.
@@ -165,7 +163,7 @@ gulp.task('hookPostDistProject', function(cb){
 
 **WEBAPP-BUILDER:** (aka: builder) Este mismo proyecto donde está toda la magia, cuyo resultado entre otras cosas es un "index.html", **el contenido de este directorio no debe modificarse.**, solo se necesita un clon de este repositorio (aka: repo), servirá para N projects.
 
-**LOADER:** Es un proyecto interno que termina generando el "index.html" configurado según proyecto, con validaciones y demás ([más info del loader](docs/loader-es.md))
+**LOADER:** Es un proyecto interno que termina generando el "index.html" configurado según proyecto, con validaciones y demás ([API del loader](loader-es.md))
 
 **SOLIDOS:** Archivo único (json), con todo el código de la app: html, css y javascript.
 

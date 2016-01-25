@@ -24,7 +24,7 @@ This framework allow you save several hours on the automatization, bootstrap/boi
 ### Features:
 
 * **All code of each app, will be an unique file (solid) by app**, yes just a request!
-* It generate a **loader** (solid) "stand-alone" whose size is less than 100k with all base libraries (aka: Libs).
+* It generate a **loader** (solid) "stand-alone" whose size is less than 50k with all base libraries (aka: Libs).
 * While the app is loading, it shows a nice loading (7 options: pure CSS)
 * Preprocessors (included):
  * CSS: [Sass](http://sass-lang.com/), [Less](http://lesscss.org/), [Stylus](http://stylus-lang.com/);
@@ -65,7 +65,7 @@ Fast sample about this framework from scratch
 
 _continuing with TL;DR and a simple language and ordered by relevance, as you like ..._
 
-This framework has several typical issues about webapps fixed and has delicious features, it can save various weeks or more.
+This framework has several typical issues about webapps fixed and has delicious features ([loader API](docs/loader-en.md)), it can save various weeks or more.
 
 ### _aboutIt():_
 This project was an extraction of other bigger, than after the use I recognize that I can separate on two projects, my app and the "framework", for reuse easy on another projects. Since this moment to today, passed more than one year, and were three versions, and each version the improvements were greater, for example from grunt to gulp. It is very useful for my, I would like it useful for you.
@@ -169,7 +169,7 @@ gulp.task('hookPostDistProject', function(cb){
 
 **WEBAPP-BUILDER:** (aka: builder) Este mismo proyecto donde está toda la magia, cuyo resultado entre otras cosas es un "index.html", **el contenido de este directorio no debe modificarse.**, solo se necesita un clon de este repositorio (aka: repo), servirá para N projects.
 
-**LOADER:** Es un proyecto interno que termina generando el "index.html" configurado según proyecto, con validaciones y demás ([más info del loader](docs/loader-es.md))
+**LOADER:** Es un proyecto interno que termina generando el "index.html" configurado según proyecto, con validaciones y demás ([loader API](docs/loader-en.md))
 
 **SOLIDOS:** Archivo único (json), con todo el código de la app: html, css y javascript.
 
