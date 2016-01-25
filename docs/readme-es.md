@@ -40,7 +40,7 @@ Este framework te permite ahorrar incontable cantidad de horas en la automatizac
 * Modo **release** para minificar y ocultar info.
 * Otros: Analytics, lenguajes, appcache, y mucho, mucho más.
 
-![](docs/img/jake.gif)
+![](img/jake.gif)
 
 Este framework es totalmente "opinionated", si lo haces como el framework te propone vas a poder disfrutar de sus features sin perder tiempo en cosas más "triviales", solo te vas a dedicar a codear tu web app/SPA!
 
@@ -55,7 +55,7 @@ Este framework es totalmente "opinionated", si lo haces como el framework te pro
 ### Presentacion y ejemplo from scratch
 Ejemplo rapido de como usar este framework desde la nada misma
 
-[![video, click to play](http://img.youtube.com/vi/gs1Q3m0--Xs/0.jpg)](https://www.youtube.com/watch?v=gs1Q3m0--Xs)
+[![video, click to play](http://img.youtube.com/vi/gs1Q3m0--Xs/0.jpg)](img/presentation.jpg)
 
 ---
 
