@@ -339,6 +339,8 @@ Crear variable de ambiente: ANDROID_HOME apuntando al SDK.
 Agregar esta linea:  
 `export ANDROID_HOME=/Users/crystian/Documents/ADT/sdk` (con tu path claramente)
 
+**NOTA:** Browsers compatibles desde: IE11, Chrome 42, Firefox 27, iOS 7, Android 4, Opera 19, Safari 7
+
 ### Instalation
 
 * Clonar: `git clone https://github.com/crystian/WEBAPP-BUILDER.git`, recomiendo en un directorio único, ya que los proyectos por default se crearan en paralelo a este.

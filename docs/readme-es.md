@@ -265,7 +265,7 @@ Dentro del directorio que contiene a la app debe existir un `app.json` con un ar
 [Ver definición de `app.json`](docs/app-es.md)
 
 
-**NOTES:**
+**NOTA:**
 
 * El proceso genera el archivo `www.json` (uno por app), **no debería subirse al VCS del proyecto** (ya ignorado para git)
 * Si se modifican los archivos de configuración (`project-config*.json`), es necesario hacer un `gulp full`
@@ -329,6 +329,8 @@ Crear variable de ambiente: ANDROID_HOME apuntando al SDK.
 `sudo nano ~/.bash_profile`
 Agregar esta linea:  
 `export ANDROID_HOME=/Users/crystian/Documents/ADT/sdk` (con tu path claramente)
+
+**NOTA:** Browsers compatibles desde: IE11, Chrome 42, Firefox 27, iOS 7, Android 4, Opera 19, Safari 7 
 
 ### Instalación
 
