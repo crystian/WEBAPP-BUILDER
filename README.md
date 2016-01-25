@@ -55,7 +55,7 @@ This framework is "opinionated", if you use it as framework propose, you can enj
 ### Presentation an sample from scratch
 Fast sample about this framework from scratch
 
-[![video, click to play](docs/img/presentation.jpg)](https://www.youtube.com/watch?v=gs1Q3m0--Xs)
+[![video, click to play](docs/img/presentation.jpg)](https://www.youtube.com/watch?v=1oPw8MhGS1U)
 
 (in spanish)
 

@@ -55,7 +55,7 @@ Este framework es totalmente "opinionated", si lo haces como el framework te pro
 ### Presentacion y ejemplo from scratch
 Ejemplo rapido de como usar este framework desde la nada misma
 
-[![video, click to play](img/presentation.jpg)](https://www.youtube.com/watch?v=gs1Q3m0--Xs)
+[![video, click to play](img/presentation.jpg)](https://www.youtube.com/watch?v=1oPw8MhGS1U)
 
 ---
 
