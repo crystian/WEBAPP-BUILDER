@@ -54,7 +54,7 @@ describe("06_html: Index template to index - ", function(){
 
     expect(test('-e', indexFileCompiled)).toBe(true);
 
-    expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(66819, 1000);
+    expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(48000, 5000);
 
     var indexFileCompiledContent = cat(indexFileCompiled);
 
@@ -79,7 +79,7 @@ describe("06_html: Index template to index - ", function(){
 
     expect(test('-e', wwwIndex)).toBe(true);
 
-    expect(fs.statSync(wwwIndex).size).toBeMoreLess(156660, 10000);
+    expect(fs.statSync(wwwIndex).size).toBeMoreLess(123000, 12000);
 
     var indexFileCompiledContent = cat(wwwIndex);
 
@@ -104,7 +104,7 @@ describe("06_html: Index template to index - ", function(){
 
     expect(test('-e', indexFileCompiled)).toBe(true);
 
-    expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(66819, 1000);
+    expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(49000, 5000);
 
     var indexFileCompiledContent = cat(indexFileCompiled);
 
@@ -129,7 +129,7 @@ describe("06_html: Index template to index - ", function(){
 
     expect(test('-e', indexFileCompiled)).toBe(true);
 
-    expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(66818, 1000);
+    expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(49000, 5000);
 
     var indexFileCompiledContent = cat(indexFileCompiled);
 
@@ -149,7 +149,7 @@ describe("06_html: Index template to index - ", function(){
 
     expect(test('-e', indexFileCompiled)).toBe(true);
 
-    expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(156660, 10000);
+    expect(fs.statSync(indexFileCompiled).size).toBeMoreLess(123000, 12000);
 
     var indexFileCompiledContent = cat(indexFileCompiled);
 

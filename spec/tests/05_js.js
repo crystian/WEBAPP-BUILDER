@@ -37,7 +37,7 @@ describe("05_js: JS mechanics", function(){
     expect(test('-e', compileLoaderJs)).toBe(true);
 
     //mac: 107629, windows: 109083, whatt?
-    expect(fs.statSync(compileLoaderJs).size).toBeMoreLess(108000, 5000);
+    expect(fs.statSync(compileLoaderJs).size).toBeMoreLess(75000, 7000);
   });
 
   it('(02) should create compile loader - minificated', function(){
@@ -54,7 +54,7 @@ describe("05_js: JS mechanics", function(){
 
     expect(test('-e', compileLoaderJs)).toBe(true);
 
-    expect(fs.statSync(compileLoaderJs).size).toBeMoreLess(50110, 1000);
+    expect(fs.statSync(compileLoaderJs).size).toBeMoreLess(32000, 3000);
   });
 
   it('(03) should jshint validate the code', function(){

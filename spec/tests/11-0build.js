@@ -222,7 +222,7 @@ describe('11-0build: check basic commands for build', function(){
       expect(test('-e', indexDist)).toBe(true);
 
       expect(cat(indexDist)).toContain('isDist:!0');
-      expect(fs.statSync(indexDist).size).toBeMoreLess(67220, 1000);
+      expect(fs.statSync(indexDist).size).toBeMoreLess(49000, 5000);
 
     });
 
@@ -489,7 +489,7 @@ describe('11-0build: check basic commands for build', function(){
       expect(test('-e', indexDist)).toBe(true);
 
       expect(cat(indexDist)).toContain('isDist:!0');
-      expect(fs.statSync(indexDist).size).toBeMoreLess(66819, 1000);
+      expect(fs.statSync(indexDist).size).toBeMoreLess(49000, 5000);
 
     });
 
