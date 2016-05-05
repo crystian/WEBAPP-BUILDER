@@ -13,18 +13,18 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/tjrjsi1diw1pdie4/branch/dev?svg=true&style=flat-square)](https://ci.appveyor.com/project/crystian/webapp-builder/branch/dev)
 
 
-[Version en español](docs/readme-es.md)
+[[Version en español / Spanish version](docs/readme-es.md)]
 
 
 ## TL;DR Version:
 
-This framework allow you save several hours on the automatization, bootstrap/boilerplate and tipically issues on a new [Web app/SPA (Single Page Application)](https://en.wikipedia.org/wiki/Web_application), this is for who need speed and agility on his devs, this is the objective of this framework. #agile #needForSpeed
+This framework allow you save several hours on the automatization, bootstrap/boilerplate and tipically issues on a new [Web app/SPA (Single Page Application)](https://en.wikipedia.org/wiki/Web_application), this is for who needs speed and agility on his products, this is the objective of this framework. #agile #needForSpeed
 
 
 ### Features:
 
 * **All code of each app, will be an unique file (solid) by app**, yes just a request!
-* It generate a **loader** (solid) "stand-alone" whose size is less than 50k with all base libraries (aka: Libs).
+* It generates a **loader** (solid) "stand-alone" whose size is less than 50k with all base libraries (aka: Libs).
 * While the app is loading, it shows a nice loading (7 options: pure CSS)
 * Preprocessors (included):
  * CSS: [Sass](http://sass-lang.com/), [Less](http://lesscss.org/), [Stylus](http://stylus-lang.com/);
@@ -33,7 +33,7 @@ This framework allow you save several hours on the automatization, bootstrap/boi
 * Detection of browser and compatibiltie (configuration via browser and version)
 * Sprites generated automatically.
 * Prepare for [cordova](http://cordova.apache.org/).
-* Minify of libraries are not.
+* Minify of libraries (for libs aren't minified)
 * Libs preloaded: [platform](https://github.com/bestiejs/platform.js/); Opcionales: [fastClick](https://github.com/ftlabs/fastclick), [lz-string](https://github.com/pieroxy/lz-string)
 * The final file can be compressed (por lz-string)
 * New files will add to the project automatically, like script/link, in **dev** and **dist** mode.
@@ -57,7 +57,7 @@ Fast sample about this framework from scratch
 
 [![video, click to play](docs/img/presentation.jpg)](https://youtu.be/E76rpMsWFlU)
 
-(in spanish)
+(in spanish with closed caption in english)
 
 ---
 
@@ -83,7 +83,7 @@ Sorry for my poor english, I am working really hard to improve it.
 	* [Gulp tasks](#gulp-tasks)
 	* [Hooks](#hooks)
 	* [Other tasks & auxiliares](#other-tasks--auxiliares)
-* [Use instructions](#use-instructions)
+* [guide](#guide)
 	* [Concepts](#concepts)
 	* [Structure of _file system_](#structure-of-file-system)
 	* [Project configuration](#project-configuration)
@@ -99,51 +99,49 @@ Sorry for my poor english, I am working really hard to improve it.
 
 ---
 
-## ... translating in progress ...
-
 ## Tasks:
 
 #### Gulp tasks
 
-* `gulp buildProject`, construcción (aka: build) del proyecto (rápido)
-* `gulp buildFull` (alias: `full`) todo el proceso de building, incluyendo: _loader_ y _project_ ("lento").
-* `gulp css` aplicación de preprocessors
-* `gulp js` aplicación de preprocessors
-* `gulp html` aplicación de preprocessors
-* `gulp watch` watcher (observador (? ) del project para aplicar preprocessors u otras tasks
-* `gulp serve` web server en modo _dev_ directo del proyecto
-* `gulp serveDist` web server del directorio _dist_
-* `gulp runAndroid` ejecuta la app en el teléfono android (si es una app "cordova", el SDK de android debe estar configurado en el path, y un device conectado en modo "dev")
+* `gulp buildProject` (alias: `build`) fast build of your project.
+* `gulp buildFull` (alias: `full`) all buildings are including: _loader_ and _project_ ("slower").
+* `gulp css` preprocessors
+* `gulp js` preprocessors
+* `gulp html` preprocessors
+* `gulp watch` watcher for your project it calls the preprocessors and others tasks
+* `gulp serve` web server in _dev_ mode from the project folder.
+* `gulp serveDist` web server from _dist_ folder.
+* `gulp runAndroid` run the app on an android device (yeap, it is "cordova" app, you need to have the sdk and environment variables on your path, and a device connected on _dev_ mode, see (Prerequisites)[#Prerequisites])
 
-Ver más en: `tasks/project/project.js`
+More taks: `tasks/project/project.js`
 
-**Argumentos opcionales:**
-* `--debug`: muestra más info al momento de _buildear_.
-* `--release`: fuerza a que sea en modo release, incluso aunque en el project-config este _seteado_ en false.
-* `--noMin`: fuerza a no usar versiones min, útil para debugear.
-* `--time`: muestra tiempos de ejecución.
-* `--testMode`: guarda en el proyecto el archivo config.js, útil para debugear, lo usan los tests.
+**Optional params:**
+* `--debug`: show info on _builder_.
+* `--release`: force the release _mode_ although the `project-config` is setted on false.
+* `--noMin`: force donn't use min versions, it is useful when you need to debuging.
+* `--time`: show times of compile.
+* `--testMode`: save on the project a temporal file called: _config.js_, useful for debuging.
 
 #### Hooks:
 
-Si tenes que hacer tasks (altamente probable), podes utilizar estos hooks para poder "engancharte" en el flujo (aka: Stream) de [gulp](https://github.com/gulpjs/gulp).
+If you need to do a custom tasks, you can use these hooks for get the stream and make your changes ([gulp](https://github.com/gulpjs/gulp)).
 
 * hookPreBuildProject
 * hookPostBuildProject
 * hookPreDistProject
 * hookPostDistProject
 
-**Ejemplo:**
+**Sample:**
 
 ```javascript
-/* al hacer un "dist" esto ejecuta antes */
+/* when the builder makes "dist" version, it runs this task before */
 gulp.task('hookPreDistProject', function(cb){
 	runSequence(
 		'ngTemplateApp2',
 		cb);
 });
 
-/* y esto después */
+/* and this after */
 gulp.task('hookPostDistProject', function(cb){
 	runSequence(
 		'copyFonts',
@@ -157,34 +155,34 @@ gulp.task('hookPostDistProject', function(cb){
 
 #### Other tasks & auxiliares
 
-* `'optimizeImages'`, gulp task para optimiza todas las imágenes que estén dentro de "dist/img"
-* `image.optimizeImages(ori, dest, _config)`, función para optimizar imágenes, indicar desde y hasta, ver config dentro de la función.
-* `customs.ngTemplate(stream)`, función para apps angular: Genera template.js listo para ser incluido.
+* `'optimizeImages'`, gulp task for optimizate all images from "dist/img"
+* `image.optimizeImages(ori, dest, _config)`, function for optimizate iamges, see config on the same function.
+* `customs.ngTemplate(stream)`, function for angular apps: It generates a template.js ready for wil be included.
 
 ---
 
-## Use instructions
+## Guide:
 
 ### Concepts:
 
-**WEBAPP-BUILDER:** (aka: builder) Este mismo proyecto donde está toda la magia, cuyo resultado entre otras cosas es un "index.html", **el contenido de este directorio no debe modificarse.**, solo se necesita un clon de este repositorio (aka: repo), servirá para N projects.
+**WEBAPP-BUILDER:** (aka: builder) This is this project, where all magic is here, the result of this project is a "index.html", **this folder doesn't should modify.**, you just need to clone this project from the repo, and it will use for your projects.
 
-**LOADER:** Es un proyecto interno que termina generando el "index.html" configurado según proyecto, con validaciones y demás ([loader API](docs/loader-en.md))
+**LOADER:** It is an internal project for build de "index.html" configured by each project ([loader API](docs/loader-en.md))
 
-**SOLIDOS:** Archivo único (json), con todo el código de la app: html, css y javascript.
+**SOLIDS:** Unique files (json), with all code of your app: html, css and javascript.
 
-**APPs:** Son Web apps/SPAs (aka: apps), con las cuales se generan archivos _sólidos_.
+**APPs:** These are your apps/SPAs (aka: apps), for each app would generate a _solid_ file.
 
-**PROJECT:** Es tu proyecto; Es el contenedor de las apps; El _builder_ genera el index y luego lo termina copiando en el project. El framework cuenta con un [wizard](#instalación-1) para la creación de projects (a partir de templates) o podes crearlo de manera manual.
+**PROJECT:** This is your project; it contain your apps; The _builder_ will generate a index and after that it will copy this index file onto your project. This framework has a [wizard](#instalación-1) for create an empty project with several templates, but you can create the app from the scratch as I showed on the video.
 
-**GULPFILE.js & BOOT.js:** Para conectar el project con el builder se debe hacer desde el `gulpfile.js` del project y debe hacer un _require_ de `tasks/boot.js` del builder, puede ser relativo o absoluto. Toda la automatización está resuelta con gulp.
+**GULPFILE.js & BOOT.js:** For connect the projects with the builder, you should use `gulpfile.js` on your project and it needs to do a _required_ for the `tasks/boot.js` file into the builder, it can be relative or absolut. All automatizacion tasks was resolve on gulp.
 
-**DEV/DIST:** Modo _dev_ es mientras trabajas y desarrollas la app en el directorio: _www_, en modo _dist_ es la versión minificada y con todo listo para ser publicada, restando información, logs, comentarios, etc.
+**DEV/DIST:** Mode _dev_ is when your are working on your project on the _www_ folder, and _dist_ mode is with all resources minificated and all ready for be published (without logs, comments, etc).
 
 **METADATA:**
-Toda la magia depende de estos archivos de "configuración" (JSONs), que le dicen a la app tanto en modo _dev_ como en _dist_, donde y como son los archivos a incluir, esto es la columna vertebral de este sistema. **Tienen varios atributos ya cargados por defecto, solo deberías agregar en tu metadata lo que queres distinto de lo default.**
+All magic depends from these files (JSONs), it configures the app for _dev_ or _dist_ mode, how is each file to include on the project, this is the dorsal spine of this system, there are several attributes by default, you should add only attributes different than default if you want another result.
 
-#### Conceptual structure:
+#### Structure of file system with metadata files:
 
 ![](https://docs.google.com/drawings/d/10MpC23l3Y4yr_FxCz9srtr1IGD0e5Dl5_-Yh21GIW0g/pub?w=559&h=431)
 
@@ -192,43 +190,43 @@ Toda la magia depende de estos archivos de "configuración" (JSONs), que le dice
 
 ### Structure of file system
 
-Esquema del builder con sus files más importantes, y projects de ejemplo de como debería ser la estructura. Luego veremos con mas profundidad cada opción.
+This is the builder with its more important files and a simple project as sample that it should be the stucture. After we do review on each option..
 
 ```
 PROJECTS/
-  ├─ WEBAPP-BUILDER/              = repo clonado, no modificar!
-  │  ├─ loader/                   = todo lo que será parte del archivo index.html final
+  ├─ WEBAPP-BUILDER/              = repo cloned, don't modify!
+  │  ├─ loader/                   = all content will be part of index.html file.
   │  ├─ ...
-  │  ├─ tasks/                    = tasks de gulp para el project como para el loader
+  │  ├─ tasks/                    = gulp tasks for the loader and the projects
   │  │  ├─ ...
-  │  │  ├─ project/               = solo tasks para el project
-  │  │  ├─ shared/                = entre el project y el loader
-  │  │  └─ boot.js                = archivo principal de inicialización de gulp, todos los projects deben incluirlo
-  │  └─ gulpfile.js               = propio del loader
-  ├─ other_project/               = project no basado en el builder, solo para demostrar que se puede convivir con otros
-  ├─ PROJECT1/                    = basado en builder
-  │  ├─ build/                    = autogenerado
-  │  ├─ dist/                     = autogenerado
-  │  ├─ www/                      = las apps deben estar dentro
-  │  │  ├─ myApp/                 = nombre de la app/directorio
+  │  │  ├─ project/               = just tasks for projects
+  │  │  ├─ shared/                = tasks for projects and loader
+  │  │  └─ boot.js                = initial file for gulp, ALL PROJECT MUST INCLUDE IT.
+  │  └─ gulpfile.js               = for the "loader"
+  ├─ other_project/               = others projecet not for this framework, just for demotrate compatibily.
+  ├─ PROJECT1/                    = project based on builder
+  │  ├─ build/                    = autogenerated
+  │  ├─ dist/                     = autogenerated
+  │  ├─ www/                      = your apps should be here
+  │  │  ├─ myApp/                 = myApp is an app
   │  │  │  ├─ ...
-  │  │  │  ├─ app.json            = metadata de los archivos de la app actual: myApp
-  │  │  │  └─ www.json            = autogenerado
-  │  │  └─ apps.json              = array de strings con nombres de cada app, en este caso: '["myApp"]'
-  │  ├─ gulpfile.js               = debe conectar con el "tasks/boot" del builder
-  │  ├─ package.json              = info y definición del project
-  │  ├─ project-config.json       = configuración del builder sobre el project, debe estar en tu VCS
-  │  └─ project-config-local.json = configuración local, NO DEBE subirse a tu VCS
-  └─ PROJECT2/                    = otro ejemplo, basado en webapp-builder.
+  │  │  │  ├─ app.json            = metadata for each file on the myApp
+  │  │  │  └─ www.json            = autogenerated
+  │  │  └─ apps.json              = array of strings with each app, in this case it would be: '["myApp"]'
+  │  ├─ gulpfile.js               = it should include a "WEBAPP-BUILDER/tasks/boot" from the builder
+  │  ├─ package.json              = info and definitions about the project
+  │  ├─ project-config.json       = builder's configuration about the project (it should be on your VCS)
+  │  └─ project-config-local.json = builder's local configuration (it DOESN'T SHOULD BE on your VCS)
+  └─ PROJECT2/                    = another project, based on builder.
      ├─ ...
      ├─ www/
      │  ├─ otherApp/
      │  │  ├─ ...
-     │  │  └─ app.json            = metadata de los archivos de la app actual: otherApp
-     │  ├─ app2/                  = nombre de la app/directorio
+     │  │  └─ app.json            = in this case de actual app is: otherApp
+     │  ├─ app2/
      │  │  ├─ ...
-     │  │  └─ app.json            = metadata de los archivos de la app actual: app2
-     │  └─ apps.json              = en este caso: '["otherApp","app2"]'
+     │  │  └─ app.json
+     │  └─ apps.json              = in this case should be: '["otherApp","app2"]'
      └─ ...
 
 ```
@@ -236,11 +234,11 @@ PROJECTS/
 
 ### Project configuration:
 
-Estos son los archivos de configuración (metadata) que deben de existir en el project.
+These files configure the project via metadata, and them should be exist on the project.
 
 #### `gulpfile.js`
 
-Conecta con el builder, solo es necesario enviarle una instancia de gulp, y el directorio actual de esta manera:
+It file connect with the builder, just need to send a gulp instance and the actual folder, like this sample:
 ```javascript
 var gulp = require('gulp');
 
@@ -251,34 +249,35 @@ require(builderFolder + 'tasks/boot').boot({
 	dirname: __dirname
 });
 ```
-**Nota:** Podes agregar más tasks de gulp ahí mismo.
+**Note:** You can add other gulp tasks here
+
 
 #### `project-config.json`
-y `project-config-local.json`
+and `project-config-local.json`
 
-El archivo principal de configuración del _builder_ es `project-config.json` el cual tiene toda la posible configuración; Los proyectos usan este archivo y pueden redefinirlo (aka: extend) simplemente con un `project-config.json` en la raíz de cada proyecto.
-En algunos casos puede ser necesario redefinirlo y que no se quiera subir al repo (credenciales, etc), para esto crear un archivo llamado: `project-config-local.json` tanto en el proyecto como en el _builder_ es soportado.
+This file is the main file for the _builder_, it has all posible configuration about your project and each app can refine it on its own folder.
+Sometimes you need to refine it but you don't want to push it on the repo (credentials tipically), so, you can add another file called: `project-config-local.json`, you can create this file on your project or even on the builder (just ensure don't push it to your repo)
 
-El orden del extend es: `BUILDER/project-config.json` -> `BUILDER/project-config-local.json` -> `PROJECT/project-config.json` -> `PROJECT/project-config-local.json`
+The order of _extend_ is: `BUILDER/project-config.json` -> `BUILDER/project-config-local.json` -> `PROJECT/project-config.json` -> `PROJECT/project-config-local.json`
 
-[Ver definición de `project-config.json`](docs/project-config-es.md)
+[See definition `project-config.json`](docs/project-config-en.md)
 
 #### `apps.json`
 
-Dentro del directorio `www` debe existir un `apps.json` con un array de strings con cada nombre de `app` (directorio) a procesar (ejemplo: ["app1", "app2", "app3"]); El `www` se puede cambiar desde folders/www en el project-config.
+Into the `www` folder should exist an `apps.json` with an array of strings, each string should be an `app`, sample: ["app1", "app2", "app3"]); the `www` can change from project-config file.
 
 #### `app.json`
 
-Dentro del directorio que contiene a la app debe existir un `app.json` con un array de objetos de configuración de grupos de archivos.
+On each `app` folder should exist an `app.json` with an array of object, each object we called "group" because it should has a group of files (or just one at least)
 
-[Ver definición de `app.json`](docs/app-en.md)
+[See definition `app.json`](docs/app-en.md)
 
 
 **NOTES:**
 
-* El proceso genera el archivo `www.json` (uno por app), **no debería subirse al VCS del proyecto** (ya ignorado para git)
-* Si se modifican los archivos de configuración (`project-config*.json`), es necesario hacer un `gulp full`
-* En modo _dev_ hace request secuencial de cada archivo del proyecto, en modo _dist_, es solo un archivo por app (con css, js y html dentro).
+* The build process generates a `www.json` file (once per app), and it doesn't push on your VCS (for git it was ignore) 
+* If you modify some configuration file (`project-config*.json`), you need to run `gulp full`
+* On _dev_ mode, the chain of request is secuencial on each project, and on _dist_ mode just one file for app (with css, js and html included).
 
 ---
 
@@ -286,9 +285,9 @@ Dentro del directorio que contiene a la app debe existir un `app.json` con un ar
 
 ### Sprites
 
-Los sprites se generan automáticamente siguiendo este patrón:
+The sprites would generate automatically following this pattern:
 
-* CSS rule: Debe ser un background, aplicado con background-image; Recomiendo aplicar a un div con el tamaño justo, ya que debería soportar distintas densidades de pixeles, ejemplo:
+* CSS rule: Should be a background, using with `background-image`; I recomend using a div with the size, because it should support differents densities of pixeles, sample:
 
 	* Normal:
 	``` css
@@ -304,23 +303,23 @@ Los sprites se generan automáticamente siguiendo este patrón:
 		}
 	```
 
-	* Las imágenes deben ser PNG y estar ubicadas en: PROJECT/APP/assets/img/sprite*
+	* The images should be PNG and should be on this folder: PROJECT/APP/assets/img/sprite*
 
 ---
 
-## Instalation
+## Instalation & environment
 
 ### Prerequisites:
 
 * [Node/npm](https://nodejs.org)
-* Gulp (vía npm, global)
-* Bower (vía npm, global)
+* Gulp (via npm, global)
+* Bower (via npm, global)
 * [Git](http://git-scm.com/downloads)
-* [Graphics Magick](http://www.graphicsmagick.org/download.html) (para generación de sprites), en Mac: `brew install graphicsmagick` puede alcanzar.
+* [Graphics Magick](http://www.graphicsmagick.org/download.html) (for sprites), on Mac: `brew install graphicsmagick`.
 
-**Opcionales:**
+**Optionals:**
 
-* [Cordova](http://cordova.apache.org/) (vía npm, global), si usas este feature los siguientes puntos son requeridos, y todos en el [path](https://en.wikipedia.org/wiki/PATH_(variable)):
+* [Cordova](http://cordova.apache.org/) (via npm, global), if you use this feature, you need to have these components on your [path](https://en.wikipedia.org/wiki/PATH_(variable)):
 	* [Android SDK](https://developer.android.com/sdk/index.html#Other)
 	* [Java](https://www.java.com/en/download/manual.jsp)
 	* [Ant](http://ant.apache.org/bindownload.cgi)
@@ -328,37 +327,40 @@ Los sprites se generan automáticamente siguiendo este patrón:
 
 ##### MAC:
 
-###### Cordova con iOS (aka: iPhone):
-Necesitas instalar un script "ios-deploy": `sudo npm i -g ios-deploy`  
-Si tenes problemas con permisos, podes probar con `sudo chmod -R a+rwx cordova/`
+###### Cordova on iOS (aka: iPhone):
+You need to install an script "ios-deploy": `sudo npm i -g ios-deploy`  
+If you have some throuble with permision, you can try with `sudo chmod -R a+rwx cordova/`
 
 ###### Android:
-Crear variable de ambiente: ANDROID_HOME apuntando al SDK.
-**Ejemplo:**
+Create environmet variables: ANDROID_HOME to android SDK.
+**Sample:**
 `sudo nano ~/.bash_profile`
-Agregar esta linea:  
-`export ANDROID_HOME=/Users/crystian/Documents/ADT/sdk` (con tu path claramente)
+Add this line:  
+`export ANDROID_HOME=/Users/crystian/Documents/ADT/sdk`
 
-**NOTA:** Browsers compatibles desde: IE11, Chrome 42, Firefox 27, iOS 7, Android 4, Opera 19, Safari 7
+
+**NOTEs:**
+* Browsers compatibles: IE11, Chrome 42, Firefox 27, iOS 7, Android 4, Opera 19, Safari 7
 
 ### Instalation
 
-* Clonar: `git clone https://github.com/crystian/WEBAPP-BUILDER.git`, recomiendo en un directorio único, ya que los proyectos por default se crearan en paralelo a este.
-* Instalar dependencias: `npm install` desde `WEBAPP-BUILDER` (tomate 5', son varias…)
-	- En Windows da un error que no puede instalar "weak/python", no te preocupes.
-* Crear nuevo proyecto desde algún template con `node create`
-	- Con este hermoso wizard creas un nuevo project (directorio) depositándolo en el "Project name" que hayas puesto en paralelo al builder.
-	- Hasta el momento los templates son estos:
-		- angular-empty: La más simple de las aplicaciones angular
-		- angular-full: Un project con dos apps, te puede servir para ver cómo se utiliza el framework
-		- angular-material: Project simple con [angular material](https://material.angularjs.org/latest/) instalado.
-		- empty: Eso mismo, el scaffolding básico para el framework.
-* Una vez creado, ingresar al nuevo proyecto: `npm i` y luego `bower i` (si no lo seleccionaste en el wizard)
-* Levanta el server en dev con: `gulp serve`, y chequear con el browser sobre la url que devuelve el comando en la consola.
+* Clone: `git clone https://github.com/crystian/WEBAPP-BUILDER.git`, I recomend a empty folder, because your next project with this framework would be in parallel with it.
+* Dependencies: `npm install` from `WEBAPP-BUILDER` (take a break, because there are several…)
+	- On Windows give an error with "weak/python", don't worry.
+* Create a project from some template with `node create`
+	- With this beautiful wizard it will create the scafolding for you on the "Project name".
+	- At the moment, these are the templates:
+		- angular-empty: A simple angular app
+		- angular-full: A project with two apps, it can help you to understand the way to use this framework.
+		- angular-material: Project simple with [angular material](https://material.angularjs.org/latest/) installed.
+		- empty: The most empty scaffolding for this framework.
+* Once created, into the project folder run the dependencies with: `npm i` and after `bower i` (if you don't select it on the wizard)
+* Run the dev server with: `gulp serve`, and check it with the url on your terminal.
 
 ---
 
-Ante alguna necesidad o bug por favor levantar el [issue](https://github.com/crystian/WEBAPP-BUILDER/issues), todo esto parece complejo pero no lo es, como lo venís haciendo puede ser más complejo. Sinceramente espero que te sirva tanto como a mí, gracias.
+If you need something in particular or found a bug, please use this git for tracker that one [issue](https://github.com/crystian/WEBAPP-BUILDER/issues), I know, all this appear complex but isn't it, is more complex than you do it now with out the framework.
+I hope it will useful for you like it is for me, thank you!
 
 ---
 
