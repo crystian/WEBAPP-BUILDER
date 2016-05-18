@@ -13,7 +13,7 @@ gulp.task('serveLoader', ['buildFull'], function(){
   return makeServe(global.cfg.pathFwk, global.cfg.loader.folders.www, global.cfg.ip, global.cfg.ports.template);
 });
 
-gulp.task('serveDist', ['buildFullDist'], function(){
+gulp.task('serveDist', 'web server from dist folder.', ['buildFullDist'], function(){
   utils.breakIfIsRoot();
 
   return makeServe(global.cfg.pathPrj + global.cfg.app.folders.dist, '/', global.cfg.ip, global.cfg.ports.dist);
@@ -26,7 +26,7 @@ gulp.task('serveProject', ['buildFull'], function(){
   return makeServe(global.cfg.pathPrj + global.cfg.app.folders.www, '/', global.cfg.ip, global.cfg.ports.project);
 });
 
-gulp.task('serve', function(){
+gulp.task('serve', 'web server in dev mode from the project folder', function(){
   var r = 'serveProject';
 
   if(global.cfg.isTemplate){

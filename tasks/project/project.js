@@ -13,10 +13,10 @@ var runSequence = require('run-sequence').use(gulp),
     image       = require('./engine/image');
 
 //Alias
-gulp.task('css', ['makeCss']);
-gulp.task('js', ['makeJs']);
-gulp.task('html', ['makeHtml']);
-gulp.task('on', ['watch']);
+gulp.task('css', 'Preprocessors', ['makeCss']);
+gulp.task('js', 'Preprocessors', ['makeJs']);
+gulp.task('html', 'Preprocessors', ['makeHtml']);
+gulp.task('on', '(alias: watch) watcher for your project it calls the preprocessors and others tasks', ['watch']);
 gulp.task('build', ['buildProject']);
 gulp.task('full', ['buildFull']);
 gulp.task('dist', ['buildFullDist']);
@@ -24,20 +24,20 @@ gulp.task('removeBuild', ['_removeBuild']);
 gulp.task('removeTemp', ['_removeTemp']);
 
 //hooks
-gulp.task('hookPreBuildProject', []);
-gulp.task('hookPostBuildProject', []);
-gulp.task('hookPreDistProject', []);
-gulp.task('hookPostDistProject', []);
+gulp.task('hookPreBuildProject', 'Hook', []);
+gulp.task('hookPostBuildProject', 'Hook', []);
+gulp.task('hookPreDistProject', 'Hook', []);
+gulp.task('hookPostDistProject', 'Hook', []);
 
 
-gulp.task('buildFull', function(cb){
+gulp.task('buildFull', '(alias: full) all buildings are including: loader and project ("slower").', function(cb){
   return runSequence(
     'buildLoader',
     'buildProject',
     cb);
 });
 
-gulp.task('buildProject', function(cb){
+gulp.task('buildProject', '(alias: build) fast build of your project.', function(cb){
   utils.breakIfIsRoot();
 
   runSequence(
@@ -73,7 +73,7 @@ gulp.task('buildProjectDist', function(cb){
     cb);
 });
 
-gulp.task('optimizeImages', function(){
+gulp.task('optimizeImages', 'gulp task for optimizate all images from "dist/img"', function(){
   return image.optimizeImages(global.cfg.app.folders.dist + 'img/**/*', global.cfg.app.folders.dist + 'img')
 });
 

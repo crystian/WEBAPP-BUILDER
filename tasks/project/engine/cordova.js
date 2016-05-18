@@ -9,7 +9,7 @@ var utils = require('../../shared/utils.js'),
     gutil = require('gulp-util');
 
 
-gulp.task('runAndroid', ['buildFullDist'], function(cb){
+gulp.task('runAndroid', 'it runs the app on an android device', ['buildFullDist'], function(cb){
   if(!global.cfg.cordova.active){
     console.logRed('This project is not a cordova one, remember set var cordova.active on true, and it will create "' + global.cfg.cordova.files.index + '" file');
     utils.exit(2);
