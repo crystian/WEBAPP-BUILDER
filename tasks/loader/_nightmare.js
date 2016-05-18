@@ -4,19 +4,19 @@
  * The main propose for this file is test the loader
  */
 
-//var gutil = require('gulp-util'),
-//	Nightmare = require('nightmare'),
-//	replace = require('replace'),
-//	async = require('async'),
-//	fs = require('fs-extra'),
-//	utils = require('./project/utils'),
-//	path = require('path'),
-//	Promise = require('q').Promise,
-//	gulp = require('gulp');
-//
+var gutil = require('gulp-util'),
+	Nightmare = require('nightmare'),
+	////replace = require('replace'),
+	//async = require('async'),
+	//fs = require('fs-extra'),
+	//utils = require('./project/utils'),
+	//path = require('path'),
+	//Promise = require('q').Promise,
+	gulp = require('gulp');
+
 //debug mode: on console: set DEBUG=nightmare
 gulp.task('_test',['_serveNightmare'], function(cb) {
-//	'use strict';
+	'use strict';
 //	var index = (global.cfg.folders.template +'/' + global.cfg.folders.build + '/' + global.cfg.loader.filesDest.index),
 //		page = 'http://' + global.cfg.ip + ':' + global.cfg.ports.nightmare + '/' + global.cfg.loader.filesDest.index;
 //

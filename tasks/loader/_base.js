@@ -53,7 +53,7 @@ gulp.task('_makeIndex', function(){
     .pipe(gulp.dest(global.cfg.pathFwk + global.cfg.loader.folders.www));
 });
 
-gulp.task('_makeConfig', function(cb){
+gulp.task('_makeConfig', 'Just for debug, it make a config file to see the result of this process', function(cb){
 
   //all variables in app, will pass to app
   var json = global.cfg.app;

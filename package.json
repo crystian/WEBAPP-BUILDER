@@ -46,6 +46,7 @@
     "gulp-uglify": "~1.5.1",
     "gulp-util": "~3.0.6",
     "gulp-webserver": "~0.9.1",
+    "gulp-help": "^1.6.1",
     "imagemin-pngquant": "~4.2.0",
     "inquirer": "~0.11.1",
     "jasmine": "~2.4.1",
@@ -67,5 +68,8 @@
   "scripts": {
     "test": "./node_modules/.bin/jasmine",
     "test-ci": "./node_modules/.bin/jasmine --ci"
+  },
+  "devDependencies": {
+    "karma-chrome-launcher": "^0.2.2"
   }
 }
