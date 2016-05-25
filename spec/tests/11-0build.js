@@ -109,6 +109,10 @@ function restoreStdout(){
 }
 
 describe('11-0build: check basic commands for build', function(){
+function getGulp(){
+  return require('gulp-help')(require('gulp'), {hideEmpty: true, hideDepsMessage: true});
+}
+
   describe('from root, it', function(){
     it('should fail because it is not project', function(){
       expect(exec('gulp buildLoader --testMode ' + args, {silent: 1}).code).toBe(2);
@@ -297,7 +301,7 @@ describe('11-0build: check basic commands for build', function(){
         var configJsonFile = utils.readJsonFile(configJson),
             test           = configJsonFile.test.server;
 
-        global.gulp = require('gulp');
+        global.gulp = getGulp();
 
         //temporal remove output
         removeStdout();
@@ -354,7 +358,7 @@ describe('11-0build: check basic commands for build', function(){
         var configJsonFile = utils.readJsonFile(configJson),
             test           = configJsonFile.test.server;
 
-        global.gulp = require('gulp');
+        global.gulp =  getGulp();
 
         //temporal remove output
         removeStdout();
@@ -575,7 +579,7 @@ describe('11-0build: check basic commands for build', function(){
         var configJsonFile = utils.readJsonFile(configJson),
             test           = configJsonFile.test.server;
 
-        global.gulp = require('gulp');
+        global.gulp =  getGulp();
 
         //temporal remove output
         removeStdout();
@@ -635,7 +639,7 @@ describe('11-0build: check basic commands for build', function(){
         var configJsonFile = utils.readJsonFile(configJson),
             test           = configJsonFile.test.server;
 
-        global.gulp = require('gulp');
+        global.gulp =  getGulp();
 
         //temporal remove output
         removeStdout();
