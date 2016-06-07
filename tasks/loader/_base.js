@@ -64,6 +64,8 @@ gulp.task('_makeConfig', 'Just for debug, it make a config file to see the resul
     text: global.cfg.loader.text
   };
 
+  json.compress = global.cfg.compress;
+
   json.cordova = {
     isDevice: global.cfg.cordova.isDevice,
     active: global.cfg.cordova.active

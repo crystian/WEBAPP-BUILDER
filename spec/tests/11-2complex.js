@@ -41,7 +41,7 @@ describe('11-2complex: check some complex cases', function(){
 
     expect(test('-e', distFolder)).toBe(true);
     expect(fs.statSync(distIndex).size).toBeMoreLess(125000, 12000);
-    expect(fs.statSync(distAppJson).size).toBeMoreLess(1287503, 10000);
+    expect(fs.statSync(distAppJson).size).toBeMoreLess(1287503, 120000);
   });
 
   it('(05) should include "minificated" files', function(){
