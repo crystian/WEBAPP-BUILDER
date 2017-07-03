@@ -1,3 +1,5 @@
+03/07/18 Deprecate in favor of webpack
+
 18/01/16 v0.10.0
 it was public on github! (01/01/06 00:02)
 redo create.js with templates

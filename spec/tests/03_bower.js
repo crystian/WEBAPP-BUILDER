@@ -99,7 +99,7 @@ describe("03_bower Bower dependencies and more", function(){
 
   });
 
-  it('(07) should create a minificated version for css libs', function(){
+  xit('(07) should create a minificated version for css libs', function(){
     cd('07');
 
     rm('-rf', configJson);

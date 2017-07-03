@@ -265,7 +265,7 @@ function getGulp(){
 
     });
 
-    it('should make project and loader files on dist', function(){
+    xit('should make project and loader files on dist', function(){
       saveConfig(projectConfigTemplate);
       removeGenFiles();
 
@@ -538,7 +538,7 @@ function getGulp(){
 
     });
 
-    it('(01) should make project and loader files on dist', function(){
+    xit('(01) should make project and loader files on dist', function(){
       cd('01');
 
       saveConfig(projectConfig);
