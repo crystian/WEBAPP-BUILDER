@@ -26,7 +26,7 @@ exports.boot = function(config){
    *
    * Don't touch, it cost severals hours
    */
-  global.gulp = config.gulp;
+  global.gulp = require('gulp-help')(config.gulp, {hideEmpty : true, hideDepsMessage: true});
 
   global.cfg = {};
   try {

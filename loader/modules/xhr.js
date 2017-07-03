@@ -81,10 +81,11 @@ loader.xhr = (function(){
       try {
 
         //anchor for compress, DON't touch it!
-        if(!loader.cfg.compress){
-          data = JSON.parse(loader.utils.decompress(data));
+        if(loader.cfg.compress){
+          data = loader.utils.decompress(data);
         }//flagCompress
 
+        data = JSON.parse(data);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -217,7 +218,6 @@ loader.xhr = (function(){
 
   function _setHtml(data, options){
     var el = document.getElementById('mainContainer');
-
     options = options || {appName: 'app'};
     options.replace = options.replace || false;
 

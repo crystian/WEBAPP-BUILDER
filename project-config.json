@@ -6,7 +6,7 @@
     "project": 9000,
     "dist": 9001,
     "template": 9002,
-    "xnightmare": 9003
+    "nightmare": 9003
   },
   "setGitVersionOnPackage": false,
   "autoprefixer": [

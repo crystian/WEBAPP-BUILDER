@@ -45,7 +45,7 @@ describe("02_css: CSS generation", function(){
     removeCssTest();
   });
 
-  it('(01) should create css files', function(){
+  xit('(01) should create css files', function(){
     cd('01');
 
     expect(test('-e', cssFile)).toBe(false);
